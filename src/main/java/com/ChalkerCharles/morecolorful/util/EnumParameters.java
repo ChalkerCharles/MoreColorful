@@ -209,5 +209,3 @@ public class EnumParameters {
         };
     }
 }
-git config --global user.email"2130897257@qq.com"
-git config --global user.name"ChalkerCharles"
