@@ -1,0 +1,140 @@
+{
+  "block.note_block.violin": {
+    "sounds": [
+      {
+      "name": "morecolorful:note/violin"
+      }],
+    "subtitle": "subtitles.block.note_block.note"
+  },
+  "block.harp.play": {
+    "sounds": [
+        "note/harp2"
+      ],
+    "subtitle": "subtitles.block.harp.play"
+  },
+  "block.bass_drum.play": {
+    "sounds": [
+      "note/bd"
+    ],
+    "subtitle": "subtitles.block.bass_drum.play"
+  },
+  "block.snare.play": {
+    "sounds": [
+      "note/snare"
+    ],
+    "subtitle": "subtitles.block.snare_drum.play"
+  },
+  "block.hat.play": {
+    "sounds": [
+      "note/hat"
+    ],
+    "subtitle": "subtitles.block.hi-hat.play"
+  },
+  "block.glockenspiel.play": {
+    "sounds": [
+      "note/bell"
+    ],
+    "subtitle": "subtitles.block.glockenspiel.play"
+  },
+  "block.chimes.play": {
+    "sounds": [
+      "note/icechime"
+    ],
+    "subtitle": "subtitles.block.chimes.play"
+  },
+  "block.xylophone.play": {
+    "sounds": [
+      "note/xylobone"
+    ],
+    "subtitle": "subtitles.block.xylophone.play"
+  },
+  "block.vibraphone.play": {
+    "sounds": [
+      "note/iron_xylophone"
+    ],
+    "subtitle": "subtitles.block.vibraphone.play"
+  },
+  "block.synthesizer_keyboard_bit.play": {
+    "sounds": [
+      "note/bit"
+    ],
+    "subtitle": "subtitles.block.synthesizer_keyboard.play"
+  },
+  "block.synthesizer_keyboard_pling.play": {
+    "sounds": [
+      "note/pling"
+    ],
+    "subtitle": "subtitles.block.synthesizer_keyboard.play"
+  },
+  "block.piano.play": {
+    "sounds": [
+      {
+        "name": "morecolorful:note/piano"
+      }],
+    "subtitle": "subtitles.block.piano.play"
+  },
+  "item.bass.play": {
+    "sounds": [
+      "note/bassattack"
+    ],
+    "subtitle": "subtitles.item.bass.play"
+  },
+  "item.flute.play": {
+    "sounds": [
+      "note/flute"
+    ],
+    "subtitle": "subtitles.item.flute.play"
+  },
+  "item.guitar.play": {
+    "sounds": [
+        "note/guitar"
+      ],
+    "subtitle": "subtitles.item.guitar.play"
+  },
+  "item.cow_bell.play": {
+    "sounds": [
+      "note/cow_bell"
+    ],
+    "subtitle": "subtitles.item.cow_bell.play"
+  },
+  "item.didgeridoo.play": {
+    "sounds": [
+      "note/didgeridoo"
+    ],
+    "subtitle": "subtitles.item.didgeridoo.play"
+  },
+  "item.banjo.play": {
+    "sounds": [
+      "note/banjo"
+    ],
+    "subtitle": "subtitles.item.banjo.play"
+  },
+  "item.violin.play": {
+    "sounds": [
+      {
+        "name": "morecolorful:note/violin"
+      }],
+    "subtitle": "subtitles.item.violin.play"
+  },
+  "item.cello.play": {
+    "sounds": [
+      {
+        "name": "morecolorful:note/cello"
+      }],
+    "subtitle": "subtitles.item.cello.play"
+  },
+  "item.electric_guitar.play": {
+    "sounds": [
+      {
+        "name": "morecolorful:note/electric_guitar"
+      }],
+    "subtitle": "subtitles.item.electric_guitar.play"
+  },
+  "item.trumpet.play": {
+    "sounds": [
+      {
+        "name": "morecolorful:note/trumpet"
+      }],
+    "subtitle": "subtitles.item.trumpet.play"
+  }
+}

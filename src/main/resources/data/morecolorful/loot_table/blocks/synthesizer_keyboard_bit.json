@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "block": "morecolorful:synthesizer_keyboard_bit",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "half": "right"
+              }
+            }
+          ],
+          "name": "morecolorful:synthesizer_keyboard_bit"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "morecolorful:blocks/synthesizer_keyboard_bit"
+}

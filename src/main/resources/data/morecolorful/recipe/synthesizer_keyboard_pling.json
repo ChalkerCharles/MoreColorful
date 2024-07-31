@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:polished_blackstone"
+    },
+    "=": {
+      "item": "minecraft:quartz_slab"
+    },
+    "X": {
+      "tag": "minecraft:stone_buttons"
+    },
+    "N": {
+      "item": "minecraft:note_block"
+    }
+  },
+  "pattern": [
+    "XXX",
+    "===",
+    "#N#"
+  ],
+  "result": {
+    "count": 1,
+    "id": "morecolorful:synthesizer_keyboard_pling"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "morecolorful:block/glockenspiel"
+    },
+    "facing=east": {
+      "model": "morecolorful:block/glockenspiel",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "morecolorful:block/glockenspiel",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "morecolorful:block/glockenspiel",
+      "y": 270
+    }
+  }
+}

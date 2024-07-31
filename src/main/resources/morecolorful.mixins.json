@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.ChalkerCharles.morecolorful.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "refmap": "morecolorful.refmap.json",
+  "mixins": [
+  ],
+  "client": [
+    "HumanoidModelMixin",
+    "ItemInHandRendererMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:iron_ingot"
+    },
+    "|": {
+      "item": "minecraft:iron_nugget"
+    }
+  },
+  "pattern": [
+    " # ",
+    "#|#",
+    "# #"
+  ],
+  "result": {
+    "count": 1,
+    "id": "morecolorful:cow_bell"
+  }
+}

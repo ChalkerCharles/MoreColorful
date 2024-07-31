@@ -1,0 +1,79 @@
+{
+	"ambientocclusion": false,
+	"textures": {
+		"0": "morecolorful:item/trumpet_model"
+	},
+	"elements": [
+		{
+			"from": [7, 4, 7],
+			"to": [8, 16, 8],
+			"faces": {
+				"north": {"uv": [0, 0, 1, 12], "texture": "#0"},
+				"east": {"uv": [1, 0, 2, 12], "texture": "#0"},
+				"south": {"uv": [2, 0, 3, 12], "texture": "#0"},
+				"west": {"uv": [1, 0, 2, 12], "texture": "#0"},
+				"up": {"uv": [0, 15, 1, 16], "texture": "#0"}
+			}
+		},
+		{
+			"from": [6, 1, 6],
+			"to": [9, 4, 9],
+			"faces": {
+				"north": {"uv": [0, 12, 3, 15], "texture": "#0"},
+				"east": {"uv": [0, 12, 3, 15], "texture": "#0"},
+				"south": {"uv": [0, 12, 3, 15], "texture": "#0"},
+				"west": {"uv": [0, 12, 3, 15], "texture": "#0"},
+				"up": {"uv": [0, 12, 3, 15], "texture": "#0"}
+			}
+		},
+		{
+			"from": [5, 0, 5],
+			"to": [10, 1, 10],
+			"faces": {
+				"north": {"uv": [3, 10, 8, 11], "texture": "#0"},
+				"east": {"uv": [3, 10, 8, 11], "texture": "#0"},
+				"south": {"uv": [3, 10, 8, 11], "texture": "#0"},
+				"west": {"uv": [3, 10, 8, 11], "texture": "#0"},
+				"up": {"uv": [3, 0, 8, 5], "texture": "#0"},
+				"down": {"uv": [3, 5, 8, 10], "texture": "#0"}
+			}
+		},
+		{
+			"from": [7.5, 5, 5],
+			"to": [7.5, 13, 11],
+			"faces": {
+				"east": {"uv": [8, 0, 14, 8], "texture": "#0"},
+				"west": {"uv": [14, 0, 8, 8], "texture": "#0"}
+			}
+		},
+		{
+			"from": [7, 5, 10.7],
+			"to": [8, 13, 10.7],
+			"faces": {
+				"north": {"uv": [8, 0, 9, 8], "texture": "#0"},
+				"south": {"uv": [8, 0, 9, 8], "texture": "#0"}
+			}
+		},
+		{
+			"from": [7, 6, 5.3],
+			"to": [8, 11, 5.3],
+			"faces": {
+				"north": {"uv": [13, 2, 14, 7], "texture": "#0"},
+				"south": {"uv": [13, 2, 14, 7], "texture": "#0"}
+			}
+		}
+	],
+	"gui_light": "front",
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [5, 0, 0],
+			"translation": [0, -3, -1],
+			"scale": [0.85, 0.85, 0.85]
+		},
+		"firstperson_righthand": {
+			"rotation": [24, -1, 0],
+			"translation": [0.25, 0, 0.5],
+			"scale": [0.85, 0.85, 0.85]
+		}
+	}
+}

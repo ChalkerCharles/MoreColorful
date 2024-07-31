@@ -1,0 +1,14 @@
+{
+ "parent": "minecraft:item/generated",
+ "textures": {
+   "layer0": "morecolorful:item/cow_bell"
+ },
+  "overrides": [
+    {
+      "predicate": {
+        "morecolorful:playing": 1
+      },
+      "model": "morecolorful:item/cow_bell_playing"
+    }
+  ]
+}

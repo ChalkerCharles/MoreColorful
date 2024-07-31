@@ -1,0 +1,6 @@
+{
+ "parent": "minecraft:item/generated",
+ "textures": {
+   "layer0": "morecolorful:item/electric_guitar"
+ }
+}

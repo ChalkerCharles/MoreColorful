@@ -1,0 +1,68 @@
+{
+	"ambientocclusion": false,
+	"textures": {
+		"0": "morecolorful:item/didgeridoo_model"
+	},
+	"elements": [
+		{
+			"from": [5.5, -10, 5.5],
+			"to": [10.5, -8, 10.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7, -13, 7]},
+			"faces": {
+				"north": {"uv": [9, 0, 14, 2], "texture": "#0"},
+				"east": {"uv": [9, 0, 14, 2], "texture": "#0"},
+				"south": {"uv": [9, 0, 14, 2], "texture": "#0"},
+				"west": {"uv": [9, 0, 14, 2], "texture": "#0"},
+				"up": {"uv": [9, 7, 14, 12], "texture": "#0"},
+				"down": {"uv": [9, 2, 14, 7], "texture": "#0"}
+			}
+		},
+		{
+			"from": [6, -8, 6],
+			"to": [10, 0, 10],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7, -12, 7]},
+			"faces": {
+				"north": {"uv": [5, 0, 9, 8], "texture": "#0"},
+				"east": {"uv": [5, 0, 9, 8], "texture": "#0"},
+				"south": {"uv": [5, 0, 9, 8], "texture": "#0"},
+				"west": {"uv": [5, 0, 9, 8], "texture": "#0"},
+				"up": {"uv": [5, 8, 9, 12], "texture": "#0"}
+			}
+		},
+		{
+			"from": [6.5, 0, 6.5],
+			"to": [9.5, 14, 9.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7, 0, 7]},
+			"faces": {
+				"north": {"uv": [2, 0, 5, 14], "texture": "#0"},
+				"east": {"uv": [2, 0, 5, 14], "texture": "#0"},
+				"south": {"uv": [2, 0, 5, 14], "texture": "#0"},
+				"west": {"uv": [2, 0, 5, 14], "texture": "#0"},
+				"up": {"uv": [5, 12, 8, 15], "texture": "#0"}
+			}
+		},
+		{
+			"from": [7, 14, 7],
+			"to": [9, 26, 9],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7, 10, 7]},
+			"faces": {
+				"north": {"uv": [0, 0, 2, 12], "texture": "#0"},
+				"east": {"uv": [0, 0, 2, 12], "texture": "#0"},
+				"south": {"uv": [0, 0, 2, 12], "texture": "#0"},
+				"west": {"uv": [0, 0, 2, 12], "texture": "#0"},
+				"up": {"uv": [0, 12, 2, 14], "texture": "#0"}
+			}
+		}
+	],
+	"gui_light": "front",
+	"display": {
+		"thirdperson_righthand": {
+			"scale": [0.85, 0.85, 0.85]
+		},
+		"firstperson_righthand": {
+			"rotation": [5, 0, -3],
+			"translation": [1, -1.5, 0],
+			"scale": [0.85, 0.85, 0.85]
+		}
+	}
+}

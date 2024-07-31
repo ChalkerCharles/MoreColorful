@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "tag": "minecraft:planks"
+    },
+    "=": {
+      "tag": "minecraft:wooden_slabs"
+    },
+    "|": {
+      "item": "minecraft:stick"
+    },
+    "S": {
+      "item": "minecraft:string"
+    }
+  },
+  "pattern": [
+    " =|",
+    "#S=",
+    "## "
+  ],
+  "result": {
+    "count": 1,
+    "id": "morecolorful:guitar"
+  }
+}

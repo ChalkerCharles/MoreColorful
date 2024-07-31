@@ -1,0 +1,26 @@
+{
+  "parent": "minecraft:item/generated",
+  "loader": "neoforge:separate_transforms",
+  "base": {
+    "parent": "morecolorful:item/trumpet_in_hand"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "morecolorful:item/trumpet_gui"
+    },
+    "ground": {
+      "parent": "morecolorful:item/trumpet_gui"
+    },
+    "fixed": {
+      "parent": "morecolorful:item/trumpet_gui"
+    }
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "morecolorful:playing": 1
+      },
+      "model": "morecolorful:item/trumpet_playing"
+    }
+  ]
+}

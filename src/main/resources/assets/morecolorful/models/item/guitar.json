@@ -1,0 +1,18 @@
+{
+  "parent": "minecraft:item/generated",
+  "loader": "neoforge:separate_transforms",
+  "base": {
+    "parent": "morecolorful:item/guitar_in_hand"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "morecolorful:item/guitar_gui"
+    },
+    "ground": {
+      "parent": "morecolorful:item/guitar_gui"
+    },
+    "fixed": {
+      "parent": "morecolorful:item/guitar_gui"
+    }
+  }
+}

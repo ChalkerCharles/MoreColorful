@@ -1,0 +1,26 @@
+{
+  "parent": "minecraft:item/generated",
+  "loader": "neoforge:separate_transforms",
+  "base": {
+    "parent": "morecolorful:item/violin_in_hand"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "morecolorful:item/violin_gui"
+    },
+    "ground": {
+      "parent": "morecolorful:item/violin_gui"
+    },
+    "fixed": {
+      "parent": "morecolorful:item/violin_gui"
+    }
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "morecolorful:playing": 1
+      },
+      "model": "morecolorful:item/violin_playing"
+    }
+  ]
+}

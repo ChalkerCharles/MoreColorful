@@ -1,0 +1,18 @@
+{
+  "parent": "minecraft:item/generated",
+  "loader": "neoforge:separate_transforms",
+  "base": {
+    "parent": "morecolorful:item/cello_in_hand"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "morecolorful:item/cello_gui"
+    },
+    "ground": {
+      "parent": "morecolorful:item/cello_gui"
+    },
+    "fixed": {
+      "parent": "morecolorful:item/cello_gui"
+    }
+  }
+}

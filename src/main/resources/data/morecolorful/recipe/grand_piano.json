@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:polished_blackstone"
+    },
+    "=": {
+      "item": "minecraft:quartz_slab"
+    },
+    "_": {
+      "item": "minecraft:polished_blackstone_pressure_plate"
+    },
+    "N": {
+      "item": "minecraft:note_block"
+    }
+  },
+  "pattern": [
+    "#N#",
+    "===",
+    "#_#"
+  ],
+  "result": {
+    "count": 1,
+    "id": "morecolorful:grand_piano"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "tag": "minecraft:planks"
+    },
+    "=": {
+      "tag": "minecraft:wooden_slabs"
+    },
+    "|": {
+      "item": "minecraft:stick"
+    },
+    "S": {
+      "item": "minecraft:string"
+    },
+    "X": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "pattern": [
+    " =|",
+    "#S=",
+    "X# "
+  ],
+  "result": {
+    "count": 1,
+    "id": "morecolorful:cello"
+  }
+}

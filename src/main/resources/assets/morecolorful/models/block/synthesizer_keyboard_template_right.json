@@ -1,0 +1,131 @@
+{
+	"ambientocclusion": false,
+	"textures": {
+		"particle": "#bottom"
+	},
+	"elements": [
+		{
+			"from": [8, 0, 10],
+			"to": [8, 12, 12],
+			"rotation": {"angle": -45, "axis": "z", "origin": [8, 0, 0], "rescale": true},
+			"faces": {
+				"east": {"uv": [0, 0, 2, 12], "texture": "#bottom"},
+				"west": {"uv": [0, 0, 2, 12], "texture": "#bottom"}
+			}
+		},
+		{
+			"from": [8, 0, 4],
+			"to": [8, 12, 6],
+			"rotation": {"angle": -45, "axis": "z", "origin": [8, 0, 0], "rescale": true},
+			"faces": {
+				"east": {"uv": [0, 0, 2, 12], "texture": "#bottom"},
+				"west": {"uv": [0, 0, 2, 12], "texture": "#bottom"}
+			}
+		},
+		{
+			"from": [7, 0.25, 0],
+			"to": [9, 0.25, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [16, 0, 0]},
+			"faces": {
+				"up": {"uv": [0, 0, 2, 16], "texture": "#bottom"},
+				"down": {"uv": [0, 0, 2, 16], "texture": "#bottom"}
+			}
+		},
+		{
+			"from": [0, 14, 0],
+			"to": [2, 17, 6],
+			"rotation": {"angle": 0, "axis": "y", "origin": [16, 0, 0]},
+			"faces": {
+				"north": {"uv": [2, 0, 0, 3], "texture": "#bottom"},
+				"east": {"uv": [6, 0, 0, 3], "texture": "#bottom"},
+				"west": {"uv": [16, 0, 10, 3], "texture": "#bottom"},
+				"up": {"uv": [0, 0, 2, 6], "texture": "#bottom"}
+			}
+		},
+		{
+			"from": [0, 14, 6],
+			"to": [16, 17, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [16, 0, 0]},
+			"faces": {
+				"north": {"uv": [16, 0, 0, 3], "texture": "#bottom"},
+				"south": {"uv": [0, 0, 16, 3], "texture": "#bottom"},
+				"west": {"uv": [10, 0, 0, 3], "texture": "#bottom"},
+				"up": {"uv": [0, 0, 16, 10], "rotation": 180, "texture": "#panel_right"}
+			}
+		},
+		{
+			"from": [2, 14, 0],
+			"to": [16, 15, 6],
+			"rotation": {"angle": 0, "axis": "y", "origin": [16, 0, 0]},
+			"faces": {
+				"north": {"uv": [0, 4, 14, 5], "texture": "#keyboard"},
+				"up": {"uv": [0, 0, 14, 6], "rotation": 180, "texture": "#keyboard"}
+			}
+		},
+		{
+			"from": [0, 12, 0],
+			"to": [16, 14, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [16, 0, 0]},
+			"faces": {
+				"north": {"uv": [16, 0, 0, 2], "texture": "#bottom"},
+				"south": {"uv": [0, 3, 16, 5], "texture": "#bottom"},
+				"west": {"uv": [16, 3, 0, 5], "texture": "#bottom"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#bottom"}
+			}
+		},
+		{
+			"from": [14, 15, 2],
+			"to": [15, 16, 6],
+			"rotation": {"angle": 0, "axis": "y", "origin": [2, 0, 0]},
+			"faces": {
+				"north": {"uv": [14, 3, 15, 4], "texture": "#keyboard"},
+				"east": {"uv": [14, 0, 15, 4], "rotation": 270, "texture": "#keyboard"},
+				"west": {"uv": [14, 0, 15, 4], "rotation": 90, "texture": "#keyboard"},
+				"up": {"uv": [14, 0, 15, 4], "rotation": 180, "texture": "#keyboard"}
+			}
+		},
+		{
+			"from": [12, 15, 2],
+			"to": [13, 16, 6],
+			"faces": {
+				"north": {"uv": [14, 3, 15, 4], "texture": "#keyboard"},
+				"east": {"uv": [14, 0, 15, 4], "rotation": 270, "texture": "#keyboard"},
+				"west": {"uv": [14, 0, 15, 4], "rotation": 90, "texture": "#keyboard"},
+				"up": {"uv": [14, 0, 15, 4], "rotation": 180, "texture": "#keyboard"}
+			}
+		},
+		{
+			"from": [8, 15, 2],
+			"to": [9, 16, 6],
+			"rotation": {"angle": 0, "axis": "y", "origin": [-4, 0, 0]},
+			"faces": {
+				"north": {"uv": [14, 3, 15, 4], "texture": "#keyboard"},
+				"east": {"uv": [14, 0, 15, 4], "rotation": 270, "texture": "#keyboard"},
+				"west": {"uv": [14, 0, 15, 4], "rotation": 90, "texture": "#keyboard"},
+				"up": {"uv": [14, 0, 15, 4], "rotation": 180, "texture": "#keyboard"}
+			}
+		},
+		{
+			"from": [6, 15, 2],
+			"to": [7, 16, 6],
+			"rotation": {"angle": 0, "axis": "y", "origin": [-6, 0, 0]},
+			"faces": {
+				"north": {"uv": [14, 3, 15, 4], "texture": "#keyboard"},
+				"east": {"uv": [14, 0, 15, 4], "rotation": 270, "texture": "#keyboard"},
+				"west": {"uv": [14, 0, 15, 4], "rotation": 90, "texture": "#keyboard"},
+				"up": {"uv": [14, 0, 15, 4], "rotation": 180, "texture": "#keyboard"}
+			}
+		},
+		{
+			"from": [4, 15, 2],
+			"to": [5, 16, 6],
+			"rotation": {"angle": 0, "axis": "y", "origin": [-8, 0, 0]},
+			"faces": {
+				"north": {"uv": [14, 3, 15, 4], "texture": "#keyboard"},
+				"east": {"uv": [14, 0, 15, 4], "rotation": 270, "texture": "#keyboard"},
+				"west": {"uv": [14, 0, 15, 4], "rotation": 90, "texture": "#keyboard"},
+				"up": {"uv": [14, 0, 15, 4], "rotation": 180, "texture": "#keyboard"}
+			}
+		}
+	]
+}

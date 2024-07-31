@@ -1,0 +1,22 @@
+{
+	"ambientocclusion": false,
+	"textures": {
+		"0": "morecolorful:block/bass_drum_top",
+		"1": "morecolorful:block/bass_drum_side",
+		"particle": "morecolorful:block/bass_drum_top"
+	},
+	"elements": [
+		{
+			"from": [1, 0, 1],
+			"to": [15, 10, 15],
+			"faces": {
+				"north": {"uv": [15, 10, 1, 0], "rotation": 180, "texture": "#1"},
+				"east": {"uv": [1, 0, 15, 10], "texture": "#1"},
+				"south": {"uv": [1, 0, 15, 10], "texture": "#1"},
+				"west": {"uv": [1, 0, 15, 10], "texture": "#1"},
+				"up": {"uv": [1, 1, 15, 15], "texture": "#0"},
+				"down": {"uv": [1, 1, 15, 15], "texture": "#0", "cullface": "down"}
+			}
+		}
+	]
+}

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "tag": "minecraft:wooden_slabs"
+    },
+    "|": {
+      "item": "minecraft:iron_ingot"
+    },
+    "X": {
+      "item": "minecraft:copper_ingot"
+    }
+  },
+  "pattern": [
+    "###",
+    "|X|",
+    "| |"
+  ],
+  "result": {
+    "count": 1,
+    "id": "morecolorful:xylophone"
+  }
+}

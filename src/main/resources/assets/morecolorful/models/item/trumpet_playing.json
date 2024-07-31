@@ -1,0 +1,31 @@
+{
+	"parent": "minecraft:item/generated",
+	"loader": "neoforge:separate_transforms",
+	"base": {
+		"parent": "morecolorful:item/trumpet_in_hand",
+		"gui_light": "front",
+		"display": {
+			"thirdperson_righthand": {
+				"rotation": [90, 0, 35],
+				"translation": [0, 1, 0],
+				"scale": [0.85, 0.85, 0.85]
+			},
+			"firstperson_righthand": {
+				"rotation": [95, 3, -10],
+				"translation": [-5, 1, 0],
+				"scale": [0.85, 0.85, 0.85]
+			}
+		}
+	},
+	"perspectives": {
+		"gui": {
+			"parent": "morecolorful:item/trumpet_gui"
+		},
+		"ground": {
+			"parent": "morecolorful:item/trumpet_gui"
+		},
+		"fixed": {
+			"parent": "morecolorful:item/trumpet_gui"
+		}
+	}
+}

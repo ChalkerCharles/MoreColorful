@@ -1,0 +1,18 @@
+{
+  "parent": "minecraft:item/generated",
+  "loader": "neoforge:separate_transforms",
+  "base": {
+    "parent": "morecolorful:item/bass_in_hand"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "morecolorful:item/bass_gui"
+    },
+    "ground": {
+      "parent": "morecolorful:item/bass_gui"
+    },
+    "fixed": {
+      "parent": "morecolorful:item/bass_gui"
+    }
+  }
+}

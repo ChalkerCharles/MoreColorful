@@ -1,0 +1,94 @@
+{
+  "entries": [
+    {
+      "enum": "net/minecraft/client/model/HumanoidModel$ArmPose",
+      "name": "MORECOLORFUL_FLUTE",
+      "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
+      "parameters": {
+        "class": "com/ChalkerCharles/morecolorful/util/EnumParameters",
+        "method": "flutePose"
+      }
+    },
+    {
+      "enum": "net/minecraft/client/model/HumanoidModel$ArmPose",
+      "name": "MORECOLORFUL_GUITAR_HOLD",
+      "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
+      "parameters": {
+        "class": "com/ChalkerCharles/morecolorful/util/EnumParameters",
+        "method": "guitarHoldPose"
+      }
+    },
+    {
+      "enum": "net/minecraft/client/model/HumanoidModel$ArmPose",
+      "name": "MORECOLORFUL_GUITAR_PLAYING",
+      "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
+      "parameters": {
+        "class": "com/ChalkerCharles/morecolorful/util/EnumParameters",
+        "method": "guitarPlayingPose"
+      }
+    },
+    {
+      "enum": "net/minecraft/client/model/HumanoidModel$ArmPose",
+      "name": "MORECOLORFUL_COW_BELL",
+      "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
+      "parameters": {
+        "class": "com/ChalkerCharles/morecolorful/util/EnumParameters",
+        "method": "cowBellPose"
+      }
+    },
+    {
+      "enum": "net/minecraft/client/model/HumanoidModel$ArmPose",
+      "name": "MORECOLORFUL_DIDGERIDOO",
+      "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
+      "parameters": {
+        "class": "com/ChalkerCharles/morecolorful/util/EnumParameters",
+        "method": "didgeridooPose"
+      }
+    },
+    {
+      "enum": "net/minecraft/client/model/HumanoidModel$ArmPose",
+      "name": "MORECOLORFUL_VIOLIN_HOLD",
+      "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
+      "parameters": {
+        "class": "com/ChalkerCharles/morecolorful/util/EnumParameters",
+        "method": "violinHoldPose"
+      }
+    },
+    {
+      "enum": "net/minecraft/client/model/HumanoidModel$ArmPose",
+      "name": "MORECOLORFUL_VIOLIN_PLAYING",
+      "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
+      "parameters": {
+        "class": "com/ChalkerCharles/morecolorful/util/EnumParameters",
+        "method": "violinPlayingPose"
+      }
+    },
+    {
+      "enum": "net/minecraft/client/model/HumanoidModel$ArmPose",
+      "name": "MORECOLORFUL_CELLO",
+      "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
+      "parameters": {
+        "class": "com/ChalkerCharles/morecolorful/util/EnumParameters",
+        "method": "celloPose"
+      }
+    },
+    {
+      "enum": "net/minecraft/client/model/HumanoidModel$ArmPose",
+      "name": "MORECOLORFUL_CELLO_HOLD",
+      "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
+      "parameters": {
+        "class": "com/ChalkerCharles/morecolorful/util/EnumParameters",
+        "method": "celloHoldPose"
+      }
+    },
+    {
+      "enum": "net/minecraft/client/model/HumanoidModel$ArmPose",
+      "name": "MORECOLORFUL_CELLO_PLAYING",
+      "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
+      "parameters": {
+        "class": "com/ChalkerCharles/morecolorful/util/EnumParameters",
+        "method": "celloPlayingPose"
+      }
+    }
+  ]
+}

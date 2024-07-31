@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:iron_ingot"
+    },
+    "|": {
+      "item": "minecraft:iron_bars"
+    },
+    "X": {
+      "item": "minecraft:heavy_weighted_pressure_plate"
+    }
+  },
+  "pattern": [
+    "###",
+    "#|#",
+    "#X#"
+  ],
+  "result": {
+    "count": 1,
+    "id": "morecolorful:vibraphone"
+  }
+}

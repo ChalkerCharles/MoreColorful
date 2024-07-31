@@ -1,0 +1,18 @@
+{
+  "parent": "minecraft:item/generated",
+  "loader": "neoforge:separate_transforms",
+  "base": {
+    "parent": "morecolorful:item/banjo_in_hand"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "morecolorful:item/banjo_gui"
+    },
+    "ground": {
+      "parent": "morecolorful:item/banjo_gui"
+    },
+    "fixed": {
+      "parent": "morecolorful:item/banjo_gui"
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "parent": "minecraft:item/generated",
+  "loader": "neoforge:separate_transforms",
+  "base": {
+    "parent": "morecolorful:item/didgeridoo_in_hand"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "morecolorful:item/didgeridoo_gui"
+    },
+    "ground": {
+      "parent": "morecolorful:item/didgeridoo_gui"
+    },
+    "fixed": {
+      "parent": "morecolorful:item/didgeridoo_gui"
+    }
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "morecolorful:playing": 1
+      },
+      "model": "morecolorful:item/didgeridoo_playing"
+    }
+  ]
+}
