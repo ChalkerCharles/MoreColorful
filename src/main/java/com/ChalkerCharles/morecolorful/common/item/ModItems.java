@@ -17,6 +17,7 @@ public class ModItems {
     public static final Supplier<Item> CRABAPPLE_PLANKS = ITEMS.register("crabapple_planks", ()-> new BlockItem(ModBlocks.CRABAPPLE_PLANKS.get(),new Item.Properties()));
     public static final Supplier<Item> HARP = ITEMS.register("harp", ()-> new BlockItem(ModBlocks.HARP.get(), new Item.Properties()));
     public static final Supplier<Item> UPRIGHT_PIANO = ITEMS.register("upright_piano", ()-> new BlockItem(ModBlocks.UPRIGHT_PIANO.get(), new Item.Properties()));
+    public static final Supplier<Item> GRAND_PIANO = ITEMS.register("grand_piano", ()-> new BlockItem(ModBlocks.GRAND_PIANO.get(), new Item.Properties()));
     public static final Supplier<Item> BASS_DRUM = ITEMS.register("bass_drum", ()-> new BlockItem(ModBlocks.BASS_DRUM.get(), new Item.Properties()));
     public static final Supplier<Item> SNARE_DRUM = ITEMS.register("snare_drum", ()-> new BlockItem(ModBlocks.SNARE_DRUM.get(), new Item.Properties()));
     public static final Supplier<Item> HIHAT = ITEMS.register("hi-hat", ()-> new BlockItem(ModBlocks.HIHAT.get(), new Item.Properties()));
@@ -41,7 +42,6 @@ public class ModItems {
     public static final Supplier<Item> CELLO = ITEMS.register("cello", ()-> new CelloItem(InstrumentsType.CELLO, new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> ELECTRIC_GUITAR = ITEMS.register("electric_guitar", ()-> new GuitarItem(InstrumentsType.ELECTRIC_GUITAR, new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> TRUMPET = ITEMS.register("trumpet", ()-> new TrumpetItem(InstrumentsType.TRUMPET, new Item.Properties().stacksTo(1)));
-    public static final Supplier<Item> GRAND_PIANO = ITEMS.register("grand_piano", ()-> new GuitarItem(InstrumentsType.PIANO, new Item.Properties().stacksTo(1)));
 
     public static void register(IEventBus eventBus){
         ITEMS.register(eventBus);
