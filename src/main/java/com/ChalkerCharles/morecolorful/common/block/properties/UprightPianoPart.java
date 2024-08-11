@@ -5,8 +5,8 @@ import org.jetbrains.annotations.NotNull;
 
 public enum UprightPianoPart implements StringRepresentable {
     LEFT_LOWER("left_lower"),
-    LEFT_UPPER("left_upper"),
     RIGHT_LOWER("right_lower"),
+    LEFT_UPPER("left_upper"),
     RIGHT_UPPER("right_upper");
 
     private final String name;

@@ -1,0 +1,109 @@
+{
+  "variants": {
+    "facing=north,part=front_left_lower": {
+      "model": "morecolorful:block/grand_piano_fll"
+    },
+    "facing=north,part=front_left_upper": {
+      "model": "morecolorful:block/grand_piano_flu"
+    },
+    "facing=north,part=front_right_lower": {
+      "model": "morecolorful:block/grand_piano_frl"
+    },
+    "facing=north,part=front_right_upper": {
+      "model": "morecolorful:block/grand_piano_fru"
+    },
+    "facing=north,part=back_left_lower": {
+      "model": "morecolorful:block/grand_piano_bll"
+    },
+    "facing=north,part=back_left_upper": {
+      "model": "morecolorful:block/grand_piano_blu"
+    },
+    "facing=north,part=back_right_upper": {
+      "model": "morecolorful:block/grand_piano_bru"
+    },
+    "facing=east,part=front_left_lower": {
+      "model": "morecolorful:block/grand_piano_fll",
+      "y": 90
+    },
+    "facing=east,part=front_left_upper": {
+      "model": "morecolorful:block/grand_piano_flu",
+      "y": 90
+    },
+    "facing=east,part=front_right_lower": {
+      "model": "morecolorful:block/grand_piano_frl",
+      "y": 90
+    },
+    "facing=east,part=front_right_upper": {
+      "model": "morecolorful:block/grand_piano_fru",
+      "y": 90
+    },
+    "facing=east,part=back_left_lower": {
+      "model": "morecolorful:block/grand_piano_bll",
+      "y": 90
+    },
+    "facing=east,part=back_left_upper": {
+      "model": "morecolorful:block/grand_piano_blu",
+      "y": 90
+    },
+    "facing=east,part=back_right_upper": {
+      "model": "morecolorful:block/grand_piano_bru",
+      "y": 90
+    },
+    "facing=south,part=front_left_lower": {
+      "model": "morecolorful:block/grand_piano_fll",
+      "y": 180
+    },
+    "facing=south,part=front_left_upper": {
+      "model": "morecolorful:block/grand_piano_flu",
+      "y": 180
+    },
+    "facing=south,part=front_right_lower": {
+      "model": "morecolorful:block/grand_piano_frl",
+      "y": 180
+    },
+    "facing=south,part=front_right_upper": {
+      "model": "morecolorful:block/grand_piano_fru",
+      "y": 180
+    },
+    "facing=south,part=back_left_lower": {
+      "model": "morecolorful:block/grand_piano_bll",
+      "y": 180
+    },
+    "facing=south,part=back_left_upper": {
+      "model": "morecolorful:block/grand_piano_blu",
+      "y": 180
+    },
+    "facing=south,part=back_right_upper": {
+      "model": "morecolorful:block/grand_piano_bru",
+      "y": 180
+    },
+    "facing=west,part=front_left_lower": {
+      "model": "morecolorful:block/grand_piano_fll",
+      "y": 270
+    },
+    "facing=west,part=front_left_upper": {
+      "model": "morecolorful:block/grand_piano_flu",
+      "y": 270
+    },
+    "facing=west,part=front_right_lower": {
+      "model": "morecolorful:block/grand_piano_frl",
+      "y": 270
+    },
+    "facing=west,part=front_right_upper": {
+      "model": "morecolorful:block/grand_piano_fru",
+      "y": 270
+    },
+    "facing=west,part=back_left_lower": {
+      "model": "morecolorful:block/grand_piano_bll",
+      "y": 270
+    },
+    "facing=west,part=back_left_upper": {
+      "model": "morecolorful:block/grand_piano_blu",
+      "y": 270
+    },
+    "facing=west,part=back_right_upper": {
+      "model": "morecolorful:block/grand_piano_bru",
+      "y": 270
+    }
+  }
+}

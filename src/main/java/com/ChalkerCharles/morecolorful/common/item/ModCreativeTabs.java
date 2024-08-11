@@ -17,26 +17,30 @@ public class ModCreativeTabs {
             .title(Component.translatable("creativetab.musical_instruments_tab"))
             .icon(()->ModItems.VIOLIN.get().getDefaultInstance())
             .displayItems((pParameters, pOutput) -> {
-                pOutput.accept(ModItems.VIOLIN.get());
-                pOutput.accept(ModItems.CELLO.get());
-                pOutput.accept(ModItems.FIDDLE_BOW.get());
-                pOutput.accept(ModItems.DRUMSTICK.get());
-                pOutput.accept(ModItems.GUITAR.get());
-                pOutput.accept(ModItems.FLUTE.get());
-                pOutput.accept(ModItems.ELECTRIC_GUITAR.get());
-                pOutput.accept(ModItems.COW_BELL.get());
                 pOutput.accept(ModItems.GRAND_PIANO.get());
                 pOutput.accept(ModItems.UPRIGHT_PIANO.get());
                 pOutput.accept(ModItems.HARP.get());
+                pOutput.accept(ModItems.VIOLIN.get());
+                pOutput.accept(ModItems.CELLO.get());
+                pOutput.accept(ModItems.FIDDLE_BOW.get());
+                pOutput.accept(ModItems.BASS.get());
+                pOutput.accept(ModItems.GUITAR.get());
+                pOutput.accept(ModItems.ELECTRIC_GUITAR.get());
+                pOutput.accept(ModItems.BANJO.get());
+                pOutput.accept(ModItems.FLUTE.get());
+                pOutput.accept(ModItems.DIDGERIDOO.get());
+                pOutput.accept(ModItems.TRUMPET.get());
+                pOutput.accept(ModItems.COW_BELL.get());
                 pOutput.accept(ModItems.BASS_DRUM.get());
                 pOutput.accept(ModItems.SNARE_DRUM.get());
+                pOutput.accept(ModItems.HIHAT.get());
                 pOutput.accept(ModItems.CHIMES.get());
                 pOutput.accept(ModItems.GLOCKENSPIEL.get());
                 pOutput.accept(ModItems.XYLOPHONE.get());
                 pOutput.accept(ModItems.VIBRAPHONE.get());
+                pOutput.accept(ModItems.DRUMSTICK.get());
                 pOutput.accept(ModItems.SYNTHESIZER_KEYBOARD_BIT.get());
                 pOutput.accept(ModItems.SYNTHESIZER_KEYBOARD_PLING.get());
-                pOutput.accept(ModItems.TRUMPET.get());
             })
             .build()).getKey();
     public static final ResourceKey<CreativeModeTab> BLOCKS_TAB = CREATIVE_MODE_TABS.register("blocks_tab",() -> CreativeModeTab.builder()

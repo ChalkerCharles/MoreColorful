@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "block": "morecolorful:grand_piano",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "part": "front_right_lower"
+              }
+            }
+          ],
+          "name": "morecolorful:grand_piano"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "morecolorful:blocks/grand_piano"
+}
