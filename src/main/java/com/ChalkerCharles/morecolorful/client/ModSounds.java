@@ -8,11 +8,13 @@ import net.minecraft.sounds.SoundEvent;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-import java.util.function.Supplier;
-
 public class ModSounds {
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS = DeferredRegister.create(Registries.SOUND_EVENT, MoreColorful.MODID);
+    public static final Holder<SoundEvent> NOTE_BLOCK_PIANO = registerSound("block.note_block.piano");
     public static final Holder<SoundEvent> NOTE_BLOCK_VIOLIN = registerSound("block.note_block.violin");
+    public static final Holder<SoundEvent> NOTE_BLOCK_CELLO = registerSound("block.note_block.cello");
+    public static final Holder<SoundEvent> NOTE_BLOCK_ELECTRIC_GUITAR = registerSound("block.note_block.electric_guitar");
+    public static final Holder<SoundEvent> NOTE_BLOCK_TRUMPET = registerSound("block.note_block.trumpet");
     // Musical Instruments
     public static final Holder<SoundEvent> HARP_PLAY = registerSound("block.harp.play");
     public static final Holder<SoundEvent> PIANO_PLAY = registerSound("block.piano.play");

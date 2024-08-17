@@ -77,12 +77,12 @@ public class PlayingScreen extends Screen {
             pPlayer.stopUsingItem();
         }).pos((i - 186) / 2, 192).size(186, 20).build());
         this.addWidget(button);
-        this.blackKey_0 = this.addWidget(new KeyButton((i - 186) / 2 + 46, 111, -1, Button -> KeyButton.playSound(pPlayer, pType, pPos, 0), false));
-        this.blackKey_2 = this.addWidget(new KeyButton((i - 186) / 2 + 63, 111, -1, Button -> KeyButton.playSound(pPlayer, pType, pPos, 2), false));
-        this.blackKey_4 = this.addWidget(new KeyButton((i - 186) / 2 + 80, 111, -1, Button -> KeyButton.playSound(pPlayer, pType, pPos, 4), false));
-        this.blackKey_7 = this.addWidget(new KeyButton((i - 186) / 2 + 110, 111, -1, Button -> KeyButton.playSound(pPlayer, pType, pPos, 7), false));
-        this.blackKey_9 = this.addWidget(new KeyButton((i - 186) / 2 + 128, 111, -1, Button -> KeyButton.playSound(pPlayer, pType, pPos, 9), false));
-        this.blackKey_12 = this.addWidget(new KeyButton((i - 186) / 2 + 30, 53, -1, Button -> KeyButton.playSound(pPlayer, pType, pPos, 12), false));
+        this.blackKey_0 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 46, 111, -1, Button -> KeyButton.playSound(pPlayer, pType, pPos, 0), false));
+        this.blackKey_2 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 63, 111, -1, Button -> KeyButton.playSound(pPlayer, pType, pPos, 2), false));
+        this.blackKey_4 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 80, 111, -1, Button -> KeyButton.playSound(pPlayer, pType, pPos, 4), false));
+        this.blackKey_7 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 110, 111, -1, Button -> KeyButton.playSound(pPlayer, pType, pPos, 7), false));
+        this.blackKey_9 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 128, 111, -1, Button -> KeyButton.playSound(pPlayer, pType, pPos, 9), false));
+        this.blackKey_12 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 30, 53, -1, Button -> KeyButton.playSound(pPlayer, pType, pPos, 12), false));
         this.blackKey_14 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 47, 53, -1, Button -> KeyButton.playSound(pPlayer, pType, pPos, 14), false));
         this.blackKey_16 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 64, 53, -1, Button -> KeyButton.playSound(pPlayer, pType, pPos, 16), false));
         this.blackKey_19 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 94, 53, -1, Button -> KeyButton.playSound(pPlayer, pType, pPos, 19), false));
@@ -90,12 +90,12 @@ public class PlayingScreen extends Screen {
         this.blackKey_24 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 142, 53, -1, Button -> KeyButton.playSound(pPlayer, pType, pPos, 24), false));
         KeyButton.width = 16;
         KeyButton.height = 48;
-        this.whiteKey_1 = this.addWidget(new KeyButton((i - 186) / 2 + 53, 111, 3, Button -> KeyButton.playSound(pPlayer, pType, pPos, 1), false));
-        this.whiteKey_3 = this.addWidget(new KeyButton((i - 186) / 2 + 69, 111, 4, Button -> KeyButton.playSound(pPlayer, pType, pPos, 3), false));
-        this.whiteKey_5 = this.addWidget(new KeyButton((i - 186) / 2 + 85, 111, 2, Button -> KeyButton.playSound(pPlayer, pType, pPos, 5), false));
-        this.whiteKey_6 = this.addWidget(new KeyButton((i - 186) / 2 + 101, 111, 0, Button -> KeyButton.playSound(pPlayer, pType, pPos, 6), false));
-        this.whiteKey_8 = this.addWidget(new KeyButton((i - 186) / 2 + 117, 111, 1, Button -> KeyButton.playSound(pPlayer, pType, pPos, 8), false));
-        this.whiteKey_10 = this.addWidget(new KeyButton((i - 186) / 2 + 133, 111, 2, Button -> KeyButton.playSound(pPlayer, pType, pPos, 10), false));
+        this.whiteKey_1 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 53, 111, 3, Button -> KeyButton.playSound(pPlayer, pType, pPos, 1), false));
+        this.whiteKey_3 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 69, 111, 4, Button -> KeyButton.playSound(pPlayer, pType, pPos, 3), false));
+        this.whiteKey_5 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 85, 111, 2, Button -> KeyButton.playSound(pPlayer, pType, pPos, 5), false));
+        this.whiteKey_6 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 101, 111, 0, Button -> KeyButton.playSound(pPlayer, pType, pPos, 6), false));
+        this.whiteKey_8 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 117, 111, 1, Button -> KeyButton.playSound(pPlayer, pType, pPos, 8), false));
+        this.whiteKey_10 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 133, 111, 2, Button -> KeyButton.playSound(pPlayer, pType, pPos, 10), false));
         this.whiteKey_11 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 21, 53, 0, Button -> KeyButton.playSound(pPlayer, pType, pPos, 11), false));
         this.whiteKey_13 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 37, 53, 3, Button -> KeyButton.playSound(pPlayer, pType, pPos, 13), false));
         this.whiteKey_15 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 53, 53, 4, Button -> KeyButton.playSound(pPlayer, pType, pPos, 15), false));
@@ -172,12 +172,12 @@ public class PlayingScreen extends Screen {
         pGuiGraphics.drawCenteredString(this.font, "[9]", (i - 186) / 2 + 149, 73, 9145227);
     }
 
-    /*@Override
+    @Override
     public void renderBackground(@NotNull GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
         this.renderTransparentBackground(pGuiGraphics);
         int i = this.width;
         pGuiGraphics.blit(PLAYING_SCREEN_TEXTURE, (i - 186) / 2, 32, 0, 0, 186, 140);
-    }*/
+    }
 
     public boolean isPauseScreen() {return false;}
     public boolean shouldCloseOnEsc() {
