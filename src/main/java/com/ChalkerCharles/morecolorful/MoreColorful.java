@@ -1,9 +1,11 @@
 package com.ChalkerCharles.morecolorful;
 
-import com.ChalkerCharles.morecolorful.client.ModSounds;
+import com.ChalkerCharles.morecolorful.common.ModDataAttachments;
+import com.ChalkerCharles.morecolorful.common.ModSounds;
+import com.ChalkerCharles.morecolorful.common.ModStats;
 import com.ChalkerCharles.morecolorful.common.block.ModBlocks;
-//import com.ChalkerCharles.morecolorful.common.block.entity.ModBlockEntities;
-import com.ChalkerCharles.morecolorful.common.block.entity.ModBlockEntities;
+import com.ChalkerCharles.morecolorful.common.block.ModBlockEntities;
+import com.ChalkerCharles.morecolorful.common.block.properties.VanillaBlockPropertyModification;
 import com.ChalkerCharles.morecolorful.common.item.ModCreativeTabs;
 import com.ChalkerCharles.morecolorful.common.item.ModItems;
 import org.slf4j.Logger;
@@ -40,11 +42,14 @@ public class MoreColorful {
         ModItems.register(modEventBus);
         ModCreativeTabs.register(modEventBus);
         ModBlocks.register(modEventBus);
-        //ModBlockEntities.register(modEventBus);
+        ModBlockEntities.register(modEventBus);
         ModSounds.register(modEventBus);
+        ModStats.register(modEventBus);
+        ModDataAttachments.register(modEventBus);
         // Register ourselves for server and other game events we are interested in.
         // Note that this is necessary if and only if we want *this* class (ExampleMod) to respond directly to events.
         // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
+        NeoForge.EVENT_BUS.register(new VanillaBlockPropertyModification());
         NeoForge.EVENT_BUS.register(this);
 
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us
@@ -61,6 +66,7 @@ public class MoreColorful {
         LOGGER.info(Config.magicNumberIntroduction + Config.magicNumber);
 
         Config.items.forEach((item) -> LOGGER.info("ITEM >> {}", item.toString()));
+        event.enqueueWork(ModStats::init);
     }
 
 

@@ -1,6 +1,6 @@
 package com.ChalkerCharles.morecolorful.mixin;
 
-import com.ChalkerCharles.morecolorful.client.ModSounds;
+import com.ChalkerCharles.morecolorful.common.ModSounds;
 import net.minecraft.core.Holder;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
@@ -10,7 +10,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Arrays;
-import java.util.Locale;
 
 import static com.ChalkerCharles.morecolorful.common.block.properties.NoteBlockInstrumentExtension.*;
 
@@ -22,14 +21,14 @@ public class NoteBlockInstrumentMixin {
     private static NoteBlockInstrument[] $VALUES;
 
     @SuppressWarnings("unused")
-    NoteBlockInstrumentMixin(String enumName, int ord, String name, Holder<SoundEvent> sound, NoteBlockInstrument.Type type) {
+    NoteBlockInstrumentMixin(String enumName, int ordinal, String name, Holder<SoundEvent> sound, NoteBlockInstrument.Type type) {
         throw new UnsupportedOperationException("Replaced by Mixin");
     }
 
     @Unique
-    private static NoteBlockInstrument moreColorful$create(String enumName, int ord, Holder<SoundEvent> pSoundEvent) {
-        return (NoteBlockInstrument)(Object)new NoteBlockInstrumentMixin(
-                enumName, ord, enumName.toLowerCase(Locale.ROOT), pSoundEvent, NoteBlockInstrument.Type.BASE_BLOCK
+    private static NoteBlockInstrument moreColorful$create(String enumName, int ordinal, String name, Holder<SoundEvent> pSoundEvent) {
+        return (NoteBlockInstrument)(Object) new NoteBlockInstrumentMixin(
+                enumName, ordinal, name, pSoundEvent, NoteBlockInstrument.Type.BASE_BLOCK
         );
     }
 
@@ -39,10 +38,10 @@ public class NoteBlockInstrumentMixin {
         int ordinal = $VALUES.length;
         $VALUES = Arrays.copyOf($VALUES, ordinal + 5);
 
-        PIANO = $VALUES[ordinal] = moreColorful$create("PIANO", ordinal, ModSounds.NOTE_BLOCK_PIANO);
-        VIOLIN = $VALUES[ordinal + 1] = moreColorful$create("VIOLIN", ordinal + 1, ModSounds.NOTE_BLOCK_VIOLIN);
-        CELLO = $VALUES[ordinal + 2] = moreColorful$create("CELLO", ordinal + 2, ModSounds.NOTE_BLOCK_CELLO);
-        ELECTRIC_GUITAR = $VALUES[ordinal + 3] = moreColorful$create("ELECTRIC_GUITAR", ordinal + 3, ModSounds.NOTE_BLOCK_ELECTRIC_GUITAR);
-        TRUMPET = $VALUES[ordinal + 4] = moreColorful$create("TRUMPET", ordinal + 2, ModSounds.NOTE_BLOCK_TRUMPET);
+        PIANO = $VALUES[ordinal] = moreColorful$create("MORECOLORFUL_PIANO", ordinal, "piano", ModSounds.NOTE_BLOCK_PIANO);
+        VIOLIN = $VALUES[ordinal + 1] = moreColorful$create("MORECOLORFUL_VIOLIN", ordinal + 1, "violin", ModSounds.NOTE_BLOCK_VIOLIN);
+        CELLO = $VALUES[ordinal + 2] = moreColorful$create("MORECOLORFUL_CELLO", ordinal + 2, "cello", ModSounds.NOTE_BLOCK_CELLO);
+        ELECTRIC_GUITAR = $VALUES[ordinal + 3] = moreColorful$create("MORECOLORFUL_ELECTRIC_GUITAR", ordinal + 3, "electric_guitar", ModSounds.NOTE_BLOCK_ELECTRIC_GUITAR);
+        TRUMPET = $VALUES[ordinal + 4] = moreColorful$create("MORECOLORFUL_TRUMPET", ordinal + 4, "trumpet", ModSounds.NOTE_BLOCK_TRUMPET);
     }
 }

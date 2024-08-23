@@ -9,7 +9,6 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.NotNull;
 
 public class ViolinItem extends MusicalInstrumentItem {
     public ViolinItem(InstrumentsType pType, Properties pProperties) {
@@ -18,19 +17,19 @@ public class ViolinItem extends MusicalInstrumentItem {
     }
 
     @Override
-    public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level pLevel, @NotNull Player pPlayer, @NotNull InteractionHand pHand) {
+    public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pHand) {
         ItemStack pStack = pPlayer.getItemInHand(pHand);
         if ((pHand == InteractionHand.MAIN_HAND && pPlayer.getItemInHand(InteractionHand.OFF_HAND).getItem() == ModItems.FIDDLE_BOW.get())
                 || (pHand == InteractionHand.OFF_HAND && pPlayer.getItemInHand(InteractionHand.MAIN_HAND).getItem() == ModItems.FIDDLE_BOW.get())) {
             if (pLevel.isClientSide) {
                 PlayingScreen.openPlayingScreen(pPlayer, pType);
-                pPlayer.startUsingItem(pHand);
-            } else {
-                pPlayer.awardStat(Stats.ITEM_USED.get(this));
-                pPlayer.awardStat(Stats.ITEM_USED.get(ModItems.FIDDLE_BOW.get()));
             }
+            pPlayer.startUsingItem(pHand);
+            pPlayer.awardStat(Stats.ITEM_USED.get(this));
+            pPlayer.awardStat(Stats.ITEM_USED.get(ModItems.FIDDLE_BOW.get()));
         } else {
-            pPlayer.displayClientMessage(Component.translatable("item.morecolorful.instruments.need_fiddle_bow"), true);
+            pPlayer.displayClientMessage(Component.translatable("info.morecolorful.instruments.need_fiddle_bow"), true);
+            return InteractionResultHolder.fail(pStack);
         }
         return InteractionResultHolder.consume(pStack);
     }

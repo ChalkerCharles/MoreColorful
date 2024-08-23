@@ -2,7 +2,7 @@ package com.ChalkerCharles.morecolorful.common.block.properties;
 
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 
-public class NoteBlockInstrumentExtension {
+public final class NoteBlockInstrumentExtension {
     public static NoteBlockInstrument PIANO;
     public static NoteBlockInstrument VIOLIN;
     public static NoteBlockInstrument CELLO;

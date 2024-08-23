@@ -1,4 +1,4 @@
-package com.ChalkerCharles.morecolorful.client;
+package com.ChalkerCharles.morecolorful.common;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
 import net.minecraft.core.Holder;

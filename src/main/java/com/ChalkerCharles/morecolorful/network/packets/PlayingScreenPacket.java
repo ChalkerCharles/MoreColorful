@@ -10,21 +10,20 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
-public record NotePlayingPacket(InstrumentsType pType, BlockPos pos, int keyId, boolean isBlock) implements CustomPacketPayload {
+public record PlayingScreenPacket(InstrumentsType pType, BlockPos pos, int id, boolean isOpen) implements CustomPacketPayload {
 
-    public static final CustomPacketPayload.Type<NotePlayingPacket> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "note_playing"));
+    public static final CustomPacketPayload.Type<PlayingScreenPacket> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "playing_screen_event"));
 
-    public static final StreamCodec<ByteBuf, NotePlayingPacket> STREAM_CODEC = StreamCodec.composite(
+    public static final StreamCodec<ByteBuf, PlayingScreenPacket> STREAM_CODEC = StreamCodec.composite(
             InstrumentsType.STREAM_CODEC,
-            NotePlayingPacket::pType,
+            PlayingScreenPacket::pType,
             BlockPos.STREAM_CODEC,
-            NotePlayingPacket::pos,
+            PlayingScreenPacket::pos,
             ByteBufCodecs.INT,
-            NotePlayingPacket::keyId,
+            PlayingScreenPacket::id,
             ByteBufCodecs.BOOL,
-            NotePlayingPacket::isBlock,
-            NotePlayingPacket::new);
-
+            PlayingScreenPacket::isOpen,
+            PlayingScreenPacket::new);
     @Override
     public @NotNull Type<? extends CustomPacketPayload> type() {
         return TYPE;

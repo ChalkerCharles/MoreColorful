@@ -58,6 +58,11 @@ runs {
         systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
     }
 
+    clientalt {
+        configure('client')
+        programArguments.addAll '--username', 'Dev2'
+    }
+
     server {
         systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
         programArgument '--nogui'

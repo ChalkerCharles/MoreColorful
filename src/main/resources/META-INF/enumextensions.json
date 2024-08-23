@@ -5,8 +5,8 @@
       "name": "MORECOLORFUL_FLUTE",
       "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
       "parameters": {
-        "class": "com/ChalkerCharles/morecolorful/util/EnumParameters",
-        "method": "flutePose"
+        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions",
+        "field": "FLUTE"
       }
     },
     {
@@ -14,8 +14,8 @@
       "name": "MORECOLORFUL_GUITAR_HOLD",
       "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
       "parameters": {
-        "class": "com/ChalkerCharles/morecolorful/util/EnumParameters",
-        "method": "guitarHoldPose"
+        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions",
+        "field": "GUITAR_HOLD"
       }
     },
     {
@@ -23,8 +23,8 @@
       "name": "MORECOLORFUL_GUITAR_PLAYING",
       "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
       "parameters": {
-        "class": "com/ChalkerCharles/morecolorful/util/EnumParameters",
-        "method": "guitarPlayingPose"
+        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions",
+        "field": "GUITAR_PLAYING"
       }
     },
     {
@@ -32,8 +32,8 @@
       "name": "MORECOLORFUL_COW_BELL",
       "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
       "parameters": {
-        "class": "com/ChalkerCharles/morecolorful/util/EnumParameters",
-        "method": "cowBellPose"
+        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions",
+        "field": "COW_BELL"
       }
     },
     {
@@ -41,8 +41,8 @@
       "name": "MORECOLORFUL_DIDGERIDOO",
       "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
       "parameters": {
-        "class": "com/ChalkerCharles/morecolorful/util/EnumParameters",
-        "method": "didgeridooPose"
+        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions",
+        "field": "DIDGERIDOO"
       }
     },
     {
@@ -50,8 +50,8 @@
       "name": "MORECOLORFUL_VIOLIN_HOLD",
       "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
       "parameters": {
-        "class": "com/ChalkerCharles/morecolorful/util/EnumParameters",
-        "method": "violinHoldPose"
+        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions",
+        "field": "VIOLIN_HOLD"
       }
     },
     {
@@ -59,8 +59,8 @@
       "name": "MORECOLORFUL_VIOLIN_PLAYING",
       "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
       "parameters": {
-        "class": "com/ChalkerCharles/morecolorful/util/EnumParameters",
-        "method": "violinPlayingPose"
+        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions",
+        "field": "VIOLIN_PLAYING"
       }
     },
     {
@@ -68,8 +68,8 @@
       "name": "MORECOLORFUL_CELLO",
       "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
       "parameters": {
-        "class": "com/ChalkerCharles/morecolorful/util/EnumParameters",
-        "method": "celloPose"
+        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions",
+        "field": "CELLO"
       }
     },
     {
@@ -77,8 +77,8 @@
       "name": "MORECOLORFUL_CELLO_HOLD",
       "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
       "parameters": {
-        "class": "com/ChalkerCharles/morecolorful/util/EnumParameters",
-        "method": "celloHoldPose"
+        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions",
+        "field": "CELLO_HOLD"
       }
     },
     {
@@ -86,8 +86,8 @@
       "name": "MORECOLORFUL_CELLO_PLAYING",
       "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
       "parameters": {
-        "class": "com/ChalkerCharles/morecolorful/util/EnumParameters",
-        "method": "celloPlayingPose"
+        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions",
+        "field": "CELLO_PLAYING"
       }
     }
   ]

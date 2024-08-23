@@ -1,8 +1,13 @@
 package com.ChalkerCharles.morecolorful.client.gui;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
+import com.ChalkerCharles.morecolorful.common.block.musical_instruments.MusicalInstrumentBlock;
 import com.ChalkerCharles.morecolorful.common.item.ModItems;
 import com.ChalkerCharles.morecolorful.common.item.musical_instruments.InstrumentsType;
+import com.ChalkerCharles.morecolorful.common.item.musical_instruments.MusicalInstrumentItem;
+import com.ChalkerCharles.morecolorful.network.packets.InstrumentPressingPacket;
+import com.ChalkerCharles.morecolorful.network.packets.InstrumentTickingPacket;
+import com.ChalkerCharles.morecolorful.network.packets.PlayingScreenPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
@@ -17,6 +22,7 @@ import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.NotNull;
 import org.lwjgl.glfw.GLFW;
 
@@ -50,22 +56,23 @@ public class PlayingScreen extends Screen {
     private KeyButton whiteKey_23;
     private KeyButton blackKey_24;
     private static final ResourceLocation PLAYING_SCREEN_TEXTURE = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "textures/gui/playing_screen.png");
-    private final Component content = Component.translatable("gui.playing_screen_title");
-    FormattedCharSequence formattedcharsequence = content.getVisualOrderText();
-    FormattedCharSequence singleletterlength = Component.literal("C").getVisualOrderText();
-    FormattedCharSequence letterwithbrackets = Component.literal("[C]").getVisualOrderText();
+    private static final Component TITLE = Component.translatable("morecolorful.gui.playing_screen_title");
+    private static final FormattedCharSequence TITLE_LENGTH = TITLE.getVisualOrderText();
+    private static final FormattedCharSequence SINGLE_LETTER_LENGTH = Component.literal("C").getVisualOrderText();
+    private static final FormattedCharSequence LETTER_WITH_BRACKETS = Component.literal("[C]").getVisualOrderText();
     public final Player pPlayer;
-    public static InstrumentsType pType;
-    public static BlockPos pPos;
-    public float pTick = 0;
-    boolean isDragging;
-    public static boolean isPressing = false;
+    public final InstrumentsType pType;
+    public final BlockPos pPos;
+    private static final BlockPos DEFAULT_POS = new BlockPos(0, -65, 0);
+    private float pTick = 0;
+    private boolean isDragging;
+    public boolean isPressing = false;
 
     public PlayingScreen(Player pPlayer, InstrumentsType pType, @Nullable BlockPos pPos) {
         super(Component.empty());
         this.pPlayer = pPlayer;
-        PlayingScreen.pType = pType;
-        PlayingScreen.pPos = pPos;
+        this.pType = pType;
+        this.pPos = pPos;
     }
 
     @Override
@@ -75,6 +82,7 @@ public class PlayingScreen extends Screen {
             if (this.minecraft != null) {this.minecraft.setScreen(null);}
             isPressing = false;
             pPlayer.stopUsingItem();
+            PacketDistributor.sendToServer(new PlayingScreenPacket(pType, pPos, pPlayer.getId(), false));
         }).pos((i - 186) / 2, 192).size(186, 20).build());
         this.addWidget(button);
         this.blackKey_0 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 46, 111, -1, Button -> KeyButton.playSound(pPlayer, pType, pPos, 0), false));
@@ -113,11 +121,11 @@ public class PlayingScreen extends Screen {
     public void render(@NotNull GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
         super.render(pGuiGraphics, pMouseX, pMouseY, pPartialTick);
         int i = this.width;
-        int j = this.font.width(formattedcharsequence);
-        int k = this.font.width(singleletterlength);
-        int l = this.font.width(letterwithbrackets);
+        int j = this.font.width(TITLE_LENGTH);
+        int k = this.font.width(SINGLE_LETTER_LENGTH);
+        int l = this.font.width(LETTER_WITH_BRACKETS);
         // Title
-        pGuiGraphics.drawString(this.font, content, (i - j) / 2, 39, 4210752, false);
+        pGuiGraphics.drawString(this.font, TITLE, (i - j) / 2, 39, 4210752, false);
         // Pitches
         pGuiGraphics.drawCenteredString(this.font, "F♯", (i - 186) / 2 + 53, 125, 16777215);
         pGuiGraphics.drawString(this.font, "G", (i - 186) / 2 + 61 - k / 2, 143, 4210752, false);
@@ -183,6 +191,7 @@ public class PlayingScreen extends Screen {
     public boolean shouldCloseOnEsc() {
         isPressing = false;
         pPlayer.stopUsingItem();
+        PacketDistributor.sendToServer(new PlayingScreenPacket(pType, pPos, pPlayer.getId(), false));
         return true;
     }
 
@@ -329,6 +338,7 @@ public class PlayingScreen extends Screen {
                 blackKey_14.isPressed || whiteKey_15.isPressed || blackKey_16.isPressed || whiteKey_17.isPressed ||whiteKey_18.isPressed || blackKey_19.isPressed || whiteKey_20.isPressed ||
                 blackKey_21.isPressed || whiteKey_22.isPressed || whiteKey_23.isPressed || blackKey_24.isPressed)){
             isPressing = false;
+            PacketDistributor.sendToServer(new InstrumentPressingPacket(pPos, pPlayer.getId(), false));
         }
 
         if (pType == InstrumentsType.PIANO || (pType.ordinal() >= 9 && pType.ordinal() <= 10)) {
@@ -360,10 +370,24 @@ public class PlayingScreen extends Screen {
                 pPlayer.swing(drumstickHand);
             }
         }
+
+        if (this.minecraft != null) {
+            if (pPos != DEFAULT_POS) {
+                if (!(pPlayer.level().getBlockState(pPos).getBlock() instanceof MusicalInstrumentBlock block) || block.getType() != this.pType) {
+                    minecraft.setScreen(null);
+                    PacketDistributor.sendToServer(new PlayingScreenPacket(pType, pPos, pPlayer.getId(), false));
+                }
+            } else if (!(pPlayer.getItemInHand(pPlayer.getUsedItemHand()).getItem() instanceof MusicalInstrumentItem item) || item.getType() != this.pType) {
+                minecraft.setScreen(null);
+                pPlayer.stopUsingItem();
+                PacketDistributor.sendToServer(new PlayingScreenPacket(pType, pPos, pPlayer.getId(), false));
+            }
+        }
+        PacketDistributor.sendToServer(new InstrumentTickingPacket(pTick, pPlayer.getId()));
     }
 
     public static void openPlayingScreen(Player pPlayer, InstrumentsType pType){
-        Minecraft.getInstance().setScreen(new PlayingScreen(pPlayer, pType, null));
+        Minecraft.getInstance().setScreen(new PlayingScreen(pPlayer, pType, DEFAULT_POS));
     }
     public static void openPlayingScreen(Player pPlayer, InstrumentsType pType, BlockPos pPos){
         Minecraft.getInstance().setScreen(new PlayingScreen(pPlayer, pType, pPos));

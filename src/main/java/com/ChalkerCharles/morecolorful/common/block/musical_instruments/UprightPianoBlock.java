@@ -1,12 +1,13 @@
 package com.ChalkerCharles.morecolorful.common.block.musical_instruments;
 
 import com.ChalkerCharles.morecolorful.client.gui.PlayingScreen;
+import com.ChalkerCharles.morecolorful.common.ModStats;
 import com.ChalkerCharles.morecolorful.common.block.properties.ModBlockStateProperties;
 import com.ChalkerCharles.morecolorful.common.block.properties.UprightPianoPart;
 import com.ChalkerCharles.morecolorful.common.item.musical_instruments.InstrumentsType;
+import com.ChalkerCharles.morecolorful.network.packets.PlayingScreenPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -15,9 +16,7 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
@@ -26,7 +25,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import org.jetbrains.annotations.NotNull;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 import javax.annotation.Nullable;
 
@@ -118,15 +117,17 @@ public class UprightPianoBlock extends MusicalInstrumentBlock {
     }
 
     @Override
-    public @NotNull InteractionResult useWithoutItem (@NotNull BlockState pState, @NotNull Level pLevel, @NotNull BlockPos pPos, @NotNull Player pPlayer, @NotNull BlockHitResult pHitResult) {
+    public InteractionResult useWithoutItem (BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, BlockHitResult pHitResult) {
         if (pLevel.isClientSide){
             PlayingScreen.openPlayingScreen(pPlayer, pType, pPos);
+            PacketDistributor.sendToServer(new PlayingScreenPacket(pType, pPos, pPlayer.getId(), true));
         }
+        pPlayer.awardStat(ModStats.INTERACT_WITH_PIANO.get());
         return InteractionResult.CONSUME;
     }
 
     @Override
-    protected @NotNull VoxelShape getShape(BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos, @NotNull CollisionContext pContext) {
+    protected VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
         Direction direction = pState.getValue(FACING);
         UprightPianoPart part = pState.getValue(PART);
         return switch (direction){
@@ -157,7 +158,7 @@ public class UprightPianoBlock extends MusicalInstrumentBlock {
         };
     }
     @Override
-    protected @NotNull BlockState updateShape(@NotNull BlockState pState, @NotNull Direction pDirection, @NotNull BlockState pNeighborState, @NotNull LevelAccessor pLevel, @NotNull BlockPos pPos, @NotNull BlockPos pNeighborPos) {
+    protected BlockState updateShape(BlockState pState, Direction pDirection, BlockState pNeighborState, LevelAccessor pLevel, BlockPos pPos, BlockPos pNeighborPos) {
         if (pDirection == getNeighbourDirection(pState.getValue(PART), pState.getValue(FACING))) {
             return pNeighborState.is(this) && pNeighborState.getValue(PART) != pState.getValue(PART)
                     ? super.updateShape(pState, pDirection, pNeighborState, pLevel, pPos, pNeighborPos)
@@ -177,7 +178,7 @@ public class UprightPianoBlock extends MusicalInstrumentBlock {
         return (pPart == UprightPianoPart.LEFT_LOWER || pPart == UprightPianoPart.RIGHT_LOWER) ? Direction.UP : Direction.DOWN;
     }
     @Override
-    public @NotNull BlockState playerWillDestroy(Level pLevel, @NotNull BlockPos pPos, @NotNull BlockState pState, @NotNull Player pPlayer) {
+    public BlockState playerWillDestroy(Level pLevel, BlockPos pPos, BlockState pState, Player pPlayer) {
         if (!pLevel.isClientSide && (pPlayer.isCreative() || !pPlayer.hasCorrectToolForDrops(pState, pLevel, pPos))) {
             UprightPianoPart part = pState.getValue(PART);
             if (part != UprightPianoPart.RIGHT_LOWER) {
@@ -212,10 +213,19 @@ public class UprightPianoBlock extends MusicalInstrumentBlock {
         }
     }
     @Override
-    public void setPlacedBy(Level pLevel, BlockPos pPos, BlockState pState, LivingEntity pPlacer, @NotNull ItemStack pStack) {
+    public void setPlacedBy(Level pLevel, BlockPos pPos, BlockState pState, LivingEntity pPlacer, ItemStack pStack) {
         pLevel.setBlock(pPos.above(), pState.setValue(PART, UprightPianoPart.LEFT_UPPER), 3);
         pLevel.setBlock(pPos.relative(pState.getValue(FACING).getCounterClockWise()), pState.setValue(PART, UprightPianoPart.RIGHT_LOWER), 3);
         pLevel.setBlock(pPos.relative(pState.getValue(FACING).getCounterClockWise()).above(), pState.setValue(PART, UprightPianoPart.RIGHT_UPPER), 3);
+    }
+    @Override
+    protected BlockState rotate(BlockState pState, Rotation pRot) {
+        return pState.setValue(FACING, pRot.rotate(pState.getValue(FACING)));
+    }
+    @SuppressWarnings("deprecation")
+    @Override
+    protected BlockState mirror(BlockState pState, Mirror pMirror) {
+        return pState.rotate(pMirror.getRotation(pState.getValue(FACING)));
     }
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {

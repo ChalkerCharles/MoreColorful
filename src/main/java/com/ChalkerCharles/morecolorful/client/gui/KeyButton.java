@@ -2,19 +2,18 @@ package com.ChalkerCharles.morecolorful.client.gui;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.common.item.musical_instruments.InstrumentsType;
+import com.ChalkerCharles.morecolorful.network.packets.InstrumentPressingPacket;
 import com.ChalkerCharles.morecolorful.network.packets.NotePlayingPacket;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.sounds.SoundManager;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.gameevent.GameEvent;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -70,26 +69,23 @@ public class KeyButton extends Button {
     }
     public static void playSound(Player pPlayer, InstrumentsType pType, BlockPos pPos, int keyId){
         int pitchId = keyId - 12;
-        double random = 2 * (Math.random() - Math.random());
-        double random1 = 2 * (Math.random() - Math.random());
         Level pLevel = pPlayer.level();
         if (pType.ordinal() <= 10) { // From Instrument Blocks
-            pLevel.playSound(pPlayer, pPos, pType.getSoundEvent().value(), SoundSource.RECORDS, 3.0F, (float) Math.pow(2,((double) pitchId / 12)));
-            pLevel.addParticle(ParticleTypes.NOTE, pPos.getX() + random, pPos.getY()+2.2, pPos.getZ() + random1, keyId / 24.0, 0, 0);
-            PacketDistributor.sendToServer(new NotePlayingPacket(pPos, true));
+            pLevel.playSound(pPlayer, pPos.getX() + 0.5, pPos.getY() + 0.5, pPos.getZ() + 0.5, pType.getSoundEvent().value(), SoundSource.RECORDS, 3.0F, (float) Math.pow(2,((double) pitchId / 12)));
+            PacketDistributor.sendToServer(new NotePlayingPacket(pType, pPos, keyId, true));
         } else { // From Instrument Items
-            pLevel.playSound(pPlayer, pPlayer.blockPosition(), pType.getSoundEvent().value(), SoundSource.RECORDS, 3.0F, (float) Math.pow(2, ((double) pitchId / 12)));
-            pLevel.addParticle(ParticleTypes.NOTE, pPlayer.getX() + random, pPlayer.getY() + 2.2, pPlayer.getZ() + random1, keyId / 24.0, 0, 0);
-            PacketDistributor.sendToServer(new NotePlayingPacket(pPlayer.blockPosition(), false));
+            pLevel.playSound(pPlayer, pPlayer, pType.getSoundEvent().value(), SoundSource.RECORDS, 3.0F, (float) Math.pow(2, ((double) pitchId / 12)));
+            PacketDistributor.sendToServer(new NotePlayingPacket(pType, pPlayer.blockPosition(), keyId, false));
         }
     }
     @Override
     public void onPress() {
-        if (this.active) {
+        if (this.active && Minecraft.getInstance().screen instanceof PlayingScreen pScreen) {
             this.onPress.onPress(this);
             this.isPressed = true;
             this.active = false;
-            PlayingScreen.isPressing = true;
+            pScreen.isPressing = true;
+            PacketDistributor.sendToServer(new InstrumentPressingPacket(pScreen.pPos, pScreen.pPlayer.getId(), true));
         }
     }
     public void restore() {

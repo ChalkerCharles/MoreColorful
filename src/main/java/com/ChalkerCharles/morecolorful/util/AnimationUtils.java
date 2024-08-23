@@ -7,7 +7,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class AnimationUtils {
+public final class AnimationUtils {
     public static void animateGuitarPlaying(ModelPart pRightArm, ModelPart pLeftArm, LivingEntity pLivingEntity, boolean pRightHanded) {
         ModelPart modelPart = pRightHanded ? pLeftArm : pRightArm;
         float angle = (float) -(Math.PI / 12);

@@ -9,7 +9,6 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.NotNull;
 
 public class GuitarItem extends MusicalInstrumentItem {
     public GuitarItem(InstrumentsType pType, Properties pProperties) {
@@ -17,18 +16,18 @@ public class GuitarItem extends MusicalInstrumentItem {
         this.pType = pType;
     }
     @Override
-    public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level pLevel, @NotNull Player pPlayer, @NotNull InteractionHand pHand) {
+    public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pHand) {
         ItemStack pStack = pPlayer.getItemInHand(pHand);
         if ((pHand == InteractionHand.MAIN_HAND && !pPlayer.hasItemInSlot(EquipmentSlot.OFFHAND))
                 || (pHand == InteractionHand.OFF_HAND && !pPlayer.hasItemInSlot(EquipmentSlot.MAINHAND))){
             if (pLevel.isClientSide) {
                 PlayingScreen.openPlayingScreen(pPlayer, pType);
-                pPlayer.startUsingItem(pHand);
-            } else {
-                pPlayer.awardStat(Stats.ITEM_USED.get(this));
             }
+            pPlayer.startUsingItem(pHand);
+            pPlayer.awardStat(Stats.ITEM_USED.get(this));
         } else {
-            pPlayer.displayClientMessage(Component.translatable("item.morecolorful.instruments.busy_hands"), true);
+            pPlayer.displayClientMessage(Component.translatable("info.morecolorful.instruments.busy_hands"), true);
+            return InteractionResultHolder.fail(pStack);
         }
         return InteractionResultHolder.consume(pStack);
     }

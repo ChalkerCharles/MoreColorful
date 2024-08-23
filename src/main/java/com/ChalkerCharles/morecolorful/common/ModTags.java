@@ -1,4 +1,4 @@
-package com.ChalkerCharles.morecolorful.common.tag;
+package com.ChalkerCharles.morecolorful.common;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
 import net.minecraft.resources.ResourceLocation;

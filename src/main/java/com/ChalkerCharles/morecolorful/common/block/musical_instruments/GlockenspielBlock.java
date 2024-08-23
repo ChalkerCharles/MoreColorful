@@ -7,16 +7,13 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import org.jetbrains.annotations.NotNull;
 
 public class GlockenspielBlock extends PercussionInstrumentBlock{
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
@@ -67,7 +64,7 @@ public class GlockenspielBlock extends PercussionInstrumentBlock{
     }
 
     @Override
-    protected @NotNull VoxelShape getCollisionShape(BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos, @NotNull CollisionContext pContext) {
+    protected VoxelShape getCollisionShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
         Direction direction = pState.getValue(FACING);
         return switch (direction){
             case WEST -> WEST_COLLISION;
@@ -77,7 +74,7 @@ public class GlockenspielBlock extends PercussionInstrumentBlock{
         };
     }
     @Override
-    protected @NotNull VoxelShape getShape(BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos, @NotNull CollisionContext pContext) {
+    protected VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
         Direction direction = pState.getValue(FACING);
         return switch (direction){
             case WEST, EAST -> WEST_EAST;
@@ -85,11 +82,11 @@ public class GlockenspielBlock extends PercussionInstrumentBlock{
         };
     }
     @Override
-    protected boolean canSurvive(@NotNull BlockState pState, @NotNull LevelReader pLevel, BlockPos pPos) {
+    protected boolean canSurvive(BlockState pState, LevelReader pLevel, BlockPos pPos) {
         return Block.canSupportRigidBlock(pLevel, pPos.below());
     }
     @Override
-    protected @NotNull BlockState updateShape(@NotNull BlockState pState, @NotNull Direction pDirection, @NotNull BlockState pNeighborState, @NotNull LevelAccessor pLevel, @NotNull BlockPos pPos, @NotNull BlockPos pNeighborPos) {
+    protected BlockState updateShape(BlockState pState, Direction pDirection, BlockState pNeighborState, LevelAccessor pLevel, BlockPos pPos, BlockPos pNeighborPos) {
         return Direction.DOWN == pDirection && !this.canSurvive(pState, pLevel, pPos)
                 ? Blocks.AIR.defaultBlockState()
                 : super.updateShape(pState, pDirection, pNeighborState, pLevel, pPos, pNeighborPos);
@@ -97,6 +94,15 @@ public class GlockenspielBlock extends PercussionInstrumentBlock{
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {
         return this.defaultBlockState().setValue(FACING, pContext.getHorizontalDirection().getOpposite());
+    }
+    @Override
+    protected BlockState rotate(BlockState pState, Rotation pRot) {
+        return pState.setValue(FACING, pRot.rotate(pState.getValue(FACING)));
+    }
+    @SuppressWarnings("deprecation")
+    @Override
+    protected BlockState mirror(BlockState pState, Mirror pMirror) {
+        return pState.rotate(pMirror.getRotation(pState.getValue(FACING)));
     }
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {

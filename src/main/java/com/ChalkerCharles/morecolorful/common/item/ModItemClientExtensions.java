@@ -2,8 +2,11 @@ package com.ChalkerCharles.morecolorful.common.item;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.client.gui.PlayingScreen;
+import com.ChalkerCharles.morecolorful.common.ModDataAttachments;
+import com.ChalkerCharles.morecolorful.util.EnumExtensions;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.InteractionHand;
@@ -24,64 +27,54 @@ public class ModItemClientExtensions {
     public static void setupUseAnim(RegisterClientExtensionsEvent event) {
         // Flute
         event.registerItem(new IClientItemExtensions() {
-            private static final HumanoidModel.ArmPose FLUTE = HumanoidModel.ArmPose.valueOf("MORECOLORFUL_FLUTE");
-
             @Override
             public HumanoidModel.ArmPose getArmPose(@NotNull LivingEntity livingEntity, @NotNull InteractionHand hand, @NotNull ItemStack itemStack) {
                 if (livingEntity.isUsingItem() && livingEntity.getUseItem() == itemStack) {
-                    return FLUTE;
+                    return EnumExtensions.FLUTE.getValue();
                 }
                 return HumanoidModel.ArmPose.ITEM;
             }
         }, ModItems.FLUTE.get());
         // Guitar-Like
         event.registerItem(new IClientItemExtensions() {
-            private static final HumanoidModel.ArmPose GUITAR_HOLD = HumanoidModel.ArmPose.valueOf("MORECOLORFUL_GUITAR_HOLD");
-            private static final HumanoidModel.ArmPose GUITAR_PLAYING = HumanoidModel.ArmPose.valueOf("MORECOLORFUL_GUITAR_PLAYING");
-
             @Override
             public HumanoidModel.ArmPose getArmPose(@NotNull LivingEntity livingEntity, @NotNull InteractionHand hand, @NotNull ItemStack itemStack) {
-                if (livingEntity.isUsingItem() && livingEntity.getUseItem() == itemStack && PlayingScreen.isPressing) {
-                    return GUITAR_PLAYING;
+                if (livingEntity.isUsingItem() && livingEntity.getUseItem() == itemStack
+                        && livingEntity.getData(ModDataAttachments.IS_PLAYING_INSTRUMENT)) {
+                    return EnumExtensions.GUITAR_PLAYING.getValue();
                 }
-                return GUITAR_HOLD;
+                return EnumExtensions.GUITAR_HOLD.getValue();
             }
         }, ModItems.GUITAR.get(), ModItems.BASS.get(), ModItems.BANJO.get(), ModItems.ELECTRIC_GUITAR.get());
         // Cow Bell
         event.registerItem(new IClientItemExtensions() {
-            private static final HumanoidModel.ArmPose COW_BELL = HumanoidModel.ArmPose.valueOf("MORECOLORFUL_COW_BELL");
-
             @Override
             public HumanoidModel.ArmPose getArmPose(@NotNull LivingEntity livingEntity, @NotNull InteractionHand hand, @NotNull ItemStack itemStack) {
                 if (livingEntity.isUsingItem() && livingEntity.getUseItem() == itemStack) {
-                    return COW_BELL;
+                    return EnumExtensions.COW_BELL.getValue();
                 }
                 return HumanoidModel.ArmPose.ITEM;
             }
         }, ModItems.COW_BELL.get());
         // Didgeridoo
         event.registerItem(new IClientItemExtensions() {
-            private static final HumanoidModel.ArmPose DIDGERIDOO = HumanoidModel.ArmPose.valueOf("MORECOLORFUL_DIDGERIDOO");
-
             @Override
             public HumanoidModel.ArmPose getArmPose(@NotNull LivingEntity livingEntity, @NotNull InteractionHand hand, @NotNull ItemStack itemStack) {
                 if (livingEntity.isUsingItem() && livingEntity.getUseItem() == itemStack) {
-                    return DIDGERIDOO;
+                    return EnumExtensions.DIDGERIDOO.getValue();
                 }
                 return HumanoidModel.ArmPose.ITEM;
             }
         }, ModItems.DIDGERIDOO.get());
         // Violin
         event.registerItem(new IClientItemExtensions() {
-            private static final HumanoidModel.ArmPose VIOLIN_PLAYING = HumanoidModel.ArmPose.valueOf("MORECOLORFUL_VIOLIN_PLAYING");
-            private static final HumanoidModel.ArmPose VIOLIN_HOLD = HumanoidModel.ArmPose.valueOf("MORECOLORFUL_VIOLIN_HOLD");
-
             @Override
             public HumanoidModel.ArmPose getArmPose(@NotNull LivingEntity livingEntity, @NotNull InteractionHand hand, @NotNull ItemStack itemStack) {
-                if (livingEntity.isUsingItem() && livingEntity.getUseItem() == itemStack && PlayingScreen.isPressing) {
-                    return VIOLIN_PLAYING;
+                if (livingEntity.isUsingItem() && livingEntity.getUseItem() == itemStack
+                        && livingEntity.getData(ModDataAttachments.IS_PLAYING_INSTRUMENT)) {
+                    return EnumExtensions.VIOLIN_PLAYING.getValue();
                 } else if (livingEntity.isUsingItem() && livingEntity.getUseItem() == itemStack) {
-                    return VIOLIN_HOLD;
+                    return EnumExtensions.VIOLIN_HOLD.getValue();
                 }
                 return HumanoidModel.ArmPose.ITEM;
             }
@@ -92,7 +85,7 @@ public class ModItemClientExtensions {
             public boolean applyForgeHandTransform(@NotNull PoseStack poseStack, @NotNull LocalPlayer player, @NotNull HumanoidArm arm, @NotNull ItemStack itemInHand, float partialTick, float equipProcess, float swingProcess) {
                 float f = player.getTicksUsingItem();
                 float f1 = f % 20 >= 10 ? -(f % 20) + 10 : (f % 20) - 10;
-                if (PlayingScreen.isPressing) {
+                if (Minecraft.getInstance().screen instanceof PlayingScreen pScreen && pScreen.isPressing) {
                     if (player.getUseItem().getItem() == ModItems.VIOLIN.get()) {
                         poseStack.mulPose(Axis.YP.rotationDegrees(f1 * 2));
                         if (arm == HumanoidArm.RIGHT) {
@@ -117,18 +110,15 @@ public class ModItemClientExtensions {
         }, ModItems.FIDDLE_BOW.get());
         // Cello
         event.registerItem(new IClientItemExtensions() {
-            private static final HumanoidModel.ArmPose CELLO = HumanoidModel.ArmPose.valueOf("MORECOLORFUL_CELLO");
-            private static final HumanoidModel.ArmPose CELLO_PLAYING = HumanoidModel.ArmPose.valueOf("MORECOLORFUL_CELLO_PLAYING");
-            private static final HumanoidModel.ArmPose CELLO_HOLD = HumanoidModel.ArmPose.valueOf("MORECOLORFUL_CELLO_HOLD");
-
             @Override
             public HumanoidModel.ArmPose getArmPose(@NotNull LivingEntity livingEntity, @NotNull InteractionHand hand, @NotNull ItemStack itemStack) {
-                if (livingEntity.isUsingItem() && livingEntity.getUseItem() == itemStack && PlayingScreen.isPressing) {
-                    return CELLO_PLAYING;
+                if (livingEntity.isUsingItem() && livingEntity.getUseItem() == itemStack
+                        && livingEntity.getData(ModDataAttachments.IS_PLAYING_INSTRUMENT)) {
+                    return EnumExtensions.CELLO_PLAYING.getValue();
                 } else if (livingEntity.isUsingItem() && livingEntity.getUseItem() == itemStack) {
-                    return CELLO_HOLD;
+                    return EnumExtensions.CELLO_HOLD.getValue();
                 }
-                return CELLO;
+                return EnumExtensions.CELLO.getValue();
             }
         }, ModItems.CELLO.get());
         // Trumpet

@@ -13,16 +13,14 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.*;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
@@ -158,7 +156,7 @@ public class XylophoneBlock extends PercussionInstrumentBlock {
     }
 
     @Override
-    protected @NotNull VoxelShape getCollisionShape(BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos, @NotNull CollisionContext pContext) {
+    protected VoxelShape getCollisionShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
         Direction direction = pState.getValue(FACING);
         boolean flag = pState.getValue(HALF) == HorizontalDoubleBlockHalf.LEFT;
         return switch (direction){
@@ -169,7 +167,7 @@ public class XylophoneBlock extends PercussionInstrumentBlock {
         };
     }
     @Override
-    protected @NotNull VoxelShape getShape(BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos, @NotNull CollisionContext pContext) {
+    protected VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
         Direction direction = pState.getValue(FACING);
         boolean flag = pState.getValue(HALF) == HorizontalDoubleBlockHalf.LEFT;
         return switch (direction){
@@ -180,11 +178,11 @@ public class XylophoneBlock extends PercussionInstrumentBlock {
         };
     }
     @Override
-    protected boolean canSurvive(@NotNull BlockState pState, @NotNull LevelReader pLevel, BlockPos pPos) {
+    protected boolean canSurvive(BlockState pState, LevelReader pLevel, BlockPos pPos) {
         return Block.canSupportRigidBlock(pLevel, pPos.below());
     }
     @Override
-    protected @NotNull BlockState updateShape(@NotNull BlockState pState, @NotNull Direction pDirection, @NotNull BlockState pNeighborState, @NotNull LevelAccessor pLevel, @NotNull BlockPos pPos, @NotNull BlockPos pNeighborPos) {
+    protected BlockState updateShape(BlockState pState, Direction pDirection, BlockState pNeighborState, LevelAccessor pLevel, BlockPos pPos, BlockPos pNeighborPos) {
         if ((Direction.DOWN == pDirection && !this.canSurvive(pState, pLevel, pPos))) {
             return Blocks.AIR.defaultBlockState();
         }
@@ -200,7 +198,7 @@ public class XylophoneBlock extends PercussionInstrumentBlock {
         return pHalf == HorizontalDoubleBlockHalf.LEFT ? pDirection.getCounterClockWise() : pDirection.getClockWise();
     }
     @Override
-    public @NotNull BlockState playerWillDestroy(Level pLevel, @NotNull BlockPos pPos, @NotNull BlockState pState, @NotNull Player pPlayer) {
+    public BlockState playerWillDestroy(Level pLevel, BlockPos pPos, BlockState pState, Player pPlayer) {
         if (!pLevel.isClientSide && (pPlayer.isCreative() || !pPlayer.hasCorrectToolForDrops(pState, pLevel, pPos))) {
             HorizontalDoubleBlockHalf half = pState.getValue(HALF);
             if (half == HorizontalDoubleBlockHalf.LEFT) {
@@ -227,8 +225,17 @@ public class XylophoneBlock extends PercussionInstrumentBlock {
                 : null;
     }
     @Override
-    public void setPlacedBy(Level pLevel, BlockPos pPos, BlockState pState, LivingEntity pPlacer, @NotNull ItemStack pStack) {
+    public void setPlacedBy(Level pLevel, BlockPos pPos, BlockState pState, LivingEntity pPlacer, ItemStack pStack) {
         pLevel.setBlock(pPos.relative(pState.getValue(FACING).getCounterClockWise()), pState.setValue(HALF, HorizontalDoubleBlockHalf.RIGHT), 3);
+    }
+    @Override
+    protected BlockState rotate(BlockState pState, Rotation pRot) {
+        return pState.setValue(FACING, pRot.rotate(pState.getValue(FACING)));
+    }
+    @SuppressWarnings("deprecation")
+    @Override
+    protected BlockState mirror(BlockState pState, Mirror pMirror) {
+        return pState.rotate(pMirror.getRotation(pState.getValue(FACING)));
     }
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {

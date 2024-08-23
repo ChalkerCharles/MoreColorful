@@ -24,6 +24,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ItemInHandRenderer.class)
+@SuppressWarnings("UnresolvedMixinReference")
 public abstract class ItemInHandRendererMixin {
     @Shadow
     @Final
@@ -53,7 +54,6 @@ public abstract class ItemInHandRendererMixin {
         }
     }
 
-    @SuppressWarnings("UnresolvedMixinReference")
     @Inject(method = "renderArmWithItem", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/vertex/PoseStack;pushPose()V", shift = At.Shift.AFTER))
     private void moreColorful$renderArm(AbstractClientPlayer pPlayer, float pPartialTicks, float pPitch, InteractionHand pHand, float pSwingProgress, ItemStack pStack, float pEquippedProgress, PoseStack pPoseStack, MultiBufferSource pBuffer, int pCombinedLight, CallbackInfo ci) {
         if (!pPlayer.isInvisible()) {
@@ -67,7 +67,7 @@ public abstract class ItemInHandRendererMixin {
                 } else if (pPlayer.getOffhandItem().getItem() instanceof GuitarItem) {
                     this.moreColorful$renderHand(pPoseStack, pBuffer, pCombinedLight, pEquippedProgress, pSwingProgress, pStack, !f);
                 }
-            } else if (pStack.getItem() instanceof DidgeridooItem && Minecraft.getInstance().screen instanceof PlayingScreen && PlayingScreen.pType == InstrumentsType.DIDGERIDOO) {
+            } else if (pStack.getItem() instanceof DidgeridooItem && Minecraft.getInstance().screen instanceof PlayingScreen pScreen && pScreen.pType == InstrumentsType.DIDGERIDOO) {
                 if (pPlayer.getMainHandItem().getItem() instanceof DidgeridooItem) {
                     this.moreColorful$renderDidgeridooHand(pPoseStack, pBuffer, pCombinedLight, pEquippedProgress, pSwingProgress, pStack, f);
                     if (!pPlayer.hasItemInSlot(EquipmentSlot.OFFHAND)) {
@@ -79,7 +79,7 @@ public abstract class ItemInHandRendererMixin {
                         this.moreColorful$renderDidgeridooHand(pPoseStack, pBuffer, pCombinedLight, pEquippedProgress, pSwingProgress, pStack, f);
                     }
                 }
-            } else if (Minecraft.getInstance().screen instanceof PlayingScreen && (PlayingScreen.pType == InstrumentsType.PIANO || (PlayingScreen.pType.ordinal() >= 9 && PlayingScreen.pType.ordinal() <= 10))) {
+            } else if (Minecraft.getInstance().screen instanceof PlayingScreen pScreen && (pScreen.pType == InstrumentsType.PIANO || (pScreen.pType.ordinal() >= 9 && pScreen.pType.ordinal() <= 10))) {
                 if (pStack.isEmpty()) {
                     if (pPlayer.getOffhandItem().isEmpty() && !(pPlayer.getMainHandItem().getItem() instanceof MapItem)) {
                         this.moreColorful$renderHand(pPoseStack, pBuffer, pCombinedLight, pEquippedProgress, pSwingProgress, pStack, !f);
@@ -89,10 +89,9 @@ public abstract class ItemInHandRendererMixin {
         }
     }
 
-    @SuppressWarnings("UnresolvedMixinReference")
     @Inject(method = "renderArmWithItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/ItemInHandRenderer;renderPlayerArm(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;IFFLnet/minecraft/world/entity/HumanoidArm;)V"), cancellable = true)
     private void moreColorful$stopRendering(AbstractClientPlayer pPlayer, float pPartialTicks, float pPitch, InteractionHand pHand, float pSwingProgress, ItemStack pStack, float pEquippedProgress, PoseStack pPoseStack, MultiBufferSource pBuffer, int pCombinedLight, CallbackInfo ci) {
-        if (pPlayer.getOffhandItem().getItem() instanceof DidgeridooItem && Minecraft.getInstance().screen instanceof PlayingScreen && PlayingScreen.pType == InstrumentsType.DIDGERIDOO) {
+        if (pPlayer.getOffhandItem().getItem() instanceof DidgeridooItem && Minecraft.getInstance().screen instanceof PlayingScreen pScreen && pScreen.pType == InstrumentsType.DIDGERIDOO) {
             ci.cancel();
         }
     }

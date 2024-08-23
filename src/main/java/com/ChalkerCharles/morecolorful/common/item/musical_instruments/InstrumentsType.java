@@ -1,14 +1,15 @@
 package com.ChalkerCharles.morecolorful.common.item.musical_instruments;
 
-import com.ChalkerCharles.morecolorful.client.ModSounds;
+import com.ChalkerCharles.morecolorful.common.ModSounds;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.core.Holder;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.ByIdMap;
 import net.minecraft.util.StringRepresentable;
-import net.minecraft.world.item.DyeColor;
-import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
+import java.util.function.IntFunction;
 
 public enum InstrumentsType implements StringRepresentable {
     // ----------------------------------------Blocks---------------------------------------- //
@@ -38,15 +39,20 @@ public enum InstrumentsType implements StringRepresentable {
     TRUMPET(ModSounds.TRUMPET_PLAY);
 
     private final Holder<SoundEvent> soundEvent;
+    private static final IntFunction<InstrumentsType> BY_ID = ByIdMap.continuous(InstrumentsType::getId, values(), ByIdMap.OutOfBoundsStrategy.ZERO);
+    public static final StreamCodec<ByteBuf, InstrumentsType> STREAM_CODEC = ByteBufCodecs.idMapper(BY_ID, InstrumentsType::getId);
     InstrumentsType(Holder<SoundEvent> pSoundEvent) {
         this.soundEvent = pSoundEvent;
     }
     public Holder<SoundEvent> getSoundEvent() {
         return this.soundEvent;
     }
+    public int getId() {
+        return this.ordinal();
+    }
 
     @Override
-    public @NotNull String getSerializedName() {
+    public String getSerializedName() {
         return this.name();
     }
 }

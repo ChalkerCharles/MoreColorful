@@ -1,20 +1,20 @@
 package com.ChalkerCharles.morecolorful.common.block.musical_instruments;
 
-import com.ChalkerCharles.morecolorful.client.gui.PlayingScreen;
+import com.ChalkerCharles.morecolorful.common.block.ModBlockEntities;
+import com.ChalkerCharles.morecolorful.common.block.entity.HiHatBlockEntity;
 import com.ChalkerCharles.morecolorful.common.block.properties.ModBlockStateProperties;
 import com.ChalkerCharles.morecolorful.common.item.musical_instruments.InstrumentsType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
@@ -22,9 +22,9 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-public class HiHatBlock extends PercussionInstrumentBlock {
+public class HiHatBlock extends PercussionInstrumentBlock implements EntityBlock {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty HIT = ModBlockStateProperties.HIT;
     protected static final VoxelShape HIHAT = Shapes.or(
@@ -50,7 +50,7 @@ public class HiHatBlock extends PercussionInstrumentBlock {
     }
 
     @Override
-    protected @NotNull VoxelShape getShape(BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos, @NotNull CollisionContext pContext) {
+    protected  VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
         Direction direction = pState.getValue(FACING);
         return switch (direction){
             case EAST -> HIHAT_EAST;
@@ -60,11 +60,11 @@ public class HiHatBlock extends PercussionInstrumentBlock {
         };
     }
     @Override
-    protected boolean canSurvive(@NotNull BlockState pState, @NotNull LevelReader pLevel, BlockPos pPos) {
+    protected boolean canSurvive( BlockState pState, LevelReader pLevel, BlockPos pPos) {
         return Block.canSupportRigidBlock(pLevel, pPos.below());
     }
     @Override
-    protected @NotNull BlockState updateShape(@NotNull BlockState pState, @NotNull Direction pDirection, @NotNull BlockState pNeighborState, @NotNull LevelAccessor pLevel, @NotNull BlockPos pPos, @NotNull BlockPos pNeighborPos) {
+    protected BlockState updateShape(BlockState pState, Direction pDirection, BlockState pNeighborState, LevelAccessor pLevel, BlockPos pPos, BlockPos pNeighborPos) {
         return Direction.DOWN == pDirection && !this.canSurvive(pState, pLevel, pPos)
                 ? Blocks.AIR.defaultBlockState()
                 : super.updateShape(pState, pDirection, pNeighborState, pLevel, pPos, pNeighborPos);
@@ -74,23 +74,26 @@ public class HiHatBlock extends PercussionInstrumentBlock {
         return this.defaultBlockState().setValue(FACING, pContext.getHorizontalDirection().getOpposite());
     }
     @Override
+    protected BlockState rotate(BlockState pState, Rotation pRot) {
+        return pState.setValue(FACING, pRot.rotate(pState.getValue(FACING)));
+    }
+    @SuppressWarnings("deprecation")
+    @Override
+    protected BlockState mirror(BlockState pState, Mirror pMirror) {
+        return pState.rotate(pMirror.getRotation(pState.getValue(FACING)));
+    }
+    @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
         pBuilder.add(HIT, FACING);
     }
+    @Nullable
     @Override
-    protected void onPlace(@NotNull BlockState pState, Level pLevel, @NotNull BlockPos pPos, @NotNull BlockState pOldState, boolean pMovedByPiston) {
-        pLevel.scheduleTick(pPos, this, 1);
+    public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
+        return new HiHatBlockEntity(pPos, pState);
     }
     @Override
-    protected void tick(@NotNull BlockState pState, ServerLevel pLevel, @NotNull BlockPos pPos, @NotNull RandomSource pRandom) {
-        if (!pLevel.isClientSide) {
-            pLevel.scheduleTick(pPos, this, 1);
-            if (PlayingScreen.isPressing && PlayingScreen.pType == pType) {
-                pPos = PlayingScreen.pPos;
-                pLevel.setBlock(pPos, pState.setValue(HIT, true), 2);
-            } else {
-                pLevel.setBlock(pPos, pState.setValue(HIT, false), 2);
-            }
-        }
+    @Nullable
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
+        return pBlockEntityType == ModBlockEntities.HIHAT.get() ? (level, pos, state, blockEntity) -> HiHatBlockEntity.tick(level, blockEntity) : null;
     }
 }

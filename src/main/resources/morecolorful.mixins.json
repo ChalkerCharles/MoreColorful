@@ -4,8 +4,7 @@
   "package": "com.ChalkerCharles.morecolorful.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "NoteBlockInstrumentMixin",
-    "NoteBlockMixin"
+    "NoteBlockInstrumentMixin"
   ],
   "client": [
     "HumanoidModelMixin",

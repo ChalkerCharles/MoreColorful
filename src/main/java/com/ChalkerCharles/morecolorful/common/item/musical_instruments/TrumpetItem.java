@@ -7,7 +7,6 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.NotNull;
 
 public class TrumpetItem extends MusicalInstrumentItem {
     public TrumpetItem(InstrumentsType pType, Properties pProperties) {
@@ -16,14 +15,13 @@ public class TrumpetItem extends MusicalInstrumentItem {
     }
 
     @Override
-    public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level pLevel, @NotNull Player pPlayer, @NotNull InteractionHand pHand) {
+    public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pHand) {
         ItemStack pStack = pPlayer.getItemInHand(pHand);
         if (pLevel.isClientSide) {
             PlayingScreen.openPlayingScreen(pPlayer, pType);
-            pPlayer.startUsingItem(pHand);
-        } else {
-            pPlayer.awardStat(Stats.ITEM_USED.get(this));
         }
+        pPlayer.startUsingItem(pHand);
+        pPlayer.awardStat(Stats.ITEM_USED.get(this));
         return InteractionResultHolder.consume(pStack);
     }
 }

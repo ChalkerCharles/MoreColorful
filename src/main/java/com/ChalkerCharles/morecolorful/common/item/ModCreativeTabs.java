@@ -14,7 +14,7 @@ public class ModCreativeTabs {
 
     public static final ResourceKey<CreativeModeTab> MUSICAL_INSTRUMENTS_TAB = CREATIVE_MODE_TABS.register("musical_instruments_tab",() -> CreativeModeTab.builder()
             .withTabsBefore(CreativeModeTabs.SPAWN_EGGS)
-            .title(Component.translatable("creativetab.musical_instruments_tab"))
+            .title(Component.translatable("creativetab.morecolorful.musical_instruments_tab"))
             .icon(()->ModItems.VIOLIN.get().getDefaultInstance())
             .displayItems((pParameters, pOutput) -> {
                 pOutput.accept(ModItems.GRAND_PIANO.get());
@@ -45,7 +45,7 @@ public class ModCreativeTabs {
             .build()).getKey();
     public static final ResourceKey<CreativeModeTab> BLOCKS_TAB = CREATIVE_MODE_TABS.register("blocks_tab",() -> CreativeModeTab.builder()
             .withTabsBefore(MUSICAL_INSTRUMENTS_TAB)
-            .title(Component.translatable("creativetab.blocks_tab"))
+            .title(Component.translatable("creativetab.morecolorful.blocks_tab"))
             .icon(()->ModItems.CRABAPPLE_PLANKS.get().getDefaultInstance())
             .displayItems((pParameters, pOutput) -> {
                 pOutput.accept(ModItems.CRABAPPLE_PLANKS.get());
