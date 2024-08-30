@@ -94,6 +94,6 @@ public class HiHatBlock extends PercussionInstrumentBlock implements EntityBlock
     @Override
     @Nullable
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return pBlockEntityType == ModBlockEntities.HIHAT.get() ? (level, pos, state, blockEntity) -> HiHatBlockEntity.tick(level, blockEntity) : null;
+        return pBlockEntityType == ModBlockEntities.HIHAT.get() ? HiHatBlockEntity::tick : null;
     }
 }

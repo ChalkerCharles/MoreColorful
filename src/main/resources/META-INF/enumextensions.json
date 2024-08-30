@@ -89,6 +89,15 @@
         "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions",
         "field": "CELLO_PLAYING"
       }
+    },
+    {
+      "enum": "net/minecraft/client/model/HumanoidModel$ArmPose",
+      "name": "MORECOLORFUL_SAXOPHONE",
+      "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
+      "parameters": {
+        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions",
+        "field": "SAXOPHONE"
+      }
     }
   ]
 }

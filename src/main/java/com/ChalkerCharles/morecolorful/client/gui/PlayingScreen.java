@@ -1,6 +1,7 @@
 package com.ChalkerCharles.morecolorful.client.gui;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
+import com.ChalkerCharles.morecolorful.client.ModKeyMapping;
 import com.ChalkerCharles.morecolorful.common.block.musical_instruments.MusicalInstrumentBlock;
 import com.ChalkerCharles.morecolorful.common.item.ModItems;
 import com.ChalkerCharles.morecolorful.common.item.musical_instruments.InstrumentsType;
@@ -27,6 +28,7 @@ import org.jetbrains.annotations.NotNull;
 import org.lwjgl.glfw.GLFW;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 @OnlyIn(Dist.CLIENT)
 public class PlayingScreen extends Screen {
@@ -55,15 +57,16 @@ public class PlayingScreen extends Screen {
     private KeyButton whiteKey_22;
     private KeyButton whiteKey_23;
     private KeyButton blackKey_24;
+    private OctaveButton octaveButton;
     private static final ResourceLocation PLAYING_SCREEN_TEXTURE = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "textures/gui/playing_screen.png");
     private static final Component TITLE = Component.translatable("morecolorful.gui.playing_screen_title");
     private static final FormattedCharSequence TITLE_LENGTH = TITLE.getVisualOrderText();
     private static final FormattedCharSequence SINGLE_LETTER_LENGTH = Component.literal("C").getVisualOrderText();
     private static final FormattedCharSequence LETTER_WITH_BRACKETS = Component.literal("[C]").getVisualOrderText();
     public final Player pPlayer;
-    public final InstrumentsType pType;
+    public InstrumentsType pType;
     public final BlockPos pPos;
-    private static final BlockPos DEFAULT_POS = new BlockPos(0, -65, 0);
+    public static final BlockPos DEFAULT_POS = new BlockPos(0, -65, 0);
     private float pTick = 0;
     private boolean isDragging;
     public boolean isPressing = false;
@@ -114,6 +117,9 @@ public class PlayingScreen extends Screen {
         this.whiteKey_23 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 133, 53, 0, Button -> KeyButton.playSound(pPlayer, pType, pPos, 23), false));
         KeyButton.width = 12;
         KeyButton.height = 32;
+        if (pType == InstrumentsType.PIANO_LOW || pType == InstrumentsType.PIANO_HIGH) {
+            this.octaveButton = this.addRenderableWidget(new OctaveButton((i - 186) / 2 + 169, 37, pType, Button -> octaveButton.toggleOctave(this)));
+        }
         super.init();
     }
 
@@ -178,6 +184,16 @@ public class PlayingScreen extends Screen {
         pGuiGraphics.drawString(this.font, "[U]", (i - 186) / 2 + 125 - l / 2, 92, 9145227, false);
         pGuiGraphics.drawString(this.font, "[I]", (i - 186) / 2 + 141 - l / 2, 92, 9145227, false);
         pGuiGraphics.drawCenteredString(this.font, "[9]", (i - 186) / 2 + 149, 73, 9145227);
+        // Tooltip
+        this.renderOctaveButtonTooltip(pGuiGraphics, pMouseX, pMouseY);
+    }
+    private void renderOctaveButtonTooltip(GuiGraphics pGuiGraphics, int mouseX, int mouseY) {
+        if (this.octaveButton != null && this.octaveButton.isHovered()) {
+            Component octaveMessage = pType == InstrumentsType.PIANO_HIGH ? Component.translatable("morecolorful.gui.octave_high_message") : Component.translatable("morecolorful.gui.octave_low_message");
+            Component octaveToggle = Component.translatable("morecolorful.gui.octave_toggle", ModKeyMapping.OCTAVE_TOGGLE.get().getKey().getDisplayName());
+            List<Component> list = List.of(new Component[]{octaveMessage, octaveToggle});
+            pGuiGraphics.renderTooltip(this.font, list, java.util.Optional.empty(), mouseX, mouseY);
+        }
     }
 
     @Override
@@ -272,6 +288,9 @@ public class PlayingScreen extends Screen {
     @Override
     public boolean keyPressed(int pKeyCode, int pScanCode, int pModifiers){
         super.keyPressed(pKeyCode, pScanCode, pModifiers);
+        if (pKeyCode == ModKeyMapping.OCTAVE_TOGGLE.get().getKey().getValue() && octaveButton != null) {
+            octaveButton.onPress();
+        }
         if (pKeyCode == GLFW.GLFW_KEY_A){blackKey_0.onPress();}
         if (pKeyCode == GLFW.GLFW_KEY_Z){whiteKey_1.onPress();}
         if (pKeyCode == GLFW.GLFW_KEY_S){blackKey_2.onPress();}
@@ -338,10 +357,10 @@ public class PlayingScreen extends Screen {
                 blackKey_14.isPressed || whiteKey_15.isPressed || blackKey_16.isPressed || whiteKey_17.isPressed ||whiteKey_18.isPressed || blackKey_19.isPressed || whiteKey_20.isPressed ||
                 blackKey_21.isPressed || whiteKey_22.isPressed || whiteKey_23.isPressed || blackKey_24.isPressed)){
             isPressing = false;
-            PacketDistributor.sendToServer(new InstrumentPressingPacket(pPos, pPlayer.getId(), false));
+            PacketDistributor.sendToServer(new InstrumentPressingPacket(pPlayer.getId(), false));
         }
 
-        if (pType == InstrumentsType.PIANO || (pType.ordinal() >= 9 && pType.ordinal() <= 10)) {
+        if (pType == InstrumentsType.PIANO_LOW || pType == InstrumentsType.PIANO_HIGH || (pType.ordinal() >= 13 && pType.ordinal() <= 14)) {
             pTick ++;
         }
 
@@ -366,14 +385,16 @@ public class PlayingScreen extends Screen {
                     pPlayer.swing(rightHand);
                 }
 
-            } else if (pType.ordinal() >= 2 && pType.ordinal() <= 8) {
+            } else if (pType.ordinal() >= 3 && pType.ordinal() <= 12) {
                 pPlayer.swing(drumstickHand);
             }
         }
 
+        boolean exception = pPlayer.level().getBlockState(pPos).getBlock() instanceof MusicalInstrumentBlock block && block.getType() == InstrumentsType.PIANO_LOW && this.pType == InstrumentsType.PIANO_HIGH;
+
         if (this.minecraft != null) {
             if (pPos != DEFAULT_POS) {
-                if (!(pPlayer.level().getBlockState(pPos).getBlock() instanceof MusicalInstrumentBlock block) || block.getType() != this.pType) {
+                if ((!(pPlayer.level().getBlockState(pPos).getBlock() instanceof MusicalInstrumentBlock block) || block.getType() != this.pType) && !exception) {
                     minecraft.setScreen(null);
                     PacketDistributor.sendToServer(new PlayingScreenPacket(pType, pPos, pPlayer.getId(), false));
                 }

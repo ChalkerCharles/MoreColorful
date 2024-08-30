@@ -149,4 +149,14 @@ public final class EnumExtensions {
             AnimationUtils.animateCelloPlaying(model.rightArm, model.leftArm, entity, false);
         }
     }));
+    public static final EnumProxy<HumanoidModel.ArmPose> SAXOPHONE = new EnumProxy<>(HumanoidModel.ArmPose.class, true, (IArmPoseTransformer) ((model, entity, arm) -> {
+        model.rightArm.xRot = -1.047198F;
+        model.leftArm.xRot = -1.047198F;
+        model.rightArm.yRot = -0.218166F;
+        model.leftArm.yRot = 0.218166F;
+        model.rightArm.zRot = -0.174533F;
+        model.leftArm.zRot = 0.174533F;
+        model.rightArm.x += 0.5F;
+        model.leftArm.x -= 0.5F;
+    }));
 }

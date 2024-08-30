@@ -131,6 +131,16 @@ public class ModItemClientExtensions {
                 return HumanoidModel.ArmPose.ITEM;
             }
         }, ModItems.TRUMPET.get());
+        // Saxophone, Ocarina & Harmonica
+        event.registerItem(new IClientItemExtensions() {
+            @Override
+            public HumanoidModel.ArmPose getArmPose(@NotNull LivingEntity livingEntity, @NotNull InteractionHand hand, @NotNull ItemStack itemStack) {
+                if (livingEntity.isUsingItem() && livingEntity.getUseItem() == itemStack) {
+                    return EnumExtensions.SAXOPHONE.getValue();
+                }
+                return HumanoidModel.ArmPose.ITEM;
+            }
+        }, ModItems.SAXOPHONE.get(), ModItems.OCARINA.get(), ModItems.HARMONICA.get());
     }
 
 }

@@ -1,7 +1,6 @@
 package com.ChalkerCharles.morecolorful.network;
 
 import com.ChalkerCharles.morecolorful.common.ModDataAttachments;
-import com.ChalkerCharles.morecolorful.common.block.entity.HiHatBlockEntity;
 import com.ChalkerCharles.morecolorful.common.item.musical_instruments.InstrumentsType;
 import com.ChalkerCharles.morecolorful.network.packets.InstrumentPressingPacket;
 import com.ChalkerCharles.morecolorful.network.packets.InstrumentTickingPacket;
@@ -14,16 +13,11 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
-import java.util.ArrayList;
-
 public final class PayloadHandler {
-    private static ArrayList<Integer> PRESSING_PLAYERS = new ArrayList<>();
-
     public static void handleNotePlaying(final NotePlayingPacket data, final IPayloadContext context) {
         InstrumentsType pType = data.pType();
         BlockPos pos = data.pos();
@@ -53,17 +47,10 @@ public final class PayloadHandler {
         boolean isOpen = data.isOpen();
         Player player = context.player();
         Entity entity = player.level().getEntity(id);
-        BlockEntity blockEntity = player.level().getBlockEntity(pos);
         Object[] obj = {pType, pos, id, isOpen};
-        Object[] obj1 = {pos, new ArrayList<Integer>()};
         context.enqueueWork(() -> {
             if (entity instanceof Player) {
                 entity.setData(ModDataAttachments.PLAYING_SCREEN_DATA, obj);
-                if (!isOpen) {
-                    if (blockEntity instanceof HiHatBlockEntity) {
-                        blockEntity.setData(ModDataAttachments.CYMBAL_DATA, obj1);
-                    }
-                }
             }
         });
     }
@@ -74,9 +61,7 @@ public final class PayloadHandler {
         boolean isOpen = data.isOpen();
         Player player = context.player();
         Entity entity = player.level().getEntity(id);
-        BlockEntity blockEntity = player.level().getBlockEntity(pos);
         Object[] obj = {pType, pos, id, isOpen};
-        Object[] obj1 = {pos, new ArrayList<Integer>()};
         context.enqueueWork(() -> {
             if (entity instanceof Player) {
                 entity.setData(ModDataAttachments.PLAYING_SCREEN_DATA, obj);
@@ -84,48 +69,31 @@ public final class PayloadHandler {
                 if (!isOpen) {
                     ((Player) entity).stopUsingItem();
                     entity.setData(ModDataAttachments.IS_PLAYING_INSTRUMENT, false);
-                    PacketDistributor.sendToAllPlayers(new InstrumentPressingPacket(pos, id, false));
-                    if (blockEntity instanceof HiHatBlockEntity) {
-                        blockEntity.setData(ModDataAttachments.CYMBAL_DATA, obj1);
-                    }
+                    PacketDistributor.sendToAllPlayers(new InstrumentPressingPacket(id, false));
                 }
             }
         });
     }
     public static void handleInstrumentPressingClient(final InstrumentPressingPacket data, final IPayloadContext context) {
-        BlockPos pos = data.pos();
         int id = data.id();
         boolean isPressing = data.isPressing();
         Player player = context.player();
-        BlockEntity blockEntity = player.level().getBlockEntity(pos);
         Entity entity = player.level().getEntity(id);
         context.enqueueWork(() -> {
             if (entity instanceof Player) {
                 entity.setData(ModDataAttachments.IS_PLAYING_INSTRUMENT, isPressing);
-                if (blockEntity instanceof HiHatBlockEntity) {
-                    PRESSING_PLAYERS = ((HiHatBlockEntity) blockEntity).pressingPlayers(blockEntity);
-                    Object[] obj = {pos, PRESSING_PLAYERS};
-                    blockEntity.setData(ModDataAttachments.CYMBAL_DATA, obj);
-                }
             }
         });
     }
     public static void handleInstrumentPressingServer(final InstrumentPressingPacket data, final IPayloadContext context) {
-        BlockPos pos = data.pos();
         int id = data.id();
         boolean isPressing = data.isPressing();
         Player player = context.player();
-        BlockEntity blockEntity = player.level().getBlockEntity(pos);
         Entity entity = player.level().getEntity(id);
         context.enqueueWork(() -> {
             if (entity instanceof Player) {
                 entity.setData(ModDataAttachments.IS_PLAYING_INSTRUMENT, isPressing);
-                if (blockEntity instanceof HiHatBlockEntity) {
-                    PRESSING_PLAYERS = ((HiHatBlockEntity) blockEntity).pressingPlayers(blockEntity);
-                    Object[] obj = {pos, PRESSING_PLAYERS};
-                    blockEntity.setData(ModDataAttachments.CYMBAL_DATA, obj);
-                }
-                PacketDistributor.sendToAllPlayers(new InstrumentPressingPacket(pos, id, isPressing));
+                PacketDistributor.sendToAllPlayers(new InstrumentPressingPacket(id, isPressing));
             }
         });
     }

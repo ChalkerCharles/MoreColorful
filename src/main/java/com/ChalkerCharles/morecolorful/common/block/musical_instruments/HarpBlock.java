@@ -3,6 +3,7 @@ package com.ChalkerCharles.morecolorful.common.block.musical_instruments;
 import com.ChalkerCharles.morecolorful.client.gui.PlayingScreen;
 import com.ChalkerCharles.morecolorful.common.ModStats;
 import com.ChalkerCharles.morecolorful.common.item.musical_instruments.InstrumentsType;
+import com.ChalkerCharles.morecolorful.network.packets.PlayingScreenPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionResult;
@@ -26,6 +27,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 public class HarpBlock extends MusicalInstrumentBlock {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
@@ -135,6 +137,7 @@ public class HarpBlock extends MusicalInstrumentBlock {
     public InteractionResult useWithoutItem (BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, BlockHitResult pHitResult) {
         if (pLevel.isClientSide){
             PlayingScreen.openPlayingScreen(pPlayer, pType, pPos);
+            PacketDistributor.sendToServer(new PlayingScreenPacket(pType, pPos, pPlayer.getId(), true));
         }
         pPlayer.awardStat(ModStats.INTERACT_WITH_HARP.get());
         return InteractionResult.SUCCESS;

@@ -20,7 +20,9 @@ public final class VanillaBlockPropertyModification {
     public void modifyBlockProperties(TagsUpdatedEvent event) {
         BuiltInRegistries.BLOCK.forEach(block -> {
             if (block.builtInRegistryHolder().is(ModTags.QUARTZ_BLOCKS)) {
-                setInstrument(block, PIANO);
+                setInstrument(block, PIANO_LOW);
+            } else if (block.builtInRegistryHolder().is(ModTags.PRISMARINES)) {
+                setInstrument(block, PIANO_HIGH);
             } else if (block.equals(Blocks.MOSS_BLOCK)) {
                 setInstrument(block, VIOLIN);
             } else if (block.builtInRegistryHolder().is(BlockTags.WART_BLOCKS)) {
@@ -29,6 +31,18 @@ public final class VanillaBlockPropertyModification {
                 setInstrument(block, ELECTRIC_GUITAR);
             } else if (block.builtInRegistryHolder().is(ModTags.COPPER_BLOCKS)) {
                 setInstrument(block, TRUMPET);
+            } else if (block.builtInRegistryHolder().is(ModTags.COPPER_GRATES)) {
+                setInstrument(block, SAXOPHONE);
+            } else if (block.builtInRegistryHolder().is(BlockTags.TERRACOTTA)) {
+                setInstrument(block, OCARINA);
+            } else if (block.builtInRegistryHolder().is(ModTags.TUFF_BLOCKS)) {
+                setInstrument(block, HARMONICA);
+            } else if (block.builtInRegistryHolder().is(ModTags.MUSHROOM_BLOCKS)) {
+                setInstrument(block, TOM);
+            } else if (block.builtInRegistryHolder().is(ModTags.BASALT_BLOCKS)) {
+                setInstrument(block, RIDE);
+            } else if (block.equals(Blocks.MAGMA_BLOCK)) {
+                setInstrument(block, CRASH);
             }
         });
     }

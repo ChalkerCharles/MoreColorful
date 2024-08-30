@@ -21,18 +21,18 @@ import org.jetbrains.annotations.NotNull;
 
 @OnlyIn(Dist.CLIENT)
 public class KeyButton extends Button {
-    private static final ResourceLocation WHITE_KEY_CF = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "textures/gui/sprites/key/white_key_cf.png");
-    private static final ResourceLocation WHITE_KEY_CF_PRESSED = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "textures/gui/sprites/key/white_key_cf_pressed.png");
-    private static final ResourceLocation WHITE_KEY_D = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "textures/gui/sprites/key/white_key_d.png");
-    private static final ResourceLocation WHITE_KEY_D_PRESSED = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "textures/gui/sprites/key/white_key_d_pressed.png");
-    private static final ResourceLocation WHITE_KEY_EB = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "textures/gui/sprites/key/white_key_eb.png");
-    private static final ResourceLocation WHITE_KEY_EB_PRESSED = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "textures/gui/sprites/key/white_key_eb_pressed.png");
-    private static final ResourceLocation WHITE_KEY_G = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "textures/gui/sprites/key/white_key_g.png");
-    private static final ResourceLocation WHITE_KEY_G_PRESSED = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "textures/gui/sprites/key/white_key_g_pressed.png");
-    private static final ResourceLocation WHITE_KEY_A = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "textures/gui/sprites/key/white_key_a.png");
-    private static final ResourceLocation WHITE_KEY_A_PRESSED = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "textures/gui/sprites/key/white_key_a_pressed.png");
-    private static final ResourceLocation BLACK_KEY = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "textures/gui/sprites/key/black_key.png");
-    private static final ResourceLocation BLACK_KEY_PRESSED = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "textures/gui/sprites/key/black_key_pressed.png");
+    private static final ResourceLocation WHITE_KEY_CF = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "key/white_key_cf");
+    private static final ResourceLocation WHITE_KEY_CF_PRESSED = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "key/white_key_cf_pressed");
+    private static final ResourceLocation WHITE_KEY_D = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "key/white_key_d");
+    private static final ResourceLocation WHITE_KEY_D_PRESSED = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "key/white_key_d_pressed");
+    private static final ResourceLocation WHITE_KEY_EB = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "key/white_key_eb");
+    private static final ResourceLocation WHITE_KEY_EB_PRESSED = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "key/white_key_eb_pressed");
+    private static final ResourceLocation WHITE_KEY_G = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "key/white_key_g");
+    private static final ResourceLocation WHITE_KEY_G_PRESSED = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "key/white_key_g_pressed");
+    private static final ResourceLocation WHITE_KEY_A = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "key/white_key_a");
+    private static final ResourceLocation WHITE_KEY_A_PRESSED = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "key/white_key_a_pressed");
+    private static final ResourceLocation BLACK_KEY = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "key/black_key");
+    private static final ResourceLocation BLACK_KEY_PRESSED = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "key/black_key_pressed");
     private final int keyType;
     public boolean isPressed;
     static int width = 12;
@@ -49,28 +49,28 @@ public class KeyButton extends Button {
         ResourceLocation resourcelocation;
         if (this.keyType == 0) {
             resourcelocation = isPressed ? WHITE_KEY_CF_PRESSED : WHITE_KEY_CF;
-            pGuiGraphics.blit(resourcelocation, this.getX(), this.getY(), 0, 0, 16, 48, 16, 48);
+            pGuiGraphics.blitSprite(resourcelocation, this.getX(), this.getY(), 16, 48);
         } else if (this.keyType == 1) {
             resourcelocation = isPressed ? WHITE_KEY_D_PRESSED : WHITE_KEY_D;
-            pGuiGraphics.blit(resourcelocation, this.getX(), this.getY(), 0, 0, 16, 48, 16, 48);
+            pGuiGraphics.blitSprite(resourcelocation, this.getX(), this.getY(), 16, 48);
         }else if (this.keyType == 2) {
             resourcelocation = isPressed ? WHITE_KEY_EB_PRESSED : WHITE_KEY_EB;
-            pGuiGraphics.blit(resourcelocation, this.getX(), this.getY(), 0, 0, 16, 48, 16, 48);
+            pGuiGraphics.blitSprite(resourcelocation, this.getX(), this.getY(), 16, 48);
         }else if (this.keyType == 3) {
             resourcelocation = isPressed ? WHITE_KEY_G_PRESSED : WHITE_KEY_G;
-            pGuiGraphics.blit(resourcelocation, this.getX(), this.getY(), 0, 0, 16, 48, 16, 48);
+            pGuiGraphics.blitSprite(resourcelocation, this.getX(), this.getY(), 16, 48);
         }else if (this.keyType == 4) {
             resourcelocation = isPressed ? WHITE_KEY_A_PRESSED : WHITE_KEY_A;
-            pGuiGraphics.blit(resourcelocation, this.getX(), this.getY(), 0, 0, 16, 48, 16, 48);
+            pGuiGraphics.blitSprite(resourcelocation, this.getX(), this.getY(), 16, 48);
         }else {
             resourcelocation = isPressed ? BLACK_KEY_PRESSED : BLACK_KEY;
-            pGuiGraphics.blit(resourcelocation, this.getX(), this.getY(), 0, 0, 12, 32, 12, 32);
+            pGuiGraphics.blitSprite(resourcelocation, this.getX(), this.getY(), 12, 32);
         }
     }
     public static void playSound(Player pPlayer, InstrumentsType pType, BlockPos pPos, int keyId){
         int pitchId = keyId - 12;
         Level pLevel = pPlayer.level();
-        if (pType.ordinal() <= 10) { // From Instrument Blocks
+        if (pType.ordinal() <= 14) { // From Instrument Blocks
             pLevel.playSound(pPlayer, pPos.getX() + 0.5, pPos.getY() + 0.5, pPos.getZ() + 0.5, pType.getSoundEvent().value(), SoundSource.RECORDS, 3.0F, (float) Math.pow(2,((double) pitchId / 12)));
             PacketDistributor.sendToServer(new NotePlayingPacket(pType, pPos, keyId, true));
         } else { // From Instrument Items
@@ -85,7 +85,7 @@ public class KeyButton extends Button {
             this.isPressed = true;
             this.active = false;
             pScreen.isPressing = true;
-            PacketDistributor.sendToServer(new InstrumentPressingPacket(pScreen.pPos, pScreen.pPlayer.getId(), true));
+            PacketDistributor.sendToServer(new InstrumentPressingPacket(pScreen.pPlayer.getId(), true));
         }
     }
     public void restore() {

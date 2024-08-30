@@ -1,0 +1,26 @@
+{
+  "parent": "minecraft:item/generated",
+  "loader": "neoforge:separate_transforms",
+  "base": {
+    "parent": "morecolorful:item/saxophone_in_hand"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "morecolorful:item/saxophone_gui"
+    },
+    "ground": {
+      "parent": "morecolorful:item/saxophone_gui"
+    },
+    "fixed": {
+      "parent": "morecolorful:item/saxophone_gui"
+    }
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "morecolorful:playing": 1
+      },
+      "model": "morecolorful:item/saxophone_playing"
+    }
+  ]
+}

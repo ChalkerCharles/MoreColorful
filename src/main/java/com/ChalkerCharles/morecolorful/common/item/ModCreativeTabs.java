@@ -30,10 +30,16 @@ public class ModCreativeTabs {
                 pOutput.accept(ModItems.FLUTE.get());
                 pOutput.accept(ModItems.DIDGERIDOO.get());
                 pOutput.accept(ModItems.TRUMPET.get());
+                pOutput.accept(ModItems.SAXOPHONE.get());
+                pOutput.accept(ModItems.OCARINA.get());
+                pOutput.accept(ModItems.HARMONICA.get());
                 pOutput.accept(ModItems.COW_BELL.get());
                 pOutput.accept(ModItems.BASS_DRUM.get());
                 pOutput.accept(ModItems.SNARE_DRUM.get());
+                pOutput.accept(ModItems.TOMTOM_DRUM.get());
                 pOutput.accept(ModItems.HIHAT.get());
+                pOutput.accept(ModItems.RIDE_CYMBAL.get());
+                pOutput.accept(ModItems.CRASH_CYMBAL.get());
                 pOutput.accept(ModItems.CHIMES.get());
                 pOutput.accept(ModItems.GLOCKENSPIEL.get());
                 pOutput.accept(ModItems.XYLOPHONE.get());
@@ -43,6 +49,7 @@ public class ModCreativeTabs {
                 pOutput.accept(ModItems.SYNTHESIZER_KEYBOARD_PLING.get());
             })
             .build()).getKey();
+    @SuppressWarnings("unused")
     public static final ResourceKey<CreativeModeTab> BLOCKS_TAB = CREATIVE_MODE_TABS.register("blocks_tab",() -> CreativeModeTab.builder()
             .withTabsBefore(MUSICAL_INSTRUMENTS_TAB)
             .title(Component.translatable("creativetab.morecolorful.blocks_tab"))

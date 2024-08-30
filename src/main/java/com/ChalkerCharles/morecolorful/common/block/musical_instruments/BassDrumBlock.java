@@ -10,7 +10,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class BassDrumBlock extends PercussionInstrumentBlock {
 
-    protected static final VoxelShape BASS_DRUM = Block.box(1.0, 0.0, 1.0, 15.0, 10.0, 15.0);
+    private static final VoxelShape BASS_DRUM = Block.box(1.0, 0.0, 1.0, 15.0, 10.0, 15.0);
 
     public BassDrumBlock(InstrumentsType pType, Properties properties) {
         super(pType, properties);

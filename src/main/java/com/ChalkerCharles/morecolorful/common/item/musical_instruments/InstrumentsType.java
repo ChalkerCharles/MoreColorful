@@ -14,10 +14,14 @@ import java.util.function.IntFunction;
 public enum InstrumentsType implements StringRepresentable {
     // ----------------------------------------Blocks---------------------------------------- //
     HARP(ModSounds.HARP_PLAY),
-    PIANO(ModSounds.PIANO_PLAY),
+    PIANO_LOW(ModSounds.PIANO_LOW_PLAY),
+    PIANO_HIGH(ModSounds.PIANO_HIGH_PLAY),
     // ------------Percussion Start------------ //
     BASS_DRUM(ModSounds.BASS_DRUM_PLAY),
     SNARE(ModSounds.SNARE_PLAY),
+    TOM(ModSounds.TOM_PLAY),
+    RIDE(ModSounds.RIDE_PLAY),
+    CRASH(ModSounds.CRASH_PLAY),
     HAT(ModSounds.HAT_PLAY),
     GLOCKENSPIEL(ModSounds.GLOCKENSPIEL_PLAY),
     CHIMES(ModSounds.CHIMES_PLAY),
@@ -36,7 +40,10 @@ public enum InstrumentsType implements StringRepresentable {
     VIOLIN(ModSounds.VIOLIN_PLAY),
     CELLO(ModSounds.CELLO_PLAY),
     ELECTRIC_GUITAR(ModSounds.ELECTRIC_GUITAR_PLAY),
-    TRUMPET(ModSounds.TRUMPET_PLAY);
+    TRUMPET(ModSounds.TRUMPET_PLAY),
+    SAXOPHONE(ModSounds.SAXOPHONE_PLAY),
+    OCARINA(ModSounds.OCARINA_PLAY),
+    HARMONICA(ModSounds.HARMONICA_PLAY);
 
     private final Holder<SoundEvent> soundEvent;
     private static final IntFunction<InstrumentsType> BY_ID = ByIdMap.continuous(InstrumentsType::getId, values(), ByIdMap.OutOfBoundsStrategy.ZERO);

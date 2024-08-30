@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "morecolorful:block/ride_cymbal_bottom"
+    },
+    "half=upper": {
+      "model": "morecolorful:block/ride_cymbal_top"
+    }
+  }
+}

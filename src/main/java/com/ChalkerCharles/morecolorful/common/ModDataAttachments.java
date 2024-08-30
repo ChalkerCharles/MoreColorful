@@ -14,9 +14,8 @@ import java.util.function.Supplier;
 public class ModDataAttachments {
     public static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(NeoForgeRegistries.Keys.ATTACHMENT_TYPES, MoreColorful.MODID);
     public static final Supplier<AttachmentType<Boolean>> IS_PLAYING_INSTRUMENT = ATTACHMENT_TYPES.register("is_playing_instrument", () -> AttachmentType.builder(() -> false).build());
-    public static final Supplier<AttachmentType<Object[]>> PLAYING_SCREEN_DATA = ATTACHMENT_TYPES.register("playing_screen_data", () -> AttachmentType.builder(() -> new Object[] {InstrumentsType.PIANO, new BlockPos(0, -65, 0), 0, false}).build());
+    public static final Supplier<AttachmentType<Object[]>> PLAYING_SCREEN_DATA = ATTACHMENT_TYPES.register("playing_screen_data", () -> AttachmentType.builder(() -> new Object[] {InstrumentsType.HARP, new BlockPos(0, -65, 0), 0, false}).build());
     public static final Supplier<AttachmentType<Float>> PLAYING_SCREEN_TICK = ATTACHMENT_TYPES.register("playing_screen_tick", () -> AttachmentType.builder(() -> 0F).build());
-    public static final Supplier<AttachmentType<Object[]>> CYMBAL_DATA = ATTACHMENT_TYPES.register("cymbal_data", () -> AttachmentType.builder(() -> new Object[] {new BlockPos(0, -65, 0), new ArrayList<Integer>()}).build());
     public static void register(IEventBus eventBus){
         ATTACHMENT_TYPES.register(eventBus);
     }

@@ -1,8 +1,15 @@
 {
-  "block.note_block.piano": {
+  "block.note_block.piano_low": {
     "sounds": [
       {
-        "name": "morecolorful:note/piano"
+        "name": "morecolorful:note/piano_low"
+      }],
+    "subtitle": "subtitles.block.note_block.note"
+  },
+  "block.note_block.piano_high": {
+    "sounds": [
+      {
+        "name": "morecolorful:note/piano_high"
       }],
     "subtitle": "subtitles.block.note_block.note"
   },
@@ -31,6 +38,48 @@
     "sounds": [
       {
         "name": "morecolorful:note/trumpet"
+      }],
+    "subtitle": "subtitles.block.note_block.note"
+  },
+  "block.note_block.saxophone": {
+    "sounds": [
+      {
+        "name": "morecolorful:note/saxophone"
+      }],
+    "subtitle": "subtitles.block.note_block.note"
+  },
+  "block.note_block.ocarina": {
+    "sounds": [
+      {
+        "name": "morecolorful:note/ocarina"
+      }],
+    "subtitle": "subtitles.block.note_block.note"
+  },
+  "block.note_block.harmonica": {
+    "sounds": [
+      {
+        "name": "morecolorful:note/harmonica"
+      }],
+    "subtitle": "subtitles.block.note_block.note"
+  },
+  "block.note_block.tom": {
+    "sounds": [
+      {
+        "name": "morecolorful:note/tom"
+      }],
+    "subtitle": "subtitles.block.note_block.note"
+  },
+  "block.note_block.ride": {
+    "sounds": [
+      {
+        "name": "morecolorful:note/ride"
+      }],
+    "subtitle": "subtitles.block.note_block.note"
+  },
+  "block.note_block.crash": {
+    "sounds": [
+      {
+        "name": "morecolorful:note/crash"
       }],
     "subtitle": "subtitles.block.note_block.note"
   },
@@ -94,12 +143,40 @@
     ],
     "subtitle": "morecolorful.subtitles.block.synthesizer_keyboard.play"
   },
-  "block.piano.play": {
+  "block.piano_low.play": {
     "sounds": [
       {
-        "name": "morecolorful:note/piano"
+        "name": "morecolorful:note/piano_low"
       }],
     "subtitle": "morecolorful.subtitles.block.piano.play"
+  },
+  "block.piano_high.play": {
+    "sounds": [
+      {
+        "name": "morecolorful:note/piano_high"
+      }],
+    "subtitle": "morecolorful.subtitles.block.piano.play"
+  },
+  "block.tom.play": {
+    "sounds": [
+      {
+        "name": "morecolorful:note/tom"
+      }],
+    "subtitle": "morecolorful.subtitles.block.tom-tom_drum.play"
+  },
+  "block.ride.play": {
+    "sounds": [
+      {
+        "name": "morecolorful:note/ride"
+      }],
+    "subtitle": "morecolorful.subtitles.block.ride_cymbal.play"
+  },
+  "block.crash.play": {
+    "sounds": [
+      {
+        "name": "morecolorful:note/crash"
+      }],
+    "subtitle": "morecolorful.subtitles.block.crash_cymbal.play"
   },
   "item.bass.play": {
     "sounds": [
@@ -164,5 +241,26 @@
         "name": "morecolorful:note/trumpet"
       }],
     "subtitle": "morecolorful.subtitles.item.trumpet.play"
+  },
+  "item.saxophone.play": {
+    "sounds": [
+      {
+        "name": "morecolorful:note/saxophone"
+      }],
+    "subtitle": "morecolorful.subtitles.item.saxophone.play"
+  },
+  "item.ocarina.play": {
+    "sounds": [
+      {
+        "name": "morecolorful:note/ocarina"
+      }],
+    "subtitle": "morecolorful.subtitles.item.ocarina.play"
+  },
+  "item.harmonica.play": {
+    "sounds": [
+      {
+        "name": "morecolorful:note/harmonica"
+      }],
+    "subtitle": "morecolorful.subtitles.item.harmonica.play"
   }
 }

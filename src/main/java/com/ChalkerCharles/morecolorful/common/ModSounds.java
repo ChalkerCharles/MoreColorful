@@ -10,17 +10,29 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class ModSounds {
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS = DeferredRegister.create(Registries.SOUND_EVENT, MoreColorful.MODID);
-    public static final Holder<SoundEvent> NOTE_BLOCK_PIANO = registerSound("block.note_block.piano");
+    public static final Holder<SoundEvent> NOTE_BLOCK_PIANO_LOW = registerSound("block.note_block.piano_low");
+    public static final Holder<SoundEvent> NOTE_BLOCK_PIANO_HIGH = registerSound("block.note_block.piano_high");
     public static final Holder<SoundEvent> NOTE_BLOCK_VIOLIN = registerSound("block.note_block.violin");
     public static final Holder<SoundEvent> NOTE_BLOCK_CELLO = registerSound("block.note_block.cello");
     public static final Holder<SoundEvent> NOTE_BLOCK_ELECTRIC_GUITAR = registerSound("block.note_block.electric_guitar");
     public static final Holder<SoundEvent> NOTE_BLOCK_TRUMPET = registerSound("block.note_block.trumpet");
+    public static final Holder<SoundEvent> NOTE_BLOCK_SAXOPHONE = registerSound("block.note_block.saxophone");
+    public static final Holder<SoundEvent> NOTE_BLOCK_OCARINA = registerSound("block.note_block.ocarina");
+    public static final Holder<SoundEvent> NOTE_BLOCK_HARMONICA = registerSound("block.note_block.harmonica");
+    public static final Holder<SoundEvent> NOTE_BLOCK_TOM = registerSound("block.note_block.tom");
+    public static final Holder<SoundEvent> NOTE_BLOCK_RIDE = registerSound("block.note_block.ride");
+    public static final Holder<SoundEvent> NOTE_BLOCK_CRASH = registerSound("block.note_block.crash");
+
     // Musical Instruments
     public static final Holder<SoundEvent> HARP_PLAY = registerSound("block.harp.play");
-    public static final Holder<SoundEvent> PIANO_PLAY = registerSound("block.piano.play");
+    public static final Holder<SoundEvent> PIANO_LOW_PLAY = registerSound("block.piano_low.play");
+    public static final Holder<SoundEvent> PIANO_HIGH_PLAY = registerSound("block.piano_high.play");
     public static final Holder<SoundEvent> BASS_DRUM_PLAY = registerSound("block.bass_drum.play");
     public static final Holder<SoundEvent> SNARE_PLAY = registerSound("block.snare.play");
+    public static final Holder<SoundEvent> TOM_PLAY = registerSound("block.tom.play");
     public static final Holder<SoundEvent> HAT_PLAY = registerSound("block.hat.play");
+    public static final Holder<SoundEvent> RIDE_PLAY = registerSound("block.ride.play");
+    public static final Holder<SoundEvent> CRASH_PLAY = registerSound("block.crash.play");
     public static final Holder<SoundEvent> BASS_PLAY = registerSound("item.bass.play");
     public static final Holder<SoundEvent> FLUTE_PLAY = registerSound("item.flute.play");
     public static final Holder<SoundEvent> GLOCKENSPIEL_PLAY = registerSound("block.glockenspiel.play");
@@ -37,6 +49,9 @@ public class ModSounds {
     public static final Holder<SoundEvent> CELLO_PLAY = registerSound("item.cello.play");
     public static final Holder<SoundEvent> ELECTRIC_GUITAR_PLAY = registerSound("item.electric_guitar.play");
     public static final Holder<SoundEvent> TRUMPET_PLAY = registerSound("item.trumpet.play");
+    public static final Holder<SoundEvent> SAXOPHONE_PLAY = registerSound("item.saxophone.play");
+    public static final Holder<SoundEvent> OCARINA_PLAY = registerSound("item.ocarina.play");
+    public static final Holder<SoundEvent> HARMONICA_PLAY = registerSound("item.harmonica.play");
 
     private static Holder<SoundEvent> registerSound(String name) {
         return SOUND_EVENTS.register(name,()-> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, name)));

@@ -67,7 +67,7 @@ public abstract class ItemInHandRendererMixin {
                 } else if (pPlayer.getOffhandItem().getItem() instanceof GuitarItem) {
                     this.moreColorful$renderHand(pPoseStack, pBuffer, pCombinedLight, pEquippedProgress, pSwingProgress, pStack, !f);
                 }
-            } else if (pStack.getItem() instanceof DidgeridooItem && Minecraft.getInstance().screen instanceof PlayingScreen pScreen && pScreen.pType == InstrumentsType.DIDGERIDOO) {
+            } else if (pStack.getItem() instanceof DidgeridooItem item && Minecraft.getInstance().screen instanceof PlayingScreen pScreen && pScreen.pType == item.getType()) {
                 if (pPlayer.getMainHandItem().getItem() instanceof DidgeridooItem) {
                     this.moreColorful$renderDidgeridooHand(pPoseStack, pBuffer, pCombinedLight, pEquippedProgress, pSwingProgress, pStack, f);
                     if (!pPlayer.hasItemInSlot(EquipmentSlot.OFFHAND)) {
@@ -79,7 +79,7 @@ public abstract class ItemInHandRendererMixin {
                         this.moreColorful$renderDidgeridooHand(pPoseStack, pBuffer, pCombinedLight, pEquippedProgress, pSwingProgress, pStack, f);
                     }
                 }
-            } else if (Minecraft.getInstance().screen instanceof PlayingScreen pScreen && (pScreen.pType == InstrumentsType.PIANO || (pScreen.pType.ordinal() >= 9 && pScreen.pType.ordinal() <= 10))) {
+            } else if (Minecraft.getInstance().screen instanceof PlayingScreen pScreen && (pScreen.pType == InstrumentsType.PIANO_LOW || pScreen.pType == InstrumentsType.PIANO_HIGH || (pScreen.pType.ordinal() >= 13 && pScreen.pType.ordinal() <= 14))) {
                 if (pStack.isEmpty()) {
                     if (pPlayer.getOffhandItem().isEmpty() && !(pPlayer.getMainHandItem().getItem() instanceof MapItem)) {
                         this.moreColorful$renderHand(pPoseStack, pBuffer, pCombinedLight, pEquippedProgress, pSwingProgress, pStack, !f);
@@ -91,7 +91,7 @@ public abstract class ItemInHandRendererMixin {
 
     @Inject(method = "renderArmWithItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/ItemInHandRenderer;renderPlayerArm(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;IFFLnet/minecraft/world/entity/HumanoidArm;)V"), cancellable = true)
     private void moreColorful$stopRendering(AbstractClientPlayer pPlayer, float pPartialTicks, float pPitch, InteractionHand pHand, float pSwingProgress, ItemStack pStack, float pEquippedProgress, PoseStack pPoseStack, MultiBufferSource pBuffer, int pCombinedLight, CallbackInfo ci) {
-        if (pPlayer.getOffhandItem().getItem() instanceof DidgeridooItem && Minecraft.getInstance().screen instanceof PlayingScreen pScreen && pScreen.pType == InstrumentsType.DIDGERIDOO) {
+        if (pPlayer.getOffhandItem().getItem() instanceof DidgeridooItem item && Minecraft.getInstance().screen instanceof PlayingScreen pScreen && pScreen.pType == item.getType()) {
             ci.cancel();
         }
     }

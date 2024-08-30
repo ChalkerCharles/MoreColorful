@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:copper_ingot"
+    },
+    "|": {
+      "item": "minecraft:iron_bars"
+    },
+    "X": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "pattern": [
+    "###",
+    "|| ",
+    " X "
+  ],
+  "result": {
+    "count": 1,
+    "id": "morecolorful:crash_cymbal"
+  }
+}

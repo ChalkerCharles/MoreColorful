@@ -33,14 +33,15 @@ public abstract class PercussionInstrumentBlock extends MusicalInstrumentBlock {
         } else {
             if (pLevel.isClientSide) {
                 PlayingScreen.openPlayingScreen(pPlayer, pType, pPos);
-                if (pType == InstrumentsType.HAT) {
-                    PacketDistributor.sendToServer(new PlayingScreenPacket(pType, pPos, pPlayer.getId(), true));
-                }
+                PacketDistributor.sendToServer(new PlayingScreenPacket(pType, pPos, pPlayer.getId(), true));
             }
             pPlayer.awardStat(switch (pType) {
                 case BASS_DRUM -> ModStats.INTERACT_WITH_BASS_DRUM.get();
                 case SNARE -> ModStats.INTERACT_WITH_SNARE.get();
+                case TOM -> ModStats.INTERACT_WITH_TOM.get();
                 case HAT -> ModStats.INTERACT_WITH_HAT.get();
+                case RIDE -> ModStats.INTERACT_WITH_RIDE.get();
+                case CRASH -> ModStats.INTERACT_WITH_CRASH.get();
                 case CHIMES -> ModStats.INTERACT_WITH_CHIMES.get();
                 case GLOCKENSPIEL -> ModStats.INTERACT_WITH_GLOCKENSPIEL.get();
                 case XYLOPHONE -> ModStats.INTERACT_WITH_XYLOPHONE.get();

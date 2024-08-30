@@ -19,7 +19,10 @@ public class ModStats {
     public static final Supplier<ResourceLocation> INTERACT_WITH_PIANO = makeCustomStat("interact_with_piano");
     public static final Supplier<ResourceLocation> INTERACT_WITH_BASS_DRUM = makeCustomStat("interact_with_bass_drum");
     public static final Supplier<ResourceLocation> INTERACT_WITH_SNARE = makeCustomStat("interact_with_snare");
+    public static final Supplier<ResourceLocation> INTERACT_WITH_TOM = makeCustomStat("interact_with_tom");
     public static final Supplier<ResourceLocation> INTERACT_WITH_HAT = makeCustomStat("interact_with_hat");
+    public static final Supplier<ResourceLocation> INTERACT_WITH_RIDE = makeCustomStat("interact_with_ride");
+    public static final Supplier<ResourceLocation> INTERACT_WITH_CRASH = makeCustomStat("interact_with_crash");
     public static final Supplier<ResourceLocation> INTERACT_WITH_GLOCKENSPIEL = makeCustomStat("interact_with_glockenspiel");
     public static final Supplier<ResourceLocation> INTERACT_WITH_CHIMES = makeCustomStat("interact_with_chimes");
     public static final Supplier<ResourceLocation> INTERACT_WITH_XYLOPHONE = makeCustomStat("interact_with_xylophone");
