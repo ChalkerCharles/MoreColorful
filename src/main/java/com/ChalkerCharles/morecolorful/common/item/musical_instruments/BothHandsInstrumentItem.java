@@ -14,9 +14,10 @@ import net.neoforged.neoforge.network.PacketDistributor;
 
 public class BothHandsInstrumentItem extends MusicalInstrumentItem {
 
-    public BothHandsInstrumentItem(InstrumentsType pType, Properties pProperties) {
-        super(pType, pProperties);
+    public BothHandsInstrumentItem(InstrumentsType pType, Properties pProperties, int burnTime) {
+        super(pType, pProperties, burnTime);
         this.pType = pType;
+        this.burnTime = burnTime;
     }
 
     @Override

@@ -14,7 +14,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 
 public class CowBellItem extends MusicalInstrumentItem {
     public CowBellItem(InstrumentsType pType, Properties pProperties) {
-        super(pType, pProperties);
+        super(pType, pProperties, 0);
         this.pType = pType;
     }
 

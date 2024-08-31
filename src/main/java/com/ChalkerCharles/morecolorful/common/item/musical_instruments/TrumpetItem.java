@@ -12,7 +12,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 
 public class TrumpetItem extends MusicalInstrumentItem {
     public TrumpetItem(InstrumentsType pType, Properties pProperties) {
-        super(pType, pProperties);
+        super(pType, pProperties, 0);
         this.pType = pType;
     }
 
