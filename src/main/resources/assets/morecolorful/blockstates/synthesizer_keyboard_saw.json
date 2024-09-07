@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=north,half=left": {
+      "model": "morecolorful:block/synthesizer_keyboard_saw_left"
+    },
+    "facing=north,half=right": {
+      "model": "morecolorful:block/synthesizer_keyboard_saw_right"
+    },
+    "facing=east,half=left": {
+      "model": "morecolorful:block/synthesizer_keyboard_saw_left",
+      "y": 90
+    },
+    "facing=east,half=right": {
+      "model": "morecolorful:block/synthesizer_keyboard_saw_right",
+      "y": 90
+    },
+    "facing=south,half=left": {
+      "model": "morecolorful:block/synthesizer_keyboard_saw_left",
+      "y": 180
+    },
+    "facing=south,half=right": {
+      "model": "morecolorful:block/synthesizer_keyboard_saw_right",
+      "y": 180
+    },
+    "facing=west,half=left": {
+      "model": "morecolorful:block/synthesizer_keyboard_saw_left",
+      "y": 270
+    },
+    "facing=west,half=right": {
+      "model": "morecolorful:block/synthesizer_keyboard_saw_right",
+      "y": 270
+    }
+  }
+}

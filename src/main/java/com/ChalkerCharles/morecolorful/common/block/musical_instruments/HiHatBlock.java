@@ -27,20 +27,20 @@ import org.jetbrains.annotations.Nullable;
 public class HiHatBlock extends PercussionInstrumentBlock implements EntityBlock {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty HIT = ModBlockStateProperties.HIT;
-    protected static final VoxelShape HIHAT = Shapes.or(
+    private static final VoxelShape HIHAT = Shapes.or(
             Block.box(7.0, 15.5, 7.0, 9.0, 16.5, 9.0),
             Block.box(7.0, 12.5, 7.0, 9.0, 14.5, 9.0),
             Block.box(7.0, 2.5, 7.0, 9.0, 4.5, 9.0),
             Block.box(7.7, 0.0, 7.7, 8.3, 18.0, 8.3),
             Block.box(3.0, 14.5, 3.0, 13.0, 15.5, 13.0));
-    protected static final VoxelShape PEDAL_NORTH = Block.box(7.0, 0.0, 3.0, 9.0, 0.5, 8.0);
-    protected static final VoxelShape PEDAL_EAST = Block.box(8.0, 0.0, 7.0, 13.0, 0.5, 9.0);
-    protected static final VoxelShape PEDAL_SOUTH = Block.box(7.0, 0.0, 8.0, 9.0, 0.5, 13.0);
-    protected static final VoxelShape PEDAL_WEST = Block.box(3.0, 0.0, 7.0, 8.0, 0.5, 9.0);
-    protected static final VoxelShape HIHAT_NORTH = Shapes.or(HIHAT, PEDAL_NORTH);
-    protected static final VoxelShape HIHAT_EAST = Shapes.or(HIHAT, PEDAL_EAST);
-    protected static final VoxelShape HIHAT_SOUTH = Shapes.or(HIHAT, PEDAL_SOUTH);
-    protected static final VoxelShape HIHAT_WEST = Shapes.or(HIHAT, PEDAL_WEST);
+    private static final VoxelShape PEDAL_NORTH = Block.box(7.0, 0.0, 3.0, 9.0, 0.5, 8.0);
+    private static final VoxelShape PEDAL_EAST = Block.box(8.0, 0.0, 7.0, 13.0, 0.5, 9.0);
+    private static final VoxelShape PEDAL_SOUTH = Block.box(7.0, 0.0, 8.0, 9.0, 0.5, 13.0);
+    private static final VoxelShape PEDAL_WEST = Block.box(3.0, 0.0, 7.0, 8.0, 0.5, 9.0);
+    private static final VoxelShape HIHAT_NORTH = Shapes.or(HIHAT, PEDAL_NORTH);
+    private static final VoxelShape HIHAT_EAST = Shapes.or(HIHAT, PEDAL_EAST);
+    private static final VoxelShape HIHAT_SOUTH = Shapes.or(HIHAT, PEDAL_SOUTH);
+    private static final VoxelShape HIHAT_WEST = Shapes.or(HIHAT, PEDAL_WEST);
 
     public HiHatBlock(InstrumentsType pType, Properties properties) {
         super(pType, properties);
@@ -50,7 +50,7 @@ public class HiHatBlock extends PercussionInstrumentBlock implements EntityBlock
     }
 
     @Override
-    protected  VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
+    protected VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
         Direction direction = pState.getValue(FACING);
         return switch (direction){
             case EAST -> HIHAT_EAST;

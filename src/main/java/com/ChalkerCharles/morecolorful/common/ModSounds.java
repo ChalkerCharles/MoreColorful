@@ -22,6 +22,11 @@ public class ModSounds {
     public static final Holder<SoundEvent> NOTE_BLOCK_TOM = registerSound("block.note_block.tom");
     public static final Holder<SoundEvent> NOTE_BLOCK_RIDE = registerSound("block.note_block.ride");
     public static final Holder<SoundEvent> NOTE_BLOCK_CRASH = registerSound("block.note_block.crash");
+    public static final Holder<SoundEvent> NOTE_BLOCK_SCULK = registerSound("block.note_block.sculk");
+    public static final Holder<SoundEvent> NOTE_BLOCK_CRYSTAL = registerSound("block.note_block.crystal");
+    public static final Holder<SoundEvent> NOTE_BLOCK_SAW = registerSound("block.note_block.saw");
+    public static final Holder<SoundEvent> NOTE_BLOCK_PLUCK = registerSound("block.note_block.pluck");
+    public static final Holder<SoundEvent> NOTE_BLOCK_SYNTH_BASS = registerSound("block.note_block.synth_bass");
 
     // Musical Instruments
     public static final Holder<SoundEvent> HARP_PLAY = registerSound("block.harp.play");
@@ -52,6 +57,11 @@ public class ModSounds {
     public static final Holder<SoundEvent> SAXOPHONE_PLAY = registerSound("item.saxophone.play");
     public static final Holder<SoundEvent> OCARINA_PLAY = registerSound("item.ocarina.play");
     public static final Holder<SoundEvent> HARMONICA_PLAY = registerSound("item.harmonica.play");
+    public static final Holder<SoundEvent> SCULK_PLAY = registerSound("block.synthesizer_keyboard_sculk.play");
+    public static final Holder<SoundEvent> CRYSTAL_PLAY = registerSound("block.synthesizer_keyboard_crystal.play");
+    public static final Holder<SoundEvent> SAW_PLAY = registerSound("block.synthesizer_keyboard_saw.play");
+    public static final Holder<SoundEvent> PLUCK_PLAY = registerSound("block.synthesizer_keyboard_pluck.play");
+    public static final Holder<SoundEvent> SYNTH_BASS_PLAY = registerSound("block.synthesizer_keyboard_synth_bass.play");
 
     private static Holder<SoundEvent> registerSound(String name) {
         return SOUND_EVENTS.register(name,()-> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, name)));

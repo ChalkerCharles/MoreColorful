@@ -13,5 +13,7 @@ public class ModLayerDefinitions {
     public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(ModModelLayers.RIDE_CYMBAL, CymbalRenderer::createRide);
         event.registerLayerDefinition(ModModelLayers.CRASH_CYMBAL, CymbalRenderer::createCrash);
+        event.registerLayerDefinition(ModModelLayers.DRUM_SET_RIDE, CymbalRenderer::createDrumSetRide);
+        event.registerLayerDefinition(ModModelLayers.DRUM_SET_CRASH, CymbalRenderer::createDrumSetCrash);
     }
 }

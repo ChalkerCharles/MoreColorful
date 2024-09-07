@@ -79,7 +79,7 @@ public abstract class ItemInHandRendererMixin {
                         this.moreColorful$renderDidgeridooHand(pPoseStack, pBuffer, pCombinedLight, pEquippedProgress, pSwingProgress, pStack, f);
                     }
                 }
-            } else if (Minecraft.getInstance().screen instanceof PlayingScreen pScreen && (pScreen.pType == InstrumentsType.PIANO_LOW || pScreen.pType == InstrumentsType.PIANO_HIGH || (pScreen.pType.ordinal() >= 13 && pScreen.pType.ordinal() <= 14))) {
+            } else if (Minecraft.getInstance().screen instanceof PlayingScreen pScreen && (pScreen.pType == InstrumentsType.PIANO_LOW || pScreen.pType == InstrumentsType.PIANO_HIGH || (pScreen.pType.ordinal() >= 13 && pScreen.pType.ordinal() <= 19))) {
                 if (pStack.isEmpty()) {
                     if (pPlayer.getOffhandItem().isEmpty() && !(pPlayer.getMainHandItem().getItem() instanceof MapItem)) {
                         this.moreColorful$renderHand(pPoseStack, pBuffer, pCombinedLight, pEquippedProgress, pSwingProgress, pStack, !f);

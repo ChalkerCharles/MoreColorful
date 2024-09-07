@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:polished_granite"
+    },
+    "=": {
+      "item": "minecraft:quartz_slab"
+    },
+    "X": {
+      "tag": "minecraft:stone_buttons"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "N": {
+      "item": "minecraft:note_block"
+    }
+  },
+  "pattern": [
+    "XRX",
+    "===",
+    "#N#"
+  ],
+  "result": {
+    "count": 1,
+    "id": "morecolorful:synthesizer_keyboard_saw"
+  }
+}

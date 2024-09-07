@@ -22,6 +22,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -107,7 +108,7 @@ public class SynthesizerKeyboardBlock extends MusicalInstrumentBlock {
             WEST_RIGHT_COLLISION);
 
     public SynthesizerKeyboardBlock(InstrumentsType pType, Properties properties) {
-        super(pType, properties);
+        super(pType, properties.strength(3.0F, 6.0F).pushReaction(PushReaction.DESTROY));
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(HALF, HorizontalDoubleBlockHalf.LEFT)
         );

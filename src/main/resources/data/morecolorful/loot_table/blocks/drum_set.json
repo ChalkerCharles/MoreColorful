@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:tag",
+          "expand": false,
+          "conditions": [
+            {
+              "block": "morecolorful:drum_set",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "part": "mid_lower"
+              }
+            }
+          ],
+          "name": "morecolorful:drum_set_parts"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "morecolorful:blocks/drum_set"
+}

@@ -4,9 +4,10 @@ import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.common.block.ModBlocks;
 import com.ChalkerCharles.morecolorful.common.item.musical_instruments.*;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import  net.neoforged.bus.api.IEventBus;
 
 import java.util.function.Supplier;
 
@@ -24,13 +25,18 @@ public class ModItems {
     public static final Supplier<Item> HIHAT = ITEMS.register("hi-hat", ()-> new BlockItem(ModBlocks.HIHAT.get(), new Item.Properties()));
     public static final Supplier<Item> RIDE_CYMBAL = ITEMS.register("ride_cymbal", ()-> new BlockItem(ModBlocks.RIDE_CYMBAL.get(), new Item.Properties()));
     public static final Supplier<Item> CRASH_CYMBAL = ITEMS.register("crash_cymbal", ()-> new BlockItem(ModBlocks.CRASH_CYMBAL.get(), new Item.Properties()));
+    public static final Supplier<Item> DRUM_SET = ITEMS.register("drum_set", ()-> new BlockItem(ModBlocks.DRUM_SET.get(), new Item.Properties()));
     public static final Supplier<Item> CHIMES = ITEMS.register("chimes", ()-> new BlockItem(ModBlocks.CHIMES.get(), new Item.Properties()));
     public static final Supplier<Item> GLOCKENSPIEL = ITEMS.register("glockenspiel", ()-> new BlockItem(ModBlocks.GLOCKENSPIEL.get(), new Item.Properties()));
     public static final Supplier<Item> XYLOPHONE = ITEMS.register("xylophone", ()-> new FuelBlockItem(ModBlocks.XYLOPHONE.get(), new Item.Properties(), 300));
     public static final Supplier<Item> VIBRAPHONE = ITEMS.register("vibraphone", ()-> new BlockItem(ModBlocks.VIBRAPHONE.get(), new Item.Properties()));
     public static final Supplier<Item> SYNTHESIZER_KEYBOARD_BIT = ITEMS.register("synthesizer_keyboard_bit", ()-> new SynthesizerKeyboardItem(ModBlocks.SYNTHESIZER_KEYBOARD_BIT.get(), new Item.Properties()));
     public static final Supplier<Item> SYNTHESIZER_KEYBOARD_PLING = ITEMS.register("synthesizer_keyboard_pling", ()-> new SynthesizerKeyboardItem(ModBlocks.SYNTHESIZER_KEYBOARD_PLING.get(), new Item.Properties()));
-
+    public static final Supplier<Item> SYNTHESIZER_KEYBOARD_SCULK = ITEMS.register("synthesizer_keyboard_sculk", ()-> new SynthesizerKeyboardItem(ModBlocks.SYNTHESIZER_KEYBOARD_SCULK.get(), new Item.Properties()));
+    public static final Supplier<Item> SYNTHESIZER_KEYBOARD_AMETHYST = ITEMS.register("synthesizer_keyboard_amethyst", ()-> new SynthesizerKeyboardItem(ModBlocks.SYNTHESIZER_KEYBOARD_AMETHYST.get(), new Item.Properties()));
+    public static final Supplier<Item> SYNTHESIZER_KEYBOARD_SAW = ITEMS.register("synthesizer_keyboard_saw", ()-> new SynthesizerKeyboardItem(ModBlocks.SYNTHESIZER_KEYBOARD_SAW.get(), new Item.Properties()));
+    public static final Supplier<Item> SYNTHESIZER_KEYBOARD_PLUCK = ITEMS.register("synthesizer_keyboard_pluck", ()-> new SynthesizerKeyboardItem(ModBlocks.SYNTHESIZER_KEYBOARD_PLUCK.get(), new Item.Properties()));
+    public static final Supplier<Item> SYNTHESIZER_KEYBOARD_SYNTH_BASS = ITEMS.register("synthesizer_keyboard_synth_bass", ()-> new SynthesizerKeyboardItem(ModBlocks.SYNTHESIZER_KEYBOARD_SYNTH_BASS.get(), new Item.Properties()));
 
     // Items
     public static final Supplier<Item> VIOLIN = ITEMS.register("violin", ()-> new BowedStringInstrumentItem(InstrumentsType.VIOLIN, new Item.Properties().stacksTo(1)));

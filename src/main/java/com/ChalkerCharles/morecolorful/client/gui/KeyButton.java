@@ -35,13 +35,15 @@ public class KeyButton extends Button {
     private static final ResourceLocation BLACK_KEY_PRESSED = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "key/black_key_pressed");
     private final int keyType;
     public boolean isPressed;
+    private final int keyId;
+    public boolean pressedByClick;
     static int width = 12;
     static int height = 32;
 
-    public KeyButton(int pX, int pY, int keyType, Button.OnPress pOnPress, boolean isPressed){
-        super(pX, pY, width, height, CommonComponents.EMPTY, pOnPress, DEFAULT_NARRATION);
+    public KeyButton(int pX, int pY, int keyType, int keyId){
+        super(pX, pY, width, height, CommonComponents.EMPTY, Button -> {}, DEFAULT_NARRATION);
         this.keyType = keyType;
-        this.isPressed = isPressed;
+        this.keyId = keyId;
     }
 
     @Override
@@ -67,10 +69,10 @@ public class KeyButton extends Button {
             pGuiGraphics.blitSprite(resourcelocation, this.getX(), this.getY(), 12, 32);
         }
     }
-    public static void playSound(Player pPlayer, InstrumentsType pType, BlockPos pPos, int keyId){
+    public void playSound(Player pPlayer, InstrumentsType pType, BlockPos pPos){
         int pitchId = keyId - 12;
         Level pLevel = pPlayer.level();
-        if (pType.ordinal() <= 14) { // From Instrument Blocks
+        if (pType.ordinal() <= 19) { // From Instrument Blocks
             pLevel.playSound(pPlayer, pPos.getX() + 0.5, pPos.getY() + 0.5, pPos.getZ() + 0.5, pType.getSoundEvent().value(), SoundSource.RECORDS, 3.0F, (float) Math.pow(2,((double) pitchId / 12)));
             PacketDistributor.sendToServer(new NotePlayingPacket(pType, pPos, keyId, true));
         } else { // From Instrument Items
@@ -78,10 +80,10 @@ public class KeyButton extends Button {
             PacketDistributor.sendToServer(new NotePlayingPacket(pType, pPlayer.blockPosition(), keyId, false));
         }
     }
-    @Override
-    public void onPress() {
-        if (this.active && Minecraft.getInstance().screen instanceof PlayingScreen pScreen) {
-            this.onPress.onPress(this);
+    public void press(boolean byClick) {
+        if (this.active && !this.isPressed && Minecraft.getInstance().screen instanceof PlayingScreen pScreen) {
+            this.playSound(pScreen.pPlayer, pScreen.pType, pScreen.pPos);
+            this.pressedByClick = byClick;
             this.isPressed = true;
             this.active = false;
             pScreen.isPressing = true;
@@ -89,12 +91,13 @@ public class KeyButton extends Button {
         }
     }
     public void restore() {
-        if (!this.active) {
+        if (!this.active && this.isPressed) {
             this.isPressed = false;
             this.active = true;
+            this.pressedByClick = false;
         }
     }
+
     @Override
-    public void playDownSound(@NotNull SoundManager pHandler) {
-    }
+    public void playDownSound(@NotNull SoundManager pHandler) {}
 }

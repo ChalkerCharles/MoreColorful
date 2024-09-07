@@ -1,5 +1,6 @@
 package com.ChalkerCharles.morecolorful.common.item.musical_instruments;
 
+import com.ChalkerCharles.morecolorful.common.block.musical_instruments.DrumSetBlock;
 import com.ChalkerCharles.morecolorful.common.block.musical_instruments.PercussionInstrumentBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.stats.Stats;
@@ -25,7 +26,7 @@ public class DrumstickItem extends Item {
         BlockPos blockpos = pContext.getClickedPos();
         BlockState blockstate = level.getBlockState(blockpos);
         Player pPlayer = pContext.getPlayer();
-        if (blockstate.getBlock() instanceof PercussionInstrumentBlock) {
+        if (blockstate.getBlock() instanceof PercussionInstrumentBlock || blockstate.getBlock() instanceof DrumSetBlock) {
             if (level.isClientSide) {
                 return InteractionResult.SUCCESS;
             } else {

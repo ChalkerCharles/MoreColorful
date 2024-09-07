@@ -36,7 +36,7 @@ public class NoteBlockInstrumentMixin {
     @Inject(method = "<clinit>", at = @At(value = "FIELD", target = "Lnet/minecraft/world/level/block/state/properties/NoteBlockInstrument;$VALUES:[Lnet/minecraft/world/level/block/state/properties/NoteBlockInstrument;", shift = At.Shift.AFTER))
     private static void moreColorful$inject(CallbackInfo ci) {
         int ordinal = $VALUES.length;
-        $VALUES = Arrays.copyOf($VALUES, ordinal + 12);
+        $VALUES = Arrays.copyOf($VALUES, ordinal + 17);
 
         PIANO_LOW = $VALUES[ordinal] = moreColorful$create("MORECOLORFUL_PIANO_LOW", ordinal, "piano_low", ModSounds.NOTE_BLOCK_PIANO_LOW);
         PIANO_HIGH = $VALUES[ordinal + 1] = moreColorful$create("MORECOLORFUL_PIANO_HIGH", ordinal + 1, "piano_high", ModSounds.NOTE_BLOCK_PIANO_HIGH);
@@ -50,5 +50,10 @@ public class NoteBlockInstrumentMixin {
         TOM = $VALUES[ordinal + 9] = moreColorful$create("MORECOLORFUL_TOM", ordinal + 9, "tom", ModSounds.NOTE_BLOCK_TOM);
         RIDE = $VALUES[ordinal + 10] = moreColorful$create("MORECOLORFUL_RIDE", ordinal + 10, "ride", ModSounds.NOTE_BLOCK_RIDE);
         CRASH = $VALUES[ordinal + 11] = moreColorful$create("MORECOLORFUL_CRASH", ordinal + 11, "crash", ModSounds.NOTE_BLOCK_CRASH);
+        SCULK = $VALUES[ordinal + 12] = moreColorful$create("MORECOLORFUL_SCULK", ordinal + 12, "vocal_chop", ModSounds.NOTE_BLOCK_SCULK);
+        CRYSTAL = $VALUES[ordinal + 13] = moreColorful$create("MORECOLORFUL_CRYSTAL", ordinal + 13, "crystal", ModSounds.NOTE_BLOCK_CRYSTAL);
+        SAW = $VALUES[ordinal + 14] = moreColorful$create("MORECOLORFUL_SAW", ordinal + 14, "saw_wave", ModSounds.NOTE_BLOCK_SAW);
+        PLUCK = $VALUES[ordinal + 15] = moreColorful$create("MORECOLORFUL_PLUCK", ordinal + 15, "pluck", ModSounds.NOTE_BLOCK_PLUCK);
+        SYNTH_BASS = $VALUES[ordinal + 16] = moreColorful$create("MORECOLORFUL_SYNTH_BASS", ordinal + 16, "synth_bass", ModSounds.NOTE_BLOCK_SYNTH_BASS);
     }
 }

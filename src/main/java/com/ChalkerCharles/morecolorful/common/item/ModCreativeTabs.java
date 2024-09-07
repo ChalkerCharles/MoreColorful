@@ -40,6 +40,7 @@ public class ModCreativeTabs {
                 pOutput.accept(ModItems.HIHAT.get());
                 pOutput.accept(ModItems.RIDE_CYMBAL.get());
                 pOutput.accept(ModItems.CRASH_CYMBAL.get());
+                pOutput.accept(ModItems.DRUM_SET.get());
                 pOutput.accept(ModItems.CHIMES.get());
                 pOutput.accept(ModItems.GLOCKENSPIEL.get());
                 pOutput.accept(ModItems.XYLOPHONE.get());
@@ -47,6 +48,11 @@ public class ModCreativeTabs {
                 pOutput.accept(ModItems.DRUMSTICK.get());
                 pOutput.accept(ModItems.SYNTHESIZER_KEYBOARD_BIT.get());
                 pOutput.accept(ModItems.SYNTHESIZER_KEYBOARD_PLING.get());
+                pOutput.accept(ModItems.SYNTHESIZER_KEYBOARD_SCULK.get());
+                pOutput.accept(ModItems.SYNTHESIZER_KEYBOARD_AMETHYST.get());
+                pOutput.accept(ModItems.SYNTHESIZER_KEYBOARD_SAW.get());
+                pOutput.accept(ModItems.SYNTHESIZER_KEYBOARD_PLUCK.get());
+                pOutput.accept(ModItems.SYNTHESIZER_KEYBOARD_SYNTH_BASS.get());
             })
             .build()).getKey();
     @SuppressWarnings("unused")

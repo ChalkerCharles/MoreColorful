@@ -27,7 +27,6 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.NotNull;
 import org.lwjgl.glfw.GLFW;
 
-import javax.annotation.Nullable;
 import java.util.List;
 
 @OnlyIn(Dist.CLIENT)
@@ -57,6 +56,7 @@ public class PlayingScreen extends Screen {
     private KeyButton whiteKey_22;
     private KeyButton whiteKey_23;
     private KeyButton blackKey_24;
+    private final KeyButton[] allKeys = new KeyButton[25];
     private OctaveButton octaveButton;
     private static final ResourceLocation PLAYING_SCREEN_TEXTURE = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "textures/gui/playing_screen.png");
     private static final Component TITLE = Component.translatable("morecolorful.gui.playing_screen_title");
@@ -71,8 +71,8 @@ public class PlayingScreen extends Screen {
     private boolean isDragging;
     public boolean isPressing = false;
 
-    public PlayingScreen(Player pPlayer, InstrumentsType pType, @Nullable BlockPos pPos) {
-        super(Component.empty());
+    public PlayingScreen(Player pPlayer, InstrumentsType pType, BlockPos pPos) {
+        super(TITLE);
         this.pPlayer = pPlayer;
         this.pType = pType;
         this.pPos = pPos;
@@ -88,33 +88,58 @@ public class PlayingScreen extends Screen {
             PacketDistributor.sendToServer(new PlayingScreenPacket(pType, pPos, pPlayer.getId(), false));
         }).pos((i - 186) / 2, 192).size(186, 20).build());
         this.addWidget(button);
-        this.blackKey_0 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 46, 111, -1, Button -> KeyButton.playSound(pPlayer, pType, pPos, 0), false));
-        this.blackKey_2 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 63, 111, -1, Button -> KeyButton.playSound(pPlayer, pType, pPos, 2), false));
-        this.blackKey_4 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 80, 111, -1, Button -> KeyButton.playSound(pPlayer, pType, pPos, 4), false));
-        this.blackKey_7 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 110, 111, -1, Button -> KeyButton.playSound(pPlayer, pType, pPos, 7), false));
-        this.blackKey_9 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 128, 111, -1, Button -> KeyButton.playSound(pPlayer, pType, pPos, 9), false));
-        this.blackKey_12 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 30, 53, -1, Button -> KeyButton.playSound(pPlayer, pType, pPos, 12), false));
-        this.blackKey_14 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 47, 53, -1, Button -> KeyButton.playSound(pPlayer, pType, pPos, 14), false));
-        this.blackKey_16 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 64, 53, -1, Button -> KeyButton.playSound(pPlayer, pType, pPos, 16), false));
-        this.blackKey_19 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 94, 53, -1, Button -> KeyButton.playSound(pPlayer, pType, pPos, 19), false));
-        this.blackKey_21 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 112, 53, -1, Button -> KeyButton.playSound(pPlayer, pType, pPos, 21), false));
-        this.blackKey_24 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 142, 53, -1, Button -> KeyButton.playSound(pPlayer, pType, pPos, 24), false));
+        this.blackKey_0 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 46, 111, -1, 0));
+        allKeys[0] = this.blackKey_0;
+        this.blackKey_2 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 63, 111, -1, 2));
+        allKeys[2] = this.blackKey_2;
+        this.blackKey_4 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 80, 111, -1, 4));
+        allKeys[4] = this.blackKey_4;
+        this.blackKey_7 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 110, 111, -1, 7));
+        allKeys[7] = this.blackKey_7;
+        this.blackKey_9 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 128, 111, -1, 9));
+        allKeys[9] = this.blackKey_9;
+        this.blackKey_12 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 30, 53, -1, 12));
+        allKeys[12] = this.blackKey_12;
+        this.blackKey_14 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 47, 53, -1, 14));
+        allKeys[14] = this.blackKey_14;
+        this.blackKey_16 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 64, 53, -1, 16));
+        allKeys[16] = this.blackKey_16;
+        this.blackKey_19 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 94, 53, -1, 19));
+        allKeys[19] = this.blackKey_19;
+        this.blackKey_21 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 112, 53, -1, 21));
+        allKeys[21] = this.blackKey_21;
+        this.blackKey_24 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 142, 53, -1, 24));
+        allKeys[24] = this.blackKey_24;
         KeyButton.width = 16;
         KeyButton.height = 48;
-        this.whiteKey_1 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 53, 111, 3, Button -> KeyButton.playSound(pPlayer, pType, pPos, 1), false));
-        this.whiteKey_3 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 69, 111, 4, Button -> KeyButton.playSound(pPlayer, pType, pPos, 3), false));
-        this.whiteKey_5 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 85, 111, 2, Button -> KeyButton.playSound(pPlayer, pType, pPos, 5), false));
-        this.whiteKey_6 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 101, 111, 0, Button -> KeyButton.playSound(pPlayer, pType, pPos, 6), false));
-        this.whiteKey_8 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 117, 111, 1, Button -> KeyButton.playSound(pPlayer, pType, pPos, 8), false));
-        this.whiteKey_10 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 133, 111, 2, Button -> KeyButton.playSound(pPlayer, pType, pPos, 10), false));
-        this.whiteKey_11 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 21, 53, 0, Button -> KeyButton.playSound(pPlayer, pType, pPos, 11), false));
-        this.whiteKey_13 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 37, 53, 3, Button -> KeyButton.playSound(pPlayer, pType, pPos, 13), false));
-        this.whiteKey_15 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 53, 53, 4, Button -> KeyButton.playSound(pPlayer, pType, pPos, 15), false));
-        this.whiteKey_17 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 69, 53, 2, Button -> KeyButton.playSound(pPlayer, pType, pPos, 17), false));
-        this.whiteKey_18 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 85, 53, 0, Button -> KeyButton.playSound(pPlayer, pType, pPos, 18), false));
-        this.whiteKey_20 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 101, 53, 1, Button -> KeyButton.playSound(pPlayer, pType, pPos, 20), false));
-        this.whiteKey_22 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 117, 53, 2, Button -> KeyButton.playSound(pPlayer, pType, pPos, 22), false));
-        this.whiteKey_23 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 133, 53, 0, Button -> KeyButton.playSound(pPlayer, pType, pPos, 23), false));
+        this.whiteKey_1 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 53, 111, 3, 1));
+        allKeys[1] = this.whiteKey_1;
+        this.whiteKey_3 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 69, 111, 4, 3));
+        allKeys[3] = this.whiteKey_3;
+        this.whiteKey_5 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 85, 111, 2, 5));
+        allKeys[5] = this.whiteKey_5;
+        this.whiteKey_6 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 101, 111, 0, 6));
+        allKeys[6] = this.whiteKey_6;
+        this.whiteKey_8 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 117, 111, 1, 8));
+        allKeys[8] = this.whiteKey_8;
+        this.whiteKey_10 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 133, 111, 2, 10));
+        allKeys[10] = this.whiteKey_10;
+        this.whiteKey_11 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 21, 53, 0, 11));
+        allKeys[11] = this.whiteKey_11;
+        this.whiteKey_13 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 37, 53, 3, 13));
+        allKeys[13] = this.whiteKey_13;
+        this.whiteKey_15 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 53, 53, 4, 15));
+        allKeys[15] = this.whiteKey_15;
+        this.whiteKey_17 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 69, 53, 2, 17));
+        allKeys[17] = this.whiteKey_17;
+        this.whiteKey_18 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 85, 53, 0, 18));
+        allKeys[18] = this.whiteKey_18;
+        this.whiteKey_20 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 101, 53, 1, 20));
+        allKeys[20] = this.whiteKey_20;
+        this.whiteKey_22 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 117, 53, 2, 22));
+        allKeys[22] = this.whiteKey_22;
+        this.whiteKey_23 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 133, 53, 0, 23));
+        allKeys[23] = this.whiteKey_23;
         KeyButton.width = 12;
         KeyButton.height = 32;
         if (pType == InstrumentsType.PIANO_LOW || pType == InstrumentsType.PIANO_HIGH) {
@@ -217,70 +242,184 @@ public class PlayingScreen extends Screen {
         if (pMouseX > (i - 186) / 2 + 37 && pMouseX < (i - 186) / 2 + 149 && pMouseY > 111 && pMouseY < 159){
             isDragging = true;
         } else isDragging = (pMouseX > (i - 186) / 2 + 21 && pMouseX < (i - 186) / 2 + 165 && pMouseY > 53 && pMouseY < 101);
+        if (blackKey_0.isHovered())
+            blackKey_0.press(true);
+        if (whiteKey_1.isHovered() && !blackKey_0.isHovered() && !blackKey_2.isHovered())
+            whiteKey_1.press(true);
+        if (blackKey_2.isHovered())
+            blackKey_2.press(true);
+        if (whiteKey_3.isHovered() && !blackKey_2.isHovered() && !blackKey_4.isHovered())
+            whiteKey_3.press(true);
+        if (blackKey_4.isHovered())
+            blackKey_4.press(true);
+        if (whiteKey_5.isHovered() && !blackKey_4.isHovered())
+            whiteKey_5.press(true);
+        if (whiteKey_6.isHovered() && !blackKey_7.isHovered())
+            whiteKey_6.press(true);
+        if (blackKey_7.isHovered())
+            blackKey_7.press(true);
+        if (whiteKey_8.isHovered() && !blackKey_7.isHovered() && !blackKey_9.isHovered())
+            whiteKey_8.press(true);
+        if (blackKey_9.isHovered())
+            blackKey_9.press(true);
+        if (whiteKey_10.isHovered() && !blackKey_9.isHovered())
+            whiteKey_10.press(true);
+        if (whiteKey_11.isHovered() && !blackKey_12.isHovered())
+            whiteKey_11.press(true);
+        if (blackKey_12.isHovered())
+            blackKey_12.press(true);
+        if (whiteKey_13.isHovered() && !blackKey_12.isHovered() && !blackKey_14.isHovered())
+            whiteKey_13.press(true);
+        if (blackKey_14.isHovered())
+            blackKey_14.press(true);
+        if (whiteKey_15.isHovered() && !blackKey_14.isHovered() && !blackKey_16.isHovered())
+            whiteKey_15.press(true);
+        if (blackKey_16.isHovered())
+            blackKey_16.press(true);
+        if (whiteKey_17.isHovered() && !blackKey_16.isHovered())
+            whiteKey_17.press(true);
+        if (whiteKey_18.isHovered() && !blackKey_19.isHovered())
+            whiteKey_18.press(true);
+        if (blackKey_19.isHovered())
+            blackKey_19.press(true);
+        if (whiteKey_20.isHovered() && !blackKey_19.isHovered() && !blackKey_21.isHovered())
+            whiteKey_20.press(true);
+        if (blackKey_21.isHovered())
+            blackKey_21.press(true);
+        if (whiteKey_22.isHovered() && !blackKey_21.isHovered())
+            whiteKey_22.press(true);
+        if (whiteKey_23.isHovered() && !blackKey_24.isHovered())
+            whiteKey_23.press(true);
+        if (blackKey_24.isHovered())
+            blackKey_24.press(true);
         return super.mouseClicked(pMouseX, pMouseY, pButton);
     }
 
     @Override
     public boolean mouseReleased(double pMouseX, double pMouseY, int pButton) {
-        blackKey_0.restore();
-        whiteKey_1.restore();
-        blackKey_2.restore();
-        whiteKey_3.restore();
-        blackKey_4.restore();
-        whiteKey_5.restore();
-        whiteKey_6.restore();
-        blackKey_7.restore();
-        whiteKey_8.restore();
-        blackKey_9.restore();
-        whiteKey_10.restore();
-        whiteKey_11.restore();
-        blackKey_12.restore();
-        whiteKey_13.restore();
-        blackKey_14.restore();
-        whiteKey_15.restore();
-        blackKey_16.restore();
-        whiteKey_17.restore();
-        whiteKey_18.restore();
-        blackKey_19.restore();
-        whiteKey_20.restore();
-        blackKey_21.restore();
-        whiteKey_22.restore();
-        whiteKey_23.restore();
-        blackKey_24.restore();
+        restoreAll();
         return super.mouseReleased(pMouseX, pMouseY, pButton);
+    }
+    private void restoreAll() {
+        for (KeyButton button : allKeys) {
+            if (!button.pressedByClick) continue;
+            button.restore();
+        }
+    }
+    private void restoreAllExcept(KeyButton exceptedOne) {
+        for (KeyButton button : allKeys) {
+            if (exceptedOne == button) continue;
+            if (!button.pressedByClick) continue;
+            button.restore();
+        }
     }
 
     @Override
     public boolean mouseDragged(double pMouseX, double pMouseY, int pButton, double pDragX, double pDragY) {
         double i = this.width;
         if (pMouseX > (i - 186) / 2 + 37 && pMouseX < (i - 186) / 2 + 149 && pMouseY > 111 && pMouseY < 159 && isDragging) {
-            if (blackKey_0.isHovered()) {blackKey_0.onPress();whiteKey_1.restore();}
-            if (whiteKey_1.isHovered() && !blackKey_0.isHovered() && !blackKey_2.isHovered()) {whiteKey_1.onPress();blackKey_0.restore();blackKey_2.restore();whiteKey_3.restore();}
-            if (blackKey_2.isHovered()) {blackKey_2.onPress();whiteKey_1.restore();whiteKey_3.restore();}
-            if (whiteKey_3.isHovered() && !blackKey_2.isHovered() && !blackKey_4.isHovered()) {whiteKey_3.onPress();blackKey_2.restore();blackKey_4.restore();whiteKey_1.restore();whiteKey_5.restore();}
-            if (blackKey_4.isHovered()) {blackKey_4.onPress();whiteKey_3.restore();whiteKey_5.restore();}
-            if (whiteKey_5.isHovered() && !blackKey_4.isHovered()) {whiteKey_5.onPress();blackKey_4.restore();whiteKey_6.restore();whiteKey_3.restore();}
-            if (whiteKey_6.isHovered() && !blackKey_7.isHovered()) {whiteKey_6.onPress();whiteKey_5.restore();blackKey_7.restore();whiteKey_8.restore();}
-            if (blackKey_7.isHovered()) {blackKey_7.onPress();whiteKey_6.restore();whiteKey_8.restore();}
-            if (whiteKey_8.isHovered() && !blackKey_7.isHovered() && !blackKey_9.isHovered()) {whiteKey_8.onPress();blackKey_7.restore();blackKey_9.restore();whiteKey_6.restore();whiteKey_10.restore();}
-            if (blackKey_9.isHovered()) {blackKey_9.onPress();whiteKey_8.restore();whiteKey_10.restore();}
-            if (whiteKey_10.isHovered() && !blackKey_9.isHovered()) {whiteKey_10.onPress();blackKey_9.restore();whiteKey_8.restore();}
+            if (blackKey_0.isHovered()) {
+                blackKey_0.press(true);
+                restoreAllExcept(blackKey_0);
+            }
+            if (whiteKey_1.isHovered() && !blackKey_0.isHovered() && !blackKey_2.isHovered()) {
+                whiteKey_1.press(true);
+                restoreAllExcept(whiteKey_1);
+            }
+            if (blackKey_2.isHovered()) {
+                blackKey_2.press(true);
+                restoreAllExcept(blackKey_2);
+            }
+            if (whiteKey_3.isHovered() && !blackKey_2.isHovered() && !blackKey_4.isHovered()) {
+                whiteKey_3.press(true);
+                restoreAllExcept(whiteKey_3);
+            }
+            if (blackKey_4.isHovered()) {
+                blackKey_4.press(true);
+                restoreAllExcept(blackKey_4);
+            }
+            if (whiteKey_5.isHovered() && !blackKey_4.isHovered()) {
+                whiteKey_5.press(true);
+                restoreAllExcept(whiteKey_5);
+            }
+            if (whiteKey_6.isHovered() && !blackKey_7.isHovered()) {
+                whiteKey_6.press(true);
+                restoreAllExcept(whiteKey_6);
+            }
+            if (blackKey_7.isHovered()) {
+                blackKey_7.press(true);
+                restoreAllExcept(blackKey_7);
+            }
+            if (whiteKey_8.isHovered() && !blackKey_7.isHovered() && !blackKey_9.isHovered()) {
+                whiteKey_8.press(true);
+                restoreAllExcept(whiteKey_8);
+            }
+            if (blackKey_9.isHovered()) {
+                blackKey_9.press(true);
+                restoreAllExcept(blackKey_9);
+            }
+            if (whiteKey_10.isHovered() && !blackKey_9.isHovered()) {
+                whiteKey_10.press(true);
+                restoreAllExcept(whiteKey_10);
+            }
         }
         if (pMouseX > (i - 186) / 2 + 21 && pMouseX < (i - 186) / 2 + 165 && pMouseY > 53 && pMouseY < 101 && isDragging){
-            if (whiteKey_11.isHovered() && !blackKey_12.isHovered()) {whiteKey_11.onPress();blackKey_12.restore();whiteKey_13.restore();}
-            if (blackKey_12.isHovered()) {blackKey_12.onPress();whiteKey_11.restore();whiteKey_13.restore();}
-            if (whiteKey_13.isHovered() && !blackKey_12.isHovered() && !blackKey_14.isHovered()) {whiteKey_13.onPress();blackKey_12.restore();blackKey_14.restore();whiteKey_11.restore();whiteKey_15.restore();}
-            if (blackKey_14.isHovered()) {blackKey_14.onPress();whiteKey_13.restore();whiteKey_15.restore();}
-            if (whiteKey_15.isHovered() && !blackKey_14.isHovered() && !blackKey_16.isHovered()) {whiteKey_15.onPress();blackKey_14.restore();blackKey_16.restore();whiteKey_17.restore();whiteKey_13.restore();}
-            if (blackKey_16.isHovered()) {blackKey_16.onPress();whiteKey_15.restore();whiteKey_17.restore();}
-            if (whiteKey_17.isHovered() && !blackKey_16.isHovered()) {whiteKey_17.onPress();blackKey_16.restore();whiteKey_15.restore();whiteKey_18.restore();}
-            if (whiteKey_18.isHovered() && !blackKey_19.isHovered()) {whiteKey_18.onPress();blackKey_19.restore();whiteKey_17.restore();whiteKey_20.restore();}
-            if (blackKey_19.isHovered()) {blackKey_19.onPress();whiteKey_18.restore();whiteKey_20.restore();}
-            if (whiteKey_20.isHovered() && !blackKey_19.isHovered() && !blackKey_21.isHovered()) {whiteKey_20.onPress();blackKey_19.restore();blackKey_21.restore();whiteKey_18.restore();whiteKey_22.restore();}
-            if (blackKey_21.isHovered()) {blackKey_21.onPress();whiteKey_20.restore();whiteKey_22.restore();}
-            if (whiteKey_22.isHovered() && !blackKey_21.isHovered()) {whiteKey_22.onPress();blackKey_21.restore();whiteKey_23.restore();whiteKey_20.restore();}
-            if (whiteKey_23.isHovered() && !blackKey_24.isHovered()) {whiteKey_23.onPress();blackKey_24.restore();whiteKey_22.restore();}
-            if (blackKey_24.isHovered()) {blackKey_24.onPress();whiteKey_23.restore();}
+            if (whiteKey_11.isHovered() && !blackKey_12.isHovered()) {
+                whiteKey_11.press(true);
+                restoreAllExcept(whiteKey_11);
+            }
+            if (blackKey_12.isHovered()) {
+                blackKey_12.press(true);
+                restoreAllExcept(blackKey_12);
+            }
+            if (whiteKey_13.isHovered() && !blackKey_12.isHovered() && !blackKey_14.isHovered()) {
+                whiteKey_13.press(true);
+                restoreAllExcept(whiteKey_13);
+            }
+            if (blackKey_14.isHovered()) {
+                blackKey_14.press(true);
+                restoreAllExcept(blackKey_14);
+            }
+            if (whiteKey_15.isHovered() && !blackKey_14.isHovered() && !blackKey_16.isHovered()) {
+                whiteKey_15.press(true);
+                restoreAllExcept(whiteKey_15);
+            }
+            if (blackKey_16.isHovered()) {
+                blackKey_16.press(true);
+                restoreAllExcept(blackKey_16);
+            }
+            if (whiteKey_17.isHovered() && !blackKey_16.isHovered()) {
+                whiteKey_17.press(true);
+                restoreAllExcept(whiteKey_17);
+            }
+            if (whiteKey_18.isHovered() && !blackKey_19.isHovered()) {
+                whiteKey_18.press(true);
+                restoreAllExcept(whiteKey_18);
+            }
+            if (blackKey_19.isHovered()) {
+                blackKey_19.press(true);
+                restoreAllExcept(blackKey_19);
+            }
+            if (whiteKey_20.isHovered() && !blackKey_19.isHovered() && !blackKey_21.isHovered()) {
+                whiteKey_20.press(true);
+                restoreAllExcept(whiteKey_20);
+            }
+            if (blackKey_21.isHovered()) {
+                blackKey_21.press(true);
+                restoreAllExcept(blackKey_21);
+            }
+            if (whiteKey_22.isHovered() && !blackKey_21.isHovered()) {
+                whiteKey_22.press(true);
+                restoreAllExcept(whiteKey_22);
+            }
+            if (whiteKey_23.isHovered() && !blackKey_24.isHovered()) {
+                whiteKey_23.press(true);
+                restoreAllExcept(whiteKey_23);
+            }
+            if (blackKey_24.isHovered()) {
+                blackKey_24.press(true);
+                restoreAllExcept(blackKey_24);
+            }
         }
         return super.mouseDragged(pMouseX, pMouseY, pButton, pDragX, pDragY);
     }
@@ -291,62 +430,62 @@ public class PlayingScreen extends Screen {
         if (pKeyCode == ModKeyMapping.OCTAVE_TOGGLE.get().getKey().getValue() && octaveButton != null) {
             octaveButton.onPress();
         }
-        if (pKeyCode == GLFW.GLFW_KEY_A){blackKey_0.onPress();}
-        if (pKeyCode == GLFW.GLFW_KEY_Z){whiteKey_1.onPress();}
-        if (pKeyCode == GLFW.GLFW_KEY_S){blackKey_2.onPress();}
-        if (pKeyCode == GLFW.GLFW_KEY_X){whiteKey_3.onPress();}
-        if (pKeyCode == GLFW.GLFW_KEY_D){blackKey_4.onPress();}
-        if (pKeyCode == GLFW.GLFW_KEY_C){whiteKey_5.onPress();}
-        if (pKeyCode == GLFW.GLFW_KEY_V){whiteKey_6.onPress();}
-        if (pKeyCode == GLFW.GLFW_KEY_G){blackKey_7.onPress();}
-        if (pKeyCode == GLFW.GLFW_KEY_B){whiteKey_8.onPress();}
-        if (pKeyCode == GLFW.GLFW_KEY_H){blackKey_9.onPress();}
-        if (pKeyCode == GLFW.GLFW_KEY_N){whiteKey_10.onPress();}
-        if (pKeyCode == GLFW.GLFW_KEY_Q){whiteKey_11.onPress();}
-        if (pKeyCode == GLFW.GLFW_KEY_2){blackKey_12.onPress();}
-        if (pKeyCode == GLFW.GLFW_KEY_W){whiteKey_13.onPress();}
-        if (pKeyCode == GLFW.GLFW_KEY_3){blackKey_14.onPress();}
-        if (pKeyCode == GLFW.GLFW_KEY_E){whiteKey_15.onPress();}
-        if (pKeyCode == GLFW.GLFW_KEY_4){blackKey_16.onPress();}
-        if (pKeyCode == GLFW.GLFW_KEY_R){whiteKey_17.onPress();}
-        if (pKeyCode == GLFW.GLFW_KEY_T){whiteKey_18.onPress();}
-        if (pKeyCode == GLFW.GLFW_KEY_6){blackKey_19.onPress();}
-        if (pKeyCode == GLFW.GLFW_KEY_Y){whiteKey_20.onPress();}
-        if (pKeyCode == GLFW.GLFW_KEY_7){blackKey_21.onPress();}
-        if (pKeyCode == GLFW.GLFW_KEY_U){whiteKey_22.onPress();}
-        if (pKeyCode == GLFW.GLFW_KEY_I){whiteKey_23.onPress();}
-        if (pKeyCode == GLFW.GLFW_KEY_9){blackKey_24.onPress();}
+        if (pKeyCode == GLFW.GLFW_KEY_A) blackKey_0.press(false);
+        if (pKeyCode == GLFW.GLFW_KEY_Z) whiteKey_1.press(false);
+        if (pKeyCode == GLFW.GLFW_KEY_S) blackKey_2.press(false);
+        if (pKeyCode == GLFW.GLFW_KEY_X) whiteKey_3.press(false);
+        if (pKeyCode == GLFW.GLFW_KEY_D) blackKey_4.press(false);
+        if (pKeyCode == GLFW.GLFW_KEY_C) whiteKey_5.press(false);
+        if (pKeyCode == GLFW.GLFW_KEY_V) whiteKey_6.press(false);
+        if (pKeyCode == GLFW.GLFW_KEY_G) blackKey_7.press(false);
+        if (pKeyCode == GLFW.GLFW_KEY_B) whiteKey_8.press(false);
+        if (pKeyCode == GLFW.GLFW_KEY_H) blackKey_9.press(false);
+        if (pKeyCode == GLFW.GLFW_KEY_N) whiteKey_10.press(false);
+        if (pKeyCode == GLFW.GLFW_KEY_Q) whiteKey_11.press(false);
+        if (pKeyCode == GLFW.GLFW_KEY_2) blackKey_12.press(false);
+        if (pKeyCode == GLFW.GLFW_KEY_W) whiteKey_13.press(false);
+        if (pKeyCode == GLFW.GLFW_KEY_3) blackKey_14.press(false);
+        if (pKeyCode == GLFW.GLFW_KEY_E) whiteKey_15.press(false);
+        if (pKeyCode == GLFW.GLFW_KEY_4) blackKey_16.press(false);
+        if (pKeyCode == GLFW.GLFW_KEY_R) whiteKey_17.press(false);
+        if (pKeyCode == GLFW.GLFW_KEY_T) whiteKey_18.press(false);
+        if (pKeyCode == GLFW.GLFW_KEY_6) blackKey_19.press(false);
+        if (pKeyCode == GLFW.GLFW_KEY_Y) whiteKey_20.press(false);
+        if (pKeyCode == GLFW.GLFW_KEY_7) blackKey_21.press(false);
+        if (pKeyCode == GLFW.GLFW_KEY_U) whiteKey_22.press(false);
+        if (pKeyCode == GLFW.GLFW_KEY_I) whiteKey_23.press(false);
+        if (pKeyCode == GLFW.GLFW_KEY_9) blackKey_24.press(false);
         return true;
     }
 
     @Override
     public boolean keyReleased(int pKeyCode, int pScanCode, int pModifiers){
         super.keyReleased(pKeyCode, pScanCode, pModifiers);
-        if (pKeyCode == GLFW.GLFW_KEY_A){blackKey_0.restore();}
-        if (pKeyCode == GLFW.GLFW_KEY_Z){whiteKey_1.restore();}
-        if (pKeyCode == GLFW.GLFW_KEY_S){blackKey_2.restore();}
-        if (pKeyCode == GLFW.GLFW_KEY_X){whiteKey_3.restore();}
-        if (pKeyCode == GLFW.GLFW_KEY_D){blackKey_4.restore();}
-        if (pKeyCode == GLFW.GLFW_KEY_C){whiteKey_5.restore();}
-        if (pKeyCode == GLFW.GLFW_KEY_V){whiteKey_6.restore();}
-        if (pKeyCode == GLFW.GLFW_KEY_G){blackKey_7.restore();}
-        if (pKeyCode == GLFW.GLFW_KEY_B){whiteKey_8.restore();}
-        if (pKeyCode == GLFW.GLFW_KEY_H){blackKey_9.restore();}
-        if (pKeyCode == GLFW.GLFW_KEY_N){whiteKey_10.restore();}
-        if (pKeyCode == GLFW.GLFW_KEY_Q){whiteKey_11.restore();}
-        if (pKeyCode == GLFW.GLFW_KEY_2){blackKey_12.restore();}
-        if (pKeyCode == GLFW.GLFW_KEY_W){whiteKey_13.restore();}
-        if (pKeyCode == GLFW.GLFW_KEY_3){blackKey_14.restore();}
-        if (pKeyCode == GLFW.GLFW_KEY_E){whiteKey_15.restore();}
-        if (pKeyCode == GLFW.GLFW_KEY_4){blackKey_16.restore();}
-        if (pKeyCode == GLFW.GLFW_KEY_R){whiteKey_17.restore();}
-        if (pKeyCode == GLFW.GLFW_KEY_T){whiteKey_18.restore();}
-        if (pKeyCode == GLFW.GLFW_KEY_6){blackKey_19.restore();}
-        if (pKeyCode == GLFW.GLFW_KEY_Y){whiteKey_20.restore();}
-        if (pKeyCode == GLFW.GLFW_KEY_7){blackKey_21.restore();}
-        if (pKeyCode == GLFW.GLFW_KEY_U){whiteKey_22.restore();}
-        if (pKeyCode == GLFW.GLFW_KEY_I){whiteKey_23.restore();}
-        if (pKeyCode == GLFW.GLFW_KEY_9){blackKey_24.restore();}
+        if (pKeyCode == GLFW.GLFW_KEY_A && !blackKey_0.pressedByClick) blackKey_0.restore();
+        if (pKeyCode == GLFW.GLFW_KEY_Z && !whiteKey_1.pressedByClick) whiteKey_1.restore();
+        if (pKeyCode == GLFW.GLFW_KEY_S && !blackKey_2.pressedByClick) blackKey_2.restore();
+        if (pKeyCode == GLFW.GLFW_KEY_X && !whiteKey_3.pressedByClick) whiteKey_3.restore();
+        if (pKeyCode == GLFW.GLFW_KEY_D && !blackKey_4.pressedByClick) blackKey_4.restore();
+        if (pKeyCode == GLFW.GLFW_KEY_C && !whiteKey_5.pressedByClick) whiteKey_5.restore();
+        if (pKeyCode == GLFW.GLFW_KEY_V && !whiteKey_6.pressedByClick) whiteKey_6.restore();
+        if (pKeyCode == GLFW.GLFW_KEY_G && !blackKey_7.pressedByClick) blackKey_7.restore();
+        if (pKeyCode == GLFW.GLFW_KEY_B && !whiteKey_8.pressedByClick) whiteKey_8.restore();
+        if (pKeyCode == GLFW.GLFW_KEY_H && !blackKey_9.pressedByClick) blackKey_9.restore();
+        if (pKeyCode == GLFW.GLFW_KEY_N && !whiteKey_10.pressedByClick) whiteKey_10.restore();
+        if (pKeyCode == GLFW.GLFW_KEY_Q && !whiteKey_11.pressedByClick) whiteKey_11.restore();
+        if (pKeyCode == GLFW.GLFW_KEY_2 && !blackKey_12.pressedByClick) blackKey_12.restore();
+        if (pKeyCode == GLFW.GLFW_KEY_W && !whiteKey_13.pressedByClick) whiteKey_13.restore();
+        if (pKeyCode == GLFW.GLFW_KEY_3 && !blackKey_14.pressedByClick) blackKey_14.restore();
+        if (pKeyCode == GLFW.GLFW_KEY_E && !whiteKey_15.pressedByClick) whiteKey_15.restore();
+        if (pKeyCode == GLFW.GLFW_KEY_4 && !blackKey_16.pressedByClick) blackKey_16.restore();
+        if (pKeyCode == GLFW.GLFW_KEY_R && !whiteKey_17.pressedByClick) whiteKey_17.restore();
+        if (pKeyCode == GLFW.GLFW_KEY_T && !whiteKey_18.pressedByClick) whiteKey_18.restore();
+        if (pKeyCode == GLFW.GLFW_KEY_6 && !blackKey_19.pressedByClick) blackKey_19.restore();
+        if (pKeyCode == GLFW.GLFW_KEY_Y && !whiteKey_20.pressedByClick) whiteKey_20.restore();
+        if (pKeyCode == GLFW.GLFW_KEY_7 && !blackKey_21.pressedByClick) blackKey_21.restore();
+        if (pKeyCode == GLFW.GLFW_KEY_U && !whiteKey_22.pressedByClick) whiteKey_22.restore();
+        if (pKeyCode == GLFW.GLFW_KEY_I && !whiteKey_23.pressedByClick) whiteKey_23.restore();
+        if (pKeyCode == GLFW.GLFW_KEY_9 && !blackKey_24.pressedByClick) blackKey_24.restore();
         return true;
     }
 
@@ -360,7 +499,7 @@ public class PlayingScreen extends Screen {
             PacketDistributor.sendToServer(new InstrumentPressingPacket(pPlayer.getId(), false));
         }
 
-        if (pType == InstrumentsType.PIANO_LOW || pType == InstrumentsType.PIANO_HIGH || (pType.ordinal() >= 13 && pType.ordinal() <= 14)) {
+        if (pType == InstrumentsType.PIANO_LOW || pType == InstrumentsType.PIANO_HIGH || (pType.ordinal() >= 13 && pType.ordinal() <= 19)) {
             pTick ++;
         }
 
@@ -396,10 +535,12 @@ public class PlayingScreen extends Screen {
             if (pPos != DEFAULT_POS) {
                 if ((!(pPlayer.level().getBlockState(pPos).getBlock() instanceof MusicalInstrumentBlock block) || block.getType() != this.pType) && !exception) {
                     minecraft.setScreen(null);
+                    isPressing = false;
                     PacketDistributor.sendToServer(new PlayingScreenPacket(pType, pPos, pPlayer.getId(), false));
                 }
             } else if (!(pPlayer.getItemInHand(pPlayer.getUsedItemHand()).getItem() instanceof MusicalInstrumentItem item) || item.getType() != this.pType) {
                 minecraft.setScreen(null);
+                isPressing = false;
                 pPlayer.stopUsingItem();
                 PacketDistributor.sendToServer(new PlayingScreenPacket(pType, pPos, pPlayer.getId(), false));
             }

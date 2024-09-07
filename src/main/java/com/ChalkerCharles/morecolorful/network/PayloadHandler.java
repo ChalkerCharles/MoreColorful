@@ -2,10 +2,7 @@ package com.ChalkerCharles.morecolorful.network;
 
 import com.ChalkerCharles.morecolorful.common.ModDataAttachments;
 import com.ChalkerCharles.morecolorful.common.item.musical_instruments.InstrumentsType;
-import com.ChalkerCharles.morecolorful.network.packets.InstrumentPressingPacket;
-import com.ChalkerCharles.morecolorful.network.packets.InstrumentTickingPacket;
-import com.ChalkerCharles.morecolorful.network.packets.NotePlayingPacket;
-import com.ChalkerCharles.morecolorful.network.packets.PlayingScreenPacket;
+import com.ChalkerCharles.morecolorful.network.packets.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
@@ -117,6 +114,39 @@ public final class PayloadHandler {
             if (entity instanceof Player) {
                 entity.setData(ModDataAttachments.PLAYING_SCREEN_TICK, tick);
                 PacketDistributor.sendToAllPlayers(new InstrumentTickingPacket(tick, id));
+            }
+        });
+    }
+    public static void handleDrumSetClient(final DrumSetPacket data, final IPayloadContext context) {
+        boolean isPressingBassDrum = data.isPressingBassDrum();
+        boolean isPressingHat = data.isPressingHat();
+        boolean isPressingRide = data.isPressingRide();
+        boolean isPressingCrash = data.isPressingCrash();
+        BlockPos pos = data.pos();
+        int id = data.id();
+        Player player = context.player();
+        Entity entity = player.level().getEntity(id);
+        Object[] obj = {isPressingBassDrum, isPressingHat, isPressingRide, isPressingCrash, pos, id};
+        context.enqueueWork(() -> {
+            if (entity instanceof Player) {
+                entity.setData(ModDataAttachments.DRUM_SET_DATA, obj);
+            }
+        });
+    }
+    public static void handleDrumSetServer(final DrumSetPacket data, final IPayloadContext context) {
+        boolean isPressingBassDrum = data.isPressingBassDrum();
+        boolean isPressingHat = data.isPressingHat();
+        boolean isPressingRide = data.isPressingRide();
+        boolean isPressingCrash = data.isPressingCrash();
+        BlockPos pos = data.pos();
+        int id = data.id();
+        Player player = context.player();
+        Entity entity = player.level().getEntity(id);
+        Object[] obj = {isPressingBassDrum, isPressingHat, isPressingRide, isPressingCrash, pos, id};
+        context.enqueueWork(() -> {
+            if (entity instanceof Player) {
+                entity.setData(ModDataAttachments.DRUM_SET_DATA, obj);
+                PacketDistributor.sendToAllPlayers(new DrumSetPacket(isPressingBassDrum, isPressingHat, isPressingRide, isPressingCrash, pos, id));
             }
         });
     }

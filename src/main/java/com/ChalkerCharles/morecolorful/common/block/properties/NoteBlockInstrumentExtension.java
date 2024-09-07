@@ -15,4 +15,9 @@ public final class NoteBlockInstrumentExtension {
     public static NoteBlockInstrument TOM;
     public static NoteBlockInstrument RIDE;
     public static NoteBlockInstrument CRASH;
+    public static NoteBlockInstrument SCULK;
+    public static NoteBlockInstrument CRYSTAL;
+    public static NoteBlockInstrument SAW;
+    public static NoteBlockInstrument PLUCK;
+    public static NoteBlockInstrument SYNTH_BASS;
 }

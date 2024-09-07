@@ -15,7 +15,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class SnareDrumBlock extends PercussionInstrumentBlock {
 
-    protected static final VoxelShape SNARE_DRUM = Shapes.or(
+    private static final VoxelShape SNARE_DRUM = Shapes.or(
             Block.box(3.0, 10.0, 3.0, 13.0, 15.0, 13.0),
             Block.box(7.0, 9.0, 7.0, 9.0, 10.0, 9.0),
             Block.box(7.0, 3.4, 7.0, 9.0, 4.4, 9.0),

@@ -39,7 +39,7 @@ public abstract class HumanoidModelMixin<T extends LivingEntity> extends Ageable
             var pos = (BlockPos) obj[1];
             var pPlayer = pLivingEntity.level().getEntity((int) obj[2]);
             boolean isOpen = (boolean) obj[3];
-            if (isOpen && (pType == InstrumentsType.PIANO_LOW || pType == InstrumentsType.PIANO_HIGH || (pType.ordinal() >= 13 && pType.ordinal() <= 14)) && pPlayer != null) {
+            if (isOpen && (pType == InstrumentsType.PIANO_LOW || pType == InstrumentsType.PIANO_HIGH || (pType.ordinal() >= 13 && pType.ordinal() <= 19)) && pPlayer != null) {
                 double deltaY = (pos.getY() - pPlayer.getY());
                 if (pType == InstrumentsType.PIANO_LOW || pType == InstrumentsType.PIANO_HIGH) {
                     if ((pPlayer.level().getBlockState(pos).is(ModBlocks.GRAND_PIANO.get()) && pPlayer.level().getBlockState(pos).getValue(ModBlockStateProperties.GRAND_PIANO_PART).ordinal() > 2)

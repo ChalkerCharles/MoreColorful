@@ -7,11 +7,17 @@
     "morecolorful:hi-hat",
     "morecolorful:ride_cymbal",
     "morecolorful:crash_cymbal",
+    "morecolorful:drum_set",
     "morecolorful:chimes",
     "morecolorful:glockenspiel",
     "morecolorful:xylophone",
     "morecolorful:vibraphone",
     "morecolorful:synthesizer_keyboard_bit",
-    "morecolorful:synthesizer_keyboard_pling"
+    "morecolorful:synthesizer_keyboard_pling",
+    "morecolorful:synthesizer_keyboard_sculk",
+    "morecolorful:synthesizer_keyboard_amethyst",
+    "morecolorful:synthesizer_keyboard_saw",
+    "morecolorful:synthesizer_keyboard_pluck",
+    "morecolorful:synthesizer_keyboard_synth_bass"
   ]
 }

@@ -1,0 +1,8 @@
+{
+	"parent": "morecolorful:block/synthesizer_keyboard_template_right",
+	"textures": {
+		"keyboard": "morecolorful:block/keyboard_amethyst",
+		"bottom": "morecolorful:block/synthesizer_bottom_amethyst",
+		"panel_right": "morecolorful:block/synthesizer_panel_amethyst_right"
+	}
+}

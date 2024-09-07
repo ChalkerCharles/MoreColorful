@@ -1,10 +1,7 @@
 package com.ChalkerCharles.morecolorful.network;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
-import com.ChalkerCharles.morecolorful.network.packets.InstrumentPressingPacket;
-import com.ChalkerCharles.morecolorful.network.packets.NotePlayingPacket;
-import com.ChalkerCharles.morecolorful.network.packets.PlayingScreenPacket;
-import com.ChalkerCharles.morecolorful.network.packets.InstrumentTickingPacket;
+import com.ChalkerCharles.morecolorful.network.packets.*;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
@@ -39,5 +36,11 @@ public class NetworkingRegistry {
                 new DirectionalPayloadHandler<>(
                         PayloadHandler::handleInstrumentTickingClient,
                         PayloadHandler::handleInstrumentTickingServer));
+        registrar.playBidirectional(
+                DrumSetPacket.TYPE,
+                DrumSetPacket.STREAM_CODEC,
+                new DirectionalPayloadHandler<>(
+                        PayloadHandler::handleDrumSetClient,
+                        PayloadHandler::handleDrumSetServer));
     }
 }

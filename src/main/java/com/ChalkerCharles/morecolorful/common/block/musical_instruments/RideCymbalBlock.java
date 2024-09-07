@@ -1,7 +1,6 @@
 package com.ChalkerCharles.morecolorful.common.block.musical_instruments;
 
 import com.ChalkerCharles.morecolorful.common.block.ModBlockEntities;
-import com.ChalkerCharles.morecolorful.common.block.entity.HiHatBlockEntity;
 import com.ChalkerCharles.morecolorful.common.block.entity.RideCymbalBlockEntity;
 import com.ChalkerCharles.morecolorful.common.item.musical_instruments.InstrumentsType;
 import net.minecraft.core.BlockPos;

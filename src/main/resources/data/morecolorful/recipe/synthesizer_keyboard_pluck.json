@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:polished_andesite"
+    },
+    "=": {
+      "item": "minecraft:quartz_slab"
+    },
+    "X": {
+      "tag": "minecraft:stone_buttons"
+    },
+    "L": {
+      "item": "minecraft:lapis_lazuli"
+    },
+    "N": {
+      "item": "minecraft:note_block"
+    }
+  },
+  "pattern": [
+    "XLX",
+    "===",
+    "#N#"
+  ],
+  "result": {
+    "count": 1,
+    "id": "morecolorful:synthesizer_keyboard_pluck"
+  }
+}

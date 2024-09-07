@@ -14,5 +14,6 @@ public class RenderersRegistry {
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerBlockEntityRenderer(ModBlockEntities.RIDE_CYMBAL.get(), CymbalRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.CRASH_CYMBAL.get(), CymbalRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntities.DRUM_SET.get(), CymbalRenderer::new);
     }
 }

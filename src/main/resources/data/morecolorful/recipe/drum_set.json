@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "morecolorful:bass_drum"
+    },
+    "S": {
+      "item": "morecolorful:snare_drum"
+    },
+    "T": {
+      "item": "morecolorful:tom-tom_drum"
+    },
+    "H": {
+      "item": "morecolorful:hi-hat"
+    },
+    "R": {
+      "item": "morecolorful:ride_cymbal"
+    },
+    "C": {
+      "item": "morecolorful:crash_cymbal"
+    }
+  },
+  "pattern": [
+    "CTR",
+    "HBS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "morecolorful:drum_set"
+  }
+}

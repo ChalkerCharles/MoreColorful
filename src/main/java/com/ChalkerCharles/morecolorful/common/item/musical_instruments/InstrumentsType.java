@@ -30,6 +30,11 @@ public enum InstrumentsType implements StringRepresentable {
     // ------------Percussion End------------ //
     BIT(ModSounds.BIT_PLAY),
     PLING(ModSounds.PLING_PLAY),
+    SCULK(ModSounds.SCULK_PLAY),
+    CRYSTAL(ModSounds.CRYSTAL_PLAY),
+    SAW(ModSounds.SAW_PLAY),
+    PLUCK(ModSounds.PLUCK_PLAY),
+    SYNTH_BASS(ModSounds.SYNTH_BASS_PLAY),
     // ----------------------------------------Items---------------------------------------- //
     BASS(ModSounds.BASS_PLAY),
     FLUTE(ModSounds.FLUTE_PLAY),

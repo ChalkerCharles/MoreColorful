@@ -83,6 +83,41 @@
       }],
     "subtitle": "subtitles.block.note_block.note"
   },
+  "block.note_block.sculk": {
+    "sounds": [
+      {
+        "name": "morecolorful:note/vocal_chop"
+      }],
+    "subtitle": "subtitles.block.note_block.note"
+  },
+  "block.note_block.crystal": {
+    "sounds": [
+      {
+        "name": "morecolorful:note/crystal"
+      }],
+    "subtitle": "subtitles.block.note_block.note"
+  },
+  "block.note_block.saw": {
+    "sounds": [
+      {
+        "name": "morecolorful:note/saw_wave"
+      }],
+    "subtitle": "subtitles.block.note_block.note"
+  },
+  "block.note_block.pluck": {
+    "sounds": [
+      {
+        "name": "morecolorful:note/pluck"
+      }],
+    "subtitle": "subtitles.block.note_block.note"
+  },
+  "block.note_block.synth_bass": {
+    "sounds": [
+      {
+        "name": "morecolorful:note/synth_bass"
+      }],
+    "subtitle": "subtitles.block.note_block.note"
+  },
   "block.harp.play": {
     "sounds": [
         "note/harp2"
@@ -177,6 +212,41 @@
         "name": "morecolorful:note/crash"
       }],
     "subtitle": "morecolorful.subtitles.block.crash_cymbal.play"
+  },
+  "block.synthesizer_keyboard_sculk.play": {
+    "sounds": [
+      {
+        "name": "morecolorful:note/vocal_chop"
+      }],
+    "subtitle": "morecolorful.subtitles.block.synthesizer_keyboard.play"
+  },
+  "block.synthesizer_keyboard_crystal.play": {
+    "sounds": [
+      {
+        "name": "morecolorful:note/crystal"
+      }],
+    "subtitle": "morecolorful.subtitles.block.synthesizer_keyboard.play"
+  },
+  "block.synthesizer_keyboard_saw.play": {
+    "sounds": [
+      {
+        "name": "morecolorful:note/saw_wave"
+      }],
+    "subtitle": "morecolorful.subtitles.block.synthesizer_keyboard.play"
+  },
+  "block.synthesizer_keyboard_pluck.play": {
+    "sounds": [
+      {
+        "name": "morecolorful:note/pluck"
+      }],
+    "subtitle": "morecolorful.subtitles.block.synthesizer_keyboard.play"
+  },
+  "block.synthesizer_keyboard_synth_bass.play": {
+    "sounds": [
+      {
+        "name": "morecolorful:note/synth_bass"
+      }],
+    "subtitle": "morecolorful.subtitles.block.synthesizer_keyboard.play"
   },
   "item.bass.play": {
     "sounds": [

@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:amethyst_block"
+    },
+    "=": {
+      "item": "minecraft:quartz_slab"
+    },
+    "X": {
+      "item": "minecraft:amethyst_shard"
+    },
+    "N": {
+      "item": "minecraft:note_block"
+    }
+  },
+  "pattern": [
+    "XXX",
+    "===",
+    "#N#"
+  ],
+  "result": {
+    "count": 1,
+    "id": "morecolorful:synthesizer_keyboard_amethyst"
+  }
+}
