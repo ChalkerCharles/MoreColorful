@@ -499,7 +499,7 @@ public class PlayingScreen extends Screen {
             PacketDistributor.sendToServer(new InstrumentPressingPacket(pPlayer.getId(), false));
         }
 
-        if (pType == InstrumentsType.PIANO_LOW || pType == InstrumentsType.PIANO_HIGH || (pType.ordinal() >= 13 && pType.ordinal() <= 19)) {
+        if (pType.getType() == InstrumentsType.Type.KEYBOARD || pType == InstrumentsType.GUZHENG) {
             pTick ++;
         }
 
@@ -524,7 +524,7 @@ public class PlayingScreen extends Screen {
                     pPlayer.swing(rightHand);
                 }
 
-            } else if (pType.ordinal() >= 3 && pType.ordinal() <= 12) {
+            } else if (pType.getType() == InstrumentsType.Type.PERCUSSION) {
                 pPlayer.swing(drumstickHand);
             }
         }

@@ -2,6 +2,7 @@ package com.ChalkerCharles.morecolorful.common.block.entity;
 
 import com.ChalkerCharles.morecolorful.common.block.ModBlockEntities;
 import com.ChalkerCharles.morecolorful.common.block.properties.DrumSetPart;
+import com.ChalkerCharles.morecolorful.util.ICymbalUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -10,7 +11,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import static com.ChalkerCharles.morecolorful.common.block.musical_instruments.DrumSetBlock.HIT;
 import static com.ChalkerCharles.morecolorful.common.block.musical_instruments.DrumSetBlock.PART;
 
-public class DrumSetBlockEntity extends BlockEntity implements PressingPlayerGetter {
+public class DrumSetBlockEntity extends BlockEntity implements ICymbalUtils {
     public int ticksRide;
     public int ticksAfterStopRide;
     public boolean shakingRide;

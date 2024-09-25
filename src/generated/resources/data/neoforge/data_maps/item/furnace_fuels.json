@@ -1,0 +1,49 @@
+{
+  "values": {
+    "morecolorful:banjo": {
+      "burn_time": 200
+    },
+    "morecolorful:bass": {
+      "burn_time": 200
+    },
+    "morecolorful:bass_drum": {
+      "burn_time": 300
+    },
+    "morecolorful:cello": {
+      "burn_time": 200
+    },
+    "morecolorful:didgeridoo": {
+      "burn_time": 200
+    },
+    "morecolorful:drumstick": {
+      "burn_time": 200
+    },
+    "morecolorful:erhu": {
+      "burn_time": 200
+    },
+    "morecolorful:fiddle_bow": {
+      "burn_time": 200
+    },
+    "morecolorful:flute": {
+      "burn_time": 200
+    },
+    "morecolorful:guitar": {
+      "burn_time": 200
+    },
+    "morecolorful:guzheng": {
+      "burn_time": 300
+    },
+    "morecolorful:pipa": {
+      "burn_time": 200
+    },
+    "morecolorful:tom-tom_drum": {
+      "burn_time": 300
+    },
+    "morecolorful:violin": {
+      "burn_time": 200
+    },
+    "morecolorful:xylophone": {
+      "burn_time": 300
+    }
+  }
+}

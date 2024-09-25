@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "morecolorful:block/crabapple_slab"
+    },
+    "type=double": {
+      "model": "morecolorful:block/crabapple_planks"
+    },
+    "type=top": {
+      "model": "morecolorful:block/crabapple_slab_top"
+    }
+  }
+}

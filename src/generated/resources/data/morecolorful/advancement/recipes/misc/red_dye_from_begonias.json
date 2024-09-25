@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_begonias": {
+      "conditions": {
+        "items": [
+          {
+            "items": "morecolorful:begonias"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "morecolorful:red_dye_from_begonias"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_begonias"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "morecolorful:red_dye_from_begonias"
+    ]
+  }
+}

@@ -1,0 +1,73 @@
+{
+	"ambientocclusion": false,
+	"render_type": "cutout",
+	"textures": {
+		"flowerbed": "morecolorful:block/begonias",
+		"stem": "morecolorful:block/flower_stem",
+		"particle": "morecolorful:block/begonias"
+	},
+	"elements": [
+		{
+			"from": [0, 2.99, 0],
+			"to": [8, 2.99, 8],
+			"faces": {
+				"up": {"uv": [0, 0, 8, 8], "texture": "#flowerbed"},
+				"down": {"uv": [0, 8, 8, 0], "texture": "#flowerbed"}
+			}
+		},
+		{
+			"from": [5, 0, -2],
+			"to": [5, 2.99, 1],
+			"rotation": {"angle": -45, "axis": "y", "origin": [0, 0, 0]},
+			"faces": {
+				"east": {"uv": [3, 4, 0, 7], "texture": "#stem", "tintindex": 1},
+				"west": {"uv": [0, 4, 3, 7], "texture": "#stem", "tintindex": 1}
+			}
+		},
+		{
+			"from": [2.5, 0, -1.4],
+			"to": [5.5, 2.99, -1.4],
+			"rotation": {"angle": -45, "axis": "y", "origin": [0, 0, 0]},
+			"faces": {
+				"north": {"uv": [0, 4, 3, 7], "texture": "#stem", "tintindex": 1},
+				"south": {"uv": [3, 4, 0, 7], "texture": "#stem", "tintindex": 1}
+			}
+		},
+		{
+			"from": [4.9, 0, 2.3],
+			"to": [4.9, 2.99, 5.3],
+			"rotation": {"angle": -45, "axis": "y", "origin": [0, 0, 0]},
+			"faces": {
+				"east": {"uv": [3, 4, 0, 7], "texture": "#stem", "tintindex": 1},
+				"west": {"uv": [0, 4, 3, 7], "texture": "#stem", "tintindex": 1}
+			}
+		},
+		{
+			"from": [4.4, 0, 2.8],
+			"to": [7.4, 2.99, 2.8],
+			"rotation": {"angle": -45, "axis": "y", "origin": [0, 0, 0]},
+			"faces": {
+				"north": {"uv": [3, 4, 0, 7], "texture": "#stem", "tintindex": 1},
+				"south": {"uv": [0, 4, 3, 7], "texture": "#stem", "tintindex": 1}
+			}
+		},
+		{
+			"from": [9.15, 0, -2.45],
+			"to": [9.15, 2.99, 0.55],
+			"rotation": {"angle": -45, "axis": "y", "origin": [0, 0, 0]},
+			"faces": {
+				"east": {"uv": [0, 4, 3, 7], "texture": "#stem", "tintindex": 1},
+				"west": {"uv": [3, 4, 0, 7], "texture": "#stem", "tintindex": 1}
+			}
+		},
+		{
+			"from": [8.65, 0, 0.05],
+			"to": [11.65, 2.99, 0.05],
+			"rotation": {"angle": -45, "axis": "y", "origin": [0, 0, 0]},
+			"faces": {
+				"north": {"uv": [3, 4, 0, 7], "texture": "#stem", "tintindex": 1},
+				"south": {"uv": [0, 4, 3, 7], "texture": "#stem", "tintindex": 1}
+			}
+		}
+	]
+}

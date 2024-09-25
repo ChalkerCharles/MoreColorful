@@ -37,6 +37,12 @@
 				"morecolorful:playing_cello": 1
 			},
 			"model": "morecolorful:item/fiddle_bow_playing_cello"
+		},
+		{
+			"predicate": {
+				"morecolorful:playing_erhu": 1
+			},
+			"model": "morecolorful:item/fiddle_bow_playing_erhu"
 		}
 	]
 }

@@ -72,7 +72,7 @@ public class KeyButton extends Button {
     public void playSound(Player pPlayer, InstrumentsType pType, BlockPos pPos){
         int pitchId = keyId - 12;
         Level pLevel = pPlayer.level();
-        if (pType.ordinal() <= 19) { // From Instrument Blocks
+        if (pType.getType() != InstrumentsType.Type.ITEM) { // From Instrument Blocks
             pLevel.playSound(pPlayer, pPos.getX() + 0.5, pPos.getY() + 0.5, pPos.getZ() + 0.5, pType.getSoundEvent().value(), SoundSource.RECORDS, 3.0F, (float) Math.pow(2,((double) pitchId / 12)));
             PacketDistributor.sendToServer(new NotePlayingPacket(pType, pPos, keyId, true));
         } else { // From Instrument Items

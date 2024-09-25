@@ -37,9 +37,4 @@ public class DrumstickItem extends Item {
         }
         return InteractionResult.PASS;
     }
-
-    @Override
-    public int getBurnTime(ItemStack itemStack, @Nullable RecipeType<?> recipeType) {
-        return 200;
-    }
 }

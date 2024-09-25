@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "morecolorful:block/ebony_planks",
+    "side": "morecolorful:block/ebony_planks",
+    "top": "morecolorful:block/ebony_planks"
+  }
+}

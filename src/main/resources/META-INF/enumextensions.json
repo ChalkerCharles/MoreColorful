@@ -5,7 +5,7 @@
       "name": "MORECOLORFUL_FLUTE",
       "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
       "parameters": {
-        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions",
+        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions$ArmPose",
         "field": "FLUTE"
       }
     },
@@ -14,7 +14,7 @@
       "name": "MORECOLORFUL_GUITAR_HOLD",
       "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
       "parameters": {
-        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions",
+        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions$ArmPose",
         "field": "GUITAR_HOLD"
       }
     },
@@ -23,7 +23,7 @@
       "name": "MORECOLORFUL_GUITAR_PLAYING",
       "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
       "parameters": {
-        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions",
+        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions$ArmPose",
         "field": "GUITAR_PLAYING"
       }
     },
@@ -32,7 +32,7 @@
       "name": "MORECOLORFUL_COW_BELL",
       "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
       "parameters": {
-        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions",
+        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions$ArmPose",
         "field": "COW_BELL"
       }
     },
@@ -41,7 +41,7 @@
       "name": "MORECOLORFUL_DIDGERIDOO",
       "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
       "parameters": {
-        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions",
+        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions$ArmPose",
         "field": "DIDGERIDOO"
       }
     },
@@ -50,7 +50,7 @@
       "name": "MORECOLORFUL_VIOLIN_HOLD",
       "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
       "parameters": {
-        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions",
+        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions$ArmPose",
         "field": "VIOLIN_HOLD"
       }
     },
@@ -59,7 +59,7 @@
       "name": "MORECOLORFUL_VIOLIN_PLAYING",
       "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
       "parameters": {
-        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions",
+        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions$ArmPose",
         "field": "VIOLIN_PLAYING"
       }
     },
@@ -68,7 +68,7 @@
       "name": "MORECOLORFUL_CELLO",
       "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
       "parameters": {
-        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions",
+        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions$ArmPose",
         "field": "CELLO"
       }
     },
@@ -77,7 +77,7 @@
       "name": "MORECOLORFUL_CELLO_HOLD",
       "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
       "parameters": {
-        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions",
+        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions$ArmPose",
         "field": "CELLO_HOLD"
       }
     },
@@ -86,7 +86,7 @@
       "name": "MORECOLORFUL_CELLO_PLAYING",
       "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
       "parameters": {
-        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions",
+        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions$ArmPose",
         "field": "CELLO_PLAYING"
       }
     },
@@ -95,8 +95,62 @@
       "name": "MORECOLORFUL_SAXOPHONE",
       "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
       "parameters": {
-        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions",
+        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions$ArmPose",
         "field": "SAXOPHONE"
+      }
+    },
+    {
+      "enum": "net/minecraft/client/model/HumanoidModel$ArmPose",
+      "name": "MORECOLORFUL_PIPA_HOLD",
+      "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
+      "parameters": {
+        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions$ArmPose",
+        "field": "PIPA_HOLD"
+      }
+    },
+    {
+      "enum": "net/minecraft/client/model/HumanoidModel$ArmPose",
+      "name": "MORECOLORFUL_PIPA_PLAYING",
+      "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
+      "parameters": {
+        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions$ArmPose",
+        "field": "PIPA_PLAYING"
+      }
+    },
+    {
+      "enum": "net/minecraft/client/model/HumanoidModel$ArmPose",
+      "name": "MORECOLORFUL_ERHU_HOLD",
+      "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
+      "parameters": {
+        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions$ArmPose",
+        "field": "ERHU_HOLD"
+      }
+    },
+    {
+      "enum": "net/minecraft/client/model/HumanoidModel$ArmPose",
+      "name": "MORECOLORFUL_ERHU_PLAYING",
+      "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
+      "parameters": {
+        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions$ArmPose",
+        "field": "ERHU_PLAYING"
+      }
+    },
+    {
+      "enum": "net/minecraft/world/entity/vehicle/Boat$Type",
+      "name": "MORECOLORFUL_CRABAPPLE",
+      "constructor": "(Ljava/util/function/Supplier;Ljava/lang/String;Ljava/util/function/Supplier;Ljava/util/function/Supplier;Ljava/util/function/Supplier;Z)V",
+      "parameters": {
+        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions$BoatType",
+        "field": "CRABAPPLE"
+      }
+    },
+    {
+      "enum": "net/minecraft/world/entity/vehicle/Boat$Type",
+      "name": "MORECOLORFUL_EBONY",
+      "constructor": "(Ljava/util/function/Supplier;Ljava/lang/String;Ljava/util/function/Supplier;Ljava/util/function/Supplier;Ljava/util/function/Supplier;Z)V",
+      "parameters": {
+        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions$BoatType",
+        "field": "EBONY"
       }
     }
   ]

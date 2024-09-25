@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "tag": "morecolorful:rare_planks"
+    },
+    "|": {
+      "item": "minecraft:stick"
+    },
+    "S": {
+      "item": "minecraft:string"
+    }
+  },
+  "pattern": [
+    "  |",
+    "#S ",
+    "## "
+  ],
+  "result": {
+    "count": 1,
+    "id": "morecolorful:pipa"
+  }
+}

@@ -46,7 +46,7 @@ public abstract class PercussionInstrumentBlock extends MusicalInstrumentBlock {
                 case GLOCKENSPIEL -> ModStats.INTERACT_WITH_GLOCKENSPIEL.get();
                 case XYLOPHONE -> ModStats.INTERACT_WITH_XYLOPHONE.get();
                 case VIBRAPHONE -> ModStats.INTERACT_WITH_VIBRAPHONE.get();
-                default -> throw new IllegalArgumentException("Invalid Percussion Instrument Type");
+                default -> throw new IllegalArgumentException("Invalid Percussion Instrument Type:" + pType);
             });
         }
         return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;

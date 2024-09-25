@@ -15,7 +15,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 public class BowedStringInstrumentItem extends MusicalInstrumentItem {
 
     public BowedStringInstrumentItem(InstrumentsType pType, Properties pProperties) {
-        super(pType, pProperties, 200);
+        super(pType, pProperties);
         this.pType = pType;
     }
 

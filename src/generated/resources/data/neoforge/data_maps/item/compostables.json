@@ -1,0 +1,19 @@
+{
+  "values": {
+    "morecolorful:begonias": {
+      "chance": 0.3
+    },
+    "morecolorful:crabapple_leaves": {
+      "chance": 0.3
+    },
+    "morecolorful:pink_carnation": {
+      "chance": 0.65
+    },
+    "morecolorful:pink_daisy": {
+      "chance": 0.65
+    },
+    "morecolorful:red_carnation": {
+      "chance": 0.65
+    }
+  }
+}

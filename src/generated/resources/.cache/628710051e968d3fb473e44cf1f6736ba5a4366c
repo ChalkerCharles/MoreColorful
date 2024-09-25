@@ -1,0 +1,25 @@
+// 1.21	2024-09-24T22:47:48.9253245	Tags for minecraft:item mod id morecolorful
+1e4a94e4415f520b9899ab8bcd0f309fa3e75c5c data/c/tags/item/fence_gates/wooden.json
+1510731ad99c9add66322ce8746f07c3dfb306b9 data/minecraft/tags/item/boats.json
+a62af075cfb52bd087a2a8c5700af05d3c4ecbed data/minecraft/tags/item/chest_boats.json
+1e4a94e4415f520b9899ab8bcd0f309fa3e75c5c data/minecraft/tags/item/fence_gates.json
+1889898ace4f84a2088016ba3eac6cda0ebb3751 data/minecraft/tags/item/flowers.json
+a16acd315881442db5074b15f6611fd69f74085d data/minecraft/tags/item/hanging_signs.json
+0bb1d2043b5cea9794f2e46fe406deec35598a86 data/minecraft/tags/item/leaves.json
+4ac9e5b9e828cb58f5287e770a4c25aeee338376 data/minecraft/tags/item/logs_that_burn.json
+0aba96354f4ecf8ec3f48b7fbbb869991c26715a data/minecraft/tags/item/planks.json
+86b6eb27bf3148f244c605bdcc3da6022d0e5518 data/minecraft/tags/item/saplings.json
+1be93c07ffe47319deb8db5f123ca08425041c75 data/minecraft/tags/item/signs.json
+ee56ea243264d5c93ab13e3e3883097180148514 data/minecraft/tags/item/small_flowers.json
+78db41951e0c2009a6f78239f12e00111acc1428 data/minecraft/tags/item/wooden_buttons.json
+c0ff23509adafacb83143cef7469c086ca437223 data/minecraft/tags/item/wooden_doors.json
+a1539aa417226bc001fc9d7c81f20681af37e9c9 data/minecraft/tags/item/wooden_fences.json
+0d08e6e5900b83be12962358e36c155a3f7a2fd0 data/minecraft/tags/item/wooden_pressure_plates.json
+cd7bcaba933ac462baee6276488777c90de7f3bc data/minecraft/tags/item/wooden_slabs.json
+e315a54c3137262180dc415ee079396fed1f6a65 data/minecraft/tags/item/wooden_stairs.json
+5eb146fd95201bf0ac239e78806e175432d5641d data/minecraft/tags/item/wooden_trapdoors.json
+2bb3e6985854ec5199bb445564ae6bb3a2568c90 data/morecolorful/tags/item/crabapple_logs.json
+041bcc1445bc45849d5ecba48c64d8797283d114 data/morecolorful/tags/item/drum_set_parts.json
+2132a173bec35d05cb6593a7602ffdf3888ea26f data/morecolorful/tags/item/ebony_logs.json
+f331d30f70aa4372b8d04c394d4b16c3fdd76b5f data/morecolorful/tags/item/rare_planks.json
+ed65f2b91265f9456b95bf0b28cb969a5459a37d data/morecolorful/tags/item/stripped_rare_logs.json

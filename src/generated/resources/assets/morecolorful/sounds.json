@@ -1,0 +1,572 @@
+{
+  "block.bass_drum.play": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.note_block.basedrum"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.block.bass_drum.play"
+  },
+  "block.chimes.play": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.note_block.chime"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.block.chimes.play"
+  },
+  "block.crash.play": {
+    "sounds": [
+      "morecolorful:note/crash"
+    ],
+    "subtitle": "morecolorful.subtitles.block.crash_cymbal.play"
+  },
+  "block.glockenspiel.play": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.note_block.bell"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.block.glockenspiel.play"
+  },
+  "block.guzheng.play": {
+    "sounds": [
+      "morecolorful:note/zheng"
+    ],
+    "subtitle": "morecolorful.subtitles.block.guzheng.play"
+  },
+  "block.harp.play": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.note_block.harp"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.block.harp.play"
+  },
+  "block.hat.play": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.note_block.hat"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.block.hi-hat.play"
+  },
+  "block.note_block.cello": {
+    "sounds": [
+      "morecolorful:note/cello"
+    ],
+    "subtitle": "subtitles.block.note_block.note"
+  },
+  "block.note_block.crash": {
+    "sounds": [
+      "morecolorful:note/crash"
+    ],
+    "subtitle": "subtitles.block.note_block.note"
+  },
+  "block.note_block.crystal": {
+    "sounds": [
+      "morecolorful:note/crystal"
+    ],
+    "subtitle": "subtitles.block.note_block.note"
+  },
+  "block.note_block.electric_guitar": {
+    "sounds": [
+      "morecolorful:note/electric_guitar"
+    ],
+    "subtitle": "subtitles.block.note_block.note"
+  },
+  "block.note_block.erhu": {
+    "sounds": [
+      "morecolorful:note/erhu"
+    ],
+    "subtitle": "subtitles.block.note_block.note"
+  },
+  "block.note_block.guzheng": {
+    "sounds": [
+      "morecolorful:note/zheng"
+    ],
+    "subtitle": "subtitles.block.note_block.note"
+  },
+  "block.note_block.harmonica": {
+    "sounds": [
+      "morecolorful:note/harmonica"
+    ],
+    "subtitle": "subtitles.block.note_block.note"
+  },
+  "block.note_block.ocarina": {
+    "sounds": [
+      "morecolorful:note/ocarina"
+    ],
+    "subtitle": "subtitles.block.note_block.note"
+  },
+  "block.note_block.piano_high": {
+    "sounds": [
+      "morecolorful:note/piano_high"
+    ],
+    "subtitle": "subtitles.block.note_block.note"
+  },
+  "block.note_block.piano_low": {
+    "sounds": [
+      "morecolorful:note/piano_low"
+    ],
+    "subtitle": "subtitles.block.note_block.note"
+  },
+  "block.note_block.pipa": {
+    "sounds": [
+      "morecolorful:note/pipa"
+    ],
+    "subtitle": "subtitles.block.note_block.note"
+  },
+  "block.note_block.pluck": {
+    "sounds": [
+      "morecolorful:note/pluck"
+    ],
+    "subtitle": "subtitles.block.note_block.note"
+  },
+  "block.note_block.ride": {
+    "sounds": [
+      "morecolorful:note/ride"
+    ],
+    "subtitle": "subtitles.block.note_block.note"
+  },
+  "block.note_block.saw": {
+    "sounds": [
+      "morecolorful:note/saw_wave"
+    ],
+    "subtitle": "subtitles.block.note_block.note"
+  },
+  "block.note_block.saxophone": {
+    "sounds": [
+      "morecolorful:note/saxophone"
+    ],
+    "subtitle": "subtitles.block.note_block.note"
+  },
+  "block.note_block.sculk": {
+    "sounds": [
+      "morecolorful:note/vocal_chop"
+    ],
+    "subtitle": "subtitles.block.note_block.note"
+  },
+  "block.note_block.synth_bass": {
+    "sounds": [
+      "morecolorful:note/synth_bass"
+    ],
+    "subtitle": "subtitles.block.note_block.note"
+  },
+  "block.note_block.tom": {
+    "sounds": [
+      "morecolorful:note/tom"
+    ],
+    "subtitle": "subtitles.block.note_block.note"
+  },
+  "block.note_block.trumpet": {
+    "sounds": [
+      "morecolorful:note/trumpet"
+    ],
+    "subtitle": "subtitles.block.note_block.note"
+  },
+  "block.note_block.violin": {
+    "sounds": [
+      "morecolorful:note/violin"
+    ],
+    "subtitle": "subtitles.block.note_block.note"
+  },
+  "block.piano_high.play": {
+    "sounds": [
+      "morecolorful:note/piano_high"
+    ],
+    "subtitle": "morecolorful.subtitles.block.piano.play"
+  },
+  "block.piano_low.play": {
+    "sounds": [
+      "morecolorful:note/piano_low"
+    ],
+    "subtitle": "morecolorful.subtitles.block.piano.play"
+  },
+  "block.rare_wood.break": {
+    "sounds": [
+      "morecolorful:block/rare_wood/break1",
+      "morecolorful:block/rare_wood/break2",
+      "morecolorful:block/rare_wood/break3",
+      "morecolorful:block/rare_wood/break4",
+      "morecolorful:block/rare_wood/break5"
+    ],
+    "subtitle": "subtitles.block.generic.break"
+  },
+  "block.rare_wood.button.click_off": {
+    "sounds": [
+      {
+        "name": "morecolorful:block/rare_wood/button_click",
+        "pitch": 0.5,
+        "volume": 0.4
+      }
+    ],
+    "subtitle": "subtitles.block.button.click"
+  },
+  "block.rare_wood.button.click_on": {
+    "sounds": [
+      {
+        "name": "morecolorful:block/rare_wood/button_click",
+        "pitch": 0.6,
+        "volume": 0.4
+      }
+    ],
+    "subtitle": "subtitles.block.button.click"
+  },
+  "block.rare_wood.door.close": {
+    "sounds": [
+      "morecolorful:block/rare_wood/door/toggle1",
+      "morecolorful:block/rare_wood/door/toggle2",
+      "morecolorful:block/rare_wood/door/toggle3",
+      "morecolorful:block/rare_wood/door/toggle4"
+    ],
+    "subtitle": "subtitles.block.door.toggle"
+  },
+  "block.rare_wood.door.open": {
+    "sounds": [
+      "morecolorful:block/rare_wood/door/toggle1",
+      "morecolorful:block/rare_wood/door/toggle2",
+      "morecolorful:block/rare_wood/door/toggle3",
+      "morecolorful:block/rare_wood/door/toggle4"
+    ],
+    "subtitle": "subtitles.block.door.toggle"
+  },
+  "block.rare_wood.fall": {
+    "sounds": [
+      "morecolorful:block/rare_wood/step1",
+      "morecolorful:block/rare_wood/step2",
+      "morecolorful:block/rare_wood/step3",
+      "morecolorful:block/rare_wood/step4",
+      "morecolorful:block/rare_wood/step5",
+      "morecolorful:block/rare_wood/step6"
+    ]
+  },
+  "block.rare_wood.fence_gate.close": {
+    "sounds": [
+      "morecolorful:block/rare_wood/fence_gate/toggle1",
+      "morecolorful:block/rare_wood/fence_gate/toggle2",
+      "morecolorful:block/rare_wood/fence_gate/toggle3"
+    ],
+    "subtitle": "subtitles.block.fence_gate.toggle"
+  },
+  "block.rare_wood.fence_gate.open": {
+    "sounds": [
+      "morecolorful:block/rare_wood/fence_gate/toggle1",
+      "morecolorful:block/rare_wood/fence_gate/toggle2",
+      "morecolorful:block/rare_wood/fence_gate/toggle3"
+    ],
+    "subtitle": "subtitles.block.fence_gate.toggle"
+  },
+  "block.rare_wood.hanging_sign.break": {
+    "sounds": [
+      "morecolorful:block/rare_wood/hanging_sign/break1",
+      "morecolorful:block/rare_wood/hanging_sign/break2",
+      "morecolorful:block/rare_wood/hanging_sign/break3",
+      "morecolorful:block/rare_wood/hanging_sign/break4"
+    ],
+    "subtitle": "subtitles.block.generic.break"
+  },
+  "block.rare_wood.hanging_sign.fall": {
+    "sounds": [
+      "morecolorful:block/rare_wood/hanging_sign/step1",
+      "morecolorful:block/rare_wood/hanging_sign/step2",
+      "morecolorful:block/rare_wood/hanging_sign/step3",
+      "morecolorful:block/rare_wood/hanging_sign/step4"
+    ]
+  },
+  "block.rare_wood.hanging_sign.hit": {
+    "sounds": [
+      "morecolorful:block/rare_wood/hanging_sign/step1",
+      "morecolorful:block/rare_wood/hanging_sign/step2",
+      "morecolorful:block/rare_wood/hanging_sign/step3",
+      "morecolorful:block/rare_wood/hanging_sign/step4"
+    ],
+    "subtitle": "subtitles.block.generic.hit"
+  },
+  "block.rare_wood.hanging_sign.place": {
+    "sounds": [
+      "morecolorful:block/rare_wood/hanging_sign/break1",
+      "morecolorful:block/rare_wood/hanging_sign/break2",
+      "morecolorful:block/rare_wood/hanging_sign/break3",
+      "morecolorful:block/rare_wood/hanging_sign/break4"
+    ],
+    "subtitle": "subtitles.block.generic.place"
+  },
+  "block.rare_wood.hanging_sign.step": {
+    "sounds": [
+      "morecolorful:block/rare_wood/hanging_sign/step1",
+      "morecolorful:block/rare_wood/hanging_sign/step2",
+      "morecolorful:block/rare_wood/hanging_sign/step3",
+      "morecolorful:block/rare_wood/hanging_sign/step4"
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
+  },
+  "block.rare_wood.hit": {
+    "sounds": [
+      "morecolorful:block/rare_wood/step1",
+      "morecolorful:block/rare_wood/step2",
+      "morecolorful:block/rare_wood/step3",
+      "morecolorful:block/rare_wood/step4",
+      "morecolorful:block/rare_wood/step5",
+      "morecolorful:block/rare_wood/step6"
+    ],
+    "subtitle": "subtitles.block.generic.hit"
+  },
+  "block.rare_wood.place": {
+    "sounds": [
+      "morecolorful:block/rare_wood/break1",
+      "morecolorful:block/rare_wood/break2",
+      "morecolorful:block/rare_wood/break3",
+      "morecolorful:block/rare_wood/break4",
+      "morecolorful:block/rare_wood/break5"
+    ],
+    "subtitle": "subtitles.block.generic.place"
+  },
+  "block.rare_wood.pressure_plate.click_off": {
+    "sounds": [
+      {
+        "name": "random/click",
+        "pitch": 0.6,
+        "volume": 0.3
+      }
+    ],
+    "subtitle": "subtitles.block.pressure_plate.click"
+  },
+  "block.rare_wood.pressure_plate.click_on": {
+    "sounds": [
+      {
+        "name": "random/click",
+        "pitch": 0.7,
+        "volume": 0.3
+      }
+    ],
+    "subtitle": "subtitles.block.pressure_plate.click"
+  },
+  "block.rare_wood.step": {
+    "sounds": [
+      "morecolorful:block/rare_wood/step1",
+      "morecolorful:block/rare_wood/step2",
+      "morecolorful:block/rare_wood/step3",
+      "morecolorful:block/rare_wood/step4",
+      "morecolorful:block/rare_wood/step5",
+      "morecolorful:block/rare_wood/step6"
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
+  },
+  "block.rare_wood.trapdoor.close": {
+    "sounds": [
+      "morecolorful:block/rare_wood/trapdoor/toggle1",
+      "morecolorful:block/rare_wood/trapdoor/toggle2",
+      "morecolorful:block/rare_wood/trapdoor/toggle3"
+    ],
+    "subtitle": "subtitles.block.trapdoor.toggle"
+  },
+  "block.rare_wood.trapdoor.open": {
+    "sounds": [
+      "morecolorful:block/rare_wood/trapdoor/toggle1",
+      "morecolorful:block/rare_wood/trapdoor/toggle2",
+      "morecolorful:block/rare_wood/trapdoor/toggle3"
+    ],
+    "subtitle": "subtitles.block.trapdoor.toggle"
+  },
+  "block.ride.play": {
+    "sounds": [
+      "morecolorful:note/ride"
+    ],
+    "subtitle": "morecolorful.subtitles.block.ride_cymbal.play"
+  },
+  "block.snare.play": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.note_block.snare"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.block.snare_drum.play"
+  },
+  "block.synthesizer_keyboard_bit.play": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.note_block.bit"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.block.synthesizer_keyboard.play"
+  },
+  "block.synthesizer_keyboard_crystal.play": {
+    "sounds": [
+      "morecolorful:note/crystal"
+    ],
+    "subtitle": "morecolorful.subtitles.block.synthesizer_keyboard.play"
+  },
+  "block.synthesizer_keyboard_pling.play": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.note_block.pling"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.block.synthesizer_keyboard.play"
+  },
+  "block.synthesizer_keyboard_pluck.play": {
+    "sounds": [
+      "morecolorful:note/pluck"
+    ],
+    "subtitle": "morecolorful.subtitles.block.synthesizer_keyboard.play"
+  },
+  "block.synthesizer_keyboard_saw.play": {
+    "sounds": [
+      "morecolorful:note/saw_wave"
+    ],
+    "subtitle": "morecolorful.subtitles.block.synthesizer_keyboard.play"
+  },
+  "block.synthesizer_keyboard_sculk.play": {
+    "sounds": [
+      "morecolorful:note/vocal_chop"
+    ],
+    "subtitle": "morecolorful.subtitles.block.synthesizer_keyboard.play"
+  },
+  "block.synthesizer_keyboard_synth_bass.play": {
+    "sounds": [
+      "morecolorful:note/synth_bass"
+    ],
+    "subtitle": "morecolorful.subtitles.block.synthesizer_keyboard.play"
+  },
+  "block.tom.play": {
+    "sounds": [
+      "morecolorful:note/tom"
+    ],
+    "subtitle": "morecolorful.subtitles.block.tom-tom_drum.play"
+  },
+  "block.vibraphone.play": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.note_block.iron_xylophone"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.block.vibraphone.play"
+  },
+  "block.xylophone.play": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.note_block.xylophone"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.block.xylophone.play"
+  },
+  "item.banjo.play": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.note_block.banjo"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.item.banjo.play"
+  },
+  "item.bass.play": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.note_block.bass"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.item.bass.play"
+  },
+  "item.cello.play": {
+    "sounds": [
+      "morecolorful:note/cello"
+    ],
+    "subtitle": "morecolorful.subtitles.item.cello.play"
+  },
+  "item.cow_bell.play": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.note_block.cow_bell"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.item.cow_bell.play"
+  },
+  "item.didgeridoo.play": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.note_block.didgeridoo"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.item.didgeridoo.play"
+  },
+  "item.electric_guitar.play": {
+    "sounds": [
+      "morecolorful:note/electric_guitar"
+    ],
+    "subtitle": "morecolorful.subtitles.item.electric_guitar.play"
+  },
+  "item.erhu.play": {
+    "sounds": [
+      "morecolorful:note/erhu"
+    ],
+    "subtitle": "morecolorful.subtitles.item.erhu.play"
+  },
+  "item.flute.play": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.note_block.flute"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.item.flute.play"
+  },
+  "item.guitar.play": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.note_block.guitar"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.item.guitar.play"
+  },
+  "item.harmonica.play": {
+    "sounds": [
+      "morecolorful:note/harmonica"
+    ],
+    "subtitle": "morecolorful.subtitles.item.harmonica.play"
+  },
+  "item.ocarina.play": {
+    "sounds": [
+      "morecolorful:note/ocarina"
+    ],
+    "subtitle": "morecolorful.subtitles.item.ocarina.play"
+  },
+  "item.pipa.play": {
+    "sounds": [
+      "morecolorful:note/pipa"
+    ],
+    "subtitle": "morecolorful.subtitles.item.pipa.play"
+  },
+  "item.saxophone.play": {
+    "sounds": [
+      "morecolorful:note/saxophone"
+    ],
+    "subtitle": "morecolorful.subtitles.item.saxophone.play"
+  },
+  "item.trumpet.play": {
+    "sounds": [
+      "morecolorful:note/trumpet"
+    ],
+    "subtitle": "morecolorful.subtitles.item.trumpet.play"
+  },
+  "item.violin.play": {
+    "sounds": [
+      "morecolorful:note/violin"
+    ],
+    "subtitle": "morecolorful.subtitles.item.violin.play"
+  }
+}

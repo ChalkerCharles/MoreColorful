@@ -20,4 +20,7 @@ public final class NoteBlockInstrumentExtension {
     public static NoteBlockInstrument SAW;
     public static NoteBlockInstrument PLUCK;
     public static NoteBlockInstrument SYNTH_BASS;
+    public static NoteBlockInstrument PIPA;
+    public static NoteBlockInstrument ERHU;
+    public static NoteBlockInstrument GUZHENG;
 }

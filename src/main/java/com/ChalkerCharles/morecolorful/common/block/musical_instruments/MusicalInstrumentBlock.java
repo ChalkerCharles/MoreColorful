@@ -4,7 +4,7 @@ import com.ChalkerCharles.morecolorful.common.item.musical_instruments.Instrumen
 import net.minecraft.world.level.block.Block;
 
 public abstract class MusicalInstrumentBlock extends Block {
-    InstrumentsType pType;
+    protected InstrumentsType pType;
     public MusicalInstrumentBlock(InstrumentsType pType, Properties properties) {
         super(properties);
         this.pType = pType;

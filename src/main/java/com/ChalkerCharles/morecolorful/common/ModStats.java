@@ -29,6 +29,7 @@ public class ModStats {
     public static final Supplier<ResourceLocation> INTERACT_WITH_XYLOPHONE = makeCustomStat("interact_with_xylophone");
     public static final Supplier<ResourceLocation> INTERACT_WITH_VIBRAPHONE = makeCustomStat("interact_with_vibraphone");
     public static final Supplier<ResourceLocation> INTERACT_WITH_SYNTHESIZER_KEYBOARD = makeCustomStat("interact_with_synthesizer_keyboard");
+    public static final Supplier<ResourceLocation> INTERACT_WITH_GUZHENG = makeCustomStat("interact_with_guzheng");
 
     private static Supplier<ResourceLocation> makeCustomStat(String pKey) {
         ResourceLocation resourcelocation = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, pKey);

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_pink_carnation": {
+      "conditions": {
+        "items": [
+          {
+            "items": "morecolorful:pink_carnation"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "morecolorful:pink_dye_from_pink_carnation"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_pink_carnation"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "morecolorful:pink_dye_from_pink_carnation"
+    ]
+  }
+}

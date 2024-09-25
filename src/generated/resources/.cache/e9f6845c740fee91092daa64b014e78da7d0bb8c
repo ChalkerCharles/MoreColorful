@@ -1,0 +1,6 @@
+// 1.21	2024-09-17T22:44:52.0934392	Tags for minecraft:worldgen/biome mod id morecolorful
+749181909b9e5e0e295cfc7ee127513b2a7d46da data/c/tags/worldgen/biome/is_floral.json
+749181909b9e5e0e295cfc7ee127513b2a7d46da data/minecraft/tags/worldgen/biome/has_structure/trial_chambers.json
+749181909b9e5e0e295cfc7ee127513b2a7d46da data/minecraft/tags/worldgen/biome/is_forest.json
+749181909b9e5e0e295cfc7ee127513b2a7d46da data/minecraft/tags/worldgen/biome/is_overworld.json
+749181909b9e5e0e295cfc7ee127513b2a7d46da data/minecraft/tags/worldgen/biome/stronghold_biased_to.json

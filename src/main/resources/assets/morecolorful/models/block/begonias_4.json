@@ -1,0 +1,37 @@
+{
+	"ambientocclusion": false,
+	"render_type": "cutout",
+	"textures": {
+		"flowerbed": "morecolorful:block/begonias",
+		"stem": "morecolorful:block/flower_stem",
+		"particle": "morecolorful:block/begonias"
+	},
+	"elements": [
+		{
+			"from": [8, 2, 0],
+			"to": [16, 2, 8],
+			"faces": {
+				"up": {"uv": [8, 0, 16, 8], "texture": "#flowerbed"},
+				"down": {"uv": [8, 8, 16, 0], "texture": "#flowerbed"}
+			}
+		},
+		{
+			"from": [12.4, 0, -7.7],
+			"to": [12.4, 2, -5.7],
+			"rotation": {"angle": -45, "axis": "y", "origin": [-1, 0, -3]},
+			"faces": {
+				"east": {"uv": [2, 5, 0, 7], "texture": "#stem", "tintindex": 1},
+				"west": {"uv": [0, 5, 2, 7], "texture": "#stem", "tintindex": 1}
+			}
+		},
+		{
+			"from": [11.9, 0, -7.2],
+			"to": [13.9, 2, -7.2],
+			"rotation": {"angle": -45, "axis": "y", "origin": [-1, 0, -3]},
+			"faces": {
+				"north": {"uv": [2, 5, 0, 7], "texture": "#stem", "tintindex": 1},
+				"south": {"uv": [0, 5, 2, 7], "texture": "#stem", "tintindex": 1}
+			}
+		}
+	]
+}

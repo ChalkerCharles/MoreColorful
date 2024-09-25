@@ -32,11 +32,10 @@ public class NoteBlockInstrumentMixin {
         );
     }
 
-    @SuppressWarnings("UnresolvedMixinReference")
     @Inject(method = "<clinit>", at = @At(value = "FIELD", target = "Lnet/minecraft/world/level/block/state/properties/NoteBlockInstrument;$VALUES:[Lnet/minecraft/world/level/block/state/properties/NoteBlockInstrument;", shift = At.Shift.AFTER))
     private static void moreColorful$inject(CallbackInfo ci) {
         int ordinal = $VALUES.length;
-        $VALUES = Arrays.copyOf($VALUES, ordinal + 17);
+        $VALUES = Arrays.copyOf($VALUES, ordinal + 20);
 
         PIANO_LOW = $VALUES[ordinal] = moreColorful$create("MORECOLORFUL_PIANO_LOW", ordinal, "piano_low", ModSounds.NOTE_BLOCK_PIANO_LOW);
         PIANO_HIGH = $VALUES[ordinal + 1] = moreColorful$create("MORECOLORFUL_PIANO_HIGH", ordinal + 1, "piano_high", ModSounds.NOTE_BLOCK_PIANO_HIGH);
@@ -55,5 +54,8 @@ public class NoteBlockInstrumentMixin {
         SAW = $VALUES[ordinal + 14] = moreColorful$create("MORECOLORFUL_SAW", ordinal + 14, "saw_wave", ModSounds.NOTE_BLOCK_SAW);
         PLUCK = $VALUES[ordinal + 15] = moreColorful$create("MORECOLORFUL_PLUCK", ordinal + 15, "pluck", ModSounds.NOTE_BLOCK_PLUCK);
         SYNTH_BASS = $VALUES[ordinal + 16] = moreColorful$create("MORECOLORFUL_SYNTH_BASS", ordinal + 16, "synth_bass", ModSounds.NOTE_BLOCK_SYNTH_BASS);
+        PIPA = $VALUES[ordinal + 17] = moreColorful$create("MORECOLORFUL_PIPA", ordinal + 17, "pipa", ModSounds.NOTE_BLOCK_PIPA);
+        ERHU = $VALUES[ordinal + 18] = moreColorful$create("MORECOLORFUL_ERHU", ordinal + 18, "erhu", ModSounds.NOTE_BLOCK_ERHU);
+        GUZHENG = $VALUES[ordinal + 19] = moreColorful$create("MORECOLORFUL_GUZHENG", ordinal + 19, "guzheng", ModSounds.NOTE_BLOCK_GUZHENG);
     }
 }

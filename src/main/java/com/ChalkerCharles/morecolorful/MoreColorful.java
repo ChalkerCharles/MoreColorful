@@ -1,13 +1,16 @@
 package com.ChalkerCharles.morecolorful;
 
+import com.ChalkerCharles.morecolorful.client.particle.ModParticles;
+import com.ChalkerCharles.morecolorful.common.ModCommonSetup;
 import com.ChalkerCharles.morecolorful.common.ModDataAttachments;
 import com.ChalkerCharles.morecolorful.common.ModSounds;
 import com.ChalkerCharles.morecolorful.common.ModStats;
 import com.ChalkerCharles.morecolorful.common.block.ModBlockEntities;
 import com.ChalkerCharles.morecolorful.common.block.ModBlocks;
-import com.ChalkerCharles.morecolorful.common.block.properties.VanillaBlockPropertyModification;
+import com.ChalkerCharles.morecolorful.common.block.VanillaBlockPropertyModification;
 import com.ChalkerCharles.morecolorful.common.item.ModCreativeTabs;
 import com.ChalkerCharles.morecolorful.common.item.ModItems;
+import com.ChalkerCharles.morecolorful.common.worldgen.biomes.ModBiomeSetup;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -25,18 +28,16 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import org.slf4j.Logger;
 
-// The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(MoreColorful.MODID)
 public class MoreColorful {
-    // Define mod id in a.json common place for everything to reference
     public static final String MODID = "morecolorful";
-    // Directly reference a.json slf4j logger
     private static final Logger LOGGER = LogUtils.getLogger();
-    // Create a.json Deferred Register to hold Blocks which will all be registered under the "examplemod" namespace
 
     public MoreColorful(IEventBus modEventBus, ModContainer modContainer) {
-        // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
+        modEventBus.addListener(ModCreativeTabs::insertInVanillaTabs);
+        modEventBus.register(ModCommonSetup.class);
+
         ModItems.register(modEventBus);
         ModCreativeTabs.register(modEventBus);
         ModBlocks.register(modEventBus);
@@ -44,10 +45,9 @@ public class MoreColorful {
         ModSounds.register(modEventBus);
         ModStats.register(modEventBus);
         ModDataAttachments.register(modEventBus);
-        // Register ourselves for server and other game events we are interested in.
-        // Note that this is necessary if and only if we want *this* class (ExampleMod) to respond directly to events.
-        // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
-        NeoForge.EVENT_BUS.register(new VanillaBlockPropertyModification());
+        ModParticles.register(modEventBus);
+
+        NeoForge.EVENT_BUS.register(VanillaBlockPropertyModification.class);
         NeoForge.EVENT_BUS.register(this);
 
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us
@@ -64,7 +64,11 @@ public class MoreColorful {
         LOGGER.info(Config.magicNumberIntroduction + Config.magicNumber);
 
         Config.items.forEach((item) -> LOGGER.info("ITEM >> {}", item.toString()));
-        event.enqueueWork(ModStats::init);
+
+        event.enqueueWork(() -> {
+            ModStats.init();
+            ModBiomeSetup.setupTerraBlender();
+        });
     }
 
 

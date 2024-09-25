@@ -17,30 +17,30 @@ public class NetworkingRegistry {
         registrar.playToServer(
                 NotePlayingPacket.TYPE,
                 NotePlayingPacket.STREAM_CODEC,
-                PayloadHandler::handleNotePlaying);
+                NotePlayingPacket::handle);
         registrar.playBidirectional(
                 PlayingScreenPacket.TYPE,
                 PlayingScreenPacket.STREAM_CODEC,
                 new DirectionalPayloadHandler<>(
-                        PayloadHandler::handlePlayingScreenClient,
-                        PayloadHandler::handlePlayingScreenServer));
+                        PlayingScreenPacket::handleClient,
+                        PlayingScreenPacket::handleServer));
         registrar.playBidirectional(
                 InstrumentPressingPacket.TYPE,
                 InstrumentPressingPacket.STREAM_CODEC,
                 new DirectionalPayloadHandler<>(
-                        PayloadHandler::handleInstrumentPressingClient,
-                        PayloadHandler::handleInstrumentPressingServer));
+                        InstrumentPressingPacket::handleClient,
+                        InstrumentPressingPacket::handleServer));
         registrar.playBidirectional(
                 InstrumentTickingPacket.TYPE,
                 InstrumentTickingPacket.STREAM_CODEC,
                 new DirectionalPayloadHandler<>(
-                        PayloadHandler::handleInstrumentTickingClient,
-                        PayloadHandler::handleInstrumentTickingServer));
+                        InstrumentTickingPacket::handleClient,
+                        InstrumentTickingPacket::handleServer));
         registrar.playBidirectional(
                 DrumSetPacket.TYPE,
                 DrumSetPacket.STREAM_CODEC,
                 new DirectionalPayloadHandler<>(
-                        PayloadHandler::handleDrumSetClient,
-                        PayloadHandler::handleDrumSetServer));
+                        DrumSetPacket::handleClient,
+                        DrumSetPacket::handleServer));
     }
 }
