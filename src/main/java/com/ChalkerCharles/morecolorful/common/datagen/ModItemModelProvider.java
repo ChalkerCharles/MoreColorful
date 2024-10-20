@@ -46,6 +46,11 @@ public class ModItemModelProvider extends ModItemModelHelper {
         basicItem(ModItems.CRABAPPLE_CHEST_BOAT.get());
         blockItem2d(ModItems.CRABAPPLE_SAPLING.get());
         basicItem(ModItems.BEGONIAS.get());
+        blockItem2d(ModItems.WHITE_CHERRY_SAPLING.get());
+        basicItem(ModItems.WHITE_PETALS.get());
+
+        blockItem2d(ModItems.AUTUMN_BIRCH_SAPLING.get());
+        basicItem(ModItems.AUTUMN_BIRCH_LEAF_PILE.get());
 
         buttonFenceWall(ModItems.EBONY_FENCE.get(), ModBlocks.EBONY_PLANKS.get(), "fence");
         basicItem(ModItems.EBONY_DOOR.get());
@@ -55,8 +60,33 @@ public class ModItemModelProvider extends ModItemModelHelper {
         basicItem(ModItems.EBONY_BOAT.get());
         basicItem(ModItems.EBONY_CHEST_BOAT.get());
 
+        buttonFenceWall(ModItems.GINKGO_FENCE.get(), ModBlocks.GINKGO_PLANKS.get(), "fence");
+        basicItem(ModItems.GINKGO_DOOR.get());
+        buttonFenceWall(ModItems.GINKGO_BUTTON.get(), ModBlocks.GINKGO_PLANKS.get(), "button");
+        basicItem(ModItems.GINKGO_SIGN.get());
+        basicItem(ModItems.GINKGO_HANGING_SIGN.get());
+        basicItem(ModItems.GINKGO_BOAT.get());
+        basicItem(ModItems.GINKGO_CHEST_BOAT.get());
+        blockItem2d(ModItems.GINKGO_SAPLING.get());
+        basicItem(ModItems.GINKGO_LEAF_PILE.get());
+
+        buttonFenceWall(ModItems.MAPLE_FENCE.get(), ModBlocks.MAPLE_PLANKS.get(), "fence");
+        basicItem(ModItems.MAPLE_DOOR.get());
+        buttonFenceWall(ModItems.MAPLE_BUTTON.get(), ModBlocks.MAPLE_PLANKS.get(), "button");
+        basicItem(ModItems.MAPLE_SIGN.get());
+        basicItem(ModItems.MAPLE_HANGING_SIGN.get());
+        basicItem(ModItems.MAPLE_BOAT.get());
+        basicItem(ModItems.MAPLE_CHEST_BOAT.get());
+        blockItem2d(ModItems.MAPLE_SAPLING.get());
+        basicItem(ModItems.MAPLE_LEAF_PILE.get());
+
         blockItem2d(ModItems.PINK_DAISY.get());
         blockItem2d(ModItems.RED_CARNATION.get());
         blockItem2d(ModItems.PINK_CARNATION.get());
+        blockItem2d(ModItems.WHITE_CARNATION.get());
+        blockItem2d(ModItems.RED_SPIDER_LILY.get());
+        blockItem2d(ModItems.YELLOW_CHRYSANTHEMUM.get());
+        blockItem2d(ModItems.GREEN_CHRYSANTHEMUM.get());
+        blockItem2d(ModItems.DAYBLOOM.get());
     }
 }

@@ -49,9 +49,47 @@ public class ModRecipeProvider extends ModRecipeHelper {
         woodenBoat(pRecipeOutput, ModItems.EBONY_BOAT, ModItems.EBONY_PLANKS);
         chestBoat(pRecipeOutput, ModItems.EBONY_CHEST_BOAT, ModItems.EBONY_PLANKS);
 
+        planks(pRecipeOutput, ModItems.GINKGO_PLANKS, ModTags.Items.GINKGO_LOGS);
+        woodFromLogs(pRecipeOutput, ModItems.GINKGO_WOOD, ModItems.GINKGO_LOG);
+        woodFromLogs(pRecipeOutput, ModItems.STRIPPED_GINKGO_WOOD, ModItems.STRIPPED_GINKGO_LOG);
+        woodenStairs(pRecipeOutput, ModItems.GINKGO_STAIRS, ModItems.GINKGO_PLANKS);
+        woodenSlab(pRecipeOutput, ModItems.GINKGO_SLAB, ModItems.GINKGO_PLANKS);
+        woodenFence(pRecipeOutput, ModItems.GINKGO_FENCE, ModItems.GINKGO_PLANKS);
+        fenceGate(pRecipeOutput, ModItems.GINKGO_FENCE_GATE, ModItems.GINKGO_PLANKS);
+        woodenDoor(pRecipeOutput, ModItems.GINKGO_DOOR, ModItems.GINKGO_PLANKS);
+        woodenTrapdoor(pRecipeOutput, ModItems.GINKGO_TRAPDOOR, ModItems.GINKGO_PLANKS);
+        woodenPressurePlate(pRecipeOutput, ModItems.GINKGO_PRESSURE_PLATE, ModItems.GINKGO_PLANKS);
+        woodenButton(pRecipeOutput, ModItems.GINKGO_BUTTON, ModItems.GINKGO_PLANKS);
+        woodenSign(pRecipeOutput, ModItems.GINKGO_SIGN, ModItems.GINKGO_PLANKS);
+        hangingSign(pRecipeOutput, ModItems.GINKGO_HANGING_SIGN, ModItems.STRIPPED_GINKGO_LOG);
+        woodenBoat(pRecipeOutput, ModItems.GINKGO_BOAT, ModItems.GINKGO_PLANKS);
+        chestBoat(pRecipeOutput, ModItems.GINKGO_CHEST_BOAT, ModItems.GINKGO_PLANKS);
+
+        planks(pRecipeOutput, ModItems.MAPLE_PLANKS, ModTags.Items.MAPLE_LOGS);
+        woodFromLogs(pRecipeOutput, ModItems.MAPLE_WOOD, ModItems.MAPLE_LOG);
+        woodFromLogs(pRecipeOutput, ModItems.STRIPPED_MAPLE_WOOD, ModItems.STRIPPED_MAPLE_LOG);
+        woodenStairs(pRecipeOutput, ModItems.MAPLE_STAIRS, ModItems.MAPLE_PLANKS);
+        woodenSlab(pRecipeOutput, ModItems.MAPLE_SLAB, ModItems.MAPLE_PLANKS);
+        woodenFence(pRecipeOutput, ModItems.MAPLE_FENCE, ModItems.MAPLE_PLANKS);
+        fenceGate(pRecipeOutput, ModItems.MAPLE_FENCE_GATE, ModItems.MAPLE_PLANKS);
+        woodenDoor(pRecipeOutput, ModItems.MAPLE_DOOR, ModItems.MAPLE_PLANKS);
+        woodenTrapdoor(pRecipeOutput, ModItems.MAPLE_TRAPDOOR, ModItems.MAPLE_PLANKS);
+        woodenPressurePlate(pRecipeOutput, ModItems.MAPLE_PRESSURE_PLATE, ModItems.MAPLE_PLANKS);
+        woodenButton(pRecipeOutput, ModItems.MAPLE_BUTTON, ModItems.MAPLE_PLANKS);
+        woodenSign(pRecipeOutput, ModItems.MAPLE_SIGN, ModItems.MAPLE_PLANKS);
+        hangingSign(pRecipeOutput, ModItems.MAPLE_HANGING_SIGN, ModItems.STRIPPED_MAPLE_LOG);
+        woodenBoat(pRecipeOutput, ModItems.MAPLE_BOAT, ModItems.MAPLE_PLANKS);
+        chestBoat(pRecipeOutput, ModItems.MAPLE_CHEST_BOAT, ModItems.MAPLE_PLANKS);
+
         simpleDye(pRecipeOutput, Items.RED_DYE, ModItems.BEGONIAS, 1);
+        simpleDye(pRecipeOutput, Items.WHITE_DYE, ModItems.WHITE_PETALS, 1);
         simpleDye(pRecipeOutput, Items.PINK_DYE, ModItems.PINK_DAISY, 1);
         simpleDye(pRecipeOutput, Items.RED_DYE, ModItems.RED_CARNATION, 1);
         simpleDye(pRecipeOutput, Items.PINK_DYE, ModItems.PINK_CARNATION, 1);
+        simpleDye(pRecipeOutput, Items.WHITE_DYE, ModItems.WHITE_CARNATION, 1);
+        simpleDye(pRecipeOutput, Items.RED_DYE, ModItems.RED_SPIDER_LILY, 1);
+        simpleDye(pRecipeOutput, Items.YELLOW_DYE, ModItems.YELLOW_CHRYSANTHEMUM, 1);
+        simpleDye(pRecipeOutput, Items.LIME_DYE, ModItems.GREEN_CHRYSANTHEMUM, 1);
+        simpleDye(pRecipeOutput, Items.YELLOW_DYE, ModItems.DAYBLOOM, 1);
     }
 }

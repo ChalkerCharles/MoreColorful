@@ -86,6 +86,15 @@ public class ModBlockLootTableProvider extends ModBlockLootTableHelper {
         dropSelf(ModBlocks.CRABAPPLE_SAPLING.get());
         dropPottedContents(ModBlocks.POTTED_CRABAPPLE_SAPLING.get());
         dropForPetals(ModBlocks.BEGONIAS.get());
+        dropForLeaves(ModBlocks.WHITE_CHERRY_LEAVES.get(), ModBlocks.WHITE_CHERRY_SAPLING.get());
+        dropSelf(ModBlocks.WHITE_CHERRY_SAPLING.get());
+        dropPottedContents(ModBlocks.POTTED_WHITE_CHERRY_SAPLING.get());
+        dropForPetals(ModBlocks.WHITE_PETALS.get());
+
+        dropForLeavesWithLeafPile(ModBlocks.AUTUMN_BIRCH_LEAVES.get(), ModBlocks.AUTUMN_BIRCH_SAPLING.get(), ModItems.AUTUMN_BIRCH_LEAF_PILE);
+        dropSelf(ModBlocks.AUTUMN_BIRCH_SAPLING.get());
+        dropPottedContents(ModBlocks.POTTED_AUTUMN_BIRCH_SAPLING.get());
+        dropForLeafPile(ModBlocks.AUTUMN_BIRCH_LEAF_PILE.get());
 
         dropSelf(ModBlocks.EBONY_LOG.get());
         dropSelf(ModBlocks.STRIPPED_EBONY_LOG.get());
@@ -105,12 +114,66 @@ public class ModBlockLootTableProvider extends ModBlockLootTableHelper {
         dropOther(ModBlocks.EBONY_HANGING_SIGN.get(), ModItems.EBONY_HANGING_SIGN.get());
         dropOther(ModBlocks.EBONY_WALL_HANGING_SIGN.get(), ModItems.EBONY_HANGING_SIGN.get());
 
+        dropSelf(ModBlocks.GINKGO_LOG.get());
+        dropSelf(ModBlocks.STRIPPED_GINKGO_LOG.get());
+        dropSelf(ModBlocks.GINKGO_WOOD.get());
+        dropSelf(ModBlocks.STRIPPED_GINKGO_WOOD.get());
+        dropSelf(ModBlocks.GINKGO_PLANKS.get());
+        dropSelf(ModBlocks.GINKGO_STAIRS.get());
+        dropForSlab(ModBlocks.GINKGO_SLAB.get());
+        dropSelf(ModBlocks.GINKGO_FENCE.get());
+        dropSelf(ModBlocks.GINKGO_FENCE_GATE.get());
+        dropForDoubleBlock(ModBlocks.GINKGO_DOOR.get());
+        dropSelf(ModBlocks.GINKGO_TRAPDOOR.get());
+        dropSelf(ModBlocks.GINKGO_PRESSURE_PLATE.get());
+        dropSelf(ModBlocks.GINKGO_BUTTON.get());
+        dropOther(ModBlocks.GINKGO_SIGN.get(), ModItems.GINKGO_SIGN.get());
+        dropOther(ModBlocks.GINKGO_WALL_SIGN.get(), ModItems.GINKGO_SIGN.get());
+        dropOther(ModBlocks.GINKGO_HANGING_SIGN.get(), ModItems.GINKGO_HANGING_SIGN.get());
+        dropOther(ModBlocks.GINKGO_WALL_HANGING_SIGN.get(), ModItems.GINKGO_HANGING_SIGN.get());
+        dropForLeavesWithLeafPile(ModBlocks.GINKGO_LEAVES.get(), ModBlocks.GINKGO_SAPLING.get(), ModItems.GINKGO_LEAF_PILE);
+        dropSelf(ModBlocks.GINKGO_SAPLING.get());
+        dropPottedContents(ModBlocks.POTTED_GINKGO_SAPLING.get());
+        dropForLeafPile(ModBlocks.GINKGO_LEAF_PILE.get());
+
+        dropSelf(ModBlocks.MAPLE_LOG.get());
+        dropSelf(ModBlocks.STRIPPED_MAPLE_LOG.get());
+        dropSelf(ModBlocks.MAPLE_WOOD.get());
+        dropSelf(ModBlocks.STRIPPED_MAPLE_WOOD.get());
+        dropSelf(ModBlocks.MAPLE_PLANKS.get());
+        dropSelf(ModBlocks.MAPLE_STAIRS.get());
+        dropForSlab(ModBlocks.MAPLE_SLAB.get());
+        dropSelf(ModBlocks.MAPLE_FENCE.get());
+        dropSelf(ModBlocks.MAPLE_FENCE_GATE.get());
+        dropForDoubleBlock(ModBlocks.MAPLE_DOOR.get());
+        dropSelf(ModBlocks.MAPLE_TRAPDOOR.get());
+        dropSelf(ModBlocks.MAPLE_PRESSURE_PLATE.get());
+        dropSelf(ModBlocks.MAPLE_BUTTON.get());
+        dropOther(ModBlocks.MAPLE_SIGN.get(), ModItems.MAPLE_SIGN.get());
+        dropOther(ModBlocks.MAPLE_WALL_SIGN.get(), ModItems.MAPLE_SIGN.get());
+        dropOther(ModBlocks.MAPLE_HANGING_SIGN.get(), ModItems.MAPLE_HANGING_SIGN.get());
+        dropOther(ModBlocks.MAPLE_WALL_HANGING_SIGN.get(), ModItems.MAPLE_HANGING_SIGN.get());
+        dropForLeavesWithLeafPile(ModBlocks.MAPLE_LEAVES.get(), ModBlocks.MAPLE_SAPLING.get(), ModItems.MAPLE_LEAF_PILE);
+        dropSelf(ModBlocks.MAPLE_SAPLING.get());
+        dropPottedContents(ModBlocks.POTTED_MAPLE_SAPLING.get());
+        dropForLeafPile(ModBlocks.MAPLE_LEAF_PILE.get());
+
         dropSelf(ModBlocks.PINK_DAISY.get());
         dropPottedContents(ModBlocks.POTTED_PINK_DAISY.get());
         dropSelf(ModBlocks.RED_CARNATION.get());
         dropPottedContents(ModBlocks.POTTED_RED_CARNATION.get());
         dropSelf(ModBlocks.PINK_CARNATION.get());
         dropPottedContents(ModBlocks.POTTED_PINK_CARNATION.get());
+        dropSelf(ModBlocks.WHITE_CARNATION.get());
+        dropPottedContents(ModBlocks.POTTED_WHITE_CARNATION.get());
+        dropSelf(ModBlocks.RED_SPIDER_LILY.get());
+        dropPottedContents(ModBlocks.POTTED_RED_SPIDER_LILY.get());
+        dropSelf(ModBlocks.YELLOW_CHRYSANTHEMUM.get());
+        dropPottedContents(ModBlocks.POTTED_YELLOW_CHRYSANTHEMUM.get());
+        dropSelf(ModBlocks.GREEN_CHRYSANTHEMUM.get());
+        dropPottedContents(ModBlocks.POTTED_GREEN_CHRYSANTHEMUM.get());
+        dropSelf(ModBlocks.DAYBLOOM.get());
+        dropPottedContents(ModBlocks.POTTED_DAYBLOOM.get());
     }
 
     @Override

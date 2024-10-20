@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_green_chrysanthemum": {
+      "conditions": {
+        "items": [
+          {
+            "items": "morecolorful:green_chrysanthemum"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "morecolorful:lime_dye_from_green_chrysanthemum"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_green_chrysanthemum"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "morecolorful:lime_dye_from_green_chrysanthemum"
+    ]
+  }
+}

@@ -3,6 +3,10 @@
     {
       "id": "morecolorful:crabapple_garden",
       "required": false
+    },
+    {
+      "id": "morecolorful:white_cherry_grove",
+      "required": false
     }
   ]
 }

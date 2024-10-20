@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/leaves",
+  "textures": {
+    "all": "morecolorful:block/autumn_birch_leaves"
+  }
+}

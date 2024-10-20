@@ -1,6 +1,7 @@
 package com.ChalkerCharles.morecolorful.common.datagen.helper;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
+import com.ChalkerCharles.morecolorful.common.block.common.LeafPileBlock;
 import com.ChalkerCharles.morecolorful.common.block.properties.HorizontalDoubleBlockHalf;
 import com.ChalkerCharles.morecolorful.common.block.properties.ModBlockStateProperties;
 import net.minecraft.core.Direction;
@@ -184,6 +185,28 @@ public abstract class ModBlockStateHelper extends BlockStateProvider {
             builder.part().modelFile(part4).rotationY(yRot).addModel()
                     .condition(BlockStateProperties.HORIZONTAL_FACING, direction)
                     .condition(BlockStateProperties.FLOWER_AMOUNT, 4).end();
+        }
+    }
+    protected void leafPileBlock(LeafPileBlock block) {
+        ModelFile part1 = new ModelFile.UncheckedModelFile(modLoc("block/" + name(block) + "_1"));
+        ModelFile part2 = new ModelFile.UncheckedModelFile(modLoc("block/" + name(block) + "_2"));
+        ModelFile part3 = new ModelFile.UncheckedModelFile(modLoc("block/" + name(block) + "_3"));
+        ModelFile part4 = new ModelFile.UncheckedModelFile(modLoc("block/" + name(block) + "_4"));
+        MultiPartBlockStateBuilder builder = getMultipartBuilder(block);
+        for (Direction direction : BlockStateProperties.HORIZONTAL_FACING.getPossibleValues()) {
+            int yRot = (int) ((direction.toYRot() + 180) % 360);
+            builder.part().modelFile(part1).rotationY(yRot).addModel()
+                    .condition(BlockStateProperties.HORIZONTAL_FACING, direction)
+                    .condition(ModBlockStateProperties.LEAF_AMOUNT, 1, 2, 3, 4).end();
+            builder.part().modelFile(part2).rotationY(yRot).addModel()
+                    .condition(BlockStateProperties.HORIZONTAL_FACING, direction)
+                    .condition(ModBlockStateProperties.LEAF_AMOUNT, 2, 3, 4).end();
+            builder.part().modelFile(part3).rotationY(yRot).addModel()
+                    .condition(BlockStateProperties.HORIZONTAL_FACING, direction)
+                    .condition(ModBlockStateProperties.LEAF_AMOUNT, 3, 4).end();
+            builder.part().modelFile(part4).rotationY(yRot).addModel()
+                    .condition(BlockStateProperties.HORIZONTAL_FACING, direction)
+                    .condition(ModBlockStateProperties.LEAF_AMOUNT, 4).end();
         }
     }
 

@@ -1,5 +1,8 @@
 {
   "values": {
+    "#morecolorful:leaf_piles": {
+      "burn_time": 50
+    },
     "morecolorful:banjo": {
       "burn_time": 200
     },

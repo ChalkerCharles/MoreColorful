@@ -4,7 +4,6 @@ import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.common.block.ModBlocks;
 import com.ChalkerCharles.morecolorful.common.item.musical_instruments.*;
 import com.ChalkerCharles.morecolorful.util.EnumExtensions;
-import net.minecraft.core.Holder;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.*;
 import net.neoforged.bus.api.IEventBus;
@@ -69,12 +68,61 @@ public class ModItems {
     public static final DeferredItem<BlockItem> EBONY_BUTTON = ITEMS.registerSimpleBlockItem(ModBlocks.EBONY_BUTTON);
     public static final DeferredItem<BlockItem> EBONY_SIGN = registerSign(ModBlocks.EBONY_SIGN, ModBlocks.EBONY_WALL_SIGN);
     public static final DeferredItem<BlockItem> EBONY_HANGING_SIGN = registerHangingSign(ModBlocks.EBONY_HANGING_SIGN, ModBlocks.EBONY_WALL_HANGING_SIGN);
+    public static final DeferredItem<BlockItem> GINKGO_LOG = ITEMS.registerSimpleBlockItem(ModBlocks.GINKGO_LOG);
+    public static final DeferredItem<BlockItem> GINKGO_WOOD = ITEMS.registerSimpleBlockItem(ModBlocks.GINKGO_WOOD);
+    public static final DeferredItem<BlockItem> STRIPPED_GINKGO_LOG = ITEMS.registerSimpleBlockItem(ModBlocks.STRIPPED_GINKGO_LOG);
+    public static final DeferredItem<BlockItem> STRIPPED_GINKGO_WOOD = ITEMS.registerSimpleBlockItem(ModBlocks.STRIPPED_GINKGO_WOOD);
+    public static final DeferredItem<BlockItem> GINKGO_PLANKS = ITEMS.registerSimpleBlockItem(ModBlocks.GINKGO_PLANKS);
+    public static final DeferredItem<BlockItem> GINKGO_STAIRS = ITEMS.registerSimpleBlockItem(ModBlocks.GINKGO_STAIRS);
+    public static final DeferredItem<BlockItem> GINKGO_SLAB = ITEMS.registerSimpleBlockItem(ModBlocks.GINKGO_SLAB);
+    public static final DeferredItem<BlockItem> GINKGO_FENCE = ITEMS.registerSimpleBlockItem(ModBlocks.GINKGO_FENCE);
+    public static final DeferredItem<BlockItem> GINKGO_FENCE_GATE = ITEMS.registerSimpleBlockItem(ModBlocks.GINKGO_FENCE_GATE);
+    public static final DeferredItem<BlockItem> GINKGO_DOOR = ITEMS.registerSimpleBlockItem(ModBlocks.GINKGO_DOOR);
+    public static final DeferredItem<BlockItem> GINKGO_TRAPDOOR = ITEMS.registerSimpleBlockItem(ModBlocks.GINKGO_TRAPDOOR);
+    public static final DeferredItem<BlockItem> GINKGO_PRESSURE_PLATE = ITEMS.registerSimpleBlockItem(ModBlocks.GINKGO_PRESSURE_PLATE);
+    public static final DeferredItem<BlockItem> GINKGO_BUTTON = ITEMS.registerSimpleBlockItem(ModBlocks.GINKGO_BUTTON);
+    public static final DeferredItem<BlockItem> GINKGO_SIGN = registerSign(ModBlocks.GINKGO_SIGN, ModBlocks.GINKGO_WALL_SIGN);
+    public static final DeferredItem<BlockItem> GINKGO_HANGING_SIGN = registerHangingSign(ModBlocks.GINKGO_HANGING_SIGN, ModBlocks.GINKGO_WALL_HANGING_SIGN);
+    public static final DeferredItem<BlockItem> MAPLE_LOG = ITEMS.registerSimpleBlockItem(ModBlocks.MAPLE_LOG);
+    public static final DeferredItem<BlockItem> MAPLE_WOOD = ITEMS.registerSimpleBlockItem(ModBlocks.MAPLE_WOOD);
+    public static final DeferredItem<BlockItem> STRIPPED_MAPLE_LOG = ITEMS.registerSimpleBlockItem(ModBlocks.STRIPPED_MAPLE_LOG);
+    public static final DeferredItem<BlockItem> STRIPPED_MAPLE_WOOD = ITEMS.registerSimpleBlockItem(ModBlocks.STRIPPED_MAPLE_WOOD);
+    public static final DeferredItem<BlockItem> MAPLE_PLANKS = ITEMS.registerSimpleBlockItem(ModBlocks.MAPLE_PLANKS);
+    public static final DeferredItem<BlockItem> MAPLE_STAIRS = ITEMS.registerSimpleBlockItem(ModBlocks.MAPLE_STAIRS);
+    public static final DeferredItem<BlockItem> MAPLE_SLAB = ITEMS.registerSimpleBlockItem(ModBlocks.MAPLE_SLAB);
+    public static final DeferredItem<BlockItem> MAPLE_FENCE = ITEMS.registerSimpleBlockItem(ModBlocks.MAPLE_FENCE);
+    public static final DeferredItem<BlockItem> MAPLE_FENCE_GATE = ITEMS.registerSimpleBlockItem(ModBlocks.MAPLE_FENCE_GATE);
+    public static final DeferredItem<BlockItem> MAPLE_DOOR = ITEMS.registerSimpleBlockItem(ModBlocks.MAPLE_DOOR);
+    public static final DeferredItem<BlockItem> MAPLE_TRAPDOOR = ITEMS.registerSimpleBlockItem(ModBlocks.MAPLE_TRAPDOOR);
+    public static final DeferredItem<BlockItem> MAPLE_PRESSURE_PLATE = ITEMS.registerSimpleBlockItem(ModBlocks.MAPLE_PRESSURE_PLATE);
+    public static final DeferredItem<BlockItem> MAPLE_BUTTON = ITEMS.registerSimpleBlockItem(ModBlocks.MAPLE_BUTTON);
+    public static final DeferredItem<BlockItem> MAPLE_SIGN = registerSign(ModBlocks.MAPLE_SIGN, ModBlocks.MAPLE_WALL_SIGN);
+    public static final DeferredItem<BlockItem> MAPLE_HANGING_SIGN = registerHangingSign(ModBlocks.MAPLE_HANGING_SIGN, ModBlocks.MAPLE_WALL_HANGING_SIGN);
+
     public static final DeferredItem<BlockItem> CRABAPPLE_LEAVES = ITEMS.registerSimpleBlockItem(ModBlocks.CRABAPPLE_LEAVES);
     public static final DeferredItem<BlockItem> CRABAPPLE_SAPLING = ITEMS.registerSimpleBlockItem(ModBlocks.CRABAPPLE_SAPLING);
     public static final DeferredItem<BlockItem> BEGONIAS = ITEMS.registerSimpleBlockItem(ModBlocks.BEGONIAS);
+    public static final DeferredItem<BlockItem> WHITE_CHERRY_LEAVES = ITEMS.registerSimpleBlockItem(ModBlocks.WHITE_CHERRY_LEAVES);
+    public static final DeferredItem<BlockItem> WHITE_CHERRY_SAPLING = ITEMS.registerSimpleBlockItem(ModBlocks.WHITE_CHERRY_SAPLING);
+    public static final DeferredItem<BlockItem> WHITE_PETALS = ITEMS.registerSimpleBlockItem(ModBlocks.WHITE_PETALS);
+    public static final DeferredItem<BlockItem> AUTUMN_BIRCH_LEAVES = ITEMS.registerSimpleBlockItem(ModBlocks.AUTUMN_BIRCH_LEAVES);
+    public static final DeferredItem<BlockItem> AUTUMN_BIRCH_SAPLING = ITEMS.registerSimpleBlockItem(ModBlocks.AUTUMN_BIRCH_SAPLING);
+    public static final DeferredItem<BlockItem> AUTUMN_BIRCH_LEAF_PILE = ITEMS.registerSimpleBlockItem(ModBlocks.AUTUMN_BIRCH_LEAF_PILE);
+    public static final DeferredItem<BlockItem> GINKGO_LEAVES = ITEMS.registerSimpleBlockItem(ModBlocks.GINKGO_LEAVES);
+    public static final DeferredItem<BlockItem> GINKGO_SAPLING = ITEMS.registerSimpleBlockItem(ModBlocks.GINKGO_SAPLING);
+    public static final DeferredItem<BlockItem> GINKGO_LEAF_PILE = ITEMS.registerSimpleBlockItem(ModBlocks.GINKGO_LEAF_PILE);
+    public static final DeferredItem<BlockItem> MAPLE_LEAVES = ITEMS.registerSimpleBlockItem(ModBlocks.MAPLE_LEAVES);
+    public static final DeferredItem<BlockItem> MAPLE_SAPLING = ITEMS.registerSimpleBlockItem(ModBlocks.MAPLE_SAPLING);
+    public static final DeferredItem<BlockItem> MAPLE_LEAF_PILE = ITEMS.registerSimpleBlockItem(ModBlocks.MAPLE_LEAF_PILE);
+
     public static final DeferredItem<BlockItem> PINK_DAISY = ITEMS.registerSimpleBlockItem(ModBlocks.PINK_DAISY);
     public static final DeferredItem<BlockItem> RED_CARNATION = ITEMS.registerSimpleBlockItem(ModBlocks.RED_CARNATION);
     public static final DeferredItem<BlockItem> PINK_CARNATION = ITEMS.registerSimpleBlockItem(ModBlocks.PINK_CARNATION);
+    public static final DeferredItem<BlockItem> WHITE_CARNATION = ITEMS.registerSimpleBlockItem(ModBlocks.WHITE_CARNATION);
+    public static final DeferredItem<BlockItem> RED_SPIDER_LILY = ITEMS.registerSimpleBlockItem(ModBlocks.RED_SPIDER_LILY);
+    public static final DeferredItem<BlockItem> YELLOW_CHRYSANTHEMUM = ITEMS.registerSimpleBlockItem(ModBlocks.YELLOW_CHRYSANTHEMUM);
+    public static final DeferredItem<BlockItem> GREEN_CHRYSANTHEMUM = ITEMS.registerSimpleBlockItem(ModBlocks.GREEN_CHRYSANTHEMUM);
+    public static final DeferredItem<BlockItem> DAYBLOOM = ITEMS.registerSimpleBlockItem(ModBlocks.DAYBLOOM);
 
     // Items
     public static final DeferredItem<Item> VIOLIN = ITEMS.register("violin", ()-> new BowedStringInstrumentItem(InstrumentsType.VIOLIN, new Item.Properties().stacksTo(1)));
@@ -99,6 +147,10 @@ public class ModItems {
     public static final DeferredItem<Item> CRABAPPLE_CHEST_BOAT = ITEMS.register("crabapple_chest_boat", ()-> new BoatItem(true, EnumExtensions.BoatType.CRABAPPLE.getValue(), new Item.Properties().stacksTo(1)));
     public static final DeferredItem<Item> EBONY_BOAT = ITEMS.register("ebony_boat", ()-> new BoatItem(false, EnumExtensions.BoatType.EBONY.getValue(), new Item.Properties().stacksTo(1)));
     public static final DeferredItem<Item> EBONY_CHEST_BOAT = ITEMS.register("ebony_chest_boat", ()-> new BoatItem(true, EnumExtensions.BoatType.EBONY.getValue(), new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> GINKGO_BOAT = ITEMS.register("ginkgo_boat", ()-> new BoatItem(false, EnumExtensions.BoatType.GINKGO.getValue(), new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> GINKGO_CHEST_BOAT = ITEMS.register("ginkgo_chest_boat", ()-> new BoatItem(true, EnumExtensions.BoatType.GINKGO.getValue(), new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> MAPLE_BOAT = ITEMS.register("maple_boat", ()-> new BoatItem(false, EnumExtensions.BoatType.MAPLE.getValue(), new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> MAPLE_CHEST_BOAT = ITEMS.register("maple_chest_boat", ()-> new BoatItem(true, EnumExtensions.BoatType.MAPLE.getValue(), new Item.Properties().stacksTo(1)));
 
     private static DeferredItem<BlockItem> registerSynthesizerKeyboard(DeferredBlock<Block> block) {
         return ITEMS.register(block.getId().getPath(), () -> new SynthesizerKeyboardItem(block.get(), new Item.Properties()));

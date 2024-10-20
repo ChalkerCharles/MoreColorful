@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "morecolorful:block/maple_slab"
+    },
+    "type=double": {
+      "model": "morecolorful:block/maple_planks"
+    },
+    "type=top": {
+      "model": "morecolorful:block/maple_slab_top"
+    }
+  }
+}

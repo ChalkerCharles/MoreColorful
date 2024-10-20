@@ -27,9 +27,16 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 ModBlocks.TOMTOM_DRUM.get(),
                 ModBlocks.GUZHENG.get()
         );
-        tag(BlockTags.MINEABLE_WITH_HOE).add(
+        tag(BlockTags.MINEABLE_WITH_HOE).addTag(
+                ModTags.Blocks.LEAF_PILES
+        ).add(
                 ModBlocks.CRABAPPLE_LEAVES.get(),
-                ModBlocks.BEGONIAS.get()
+                ModBlocks.BEGONIAS.get(),
+                ModBlocks.WHITE_CHERRY_LEAVES.get(),
+                ModBlocks.WHITE_PETALS.get(),
+                ModBlocks.AUTUMN_BIRCH_LEAVES.get(),
+                ModBlocks.GINKGO_LEAVES.get(),
+                ModBlocks.MAPLE_LEAVES.get()
         );
         tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
                 ModBlocks.HARP.get(),
@@ -54,89 +61,155 @@ public class ModBlockTagProvider extends BlockTagsProvider {
         );
         tag(BlockTags.CEILING_HANGING_SIGNS).add(
                 ModBlocks.CRABAPPLE_HANGING_SIGN.get(),
-                ModBlocks.EBONY_HANGING_SIGN.get()
+                ModBlocks.EBONY_HANGING_SIGN.get(),
+                ModBlocks.GINKGO_HANGING_SIGN.get(),
+                ModBlocks.MAPLE_HANGING_SIGN.get()
         );
         tag(BlockTags.FENCE_GATES).add(
                 ModBlocks.CRABAPPLE_FENCE_GATE.get(),
-                ModBlocks.EBONY_FENCE_GATE.get()
+                ModBlocks.EBONY_FENCE_GATE.get(),
+                ModBlocks.GINKGO_FENCE_GATE.get(),
+                ModBlocks.MAPLE_FENCE_GATE.get()
         );
         tag(BlockTags.FLOWER_POTS).add(
                 ModBlocks.POTTED_CRABAPPLE_SAPLING.get(),
+                ModBlocks.POTTED_WHITE_CHERRY_SAPLING.get(),
+                ModBlocks.POTTED_AUTUMN_BIRCH_SAPLING.get(),
+                ModBlocks.POTTED_GINKGO_SAPLING.get(),
+                ModBlocks.POTTED_MAPLE_SAPLING.get(),
                 ModBlocks.POTTED_PINK_DAISY.get(),
                 ModBlocks.POTTED_RED_CARNATION.get(),
-                ModBlocks.POTTED_PINK_CARNATION.get()
+                ModBlocks.POTTED_PINK_CARNATION.get(),
+                ModBlocks.POTTED_WHITE_CARNATION.get(),
+                ModBlocks.POTTED_RED_SPIDER_LILY.get(),
+                ModBlocks.POTTED_YELLOW_CHRYSANTHEMUM.get(),
+                ModBlocks.POTTED_GREEN_CHRYSANTHEMUM.get(),
+                ModBlocks.POTTED_DAYBLOOM.get()
         );
         tag(BlockTags.FLOWERS).add(
                 ModBlocks.CRABAPPLE_LEAVES.get(),
-                ModBlocks.BEGONIAS.get()
+                ModBlocks.BEGONIAS.get(),
+                ModBlocks.WHITE_CHERRY_LEAVES.get(),
+                ModBlocks.WHITE_PETALS.get()
         );
-        tag(BlockTags.INSIDE_STEP_SOUND_BLOCKS).add(
-                ModBlocks.BEGONIAS.get()
+        tag(BlockTags.INSIDE_STEP_SOUND_BLOCKS).addTag(
+                ModTags.Blocks.LEAF_PILES
+        ).add(
+                ModBlocks.BEGONIAS.get(),
+                ModBlocks.WHITE_PETALS.get()
         );
         tag(BlockTags.LEAVES).add(
-                ModBlocks.CRABAPPLE_LEAVES.get()
+                ModBlocks.CRABAPPLE_LEAVES.get(),
+                ModBlocks.WHITE_CHERRY_LEAVES.get(),
+                ModBlocks.AUTUMN_BIRCH_LEAVES.get(),
+                ModBlocks.GINKGO_LEAVES.get(),
+                ModBlocks.MAPLE_LEAVES.get()
         );
         tag(BlockTags.LOGS_THAT_BURN).addTags(
                 ModTags.Blocks.CRABAPPLE_LOGS,
-                ModTags.Blocks.EBONY_LOGS
+                ModTags.Blocks.EBONY_LOGS,
+                ModTags.Blocks.GINKGO_LOGS,
+                ModTags.Blocks.MAPLE_LOGS
         );
         tag(BlockTags.OVERWORLD_NATURAL_LOGS).add(
-                ModBlocks.CRABAPPLE_LOG.get()
+                ModBlocks.CRABAPPLE_LOG.get(),
+                ModBlocks.GINKGO_LOG.get(),
+                ModBlocks.MAPLE_LOG.get()
         );
         tag(BlockTags.PLANKS).add(
                 ModBlocks.CRABAPPLE_PLANKS.get(),
-                ModBlocks.EBONY_PLANKS.get()
+                ModBlocks.EBONY_PLANKS.get(),
+                ModBlocks.GINKGO_PLANKS.get(),
+                ModBlocks.MAPLE_PLANKS.get()
+        );
+        tag(BlockTags.REPLACEABLE).addTag(
+                ModTags.Blocks.LEAF_PILES
+        );
+        tag(BlockTags.REPLACEABLE_BY_TREES).addTag(
+                ModTags.Blocks.LEAF_PILES
         );
         tag(BlockTags.SAPLINGS).add(
-                ModBlocks.CRABAPPLE_SAPLING.get()
+                ModBlocks.CRABAPPLE_SAPLING.get(),
+                ModBlocks.WHITE_CHERRY_SAPLING.get(),
+                ModBlocks.AUTUMN_BIRCH_SAPLING.get(),
+                ModBlocks.GINKGO_SAPLING.get(),
+                ModBlocks.MAPLE_SAPLING.get()
         );
         tag(BlockTags.SMALL_FLOWERS).add(
                 ModBlocks.PINK_DAISY.get(),
                 ModBlocks.RED_CARNATION.get(),
-                ModBlocks.PINK_CARNATION.get()
+                ModBlocks.PINK_CARNATION.get(),
+                ModBlocks.WHITE_CARNATION.get(),
+                ModBlocks.RED_SPIDER_LILY.get(),
+                ModBlocks.YELLOW_CHRYSANTHEMUM.get(),
+                ModBlocks.GREEN_CHRYSANTHEMUM.get(),
+                ModBlocks.DAYBLOOM.get()
         );
         tag(BlockTags.STANDING_SIGNS).add(
                 ModBlocks.CRABAPPLE_SIGN.get(),
-                ModBlocks.EBONY_SIGN.get()
+                ModBlocks.EBONY_SIGN.get(),
+                ModBlocks.GINKGO_SIGN.get(),
+                ModBlocks.MAPLE_SIGN.get()
         );
-        tag(BlockTags.SWORD_EFFICIENT).add(
-                ModBlocks.BEGONIAS.get()
+        tag(BlockTags.SWORD_EFFICIENT).addTag(
+                ModTags.Blocks.LEAF_PILES
+        ).add(
+                ModBlocks.BEGONIAS.get(),
+                ModBlocks.WHITE_PETALS.get()
         );
         tag(BlockTags.WALL_HANGING_SIGNS).add(
                 ModBlocks.CRABAPPLE_WALL_HANGING_SIGN.get(),
-                ModBlocks.EBONY_WALL_HANGING_SIGN.get()
+                ModBlocks.EBONY_WALL_HANGING_SIGN.get(),
+                ModBlocks.GINKGO_WALL_HANGING_SIGN.get(),
+                ModBlocks.MAPLE_WALL_HANGING_SIGN.get()
         );
         tag(BlockTags.WALL_SIGNS).add(
                 ModBlocks.CRABAPPLE_WALL_SIGN.get(),
-                ModBlocks.EBONY_WALL_SIGN.get()
+                ModBlocks.EBONY_WALL_SIGN.get(),
+                ModBlocks.GINKGO_WALL_SIGN.get(),
+                ModBlocks.MAPLE_WALL_SIGN.get()
         );
         tag(BlockTags.WOODEN_BUTTONS).add(
                 ModBlocks.CRABAPPLE_BUTTON.get(),
-                ModBlocks.EBONY_BUTTON.get()
+                ModBlocks.EBONY_BUTTON.get(),
+                ModBlocks.GINKGO_BUTTON.get(),
+                ModBlocks.MAPLE_BUTTON.get()
         );
         tag(BlockTags.WOODEN_DOORS).add(
                 ModBlocks.CRABAPPLE_DOOR.get(),
-                ModBlocks.EBONY_DOOR.get()
+                ModBlocks.EBONY_DOOR.get(),
+                ModBlocks.GINKGO_DOOR.get(),
+                ModBlocks.MAPLE_DOOR.get()
         );
         tag(BlockTags.WOODEN_FENCES).add(
                 ModBlocks.CRABAPPLE_FENCE.get(),
-                ModBlocks.EBONY_FENCE.get()
+                ModBlocks.EBONY_FENCE.get(),
+                ModBlocks.GINKGO_FENCE.get(),
+                ModBlocks.MAPLE_FENCE.get()
         );
         tag(BlockTags.WOODEN_PRESSURE_PLATES).add(
                 ModBlocks.CRABAPPLE_PRESSURE_PLATE.get(),
-                ModBlocks.EBONY_PRESSURE_PLATE.get()
+                ModBlocks.EBONY_PRESSURE_PLATE.get(),
+                ModBlocks.GINKGO_PRESSURE_PLATE.get(),
+                ModBlocks.MAPLE_PRESSURE_PLATE.get()
         );
         tag(BlockTags.WOODEN_SLABS).add(
                 ModBlocks.CRABAPPLE_SLAB.get(),
-                ModBlocks.EBONY_SLAB.get()
+                ModBlocks.EBONY_SLAB.get(),
+                ModBlocks.GINKGO_SLAB.get(),
+                ModBlocks.MAPLE_SLAB.get()
         );
         tag(BlockTags.WOODEN_STAIRS).add(
                 ModBlocks.CRABAPPLE_STAIRS.get(),
-                ModBlocks.EBONY_STAIRS.get()
+                ModBlocks.EBONY_STAIRS.get(),
+                ModBlocks.GINKGO_STAIRS.get(),
+                ModBlocks.MAPLE_STAIRS.get()
         );
         tag(BlockTags.WOODEN_TRAPDOORS).add(
                 ModBlocks.CRABAPPLE_TRAPDOOR.get(),
-                ModBlocks.EBONY_TRAPDOOR.get()
+                ModBlocks.EBONY_TRAPDOOR.get(),
+                ModBlocks.GINKGO_TRAPDOOR.get(),
+                ModBlocks.MAPLE_TRAPDOOR.get()
         );
 
         // More Colorful Tags
@@ -324,6 +397,23 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 Blocks.TUFF_BRICK_SLAB,
                 Blocks.TUFF_BRICK_WALL,
                 Blocks.CHISELED_TUFF_BRICKS
+        );
+        tag(ModTags.Blocks.LEAF_PILES).add(
+                ModBlocks.AUTUMN_BIRCH_LEAF_PILE.get(),
+                ModBlocks.GINKGO_LEAF_PILE.get(),
+                ModBlocks.MAPLE_LEAF_PILE.get()
+        );
+        tag(ModTags.Blocks.GINKGO_LOGS).add(
+                ModBlocks.GINKGO_LOG.get(),
+                ModBlocks.GINKGO_WOOD.get(),
+                ModBlocks.STRIPPED_GINKGO_LOG.get(),
+                ModBlocks.STRIPPED_GINKGO_WOOD.get()
+        );
+        tag(ModTags.Blocks.MAPLE_LOGS).add(
+                ModBlocks.MAPLE_LOG.get(),
+                ModBlocks.MAPLE_WOOD.get(),
+                ModBlocks.STRIPPED_MAPLE_LOG.get(),
+                ModBlocks.STRIPPED_MAPLE_WOOD.get()
         );
     }
 }

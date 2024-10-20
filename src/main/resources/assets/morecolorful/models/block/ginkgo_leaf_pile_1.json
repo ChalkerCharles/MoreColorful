@@ -1,0 +1,7 @@
+{
+	"parent": "morecolorful:block/leaf_pile_1",
+	"textures": {
+		"top": "morecolorful:block/ginkgo_leaf_pile",
+		"base": "morecolorful:block/ginkgo_leaf_pile_base"
+	}
+}

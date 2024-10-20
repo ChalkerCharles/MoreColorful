@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "morecolorful:block/ginkgo_slab"
+    },
+    "type=double": {
+      "model": "morecolorful:block/ginkgo_planks"
+    },
+    "type=top": {
+      "model": "morecolorful:block/ginkgo_slab_top"
+    }
+  }
+}

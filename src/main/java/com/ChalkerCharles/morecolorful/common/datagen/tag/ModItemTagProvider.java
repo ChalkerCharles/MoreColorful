@@ -42,16 +42,23 @@ public class ModItemTagProvider extends ItemTagsProvider {
 
         tag(ItemTags.BOATS).add(
                 ModItems.CRABAPPLE_BOAT.get(),
-                ModItems.EBONY_BOAT.get()
+                ModItems.EBONY_BOAT.get(),
+                ModItems.GINKGO_BOAT.get(),
+                ModItems.MAPLE_BOAT.get()
         );
         tag(ItemTags.CHEST_BOATS).add(
                 ModItems.CRABAPPLE_CHEST_BOAT.get(),
-                ModItems.EBONY_CHEST_BOAT.get()
+                ModItems.EBONY_CHEST_BOAT.get(),
+                ModItems.GINKGO_CHEST_BOAT.get(),
+                ModItems.MAPLE_CHEST_BOAT.get()
         );
 
         // More Colorful Tags
         copy(ModTags.Blocks.CRABAPPLE_LOGS, ModTags.Items.CRABAPPLE_LOGS);
         copy(ModTags.Blocks.EBONY_LOGS, ModTags.Items.EBONY_LOGS);
+        copy(ModTags.Blocks.GINKGO_LOGS, ModTags.Items.GINKGO_LOGS);
+        copy(ModTags.Blocks.MAPLE_LOGS, ModTags.Items.MAPLE_LOGS);
+        copy(ModTags.Blocks.LEAF_PILES, ModTags.Items.LEAF_PILES);
 
         tag(ModTags.Items.DRUM_SET_PARTS).add(
                 ModItems.BASS_DRUM.get(),
@@ -72,7 +79,9 @@ public class ModItemTagProvider extends ItemTagsProvider {
         // C Tags
         tag(Tags.Items.FENCE_GATES_WOODEN).add(
                 ModItems.CRABAPPLE_FENCE_GATE.get(),
-                ModItems.EBONY_FENCE_GATE.get()
+                ModItems.EBONY_FENCE_GATE.get(),
+                ModItems.GINKGO_FENCE_GATE.get(),
+                ModItems.MAPLE_FENCE_GATE.get()
         );
     }
 }

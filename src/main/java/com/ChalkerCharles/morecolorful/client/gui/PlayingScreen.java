@@ -2,6 +2,7 @@ package com.ChalkerCharles.morecolorful.client.gui;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.client.ModKeyMapping;
+import com.ChalkerCharles.morecolorful.common.ModDataAttachments;
 import com.ChalkerCharles.morecolorful.common.block.musical_instruments.MusicalInstrumentBlock;
 import com.ChalkerCharles.morecolorful.common.item.ModItems;
 import com.ChalkerCharles.morecolorful.common.item.musical_instruments.InstrumentsType;
@@ -66,7 +67,7 @@ public class PlayingScreen extends Screen {
     public final Player pPlayer;
     public InstrumentsType pType;
     public final BlockPos pPos;
-    public static final BlockPos DEFAULT_POS = new BlockPos(0, -65, 0);
+    public static final BlockPos DEFAULT_POS = new BlockPos(0, -128, 0);
     private float pTick = 0;
     private boolean isDragging;
     public boolean isPressing = false;

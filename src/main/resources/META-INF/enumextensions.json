@@ -152,6 +152,24 @@
         "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions$BoatType",
         "field": "EBONY"
       }
+    },
+    {
+      "enum": "net/minecraft/world/entity/vehicle/Boat$Type",
+      "name": "MORECOLORFUL_GINKGO",
+      "constructor": "(Ljava/util/function/Supplier;Ljava/lang/String;Ljava/util/function/Supplier;Ljava/util/function/Supplier;Ljava/util/function/Supplier;Z)V",
+      "parameters": {
+        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions$BoatType",
+        "field": "GINKGO"
+      }
+    },
+    {
+      "enum": "net/minecraft/world/entity/vehicle/Boat$Type",
+      "name": "MORECOLORFUL_MAPLE",
+      "constructor": "(Ljava/util/function/Supplier;Ljava/lang/String;Ljava/util/function/Supplier;Ljava/util/function/Supplier;Ljava/util/function/Supplier;Z)V",
+      "parameters": {
+        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions$BoatType",
+        "field": "MAPLE"
+      }
     }
   ]
 }

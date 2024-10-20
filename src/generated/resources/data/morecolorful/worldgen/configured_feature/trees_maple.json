@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:random_selector",
+  "config": {
+    "default": "morecolorful:maple",
+    "features": [
+      {
+        "chance": 0.3,
+        "feature": "morecolorful:fancy_maple"
+      }
+    ]
+  }
+}

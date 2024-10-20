@@ -245,5 +245,19 @@ public final class EnumExtensions {
                 ModItems.EBONY_CHEST_BOAT,
                 Items.STICK,
                 false);
+        public static final EnumProxy<Boat.Type> GINKGO = new EnumProxy<>(Boat.Type.class,
+                ModBlocks.GINKGO_PLANKS,
+                "morecolorful:ginkgo",
+                ModItems.GINKGO_BOAT,
+                ModItems.GINKGO_CHEST_BOAT,
+                Items.STICK,
+                false);
+        public static final EnumProxy<Boat.Type> MAPLE = new EnumProxy<>(Boat.Type.class,
+                ModBlocks.MAPLE_PLANKS,
+                "morecolorful:maple",
+                ModItems.MAPLE_BOAT,
+                ModItems.MAPLE_CHEST_BOAT,
+                Items.STICK,
+                false);
     }
 }

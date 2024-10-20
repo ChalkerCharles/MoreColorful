@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:random_selector",
+  "config": {
+    "default": "morecolorful:ginkgo",
+    "features": [
+      {
+        "chance": 0.06,
+        "feature": "morecolorful:fancy_ginkgo"
+      }
+    ]
+  }
+}

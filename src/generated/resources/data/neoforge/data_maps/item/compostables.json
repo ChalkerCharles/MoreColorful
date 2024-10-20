@@ -1,9 +1,39 @@
 {
   "values": {
+    "#morecolorful:leaf_piles": {
+      "chance": 0.3
+    },
+    "morecolorful:autumn_birch_leaves": {
+      "chance": 0.3
+    },
+    "morecolorful:autumn_birch_sapling": {
+      "chance": 0.3
+    },
     "morecolorful:begonias": {
       "chance": 0.3
     },
     "morecolorful:crabapple_leaves": {
+      "chance": 0.3
+    },
+    "morecolorful:crabapple_sapling": {
+      "chance": 0.3
+    },
+    "morecolorful:daybloom": {
+      "chance": 0.65
+    },
+    "morecolorful:ginkgo_leaves": {
+      "chance": 0.3
+    },
+    "morecolorful:ginkgo_sapling": {
+      "chance": 0.3
+    },
+    "morecolorful:green_chrysanthemum": {
+      "chance": 0.65
+    },
+    "morecolorful:maple_leaves": {
+      "chance": 0.3
+    },
+    "morecolorful:maple_sapling": {
       "chance": 0.3
     },
     "morecolorful:pink_carnation": {
@@ -13,6 +43,24 @@
       "chance": 0.65
     },
     "morecolorful:red_carnation": {
+      "chance": 0.65
+    },
+    "morecolorful:red_spider_lily": {
+      "chance": 0.65
+    },
+    "morecolorful:white_carnation": {
+      "chance": 0.65
+    },
+    "morecolorful:white_cherry_leaves": {
+      "chance": 0.3
+    },
+    "morecolorful:white_cherry_sapling": {
+      "chance": 0.3
+    },
+    "morecolorful:white_petals": {
+      "chance": 0.3
+    },
+    "morecolorful:yellow_chrysanthemum": {
       "chance": 0.65
     }
   }

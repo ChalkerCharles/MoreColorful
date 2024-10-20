@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_daybloom": {
+      "conditions": {
+        "items": [
+          {
+            "items": "morecolorful:daybloom"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "morecolorful:yellow_dye_from_daybloom"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_daybloom"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "morecolorful:yellow_dye_from_daybloom"
+    ]
+  }
+}

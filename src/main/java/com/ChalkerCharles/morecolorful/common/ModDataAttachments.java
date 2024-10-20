@@ -16,9 +16,9 @@ import java.util.function.Supplier;
 public class ModDataAttachments {
     public static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(NeoForgeRegistries.Keys.ATTACHMENT_TYPES, MoreColorful.MODID);
     public static final Supplier<AttachmentType<Boolean>> IS_PLAYING_INSTRUMENT = ATTACHMENT_TYPES.register("is_playing_instrument", () -> AttachmentType.builder(() -> false).build());
-    public static final Supplier<AttachmentType<PlayingScreenPacket>> PLAYING_SCREEN_DATA = ATTACHMENT_TYPES.register("playing_screen_data", () -> AttachmentType.builder(() -> new PlayingScreenPacket(InstrumentsType.HARP, new BlockPos(0, -65, 0), 0, false)).build());
+    public static final Supplier<AttachmentType<PlayingScreenPacket>> PLAYING_SCREEN_DATA = ATTACHMENT_TYPES.register("playing_screen_data", () -> AttachmentType.builder(PlayingScreenPacket::new).build());
     public static final Supplier<AttachmentType<Float>> PLAYING_SCREEN_TICK = ATTACHMENT_TYPES.register("playing_screen_tick", () -> AttachmentType.builder(() -> 0F).build());
-    public static final Supplier<AttachmentType<DrumSetPacket>> DRUM_SET_DATA = ATTACHMENT_TYPES.register("drum_set_data", () -> AttachmentType.builder(() -> new DrumSetPacket(false, false, false, false, new BlockPos(0, -65, 0), 0)).build());
+    public static final Supplier<AttachmentType<DrumSetPacket>> DRUM_SET_DATA = ATTACHMENT_TYPES.register("drum_set_data", () -> AttachmentType.builder(DrumSetPacket::new).build());
     public static void register(IEventBus eventBus){
         ATTACHMENT_TYPES.register(eventBus);
     }

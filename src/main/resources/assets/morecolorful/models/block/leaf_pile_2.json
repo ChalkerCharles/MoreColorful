@@ -1,0 +1,25 @@
+{
+	"ambientocclusion": false,
+	"render_type": "cutout",
+	"textures": {
+		"particle": "#top"
+	},
+	"elements": [
+		{
+			"from": [0, 1, 8],
+			"to": [8, 1, 16],
+			"faces": {
+				"up": {"uv": [0, 8, 8, 16], "texture": "#top"},
+				"down": {"uv": [0, 16, 8, 8], "texture": "#top"}
+			}
+		},
+		{
+			"from": [0, 0.5, 8],
+			"to": [8, 0.5, 16],
+			"faces": {
+				"up": {"uv": [0, 8, 8, 16], "texture": "#base"},
+				"down": {"uv": [0, 16, 8, 8], "texture": "#base"}
+			}
+		}
+	]
+}

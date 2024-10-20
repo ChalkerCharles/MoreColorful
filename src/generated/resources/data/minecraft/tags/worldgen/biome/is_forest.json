@@ -3,6 +3,22 @@
     {
       "id": "morecolorful:crabapple_garden",
       "required": false
+    },
+    {
+      "id": "morecolorful:autumn_birch_forest",
+      "required": false
+    },
+    {
+      "id": "morecolorful:golden_grove",
+      "required": false
+    },
+    {
+      "id": "morecolorful:maple_forest",
+      "required": false
+    },
+    {
+      "id": "morecolorful:sunset_valley",
+      "required": false
     }
   ]
 }

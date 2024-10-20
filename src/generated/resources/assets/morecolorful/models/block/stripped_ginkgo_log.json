@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "morecolorful:block/stripped_ginkgo_log_top",
+    "side": "morecolorful:block/stripped_ginkgo_log"
+  }
+}

@@ -1,6 +1,9 @@
-// 1.21	2024-09-17T22:44:52.0934392	Tags for minecraft:worldgen/biome mod id morecolorful
-749181909b9e5e0e295cfc7ee127513b2a7d46da data/c/tags/worldgen/biome/is_floral.json
-749181909b9e5e0e295cfc7ee127513b2a7d46da data/minecraft/tags/worldgen/biome/has_structure/trial_chambers.json
-749181909b9e5e0e295cfc7ee127513b2a7d46da data/minecraft/tags/worldgen/biome/is_forest.json
-749181909b9e5e0e295cfc7ee127513b2a7d46da data/minecraft/tags/worldgen/biome/is_overworld.json
-749181909b9e5e0e295cfc7ee127513b2a7d46da data/minecraft/tags/worldgen/biome/stronghold_biased_to.json
+// 1.21	2024-10-20T12:38:56.2379794	Tags for minecraft:worldgen/biome mod id morecolorful
+735a9959e10e5f87a9f342c925c4ed4de2b96ca6 data/c/tags/worldgen/biome/is_birch_forest.json
+d1b95dc7c414b06b0f9ee93b6a20851280267e1f data/c/tags/worldgen/biome/is_floral.json
+6b72c964e34a11ee4b74305602bfa2ed9e8790d4 data/c/tags/worldgen/biome/is_tree/deciduous.json
+e4aa61e463b139621965aaffa71141c36916ee19 data/minecraft/tags/worldgen/biome/has_structure/trial_chambers.json
+e715ab1cba4a342245e1142d2e4334ffb5ec8ac7 data/minecraft/tags/worldgen/biome/is_forest.json
+032d4906680de5819ae085dbde75b6ac1267b51f data/minecraft/tags/worldgen/biome/is_mountain.json
+e4aa61e463b139621965aaffa71141c36916ee19 data/minecraft/tags/worldgen/biome/is_overworld.json
+e715ab1cba4a342245e1142d2e4334ffb5ec8ac7 data/minecraft/tags/worldgen/biome/stronghold_biased_to.json

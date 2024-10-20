@@ -14,8 +14,11 @@ public class ColorHandlersRegistry {
     @SubscribeEvent
     public static void registerBlockColors(RegisterColorHandlersEvent.Block event) {
         event.register((state, world, pos, tintIndex) -> {
-                    if (tintIndex != 0) { return world != null && pos != null ? BiomeColors.getAverageGrassColor(world, pos) : GrassColor.getDefaultColor(); }
-                    else { return -1; }},
-                ModBlocks.BEGONIAS.get());
+            if (tintIndex != 0) {
+                return world != null && pos != null ? BiomeColors.getAverageGrassColor(world, pos) : GrassColor.getDefaultColor();
+            } else {
+                return -1;
+            }
+            }, ModBlocks.BEGONIAS.get(), ModBlocks.WHITE_PETALS.get());
     }
 }

@@ -93,39 +93,92 @@ public class ModCreativeTabs {
                     ModItems.EBONY_DOOR,
                     ModItems.EBONY_TRAPDOOR,
                     ModItems.EBONY_PRESSURE_PLATE,
-                    ModItems.EBONY_BUTTON
+                    ModItems.EBONY_BUTTON,
+                    ModItems.GINKGO_LOG,
+                    ModItems.GINKGO_WOOD,
+                    ModItems.STRIPPED_GINKGO_LOG,
+                    ModItems.STRIPPED_GINKGO_WOOD,
+                    ModItems.GINKGO_PLANKS,
+                    ModItems.GINKGO_STAIRS,
+                    ModItems.GINKGO_SLAB,
+                    ModItems.GINKGO_FENCE,
+                    ModItems.GINKGO_FENCE_GATE,
+                    ModItems.GINKGO_DOOR,
+                    ModItems.GINKGO_TRAPDOOR,
+                    ModItems.GINKGO_PRESSURE_PLATE,
+                    ModItems.GINKGO_BUTTON,
+                    ModItems.MAPLE_LOG,
+                    ModItems.MAPLE_WOOD,
+                    ModItems.STRIPPED_MAPLE_LOG,
+                    ModItems.STRIPPED_MAPLE_WOOD,
+                    ModItems.MAPLE_PLANKS,
+                    ModItems.MAPLE_STAIRS,
+                    ModItems.MAPLE_SLAB,
+                    ModItems.MAPLE_FENCE,
+                    ModItems.MAPLE_FENCE_GATE,
+                    ModItems.MAPLE_DOOR,
+                    ModItems.MAPLE_TRAPDOOR,
+                    ModItems.MAPLE_PRESSURE_PLATE,
+                    ModItems.MAPLE_BUTTON
             );
         } else if (tab == CreativeModeTabs.NATURAL_BLOCKS) {
             insertAfterBySequence(event, Items.CHERRY_LOG,
-                    ModItems.CRABAPPLE_LOG
+                    ModItems.CRABAPPLE_LOG,
+                    ModItems.GINKGO_LOG,
+                    ModItems.MAPLE_LOG
             );
             insertAfterBySequence(event, Items.CHERRY_LEAVES,
-                    ModItems.CRABAPPLE_LEAVES
+                    ModItems.CRABAPPLE_LEAVES,
+                    ModItems.WHITE_CHERRY_LEAVES,
+                    ModItems.AUTUMN_BIRCH_LEAVES,
+                    ModItems.GINKGO_LEAVES,
+                    ModItems.MAPLE_LEAVES
             );
             insertAfterBySequence(event, Items.CHERRY_SAPLING,
-                    ModItems.CRABAPPLE_SAPLING
+                    ModItems.CRABAPPLE_SAPLING,
+                    ModItems.WHITE_CHERRY_SAPLING,
+                    ModItems.AUTUMN_BIRCH_SAPLING,
+                    ModItems.GINKGO_SAPLING,
+                    ModItems.MAPLE_SAPLING
             );
             insertAfterBySequence(event, Items.WITHER_ROSE,
                     ModItems.PINK_DAISY,
                     ModItems.RED_CARNATION,
-                    ModItems.PINK_CARNATION
+                    ModItems.PINK_CARNATION,
+                    ModItems.WHITE_CARNATION,
+                    ModItems.RED_SPIDER_LILY,
+                    ModItems.YELLOW_CHRYSANTHEMUM,
+                    ModItems.GREEN_CHRYSANTHEMUM,
+                    ModItems.DAYBLOOM
             );
             insertAfterBySequence(event, Items.PINK_PETALS,
-                    ModItems.BEGONIAS
+                    ModItems.BEGONIAS,
+                    ModItems.WHITE_PETALS,
+                    ModItems.AUTUMN_BIRCH_LEAF_PILE,
+                    ModItems.GINKGO_LEAF_PILE,
+                    ModItems.MAPLE_LEAF_PILE
             );
         } else if (tab == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
             insertAfterBySequence(event, Items.CHERRY_HANGING_SIGN,
                     ModItems.CRABAPPLE_SIGN,
                     ModItems.CRABAPPLE_HANGING_SIGN,
                     ModItems.EBONY_SIGN,
-                    ModItems.EBONY_HANGING_SIGN
+                    ModItems.EBONY_HANGING_SIGN,
+                    ModItems.GINKGO_SIGN,
+                    ModItems.GINKGO_HANGING_SIGN,
+                    ModItems.MAPLE_SIGN,
+                    ModItems.MAPLE_HANGING_SIGN
             );
         } else if (tab == CreativeModeTabs.TOOLS_AND_UTILITIES) {
             insertAfterBySequence(event, Items.CHERRY_CHEST_BOAT,
                     ModItems.CRABAPPLE_BOAT,
                     ModItems.CRABAPPLE_CHEST_BOAT,
                     ModItems.EBONY_BOAT,
-                    ModItems.EBONY_CHEST_BOAT
+                    ModItems.EBONY_CHEST_BOAT,
+                    ModItems.GINKGO_BOAT,
+                    ModItems.GINKGO_CHEST_BOAT,
+                    ModItems.MAPLE_BOAT,
+                    ModItems.MAPLE_CHEST_BOAT
             );
         }
     }

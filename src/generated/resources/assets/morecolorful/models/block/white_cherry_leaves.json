@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/leaves",
+  "textures": {
+    "all": "morecolorful:block/white_cherry_leaves"
+  }
+}

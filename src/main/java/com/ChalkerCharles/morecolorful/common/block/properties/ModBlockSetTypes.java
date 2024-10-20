@@ -1,16 +1,18 @@
 package com.ChalkerCharles.morecolorful.common.block.properties;
 
-import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.common.ModSounds;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 
+import static com.ChalkerCharles.morecolorful.MoreColorful.MODID;
 import static net.minecraft.world.level.block.state.properties.BlockSetType.register;
 
 public class ModBlockSetTypes {
-    public static final BlockSetType CRABAPPLE = registerCherry((MoreColorful.MODID + ":crabapple"));
-    public static final BlockSetType EBONY = registerRareWood((MoreColorful.MODID + ":ebony"));
+    public static final BlockSetType CRABAPPLE = registerCherry(MODID + ":crabapple");
+    public static final BlockSetType EBONY = registerRareWood(MODID + ":ebony");
+    public static final BlockSetType GINKGO = register(new BlockSetType(MODID + ":ginkgo"));
+    public static final BlockSetType MAPLE = register(new BlockSetType(MODID + ":maple"));
 
     private static BlockSetType registerCherry(@SuppressWarnings("SameParameterValue") String name) {
         return register(new BlockSetType(
