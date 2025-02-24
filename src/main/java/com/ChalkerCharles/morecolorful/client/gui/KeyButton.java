@@ -33,7 +33,7 @@ public class KeyButton extends Button {
     private static final ResourceLocation WHITE_KEY_A_PRESSED = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "key/white_key_a_pressed");
     private static final ResourceLocation BLACK_KEY = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "key/black_key");
     private static final ResourceLocation BLACK_KEY_PRESSED = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "key/black_key_pressed");
-    private final int keyType;
+    public final int keyType;
     public boolean isPressed;
     public final int keyId;
     public boolean pressedByClick;
@@ -55,16 +55,16 @@ public class KeyButton extends Button {
         } else if (this.keyType == 1) {
             resourcelocation = isPressed ? WHITE_KEY_D_PRESSED : WHITE_KEY_D;
             pGuiGraphics.blitSprite(resourcelocation, this.getX(), this.getY(), 16, 48);
-        }else if (this.keyType == 2) {
+        } else if (this.keyType == 2) {
             resourcelocation = isPressed ? WHITE_KEY_EB_PRESSED : WHITE_KEY_EB;
             pGuiGraphics.blitSprite(resourcelocation, this.getX(), this.getY(), 16, 48);
-        }else if (this.keyType == 3) {
+        } else if (this.keyType == 3) {
             resourcelocation = isPressed ? WHITE_KEY_G_PRESSED : WHITE_KEY_G;
             pGuiGraphics.blitSprite(resourcelocation, this.getX(), this.getY(), 16, 48);
-        }else if (this.keyType == 4) {
+        } else if (this.keyType == 4) {
             resourcelocation = isPressed ? WHITE_KEY_A_PRESSED : WHITE_KEY_A;
             pGuiGraphics.blitSprite(resourcelocation, this.getX(), this.getY(), 16, 48);
-        }else {
+        } else {
             resourcelocation = isPressed ? BLACK_KEY_PRESSED : BLACK_KEY;
             pGuiGraphics.blitSprite(resourcelocation, this.getX(), this.getY(), 12, 32);
         }

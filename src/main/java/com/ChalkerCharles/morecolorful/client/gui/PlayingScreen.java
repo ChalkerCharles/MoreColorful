@@ -78,7 +78,7 @@ public class PlayingScreen extends Screen {
         this.pPlayer = pPlayer;
         this.pType = pType;
         this.pPos = pPos;
-        this.midiHandler = new MidiHandler(this::pressFromKeyId, this::restoreFromKeyId);
+        this.midiHandler = new MidiHandler(this::pressByKeyId, this::restoreByKeyId);
     }
 
     @Override
@@ -254,7 +254,11 @@ public class PlayingScreen extends Screen {
             isDragging = true;
         } else isDragging = (pMouseX > (i - 186) / 2 + 21 && pMouseX < (i - 186) / 2 + 165 && pMouseY > 53 && pMouseY < 101);
         for (KeyButton button: allKeys) {
-            if (button.isHovered() && !(getNextKey(button).isHovered() || getLastKey(button).isHovered())) {
+            if (button.isHovered() && (button == blackKey_0 || button == blackKey_24)) {
+                button.press(true);
+                continue;
+            }
+            if (button.isHovered() && (button.keyType >= 0 != (getNextKey(button).isHovered() || getLastKey(button).isHovered()))) {
                 button.press(true);
             }
         }
@@ -285,8 +289,12 @@ public class PlayingScreen extends Screen {
         double i = this.width;
         if (pMouseX > (i - 186) / 2 + 37 && pMouseX < (i - 186) / 2 + 149 && pMouseY > 111 && pMouseY < 159 && isDragging) {
             for (int x = 0; x <= 10; x++) {
-                KeyButton key = getKeyFromId(x);
-                if (key.isHovered() && !(getNextKey(x).isHovered() || getLastKey(x).isHovered())) {
+                KeyButton key = getKeyById(x);
+                if (key.isHovered() && (key == blackKey_0 || key == blackKey_24)) {
+                    key.press(true);
+                    continue;
+                }
+                if (key.isHovered() && (key.keyType >= 0 == !(getNextKey(x).isHovered() || getLastKey(x).isHovered()))) {
                     key.press(true);
                     restoreAllExcept(key);
                 }
@@ -294,8 +302,12 @@ public class PlayingScreen extends Screen {
         }
         if (pMouseX > (i - 186) / 2 + 21 && pMouseX < (i - 186) / 2 + 165 && pMouseY > 53 && pMouseY < 101 && isDragging){
             for (int x = 11; x <= 24; x++) {
-                KeyButton key = getKeyFromId(x);
-                if (key.isHovered() && !(getNextKey(x).isHovered() || getLastKey(x).isHovered())) {
+                KeyButton key = getKeyById(x);
+                if (key.isHovered() && (key == blackKey_0 || key == blackKey_24)) {
+                    key.press(true);
+                    continue;
+                }
+                if (key.isHovered() && (key.keyType >= 0 == !(getNextKey(x).isHovered() || getLastKey(x).isHovered()))) {
                     key.press(true);
                     restoreAllExcept(key);
                 }
@@ -428,7 +440,7 @@ public class PlayingScreen extends Screen {
         PacketDistributor.sendToServer(new InstrumentTickingPacket(pTick, pPlayer.getId()));
     }
 
-    private KeyButton getKeyFromId(int keyId) {
+    private KeyButton getKeyById(int keyId) {
         return switch (keyId) {
             case 0 -> blackKey_0;
             case 1 -> whiteKey_1;
@@ -460,11 +472,11 @@ public class PlayingScreen extends Screen {
     }
     private KeyButton getNextKey(int keyId) {
         int nextKeyId = keyId + 1 > 24 ? 0 : keyId + 1;
-        return getKeyFromId(nextKeyId);
+        return getKeyById(nextKeyId);
     }
     private KeyButton getLastKey(int keyId) {
         int lastKeyId = keyId - 1 < 0 ? 24 : keyId - 1;
-        return getKeyFromId(lastKeyId);
+        return getKeyById(lastKeyId);
     }
     private KeyButton getNextKey(KeyButton keyButton) {
         return getNextKey(keyButton.keyId);
@@ -472,11 +484,11 @@ public class PlayingScreen extends Screen {
     private KeyButton getLastKey(KeyButton keyButton) {
         return getLastKey(keyButton.keyId);
     }
-    private void pressFromKeyId(int keyId) {
-        getKeyFromId(keyId).press(false);
+    private void pressByKeyId(int keyId) {
+        getKeyById(keyId).press(false);
     }
-    private void restoreFromKeyId(int keyId) {
-        getKeyFromId(keyId).restore();
+    private void restoreByKeyId(int keyId) {
+        getKeyById(keyId).restore();
     }
 
     public static void openPlayingScreen(Player pPlayer, InstrumentsType pType){
