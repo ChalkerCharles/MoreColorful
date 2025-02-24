@@ -40,17 +40,22 @@ public class ModItemTagProvider extends ItemTagsProvider {
         copy(BlockTags.WOODEN_STAIRS, ItemTags.WOODEN_STAIRS);
         copy(BlockTags.WOODEN_TRAPDOORS, ItemTags.WOODEN_TRAPDOORS);
 
+        tag(ItemTags.BEE_FOOD).remove(ModItems.CLOSED_DAYBLOOM.get());
         tag(ItemTags.BOATS).add(
                 ModItems.CRABAPPLE_BOAT.get(),
                 ModItems.EBONY_BOAT.get(),
                 ModItems.GINKGO_BOAT.get(),
-                ModItems.MAPLE_BOAT.get()
+                ModItems.MAPLE_BOAT.get(),
+                ModItems.FROST_BOAT.get(),
+                ModItems.DAWN_REDWOOD_BOAT.get()
         );
         tag(ItemTags.CHEST_BOATS).add(
                 ModItems.CRABAPPLE_CHEST_BOAT.get(),
                 ModItems.EBONY_CHEST_BOAT.get(),
                 ModItems.GINKGO_CHEST_BOAT.get(),
-                ModItems.MAPLE_CHEST_BOAT.get()
+                ModItems.MAPLE_CHEST_BOAT.get(),
+                ModItems.FROST_CHEST_BOAT.get(),
+                ModItems.DAWN_REDWOOD_CHEST_BOAT.get()
         );
 
         // More Colorful Tags
@@ -58,7 +63,9 @@ public class ModItemTagProvider extends ItemTagsProvider {
         copy(ModTags.Blocks.EBONY_LOGS, ModTags.Items.EBONY_LOGS);
         copy(ModTags.Blocks.GINKGO_LOGS, ModTags.Items.GINKGO_LOGS);
         copy(ModTags.Blocks.MAPLE_LOGS, ModTags.Items.MAPLE_LOGS);
-        copy(ModTags.Blocks.LEAF_PILES, ModTags.Items.LEAF_PILES);
+        copy(ModTags.Blocks.LEAF_LITTERS, ModTags.Items.LEAF_LITTERS);
+        copy(ModTags.Blocks.FROST_LOGS, ModTags.Items.FROST_LOGS);
+        copy(ModTags.Blocks.DAWN_REDWOOD_LOGS, ModTags.Items.DAWN_REDWOOD_LOGS);
 
         tag(ModTags.Items.DRUM_SET_PARTS).add(
                 ModItems.BASS_DRUM.get(),
@@ -81,7 +88,13 @@ public class ModItemTagProvider extends ItemTagsProvider {
                 ModItems.CRABAPPLE_FENCE_GATE.get(),
                 ModItems.EBONY_FENCE_GATE.get(),
                 ModItems.GINKGO_FENCE_GATE.get(),
-                ModItems.MAPLE_FENCE_GATE.get()
+                ModItems.MAPLE_FENCE_GATE.get(),
+                ModItems.FROST_FENCE_GATE.get(),
+                ModItems.DAWN_REDWOOD_FENCE_GATE.get()
+        );
+        tag(Tags.Items.FOODS_BERRY).add(
+                ModItems.STRAWBERRY.get(),
+                ModItems.BLUEBERRIES.get()
         );
     }
 }

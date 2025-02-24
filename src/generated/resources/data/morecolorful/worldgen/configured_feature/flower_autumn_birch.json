@@ -6,31 +6,39 @@
         "type": "minecraft:simple_block",
         "config": {
           "to_place": {
-            "type": "minecraft:weighted_state_provider",
-            "entries": [
+            "type": "minecraft:noise_provider",
+            "noise": {
+              "amplitudes": [
+                1.0
+              ],
+              "firstOctave": 0
+            },
+            "scale": 0.020833334,
+            "seed": 2345,
+            "states": [
               {
-                "data": {
-                  "Name": "minecraft:dandelion"
-                },
-                "weight": 1
+                "Name": "minecraft:dandelion"
               },
               {
-                "data": {
-                  "Name": "minecraft:oxeye_daisy"
-                },
-                "weight": 1
+                "Name": "minecraft:oxeye_daisy"
               },
               {
-                "data": {
-                  "Name": "morecolorful:red_spider_lily"
-                },
-                "weight": 2
+                "Name": "morecolorful:red_spider_lily"
               },
               {
-                "data": {
-                  "Name": "morecolorful:yellow_chrysanthemum"
-                },
-                "weight": 2
+                "Name": "morecolorful:yellow_chrysanthemum"
+              },
+              {
+                "Name": "minecraft:dandelion"
+              },
+              {
+                "Name": "minecraft:oxeye_daisy"
+              },
+              {
+                "Name": "morecolorful:red_spider_lily"
+              },
+              {
+                "Name": "morecolorful:yellow_chrysanthemum"
               }
             ]
           }
@@ -47,7 +55,7 @@
       ]
     },
     "tries": 128,
-    "xz_spread": 7,
-    "y_spread": 3
+    "xz_spread": 6,
+    "y_spread": 2
   }
 }

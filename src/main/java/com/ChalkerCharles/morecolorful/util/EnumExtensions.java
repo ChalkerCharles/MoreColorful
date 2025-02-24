@@ -259,5 +259,19 @@ public final class EnumExtensions {
                 ModItems.MAPLE_CHEST_BOAT,
                 Items.STICK,
                 false);
+        public static final EnumProxy<Boat.Type> FROST = new EnumProxy<>(Boat.Type.class,
+                ModBlocks.FROST_PLANKS,
+                "morecolorful:frost",
+                ModItems.FROST_BOAT,
+                ModItems.FROST_CHEST_BOAT,
+                Items.STICK,
+                false);
+        public static final EnumProxy<Boat.Type> DAWN_REDWOOD = new EnumProxy<>(Boat.Type.class,
+                ModBlocks.DAWN_REDWOOD_PLANKS,
+                "morecolorful:dawn_redwood",
+                ModItems.DAWN_REDWOOD_BOAT,
+                ModItems.DAWN_REDWOOD_CHEST_BOAT,
+                Items.STICK,
+                false);
     }
 }

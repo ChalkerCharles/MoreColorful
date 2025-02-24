@@ -1,7 +1,0 @@
-{
-	"parent": "morecolorful:block/leaf_pile_1",
-	"textures": {
-		"top": "morecolorful:block/autumn_birch_leaf_pile",
-		"base": "morecolorful:block/autumn_birch_leaf_pile_base"
-	}
-}

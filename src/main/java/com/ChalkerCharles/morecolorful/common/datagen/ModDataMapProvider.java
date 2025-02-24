@@ -34,7 +34,7 @@ public class ModDataMapProvider extends DataMapProvider {
                 .add(ModItems.DIDGERIDOO, new FurnaceFuel(200), false)
                 .add(ModItems.PIPA, new FurnaceFuel(200), false)
                 .add(ModItems.ERHU, new FurnaceFuel(200), false)
-                .add(ModTags.Items.LEAF_PILES, new FurnaceFuel(50), false);
+                .add(ModTags.Items.LEAF_LITTERS, new FurnaceFuel(50), false);
 
         builder(NeoForgeDataMaps.COMPOSTABLES)
                 .add(ModItems.CRABAPPLE_LEAVES, new Compostable(0.3F), false)
@@ -43,13 +43,20 @@ public class ModDataMapProvider extends DataMapProvider {
                 .add(ModItems.WHITE_CHERRY_LEAVES, new Compostable(0.3F), false)
                 .add(ModItems.WHITE_CHERRY_SAPLING, new Compostable(0.3F), false)
                 .add(ModItems.WHITE_PETALS, new Compostable(0.3F), false)
-                .add(ModTags.Items.LEAF_PILES, new Compostable(0.3F), false)
-                .add(ModItems.AUTUMN_BIRCH_LEAVES, new Compostable(0.3F), false)
-                .add(ModItems.AUTUMN_BIRCH_SAPLING, new Compostable(0.3F), false)
+                .add(ModTags.Items.LEAF_LITTERS, new Compostable(0.3F), false)
+                .add(ModItems.ORANGE_BIRCH_LEAVES, new Compostable(0.3F), false)
+                .add(ModItems.ORANGE_BIRCH_SAPLING, new Compostable(0.3F), false)
+                .add(ModItems.YELLOW_BIRCH_LEAVES, new Compostable(0.3F), false)
+                .add(ModItems.YELLOW_BIRCH_SAPLING, new Compostable(0.3F), false)
                 .add(ModItems.GINKGO_LEAVES, new Compostable(0.3F), false)
                 .add(ModItems.GINKGO_SAPLING, new Compostable(0.3F), false)
                 .add(ModItems.MAPLE_LEAVES, new Compostable(0.3F), false)
                 .add(ModItems.MAPLE_SAPLING, new Compostable(0.3F), false)
+                .add(ModItems.FROST_LEAVES, new Compostable(0.3F), false)
+                .add(ModItems.FROST_SAPLING, new Compostable(0.3F), false)
+                .add(ModItems.FROSTY_PETALS, new Compostable(0.3F), false)
+                .add(ModItems.DAWN_REDWOOD_LEAVES, new Compostable(0.3F), false)
+                .add(ModItems.DAWN_REDWOOD_SAPLING, new Compostable(0.3F), false)
                 .add(ModItems.PINK_DAISY, new Compostable(0.65F), false)
                 .add(ModItems.RED_CARNATION, new Compostable(0.65F), false)
                 .add(ModItems.PINK_CARNATION, new Compostable(0.65F), false)
@@ -57,6 +64,12 @@ public class ModDataMapProvider extends DataMapProvider {
                 .add(ModItems.RED_SPIDER_LILY, new Compostable(0.65F), false)
                 .add(ModItems.YELLOW_CHRYSANTHEMUM, new Compostable(0.65F), false)
                 .add(ModItems.GREEN_CHRYSANTHEMUM, new Compostable(0.65F), false)
-                .add(ModItems.DAYBLOOM, new Compostable(0.65F), false);
+                .add(ModItems.OPEN_DAYBLOOM, new Compostable(0.65F), false)
+                .add(ModItems.CLOSED_DAYBLOOM, new Compostable(0.65F), false)
+                .add(ModItems.EDELWEISS, new Compostable(0.65F), false)
+                .add(ModItems.CROCUS, new Compostable(0.65F), false)
+                .add(ModItems.IRIS, new Compostable(0.65F), false)
+                .add(ModItems.STRAWBERRY, new Compostable(0.3F), false)
+                .add(ModItems.BLUEBERRIES, new Compostable(0.3F), false);
     }
 }

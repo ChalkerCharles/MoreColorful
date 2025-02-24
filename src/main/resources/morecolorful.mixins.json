@@ -4,6 +4,9 @@
   "package": "com.ChalkerCharles.morecolorful.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "BeeMixin",
+    "BeePollinateGoalMixin",
+    "FlowerPotBlockMixin",
     "NoteBlockInstrumentMixin"
   ],
   "client": [

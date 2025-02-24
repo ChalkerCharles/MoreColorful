@@ -8,7 +8,6 @@ import net.minecraft.world.level.ItemLike;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.BasicItemListing;
-import net.neoforged.neoforge.event.village.VillagerTradesEvent;
 import net.neoforged.neoforge.event.village.WandererTradesEvent;
 
 @EventBusSubscriber(modid = MoreColorful.MODID)
@@ -21,7 +20,7 @@ public class ModCustomTrades {
     @SubscribeEvent
     public static void addWandererTrades(WandererTradesEvent event) {
         var genericTrades = event.getGenericTrades();
-        genericTrades.add(buy(ModItems.EBONY_LOG, 3, 5, 15, 12));
+        genericTrades.add(buy(ModItems.EBONY_LOG, 8, 1, 8, 12));
 
     }
 

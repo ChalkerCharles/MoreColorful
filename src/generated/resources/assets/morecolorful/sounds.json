@@ -56,6 +56,58 @@
     ],
     "subtitle": "morecolorful.subtitles.block.hi-hat.play"
   },
+  "block.leaf_litter.break": {
+    "sounds": [
+      "morecolorful:block/leaf_litter/break1",
+      "morecolorful:block/leaf_litter/break2",
+      "morecolorful:block/leaf_litter/break3",
+      "morecolorful:block/leaf_litter/break4",
+      "morecolorful:block/leaf_litter/break5"
+    ],
+    "subtitle": "subtitles.block.generic.break"
+  },
+  "block.leaf_litter.fall": {
+    "sounds": [
+      "morecolorful:block/leaf_litter/step1",
+      "morecolorful:block/leaf_litter/step2",
+      "morecolorful:block/leaf_litter/step3",
+      "morecolorful:block/leaf_litter/step4",
+      "morecolorful:block/leaf_litter/step5",
+      "morecolorful:block/leaf_litter/step6"
+    ]
+  },
+  "block.leaf_litter.hit": {
+    "sounds": [
+      "morecolorful:block/leaf_litter/step1",
+      "morecolorful:block/leaf_litter/step2",
+      "morecolorful:block/leaf_litter/step3",
+      "morecolorful:block/leaf_litter/step4",
+      "morecolorful:block/leaf_litter/step5",
+      "morecolorful:block/leaf_litter/step6"
+    ],
+    "subtitle": "subtitles.block.generic.hit"
+  },
+  "block.leaf_litter.place": {
+    "sounds": [
+      "morecolorful:block/leaf_litter/break1",
+      "morecolorful:block/leaf_litter/break2",
+      "morecolorful:block/leaf_litter/break3",
+      "morecolorful:block/leaf_litter/break4",
+      "morecolorful:block/leaf_litter/break5"
+    ],
+    "subtitle": "subtitles.block.generic.place"
+  },
+  "block.leaf_litter.step": {
+    "sounds": [
+      "morecolorful:block/leaf_litter/step1",
+      "morecolorful:block/leaf_litter/step2",
+      "morecolorful:block/leaf_litter/step3",
+      "morecolorful:block/leaf_litter/step4",
+      "morecolorful:block/leaf_litter/step5",
+      "morecolorful:block/leaf_litter/step6"
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
+  },
   "block.note_block.cello": {
     "sounds": [
       "morecolorful:note/cello"

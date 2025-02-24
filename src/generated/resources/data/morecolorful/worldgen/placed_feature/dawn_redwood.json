@@ -1,0 +1,18 @@
+{
+  "feature": "morecolorful:dawn_redwood",
+  "placement": [
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:would_survive",
+        "state": {
+          "Name": "morecolorful:dawn_redwood_sapling",
+          "Properties": {
+            "stage": "0",
+            "waterlogged": "false"
+          }
+        }
+      }
+    }
+  ]
+}

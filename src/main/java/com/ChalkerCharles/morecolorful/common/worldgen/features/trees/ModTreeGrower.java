@@ -1,6 +1,5 @@
 package com.ChalkerCharles.morecolorful.common.worldgen.features.trees;
 
-import net.minecraft.data.worldgen.features.TreeFeatures;
 import net.minecraft.world.level.block.grower.TreeGrower;
 
 import java.util.Optional;
@@ -14,10 +13,14 @@ public class ModTreeGrower {
             Optional.empty(),
             Optional.of(ModTreeFeatures.WHITE_CHERRY),
             Optional.of(ModTreeFeatures.WHITE_CHERRY_005));
-    public static final TreeGrower AUTUMN_BIRCH = new TreeGrower("autumn_birch",
+    public static final TreeGrower ORANGE_BIRCH = new TreeGrower("orange_birch",
             Optional.empty(),
-            Optional.of(ModTreeFeatures.AUTUMN_BIRCH),
-            Optional.of(ModTreeFeatures.AUTUMN_BIRCH_005));
+            Optional.of(ModTreeFeatures.ORANGE_BIRCH),
+            Optional.of(ModTreeFeatures.ORANGE_BIRCH_005));
+    public static final TreeGrower YELLOW_BIRCH = new TreeGrower("yellow_birch",
+            Optional.empty(),
+            Optional.of(ModTreeFeatures.YELLOW_BIRCH),
+            Optional.of(ModTreeFeatures.YELLOW_BIRCH_005));
     public static final TreeGrower GINKGO = new TreeGrower("ginkgo",
             0.1F,
             Optional.empty(),
@@ -33,5 +36,13 @@ public class ModTreeGrower {
             Optional.of(ModTreeFeatures.MAPLE),
             Optional.of(ModTreeFeatures.FANCY_MAPLE),
             Optional.empty(),
+            Optional.empty());
+    public static final TreeGrower FROST = new TreeGrower("frost",
+            Optional.empty(),
+            Optional.of(ModTreeFeatures.FROST),
+            Optional.empty());
+    public static final TreeGrower DAWN_REDWOOD = new TreeGrower("dawn_redwood",
+            Optional.empty(),
+            Optional.of(ModTreeFeatures.DAWN_REDWOOD),
             Optional.empty());
 }

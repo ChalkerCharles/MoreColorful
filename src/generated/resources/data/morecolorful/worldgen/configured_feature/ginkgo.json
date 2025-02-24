@@ -9,9 +9,9 @@
       }
     },
     "foliage_placer": {
-      "type": "minecraft:random_spread_foliage_placer",
+      "type": "morecolorful:ginkgo_foliage_placer",
       "foliage_height": 4,
-      "leaf_placement_attempts": 150,
+      "leaf_placement_attempts": 135,
       "offset": 0,
       "radius": 3
     },

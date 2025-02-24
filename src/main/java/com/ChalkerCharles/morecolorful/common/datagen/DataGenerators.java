@@ -1,6 +1,8 @@
 package com.ChalkerCharles.morecolorful.common.datagen;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
+import com.ChalkerCharles.morecolorful.common.datagen.loot.ModArchaeologyLootProvider;
+import com.ChalkerCharles.morecolorful.common.datagen.loot.ModBlockLootTableProvider;
 import com.ChalkerCharles.morecolorful.common.datagen.tag.ModBiomeTagProvider;
 import com.ChalkerCharles.morecolorful.common.datagen.tag.ModBlockTagProvider;
 import com.ChalkerCharles.morecolorful.common.datagen.tag.ModItemTagProvider;
@@ -38,9 +40,15 @@ public class DataGenerators {
         generator.addProvider(event.includeServer(), new ModBiomeTagProvider(output, provider, helper));
 
         generator.addProvider(event.includeServer(), new LootTableProvider(output, Collections.emptySet(),
-                List.of(new LootTableProvider.SubProviderEntry(ModBlockLootTableProvider::new, LootContextParamSets.BLOCK)), provider));
+                List.of(
+                        new LootTableProvider.SubProviderEntry(ModBlockLootTableProvider::new, LootContextParamSets.BLOCK),
+                        new LootTableProvider.SubProviderEntry(ModArchaeologyLootProvider::new, LootContextParamSets.ARCHAEOLOGY)
+                ), provider)
+        );
+
         generator.addProvider(event.includeServer(), new ModRecipeProvider(output, provider));
-        generator.addProvider(event.includeServer(), new ModWorldGenProvider(output, provider));
+        generator.addProvider(event.includeServer(), new ModDatapackProvider(output, provider));
         generator.addProvider(event.includeServer(), new ModDataMapProvider(output, provider));
+        generator.addProvider(event.includeServer(), new ModGlobalLootModifierProvider(output, provider));
     }
 }

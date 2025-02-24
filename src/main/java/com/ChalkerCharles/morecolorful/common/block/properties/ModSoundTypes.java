@@ -22,4 +22,13 @@ public class ModSoundTypes {
             ModSounds.RARE_WOOD_HANGING_SIGN_HIT,
             ModSounds.RARE_WOOD_HANGING_SIGN_FALL
     );
+    public static final DeferredSoundType LEAF_LITTER = new DeferredSoundType(
+            1.0F,
+            1.0F,
+            ModSounds.LEAF_LITTER_BREAK,
+            ModSounds.LEAF_LITTER_STEP,
+            ModSounds.LEAF_LITTER_PLACE,
+            ModSounds.LEAF_LITTER_HIT,
+            ModSounds.LEAF_LITTER_FALL
+    );
 }

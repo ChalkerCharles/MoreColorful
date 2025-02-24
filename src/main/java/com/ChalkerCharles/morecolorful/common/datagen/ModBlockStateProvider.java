@@ -35,9 +35,12 @@ public class ModBlockStateProvider extends ModBlockStateHelper {
         cross(ModBlocks.WHITE_CHERRY_SAPLING.get());
         simpleFlowerPot(ModBlocks.POTTED_WHITE_CHERRY_SAPLING.get(), ModBlocks.WHITE_CHERRY_SAPLING.get());
 
-        leaves(ModBlocks.AUTUMN_BIRCH_LEAVES.get());
-        cross(ModBlocks.AUTUMN_BIRCH_SAPLING.get());
-        simpleFlowerPot(ModBlocks.POTTED_AUTUMN_BIRCH_SAPLING.get(), ModBlocks.AUTUMN_BIRCH_SAPLING.get());
+        leaves(ModBlocks.ORANGE_BIRCH_LEAVES.get());
+        cross(ModBlocks.ORANGE_BIRCH_SAPLING.get());
+        simpleFlowerPot(ModBlocks.POTTED_ORANGE_BIRCH_SAPLING.get(), ModBlocks.ORANGE_BIRCH_SAPLING.get());
+        leaves(ModBlocks.YELLOW_BIRCH_LEAVES.get());
+        cross(ModBlocks.YELLOW_BIRCH_SAPLING.get());
+        simpleFlowerPot(ModBlocks.POTTED_YELLOW_BIRCH_SAPLING.get(), ModBlocks.YELLOW_BIRCH_SAPLING.get());
 
         logAndWood(ModBlocks.EBONY_LOG.get(), ModBlocks.EBONY_WOOD.get());
         logAndWood(ModBlocks.STRIPPED_EBONY_LOG.get(), ModBlocks.STRIPPED_EBONY_WOOD.get());
@@ -87,6 +90,40 @@ public class ModBlockStateProvider extends ModBlockStateHelper {
         cross(ModBlocks.MAPLE_SAPLING.get());
         simpleFlowerPot(ModBlocks.POTTED_MAPLE_SAPLING.get(), ModBlocks.MAPLE_SAPLING.get());
 
+        logAndWood(ModBlocks.FROST_LOG.get(), ModBlocks.FROST_WOOD.get());
+        logAndWood(ModBlocks.STRIPPED_FROST_LOG.get(), ModBlocks.STRIPPED_FROST_WOOD.get());
+        simpleCube(ModBlocks.FROST_PLANKS.get());
+        simpleStairs(ModBlocks.FROST_STAIRS.get(), ModBlocks.FROST_PLANKS.get());
+        simpleSlab(ModBlocks.FROST_SLAB.get(), ModBlocks.FROST_PLANKS.get());
+        fenceBlock(ModBlocks.FROST_FENCE.get(), blockTexture(ModBlocks.FROST_PLANKS.get()));
+        simpleFenceGate(ModBlocks.FROST_FENCE_GATE.get(), ModBlocks.FROST_PLANKS.get());
+        simpleDoor(ModBlocks.FROST_DOOR.get(), false);
+        simpleTrapdoor(ModBlocks.FROST_TRAPDOOR.get(), true, false);
+        simplePressurePlate(ModBlocks.FROST_PRESSURE_PLATE.get(), ModBlocks.FROST_PLANKS.get());
+        buttonBlock(ModBlocks.FROST_BUTTON.get(), blockTexture(ModBlocks.FROST_PLANKS.get()));
+        signBlock(ModBlocks.FROST_SIGN.get(), ModBlocks.FROST_WALL_SIGN.get(), blockTexture(ModBlocks.FROST_PLANKS.get()));
+        hangingSignBlock(ModBlocks.FROST_HANGING_SIGN.get(), ModBlocks.FROST_WALL_HANGING_SIGN.get(), blockTexture(ModBlocks.FROST_PLANKS.get()));
+        leaves(ModBlocks.FROST_LEAVES.get());
+        cross(ModBlocks.FROST_SAPLING.get());
+        simpleFlowerPot(ModBlocks.POTTED_FROST_SAPLING.get(), ModBlocks.FROST_SAPLING.get());
+
+        logAndWood(ModBlocks.DAWN_REDWOOD_LOG.get(), ModBlocks.DAWN_REDWOOD_WOOD.get());
+        logAndWood(ModBlocks.STRIPPED_DAWN_REDWOOD_LOG.get(), ModBlocks.STRIPPED_DAWN_REDWOOD_WOOD.get());
+        simpleCube(ModBlocks.DAWN_REDWOOD_PLANKS.get());
+        simpleStairs(ModBlocks.DAWN_REDWOOD_STAIRS.get(), ModBlocks.DAWN_REDWOOD_PLANKS.get());
+        simpleSlab(ModBlocks.DAWN_REDWOOD_SLAB.get(), ModBlocks.DAWN_REDWOOD_PLANKS.get());
+        fenceBlock(ModBlocks.DAWN_REDWOOD_FENCE.get(), blockTexture(ModBlocks.DAWN_REDWOOD_PLANKS.get()));
+        simpleFenceGate(ModBlocks.DAWN_REDWOOD_FENCE_GATE.get(), ModBlocks.DAWN_REDWOOD_PLANKS.get());
+        simpleDoor(ModBlocks.DAWN_REDWOOD_DOOR.get(), false);
+        simpleTrapdoor(ModBlocks.DAWN_REDWOOD_TRAPDOOR.get(), false, false);
+        simplePressurePlate(ModBlocks.DAWN_REDWOOD_PRESSURE_PLATE.get(), ModBlocks.DAWN_REDWOOD_PLANKS.get());
+        buttonBlock(ModBlocks.DAWN_REDWOOD_BUTTON.get(), blockTexture(ModBlocks.DAWN_REDWOOD_PLANKS.get()));
+        signBlock(ModBlocks.DAWN_REDWOOD_SIGN.get(), ModBlocks.DAWN_REDWOOD_WALL_SIGN.get(), blockTexture(ModBlocks.DAWN_REDWOOD_PLANKS.get()));
+        hangingSignBlock(ModBlocks.DAWN_REDWOOD_HANGING_SIGN.get(), ModBlocks.DAWN_REDWOOD_WALL_HANGING_SIGN.get(), blockTexture(ModBlocks.DAWN_REDWOOD_PLANKS.get()));
+        leaves(ModBlocks.DAWN_REDWOOD_LEAVES.get());
+        cross(ModBlocks.DAWN_REDWOOD_SAPLING.get());
+        simpleFlowerPot(ModBlocks.POTTED_DAWN_REDWOOD_SAPLING.get(), ModBlocks.DAWN_REDWOOD_SAPLING.get());
+
         cross(ModBlocks.PINK_DAISY.get());
         simpleFlowerPot(ModBlocks.POTTED_PINK_DAISY.get(), ModBlocks.PINK_DAISY.get());
         cross(ModBlocks.RED_CARNATION.get());
@@ -101,8 +138,19 @@ public class ModBlockStateProvider extends ModBlockStateHelper {
         simpleFlowerPot(ModBlocks.POTTED_YELLOW_CHRYSANTHEMUM.get(), ModBlocks.YELLOW_CHRYSANTHEMUM.get());
         cross(ModBlocks.GREEN_CHRYSANTHEMUM.get());
         simpleFlowerPot(ModBlocks.POTTED_GREEN_CHRYSANTHEMUM.get(), ModBlocks.GREEN_CHRYSANTHEMUM.get());
-        cross(ModBlocks.DAYBLOOM.get());
-        simpleFlowerPot(ModBlocks.POTTED_DAYBLOOM.get(), ModBlocks.DAYBLOOM.get());
+        cross(ModBlocks.OPEN_DAYBLOOM.get());
+        simpleFlowerPot(ModBlocks.POTTED_OPEN_DAYBLOOM.get(), ModBlocks.OPEN_DAYBLOOM.get());
+        cross(ModBlocks.CLOSED_DAYBLOOM.get());
+        simpleFlowerPot(ModBlocks.POTTED_CLOSED_DAYBLOOM.get(), ModBlocks.CLOSED_DAYBLOOM.get());
+        cross(ModBlocks.EDELWEISS.get());
+        simpleFlowerPot(ModBlocks.POTTED_EDELWEISS.get(), ModBlocks.EDELWEISS.get());
+        cross(ModBlocks.CROCUS.get());
+        simpleFlowerPot(ModBlocks.POTTED_CROCUS.get(), ModBlocks.CROCUS.get());
+        cross(ModBlocks.IRIS.get());
+        simpleFlowerPot(ModBlocks.POTTED_IRIS.get(), ModBlocks.IRIS.get());
+
+        berryBush(ModBlocks.STRAWBERRY_BUSH.get());
+        berryBush(ModBlocks.BLUEBERRY_BUSH.get());
     }
 
     private void registerStatesOnly() {
@@ -127,8 +175,11 @@ public class ModBlockStateProvider extends ModBlockStateHelper {
 
         petalBlock(ModBlocks.BEGONIAS.get());
         petalBlock(ModBlocks.WHITE_PETALS.get());
-        leafPileBlock(ModBlocks.AUTUMN_BIRCH_LEAF_PILE.get());
-        leafPileBlock(ModBlocks.GINKGO_LEAF_PILE.get());
-        leafPileBlock(ModBlocks.MAPLE_LEAF_PILE.get());
+        leafLitterBlock(ModBlocks.ORANGE_BIRCH_LEAF_LITTER.get());
+        leafLitterBlock(ModBlocks.YELLOW_BIRCH_LEAF_LITTER.get());
+        leafLitterBlock(ModBlocks.GINKGO_LEAF_LITTER.get());
+        leafLitterBlock(ModBlocks.MAPLE_LEAF_LITTER.get());
+        petalBlock(ModBlocks.FROSTY_PETALS.get());
+        leafLitterBlock(ModBlocks.DAWN_REDWOOD_LEAF_LITTER.get());
     }
 }

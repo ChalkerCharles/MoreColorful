@@ -18,6 +18,20 @@ public abstract class ModSoundDefinitionHelper extends SoundDefinitionsProvider 
         super(output, modId, helper);
     }
 
+    protected String mcMusic(String name) {
+        return "minecraft:music/" + name;
+    }
+    protected String modMusic(String name) {
+        return modid + ":music/" + name;
+    }
+
+    protected static SoundDefinition.Sound music(final String name, float volume, int weight) {
+        return music(name, volume).weight(weight);
+    }
+    protected static SoundDefinition.Sound music(final String name, float volume) {
+        return sound(name).stream().volume(volume);
+    }
+
     protected void noteBlock(Holder<SoundEvent> soundEvent, String soundFile) {
         add(soundEvent.value(), SoundDefinition.definition()
                 .with(sound(modid + ":note/" + soundFile))

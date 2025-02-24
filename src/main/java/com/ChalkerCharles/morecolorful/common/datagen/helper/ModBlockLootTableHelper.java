@@ -1,6 +1,7 @@
 package com.ChalkerCharles.morecolorful.common.datagen.helper;
 
-import com.ChalkerCharles.morecolorful.common.block.common.LeafPileBlock;
+import com.ChalkerCharles.morecolorful.common.block.common.BerryBushBlock;
+import com.ChalkerCharles.morecolorful.common.block.common.LeafLitterBlock;
 import com.ChalkerCharles.morecolorful.common.block.properties.HorizontalDoubleBlockHalf;
 import com.ChalkerCharles.morecolorful.common.block.properties.ModBlockStateProperties;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
@@ -19,6 +20,7 @@ import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer;
+import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.BonusLevelTableCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
@@ -86,13 +88,32 @@ public abstract class ModBlockLootTableHelper extends BlockLootSubProvider {
                                                                         .when(
                                                                                 LootItemBlockStatePropertyCondition.hasBlockStateProperties(pLeafPileBlock)
                                                                                         .setProperties(
-                                                                                                StatePropertiesPredicate.Builder.properties().hasProperty(LeafPileBlock.AMOUNT, integer)
+                                                                                                StatePropertiesPredicate.Builder.properties().hasProperty(LeafLitterBlock.AMOUNT, integer)
                                                                                         )
                                                                         )
                                                         )
                                         )
                                 )
                 );
+    }
+
+    protected LootTable.Builder createBerryBushDrops(Block pBerryBush, ItemLike pBerry) {
+        HolderLookup.RegistryLookup<Enchantment> registrylookup = this.registries.lookupOrThrow(Registries.ENCHANTMENT);
+        return LootTable.lootTable()
+                .withPool(
+                        LootPool.lootPool()
+                                .when(
+                                        LootItemBlockStatePropertyCondition.hasBlockStateProperties(pBerryBush)
+                                                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(BerryBushBlock.AGE, 4))
+                                )
+                                .add(LootItem.lootTableItem(pBerry))
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
+                                .apply(ApplyBonusCount.addUniformBonusCount(registrylookup.getOrThrow(Enchantments.FORTUNE)))
+                );
+    }
+
+    protected void dropBerries(Block pBerryBush, ItemLike pBerry) {
+        this.add(pBerryBush, createBerryBushDrops(pBerryBush, pBerry));
     }
 
     protected void dropForSlab(Block pBlock) {

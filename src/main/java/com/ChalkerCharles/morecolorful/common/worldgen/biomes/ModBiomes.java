@@ -15,6 +15,7 @@ public class ModBiomes {
     public static final ResourceKey<Biome> SUNSET_VALLEY = register("sunset_valley");
     public static final ResourceKey<Biome> AUTUMN_BIRCH_FOREST = register("autumn_birch_forest");
     public static final ResourceKey<Biome> GOLDEN_GROVE = register("golden_grove");
+    public static final ResourceKey<Biome> MIXED_FOREST = register("mixed_forest");
     public static final ResourceKey<Biome> SPRING_VALLEY = register("spring_valley");
     public static final ResourceKey<Biome> POLLUTED_FOREST = register("polluted_forest");
     public static final ResourceKey<Biome> MAGIC_FOREST = register("magic_forest");
@@ -22,13 +23,14 @@ public class ModBiomes {
     public static final ResourceKey<Biome> CRABAPPLE_GARDEN = register("crabapple_garden");
     public static final ResourceKey<Biome> JACARANDA_GROVE = register("jacaranda_grove");
     public static final ResourceKey<Biome> OLD_GROWTH_FOREST = register("old_growth_forest");
+    public static final ResourceKey<Biome> MONSOON_FOREST = register("monsoon_forest");
     public static final ResourceKey<Biome> RAINFOREST = register("rainforest");
 
     // Plains
     public static final ResourceKey<Biome> TUNDRA = register("tundra");
     public static final ResourceKey<Biome> GOLDEN_PASTURE = register("golden_pasture");
-    public static final ResourceKey<Biome> CURSED_LAND = register("cursed_land");
-    public static final ResourceKey<Biome> COLE_FLOWER_FIELDS = register("cole_flower_fields");
+    public static final ResourceKey<Biome> OMINOUS_LAND = register("ominous_land");
+    public static final ResourceKey<Biome> RAPESEED_FLOWER_FIELDS = register("rapeseed_flower_fields");
     public static final ResourceKey<Biome> LAVENDER_FIELDS = register("lavender_fields");
     public static final ResourceKey<Biome> SHRUBLAND = register("shrubland");
     public static final ResourceKey<Biome> WET_SAVANNA = register("wet_savanna");
@@ -47,7 +49,7 @@ public class ModBiomes {
     public static final ResourceKey<Biome> MARSH = register("marsh");
     public static final ResourceKey<Biome> SALT_LAKE = register("salt_lake");
     public static final ResourceKey<Biome> WILLOW_BAYOU = register("willow_bayou");
-    public static final ResourceKey<Biome> LUSH_SWAMP = register("lush_swamp");
+    public static final ResourceKey<Biome> FLOODED_FOREST = register("flooded_forest");
 
     // Deserts
     public static final ResourceKey<Biome> COLD_DESERT = register("cold_desert");
@@ -56,7 +58,7 @@ public class ModBiomes {
     public static final ResourceKey<Biome> WASTELAND = register("wasteland");
 
     // Oceans, Coasts & Islands
-    public static final ResourceKey<Biome> GLOWING_ABYSS = register("glowing_abyss");
+    public static final ResourceKey<Biome> GLOWING_DEPTH = register("glowing_depth");
     public static final ResourceKey<Biome> GRAVELLY_BEACH = register("gravelly_beach");
     public static final ResourceKey<Biome> LUSH_BEACH = register("lush_beach");
     public static final ResourceKey<Biome> CORAL_ISLAND = register("coral_island");
@@ -66,7 +68,7 @@ public class ModBiomes {
     // Caves
     public static final ResourceKey<Biome> FROZEN_CAVE = register("frozen_cave");
     public static final ResourceKey<Biome> CORRUPTED_CHASM = register("corrupted_chasm");
-    public static final ResourceKey<Biome> CRYSTAL_CAVE = register("crystal_cave");
+    public static final ResourceKey<Biome> CRYSTAL_GROTTO = register("crystal_grotto");
     public static final ResourceKey<Biome> SPIDER_NEST = register("spider_nest");
 
     // ********** Nether ********** //

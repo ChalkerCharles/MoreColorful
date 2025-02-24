@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "morecolorful:block/frost_slab"
+    },
+    "type=double": {
+      "model": "morecolorful:block/frost_planks"
+    },
+    "type=top": {
+      "model": "morecolorful:block/frost_slab_top"
+    }
+  }
+}

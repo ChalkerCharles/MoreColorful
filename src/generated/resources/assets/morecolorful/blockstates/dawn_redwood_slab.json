@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "morecolorful:block/dawn_redwood_slab"
+    },
+    "type=double": {
+      "model": "morecolorful:block/dawn_redwood_planks"
+    },
+    "type=top": {
+      "model": "morecolorful:block/dawn_redwood_slab_top"
+    }
+  }
+}

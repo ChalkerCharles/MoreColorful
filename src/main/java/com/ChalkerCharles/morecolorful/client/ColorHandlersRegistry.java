@@ -19,6 +19,6 @@ public class ColorHandlersRegistry {
             } else {
                 return -1;
             }
-            }, ModBlocks.BEGONIAS.get(), ModBlocks.WHITE_PETALS.get());
+            }, ModBlocks.BEGONIAS.get(), ModBlocks.WHITE_PETALS.get(), ModBlocks.FROSTY_PETALS.get());
     }
 }

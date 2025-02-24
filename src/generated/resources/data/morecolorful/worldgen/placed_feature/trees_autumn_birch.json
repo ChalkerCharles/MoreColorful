@@ -1,5 +1,5 @@
 {
-  "feature": "morecolorful:autumn_birch_0002",
+  "feature": "morecolorful:trees_autumn_birch",
   "placement": [
     {
       "type": "minecraft:count",
@@ -36,7 +36,7 @@
       "predicate": {
         "type": "minecraft:would_survive",
         "state": {
-          "Name": "morecolorful:autumn_birch_sapling",
+          "Name": "morecolorful:orange_birch_sapling",
           "Properties": {
             "stage": "0"
           }

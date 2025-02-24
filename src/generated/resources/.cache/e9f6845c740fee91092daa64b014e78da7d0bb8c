@@ -1,9 +1,18 @@
-// 1.21	2024-10-20T12:38:56.2379794	Tags for minecraft:worldgen/biome mod id morecolorful
+// 1.21	2025-02-23T01:32:57.3938276	Tags for minecraft:worldgen/biome mod id morecolorful
 735a9959e10e5f87a9f342c925c4ed4de2b96ca6 data/c/tags/worldgen/biome/is_birch_forest.json
-d1b95dc7c414b06b0f9ee93b6a20851280267e1f data/c/tags/worldgen/biome/is_floral.json
-6b72c964e34a11ee4b74305602bfa2ed9e8790d4 data/c/tags/worldgen/biome/is_tree/deciduous.json
-e4aa61e463b139621965aaffa71141c36916ee19 data/minecraft/tags/worldgen/biome/has_structure/trial_chambers.json
+f619a98a5b749498829e6cd05ee722c315668e23 data/c/tags/worldgen/biome/is_cold/overworld.json
+f18dcfc048510ef53b5ad8e63a8361673af7934f data/c/tags/worldgen/biome/is_floral.json
+f619a98a5b749498829e6cd05ee722c315668e23 data/c/tags/worldgen/biome/is_snowy.json
+ea63a2eea219b2c1e70c912c3eb3d8869c094a0c data/c/tags/worldgen/biome/is_swamp.json
+ea63a2eea219b2c1e70c912c3eb3d8869c094a0c data/c/tags/worldgen/biome/is_tree/coniferous.json
+2f465c4dc6504b5a1a42c3b55319535bfdda050b data/c/tags/worldgen/biome/is_tree/deciduous.json
+ea63a2eea219b2c1e70c912c3eb3d8869c094a0c data/minecraft/tags/worldgen/biome/has_structure/mineshaft.json
+2a906e9b4e4ab0e693f11a29794444eb6713633c data/minecraft/tags/worldgen/biome/has_structure/trial_chambers.json
 e715ab1cba4a342245e1142d2e4334ffb5ec8ac7 data/minecraft/tags/worldgen/biome/is_forest.json
-032d4906680de5819ae085dbde75b6ac1267b51f data/minecraft/tags/worldgen/biome/is_mountain.json
-e4aa61e463b139621965aaffa71141c36916ee19 data/minecraft/tags/worldgen/biome/is_overworld.json
+34ec3e52356d9ecb626509a342e9d2184eb7591c data/minecraft/tags/worldgen/biome/is_mountain.json
+932d2c3c7dd0fa12f54eb32a1edee0b9b5d99615 data/minecraft/tags/worldgen/biome/is_overworld.json
+f619a98a5b749498829e6cd05ee722c315668e23 data/minecraft/tags/worldgen/biome/spawns_cold_variant_frogs.json
+f619a98a5b749498829e6cd05ee722c315668e23 data/minecraft/tags/worldgen/biome/spawns_snow_foxes.json
+f619a98a5b749498829e6cd05ee722c315668e23 data/minecraft/tags/worldgen/biome/spawns_white_rabbits.json
 e715ab1cba4a342245e1142d2e4334ffb5ec8ac7 data/minecraft/tags/worldgen/biome/stronghold_biased_to.json
+ea63a2eea219b2c1e70c912c3eb3d8869c094a0c data/minecraft/tags/worldgen/biome/water_on_map_outlines.json

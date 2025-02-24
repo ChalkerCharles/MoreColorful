@@ -23,6 +23,14 @@
     {
       "id": "morecolorful:sunset_valley",
       "required": false
+    },
+    {
+      "id": "morecolorful:frost_grove",
+      "required": false
+    },
+    {
+      "id": "morecolorful:dawn_redwood_swamp",
+      "required": false
     }
   ]
 }

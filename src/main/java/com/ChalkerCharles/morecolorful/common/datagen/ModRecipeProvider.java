@@ -81,8 +81,41 @@ public class ModRecipeProvider extends ModRecipeHelper {
         woodenBoat(pRecipeOutput, ModItems.MAPLE_BOAT, ModItems.MAPLE_PLANKS);
         chestBoat(pRecipeOutput, ModItems.MAPLE_CHEST_BOAT, ModItems.MAPLE_PLANKS);
 
+        planks(pRecipeOutput, ModItems.FROST_PLANKS, ModTags.Items.FROST_LOGS);
+        woodFromLogs(pRecipeOutput, ModItems.FROST_WOOD, ModItems.FROST_LOG);
+        woodFromLogs(pRecipeOutput, ModItems.STRIPPED_FROST_WOOD, ModItems.STRIPPED_FROST_LOG);
+        woodenStairs(pRecipeOutput, ModItems.FROST_STAIRS, ModItems.FROST_PLANKS);
+        woodenSlab(pRecipeOutput, ModItems.FROST_SLAB, ModItems.FROST_PLANKS);
+        woodenFence(pRecipeOutput, ModItems.FROST_FENCE, ModItems.FROST_PLANKS);
+        fenceGate(pRecipeOutput, ModItems.FROST_FENCE_GATE, ModItems.FROST_PLANKS);
+        woodenDoor(pRecipeOutput, ModItems.FROST_DOOR, ModItems.FROST_PLANKS);
+        woodenTrapdoor(pRecipeOutput, ModItems.FROST_TRAPDOOR, ModItems.FROST_PLANKS);
+        woodenPressurePlate(pRecipeOutput, ModItems.FROST_PRESSURE_PLATE, ModItems.FROST_PLANKS);
+        woodenButton(pRecipeOutput, ModItems.FROST_BUTTON, ModItems.FROST_PLANKS);
+        woodenSign(pRecipeOutput, ModItems.FROST_SIGN, ModItems.FROST_PLANKS);
+        hangingSign(pRecipeOutput, ModItems.FROST_HANGING_SIGN, ModItems.STRIPPED_FROST_LOG);
+        woodenBoat(pRecipeOutput, ModItems.FROST_BOAT, ModItems.FROST_PLANKS);
+        chestBoat(pRecipeOutput, ModItems.FROST_CHEST_BOAT, ModItems.FROST_PLANKS);
+
+        planks(pRecipeOutput, ModItems.DAWN_REDWOOD_PLANKS, ModTags.Items.DAWN_REDWOOD_LOGS);
+        woodFromLogs(pRecipeOutput, ModItems.DAWN_REDWOOD_WOOD, ModItems.DAWN_REDWOOD_LOG);
+        woodFromLogs(pRecipeOutput, ModItems.STRIPPED_DAWN_REDWOOD_WOOD, ModItems.STRIPPED_DAWN_REDWOOD_LOG);
+        woodenStairs(pRecipeOutput, ModItems.DAWN_REDWOOD_STAIRS, ModItems.DAWN_REDWOOD_PLANKS);
+        woodenSlab(pRecipeOutput, ModItems.DAWN_REDWOOD_SLAB, ModItems.DAWN_REDWOOD_PLANKS);
+        woodenFence(pRecipeOutput, ModItems.DAWN_REDWOOD_FENCE, ModItems.DAWN_REDWOOD_PLANKS);
+        fenceGate(pRecipeOutput, ModItems.DAWN_REDWOOD_FENCE_GATE, ModItems.DAWN_REDWOOD_PLANKS);
+        woodenDoor(pRecipeOutput, ModItems.DAWN_REDWOOD_DOOR, ModItems.DAWN_REDWOOD_PLANKS);
+        woodenTrapdoor(pRecipeOutput, ModItems.DAWN_REDWOOD_TRAPDOOR, ModItems.DAWN_REDWOOD_PLANKS);
+        woodenPressurePlate(pRecipeOutput, ModItems.DAWN_REDWOOD_PRESSURE_PLATE, ModItems.DAWN_REDWOOD_PLANKS);
+        woodenButton(pRecipeOutput, ModItems.DAWN_REDWOOD_BUTTON, ModItems.DAWN_REDWOOD_PLANKS);
+        woodenSign(pRecipeOutput, ModItems.DAWN_REDWOOD_SIGN, ModItems.DAWN_REDWOOD_PLANKS);
+        hangingSign(pRecipeOutput, ModItems.DAWN_REDWOOD_HANGING_SIGN, ModItems.STRIPPED_DAWN_REDWOOD_LOG);
+        woodenBoat(pRecipeOutput, ModItems.DAWN_REDWOOD_BOAT, ModItems.DAWN_REDWOOD_PLANKS);
+        chestBoat(pRecipeOutput, ModItems.DAWN_REDWOOD_CHEST_BOAT, ModItems.DAWN_REDWOOD_PLANKS);
+
         simpleDye(pRecipeOutput, Items.RED_DYE, ModItems.BEGONIAS, 1);
         simpleDye(pRecipeOutput, Items.WHITE_DYE, ModItems.WHITE_PETALS, 1);
+        simpleDye(pRecipeOutput, Items.LIGHT_GRAY_DYE, ModItems.FROSTY_PETALS, 1);
         simpleDye(pRecipeOutput, Items.PINK_DYE, ModItems.PINK_DAISY, 1);
         simpleDye(pRecipeOutput, Items.RED_DYE, ModItems.RED_CARNATION, 1);
         simpleDye(pRecipeOutput, Items.PINK_DYE, ModItems.PINK_CARNATION, 1);
@@ -90,6 +123,9 @@ public class ModRecipeProvider extends ModRecipeHelper {
         simpleDye(pRecipeOutput, Items.RED_DYE, ModItems.RED_SPIDER_LILY, 1);
         simpleDye(pRecipeOutput, Items.YELLOW_DYE, ModItems.YELLOW_CHRYSANTHEMUM, 1);
         simpleDye(pRecipeOutput, Items.LIME_DYE, ModItems.GREEN_CHRYSANTHEMUM, 1);
-        simpleDye(pRecipeOutput, Items.YELLOW_DYE, ModItems.DAYBLOOM, 1);
+        simpleDye(pRecipeOutput, Items.YELLOW_DYE, ModItems.OPEN_DAYBLOOM, 1);
+        simpleDye(pRecipeOutput, Items.WHITE_DYE, ModItems.EDELWEISS, 1);
+        simpleDye(pRecipeOutput, Items.PURPLE_DYE, ModItems.CROCUS, 1);
+        simpleDye(pRecipeOutput, Items.PURPLE_DYE, ModItems.IRIS, 1);
     }
 }

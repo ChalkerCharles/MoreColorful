@@ -22,9 +22,11 @@ public class ModTags {
         public static final TagKey<Block> CRABAPPLE_LOGS = create("crabapple_logs");
         public static final TagKey<Block> EBONY_LOGS = create("ebony_logs");
         public static final TagKey<Block> RARE_WOOD = create("rare_wood");
-        public static final TagKey<Block> LEAF_PILES = create("leaf_piles");
+        public static final TagKey<Block> LEAF_LITTERS = create("leaf_litters");
         public static final TagKey<Block> GINKGO_LOGS = create("ginkgo_logs");
         public static final TagKey<Block> MAPLE_LOGS = create("maple_logs");
+        public static final TagKey<Block> FROST_LOGS = create("frost_logs");
+        public static final TagKey<Block> DAWN_REDWOOD_LOGS = create("dawn_redwood_logs");
         private static TagKey<Block> create(String path) {
             return BlockTags.create(ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, path));
         }
@@ -36,9 +38,11 @@ public class ModTags {
         public static final TagKey<Item> EBONY_LOGS = create("ebony_logs");
         public static final TagKey<Item> RARE_PLANKS = create("rare_planks");
         public static final TagKey<Item> STRIPPED_RARE_LOGS = create("stripped_rare_logs");
-        public static final TagKey<Item> LEAF_PILES = create("leaf_piles");
+        public static final TagKey<Item> LEAF_LITTERS = create("leaf_litters");
         public static final TagKey<Item> GINKGO_LOGS = create("ginkgo_logs");
         public static final TagKey<Item> MAPLE_LOGS = create("maple_logs");
+        public static final TagKey<Item> FROST_LOGS = create("frost_logs");
+        public static final TagKey<Item> DAWN_REDWOOD_LOGS = create("dawn_redwood_logs");
         private static TagKey<Item> create(String path) {
             return ItemTags.create(ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, path));
         }

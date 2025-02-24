@@ -2,9 +2,12 @@
   "values": [
     "morecolorful:potted_crabapple_sapling",
     "morecolorful:potted_white_cherry_sapling",
-    "morecolorful:potted_autumn_birch_sapling",
+    "morecolorful:potted_orange_birch_sapling",
+    "morecolorful:potted_yellow_birch_sapling",
     "morecolorful:potted_ginkgo_sapling",
     "morecolorful:potted_maple_sapling",
+    "morecolorful:potted_frost_sapling",
+    "morecolorful:potted_dawn_redwood_sapling",
     "morecolorful:potted_pink_daisy",
     "morecolorful:potted_red_carnation",
     "morecolorful:potted_pink_carnation",
@@ -12,6 +15,10 @@
     "morecolorful:potted_red_spider_lily",
     "morecolorful:potted_yellow_chrysanthemum",
     "morecolorful:potted_green_chrysanthemum",
-    "morecolorful:potted_daybloom"
+    "morecolorful:potted_open_daybloom",
+    "morecolorful:potted_closed_daybloom",
+    "morecolorful:potted_edelweiss",
+    "morecolorful:potted_crocus",
+    "morecolorful:potted_iris"
   ]
 }

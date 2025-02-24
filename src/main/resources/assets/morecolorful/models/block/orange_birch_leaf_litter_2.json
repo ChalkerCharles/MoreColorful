@@ -1,0 +1,6 @@
+{
+	"parent": "morecolorful:block/template_leaf_litter_2",
+	"textures": {
+		"texture": "morecolorful:block/orange_birch_leaf_litter"
+  	}
+}

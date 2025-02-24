@@ -6,6 +6,14 @@
       {
         "chance": 0.06,
         "feature": "morecolorful:fancy_ginkgo"
+      },
+      {
+        "chance": 0.2,
+        "feature": "minecraft:oak_bees_0002"
+      },
+      {
+        "chance": 0.06,
+        "feature": "minecraft:fancy_oak_bees_0002"
       }
     ]
   }

@@ -14,6 +14,8 @@ public class ModWoodTypes {
     public static final WoodType EBONY = registerRareWood(MODID + ":ebony", ModBlockSetTypes.EBONY);
     public static final WoodType GINKGO = register(new WoodType(MODID + ":ginkgo", ModBlockSetTypes.GINKGO));
     public static final WoodType MAPLE = register(new WoodType(MODID + ":maple", ModBlockSetTypes.MAPLE));
+    public static final WoodType FROST = registerCherry(MODID + ":frost", ModBlockSetTypes.FROST);
+    public static final WoodType DAWN_REDWOOD = register(new WoodType(MODID + ":dawn_redwood", ModBlockSetTypes.DAWN_REDWOOD));
 
     @SuppressWarnings("SameParameterValue")
     private static WoodType registerCherry(String name, BlockSetType type) {

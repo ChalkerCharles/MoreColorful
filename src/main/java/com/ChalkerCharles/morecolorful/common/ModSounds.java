@@ -94,6 +94,14 @@ public class ModSounds {
     public static final Supplier<SoundEvent> RARE_WOOD_HANGING_SIGN_FALL = register("block.rare_wood.hanging_sign.fall");
     public static final Supplier<SoundEvent> RARE_WOOD_FENCE_GATE_CLOSE = register("block.rare_wood.fence_gate.close");
     public static final Supplier<SoundEvent> RARE_WOOD_FENCE_GATE_OPEN = register("block.rare_wood.fence_gate.open");
+    public static final Supplier<SoundEvent> LEAF_LITTER_BREAK = register("block.leaf_litter.break");
+    public static final Supplier<SoundEvent> LEAF_LITTER_STEP = register("block.leaf_litter.step");
+    public static final Supplier<SoundEvent> LEAF_LITTER_PLACE = register("block.leaf_litter.place");
+    public static final Supplier<SoundEvent> LEAF_LITTER_HIT = register("block.leaf_litter.hit");
+    public static final Supplier<SoundEvent> LEAF_LITTER_FALL = register("block.leaf_litter.fall");
+
+    // Music
+    //public static final Holder<SoundEvent> MUSIC_BIOME_AUTUMN = registerForHolder("music.overworld.autumn");
 
     private static Holder<SoundEvent> registerForHolder(String name) {
         return SOUND_EVENTS.register(name, ()-> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, name)));

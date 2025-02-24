@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_edelweiss": {
+      "conditions": {
+        "items": [
+          {
+            "items": "morecolorful:edelweiss"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "morecolorful:white_dye_from_edelweiss"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_edelweiss"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "morecolorful:white_dye_from_edelweiss"
+    ]
+  }
+}

@@ -3,7 +3,6 @@ package com.ChalkerCharles.morecolorful.common.block.common;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleType;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.ParticleUtils;
 import net.minecraft.util.RandomSource;

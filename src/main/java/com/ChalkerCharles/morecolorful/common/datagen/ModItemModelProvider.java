@@ -49,8 +49,10 @@ public class ModItemModelProvider extends ModItemModelHelper {
         blockItem2d(ModItems.WHITE_CHERRY_SAPLING.get());
         basicItem(ModItems.WHITE_PETALS.get());
 
-        blockItem2d(ModItems.AUTUMN_BIRCH_SAPLING.get());
-        basicItem(ModItems.AUTUMN_BIRCH_LEAF_PILE.get());
+        blockItem2d(ModItems.ORANGE_BIRCH_SAPLING.get());
+        blockItem2d(ModItems.ORANGE_BIRCH_LEAF_LITTER.get());
+        blockItem2d(ModItems.YELLOW_BIRCH_SAPLING.get());
+        blockItem2d(ModItems.YELLOW_BIRCH_LEAF_LITTER.get());
 
         buttonFenceWall(ModItems.EBONY_FENCE.get(), ModBlocks.EBONY_PLANKS.get(), "fence");
         basicItem(ModItems.EBONY_DOOR.get());
@@ -68,7 +70,7 @@ public class ModItemModelProvider extends ModItemModelHelper {
         basicItem(ModItems.GINKGO_BOAT.get());
         basicItem(ModItems.GINKGO_CHEST_BOAT.get());
         blockItem2d(ModItems.GINKGO_SAPLING.get());
-        basicItem(ModItems.GINKGO_LEAF_PILE.get());
+        blockItem2d(ModItems.GINKGO_LEAF_LITTER.get());
 
         buttonFenceWall(ModItems.MAPLE_FENCE.get(), ModBlocks.MAPLE_PLANKS.get(), "fence");
         basicItem(ModItems.MAPLE_DOOR.get());
@@ -78,7 +80,27 @@ public class ModItemModelProvider extends ModItemModelHelper {
         basicItem(ModItems.MAPLE_BOAT.get());
         basicItem(ModItems.MAPLE_CHEST_BOAT.get());
         blockItem2d(ModItems.MAPLE_SAPLING.get());
-        basicItem(ModItems.MAPLE_LEAF_PILE.get());
+        blockItem2d(ModItems.MAPLE_LEAF_LITTER.get());
+
+        buttonFenceWall(ModItems.FROST_FENCE.get(), ModBlocks.FROST_PLANKS.get(), "fence");
+        basicItem(ModItems.FROST_DOOR.get());
+        buttonFenceWall(ModItems.FROST_BUTTON.get(), ModBlocks.FROST_PLANKS.get(), "button");
+        basicItem(ModItems.FROST_SIGN.get());
+        basicItem(ModItems.FROST_HANGING_SIGN.get());
+        basicItem(ModItems.FROST_BOAT.get());
+        basicItem(ModItems.FROST_CHEST_BOAT.get());
+        blockItem2d(ModItems.FROST_SAPLING.get());
+        basicItem(ModItems.FROSTY_PETALS.get());
+
+        buttonFenceWall(ModItems.DAWN_REDWOOD_FENCE.get(), ModBlocks.DAWN_REDWOOD_PLANKS.get(), "fence");
+        basicItem(ModItems.DAWN_REDWOOD_DOOR.get());
+        buttonFenceWall(ModItems.DAWN_REDWOOD_BUTTON.get(), ModBlocks.DAWN_REDWOOD_PLANKS.get(), "button");
+        basicItem(ModItems.DAWN_REDWOOD_SIGN.get());
+        basicItem(ModItems.DAWN_REDWOOD_HANGING_SIGN.get());
+        basicItem(ModItems.DAWN_REDWOOD_BOAT.get());
+        basicItem(ModItems.DAWN_REDWOOD_CHEST_BOAT.get());
+        blockItem2d(ModItems.DAWN_REDWOOD_SAPLING.get());
+        blockItem2d(ModItems.DAWN_REDWOOD_LEAF_LITTER.get());
 
         blockItem2d(ModItems.PINK_DAISY.get());
         blockItem2d(ModItems.RED_CARNATION.get());
@@ -87,6 +109,13 @@ public class ModItemModelProvider extends ModItemModelHelper {
         blockItem2d(ModItems.RED_SPIDER_LILY.get());
         blockItem2d(ModItems.YELLOW_CHRYSANTHEMUM.get());
         blockItem2d(ModItems.GREEN_CHRYSANTHEMUM.get());
-        blockItem2d(ModItems.DAYBLOOM.get());
+        blockItem2d(ModItems.OPEN_DAYBLOOM.get());
+        blockItem2d(ModItems.CLOSED_DAYBLOOM.get());
+        blockItem2d(ModItems.EDELWEISS.get());
+        blockItem2d(ModItems.CROCUS.get());
+        blockItem2d(ModItems.IRIS.get());
+
+        basicItem(ModItems.STRAWBERRY.get());
+        basicItem(ModItems.BLUEBERRIES.get());
     }
 }

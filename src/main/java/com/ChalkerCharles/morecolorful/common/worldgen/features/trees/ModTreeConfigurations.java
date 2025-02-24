@@ -1,6 +1,9 @@
 package com.ChalkerCharles.morecolorful.common.worldgen.features.trees;
 
 import com.ChalkerCharles.morecolorful.common.block.ModBlocks;
+import com.ChalkerCharles.morecolorful.common.worldgen.features.trees.foliageplacers.DawnRedwoodFoliagePlacer;
+import com.ChalkerCharles.morecolorful.common.worldgen.features.trees.foliageplacers.GinkgoFoliagePlacer;
+import com.ChalkerCharles.morecolorful.common.worldgen.features.trees.trunklplacers.DawnRedwoodTrunkPlacer;
 import net.minecraft.data.worldgen.features.TreeFeatures;
 import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.util.valueproviders.ConstantInt;
@@ -10,10 +13,8 @@ import net.minecraft.util.valueproviders.WeightedListInt;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
-import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.CherryFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FancyFoliagePlacer;
-import net.minecraft.world.level.levelgen.feature.foliageplacers.RandomSpreadFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.treedecorators.BeehiveDecorator;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.CherryTrunkPlacer;
@@ -32,19 +33,27 @@ public class ModTreeConfigurations {
     public static final TreeConfiguration WHITE_CHERRY_005 = whiteCherry()
             .decorators(List.of(new BeehiveDecorator(0.05F)))
             .build();
-    public static final TreeConfiguration AUTUMN_BIRCH = TreeFeatures.createStraightBlobTree(
-            Blocks.BIRCH_LOG, ModBlocks.AUTUMN_BIRCH_LEAVES.get(), 5, 2, 1, 2).ignoreVines().build();
-    public static final TreeConfiguration AUTUMN_BIRCH_0002 = TreeFeatures.createStraightBlobTree(
-            Blocks.BIRCH_LOG, ModBlocks.AUTUMN_BIRCH_LEAVES.get(), 5, 2, 1, 2).ignoreVines()
+    public static final TreeConfiguration ORANGE_BIRCH = TreeFeatures.createStraightBlobTree(
+            Blocks.BIRCH_LOG, ModBlocks.ORANGE_BIRCH_LEAVES.get(), 5, 2, 1, 2).ignoreVines().build();
+    public static final TreeConfiguration ORANGE_BIRCH_0002 = TreeFeatures.createStraightBlobTree(
+            Blocks.BIRCH_LOG, ModBlocks.ORANGE_BIRCH_LEAVES.get(), 5, 2, 1, 2).ignoreVines()
             .decorators(List.of(new BeehiveDecorator(0.002F))).build();
-    public static final TreeConfiguration AUTUMN_BIRCH_005 = TreeFeatures.createStraightBlobTree(
-                    Blocks.BIRCH_LOG, ModBlocks.AUTUMN_BIRCH_LEAVES.get(), 5, 2, 1, 2).ignoreVines()
+    public static final TreeConfiguration ORANGE_BIRCH_005 = TreeFeatures.createStraightBlobTree(
+                    Blocks.BIRCH_LOG, ModBlocks.ORANGE_BIRCH_LEAVES.get(), 5, 2, 1, 2).ignoreVines()
+            .decorators(List.of(new BeehiveDecorator(0.05F))).build();
+    public static final TreeConfiguration YELLOW_BIRCH = TreeFeatures.createStraightBlobTree(
+            Blocks.BIRCH_LOG, ModBlocks.YELLOW_BIRCH_LEAVES.get(), 5, 2, 1, 2).ignoreVines().build();
+    public static final TreeConfiguration YELLOW_BIRCH_0002 = TreeFeatures.createStraightBlobTree(
+                    Blocks.BIRCH_LOG, ModBlocks.YELLOW_BIRCH_LEAVES.get(), 5, 2, 1, 2).ignoreVines()
+            .decorators(List.of(new BeehiveDecorator(0.002F))).build();
+    public static final TreeConfiguration YELLOW_BIRCH_005 = TreeFeatures.createStraightBlobTree(
+                    Blocks.BIRCH_LOG, ModBlocks.YELLOW_BIRCH_LEAVES.get(), 5, 2, 1, 2).ignoreVines()
             .decorators(List.of(new BeehiveDecorator(0.05F))).build();
     public static final TreeConfiguration GINKGO = new TreeConfiguration.TreeConfigurationBuilder(
             BlockStateProvider.simple(ModBlocks.GINKGO_LOG.get()),
             new StraightTrunkPlacer(5, 2, 0),
             BlockStateProvider.simple(ModBlocks.GINKGO_LEAVES.get()),
-            new RandomSpreadFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0), ConstantInt.of(4), 150),
+            new GinkgoFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0), ConstantInt.of(4), 135),
             new TwoLayersFeatureSize(1, 0, 1)
     ).build();
     public static final TreeConfiguration FANCY_GINKGO = new TreeConfiguration.TreeConfigurationBuilder(
@@ -72,6 +81,30 @@ public class ModTreeConfigurations {
             BlockStateProvider.simple(ModBlocks.MAPLE_LEAVES.get()),
             new CherryFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0), ConstantInt.of(5), 0.25F, 0.5F, 0.066666667F, 0.16666667F),
             new TwoLayersFeatureSize(1, 0, 2)
+    ).ignoreVines().build();
+    public static final TreeConfiguration FROST = new TreeConfiguration.TreeConfigurationBuilder(
+            BlockStateProvider.simple(ModBlocks.FROST_LOG.get()),
+            new CherryTrunkPlacer(
+                    7,
+                    1,
+                    0,
+                    new WeightedListInt(
+                            SimpleWeightedRandomList.<IntProvider>builder().add(ConstantInt.of(2), 1).add(ConstantInt.of(3), 1).build()
+                    ),
+                    UniformInt.of(2, 4),
+                    UniformInt.of(-4, -3),
+                    UniformInt.of(-1, 0)
+            ),
+            BlockStateProvider.simple(ModBlocks.FROST_LEAVES.get()),
+            new CherryFoliagePlacer(ConstantInt.of(4), ConstantInt.of(0), ConstantInt.of(5), 0.25F, 0.5F, 0.16666667F, 0.33333334F),
+            new TwoLayersFeatureSize(1, 0, 2)
+    ).ignoreVines().build();
+    public static final TreeConfiguration DAWN_REDWOOD = new TreeConfiguration.TreeConfigurationBuilder(
+            BlockStateProvider.simple(ModBlocks.DAWN_REDWOOD_LOG.get()),
+            new DawnRedwoodTrunkPlacer(14, 10, 6, UniformInt.of(3, 5)),
+            BlockStateProvider.simple(ModBlocks.DAWN_REDWOOD_LEAVES.get()),
+            new DawnRedwoodFoliagePlacer(UniformInt.of(3, 4), UniformInt.of(0, 2), UniformInt.of(3, 5)),
+            new TwoLayersFeatureSize(2, 0, 2)
     ).ignoreVines().build();
 
     private static TreeConfiguration.TreeConfigurationBuilder crabapple() {

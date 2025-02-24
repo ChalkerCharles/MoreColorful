@@ -1,5 +1,6 @@
 package com.ChalkerCharles.morecolorful.common.worldgen.biomes;
 
+import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.common.worldgen.biomes.overworld.ModOverworldBiomes;
 import com.ChalkerCharles.morecolorful.common.worldgen.biomes.overworld.ModOverworldRegion;
 import net.minecraft.core.HolderGetter;
@@ -9,10 +10,15 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import terrablender.api.Regions;
+import terrablender.api.SurfaceRuleManager;
 
 public class ModBiomeSetup {
-    public static void setupTerraBlender() {
+    public static void registerRegions() {
         Regions.register(new ModOverworldRegion(10));
+    }
+
+    public static void registerSurfaceRules() {
+        SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, MoreColorful.MODID, ModSurfaceRuleData.overworld());
     }
 
     public static void bootstrap(BootstrapContext<Biome> context) {
@@ -25,5 +31,7 @@ public class ModBiomeSetup {
         context.register(ModBiomes.GOLDEN_GROVE, ModOverworldBiomes.goldenGrove(placedFeature, carver));
         context.register(ModBiomes.MAPLE_FOREST, ModOverworldBiomes.mapleForest(placedFeature, carver));
         context.register(ModBiomes.SUNSET_VALLEY, ModOverworldBiomes.sunsetValley(placedFeature, carver));
+        context.register(ModBiomes.FROST_GROVE, ModOverworldBiomes.frostGrove(placedFeature, carver));
+        context.register(ModBiomes.DAWN_REDWOOD_SWAMP, ModOverworldBiomes.dawnRedwoodSwamp(placedFeature, carver));
     }
 }

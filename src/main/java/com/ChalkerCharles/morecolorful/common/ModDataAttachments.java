@@ -1,11 +1,8 @@
 package com.ChalkerCharles.morecolorful.common;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
-import com.ChalkerCharles.morecolorful.client.gui.PlayingScreen;
-import com.ChalkerCharles.morecolorful.common.item.musical_instruments.InstrumentsType;
 import com.ChalkerCharles.morecolorful.network.packets.DrumSetPacket;
 import com.ChalkerCharles.morecolorful.network.packets.PlayingScreenPacket;
-import net.minecraft.core.BlockPos;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.registries.DeferredRegister;

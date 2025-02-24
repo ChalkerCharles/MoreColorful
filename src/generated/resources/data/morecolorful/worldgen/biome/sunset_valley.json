@@ -82,9 +82,9 @@
       "minecraft:glow_lichen",
       "morecolorful:flower_sunset_valley",
       "morecolorful:trees_sunset_valley",
-      "morecolorful:autumn_birch_leaf_pile",
-      "morecolorful:ginkgo_leaf_pile",
-      "morecolorful:maple_leaf_pile",
+      "morecolorful:autumn_birch_leaf_litter",
+      "morecolorful:ginkgo_leaf_litter",
+      "morecolorful:maple_leaf_litter",
       "minecraft:patch_grass_forest",
       "minecraft:brown_mushroom_normal",
       "minecraft:red_mushroom_normal",
@@ -131,6 +131,18 @@
         "maxCount": 4,
         "minCount": 4,
         "weight": 8
+      },
+      {
+        "type": "minecraft:fox",
+        "maxCount": 4,
+        "minCount": 2,
+        "weight": 8
+      },
+      {
+        "type": "minecraft:rabbit",
+        "maxCount": 3,
+        "minCount": 2,
+        "weight": 4
       }
     ],
     "misc": [],

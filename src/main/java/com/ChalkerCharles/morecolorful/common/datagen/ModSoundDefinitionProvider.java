@@ -164,5 +164,43 @@ public class ModSoundDefinitionProvider extends ModSoundDefinitionHelper {
                 "rare_wood/hanging_sign/step2",
                 "rare_wood/hanging_sign/step3",
                 "rare_wood/hanging_sign/step4");
+        generic(ModSounds.LEAF_LITTER_BREAK, "subtitles.block.generic.break",
+                "leaf_litter/break1",
+                "leaf_litter/break2",
+                "leaf_litter/break3",
+                "leaf_litter/break4",
+                "leaf_litter/break5");
+        generic(ModSounds.LEAF_LITTER_STEP, "subtitles.block.generic.footsteps",
+                "leaf_litter/step1",
+                "leaf_litter/step2",
+                "leaf_litter/step3",
+                "leaf_litter/step4",
+                "leaf_litter/step5",
+                "leaf_litter/step6");
+        generic(ModSounds.LEAF_LITTER_PLACE, "subtitles.block.generic.place",
+                "leaf_litter/break1",
+                "leaf_litter/break2",
+                "leaf_litter/break3",
+                "leaf_litter/break4",
+                "leaf_litter/break5");
+        generic(ModSounds.LEAF_LITTER_HIT, "subtitles.block.generic.hit",
+                "leaf_litter/step1",
+                "leaf_litter/step2",
+                "leaf_litter/step3",
+                "leaf_litter/step4",
+                "leaf_litter/step5",
+                "leaf_litter/step6");
+        generic(ModSounds.LEAF_LITTER_FALL, null,
+                "leaf_litter/step1",
+                "leaf_litter/step2",
+                "leaf_litter/step3",
+                "leaf_litter/step4",
+                "leaf_litter/step5",
+                "leaf_litter/step6");
+
+        // Music
+//        add(ModSounds.MUSIC_BIOME_AUTUMN.value(), SoundDefinition.definition().with(
+//                music(modMusic("twilight"), 0.8F, 2)
+//        ));
     }
 }

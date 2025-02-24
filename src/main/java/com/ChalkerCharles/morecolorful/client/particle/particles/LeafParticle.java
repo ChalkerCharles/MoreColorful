@@ -1,10 +1,13 @@
 package com.ChalkerCharles.morecolorful.client.particle.particles;
 
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.particle.ParticleRenderType;
-import net.minecraft.client.particle.SpriteSet;
-import net.minecraft.client.particle.TextureSheetParticle;
+import net.minecraft.client.particle.*;
+import net.minecraft.core.particles.SimpleParticleType;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import org.jetbrains.annotations.Nullable;
 
+@OnlyIn(Dist.CLIENT)
 public class LeafParticle extends TextureSheetParticle {
     private float rotSpeed;
     private final float particleRandom;
@@ -16,11 +19,12 @@ public class LeafParticle extends TextureSheetParticle {
         this.particleRandom = this.random.nextFloat();
         this.spinAcceleration = (float)Math.toRadians(this.random.nextBoolean() ? -5.0 : 5.0);
         this.lifetime = 300;
-        this.gravity = 7.5E-4F;
+        this.gravity = 2.1E-4F;
         float f = this.random.nextBoolean() ? 0.1F : 0.125F;
         this.quadSize = f;
         this.setSize(f, f);
         this.friction = 1.0F;
+        this.yd = -0.021F;
     }
 
     @Override
@@ -40,8 +44,8 @@ public class LeafParticle extends TextureSheetParticle {
         if (!this.removed) {
             float f = (float)(300 - this.lifetime);
             float f1 = Math.min(f / 300.0F, 1.0F);
-            double d0 = Math.cos(Math.toRadians(this.particleRandom * 60.0F)) * 2.0 * Math.pow(f1, 1.25);
-            double d1 = Math.sin(Math.toRadians(this.particleRandom * 60.0F)) * 2.0 * Math.pow(f1, 1.25);
+            double d0 = f1 * Math.cos(f1 * Math.toRadians(1000.0F + this.particleRandom * 3000.0F)) * 10.0;
+            double d1 = f1 * Math.sin(f1 * Math.toRadians(1000.0F + this.particleRandom * 3000.0F)) * 10.0;
             this.xd += d0 * 0.0025F;
             this.zd += d1 * 0.0025F;
             this.yd = this.yd - (double)this.gravity;
@@ -58,6 +62,19 @@ public class LeafParticle extends TextureSheetParticle {
                 this.yd = this.yd * (double)this.friction;
                 this.zd = this.zd * (double)this.friction;
             }
+        }
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public static class Provider implements ParticleProvider<SimpleParticleType> {
+        private final SpriteSet sprites;
+        public Provider(SpriteSet sprites) {
+            this.sprites = sprites;
+        }
+        @Nullable
+        @Override
+        public Particle createParticle(SimpleParticleType pType, ClientLevel pLevel, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed) {
+            return new LeafParticle(pLevel, pX, pY, pZ, sprites);
         }
     }
 }

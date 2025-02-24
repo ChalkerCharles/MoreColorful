@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:random_selector",
+  "config": {
+    "default": "morecolorful:orange_birch_0002",
+    "features": [
+      {
+        "chance": 0.5,
+        "feature": "morecolorful:yellow_birch_0002"
+      }
+    ]
+  }
+}

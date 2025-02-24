@@ -1,12 +1,16 @@
 {
   "values": [
-    "#morecolorful:leaf_piles",
+    "#morecolorful:leaf_litters",
     "morecolorful:crabapple_leaves",
     "morecolorful:begonias",
     "morecolorful:white_cherry_leaves",
     "morecolorful:white_petals",
-    "morecolorful:autumn_birch_leaves",
+    "morecolorful:orange_birch_leaves",
+    "morecolorful:yellow_birch_leaves",
     "morecolorful:ginkgo_leaves",
-    "morecolorful:maple_leaves"
+    "morecolorful:maple_leaves",
+    "morecolorful:frost_leaves",
+    "morecolorful:frosty_petals",
+    "morecolorful:dawn_redwood_leaves"
   ]
 }

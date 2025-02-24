@@ -1,16 +1,16 @@
 {
   "values": {
-    "#morecolorful:leaf_piles": {
-      "chance": 0.3
-    },
-    "morecolorful:autumn_birch_leaves": {
-      "chance": 0.3
-    },
-    "morecolorful:autumn_birch_sapling": {
+    "#morecolorful:leaf_litters": {
       "chance": 0.3
     },
     "morecolorful:begonias": {
       "chance": 0.3
+    },
+    "morecolorful:blueberries": {
+      "chance": 0.3
+    },
+    "morecolorful:closed_daybloom": {
+      "chance": 0.65
     },
     "morecolorful:crabapple_leaves": {
       "chance": 0.3
@@ -18,8 +18,26 @@
     "morecolorful:crabapple_sapling": {
       "chance": 0.3
     },
-    "morecolorful:daybloom": {
+    "morecolorful:crocus": {
       "chance": 0.65
+    },
+    "morecolorful:dawn_redwood_leaves": {
+      "chance": 0.3
+    },
+    "morecolorful:dawn_redwood_sapling": {
+      "chance": 0.3
+    },
+    "morecolorful:edelweiss": {
+      "chance": 0.65
+    },
+    "morecolorful:frost_leaves": {
+      "chance": 0.3
+    },
+    "morecolorful:frost_sapling": {
+      "chance": 0.3
+    },
+    "morecolorful:frosty_petals": {
+      "chance": 0.3
     },
     "morecolorful:ginkgo_leaves": {
       "chance": 0.3
@@ -30,10 +48,22 @@
     "morecolorful:green_chrysanthemum": {
       "chance": 0.65
     },
+    "morecolorful:iris": {
+      "chance": 0.65
+    },
     "morecolorful:maple_leaves": {
       "chance": 0.3
     },
     "morecolorful:maple_sapling": {
+      "chance": 0.3
+    },
+    "morecolorful:open_daybloom": {
+      "chance": 0.65
+    },
+    "morecolorful:orange_birch_leaves": {
+      "chance": 0.3
+    },
+    "morecolorful:orange_birch_sapling": {
       "chance": 0.3
     },
     "morecolorful:pink_carnation": {
@@ -48,6 +78,9 @@
     "morecolorful:red_spider_lily": {
       "chance": 0.65
     },
+    "morecolorful:strawberry": {
+      "chance": 0.3
+    },
     "morecolorful:white_carnation": {
       "chance": 0.65
     },
@@ -58,6 +91,12 @@
       "chance": 0.3
     },
     "morecolorful:white_petals": {
+      "chance": 0.3
+    },
+    "morecolorful:yellow_birch_leaves": {
+      "chance": 0.3
+    },
+    "morecolorful:yellow_birch_sapling": {
       "chance": 0.3
     },
     "morecolorful:yellow_chrysanthemum": {

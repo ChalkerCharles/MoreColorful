@@ -12,11 +12,15 @@
         "feature": "minecraft:fancy_oak_bees_0002"
       },
       {
-        "chance": 0.4,
-        "feature": "morecolorful:autumn_birch_0002"
+        "chance": 0.2,
+        "feature": "morecolorful:orange_birch_0002"
       },
       {
-        "chance": 0.3,
+        "chance": 0.2,
+        "feature": "morecolorful:yellow_birch_0002"
+      },
+      {
+        "chance": 0.2,
         "feature": "morecolorful:ginkgo"
       },
       {

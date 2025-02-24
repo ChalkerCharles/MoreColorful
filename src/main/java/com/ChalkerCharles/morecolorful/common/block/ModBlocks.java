@@ -2,9 +2,7 @@ package com.ChalkerCharles.morecolorful.common.block;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.client.particle.ModParticles;
-import com.ChalkerCharles.morecolorful.common.block.common.FallingLeavesBlock;
-import com.ChalkerCharles.morecolorful.common.block.common.LeafPileBlock;
-import com.ChalkerCharles.morecolorful.common.block.common.PetalLeavesBlock;
+import com.ChalkerCharles.morecolorful.common.block.common.*;
 import com.ChalkerCharles.morecolorful.common.block.musical_instruments.*;
 import com.ChalkerCharles.morecolorful.common.block.properties.ModBlockSetTypes;
 import com.ChalkerCharles.morecolorful.common.block.properties.ModSoundTypes;
@@ -98,10 +96,14 @@ public class ModBlocks {
     public static final DeferredBlock<SaplingBlock> WHITE_CHERRY_SAPLING = BLOCKS.register("white_cherry_sapling", ()-> new SaplingBlock(ModTreeGrower.WHITE_CHERRY, BlockBehaviour.Properties.ofFullCopy(Blocks.CHERRY_SAPLING).mapColor(MapColor.SNOW)));
     public static final DeferredBlock<FlowerPotBlock> POTTED_WHITE_CHERRY_SAPLING = BLOCKS.register("potted_white_cherry_sapling", ()-> flowerPot(WHITE_CHERRY_SAPLING));
     public static final DeferredBlock<PinkPetalsBlock> WHITE_PETALS = BLOCKS.register("white_petals", ()-> new PinkPetalsBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.PINK_PETALS).mapColor(MapColor.SNOW)));
-    public static final DeferredBlock<LeavesBlock> AUTUMN_BIRCH_LEAVES = BLOCKS.register("autumn_birch_leaves", ()-> new FallingLeavesBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BIRCH_LEAVES).mapColor(MapColor.TERRACOTTA_YELLOW), ModParticles.AUTUMN_BIRCH_LEAVES));
-    public static final DeferredBlock<SaplingBlock> AUTUMN_BIRCH_SAPLING = BLOCKS.register("autumn_birch_sapling", ()-> new SaplingBlock(ModTreeGrower.AUTUMN_BIRCH, BlockBehaviour.Properties.ofFullCopy(Blocks.BIRCH_SAPLING).mapColor(MapColor.TERRACOTTA_YELLOW)));
-    public static final DeferredBlock<FlowerPotBlock> POTTED_AUTUMN_BIRCH_SAPLING = BLOCKS.register("potted_autumn_birch_sapling", ()-> flowerPot(AUTUMN_BIRCH_SAPLING));
-    public static final DeferredBlock<LeafPileBlock> AUTUMN_BIRCH_LEAF_PILE = BLOCKS.register("autumn_birch_leaf_pile", ()-> new LeafPileBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.PINK_PETALS).mapColor(MapColor.TERRACOTTA_YELLOW).replaceable()));
+    public static final DeferredBlock<LeavesBlock> ORANGE_BIRCH_LEAVES = BLOCKS.register("orange_birch_leaves", ()-> new FallingLeavesBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BIRCH_LEAVES).mapColor(MapColor.TERRACOTTA_ORANGE), ModParticles.ORANGE_BIRCH_LEAVES));
+    public static final DeferredBlock<SaplingBlock> ORANGE_BIRCH_SAPLING = BLOCKS.register("orange_birch_sapling", ()-> new SaplingBlock(ModTreeGrower.ORANGE_BIRCH, BlockBehaviour.Properties.ofFullCopy(Blocks.BIRCH_SAPLING).mapColor(MapColor.TERRACOTTA_ORANGE)));
+    public static final DeferredBlock<FlowerPotBlock> POTTED_ORANGE_BIRCH_SAPLING = BLOCKS.register("potted_orange_birch_sapling", ()-> flowerPot(ORANGE_BIRCH_SAPLING));
+    public static final DeferredBlock<LeafLitterBlock> ORANGE_BIRCH_LEAF_LITTER = BLOCKS.register("orange_birch_leaf_litter", ()-> new LeafLitterBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.PINK_PETALS).mapColor(MapColor.TERRACOTTA_ORANGE).sound(ModSoundTypes.LEAF_LITTER).replaceable()));
+    public static final DeferredBlock<LeavesBlock> YELLOW_BIRCH_LEAVES = BLOCKS.register("yellow_birch_leaves", ()-> new FallingLeavesBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BIRCH_LEAVES).mapColor(MapColor.TERRACOTTA_YELLOW), ModParticles.YELLOW_BIRCH_LEAVES));
+    public static final DeferredBlock<SaplingBlock> YELLOW_BIRCH_SAPLING = BLOCKS.register("yellow_birch_sapling", ()-> new SaplingBlock(ModTreeGrower.YELLOW_BIRCH, BlockBehaviour.Properties.ofFullCopy(Blocks.BIRCH_SAPLING).mapColor(MapColor.TERRACOTTA_YELLOW)));
+    public static final DeferredBlock<FlowerPotBlock> POTTED_YELLOW_BIRCH_SAPLING = BLOCKS.register("potted_yellow_birch_sapling", ()-> flowerPot(YELLOW_BIRCH_SAPLING));
+    public static final DeferredBlock<LeafLitterBlock> YELLOW_BIRCH_LEAF_LITTER = BLOCKS.register("yellow_birch_leaf_litter", ()-> new LeafLitterBlock(BlockBehaviour.Properties.ofFullCopy(ModBlocks.ORANGE_BIRCH_LEAF_LITTER.get()).mapColor(MapColor.TERRACOTTA_YELLOW).sound(ModSoundTypes.LEAF_LITTER).replaceable()));
 
     public static final DeferredBlock<RotatedPillarBlock> GINKGO_LOG = BLOCKS.register("ginkgo_log", ()-> log(Blocks.OAK_LOG, MapColor.SAND, MapColor.WOOD));
     public static final DeferredBlock<RotatedPillarBlock> GINKGO_WOOD = BLOCKS.register("ginkgo_wood", ()-> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WOOD)));
@@ -123,7 +125,7 @@ public class ModBlocks {
     public static final DeferredBlock<LeavesBlock> GINKGO_LEAVES = BLOCKS.register("ginkgo_leaves", ()-> new FallingLeavesBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LEAVES).mapColor(MapColor.GOLD), ModParticles.GINKGO_LEAVES));
     public static final DeferredBlock<SaplingBlock> GINKGO_SAPLING = BLOCKS.register("ginkgo_sapling", ()-> new SaplingBlock(ModTreeGrower.GINKGO, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING).mapColor(MapColor.GOLD)));
     public static final DeferredBlock<FlowerPotBlock> POTTED_GINKGO_SAPLING = BLOCKS.register("potted_ginkgo_sapling", ()-> flowerPot(GINKGO_SAPLING));
-    public static final DeferredBlock<LeafPileBlock> GINKGO_LEAF_PILE = BLOCKS.register("ginkgo_leaf_pile", ()-> new LeafPileBlock(BlockBehaviour.Properties.ofFullCopy(ModBlocks.AUTUMN_BIRCH_LEAF_PILE.get()).mapColor(MapColor.GOLD)));
+    public static final DeferredBlock<LeafLitterBlock> GINKGO_LEAF_LITTER = BLOCKS.register("ginkgo_leaf_litter", ()-> new LeafLitterBlock(BlockBehaviour.Properties.ofFullCopy(ModBlocks.ORANGE_BIRCH_LEAF_LITTER.get()).mapColor(MapColor.GOLD)));
 
     public static final DeferredBlock<RotatedPillarBlock> MAPLE_LOG = BLOCKS.register("maple_log", ()-> log(Blocks.OAK_LOG, MapColor.RAW_IRON, MapColor.WOOD));
     public static final DeferredBlock<RotatedPillarBlock> MAPLE_WOOD = BLOCKS.register("maple_wood", ()-> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WOOD)));
@@ -145,7 +147,49 @@ public class ModBlocks {
     public static final DeferredBlock<LeavesBlock> MAPLE_LEAVES = BLOCKS.register("maple_leaves", ()-> new FallingLeavesBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LEAVES).mapColor(MapColor.TERRACOTTA_RED), ModParticles.MAPLE_LEAVES));
     public static final DeferredBlock<SaplingBlock> MAPLE_SAPLING = BLOCKS.register("maple_sapling", ()-> new SaplingBlock(ModTreeGrower.MAPLE, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING).mapColor(MapColor.TERRACOTTA_RED)));
     public static final DeferredBlock<FlowerPotBlock> POTTED_MAPLE_SAPLING = BLOCKS.register("potted_maple_sapling", ()-> flowerPot(MAPLE_SAPLING));
-    public static final DeferredBlock<LeafPileBlock> MAPLE_LEAF_PILE = BLOCKS.register("maple_leaf_pile", ()-> new LeafPileBlock(BlockBehaviour.Properties.ofFullCopy(ModBlocks.AUTUMN_BIRCH_LEAF_PILE.get()).mapColor(MapColor.TERRACOTTA_RED)));
+    public static final DeferredBlock<LeafLitterBlock> MAPLE_LEAF_LITTER = BLOCKS.register("maple_leaf_litter", ()-> new LeafLitterBlock(BlockBehaviour.Properties.ofFullCopy(ModBlocks.ORANGE_BIRCH_LEAF_LITTER.get()).mapColor(MapColor.TERRACOTTA_RED)));
+    public static final DeferredBlock<RotatedPillarBlock> FROST_LOG = BLOCKS.register("frost_log", ()-> log(Blocks.CHERRY_LOG, MapColor.SNOW, MapColor.TERRACOTTA_BLUE));
+    public static final DeferredBlock<RotatedPillarBlock> FROST_WOOD = BLOCKS.register("frost_wood", ()-> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CHERRY_WOOD).mapColor(MapColor.TERRACOTTA_BLUE)));
+    public static final DeferredBlock<RotatedPillarBlock> STRIPPED_FROST_LOG = BLOCKS.register("stripped_frost_log", ()-> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_CHERRY_LOG).mapColor(MapColor.SNOW)));
+    public static final DeferredBlock<RotatedPillarBlock> STRIPPED_FROST_WOOD = BLOCKS.register("stripped_frost_wood", ()-> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_CHERRY_WOOD).mapColor(MapColor.SNOW)));
+    public static final DeferredBlock<Block> FROST_PLANKS = BLOCKS.register("frost_planks", ()-> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.CHERRY_PLANKS).mapColor(MapColor.SNOW)));
+    public static final DeferredBlock<StairBlock> FROST_STAIRS = BLOCKS.register("frost_stairs", ()-> stair(FROST_PLANKS.get()));
+    public static final DeferredBlock<SlabBlock> FROST_SLAB = BLOCKS.register("frost_slab", ()-> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CHERRY_SLAB).mapColor(MapColor.SNOW)));
+    public static final DeferredBlock<FenceBlock> FROST_FENCE = BLOCKS.register("frost_fence", ()-> new FenceBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CHERRY_FENCE).mapColor(MapColor.SNOW)));
+    public static final DeferredBlock<FenceGateBlock> FROST_FENCE_GATE = BLOCKS.register("frost_fence_gate", ()-> new FenceGateBlock(ModWoodTypes.FROST, BlockBehaviour.Properties.ofFullCopy(Blocks.CHERRY_FENCE).mapColor(MapColor.SNOW)));
+    public static final DeferredBlock<DoorBlock> FROST_DOOR = BLOCKS.register("frost_door", ()-> new DoorBlock(ModBlockSetTypes.FROST, BlockBehaviour.Properties.ofFullCopy(Blocks.CHERRY_DOOR).mapColor(MapColor.SNOW)));
+    public static final DeferredBlock<TrapDoorBlock> FROST_TRAPDOOR = BLOCKS.register("frost_trapdoor", ()-> new TrapDoorBlock(ModBlockSetTypes.FROST, BlockBehaviour.Properties.ofFullCopy(Blocks.CHERRY_TRAPDOOR).mapColor(MapColor.SNOW)));
+    public static final DeferredBlock<PressurePlateBlock> FROST_PRESSURE_PLATE = BLOCKS.register("frost_pressure_plate", ()-> new PressurePlateBlock(ModBlockSetTypes.FROST, BlockBehaviour.Properties.ofFullCopy(Blocks.CHERRY_PRESSURE_PLATE).mapColor(MapColor.SNOW)));
+    public static final DeferredBlock<ButtonBlock> FROST_BUTTON = BLOCKS.register("frost_button", ()-> woodenButton(ModBlockSetTypes.FROST, Blocks.CHERRY_BUTTON, MapColor.SNOW));
+    public static final DeferredBlock<StandingSignBlock> FROST_SIGN = BLOCKS.register("frost_sign", ()-> new StandingSignBlock(ModWoodTypes.FROST, BlockBehaviour.Properties.ofFullCopy(Blocks.CHERRY_SIGN).mapColor(MapColor.SNOW)));
+    public static final DeferredBlock<WallSignBlock> FROST_WALL_SIGN = BLOCKS.register("frost_wall_sign", ()-> new WallSignBlock(ModWoodTypes.FROST, BlockBehaviour.Properties.ofFullCopy(Blocks.CHERRY_WALL_SIGN).mapColor(MapColor.SNOW).lootFrom(FROST_SIGN)));
+    public static final DeferredBlock<CeilingHangingSignBlock> FROST_HANGING_SIGN = BLOCKS.register("frost_hanging_sign", ()-> new CeilingHangingSignBlock(ModWoodTypes.FROST, BlockBehaviour.Properties.ofFullCopy(Blocks.CHERRY_HANGING_SIGN).mapColor(MapColor.SNOW)));
+    public static final DeferredBlock<WallHangingSignBlock> FROST_WALL_HANGING_SIGN = BLOCKS.register("frost_wall_hanging_sign", ()-> new WallHangingSignBlock(ModWoodTypes.FROST, BlockBehaviour.Properties.ofFullCopy(Blocks.CHERRY_WALL_HANGING_SIGN).mapColor(MapColor.SNOW).lootFrom(FROST_HANGING_SIGN)));
+    public static final DeferredBlock<LeavesBlock> FROST_LEAVES = BLOCKS.register("frost_leaves", ()-> new PetalLeavesBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CHERRY_LEAVES).mapColor(MapColor.ICE), ModParticles.FROST_LEAVES));
+    public static final DeferredBlock<SaplingBlock> FROST_SAPLING = BLOCKS.register("frost_sapling", ()-> new SaplingBlock(ModTreeGrower.FROST, BlockBehaviour.Properties.ofFullCopy(Blocks.CHERRY_SAPLING).mapColor(MapColor.ICE)));
+    public static final DeferredBlock<FlowerPotBlock> POTTED_FROST_SAPLING = BLOCKS.register("potted_frost_sapling", ()-> flowerPot(FROST_SAPLING));
+    public static final DeferredBlock<PinkPetalsBlock> FROSTY_PETALS = BLOCKS.register("frosty_petals", ()-> new PinkPetalsBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.PINK_PETALS).mapColor(MapColor.ICE)));
+    public static final DeferredBlock<RotatedPillarBlock> DAWN_REDWOOD_LOG = BLOCKS.register("dawn_redwood_log", ()-> log(Blocks.OAK_LOG, MapColor.TERRACOTTA_ORANGE, MapColor.COLOR_BROWN));
+    public static final DeferredBlock<RotatedPillarBlock> DAWN_REDWOOD_WOOD = BLOCKS.register("dawn_redwood_wood", ()-> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WOOD).mapColor(MapColor.COLOR_BROWN)));
+    public static final DeferredBlock<RotatedPillarBlock> STRIPPED_DAWN_REDWOOD_LOG = BLOCKS.register("stripped_dawn_redwood_log", ()-> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_OAK_LOG).mapColor(MapColor.TERRACOTTA_ORANGE)));
+    public static final DeferredBlock<RotatedPillarBlock> STRIPPED_DAWN_REDWOOD_WOOD = BLOCKS.register("stripped_dawn_redwood_wood", ()-> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_OAK_WOOD).mapColor(MapColor.TERRACOTTA_ORANGE)));
+    public static final DeferredBlock<Block> DAWN_REDWOOD_PLANKS = BLOCKS.register("dawn_redwood_planks", ()-> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).mapColor(MapColor.TERRACOTTA_ORANGE)));
+    public static final DeferredBlock<StairBlock> DAWN_REDWOOD_STAIRS = BLOCKS.register("dawn_redwood_stairs", ()-> stair(DAWN_REDWOOD_PLANKS.get()));
+    public static final DeferredBlock<SlabBlock> DAWN_REDWOOD_SLAB = BLOCKS.register("dawn_redwood_slab", ()-> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SLAB).mapColor(MapColor.TERRACOTTA_ORANGE)));
+    public static final DeferredBlock<FenceBlock> DAWN_REDWOOD_FENCE = BLOCKS.register("dawn_redwood_fence", ()-> new FenceBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE).mapColor(MapColor.TERRACOTTA_ORANGE)));
+    public static final DeferredBlock<FenceGateBlock> DAWN_REDWOOD_FENCE_GATE = BLOCKS.register("dawn_redwood_fence_gate", ()-> new FenceGateBlock(ModWoodTypes.DAWN_REDWOOD, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_FENCE).mapColor(MapColor.TERRACOTTA_ORANGE)));
+    public static final DeferredBlock<DoorBlock> DAWN_REDWOOD_DOOR = BLOCKS.register("dawn_redwood_door", ()-> new DoorBlock(ModBlockSetTypes.DAWN_REDWOOD, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_DOOR).mapColor(MapColor.TERRACOTTA_ORANGE)));
+    public static final DeferredBlock<TrapDoorBlock> DAWN_REDWOOD_TRAPDOOR = BLOCKS.register("dawn_redwood_trapdoor", ()-> new TrapDoorBlock(ModBlockSetTypes.DAWN_REDWOOD, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_TRAPDOOR).mapColor(MapColor.TERRACOTTA_ORANGE)));
+    public static final DeferredBlock<PressurePlateBlock> DAWN_REDWOOD_PRESSURE_PLATE = BLOCKS.register("dawn_redwood_pressure_plate", ()-> new PressurePlateBlock(ModBlockSetTypes.DAWN_REDWOOD, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PRESSURE_PLATE).mapColor(MapColor.TERRACOTTA_ORANGE)));
+    public static final DeferredBlock<ButtonBlock> DAWN_REDWOOD_BUTTON = BLOCKS.register("dawn_redwood_button", ()-> woodenButton(ModBlockSetTypes.DAWN_REDWOOD, Blocks.OAK_BUTTON, MapColor.SAND));
+    public static final DeferredBlock<StandingSignBlock> DAWN_REDWOOD_SIGN = BLOCKS.register("dawn_redwood_sign", ()-> new StandingSignBlock(ModWoodTypes.DAWN_REDWOOD, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SIGN).mapColor(MapColor.TERRACOTTA_ORANGE)));
+    public static final DeferredBlock<WallSignBlock> DAWN_REDWOOD_WALL_SIGN = BLOCKS.register("dawn_redwood_wall_sign", ()-> new WallSignBlock(ModWoodTypes.DAWN_REDWOOD, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WALL_SIGN).mapColor(MapColor.TERRACOTTA_ORANGE).lootFrom(DAWN_REDWOOD_SIGN)));
+    public static final DeferredBlock<CeilingHangingSignBlock> DAWN_REDWOOD_HANGING_SIGN = BLOCKS.register("dawn_redwood_hanging_sign", ()-> new CeilingHangingSignBlock(ModWoodTypes.DAWN_REDWOOD, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_HANGING_SIGN).mapColor(MapColor.TERRACOTTA_ORANGE)));
+    public static final DeferredBlock<WallHangingSignBlock> DAWN_REDWOOD_WALL_HANGING_SIGN = BLOCKS.register("dawn_redwood_wall_hanging_sign", ()-> new WallHangingSignBlock(ModWoodTypes.DAWN_REDWOOD, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WALL_HANGING_SIGN).mapColor(MapColor.TERRACOTTA_ORANGE).lootFrom(DAWN_REDWOOD_HANGING_SIGN)));
+    public static final DeferredBlock<LeavesBlock> DAWN_REDWOOD_LEAVES = BLOCKS.register("dawn_redwood_leaves", ()-> new FallingLeavesBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LEAVES).mapColor(MapColor.TERRACOTTA_ORANGE), ModParticles.DAWN_REDWOOD_LEAVES));
+    public static final DeferredBlock<SaplingBlock> DAWN_REDWOOD_SAPLING = BLOCKS.register("dawn_redwood_sapling", ()-> new DawnRedwoodSaplingBlock(ModTreeGrower.DAWN_REDWOOD, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING).mapColor(MapColor.TERRACOTTA_ORANGE)));
+    public static final DeferredBlock<FlowerPotBlock> POTTED_DAWN_REDWOOD_SAPLING = BLOCKS.register("potted_dawn_redwood_sapling", ()-> flowerPot(DAWN_REDWOOD_SAPLING));
+    public static final DeferredBlock<LeafLitterBlock> DAWN_REDWOOD_LEAF_LITTER = BLOCKS.register("dawn_redwood_leaf_litter", ()-> new LeafLitterBlock(BlockBehaviour.Properties.ofFullCopy(ModBlocks.ORANGE_BIRCH_LEAF_LITTER.get()).mapColor(MapColor.TERRACOTTA_ORANGE)));
 
     public static final DeferredBlock<FlowerBlock> PINK_DAISY = BLOCKS.register("pink_daisy", ()-> new FlowerBlock(MobEffects.REGENERATION, 8.0F, BlockBehaviour.Properties.ofFullCopy(Blocks.OXEYE_DAISY).mapColor(MapColor.COLOR_PINK)));
     public static final DeferredBlock<FlowerPotBlock> POTTED_PINK_DAISY = BLOCKS.register("potted_pink_daisy", ()-> flowerPot(PINK_DAISY));
@@ -161,8 +205,19 @@ public class ModBlocks {
     public static final DeferredBlock<FlowerPotBlock> POTTED_YELLOW_CHRYSANTHEMUM = BLOCKS.register("potted_yellow_chrysanthemum", ()-> flowerPot(YELLOW_CHRYSANTHEMUM));
     public static final DeferredBlock<FlowerBlock> GREEN_CHRYSANTHEMUM = BLOCKS.register("green_chrysanthemum", ()-> new FlowerBlock(MobEffects.DAMAGE_RESISTANCE, 6.0F, BlockBehaviour.Properties.ofFullCopy(Blocks.OXEYE_DAISY).mapColor(MapColor.COLOR_LIGHT_GREEN)));
     public static final DeferredBlock<FlowerPotBlock> POTTED_GREEN_CHRYSANTHEMUM = BLOCKS.register("potted_green_chrysanthemum", ()-> flowerPot(GREEN_CHRYSANTHEMUM));
-    public static final DeferredBlock<FlowerBlock> DAYBLOOM = BLOCKS.register("daybloom", ()-> new FlowerBlock(MobEffects.ABSORPTION, 12.0F, BlockBehaviour.Properties.ofFullCopy(Blocks.OXEYE_DAISY).mapColor(MapColor.COLOR_YELLOW)));
-    public static final DeferredBlock<FlowerPotBlock> POTTED_DAYBLOOM = BLOCKS.register("potted_daybloom", ()-> flowerPot(DAYBLOOM));
+    public static final DeferredBlock<FlowerBlock> OPEN_DAYBLOOM = BLOCKS.register("open_daybloom", ()-> new DaybloomBlock(DaybloomBlock.Type.OPEN, BlockBehaviour.Properties.ofFullCopy(Blocks.OXEYE_DAISY).mapColor(MapColor.COLOR_YELLOW).randomTicks()));
+    public static final DeferredBlock<FlowerPotBlock> POTTED_OPEN_DAYBLOOM = BLOCKS.register("potted_open_daybloom", ()-> new FlowerPotBlock(()-> (FlowerPotBlock) Blocks.FLOWER_POT, OPEN_DAYBLOOM, flowerPotProperties(OPEN_DAYBLOOM).randomTicks()));
+    public static final DeferredBlock<FlowerBlock> CLOSED_DAYBLOOM = BLOCKS.register("closed_daybloom", ()-> new DaybloomBlock(DaybloomBlock.Type.CLOSED, BlockBehaviour.Properties.ofFullCopy(Blocks.OXEYE_DAISY).mapColor(MapColor.PLANT).randomTicks()));
+    public static final DeferredBlock<FlowerPotBlock> POTTED_CLOSED_DAYBLOOM = BLOCKS.register("potted_closed_daybloom", ()-> new FlowerPotBlock(()-> (FlowerPotBlock) Blocks.FLOWER_POT, CLOSED_DAYBLOOM, flowerPotProperties(CLOSED_DAYBLOOM).randomTicks()));
+    public static final DeferredBlock<FlowerBlock> EDELWEISS = BLOCKS.register("edelweiss", ()-> new FlowerBlock(MobEffects.FIRE_RESISTANCE, 6.0F, BlockBehaviour.Properties.ofFullCopy(Blocks.OXEYE_DAISY).mapColor(MapColor.SNOW)));
+    public static final DeferredBlock<FlowerPotBlock> POTTED_EDELWEISS = BLOCKS.register("potted_edelweiss", ()-> flowerPot(EDELWEISS));
+    public static final DeferredBlock<FlowerBlock> CROCUS = BLOCKS.register("crocus", ()-> new FlowerBlock(MobEffects.MOVEMENT_SPEED, 8.0F, BlockBehaviour.Properties.ofFullCopy(Blocks.OXEYE_DAISY).mapColor(MapColor.COLOR_PURPLE)));
+    public static final DeferredBlock<FlowerPotBlock> POTTED_CROCUS = BLOCKS.register("potted_crocus", ()-> flowerPot(CROCUS));
+    public static final DeferredBlock<FlowerBlock> IRIS = BLOCKS.register("iris", ()-> new FlowerBlock(MobEffects.SATURATION, 0.35F, BlockBehaviour.Properties.ofFullCopy(Blocks.OXEYE_DAISY).mapColor(MapColor.COLOR_PURPLE)));
+    public static final DeferredBlock<FlowerPotBlock> POTTED_IRIS = BLOCKS.register("potted_iris", ()-> flowerPot(IRIS));
+
+    public static final DeferredBlock<BerryBushBlock> STRAWBERRY_BUSH = BLOCKS.register("strawberry_bush", ()-> new BerryBushBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH)));
+    public static final DeferredBlock<BerryBushBlock> BLUEBERRY_BUSH = BLOCKS.register("blueberry_bush", ()-> new BerryBushBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH)));
 
     private static RotatedPillarBlock log(Block pBlock, MapColor pTopMapColor, MapColor pSideMapColor) {
         return new RotatedPillarBlock(
@@ -188,8 +243,11 @@ public class ModBlocks {
     private static ButtonBlock rareWoodButton(BlockSetType pType, Block pBlock, MapColor pColor) {
         return new ButtonBlock(pType, 30, BlockBehaviour.Properties.ofFullCopy(pBlock).mapColor(pColor).instrument(NoteBlockInstrumentExtension.GUZHENG));
     }
+    private static BlockBehaviour.Properties flowerPotProperties(Supplier<? extends Block> pPotted) {
+        return BlockBehaviour.Properties.of().instabreak().noOcclusion().pushReaction(PushReaction.DESTROY).mapColor(pPotted.get().defaultMapColor());
+    }
     private static FlowerPotBlock flowerPot(Supplier<FlowerPotBlock> emptyPot, Supplier<? extends Block> pPotted) {
-        return new FlowerPotBlock(emptyPot, pPotted, BlockBehaviour.Properties.of().instabreak().noOcclusion().pushReaction(PushReaction.DESTROY).mapColor(pPotted.get().defaultMapColor()));
+        return new FlowerPotBlock(emptyPot, pPotted, flowerPotProperties(pPotted));
     }
     private static FlowerPotBlock flowerPot(Supplier<? extends Block> pPotted) {
         return flowerPot(() -> (FlowerPotBlock) Blocks.FLOWER_POT, pPotted);

@@ -1,8 +1,8 @@
 package com.ChalkerCharles.morecolorful.client.gui;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
+import com.ChalkerCharles.morecolorful.client.MidiHandler;
 import com.ChalkerCharles.morecolorful.client.ModKeyMapping;
-import com.ChalkerCharles.morecolorful.common.ModDataAttachments;
 import com.ChalkerCharles.morecolorful.common.block.musical_instruments.MusicalInstrumentBlock;
 import com.ChalkerCharles.morecolorful.common.item.ModItems;
 import com.ChalkerCharles.morecolorful.common.item.musical_instruments.InstrumentsType;
@@ -71,12 +71,14 @@ public class PlayingScreen extends Screen {
     private float pTick = 0;
     private boolean isDragging;
     public boolean isPressing = false;
+    private final MidiHandler midiHandler;
 
     public PlayingScreen(Player pPlayer, InstrumentsType pType, BlockPos pPos) {
         super(TITLE);
         this.pPlayer = pPlayer;
         this.pType = pType;
         this.pPos = pPos;
+        this.midiHandler = new MidiHandler(this::pressFromKeyId, this::restoreFromKeyId);
     }
 
     @Override
@@ -229,7 +231,15 @@ public class PlayingScreen extends Screen {
         pGuiGraphics.blit(PLAYING_SCREEN_TEXTURE, (i - 186) / 2, 32, 0, 0, 186, 140);
     }
 
+    @Override
     public boolean isPauseScreen() {return false;}
+
+    @Override
+    public void removed() {
+        midiHandler.closeDevices();
+    }
+
+    @Override
     public boolean shouldCloseOnEsc() {
         isPressing = false;
         pPlayer.stopUsingItem();
@@ -243,56 +253,11 @@ public class PlayingScreen extends Screen {
         if (pMouseX > (i - 186) / 2 + 37 && pMouseX < (i - 186) / 2 + 149 && pMouseY > 111 && pMouseY < 159){
             isDragging = true;
         } else isDragging = (pMouseX > (i - 186) / 2 + 21 && pMouseX < (i - 186) / 2 + 165 && pMouseY > 53 && pMouseY < 101);
-        if (blackKey_0.isHovered())
-            blackKey_0.press(true);
-        if (whiteKey_1.isHovered() && !blackKey_0.isHovered() && !blackKey_2.isHovered())
-            whiteKey_1.press(true);
-        if (blackKey_2.isHovered())
-            blackKey_2.press(true);
-        if (whiteKey_3.isHovered() && !blackKey_2.isHovered() && !blackKey_4.isHovered())
-            whiteKey_3.press(true);
-        if (blackKey_4.isHovered())
-            blackKey_4.press(true);
-        if (whiteKey_5.isHovered() && !blackKey_4.isHovered())
-            whiteKey_5.press(true);
-        if (whiteKey_6.isHovered() && !blackKey_7.isHovered())
-            whiteKey_6.press(true);
-        if (blackKey_7.isHovered())
-            blackKey_7.press(true);
-        if (whiteKey_8.isHovered() && !blackKey_7.isHovered() && !blackKey_9.isHovered())
-            whiteKey_8.press(true);
-        if (blackKey_9.isHovered())
-            blackKey_9.press(true);
-        if (whiteKey_10.isHovered() && !blackKey_9.isHovered())
-            whiteKey_10.press(true);
-        if (whiteKey_11.isHovered() && !blackKey_12.isHovered())
-            whiteKey_11.press(true);
-        if (blackKey_12.isHovered())
-            blackKey_12.press(true);
-        if (whiteKey_13.isHovered() && !blackKey_12.isHovered() && !blackKey_14.isHovered())
-            whiteKey_13.press(true);
-        if (blackKey_14.isHovered())
-            blackKey_14.press(true);
-        if (whiteKey_15.isHovered() && !blackKey_14.isHovered() && !blackKey_16.isHovered())
-            whiteKey_15.press(true);
-        if (blackKey_16.isHovered())
-            blackKey_16.press(true);
-        if (whiteKey_17.isHovered() && !blackKey_16.isHovered())
-            whiteKey_17.press(true);
-        if (whiteKey_18.isHovered() && !blackKey_19.isHovered())
-            whiteKey_18.press(true);
-        if (blackKey_19.isHovered())
-            blackKey_19.press(true);
-        if (whiteKey_20.isHovered() && !blackKey_19.isHovered() && !blackKey_21.isHovered())
-            whiteKey_20.press(true);
-        if (blackKey_21.isHovered())
-            blackKey_21.press(true);
-        if (whiteKey_22.isHovered() && !blackKey_21.isHovered())
-            whiteKey_22.press(true);
-        if (whiteKey_23.isHovered() && !blackKey_24.isHovered())
-            whiteKey_23.press(true);
-        if (blackKey_24.isHovered())
-            blackKey_24.press(true);
+        for (KeyButton button: allKeys) {
+            if (button.isHovered() && !(getNextKey(button).isHovered() || getLastKey(button).isHovered())) {
+                button.press(true);
+            }
+        }
         return super.mouseClicked(pMouseX, pMouseY, pButton);
     }
 
@@ -319,107 +284,21 @@ public class PlayingScreen extends Screen {
     public boolean mouseDragged(double pMouseX, double pMouseY, int pButton, double pDragX, double pDragY) {
         double i = this.width;
         if (pMouseX > (i - 186) / 2 + 37 && pMouseX < (i - 186) / 2 + 149 && pMouseY > 111 && pMouseY < 159 && isDragging) {
-            if (blackKey_0.isHovered()) {
-                blackKey_0.press(true);
-                restoreAllExcept(blackKey_0);
-            }
-            if (whiteKey_1.isHovered() && !blackKey_0.isHovered() && !blackKey_2.isHovered()) {
-                whiteKey_1.press(true);
-                restoreAllExcept(whiteKey_1);
-            }
-            if (blackKey_2.isHovered()) {
-                blackKey_2.press(true);
-                restoreAllExcept(blackKey_2);
-            }
-            if (whiteKey_3.isHovered() && !blackKey_2.isHovered() && !blackKey_4.isHovered()) {
-                whiteKey_3.press(true);
-                restoreAllExcept(whiteKey_3);
-            }
-            if (blackKey_4.isHovered()) {
-                blackKey_4.press(true);
-                restoreAllExcept(blackKey_4);
-            }
-            if (whiteKey_5.isHovered() && !blackKey_4.isHovered()) {
-                whiteKey_5.press(true);
-                restoreAllExcept(whiteKey_5);
-            }
-            if (whiteKey_6.isHovered() && !blackKey_7.isHovered()) {
-                whiteKey_6.press(true);
-                restoreAllExcept(whiteKey_6);
-            }
-            if (blackKey_7.isHovered()) {
-                blackKey_7.press(true);
-                restoreAllExcept(blackKey_7);
-            }
-            if (whiteKey_8.isHovered() && !blackKey_7.isHovered() && !blackKey_9.isHovered()) {
-                whiteKey_8.press(true);
-                restoreAllExcept(whiteKey_8);
-            }
-            if (blackKey_9.isHovered()) {
-                blackKey_9.press(true);
-                restoreAllExcept(blackKey_9);
-            }
-            if (whiteKey_10.isHovered() && !blackKey_9.isHovered()) {
-                whiteKey_10.press(true);
-                restoreAllExcept(whiteKey_10);
+            for (int x = 0; x <= 10; x++) {
+                KeyButton key = getKeyFromId(x);
+                if (key.isHovered() && !(getNextKey(x).isHovered() || getLastKey(x).isHovered())) {
+                    key.press(true);
+                    restoreAllExcept(key);
+                }
             }
         }
         if (pMouseX > (i - 186) / 2 + 21 && pMouseX < (i - 186) / 2 + 165 && pMouseY > 53 && pMouseY < 101 && isDragging){
-            if (whiteKey_11.isHovered() && !blackKey_12.isHovered()) {
-                whiteKey_11.press(true);
-                restoreAllExcept(whiteKey_11);
-            }
-            if (blackKey_12.isHovered()) {
-                blackKey_12.press(true);
-                restoreAllExcept(blackKey_12);
-            }
-            if (whiteKey_13.isHovered() && !blackKey_12.isHovered() && !blackKey_14.isHovered()) {
-                whiteKey_13.press(true);
-                restoreAllExcept(whiteKey_13);
-            }
-            if (blackKey_14.isHovered()) {
-                blackKey_14.press(true);
-                restoreAllExcept(blackKey_14);
-            }
-            if (whiteKey_15.isHovered() && !blackKey_14.isHovered() && !blackKey_16.isHovered()) {
-                whiteKey_15.press(true);
-                restoreAllExcept(whiteKey_15);
-            }
-            if (blackKey_16.isHovered()) {
-                blackKey_16.press(true);
-                restoreAllExcept(blackKey_16);
-            }
-            if (whiteKey_17.isHovered() && !blackKey_16.isHovered()) {
-                whiteKey_17.press(true);
-                restoreAllExcept(whiteKey_17);
-            }
-            if (whiteKey_18.isHovered() && !blackKey_19.isHovered()) {
-                whiteKey_18.press(true);
-                restoreAllExcept(whiteKey_18);
-            }
-            if (blackKey_19.isHovered()) {
-                blackKey_19.press(true);
-                restoreAllExcept(blackKey_19);
-            }
-            if (whiteKey_20.isHovered() && !blackKey_19.isHovered() && !blackKey_21.isHovered()) {
-                whiteKey_20.press(true);
-                restoreAllExcept(whiteKey_20);
-            }
-            if (blackKey_21.isHovered()) {
-                blackKey_21.press(true);
-                restoreAllExcept(blackKey_21);
-            }
-            if (whiteKey_22.isHovered() && !blackKey_21.isHovered()) {
-                whiteKey_22.press(true);
-                restoreAllExcept(whiteKey_22);
-            }
-            if (whiteKey_23.isHovered() && !blackKey_24.isHovered()) {
-                whiteKey_23.press(true);
-                restoreAllExcept(whiteKey_23);
-            }
-            if (blackKey_24.isHovered()) {
-                blackKey_24.press(true);
-                restoreAllExcept(blackKey_24);
+            for (int x = 11; x <= 24; x++) {
+                KeyButton key = getKeyFromId(x);
+                if (key.isHovered() && !(getNextKey(x).isHovered() || getLastKey(x).isHovered())) {
+                    key.press(true);
+                    restoreAllExcept(key);
+                }
             }
         }
         return super.mouseDragged(pMouseX, pMouseY, pButton, pDragX, pDragY);
@@ -547,6 +426,57 @@ public class PlayingScreen extends Screen {
             }
         }
         PacketDistributor.sendToServer(new InstrumentTickingPacket(pTick, pPlayer.getId()));
+    }
+
+    private KeyButton getKeyFromId(int keyId) {
+        return switch (keyId) {
+            case 0 -> blackKey_0;
+            case 1 -> whiteKey_1;
+            case 2 -> blackKey_2;
+            case 3 -> whiteKey_3;
+            case 4 -> blackKey_4;
+            case 5 -> whiteKey_5;
+            case 6 -> whiteKey_6;
+            case 7 -> blackKey_7;
+            case 8 -> whiteKey_8;
+            case 9 -> blackKey_9;
+            case 10 -> whiteKey_10;
+            case 11 -> whiteKey_11;
+            case 12 -> blackKey_12;
+            case 13 -> whiteKey_13;
+            case 14 -> blackKey_14;
+            case 15 -> whiteKey_15;
+            case 16 -> blackKey_16;
+            case 17 -> whiteKey_17;
+            case 18 -> whiteKey_18;
+            case 19 -> blackKey_19;
+            case 20 -> whiteKey_20;
+            case 21 -> blackKey_21;
+            case 22 -> whiteKey_22;
+            case 23 -> whiteKey_23;
+            case 24 -> blackKey_24;
+            default -> throw new IllegalStateException("Unexpected value: " + keyId);
+        };
+    }
+    private KeyButton getNextKey(int keyId) {
+        int nextKeyId = keyId + 1 > 24 ? 0 : keyId + 1;
+        return getKeyFromId(nextKeyId);
+    }
+    private KeyButton getLastKey(int keyId) {
+        int lastKeyId = keyId - 1 < 0 ? 24 : keyId - 1;
+        return getKeyFromId(lastKeyId);
+    }
+    private KeyButton getNextKey(KeyButton keyButton) {
+        return getNextKey(keyButton.keyId);
+    }
+    private KeyButton getLastKey(KeyButton keyButton) {
+        return getLastKey(keyButton.keyId);
+    }
+    private void pressFromKeyId(int keyId) {
+        getKeyFromId(keyId).press(false);
+    }
+    private void restoreFromKeyId(int keyId) {
+        getKeyFromId(keyId).restore();
     }
 
     public static void openPlayingScreen(Player pPlayer, InstrumentsType pType){

@@ -171,7 +171,7 @@ public class ModOverworldBiomeBuilder {
 //    };
     protected final ResourceKey<Biome>[][] MOD_SWAMP_BIOMES = new ResourceKey[][]{
             {null, null, null, null, null},
-            {null, null, null, null, null},
+            {ModBiomes.DAWN_REDWOOD_SWAMP, ModBiomes.DAWN_REDWOOD_SWAMP, ModBiomes.DAWN_REDWOOD_SWAMP, ModBiomes.DAWN_REDWOOD_SWAMP, ModBiomes.DAWN_REDWOOD_SWAMP},
             {null, null, null, null, null},
             {null, null, null, null, null},
             {null, null, null, null, null}

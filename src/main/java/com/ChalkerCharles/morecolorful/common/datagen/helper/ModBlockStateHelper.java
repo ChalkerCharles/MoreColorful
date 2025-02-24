@@ -1,7 +1,8 @@
 package com.ChalkerCharles.morecolorful.common.datagen.helper;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
-import com.ChalkerCharles.morecolorful.common.block.common.LeafPileBlock;
+import com.ChalkerCharles.morecolorful.common.block.common.BerryBushBlock;
+import com.ChalkerCharles.morecolorful.common.block.common.LeafLitterBlock;
 import com.ChalkerCharles.morecolorful.common.block.properties.HorizontalDoubleBlockHalf;
 import com.ChalkerCharles.morecolorful.common.block.properties.ModBlockStateProperties;
 import net.minecraft.core.Direction;
@@ -107,6 +108,16 @@ public abstract class ModBlockStateHelper extends BlockStateProvider {
         simpleBlock(pWall, sign);
     }
 
+    protected void berryBush(BerryBushBlock block) {
+        getVariantBuilder(block).forAllStates(state -> {
+            int age = state.getValue(BerryBushBlock.AGE);
+            ResourceLocation texture = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "block/" + name(block) + "_stage" + age);
+            return ConfiguredModel.builder()
+                    .modelFile(models().cross(name(block) + "_stage" + age, texture).renderType(CUTOUT))
+                    .build();
+        });
+    }
+
     // States Only (For the blocks that have custom models)
     protected void simpleStateBlock(Block block) {
         getVariantBuilder(block).partialState().setModels(
@@ -187,7 +198,7 @@ public abstract class ModBlockStateHelper extends BlockStateProvider {
                     .condition(BlockStateProperties.FLOWER_AMOUNT, 4).end();
         }
     }
-    protected void leafPileBlock(LeafPileBlock block) {
+    protected void leafLitterBlock(LeafLitterBlock block) {
         ModelFile part1 = new ModelFile.UncheckedModelFile(modLoc("block/" + name(block) + "_1"));
         ModelFile part2 = new ModelFile.UncheckedModelFile(modLoc("block/" + name(block) + "_2"));
         ModelFile part3 = new ModelFile.UncheckedModelFile(modLoc("block/" + name(block) + "_3"));
@@ -197,16 +208,16 @@ public abstract class ModBlockStateHelper extends BlockStateProvider {
             int yRot = (int) ((direction.toYRot() + 180) % 360);
             builder.part().modelFile(part1).rotationY(yRot).addModel()
                     .condition(BlockStateProperties.HORIZONTAL_FACING, direction)
-                    .condition(ModBlockStateProperties.LEAF_AMOUNT, 1, 2, 3, 4).end();
+                    .condition(ModBlockStateProperties.SEGMENT_AMOUNT, 1, 2, 3, 4).end();
             builder.part().modelFile(part2).rotationY(yRot).addModel()
                     .condition(BlockStateProperties.HORIZONTAL_FACING, direction)
-                    .condition(ModBlockStateProperties.LEAF_AMOUNT, 2, 3, 4).end();
+                    .condition(ModBlockStateProperties.SEGMENT_AMOUNT, 2, 3, 4).end();
             builder.part().modelFile(part3).rotationY(yRot).addModel()
                     .condition(BlockStateProperties.HORIZONTAL_FACING, direction)
-                    .condition(ModBlockStateProperties.LEAF_AMOUNT, 3, 4).end();
+                    .condition(ModBlockStateProperties.SEGMENT_AMOUNT, 3, 4).end();
             builder.part().modelFile(part4).rotationY(yRot).addModel()
                     .condition(BlockStateProperties.HORIZONTAL_FACING, direction)
-                    .condition(ModBlockStateProperties.LEAF_AMOUNT, 4).end();
+                    .condition(ModBlockStateProperties.SEGMENT_AMOUNT, 4).end();
         }
     }
 

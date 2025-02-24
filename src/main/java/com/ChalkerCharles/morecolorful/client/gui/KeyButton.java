@@ -35,7 +35,7 @@ public class KeyButton extends Button {
     private static final ResourceLocation BLACK_KEY_PRESSED = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "key/black_key_pressed");
     private final int keyType;
     public boolean isPressed;
-    private final int keyId;
+    public final int keyId;
     public boolean pressedByClick;
     static int width = 12;
     static int height = 32;

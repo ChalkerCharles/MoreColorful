@@ -13,6 +13,8 @@ public class ModBlockSetTypes {
     public static final BlockSetType EBONY = registerRareWood(MODID + ":ebony");
     public static final BlockSetType GINKGO = register(new BlockSetType(MODID + ":ginkgo"));
     public static final BlockSetType MAPLE = register(new BlockSetType(MODID + ":maple"));
+    public static final BlockSetType FROST = registerCherry(MODID + ":frost");
+    public static final BlockSetType DAWN_REDWOOD = register(new BlockSetType(MODID + ":dawn_redwood"));
 
     private static BlockSetType registerCherry(@SuppressWarnings("SameParameterValue") String name) {
         return register(new BlockSetType(
