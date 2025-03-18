@@ -1,6 +1,7 @@
 package com.ChalkerCharles.morecolorful.mixin;
 
 import com.ChalkerCharles.morecolorful.common.block.ModBlocks;
+import net.minecraft.core.HolderSet;
 import net.minecraft.world.entity.animal.Bee;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Final;
@@ -13,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.function.Predicate;
 
-@Mixin(targets = "Lnet/minecraft/world/entity/animal/Bee$BeePollinateGoal")
+@Mixin(targets = "net.minecraft.world.entity.animal.Bee$BeePollinateGoal")
 public abstract class BeePollinateGoalMixin {
     @Shadow
     @Mutable
@@ -22,6 +23,13 @@ public abstract class BeePollinateGoalMixin {
 
     @Inject(method = "<init>(Lnet/minecraft/world/entity/animal/Bee;)V", at = @At("TAIL"))
     private void moreColorful$modify(Bee bee, CallbackInfo ci) {
-        VALID_POLLINATION_BLOCKS = VALID_POLLINATION_BLOCKS.and(state -> !state.is(ModBlocks.CLOSED_DAYBLOOM));
+        VALID_POLLINATION_BLOCKS = VALID_POLLINATION_BLOCKS.and(state ->
+                !(state.is(HolderSet.direct(
+                        ModBlocks.CLOSED_DAYBLOOM,
+                        ModBlocks.CLOSED_WATER_LILY,
+                        ModBlocks.CLOSED_WHITE_WATER_LILY,
+                        ModBlocks.CLOSED_BLUE_WATER_LILY)
+                ))
+        );
     }
 }

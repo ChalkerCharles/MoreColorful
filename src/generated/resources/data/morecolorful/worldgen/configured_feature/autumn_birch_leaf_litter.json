@@ -20,16 +20,6 @@
               },
               {
                 "data": {
-                  "Name": "morecolorful:yellow_birch_leaf_litter",
-                  "Properties": {
-                    "facing": "north",
-                    "segment_amount": "1"
-                  }
-                },
-                "weight": 1
-              },
-              {
-                "data": {
                   "Name": "morecolorful:orange_birch_leaf_litter",
                   "Properties": {
                     "facing": "east",
@@ -40,27 +30,7 @@
               },
               {
                 "data": {
-                  "Name": "morecolorful:yellow_birch_leaf_litter",
-                  "Properties": {
-                    "facing": "east",
-                    "segment_amount": "1"
-                  }
-                },
-                "weight": 1
-              },
-              {
-                "data": {
                   "Name": "morecolorful:orange_birch_leaf_litter",
-                  "Properties": {
-                    "facing": "south",
-                    "segment_amount": "1"
-                  }
-                },
-                "weight": 1
-              },
-              {
-                "data": {
-                  "Name": "morecolorful:yellow_birch_leaf_litter",
                   "Properties": {
                     "facing": "south",
                     "segment_amount": "1"
@@ -80,27 +50,7 @@
               },
               {
                 "data": {
-                  "Name": "morecolorful:yellow_birch_leaf_litter",
-                  "Properties": {
-                    "facing": "west",
-                    "segment_amount": "1"
-                  }
-                },
-                "weight": 1
-              },
-              {
-                "data": {
                   "Name": "morecolorful:orange_birch_leaf_litter",
-                  "Properties": {
-                    "facing": "north",
-                    "segment_amount": "2"
-                  }
-                },
-                "weight": 1
-              },
-              {
-                "data": {
-                  "Name": "morecolorful:yellow_birch_leaf_litter",
                   "Properties": {
                     "facing": "north",
                     "segment_amount": "2"
@@ -120,16 +70,6 @@
               },
               {
                 "data": {
-                  "Name": "morecolorful:yellow_birch_leaf_litter",
-                  "Properties": {
-                    "facing": "east",
-                    "segment_amount": "2"
-                  }
-                },
-                "weight": 1
-              },
-              {
-                "data": {
                   "Name": "morecolorful:orange_birch_leaf_litter",
                   "Properties": {
                     "facing": "south",
@@ -140,27 +80,7 @@
               },
               {
                 "data": {
-                  "Name": "morecolorful:yellow_birch_leaf_litter",
-                  "Properties": {
-                    "facing": "south",
-                    "segment_amount": "2"
-                  }
-                },
-                "weight": 1
-              },
-              {
-                "data": {
                   "Name": "morecolorful:orange_birch_leaf_litter",
-                  "Properties": {
-                    "facing": "west",
-                    "segment_amount": "2"
-                  }
-                },
-                "weight": 1
-              },
-              {
-                "data": {
-                  "Name": "morecolorful:yellow_birch_leaf_litter",
                   "Properties": {
                     "facing": "west",
                     "segment_amount": "2"
@@ -180,27 +100,7 @@
               },
               {
                 "data": {
-                  "Name": "morecolorful:yellow_birch_leaf_litter",
-                  "Properties": {
-                    "facing": "north",
-                    "segment_amount": "3"
-                  }
-                },
-                "weight": 1
-              },
-              {
-                "data": {
                   "Name": "morecolorful:orange_birch_leaf_litter",
-                  "Properties": {
-                    "facing": "east",
-                    "segment_amount": "3"
-                  }
-                },
-                "weight": 1
-              },
-              {
-                "data": {
-                  "Name": "morecolorful:yellow_birch_leaf_litter",
                   "Properties": {
                     "facing": "east",
                     "segment_amount": "3"
@@ -220,27 +120,7 @@
               },
               {
                 "data": {
-                  "Name": "morecolorful:yellow_birch_leaf_litter",
-                  "Properties": {
-                    "facing": "south",
-                    "segment_amount": "3"
-                  }
-                },
-                "weight": 1
-              },
-              {
-                "data": {
                   "Name": "morecolorful:orange_birch_leaf_litter",
-                  "Properties": {
-                    "facing": "west",
-                    "segment_amount": "3"
-                  }
-                },
-                "weight": 1
-              },
-              {
-                "data": {
-                  "Name": "morecolorful:yellow_birch_leaf_litter",
                   "Properties": {
                     "facing": "west",
                     "segment_amount": "3"
@@ -260,16 +140,6 @@
               },
               {
                 "data": {
-                  "Name": "morecolorful:yellow_birch_leaf_litter",
-                  "Properties": {
-                    "facing": "north",
-                    "segment_amount": "4"
-                  }
-                },
-                "weight": 1
-              },
-              {
-                "data": {
                   "Name": "morecolorful:orange_birch_leaf_litter",
                   "Properties": {
                     "facing": "east",
@@ -280,27 +150,7 @@
               },
               {
                 "data": {
-                  "Name": "morecolorful:yellow_birch_leaf_litter",
-                  "Properties": {
-                    "facing": "east",
-                    "segment_amount": "4"
-                  }
-                },
-                "weight": 1
-              },
-              {
-                "data": {
                   "Name": "morecolorful:orange_birch_leaf_litter",
-                  "Properties": {
-                    "facing": "south",
-                    "segment_amount": "4"
-                  }
-                },
-                "weight": 1
-              },
-              {
-                "data": {
-                  "Name": "morecolorful:yellow_birch_leaf_litter",
                   "Properties": {
                     "facing": "south",
                     "segment_amount": "4"
@@ -313,6 +163,156 @@
                   "Name": "morecolorful:orange_birch_leaf_litter",
                   "Properties": {
                     "facing": "west",
+                    "segment_amount": "4"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "morecolorful:yellow_birch_leaf_litter",
+                  "Properties": {
+                    "facing": "north",
+                    "segment_amount": "1"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "morecolorful:yellow_birch_leaf_litter",
+                  "Properties": {
+                    "facing": "east",
+                    "segment_amount": "1"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "morecolorful:yellow_birch_leaf_litter",
+                  "Properties": {
+                    "facing": "south",
+                    "segment_amount": "1"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "morecolorful:yellow_birch_leaf_litter",
+                  "Properties": {
+                    "facing": "west",
+                    "segment_amount": "1"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "morecolorful:yellow_birch_leaf_litter",
+                  "Properties": {
+                    "facing": "north",
+                    "segment_amount": "2"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "morecolorful:yellow_birch_leaf_litter",
+                  "Properties": {
+                    "facing": "east",
+                    "segment_amount": "2"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "morecolorful:yellow_birch_leaf_litter",
+                  "Properties": {
+                    "facing": "south",
+                    "segment_amount": "2"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "morecolorful:yellow_birch_leaf_litter",
+                  "Properties": {
+                    "facing": "west",
+                    "segment_amount": "2"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "morecolorful:yellow_birch_leaf_litter",
+                  "Properties": {
+                    "facing": "north",
+                    "segment_amount": "3"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "morecolorful:yellow_birch_leaf_litter",
+                  "Properties": {
+                    "facing": "east",
+                    "segment_amount": "3"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "morecolorful:yellow_birch_leaf_litter",
+                  "Properties": {
+                    "facing": "south",
+                    "segment_amount": "3"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "morecolorful:yellow_birch_leaf_litter",
+                  "Properties": {
+                    "facing": "west",
+                    "segment_amount": "3"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "morecolorful:yellow_birch_leaf_litter",
+                  "Properties": {
+                    "facing": "north",
+                    "segment_amount": "4"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "morecolorful:yellow_birch_leaf_litter",
+                  "Properties": {
+                    "facing": "east",
+                    "segment_amount": "4"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "morecolorful:yellow_birch_leaf_litter",
+                  "Properties": {
+                    "facing": "south",
                     "segment_amount": "4"
                   }
                 },

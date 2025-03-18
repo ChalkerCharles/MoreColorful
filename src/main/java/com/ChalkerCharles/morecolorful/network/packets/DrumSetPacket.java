@@ -15,8 +15,10 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public record DrumSetPacket(boolean isPressingBassDrum, boolean isPressingHat, boolean isPressingRide, boolean isPressingCrash, BlockPos pos, int id) implements CustomPacketPayload {
     public DrumSetPacket() {
-        this(false, false, false, false, new BlockPos(0, -128, 0), 0);
+        this(false, false, false, false, DEFAULT_POS, 0);
     }
+
+    private static final BlockPos DEFAULT_POS = new BlockPos(0, -2048, 0);
 
     public static final CustomPacketPayload.Type<DrumSetPacket> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "drum_set_event"));
 

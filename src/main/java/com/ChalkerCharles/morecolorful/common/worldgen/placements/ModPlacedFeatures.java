@@ -15,5 +15,6 @@ public class ModPlacedFeatures {
     public static void bootstrap(BootstrapContext<PlacedFeature> context) {
         ModTreePlacements.bootstrap(context);
         ModVegetationPlacements.bootstrap(context);
+        ModMiscOverworldPlacements.bootstrap(context);
     }
 }

@@ -116,8 +116,8 @@ public class ModOverworldBiomeBuilder {
     protected final ResourceKey<Biome>[][] MOD_MIDDLE_BIOMES = new ResourceKey[][]{
             {null, null, null, null, null},
             {null, ModBiomes.GOLDEN_GROVE, ModBiomes.AUTUMN_BIRCH_FOREST, ModBiomes.MAPLE_FOREST, null},
-            {null, null, null, null, null},
-            {null, null, null, null, null},
+            {null, null, ModBiomes.AZURE_FIELDS, null, null},
+            {null, ModBiomes.LAVENDER_FIELDS, ModBiomes.JACARANDA_GROVE, null, null},
             {null, null, null, null, null}
     };
 //    protected final ResourceKey<Biome>[][] MOD_MIDDLE_BIOMES_VARIANT0 = new ResourceKey[][]{
@@ -170,11 +170,11 @@ public class ModOverworldBiomeBuilder {
 //            {ModBiomes.WILLOW_BAYOU,        ModBiomes.WILLOW_BAYOU,         ModBiomes.LUSH_SWAMP,           ModBiomes.LUSH_SWAMP,           ModBiomes.LUSH_SWAMP}
 //    };
     protected final ResourceKey<Biome>[][] MOD_SWAMP_BIOMES = new ResourceKey[][]{
-            {null, null, null, null, null},
-            {ModBiomes.DAWN_REDWOOD_SWAMP, ModBiomes.DAWN_REDWOOD_SWAMP, ModBiomes.DAWN_REDWOOD_SWAMP, ModBiomes.DAWN_REDWOOD_SWAMP, ModBiomes.DAWN_REDWOOD_SWAMP},
-            {null, null, null, null, null},
-            {null, null, null, null, null},
-            {null, null, null, null, null}
+            {ModBiomes.ICE_MARSH,           ModBiomes.ICE_MARSH,            ModBiomes.ICE_MARSH,            ModBiomes.ICE_MARSH,            ModBiomes.ICE_MARSH},
+            {ModBiomes.DAWN_REDWOOD_SWAMP,  ModBiomes.DAWN_REDWOOD_SWAMP,   ModBiomes.DAWN_REDWOOD_SWAMP,   ModBiomes.DAWN_REDWOOD_SWAMP,   ModBiomes.DAWN_REDWOOD_SWAMP},
+            {ModBiomes.MARSH,               ModBiomes.MARSH,                ModBiomes.MARSH,                ModBiomes.MARSH,                ModBiomes.MARSH},
+            {ModBiomes.WILLOW_BAYOU,        ModBiomes.WILLOW_BAYOU,         ModBiomes.WILLOW_BAYOU, null, null},
+            {ModBiomes.WILLOW_BAYOU,        ModBiomes.WILLOW_BAYOU, null, null, null}
     };
 //    protected final ResourceKey<Biome>[][] MOD_BEACH_BIOMES0 = new ResourceKey[][]{
 //            {Biomes.SNOWY_BEACH,    Biomes.SNOWY_BEACH, Biomes.SNOWY_BEACH,    Biomes.SNOWY_BEACH,     Biomes.SNOWY_BEACH},

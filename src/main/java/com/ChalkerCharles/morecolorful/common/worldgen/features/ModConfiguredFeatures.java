@@ -16,5 +16,6 @@ public class ModConfiguredFeatures {
     public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context) {
         ModTreeFeatures.bootstrap(context);
         ModVegetationFeatures.bootstrap(context);
+        ModMiscOverworldFeatures.bootstrap(context);
     }
 }

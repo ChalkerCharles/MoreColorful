@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:random_selector",
+  "config": {
+    "default": "morecolorful:jacaranda_bees",
+    "features": [
+      {
+        "chance": 0.13333333,
+        "feature": "minecraft:fancy_oak_bees"
+      },
+      {
+        "chance": 0.4,
+        "feature": "morecolorful:oak_bees"
+      }
+    ]
+  }
+}

@@ -1,0 +1,7 @@
+{
+	"parent": "morecolorful:block/template_closed_water_lily",
+	"textures": {
+		"base": "morecolorful:block/water_lily_base",
+		"cross": "morecolorful:block/closed_water_lily"
+	}
+}

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "part=upper": {
+      "model": "morecolorful:block/reed_top"
+    },
+    "part=mid": {
+      "model": "morecolorful:block/reed_middle"
+    },
+    "part=lower": {
+      "model": "morecolorful:block/reed_bottom"
+    }
+  }
+}

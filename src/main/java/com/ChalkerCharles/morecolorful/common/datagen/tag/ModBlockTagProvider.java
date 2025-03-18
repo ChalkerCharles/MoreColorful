@@ -27,7 +27,18 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 ModBlocks.TOMTOM_DRUM.get(),
                 ModBlocks.GUZHENG.get(),
                 ModBlocks.STRAWBERRY_BUSH.get(),
-                ModBlocks.BLUEBERRY_BUSH.get()
+                ModBlocks.BLUEBERRY_BUSH.get(),
+                ModBlocks.DAWN_REDWOOD_ROOTS.get(),
+                ModBlocks.SHORT_WATER_GRASS.get(),
+                ModBlocks.TALL_WATER_GRASS.get(),
+                ModBlocks.REED.get(),
+                ModBlocks.OPEN_WATER_LILY.get(),
+                ModBlocks.OPEN_WHITE_WATER_LILY.get(),
+                ModBlocks.OPEN_BLUE_WATER_LILY.get(),
+                ModBlocks.CLOSED_WATER_LILY.get(),
+                ModBlocks.CLOSED_WHITE_WATER_LILY.get(),
+                ModBlocks.CLOSED_BLUE_WATER_LILY.get(),
+                ModBlocks.WILLOW_BRANCHES.get()
         );
         tag(BlockTags.MINEABLE_WITH_HOE).addTag(
                 ModTags.Blocks.LEAF_LITTERS
@@ -42,7 +53,16 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 ModBlocks.MAPLE_LEAVES.get(),
                 ModBlocks.FROST_LEAVES.get(),
                 ModBlocks.FROSTY_PETALS.get(),
-                ModBlocks.DAWN_REDWOOD_LEAVES.get()
+                ModBlocks.DAWN_REDWOOD_LEAVES.get(),
+                ModBlocks.JACARANDA_LEAVES.get(),
+                ModBlocks.VIOLETS.get(),
+                ModBlocks.BUTTERCUPS.get(),
+                ModBlocks.FORGET_ME_NOTS.get(),
+                ModBlocks.BABY_BLUE_EYES.get(),
+                ModBlocks.SPEEDWELLS.get(),
+                ModBlocks.WOOD_SORRELS.get(),
+                ModBlocks.DUCKWEEDS.get(),
+                ModBlocks.WILLOW_LEAVES.get()
         );
         tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
                 ModBlocks.HARP.get(),
@@ -75,7 +95,9 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 ModBlocks.GINKGO_HANGING_SIGN.get(),
                 ModBlocks.MAPLE_HANGING_SIGN.get(),
                 ModBlocks.FROST_HANGING_SIGN.get(),
-                ModBlocks.DAWN_REDWOOD_HANGING_SIGN.get()
+                ModBlocks.DAWN_REDWOOD_HANGING_SIGN.get(),
+                ModBlocks.JACARANDA_HANGING_SIGN.get(),
+                ModBlocks.WILLOW_HANGING_SIGN.get()
         );
         tag(BlockTags.FENCE_GATES).add(
                 ModBlocks.CRABAPPLE_FENCE_GATE.get(),
@@ -83,7 +105,9 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 ModBlocks.GINKGO_FENCE_GATE.get(),
                 ModBlocks.MAPLE_FENCE_GATE.get(),
                 ModBlocks.FROST_FENCE_GATE.get(),
-                ModBlocks.DAWN_REDWOOD_FENCE_GATE.get()
+                ModBlocks.DAWN_REDWOOD_FENCE_GATE.get(),
+                ModBlocks.JACARANDA_FENCE_GATE.get(),
+                ModBlocks.WILLOW_FENCE_GATE.get()
         );
         tag(BlockTags.FLOWER_POTS).add(
                 ModBlocks.POTTED_CRABAPPLE_SAPLING.get(),
@@ -94,6 +118,8 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 ModBlocks.POTTED_MAPLE_SAPLING.get(),
                 ModBlocks.POTTED_FROST_SAPLING.get(),
                 ModBlocks.POTTED_DAWN_REDWOOD_SAPLING.get(),
+                ModBlocks.POTTED_JACARANDA_SAPLING.get(),
+                ModBlocks.POTTED_WILLOW_SAPLING.get(),
                 ModBlocks.POTTED_PINK_DAISY.get(),
                 ModBlocks.POTTED_RED_CARNATION.get(),
                 ModBlocks.POTTED_PINK_CARNATION.get(),
@@ -105,7 +131,10 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 ModBlocks.POTTED_CLOSED_DAYBLOOM.get(),
                 ModBlocks.POTTED_EDELWEISS.get(),
                 ModBlocks.POTTED_CROCUS.get(),
-                ModBlocks.POTTED_IRIS.get()
+                ModBlocks.POTTED_IRIS.get(),
+                ModBlocks.POTTED_LAVENDER.get(),
+                ModBlocks.POTTED_DAFFODIL.get(),
+                ModBlocks.POTTED_GERBERA_DAISY.get()
         );
         tag(BlockTags.FLOWERS).add(
                 ModBlocks.CRABAPPLE_LEAVES.get(),
@@ -113,14 +142,48 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 ModBlocks.WHITE_CHERRY_LEAVES.get(),
                 ModBlocks.WHITE_PETALS.get(),
                 ModBlocks.FROST_LEAVES.get(),
-                ModBlocks.FROSTY_PETALS.get()
+                ModBlocks.FROSTY_PETALS.get(),
+                ModBlocks.JACARANDA_LEAVES.get(),
+                ModBlocks.VIOLETS.get(),
+                ModBlocks.BUTTERCUPS.get(),
+                ModBlocks.FORGET_ME_NOTS.get(),
+                ModBlocks.BABY_BLUE_EYES.get(),
+                ModBlocks.SPEEDWELLS.get(),
+                ModBlocks.WOOD_SORRELS.get(),
+                ModBlocks.OPEN_WATER_LILY.get(),
+                ModBlocks.OPEN_WHITE_WATER_LILY.get(),
+                ModBlocks.OPEN_BLUE_WATER_LILY.get(),
+                ModBlocks.CLOSED_WATER_LILY.get(),
+                ModBlocks.CLOSED_WHITE_WATER_LILY.get(),
+                ModBlocks.CLOSED_BLUE_WATER_LILY.get()
+        );
+        tag(BlockTags.FROG_PREFER_JUMP_TO).add(
+                ModBlocks.OPEN_WATER_LILY.get(),
+                ModBlocks.OPEN_WHITE_WATER_LILY.get(),
+                ModBlocks.OPEN_BLUE_WATER_LILY.get(),
+                ModBlocks.CLOSED_WATER_LILY.get(),
+                ModBlocks.CLOSED_WHITE_WATER_LILY.get(),
+                ModBlocks.CLOSED_BLUE_WATER_LILY.get()
         );
         tag(BlockTags.INSIDE_STEP_SOUND_BLOCKS).addTag(
                 ModTags.Blocks.LEAF_LITTERS
         ).add(
                 ModBlocks.BEGONIAS.get(),
                 ModBlocks.WHITE_PETALS.get(),
-                ModBlocks.FROSTY_PETALS.get()
+                ModBlocks.FROSTY_PETALS.get(),
+                ModBlocks.VIOLETS.get(),
+                ModBlocks.BUTTERCUPS.get(),
+                ModBlocks.FORGET_ME_NOTS.get(),
+                ModBlocks.BABY_BLUE_EYES.get(),
+                ModBlocks.SPEEDWELLS.get(),
+                ModBlocks.WOOD_SORRELS.get(),
+                ModBlocks.OPEN_WATER_LILY.get(),
+                ModBlocks.OPEN_WHITE_WATER_LILY.get(),
+                ModBlocks.OPEN_BLUE_WATER_LILY.get(),
+                ModBlocks.CLOSED_WATER_LILY.get(),
+                ModBlocks.CLOSED_WHITE_WATER_LILY.get(),
+                ModBlocks.CLOSED_BLUE_WATER_LILY.get(),
+                ModBlocks.DUCKWEEDS.get()
         );
         tag(BlockTags.LEAVES).add(
                 ModBlocks.CRABAPPLE_LEAVES.get(),
@@ -130,7 +193,9 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 ModBlocks.GINKGO_LEAVES.get(),
                 ModBlocks.MAPLE_LEAVES.get(),
                 ModBlocks.FROST_LEAVES.get(),
-                ModBlocks.DAWN_REDWOOD_LEAVES.get()
+                ModBlocks.DAWN_REDWOOD_LEAVES.get(),
+                ModBlocks.JACARANDA_LEAVES.get(),
+                ModBlocks.WILLOW_LEAVES.get()
         );
         tag(BlockTags.LOGS_THAT_BURN).addTags(
                 ModTags.Blocks.CRABAPPLE_LOGS,
@@ -138,14 +203,18 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 ModTags.Blocks.GINKGO_LOGS,
                 ModTags.Blocks.MAPLE_LOGS,
                 ModTags.Blocks.FROST_LOGS,
-                ModTags.Blocks.DAWN_REDWOOD_LOGS
+                ModTags.Blocks.DAWN_REDWOOD_LOGS,
+                ModTags.Blocks.JACARANDA_LOGS,
+                ModTags.Blocks.WILLOW_LOGS
         );
         tag(BlockTags.OVERWORLD_NATURAL_LOGS).add(
                 ModBlocks.CRABAPPLE_LOG.get(),
                 ModBlocks.GINKGO_LOG.get(),
                 ModBlocks.MAPLE_LOG.get(),
                 ModBlocks.FROST_LOG.get(),
-                ModBlocks.DAWN_REDWOOD_LOG.get()
+                ModBlocks.DAWN_REDWOOD_LOG.get(),
+                ModBlocks.JACARANDA_LOG.get(),
+                ModBlocks.WILLOW_LOG.get()
         );
         tag(BlockTags.PLANKS).add(
                 ModBlocks.CRABAPPLE_PLANKS.get(),
@@ -153,13 +222,22 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 ModBlocks.GINKGO_PLANKS.get(),
                 ModBlocks.MAPLE_PLANKS.get(),
                 ModBlocks.FROST_PLANKS.get(),
-                ModBlocks.DAWN_REDWOOD_PLANKS.get()
+                ModBlocks.DAWN_REDWOOD_PLANKS.get(),
+                ModBlocks.JACARANDA_PLANKS.get(),
+                ModBlocks.WILLOW_PLANKS.get()
         );
         tag(BlockTags.REPLACEABLE).addTag(
                 ModTags.Blocks.LEAF_LITTERS
+        ).add(
+                ModBlocks.SHORT_WATER_GRASS.get(),
+                ModBlocks.TALL_WATER_GRASS.get(),
+                ModBlocks.DUCKWEEDS.get()
         );
         tag(BlockTags.REPLACEABLE_BY_TREES).addTag(
                 ModTags.Blocks.LEAF_LITTERS
+        ).add(
+                ModBlocks.CATTAIL.get(),
+                ModBlocks.REED.get()
         );
         tag(BlockTags.SAPLINGS).add(
                 ModBlocks.CRABAPPLE_SAPLING.get(),
@@ -169,7 +247,9 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 ModBlocks.GINKGO_SAPLING.get(),
                 ModBlocks.MAPLE_SAPLING.get(),
                 ModBlocks.FROST_SAPLING.get(),
-                ModBlocks.DAWN_REDWOOD_SAPLING.get()
+                ModBlocks.DAWN_REDWOOD_SAPLING.get(),
+                ModBlocks.JACARANDA_SAPLING.get(),
+                ModBlocks.WILLOW_SAPLING.get()
         );
         tag(BlockTags.SMALL_FLOWERS).add(
                 ModBlocks.PINK_DAISY.get(),
@@ -183,7 +263,13 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 ModBlocks.CLOSED_DAYBLOOM.get(),
                 ModBlocks.EDELWEISS.get(),
                 ModBlocks.CROCUS.get(),
-                ModBlocks.IRIS.get()
+                ModBlocks.IRIS.get(),
+                ModBlocks.LAVENDER.get(),
+                ModBlocks.DAFFODIL.get(),
+                ModBlocks.GERBERA_DAISY.get()
+        );
+        tag(BlockTags.TALL_FLOWERS).add(
+                ModBlocks.CATTAIL.get()
         );
         tag(BlockTags.STANDING_SIGNS).add(
                 ModBlocks.CRABAPPLE_SIGN.get(),
@@ -191,7 +277,9 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 ModBlocks.GINKGO_SIGN.get(),
                 ModBlocks.MAPLE_SIGN.get(),
                 ModBlocks.FROST_SIGN.get(),
-                ModBlocks.DAWN_REDWOOD_SIGN.get()
+                ModBlocks.DAWN_REDWOOD_SIGN.get(),
+                ModBlocks.JACARANDA_SIGN.get(),
+                ModBlocks.WILLOW_SIGN.get()
         );
         tag(BlockTags.SWORD_EFFICIENT).addTag(
                 ModTags.Blocks.LEAF_LITTERS
@@ -200,7 +288,22 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 ModBlocks.WHITE_PETALS.get(),
                 ModBlocks.FROSTY_PETALS.get(),
                 ModBlocks.STRAWBERRY_BUSH.get(),
-                ModBlocks.BLUEBERRY_BUSH.get()
+                ModBlocks.BLUEBERRY_BUSH.get(),
+                ModBlocks.VIOLETS.get(),
+                ModBlocks.BUTTERCUPS.get(),
+                ModBlocks.FORGET_ME_NOTS.get(),
+                ModBlocks.BABY_BLUE_EYES.get(),
+                ModBlocks.SPEEDWELLS.get(),
+                ModBlocks.WOOD_SORRELS.get(),
+                ModBlocks.CATTAIL.get(),
+                ModBlocks.REED.get(),
+                ModBlocks.OPEN_WATER_LILY.get(),
+                ModBlocks.OPEN_WHITE_WATER_LILY.get(),
+                ModBlocks.OPEN_BLUE_WATER_LILY.get(),
+                ModBlocks.CLOSED_WATER_LILY.get(),
+                ModBlocks.CLOSED_WHITE_WATER_LILY.get(),
+                ModBlocks.CLOSED_BLUE_WATER_LILY.get(),
+                ModBlocks.DUCKWEEDS.get()
         );
         tag(BlockTags.WALL_HANGING_SIGNS).add(
                 ModBlocks.CRABAPPLE_WALL_HANGING_SIGN.get(),
@@ -208,7 +311,9 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 ModBlocks.GINKGO_WALL_HANGING_SIGN.get(),
                 ModBlocks.MAPLE_WALL_HANGING_SIGN.get(),
                 ModBlocks.FROST_WALL_HANGING_SIGN.get(),
-                ModBlocks.DAWN_REDWOOD_WALL_HANGING_SIGN.get()
+                ModBlocks.DAWN_REDWOOD_WALL_HANGING_SIGN.get(),
+                ModBlocks.JACARANDA_WALL_HANGING_SIGN.get(),
+                ModBlocks.WILLOW_WALL_HANGING_SIGN.get()
         );
         tag(BlockTags.WALL_SIGNS).add(
                 ModBlocks.CRABAPPLE_WALL_SIGN.get(),
@@ -216,7 +321,9 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 ModBlocks.GINKGO_WALL_SIGN.get(),
                 ModBlocks.MAPLE_WALL_SIGN.get(),
                 ModBlocks.FROST_WALL_SIGN.get(),
-                ModBlocks.DAWN_REDWOOD_WALL_SIGN.get()
+                ModBlocks.DAWN_REDWOOD_WALL_SIGN.get(),
+                ModBlocks.JACARANDA_WALL_SIGN.get(),
+                ModBlocks.WILLOW_WALL_SIGN.get()
         );
         tag(BlockTags.WOODEN_BUTTONS).add(
                 ModBlocks.CRABAPPLE_BUTTON.get(),
@@ -224,7 +331,9 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 ModBlocks.GINKGO_BUTTON.get(),
                 ModBlocks.MAPLE_BUTTON.get(),
                 ModBlocks.FROST_BUTTON.get(),
-                ModBlocks.DAWN_REDWOOD_BUTTON.get()
+                ModBlocks.DAWN_REDWOOD_BUTTON.get(),
+                ModBlocks.JACARANDA_BUTTON.get(),
+                ModBlocks.WILLOW_BUTTON.get()
         );
         tag(BlockTags.WOODEN_DOORS).add(
                 ModBlocks.CRABAPPLE_DOOR.get(),
@@ -232,7 +341,9 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 ModBlocks.GINKGO_DOOR.get(),
                 ModBlocks.MAPLE_DOOR.get(),
                 ModBlocks.FROST_DOOR.get(),
-                ModBlocks.DAWN_REDWOOD_DOOR.get()
+                ModBlocks.DAWN_REDWOOD_DOOR.get(),
+                ModBlocks.JACARANDA_DOOR.get(),
+                ModBlocks.WILLOW_DOOR.get()
         );
         tag(BlockTags.WOODEN_FENCES).add(
                 ModBlocks.CRABAPPLE_FENCE.get(),
@@ -240,7 +351,9 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 ModBlocks.GINKGO_FENCE.get(),
                 ModBlocks.MAPLE_FENCE.get(),
                 ModBlocks.FROST_FENCE.get(),
-                ModBlocks.DAWN_REDWOOD_FENCE.get()
+                ModBlocks.DAWN_REDWOOD_FENCE.get(),
+                ModBlocks.JACARANDA_FENCE.get(),
+                ModBlocks.WILLOW_FENCE.get()
         );
         tag(BlockTags.WOODEN_PRESSURE_PLATES).add(
                 ModBlocks.CRABAPPLE_PRESSURE_PLATE.get(),
@@ -248,7 +361,9 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 ModBlocks.GINKGO_PRESSURE_PLATE.get(),
                 ModBlocks.MAPLE_PRESSURE_PLATE.get(),
                 ModBlocks.FROST_PRESSURE_PLATE.get(),
-                ModBlocks.DAWN_REDWOOD_PRESSURE_PLATE.get()
+                ModBlocks.DAWN_REDWOOD_PRESSURE_PLATE.get(),
+                ModBlocks.JACARANDA_PRESSURE_PLATE.get(),
+                ModBlocks.WILLOW_PRESSURE_PLATE.get()
         );
         tag(BlockTags.WOODEN_SLABS).add(
                 ModBlocks.CRABAPPLE_SLAB.get(),
@@ -256,7 +371,9 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 ModBlocks.GINKGO_SLAB.get(),
                 ModBlocks.MAPLE_SLAB.get(),
                 ModBlocks.FROST_SLAB.get(),
-                ModBlocks.DAWN_REDWOOD_SLAB.get()
+                ModBlocks.DAWN_REDWOOD_SLAB.get(),
+                ModBlocks.JACARANDA_SLAB.get(),
+                ModBlocks.WILLOW_SLAB.get()
         );
         tag(BlockTags.WOODEN_STAIRS).add(
                 ModBlocks.CRABAPPLE_STAIRS.get(),
@@ -264,7 +381,9 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 ModBlocks.GINKGO_STAIRS.get(),
                 ModBlocks.MAPLE_STAIRS.get(),
                 ModBlocks.FROST_STAIRS.get(),
-                ModBlocks.DAWN_REDWOOD_STAIRS.get()
+                ModBlocks.DAWN_REDWOOD_STAIRS.get(),
+                ModBlocks.JACARANDA_STAIRS.get(),
+                ModBlocks.WILLOW_STAIRS.get()
         );
         tag(BlockTags.WOODEN_TRAPDOORS).add(
                 ModBlocks.CRABAPPLE_TRAPDOOR.get(),
@@ -272,7 +391,9 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 ModBlocks.GINKGO_TRAPDOOR.get(),
                 ModBlocks.MAPLE_TRAPDOOR.get(),
                 ModBlocks.FROST_TRAPDOOR.get(),
-                ModBlocks.DAWN_REDWOOD_TRAPDOOR.get()
+                ModBlocks.DAWN_REDWOOD_TRAPDOOR.get(),
+                ModBlocks.JACARANDA_TRAPDOOR.get(),
+                ModBlocks.WILLOW_TRAPDOOR.get()
         );
 
         // More Colorful Tags
@@ -491,6 +612,26 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 ModBlocks.DAWN_REDWOOD_WOOD.get(),
                 ModBlocks.STRIPPED_DAWN_REDWOOD_LOG.get(),
                 ModBlocks.STRIPPED_DAWN_REDWOOD_WOOD.get()
+        );
+        tag(ModTags.Blocks.JACARANDA_LOGS).add(
+                ModBlocks.JACARANDA_LOG.get(),
+                ModBlocks.JACARANDA_WOOD.get(),
+                ModBlocks.STRIPPED_JACARANDA_LOG.get(),
+                ModBlocks.STRIPPED_JACARANDA_WOOD.get()
+        );
+        tag(ModTags.Blocks.WILLOW_LOGS).add(
+                ModBlocks.WILLOW_LOG.get(),
+                ModBlocks.WILLOW_WOOD.get(),
+                ModBlocks.STRIPPED_WILLOW_LOG.get(),
+                ModBlocks.STRIPPED_WILLOW_WOOD.get()
+        );
+        tag(ModTags.Blocks.LAKES_CANNOT_REPLACE).addTags(
+                BlockTags.FEATURES_CANNOT_REPLACE,
+                BlockTags.OVERWORLD_NATURAL_LOGS,
+                BlockTags.ICE
+        ).add(
+                Blocks.SNOW,
+                ModBlocks.WILLOW_BRANCHES.get()
         );
     }
 }

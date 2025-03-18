@@ -11,4 +11,7 @@ public class ModBlockStateProperties {
     public static final EnumProperty<GrandPianoPart> GRAND_PIANO_PART = EnumProperty.create("part", GrandPianoPart.class);
     public static final EnumProperty<DrumSetPart> DRUM_SET_PART = EnumProperty.create("part", DrumSetPart.class);
     public static final IntegerProperty SEGMENT_AMOUNT = IntegerProperty.create("segment_amount", 1, 4);
+    public static final EnumProperty<ReedPart> REED_PART = EnumProperty.create("part", ReedPart.class);
+    public static final BooleanProperty TALL_REED = BooleanProperty.create("tall_reed");
+    public static final BooleanProperty TIP = BooleanProperty.create("tip");
 }

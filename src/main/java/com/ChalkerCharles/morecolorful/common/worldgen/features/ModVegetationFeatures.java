@@ -13,12 +13,15 @@ import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.data.worldgen.placement.TreePlacements;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.random.SimpleWeightedRandomList;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.PinkPetalsBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.WeightedPlacedFeature;
+import net.minecraft.world.level.levelgen.feature.configurations.ProbabilityFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.RandomFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
@@ -31,6 +34,7 @@ import net.minecraft.world.level.levelgen.synth.NormalNoise;
 import java.util.List;
 
 import static com.ChalkerCharles.morecolorful.common.worldgen.features.ModConfiguredFeatures.registerKey;
+import static net.minecraft.data.worldgen.features.FeatureUtils.register;
 
 public class ModVegetationFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> FLOWER_CRABAPPLE = registerKey("flower_crabapple");
@@ -48,415 +52,524 @@ public class ModVegetationFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_SUNSET_VALLEY = registerKey("trees_sunset_valley");
     public static final ResourceKey<ConfiguredFeature<?, ?>> FLOWER_SUNSET_VALLEY = registerKey("flower_sunset_valley");
     public static final ResourceKey<ConfiguredFeature<?, ?>> FLOWER_FROST = registerKey("flower_frost");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_CROCUS = registerKey("patch_crocus");
     public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_STRAWBERRY_BUSH = registerKey("patch_strawberry_bush");
     public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_BLUEBERRY_BUSH = registerKey("patch_blueberry_bush");
     public static final ResourceKey<ConfiguredFeature<?, ?>> FLOWER_DAWN_REDWOOD = registerKey("flower_dawn_redwood");
     public static final ResourceKey<ConfiguredFeature<?, ?>> DAWN_REDWOOD_LEAF_LITTER = registerKey("dawn_redwood_leaf_litter");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_LAVENDER = registerKey("trees_lavender");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> FLOWER_LAVENDER = registerKey("flower_lavender");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> FLOWER_JACARANDA = registerKey("flower_jacaranda");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> FLOWER_MARSH = registerKey("flower_marsh");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_WATER_GRASS = registerKey("patch_water_grass");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_GERBERA_DAISY = registerKey("patch_gerbera_daisy");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_CATTAIL = registerKey("patch_cattail");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_REED = registerKey("patch_reed");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_WATER_LILY = registerKey("patch_water_lily");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_DUCKWEEDS = registerKey("patch_duckweeds");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_BUTTERCUPS = registerKey("patch_buttercups");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_FORGET_ME_NOTS = registerKey("patch_forget-me-nots");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_SPEEDWELLS = registerKey("patch_speedwells");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_AZURE = registerKey("trees_azure");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> FLOWER_AZURE = registerKey("flower_azure");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_WILLOW = registerKey("trees_willow");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_WILLOW_BAYOU = registerKey("trees_willow_bayou");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_WOOD_SORRELS = registerKey("patch_wood_sorrels");
 
     public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context) {
         HolderGetter<PlacedFeature> placedFeature = context.lookup(Registries.PLACED_FEATURE);
-
         SimpleWeightedRandomList.Builder<BlockState> begonias = SimpleWeightedRandomList.builder();
-        for (int i = 1; i <= 4; i++) {
-            for (Direction direction : Direction.Plane.HORIZONTAL) {
-                begonias.add(
-                        ModBlocks.BEGONIAS.get().defaultBlockState().setValue(PinkPetalsBlock.AMOUNT, i).setValue(PinkPetalsBlock.FACING, direction), 1
-                );
-            }
-        }
-        begonias.add(ModBlocks.RED_CARNATION.get().defaultBlockState(), 4);
-        context.register(
-                FLOWER_CRABAPPLE,
-                new ConfiguredFeature<>(
-                        Feature.FLOWER,
-                        new RandomPatchConfiguration(
-                                96, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(begonias)))
-                        )
+        addPetals(begonias, ModBlocks.BEGONIAS.get(), 3);
+        begonias.add(ModBlocks.RED_CARNATION.get().defaultBlockState(), 2);
+        register(context, FLOWER_CRABAPPLE,
+                Feature.FLOWER,
+                new RandomPatchConfiguration(
+                        96, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(begonias)))
                 )
         );
-
         SimpleWeightedRandomList.Builder<BlockState> whitePetals = SimpleWeightedRandomList.builder();
-        for (int i = 1; i <= 4; i++) {
-            for (Direction direction : Direction.Plane.HORIZONTAL) {
-                whitePetals.add(
-                        ModBlocks.WHITE_PETALS.get().defaultBlockState().setValue(PinkPetalsBlock.AMOUNT, i).setValue(PinkPetalsBlock.FACING, direction), 1
-                );
-            }
-        }
-        whitePetals.add(ModBlocks.WHITE_CARNATION.get().defaultBlockState(), 1);
-        context.register(
-                FLOWER_WHITE_CHERRY,
-                new ConfiguredFeature<>(
-                        Feature.FLOWER,
-                        new RandomPatchConfiguration(
-                                96, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(whitePetals)))
-                        )
+        addPetals(whitePetals, ModBlocks.WHITE_PETALS.get(), 3);
+        whitePetals.add(ModBlocks.WHITE_CARNATION.get().defaultBlockState(), 2);
+        register(context, FLOWER_WHITE_CHERRY,
+                Feature.FLOWER,
+                new RandomPatchConfiguration(
+                        96, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(whitePetals)))
                 )
         );
-
-        context.register(FLOWER_CHERRY,
-                new ConfiguredFeature<>(
-                        Feature.FLOWER,
-                        new RandomPatchConfiguration(
-                                96, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
-                                        new WeightedStateProvider(
-                                                SimpleWeightedRandomList.<BlockState>builder()
-                                                        .add(ModBlocks.PINK_CARNATION.get().defaultBlockState(), 1)
-                                                        .add(ModBlocks.PINK_DAISY.get().defaultBlockState(), 1)
-                                        )
-                                ))
-                        )
+        register(context, FLOWER_CHERRY,
+                Feature.FLOWER,
+                new RandomPatchConfiguration(
+                        32, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
+                                new WeightedStateProvider(
+                                        SimpleWeightedRandomList.<BlockState>builder()
+                                                .add(ModBlocks.PINK_CARNATION.get().defaultBlockState())
+                                                .add(ModBlocks.PINK_DAISY.get().defaultBlockState())
+                                )
+                        ))
                 )
         );
-
-        context.register(
-                TREES_AUTUMN_BIRCH,
-                new ConfiguredFeature<>(
-                        Feature.RANDOM_SELECTOR,
-                        new RandomFeatureConfiguration(
-                                List.of(
-                                        new WeightedPlacedFeature(
-                                                placedFeature.getOrThrow(ModTreePlacements.YELLOW_BIRCH_0002),
-                                                0.5F
-                                        )
+        register(context, TREES_AUTUMN_BIRCH,
+                Feature.RANDOM_SELECTOR,
+                new RandomFeatureConfiguration(
+                        List.of(
+                                new WeightedPlacedFeature(
+                                        placedFeature.getOrThrow(ModTreePlacements.YELLOW_BIRCH_0002),
+                                        0.45F
                                 ),
-                                placedFeature.getOrThrow(ModTreePlacements.ORANGE_BIRCH_0002)
-                        )
+                                new WeightedPlacedFeature(
+                                        placedFeature.getOrThrow(ModTreePlacements.TALL_YELLOW_BIRCH_0002),
+                                        0.05F
+                                ),
+                                new WeightedPlacedFeature(
+                                        placedFeature.getOrThrow(ModTreePlacements.TALL_ORANGE_BIRCH_0002),
+                                        0.05F
+                                )
+                        ),
+                        placedFeature.getOrThrow(ModTreePlacements.ORANGE_BIRCH_0002)
                 )
         );
-
-        context.register(FLOWER_AUTUMN_BIRCH,
-                new ConfiguredFeature<>(
-                        Feature.FLOWER,
-                        new RandomPatchConfiguration(
-                                128,
-                                6,
-                                2,
-                                PlacementUtils.onlyWhenEmpty(
-                                        Feature.SIMPLE_BLOCK,
-                                        new SimpleBlockConfiguration(
-                                                new NoiseProvider(
-                                                        2345L,
-                                                        new NormalNoise.NoiseParameters(0, 1.0),
-                                                        0.020833334F,
-                                                        List.of(
-                                                                Blocks.DANDELION.defaultBlockState(),
-                                                                Blocks.OXEYE_DAISY.defaultBlockState(),
-                                                                ModBlocks.RED_SPIDER_LILY.get().defaultBlockState(),
-                                                                ModBlocks.YELLOW_CHRYSANTHEMUM.get().defaultBlockState(),
-                                                                Blocks.DANDELION.defaultBlockState(),
-                                                                Blocks.OXEYE_DAISY.defaultBlockState(),
-                                                                ModBlocks.RED_SPIDER_LILY.get().defaultBlockState(),
-                                                                ModBlocks.YELLOW_CHRYSANTHEMUM.get().defaultBlockState()
-                                                        )
+        register(context, FLOWER_AUTUMN_BIRCH,
+                Feature.FLOWER,
+                new RandomPatchConfiguration(
+                        128,
+                        6,
+                        2,
+                        PlacementUtils.onlyWhenEmpty(
+                                Feature.SIMPLE_BLOCK,
+                                new SimpleBlockConfiguration(
+                                        new NoiseProvider(
+                                                2345L,
+                                                new NormalNoise.NoiseParameters(0, 1.0),
+                                                0.020833334F,
+                                                List.of(
+                                                        Blocks.DANDELION.defaultBlockState(),
+                                                        Blocks.OXEYE_DAISY.defaultBlockState(),
+                                                        ModBlocks.RED_SPIDER_LILY.get().defaultBlockState(),
+                                                        ModBlocks.YELLOW_CHRYSANTHEMUM.get().defaultBlockState(),
+                                                        Blocks.DANDELION.defaultBlockState(),
+                                                        Blocks.OXEYE_DAISY.defaultBlockState(),
+                                                        ModBlocks.RED_SPIDER_LILY.get().defaultBlockState(),
+                                                        ModBlocks.YELLOW_CHRYSANTHEMUM.get().defaultBlockState()
                                                 )
                                         )
                                 )
                         )
                 )
         );
-
-        SimpleWeightedRandomList.Builder<BlockState> autumnBirchLeafPile = SimpleWeightedRandomList.builder();
-        for (int i = 1; i <= 4; i++) {
-            for (Direction direction : Direction.Plane.HORIZONTAL) {
-                autumnBirchLeafPile.add(
-                        ModBlocks.ORANGE_BIRCH_LEAF_LITTER.get().defaultBlockState().setValue(LeafLitterBlock.AMOUNT, i).setValue(LeafLitterBlock.FACING, direction), 1
-                );
-                autumnBirchLeafPile.add(
-                        ModBlocks.YELLOW_BIRCH_LEAF_LITTER.get().defaultBlockState().setValue(LeafLitterBlock.AMOUNT, i).setValue(LeafLitterBlock.FACING, direction), 1
-                );
-            }
-        }
-        context.register(
-                AUTUMN_BIRCH_LEAF_LITTER,
-                new ConfiguredFeature<>(
-                        Feature.RANDOM_PATCH,
-                        new RandomPatchConfiguration(
-                                128, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(autumnBirchLeafPile)))
-                        )
+        SimpleWeightedRandomList.Builder<BlockState> autumnBirchLeafLitters = SimpleWeightedRandomList.builder();
+        addLeafLitters(autumnBirchLeafLitters, ModBlocks.ORANGE_BIRCH_LEAF_LITTER.get());
+        addLeafLitters(autumnBirchLeafLitters, ModBlocks.YELLOW_BIRCH_LEAF_LITTER.get());
+        register(context, AUTUMN_BIRCH_LEAF_LITTER,
+                Feature.RANDOM_PATCH,
+                new RandomPatchConfiguration(
+                        128, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(autumnBirchLeafLitters)))
                 )
         );
-
-        context.register(
-                TREES_GINKGO,
-                new ConfiguredFeature<>(
-                        Feature.RANDOM_SELECTOR,
-                        new RandomFeatureConfiguration(
-                                List.of(
-                                        new WeightedPlacedFeature(
-                                                placedFeature.getOrThrow(ModTreePlacements.FANCY_GINKGO),
-                                                0.06F
-                                        ),
-                                        new WeightedPlacedFeature(
-                                                placedFeature.getOrThrow(TreePlacements.OAK_BEES_0002),
-                                                0.2F
-                                        ),
-                                        new WeightedPlacedFeature(
-                                                placedFeature.getOrThrow(TreePlacements.FANCY_OAK_BEES_0002),
-                                                0.06F
-                                        )
+        register(context, TREES_GINKGO,
+                Feature.RANDOM_SELECTOR,
+                new RandomFeatureConfiguration(
+                        List.of(
+                                new WeightedPlacedFeature(
+                                        placedFeature.getOrThrow(ModTreePlacements.FANCY_GINKGO),
+                                        0.06F
                                 ),
-                                placedFeature.getOrThrow(ModTreePlacements.GINKGO)
-                        )
+                                new WeightedPlacedFeature(
+                                        placedFeature.getOrThrow(TreePlacements.OAK_BEES_0002),
+                                        0.2F
+                                ),
+                                new WeightedPlacedFeature(
+                                        placedFeature.getOrThrow(TreePlacements.FANCY_OAK_BEES_0002),
+                                        0.06F
+                                )
+                        ),
+                        placedFeature.getOrThrow(ModTreePlacements.GINKGO)
                 )
         );
-
-        context.register(FLOWER_GINKGO,
-                new ConfiguredFeature<>(
-                        Feature.FLOWER,
-                        new RandomPatchConfiguration(
-                                128,
-                                6,
-                                2,
-                                PlacementUtils.onlyWhenEmpty(
-                                        Feature.SIMPLE_BLOCK,
-                                        new SimpleBlockConfiguration(
-                                                new NoiseProvider(
-                                                        2345L,
-                                                        new NormalNoise.NoiseParameters(0, 1.0),
-                                                        0.020833334F,
-                                                        List.of(
-                                                                Blocks.DANDELION.defaultBlockState(),
-                                                                Blocks.OXEYE_DAISY.defaultBlockState(),
-                                                                ModBlocks.OPEN_DAYBLOOM.get().defaultBlockState(),
-                                                                ModBlocks.YELLOW_CHRYSANTHEMUM.get().defaultBlockState(),
-                                                                Blocks.DANDELION.defaultBlockState(),
-                                                                Blocks.OXEYE_DAISY.defaultBlockState(),
-                                                                ModBlocks.OPEN_DAYBLOOM.get().defaultBlockState(),
-                                                                ModBlocks.YELLOW_CHRYSANTHEMUM.get().defaultBlockState()
-                                                        )
+        register(context, FLOWER_GINKGO,
+                Feature.FLOWER,
+                new RandomPatchConfiguration(
+                        128,
+                        6,
+                        2,
+                        PlacementUtils.onlyWhenEmpty(
+                                Feature.SIMPLE_BLOCK,
+                                new SimpleBlockConfiguration(
+                                        new NoiseProvider(
+                                                2345L,
+                                                new NormalNoise.NoiseParameters(0, 1.0),
+                                                0.020833334F,
+                                                List.of(
+                                                        Blocks.DANDELION.defaultBlockState(),
+                                                        Blocks.OXEYE_DAISY.defaultBlockState(),
+                                                        ModBlocks.OPEN_DAYBLOOM.get().defaultBlockState(),
+                                                        ModBlocks.YELLOW_CHRYSANTHEMUM.get().defaultBlockState(),
+                                                        Blocks.DANDELION.defaultBlockState(),
+                                                        Blocks.OXEYE_DAISY.defaultBlockState(),
+                                                        ModBlocks.OPEN_DAYBLOOM.get().defaultBlockState(),
+                                                        ModBlocks.YELLOW_CHRYSANTHEMUM.get().defaultBlockState()
                                                 )
                                         )
                                 )
                         )
                 )
         );
-
-        SimpleWeightedRandomList.Builder<BlockState> ginkgoLeafPile = SimpleWeightedRandomList.builder();
-        for (int i = 1; i <= 4; i++) {
-            for (Direction direction : Direction.Plane.HORIZONTAL) {
-                ginkgoLeafPile.add(
-                        ModBlocks.GINKGO_LEAF_LITTER.get().defaultBlockState().setValue(LeafLitterBlock.AMOUNT, i).setValue(LeafLitterBlock.FACING, direction), 1
-                );
-            }
-        }
-        context.register(
-                GINKGO_LEAF_LITTER,
-                new ConfiguredFeature<>(
-                        Feature.RANDOM_PATCH,
-                        new RandomPatchConfiguration(
-                                128, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(ginkgoLeafPile)))
-                        )
+        SimpleWeightedRandomList.Builder<BlockState> ginkgoLeafLitters = SimpleWeightedRandomList.builder();
+        addLeafLitters(ginkgoLeafLitters, ModBlocks.GINKGO_LEAF_LITTER.get());
+        register(context, GINKGO_LEAF_LITTER,
+                Feature.RANDOM_PATCH,
+                new RandomPatchConfiguration(
+                        128, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(ginkgoLeafLitters)))
                 )
         );
-
-        context.register(
-                TREES_MAPLE,
-                new ConfiguredFeature<>(
-                        Feature.RANDOM_SELECTOR,
-                        new RandomFeatureConfiguration(
-                                List.of(
-                                        new WeightedPlacedFeature(
-                                                placedFeature.getOrThrow(ModTreePlacements.FANCY_MAPLE),
-                                                0.3F
-                                        )
-                                ),
-                                placedFeature.getOrThrow(ModTreePlacements.MAPLE)
-                        )
+        register(context, TREES_MAPLE,
+                Feature.RANDOM_SELECTOR,
+                new RandomFeatureConfiguration(
+                        List.of(
+                                new WeightedPlacedFeature(
+                                        placedFeature.getOrThrow(ModTreePlacements.FANCY_MAPLE),
+                                        0.3F
+                                )
+                        ),
+                        placedFeature.getOrThrow(ModTreePlacements.MAPLE)
                 )
         );
-
-        context.register(FLOWER_MAPLE,
-                new ConfiguredFeature<>(
-                        Feature.FLOWER,
-                        new RandomPatchConfiguration(
-                                128,
-                                6,
-                                2,
-                                PlacementUtils.onlyWhenEmpty(
-                                        Feature.SIMPLE_BLOCK,
-                                        new SimpleBlockConfiguration(
-                                                new NoiseProvider(
-                                                        2345L,
-                                                        new NormalNoise.NoiseParameters(0, 1.0),
-                                                        0.020833334F,
-                                                        List.of(
-                                                                Blocks.DANDELION.defaultBlockState(),
-                                                                Blocks.OXEYE_DAISY.defaultBlockState(),
-                                                                ModBlocks.GREEN_CHRYSANTHEMUM.get().defaultBlockState(),
-                                                                ModBlocks.RED_SPIDER_LILY.get().defaultBlockState(),
-                                                                Blocks.DANDELION.defaultBlockState(),
-                                                                Blocks.OXEYE_DAISY.defaultBlockState(),
-                                                                ModBlocks.GREEN_CHRYSANTHEMUM.get().defaultBlockState(),
-                                                                ModBlocks.RED_SPIDER_LILY.get().defaultBlockState()
-                                                        )
+        register(context, FLOWER_MAPLE,
+                Feature.FLOWER,
+                new RandomPatchConfiguration(
+                        128,
+                        6,
+                        2,
+                        PlacementUtils.onlyWhenEmpty(
+                                Feature.SIMPLE_BLOCK,
+                                new SimpleBlockConfiguration(
+                                        new NoiseProvider(
+                                                2345L,
+                                                new NormalNoise.NoiseParameters(0, 1.0),
+                                                0.020833334F,
+                                                List.of(
+                                                        Blocks.DANDELION.defaultBlockState(),
+                                                        Blocks.OXEYE_DAISY.defaultBlockState(),
+                                                        ModBlocks.GREEN_CHRYSANTHEMUM.get().defaultBlockState(),
+                                                        ModBlocks.RED_SPIDER_LILY.get().defaultBlockState(),
+                                                        Blocks.DANDELION.defaultBlockState(),
+                                                        Blocks.OXEYE_DAISY.defaultBlockState(),
+                                                        ModBlocks.GREEN_CHRYSANTHEMUM.get().defaultBlockState(),
+                                                        ModBlocks.RED_SPIDER_LILY.get().defaultBlockState()
                                                 )
                                         )
                                 )
                         )
                 )
         );
-
-        SimpleWeightedRandomList.Builder<BlockState> mapleLeafPile = SimpleWeightedRandomList.builder();
-        for (int i = 1; i <= 4; i++) {
-            for (Direction direction : Direction.Plane.HORIZONTAL) {
-                mapleLeafPile.add(
-                        ModBlocks.MAPLE_LEAF_LITTER.get().defaultBlockState().setValue(LeafLitterBlock.AMOUNT, i).setValue(LeafLitterBlock.FACING, direction), 1
-                );
-            }
-        }
-        context.register(
-                MAPLE_LEAF_LITTER,
-                new ConfiguredFeature<>(
-                        Feature.RANDOM_PATCH,
-                        new RandomPatchConfiguration(
-                                128, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(mapleLeafPile)))
-                        )
+        SimpleWeightedRandomList.Builder<BlockState> mapleLeafLitters = SimpleWeightedRandomList.builder();
+        addLeafLitters(mapleLeafLitters, ModBlocks.MAPLE_LEAF_LITTER.get());
+        register(context, MAPLE_LEAF_LITTER,
+                Feature.RANDOM_PATCH,
+                new RandomPatchConfiguration(
+                        128, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(mapleLeafLitters)))
                 )
         );
-
-        context.register(
-                TREES_SUNSET_VALLEY,
-                new ConfiguredFeature<>(
-                        Feature.RANDOM_SELECTOR,
-                        new RandomFeatureConfiguration(
-                                List.of(
-                                        new WeightedPlacedFeature(
-                                                placedFeature.getOrThrow(TreePlacements.OAK_BEES_0002),
-                                                0.2F
-                                        ),
-                                        new WeightedPlacedFeature(
-                                                placedFeature.getOrThrow(TreePlacements.FANCY_OAK_BEES_0002),
-                                                0.06F
-                                        ),
-                                        new WeightedPlacedFeature(
-                                                placedFeature.getOrThrow(ModTreePlacements.ORANGE_BIRCH_0002),
-                                                0.2F
-                                        ),
-                                        new WeightedPlacedFeature(
-                                                placedFeature.getOrThrow(ModTreePlacements.YELLOW_BIRCH_0002),
-                                                0.2F
-                                        ),
-                                        new WeightedPlacedFeature(
-                                                placedFeature.getOrThrow(ModTreePlacements.GINKGO),
-                                                0.2F
-                                        ),
-                                        new WeightedPlacedFeature(
-                                                placedFeature.getOrThrow(ModTreePlacements.FANCY_GINKGO),
-                                                0.06F
-                                        ),
-                                        new WeightedPlacedFeature(
-                                                placedFeature.getOrThrow(ModTreePlacements.FANCY_MAPLE),
-                                                0.1F
-                                        )
+        register(context, TREES_SUNSET_VALLEY,
+                Feature.RANDOM_SELECTOR,
+                new RandomFeatureConfiguration(
+                        List.of(
+                                new WeightedPlacedFeature(
+                                        placedFeature.getOrThrow(TreePlacements.OAK_BEES_0002),
+                                        0.2F
                                 ),
-                                placedFeature.getOrThrow(ModTreePlacements.MAPLE)
-                        )
+                                new WeightedPlacedFeature(
+                                        placedFeature.getOrThrow(TreePlacements.FANCY_OAK_BEES_0002),
+                                        0.06F
+                                ),
+                                new WeightedPlacedFeature(
+                                        placedFeature.getOrThrow(ModTreePlacements.ORANGE_BIRCH_0002),
+                                        0.2F
+                                ),
+                                new WeightedPlacedFeature(
+                                        placedFeature.getOrThrow(ModTreePlacements.YELLOW_BIRCH_0002),
+                                        0.2F
+                                ),
+                                new WeightedPlacedFeature(
+                                        placedFeature.getOrThrow(ModTreePlacements.TALL_ORANGE_BIRCH_0002),
+                                        0.02F
+                                ),
+                                new WeightedPlacedFeature(
+                                        placedFeature.getOrThrow(ModTreePlacements.TALL_YELLOW_BIRCH_0002),
+                                        0.02F
+                                ),
+                                new WeightedPlacedFeature(
+                                        placedFeature.getOrThrow(ModTreePlacements.GINKGO),
+                                        0.2F
+                                ),
+                                new WeightedPlacedFeature(
+                                        placedFeature.getOrThrow(ModTreePlacements.FANCY_GINKGO),
+                                        0.06F
+                                ),
+                                new WeightedPlacedFeature(
+                                        placedFeature.getOrThrow(ModTreePlacements.FANCY_MAPLE),
+                                        0.1F
+                                )
+                        ),
+                        placedFeature.getOrThrow(ModTreePlacements.MAPLE)
                 )
         );
-
-        context.register(FLOWER_SUNSET_VALLEY,
-                new ConfiguredFeature<>(
-                        Feature.FLOWER,
-                        new RandomPatchConfiguration(
-                                128,
-                                6,
-                                2,
-                                PlacementUtils.onlyWhenEmpty(
-                                        Feature.SIMPLE_BLOCK,
-                                        new SimpleBlockConfiguration(
-                                                new NoiseProvider(
-                                                        2345L,
-                                                        new NormalNoise.NoiseParameters(0, 1.0),
-                                                        0.020833334F,
-                                                        List.of(
-                                                                Blocks.DANDELION.defaultBlockState(),
-                                                                Blocks.OXEYE_DAISY.defaultBlockState(),
-                                                                ModBlocks.YELLOW_CHRYSANTHEMUM.get().defaultBlockState(),
-                                                                ModBlocks.GREEN_CHRYSANTHEMUM.get().defaultBlockState(),
-                                                                ModBlocks.RED_SPIDER_LILY.get().defaultBlockState(),
-                                                                ModBlocks.OPEN_DAYBLOOM.get().defaultBlockState(),
-                                                                Blocks.DANDELION.defaultBlockState(),
-                                                                Blocks.OXEYE_DAISY.defaultBlockState(),
-                                                                ModBlocks.YELLOW_CHRYSANTHEMUM.get().defaultBlockState(),
-                                                                ModBlocks.GREEN_CHRYSANTHEMUM.get().defaultBlockState(),
-                                                                ModBlocks.RED_SPIDER_LILY.get().defaultBlockState(),
-                                                                ModBlocks.OPEN_DAYBLOOM.get().defaultBlockState()
-                                                        )
+        register(context, FLOWER_SUNSET_VALLEY,
+                Feature.FLOWER,
+                new RandomPatchConfiguration(
+                        128,
+                        6,
+                        2,
+                        PlacementUtils.onlyWhenEmpty(
+                                Feature.SIMPLE_BLOCK,
+                                new SimpleBlockConfiguration(
+                                        new NoiseProvider(
+                                                2345L,
+                                                new NormalNoise.NoiseParameters(0, 1.0),
+                                                0.020833334F,
+                                                List.of(
+                                                        Blocks.DANDELION.defaultBlockState(),
+                                                        Blocks.OXEYE_DAISY.defaultBlockState(),
+                                                        ModBlocks.YELLOW_CHRYSANTHEMUM.get().defaultBlockState(),
+                                                        ModBlocks.GREEN_CHRYSANTHEMUM.get().defaultBlockState(),
+                                                        ModBlocks.RED_SPIDER_LILY.get().defaultBlockState(),
+                                                        ModBlocks.OPEN_DAYBLOOM.get().defaultBlockState(),
+                                                        Blocks.DANDELION.defaultBlockState(),
+                                                        Blocks.OXEYE_DAISY.defaultBlockState(),
+                                                        ModBlocks.YELLOW_CHRYSANTHEMUM.get().defaultBlockState(),
+                                                        ModBlocks.GREEN_CHRYSANTHEMUM.get().defaultBlockState(),
+                                                        ModBlocks.RED_SPIDER_LILY.get().defaultBlockState(),
+                                                        ModBlocks.OPEN_DAYBLOOM.get().defaultBlockState()
                                                 )
                                         )
                                 )
                         )
                 )
         );
-
         SimpleWeightedRandomList.Builder<BlockState> frosty = SimpleWeightedRandomList.builder();
-        for (int i = 1; i <= 4; i++) {
-            for (Direction direction : Direction.Plane.HORIZONTAL) {
-                frosty.add(
-                        ModBlocks.FROSTY_PETALS.get().defaultBlockState().setValue(PinkPetalsBlock.AMOUNT, i).setValue(PinkPetalsBlock.FACING, direction), 1
-                );
-            }
-        }
-        frosty.add(ModBlocks.EDELWEISS.get().defaultBlockState(), 2);
-        frosty.add(ModBlocks.CROCUS.get().defaultBlockState(), 2);
-        context.register(
-                FLOWER_FROST,
-                new ConfiguredFeature<>(
-                        Feature.FLOWER,
-                        new RandomPatchConfiguration(
-                                96, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(frosty)))
-                        )
+        addPetals(frosty, ModBlocks.FROSTY_PETALS.get(), 2);
+        frosty.add(ModBlocks.EDELWEISS.get().defaultBlockState());
+        frosty.add(ModBlocks.CROCUS.get().defaultBlockState());
+        register(context, FLOWER_FROST,
+                Feature.FLOWER,
+                new RandomPatchConfiguration(
+                        96, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(frosty)))
                 )
         );
-
-        context.register(PATCH_STRAWBERRY_BUSH,
-                new ConfiguredFeature<>(Feature.RANDOM_PATCH,
-                        FeatureUtils.simplePatchConfiguration(
-                                Feature.SIMPLE_BLOCK,
-                                new SimpleBlockConfiguration(
-                                        BlockStateProvider.simple(ModBlocks.STRAWBERRY_BUSH.get().defaultBlockState().setValue(BerryBushBlock.AGE, 4))
+        register(context, PATCH_CROCUS,
+                Feature.FLOWER,
+                grassPatch(BlockStateProvider.simple(ModBlocks.CROCUS.get()), 64)
+        );
+        register(context, PATCH_STRAWBERRY_BUSH,
+                Feature.RANDOM_PATCH,
+                FeatureUtils.simplePatchConfiguration(
+                        Feature.SIMPLE_BLOCK,
+                        new SimpleBlockConfiguration(
+                                BlockStateProvider.simple(ModBlocks.STRAWBERRY_BUSH.get().defaultBlockState().setValue(BerryBushBlock.AGE, 4))
+                        ),
+                        List.of(Blocks.GRASS_BLOCK)
+                )
+        );
+        register(context, PATCH_BLUEBERRY_BUSH,
+                Feature.RANDOM_PATCH,
+                FeatureUtils.simplePatchConfiguration(
+                        Feature.SIMPLE_BLOCK,
+                        new SimpleBlockConfiguration(
+                                BlockStateProvider.simple(ModBlocks.BLUEBERRY_BUSH.get().defaultBlockState().setValue(BerryBushBlock.AGE, 4))
+                        ),
+                        List.of(Blocks.GRASS_BLOCK)
+                )
+        );
+        register(context, FLOWER_DAWN_REDWOOD,
+                Feature.FLOWER,
+                new RandomPatchConfiguration(
+                        64, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.IRIS.get())))
+                )
+        );
+        SimpleWeightedRandomList.Builder<BlockState> dawnRedwoodLeafLitters = SimpleWeightedRandomList.builder();
+        addLeafLitters(dawnRedwoodLeafLitters, ModBlocks.DAWN_REDWOOD_LEAF_LITTER.get());
+        register(context, DAWN_REDWOOD_LEAF_LITTER,
+                Feature.RANDOM_PATCH,
+                new RandomPatchConfiguration(
+                        128, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(dawnRedwoodLeafLitters)))
+                )
+        );
+        register(context, TREES_LAVENDER,
+                Feature.RANDOM_SELECTOR,
+                new RandomFeatureConfiguration(
+                        List.of(
+                                new WeightedPlacedFeature(
+                                        placedFeature.getOrThrow(TreePlacements.FANCY_OAK_BEES),
+                                        0.13333333F
                                 ),
-                                List.of(Blocks.GRASS_BLOCK)
-                        )
+                                new WeightedPlacedFeature(
+                                        placedFeature.getOrThrow(ModTreePlacements.OAK_BEES),
+                                        0.4F
+                                )
+                        ),
+                        placedFeature.getOrThrow(ModTreePlacements.JACARANDA_BEES)
                 )
         );
-
-        context.register(PATCH_BLUEBERRY_BUSH,
-                new ConfiguredFeature<>(Feature.RANDOM_PATCH,
-                        FeatureUtils.simplePatchConfiguration(
+        SimpleWeightedRandomList.Builder<BlockState> lavenders = SimpleWeightedRandomList.builder();
+        addPetals(lavenders, ModBlocks.VIOLETS.get());
+        lavenders.add(ModBlocks.LAVENDER.get().defaultBlockState(), 128);
+        register(context, FLOWER_LAVENDER,
+                Feature.FLOWER,
+                new RandomPatchConfiguration(
+                        128, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(lavenders)))
+                )
+        );
+        SimpleWeightedRandomList.Builder<BlockState> violets = SimpleWeightedRandomList.builder();
+        addPetals(violets, ModBlocks.VIOLETS.get(), 2);
+        violets.add(ModBlocks.LAVENDER.get().defaultBlockState());
+        register(context, FLOWER_JACARANDA,
+                Feature.FLOWER,
+                new RandomPatchConfiguration(
+                        96, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(violets)))
+                )
+        );
+        register(context, FLOWER_MARSH,
+                Feature.FLOWER,
+                grassPatch(new WeightedStateProvider(
+                    SimpleWeightedRandomList.<BlockState>builder()
+                            .add(Blocks.DANDELION.defaultBlockState(), 2)
+                            .add(Blocks.POPPY.defaultBlockState(), 2)
+                            .add(Blocks.BLUE_ORCHID.defaultBlockState())
+                            .add(ModBlocks.IRIS.get().defaultBlockState())
+                            .add(ModBlocks.DAFFODIL.get().defaultBlockState(), 6)
+                ), 64)
+        );
+        register(context, PATCH_WATER_GRASS,
+                Feature.RANDOM_PATCH,
+                waterPatchConfiguration(
+                    new WeightedStateProvider(
+                            SimpleWeightedRandomList.<BlockState>builder()
+                                    .add(ModBlocks.SHORT_WATER_GRASS.get().defaultBlockState(), 2)
+                                    .add(ModBlocks.TALL_WATER_GRASS.get().defaultBlockState())
+                    )
+                )
+        );
+        register(context, PATCH_GERBERA_DAISY,
+                Feature.FLOWER,
+                grassPatch(BlockStateProvider.simple(ModBlocks.GERBERA_DAISY.get()), 64)
+        );
+        register(context, PATCH_CATTAIL,
+                Feature.RANDOM_PATCH,
+                FeatureUtils.simpleRandomPatchConfiguration(
+                        64, PlacementUtils.filtered(
                                 Feature.SIMPLE_BLOCK,
-                                new SimpleBlockConfiguration(
-                                        BlockStateProvider.simple(ModBlocks.BLUEBERRY_BUSH.get().defaultBlockState().setValue(BerryBushBlock.AGE, 4))
+                                new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.CATTAIL.get())),
+                                BlockPredicate.ONLY_IN_AIR_OR_WATER_PREDICATE
+                        )
+                )
+        );
+        register(context, PATCH_REED,
+                ModFeatures.REED.get(),
+                new ProbabilityFeatureConfiguration(0.4F)
+        );
+        register(context, PATCH_WATER_LILY,
+                Feature.RANDOM_PATCH,
+                grassPatch(new WeightedStateProvider(
+                        SimpleWeightedRandomList.<BlockState>builder()
+                                .add(ModBlocks.OPEN_WATER_LILY.get().defaultBlockState(), 17)
+                                .add(ModBlocks.OPEN_WHITE_WATER_LILY.get().defaultBlockState(),14)
+                                .add(ModBlocks.OPEN_BLUE_WATER_LILY.get().defaultBlockState())
+                ), 8)
+        );
+        SimpleWeightedRandomList.Builder<BlockState> duckweeds = SimpleWeightedRandomList.builder();
+        addLeafLitters(duckweeds, ModBlocks.DUCKWEEDS.get());
+        register(context, PATCH_DUCKWEEDS,
+                Feature.RANDOM_PATCH,
+                grassPatch(new WeightedStateProvider(duckweeds), 32)
+        );
+        SimpleWeightedRandomList.Builder<BlockState> buttercups = SimpleWeightedRandomList.builder();
+        addPetals(buttercups, ModBlocks.BUTTERCUPS.get());
+        register(context, PATCH_BUTTERCUPS,
+                Feature.FLOWER,
+                new RandomPatchConfiguration(
+                        32, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(buttercups)))
+                )
+        );
+        SimpleWeightedRandomList.Builder<BlockState> forget_me_nots = SimpleWeightedRandomList.builder();
+        addPetals(forget_me_nots, ModBlocks.FORGET_ME_NOTS.get());
+        register(context, PATCH_FORGET_ME_NOTS,
+                Feature.FLOWER,
+                new RandomPatchConfiguration(
+                        32, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(forget_me_nots)))
+                )
+        );
+        SimpleWeightedRandomList.Builder<BlockState> speedwells = SimpleWeightedRandomList.builder();
+        addPetals(speedwells, ModBlocks.SPEEDWELLS.get());
+        register(context, PATCH_SPEEDWELLS,
+                Feature.FLOWER,
+                new RandomPatchConfiguration(
+                        32, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(speedwells)))
+                )
+        );
+        register(context, TREES_AZURE,
+                Feature.RANDOM_SELECTOR,
+                new RandomFeatureConfiguration(
+                        List.of(
+                                new WeightedPlacedFeature(
+                                        placedFeature.getOrThrow(TreePlacements.SUPER_BIRCH_BEES),
+                                        0.125F
                                 ),
-                                List.of(Blocks.GRASS_BLOCK)
-                        )
+                                new WeightedPlacedFeature(
+                                        placedFeature.getOrThrow(ModTreePlacements.BIRCH_BEES),
+                                        0.375F
+                                ),
+                                new WeightedPlacedFeature(
+                                        placedFeature.getOrThrow(TreePlacements.FANCY_OAK_BEES),
+                                        0.125F
+                                )
+                        ),
+                        placedFeature.getOrThrow(ModTreePlacements.OAK_BEES)
                 )
         );
-
-        context.register(FLOWER_DAWN_REDWOOD,
-                new ConfiguredFeature<>(Feature.FLOWER,
-                        new RandomPatchConfiguration(
-                                64, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.IRIS.get())))
-                        )
+        SimpleWeightedRandomList.Builder<BlockState> azure = SimpleWeightedRandomList.builder();
+        addPetalsWithWeight(azure, ModBlocks.BABY_BLUE_EYES.get(), 8);
+        addPetalsWithWeight(azure, ModBlocks.FORGET_ME_NOTS.get());
+        addPetalsWithWeight(azure, ModBlocks.SPEEDWELLS.get());
+        azure.add(Blocks.CORNFLOWER.defaultBlockState(), 4);
+        register(context, FLOWER_AZURE,
+                Feature.FLOWER,
+                new RandomPatchConfiguration(
+                        128, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(azure)))
                 )
         );
-
-        SimpleWeightedRandomList.Builder<BlockState> dawnRedwoodLeafPile = SimpleWeightedRandomList.builder();
-        for (int i = 1; i <= 4; i++) {
-            for (Direction direction : Direction.Plane.HORIZONTAL) {
-                dawnRedwoodLeafPile.add(
-                        ModBlocks.DAWN_REDWOOD_LEAF_LITTER.get().defaultBlockState().setValue(LeafLitterBlock.AMOUNT, i).setValue(LeafLitterBlock.FACING, direction), 1
-                );
-            }
-        }
-        context.register(
-                DAWN_REDWOOD_LEAF_LITTER,
-                new ConfiguredFeature<>(
-                        Feature.RANDOM_PATCH,
-                        new RandomPatchConfiguration(
-                                128, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(dawnRedwoodLeafPile)))
-                        )
+        register(context, TREES_WILLOW,
+                Feature.RANDOM_SELECTOR,
+                new RandomFeatureConfiguration(
+                        List.of(
+                                new WeightedPlacedFeature(
+                                        placedFeature.getOrThrow(ModTreePlacements.FANCY_WILLOW),
+                                        0.4F
+                                )
+                        ),
+                        placedFeature.getOrThrow(ModTreePlacements.WILLOW)
+                )
+        );
+        register(context, TREES_WILLOW_BAYOU,
+                Feature.RANDOM_SELECTOR,
+                new RandomFeatureConfiguration(
+                        List.of(
+                                new WeightedPlacedFeature(
+                                        placedFeature.getOrThrow(ModTreePlacements.FANCY_WILLOW),
+                                        0.4F
+                                ),
+                                new WeightedPlacedFeature(
+                                        placedFeature.getOrThrow(ModTreePlacements.SWAMP_OAK),
+                                        0.2F
+                                )
+                        ),
+                        placedFeature.getOrThrow(ModTreePlacements.WILLOW)
+                )
+        );
+        SimpleWeightedRandomList.Builder<BlockState> woodSorrels = SimpleWeightedRandomList.builder();
+        addPetals(woodSorrels, ModBlocks.WOOD_SORRELS.get());
+        register(context, PATCH_WOOD_SORRELS,
+                Feature.FLOWER,
+                new RandomPatchConfiguration(
+                        32, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(woodSorrels)))
                 )
         );
     }
@@ -465,5 +578,46 @@ public class ModVegetationFeatures {
         return FeatureUtils.simpleRandomPatchConfiguration(
                 pTries, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(pStateProvider))
         );
+    }
+    private static RandomPatchConfiguration waterPatchConfiguration(BlockStateProvider pStateProvider) {
+        return FeatureUtils.simpleRandomPatchConfiguration(
+                96, PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(pStateProvider), BlockPredicate.matchesBlocks(Blocks.WATER))
+        );
+    }
+    private static void addPetalsOrLeafLitters(SimpleWeightedRandomList.Builder<BlockState> builder, Block block, boolean isPetals, int weight) {
+        for (int i = 1; i <= 4; i++) {
+            for (Direction direction : Direction.Plane.HORIZONTAL) {
+                if (isPetals) {
+                    builder.add(
+                            block.defaultBlockState().setValue(PinkPetalsBlock.AMOUNT, i).setValue(PinkPetalsBlock.FACING, direction), weight
+                    );
+                } else {
+                    builder.add(
+                            block.defaultBlockState().setValue(LeafLitterBlock.AMOUNT, i).setValue(LeafLitterBlock.FACING, direction), weight
+                    );
+                }
+            }
+        }
+    }
+    private static void addPetals(SimpleWeightedRandomList.Builder<BlockState> builder, Block block, int weight) {
+        addPetalsOrLeafLitters(builder, block, true, weight);
+    }
+    private static void addPetals(SimpleWeightedRandomList.Builder<BlockState> builder, Block block) {
+        addPetals(builder, block, 1);
+    }
+    private static void addLeafLitters(SimpleWeightedRandomList.Builder<BlockState> builder, Block block) {
+        addPetalsOrLeafLitters(builder, block, false, 1);
+    }
+    private static void addPetalsWithWeight(SimpleWeightedRandomList.Builder<BlockState> builder, Block block, int weight) {
+        for (int i = 1; i <= 4; i++) {
+            for (Direction direction : Direction.Plane.HORIZONTAL) {
+                builder.add(
+                        block.defaultBlockState().setValue(PinkPetalsBlock.AMOUNT, i).setValue(PinkPetalsBlock.FACING, direction), weight * i
+                );
+            }
+        }
+    }
+    private static void addPetalsWithWeight(SimpleWeightedRandomList.Builder<BlockState> builder, Block block) {
+        addPetalsWithWeight(builder, block, 1);
     }
 }

@@ -1,0 +1,73 @@
+{
+	"ambientocclusion": false,
+	"render_type": "cutout",
+	"textures": {
+		"flowerbed": "morecolorful:block/forget-me-nots",
+		"stem": "morecolorful:block/flower_stem_tall",
+		"particle": "morecolorful:block/forget-me-nots"
+	},
+	"elements": [
+		{
+			"from": [0, 5, 0],
+			"to": [8, 5, 8],
+			"faces": {
+				"up": {"uv": [0, 0, 8, 8], "texture": "#flowerbed"},
+				"down": {"uv": [0, 8, 8, 0], "texture": "#flowerbed"}
+			}
+		},
+		{
+			"from": [3.49013, 0, 2.02028],
+			"to": [3.49013, 5, 4.02028],
+			"rotation": {"angle": -45, "axis": "y", "origin": [3.49013, 2.5, 2.52028]},
+			"faces": {
+				"east": {"uv": [4, 11, 2, 16], "texture": "#stem", "tintindex": 1},
+				"west": {"uv": [2, 11, 4, 16], "texture": "#stem", "tintindex": 1}
+			}
+		},
+		{
+			"from": [2.99013, 0, 2.52028],
+			"to": [4.99013, 5, 2.52028],
+			"rotation": {"angle": -45, "axis": "y", "origin": [3.49013, 2.5, 2.52028]},
+			"faces": {
+				"north": {"uv": [4, 11, 2, 16], "texture": "#stem", "tintindex": 1},
+				"south": {"uv": [2, 11, 4, 16], "texture": "#stem", "tintindex": 1}
+			}
+		},
+		{
+			"from": [1.48492, 0, 5.94472],
+			"to": [1.48492, 5, 6.94472],
+			"rotation": {"angle": 45, "axis": "y", "origin": [1.48492, 1.495, 6.44472]},
+			"faces": {
+				"east": {"uv": [0, 11, 1, 16], "texture": "#stem", "tintindex": 1},
+				"west": {"uv": [1, 11, 0, 16], "texture": "#stem", "tintindex": 1}
+			}
+		},
+		{
+			"from": [0.98492, 0, 6.44472],
+			"to": [1.98492, 5, 6.44472],
+			"rotation": {"angle": 45, "axis": "y", "origin": [1.48492, 2.5, 6.44472]},
+			"faces": {
+				"north": {"uv": [1, 11, 0, 16], "texture": "#stem", "tintindex": 1},
+				"south": {"uv": [0, 11, 1, 16], "texture": "#stem", "tintindex": 1}
+			}
+		},
+		{
+			"from": [6.43467, 0, 5.00538],
+			"to": [6.43467, 5, 6.00538],
+			"rotation": {"angle": -45, "axis": "y", "origin": [6.43467, 2.5, 5.50538]},
+			"faces": {
+				"east": {"uv": [0, 11, 1, 16], "texture": "#stem", "tintindex": 1},
+				"west": {"uv": [0, 11, 1, 16], "texture": "#stem", "tintindex": 1}
+			}
+		},
+		{
+			"from": [5.93467, 0, 5.50538],
+			"to": [6.93467, 5, 5.50538],
+			"rotation": {"angle": -45, "axis": "y", "origin": [6.43467, 2.5, 5.50538]},
+			"faces": {
+				"north": {"uv": [0, 11, 1, 16], "texture": "#stem", "tintindex": 1},
+				"south": {"uv": [0, 11, 1, 16], "texture": "#stem", "tintindex": 1}
+			}
+		}
+	]
+}

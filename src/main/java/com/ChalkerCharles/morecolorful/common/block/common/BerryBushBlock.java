@@ -2,6 +2,7 @@ package com.ChalkerCharles.morecolorful.common.block.common;
 
 import com.ChalkerCharles.morecolorful.common.block.ModBlocks;
 import com.ChalkerCharles.morecolorful.common.item.ModItems;
+import com.google.common.collect.ImmutableMap;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -31,6 +32,9 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.common.CommonHooks;
+import net.neoforged.neoforge.common.util.Lazy;
+
+import java.util.Map;
 
 public class BerryBushBlock extends BushBlock implements BonemealableBlock {
     public static final MapCodec<BerryBushBlock> CODEC = simpleCodec(BerryBushBlock::new);
@@ -38,6 +42,10 @@ public class BerryBushBlock extends BushBlock implements BonemealableBlock {
     private static final VoxelShape SAPLING_SHAPE = Block.box(3.0, 0.0, 3.0, 13.0, 8.0, 13.0);
     private static final VoxelShape MID_GROWTH_SHAPE = Block.box(1.0, 0.0, 1.0, 15.0, 12.0, 15.0);
     private static final VoxelShape GROWN_SHAPE = Block.box(1.0, 0.0, 1.0, 15.0, 16.0, 15.0);
+    private static final Lazy<Map<Block, Item>> BERRIES = Lazy.of(() -> ImmutableMap.of(
+            ModBlocks.STRAWBERRY_BUSH.get(), ModItems.STRAWBERRY.get(),
+            ModBlocks.BLUEBERRY_BUSH.get(), ModItems.BLUEBERRIES.get()
+    ));
 
     @Override
     protected MapCodec<? extends BushBlock> codec() {
@@ -61,13 +69,7 @@ public class BerryBushBlock extends BushBlock implements BonemealableBlock {
     }
 
     public Item getBerry(BerryBushBlock block){
-        if (block == ModBlocks.STRAWBERRY_BUSH.get()) {
-            return ModItems.STRAWBERRY.get();
-        } else if (block == ModBlocks.BLUEBERRY_BUSH.get()) {
-            return ModItems.BLUEBERRIES.get();
-        } else {
-            throw new IllegalArgumentException("Invalid Berry Bush Block:" + block);
-        }
+        return BERRIES.get().get(block);
     }
 
     @Override

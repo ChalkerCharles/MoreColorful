@@ -22,11 +22,16 @@ public abstract class ModItemModelHelper extends ItemModelProvider {
                 .texture("texture", modLoc("block/" + name(baseBlock)));
     }
 
-    protected void blockItem2d(Item item) {
+    protected void blockItem2d(Item item, String name) {
         ResourceLocation resourceLocation = Objects.requireNonNull(BuiltInRegistries.ITEM.getKey(item));
         getBuilder(item.toString())
                 .parent(new ModelFile.UncheckedModelFile("item/generated"))
-                .texture("layer0", ResourceLocation.fromNamespaceAndPath(resourceLocation.getNamespace(), "block/" + resourceLocation.getPath()));
+                .texture("layer0", ResourceLocation.fromNamespaceAndPath(resourceLocation.getNamespace(), "block/" + name));
+    }
+
+    protected void blockItem2d(Item item) {
+        ResourceLocation resourceLocation = Objects.requireNonNull(BuiltInRegistries.ITEM.getKey(item));
+        blockItem2d(item, resourceLocation.getPath());
     }
 
     protected void itemWithCustomName(Item item, String name) {

@@ -145,7 +145,33 @@ public class ModCreativeTabs {
                     ModItems.DAWN_REDWOOD_DOOR,
                     ModItems.DAWN_REDWOOD_TRAPDOOR,
                     ModItems.DAWN_REDWOOD_PRESSURE_PLATE,
-                    ModItems.DAWN_REDWOOD_BUTTON
+                    ModItems.DAWN_REDWOOD_BUTTON,
+                    ModItems.JACARANDA_LOG,
+                    ModItems.JACARANDA_WOOD,
+                    ModItems.STRIPPED_JACARANDA_LOG,
+                    ModItems.STRIPPED_JACARANDA_WOOD,
+                    ModItems.JACARANDA_PLANKS,
+                    ModItems.JACARANDA_STAIRS,
+                    ModItems.JACARANDA_SLAB,
+                    ModItems.JACARANDA_FENCE,
+                    ModItems.JACARANDA_FENCE_GATE,
+                    ModItems.JACARANDA_DOOR,
+                    ModItems.JACARANDA_TRAPDOOR,
+                    ModItems.JACARANDA_PRESSURE_PLATE,
+                    ModItems.JACARANDA_BUTTON,
+                    ModItems.WILLOW_LOG,
+                    ModItems.WILLOW_WOOD,
+                    ModItems.STRIPPED_WILLOW_LOG,
+                    ModItems.STRIPPED_WILLOW_WOOD,
+                    ModItems.WILLOW_PLANKS,
+                    ModItems.WILLOW_STAIRS,
+                    ModItems.WILLOW_SLAB,
+                    ModItems.WILLOW_FENCE,
+                    ModItems.WILLOW_FENCE_GATE,
+                    ModItems.WILLOW_DOOR,
+                    ModItems.WILLOW_TRAPDOOR,
+                    ModItems.WILLOW_PRESSURE_PLATE,
+                    ModItems.WILLOW_BUTTON
             );
         } else if (tab == CreativeModeTabs.NATURAL_BLOCKS) {
             insertAfterBySequence(event, Items.CHERRY_LOG,
@@ -153,7 +179,10 @@ public class ModCreativeTabs {
                     ModItems.GINKGO_LOG,
                     ModItems.MAPLE_LOG,
                     ModItems.FROST_LOG,
-                    ModItems.DAWN_REDWOOD_LOG
+                    ModItems.DAWN_REDWOOD_LOG,
+                    ModItems.DAWN_REDWOOD_ROOTS,
+                    ModItems.JACARANDA_LOG,
+                    ModItems.WILLOW_LOG
             );
             insertAfterBySequence(event, Items.CHERRY_LEAVES,
                     ModItems.CRABAPPLE_LEAVES,
@@ -163,7 +192,10 @@ public class ModCreativeTabs {
                     ModItems.GINKGO_LEAVES,
                     ModItems.MAPLE_LEAVES,
                     ModItems.FROST_LEAVES,
-                    ModItems.DAWN_REDWOOD_LEAVES
+                    ModItems.DAWN_REDWOOD_LEAVES,
+                    ModItems.JACARANDA_LEAVES,
+                    ModItems.WILLOW_LEAVES,
+                    ModItems.WILLOW_BRANCHES
             );
             insertAfterBySequence(event, Items.CHERRY_SAPLING,
                     ModItems.CRABAPPLE_SAPLING,
@@ -173,7 +205,18 @@ public class ModCreativeTabs {
                     ModItems.GINKGO_SAPLING,
                     ModItems.MAPLE_SAPLING,
                     ModItems.FROST_SAPLING,
-                    ModItems.DAWN_REDWOOD_SAPLING
+                    ModItems.DAWN_REDWOOD_SAPLING,
+                    ModItems.JACARANDA_SAPLING,
+                    ModItems.WILLOW_SAPLING
+            );
+            insertAfterBySequence(event, Items.SUGAR_CANE,
+                    ModItems.REED
+            );
+            insertAfterBySequence(event, Items.FERN,
+                    ModItems.SHORT_WATER_GRASS
+            );
+            insertAfterBySequence(event, Items.LARGE_FERN,
+                    ModItems.TALL_WATER_GRASS
             );
             insertAfterBySequence(event, Items.WITHER_ROSE,
                     ModItems.PINK_DAISY,
@@ -187,21 +230,42 @@ public class ModCreativeTabs {
                     ModItems.CLOSED_DAYBLOOM,
                     ModItems.EDELWEISS,
                     ModItems.CROCUS,
-                    ModItems.IRIS
+                    ModItems.IRIS,
+                    ModItems.LAVENDER,
+                    ModItems.DAFFODIL,
+                    ModItems.GERBERA_DAISY
             );
             insertAfterBySequence(event, Items.PINK_PETALS,
                     ModItems.BEGONIAS,
                     ModItems.WHITE_PETALS,
                     ModItems.FROSTY_PETALS,
+                    ModItems.VIOLETS,
+                    ModItems.BUTTERCUPS,
+                    ModItems.FORGET_ME_NOTS,
+                    ModItems.BABY_BLUE_EYES,
+                    ModItems.SPEEDWELLS,
+                    ModItems.WOOD_SORRELS,
                     ModItems.ORANGE_BIRCH_LEAF_LITTER,
                     ModItems.YELLOW_BIRCH_LEAF_LITTER,
                     ModItems.GINKGO_LEAF_LITTER,
                     ModItems.MAPLE_LEAF_LITTER,
                     ModItems.DAWN_REDWOOD_LEAF_LITTER
             );
+            insertAfterBySequence(event, Items.PITCHER_PLANT,
+                    ModItems.CATTAIL
+            );
             insertAfterBySequence(event, Items.SWEET_BERRIES,
                     ModItems.STRAWBERRY,
                     ModItems.BLUEBERRIES
+            );
+            insertAfterBySequence(event, Items.LILY_PAD,
+                    ModItems.OPEN_WATER_LILY,
+                    ModItems.CLOSED_WATER_LILY,
+                    ModItems.OPEN_WHITE_WATER_LILY,
+                    ModItems.CLOSED_WHITE_WATER_LILY,
+                    ModItems.OPEN_BLUE_WATER_LILY,
+                    ModItems.CLOSED_BLUE_WATER_LILY,
+                    ModItems.DUCKWEEDS
             );
         } else if (tab == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
             insertAfterBySequence(event, Items.CHERRY_HANGING_SIGN,
@@ -216,7 +280,11 @@ public class ModCreativeTabs {
                     ModItems.FROST_SIGN,
                     ModItems.FROST_HANGING_SIGN,
                     ModItems.DAWN_REDWOOD_SIGN,
-                    ModItems.DAWN_REDWOOD_HANGING_SIGN
+                    ModItems.DAWN_REDWOOD_HANGING_SIGN,
+                    ModItems.JACARANDA_SIGN,
+                    ModItems.JACARANDA_HANGING_SIGN,
+                    ModItems.WILLOW_SIGN,
+                    ModItems.WILLOW_HANGING_SIGN
             );
         } else if (tab == CreativeModeTabs.TOOLS_AND_UTILITIES) {
             insertAfterBySequence(event, Items.CHERRY_CHEST_BOAT,
@@ -231,7 +299,11 @@ public class ModCreativeTabs {
                     ModItems.FROST_BOAT,
                     ModItems.FROST_CHEST_BOAT,
                     ModItems.DAWN_REDWOOD_BOAT,
-                    ModItems.DAWN_REDWOOD_CHEST_BOAT
+                    ModItems.DAWN_REDWOOD_CHEST_BOAT,
+                    ModItems.JACARANDA_BOAT,
+                    ModItems.JACARANDA_CHEST_BOAT,
+                    ModItems.WILLOW_BOAT,
+                    ModItems.WILLOW_CHEST_BOAT
             );
         } else if (tab == CreativeModeTabs.FOOD_AND_DRINKS) {
             insertAfterBySequence(event, Items.SWEET_BERRIES,

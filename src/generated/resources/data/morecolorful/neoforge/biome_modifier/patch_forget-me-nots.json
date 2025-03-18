@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": [
+    "minecraft:meadow",
+    "minecraft:flower_forest",
+    "minecraft:old_growth_birch_forest"
+  ],
+  "features": "morecolorful:patch_forget-me-nots",
+  "step": "vegetal_decoration"
+}

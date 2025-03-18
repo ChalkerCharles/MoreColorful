@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_baby-blue-eyes": {
+      "conditions": {
+        "items": [
+          {
+            "items": "morecolorful:baby-blue-eyes"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "morecolorful:light_blue_dye_from_baby-blue-eyes"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_baby-blue-eyes"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "morecolorful:light_blue_dye_from_baby-blue-eyes"
+    ]
+  }
+}

@@ -12,7 +12,10 @@ import com.ChalkerCharles.morecolorful.common.item.ModCreativeTabs;
 import com.ChalkerCharles.morecolorful.common.item.ModItems;
 import com.ChalkerCharles.morecolorful.common.loot.modifiers.ModLootModifiers;
 import com.ChalkerCharles.morecolorful.common.worldgen.biomes.ModBiomeSetup;
+import com.ChalkerCharles.morecolorful.common.worldgen.features.ModFeatures;
 import com.ChalkerCharles.morecolorful.common.worldgen.features.trees.ModFoliagePlacers;
+import com.ChalkerCharles.morecolorful.common.worldgen.features.trees.ModRootPlacers;
+import com.ChalkerCharles.morecolorful.common.worldgen.features.trees.ModTreeDecorators;
 import com.ChalkerCharles.morecolorful.common.worldgen.features.trees.ModTrunkPlacers;
 import com.mojang.logging.LogUtils;
 import net.neoforged.bus.api.IEventBus;
@@ -49,6 +52,9 @@ public class MoreColorful {
         ModLootModifiers.register(modEventBus);
         ModFoliagePlacers.register(modEventBus);
         ModTrunkPlacers.register(modEventBus);
+        ModRootPlacers.register(modEventBus);
+        ModTreeDecorators.register(modEventBus);
+        ModFeatures.register(modEventBus);
 
         NeoForge.EVENT_BUS.register(VanillaBlockPropertyModification.class);
         NeoForge.EVENT_BUS.register(this);
@@ -101,16 +107,4 @@ public class MoreColorful {
             case 3 -> LOGGER.info("See You Around!");
         }
     }
-
-    // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
-//    @EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-//    public static class ClientModEvents {
-//        @SubscribeEvent
-//        public static void onClientSetup(FMLClientSetupEvent event)
-//        {
-//            // Some client setup code
-//            LOGGER.info("HELLO FROM CLIENT SETUP");
-//            LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
-//        }
-//    }
 }

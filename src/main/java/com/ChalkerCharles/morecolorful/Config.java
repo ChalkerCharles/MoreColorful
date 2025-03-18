@@ -2,6 +2,7 @@ package com.ChalkerCharles.morecolorful;
 
 //@EventBusSubscriber(modid = MoreColorful.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class Config {
+    // TODO: Config... Might be later
 //    private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
 //
 //    private static final ModConfigSpec.BooleanValue LOG_DIRT_BLOCK = BUILDER

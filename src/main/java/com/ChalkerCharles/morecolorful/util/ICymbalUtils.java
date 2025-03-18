@@ -5,62 +5,47 @@ import com.ChalkerCharles.morecolorful.common.block.ModBlocks;
 import com.ChalkerCharles.morecolorful.common.block.properties.DrumSetPart;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 
-import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Stream;
 
 import static com.ChalkerCharles.morecolorful.common.block.musical_instruments.DrumSetBlock.FACING;
 import static com.ChalkerCharles.morecolorful.common.block.musical_instruments.DrumSetBlock.PART;
 
 public interface ICymbalUtils {
     EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
-    default ArrayList<Integer> pressingPlayers(Level level, BlockPos pos) {
-        ArrayList<Integer> list = new ArrayList<>();
-        for (Player player : level.players()) {
-            BlockPos pos1 = player.getData(ModDataAttachments.PLAYING_SCREEN_DATA).pos();
-            BlockState state = level.getBlockState(pos1);
-            if ((state.is(ModBlocks.RIDE_CYMBAL.get()) || state.is(ModBlocks.CRASH_CYMBAL.get()))
-                    && state.getValue(HALF) == DoubleBlockHalf.LOWER) {
-                pos1 = pos1.above();
-            }
-            boolean isPressing = player.getData(ModDataAttachments.IS_PLAYING_INSTRUMENT);
-            if (isPressing && pos.equals(pos1)) {
-                list.add(player.getId());
-            }
-        }
-        return list;
+    default List<Integer> pressingPlayers(Level level, BlockPos pos) {
+        return level.players().stream()
+                .filter(p -> {
+                    BlockPos pos1 = p.getData(ModDataAttachments.PLAYING_SCREEN_DATA).pos();
+                    BlockState state = level.getBlockState(pos1);
+                    pos1 = (state.is(ModBlocks.RIDE_CYMBAL) || state.is(ModBlocks.CRASH_CYMBAL)) && state.getValue(HALF) == DoubleBlockHalf.LOWER
+                            ? pos1.above() : pos1;
+                    return p.getData(ModDataAttachments.IS_PLAYING_INSTRUMENT) && pos.equals(pos1);
+                })
+                .flatMap(p -> Stream.of(p.getId())).toList();
     }
 
-    default ArrayList<Integer> pressingPlayersForHiHat(Level level, BlockPos pos) {
-        ArrayList<Integer> list = new ArrayList<>();
-        for (Player player : level.players()) {
-            BlockPos pos1 = player.getData(ModDataAttachments.PLAYING_SCREEN_DATA).pos();
-            boolean isPressing = player.getData(ModDataAttachments.IS_PLAYING_INSTRUMENT);
-            if (isPressing && pos.equals(pos1)) {
-                list.add(player.getId());
-            }
-        }
-        return list;
+    default List<Integer> pressingPlayersForHiHat(Level level, BlockPos pos) {
+        return level.players().stream()
+                .filter(p -> p.getData(ModDataAttachments.IS_PLAYING_INSTRUMENT)
+                                && pos.equals(p.getData(ModDataAttachments.PLAYING_SCREEN_DATA).pos()))
+                .flatMap(p -> Stream.of(p.getId())).toList();
     }
-    default ArrayList<Integer> pressingBassDrumPlayers(Level level, BlockPos pos) {
-        ArrayList<Integer> list = new ArrayList<>();
-        for (Player player : level.players()) {
-            BlockPos pos1 = player.getData(ModDataAttachments.DRUM_SET_DATA).pos();
-            BlockState state = level.getBlockState(pos1);
-            if (state.is(ModBlocks.DRUM_SET)) {
-                pos1 = getBassDrumPos(pos1, state);
-            }
-            boolean isPressingBassDrum = player.getData(ModDataAttachments.DRUM_SET_DATA).isPressingBassDrum();
-            if (isPressingBassDrum && pos.equals(pos1)) {
-                list.add(player.getId());
-            }
-        }
-        return list;
+    default List<Integer> pressingBassDrumPlayers(Level level, BlockPos pos) {
+        return level.players().stream()
+                .filter(p -> {
+                    BlockPos pos1 = p.getData(ModDataAttachments.DRUM_SET_DATA).pos();
+                    BlockState state = level.getBlockState(pos1);
+                    pos1 = state.is(ModBlocks.DRUM_SET) ? getBassDrumPos(pos1, state) : pos1;
+                    return p.getData(ModDataAttachments.DRUM_SET_DATA).isPressingBassDrum() && pos.equals(pos1);
+                })
+                .flatMap(p -> Stream.of(p.getId())).toList();
     }
     default BlockPos getBassDrumPos(BlockPos pos, BlockState state) {
         Direction direction = state.getValue(FACING);
@@ -74,20 +59,15 @@ public interface ICymbalUtils {
             case RIGHT_UPPER -> pos.relative(direction.getClockWise()).below();
         };
     }
-    default ArrayList<Integer> pressingHatPlayers(Level level, BlockPos pos) {
-        ArrayList<Integer> list = new ArrayList<>();
-        for (Player player : level.players()) {
-            BlockPos pos1 = player.getData(ModDataAttachments.DRUM_SET_DATA).pos();
-            BlockState state = level.getBlockState(pos1);
-            if (state.is(ModBlocks.DRUM_SET)) {
-                pos1 = getHatPos(pos1, state);
-            }
-            boolean isPressingHat = player.getData(ModDataAttachments.DRUM_SET_DATA).isPressingHat();
-            if (isPressingHat && pos.equals(pos1)) {
-                list.add(player.getId());
-            }
-        }
-        return list;
+    default List<Integer> pressingHatPlayers(Level level, BlockPos pos) {
+        return level.players().stream()
+                .filter(p -> {
+                    BlockPos pos1 = p.getData(ModDataAttachments.DRUM_SET_DATA).pos();
+                    BlockState state = level.getBlockState(pos1);
+                    pos1 = state.is(ModBlocks.DRUM_SET) ? getHatPos(pos1, state) : pos1;
+                    return p.getData(ModDataAttachments.DRUM_SET_DATA).isPressingHat() && pos.equals(pos1);
+                })
+                .flatMap(p -> Stream.of(p.getId())).toList();
     }
     default BlockPos getHatPos(BlockPos pos, BlockState state) {
         Direction direction = state.getValue(FACING);
@@ -101,20 +81,15 @@ public interface ICymbalUtils {
             case RIGHT_UPPER -> pos.relative(direction.getClockWise()).relative(direction.getClockWise()).below();
         };
     }
-    default ArrayList<Integer> pressingRidePlayers(Level level, BlockPos pos) {
-        ArrayList<Integer> list = new ArrayList<>();
-        for (Player player : level.players()) {
-            BlockPos pos1 = player.getData(ModDataAttachments.DRUM_SET_DATA).pos();
-            BlockState state = level.getBlockState(pos1);
-            if (state.is(ModBlocks.DRUM_SET)) {
-                pos1 = getRidePos(pos1, state);
-            }
-            boolean isPressingRide = player.getData(ModDataAttachments.DRUM_SET_DATA).isPressingRide();
-            if (isPressingRide && pos.equals(pos1)) {
-                list.add(player.getId());
-            }
-        }
-        return list;
+    default List<Integer> pressingRidePlayers(Level level, BlockPos pos) {
+        return level.players().stream()
+                .filter(p -> {
+                    BlockPos pos1 = p.getData(ModDataAttachments.DRUM_SET_DATA).pos();
+                    BlockState state = level.getBlockState(pos1);
+                    pos1 = state.is(ModBlocks.DRUM_SET) ? getRidePos(pos1, state) : pos1;
+                    return p.getData(ModDataAttachments.DRUM_SET_DATA).isPressingRide() && pos.equals(pos1);
+                })
+                .flatMap(p -> Stream.of(p.getId())).toList();
     }
     default BlockPos getRidePos(BlockPos pos, BlockState state) {
         Direction direction = state.getValue(FACING);
@@ -128,20 +103,15 @@ public interface ICymbalUtils {
             case LEFT_UPPER -> pos.relative(direction.getCounterClockWise()).relative(direction.getCounterClockWise());
         };
     }
-    default ArrayList<Integer> pressingCrashPlayers(Level level, BlockPos pos) {
-        ArrayList<Integer> list = new ArrayList<>();
-        for (Player player : level.players()) {
-            BlockPos pos1 = player.getData(ModDataAttachments.DRUM_SET_DATA).pos();
-            BlockState state = level.getBlockState(pos1);
-            if (state.is(ModBlocks.DRUM_SET)) {
-                pos1 = getCrashPos(pos1, state);
-            }
-            boolean isPressingCrash = player.getData(ModDataAttachments.DRUM_SET_DATA).isPressingCrash();
-            if (isPressingCrash && pos.equals(pos1)) {
-                list.add(player.getId());
-            }
-        }
-        return list;
+    default List<Integer> pressingCrashPlayers(Level level, BlockPos pos) {
+        return level.players().stream()
+                .filter(p -> {
+                    BlockPos pos1 = p.getData(ModDataAttachments.DRUM_SET_DATA).pos();
+                    BlockState state = level.getBlockState(pos1);
+                    pos1 = state.is(ModBlocks.DRUM_SET) ? getCrashPos(pos1, state) : pos1;
+                    return p.getData(ModDataAttachments.DRUM_SET_DATA).isPressingCrash() && pos.equals(pos1);
+                })
+                .flatMap(p -> Stream.of(p.getId())).toList();
     }
     default BlockPos getCrashPos(BlockPos pos, BlockState state) {
         Direction direction = state.getValue(FACING);

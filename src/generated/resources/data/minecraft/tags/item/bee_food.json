@@ -1,6 +1,9 @@
 {
   "remove": [
-    "morecolorful:closed_daybloom"
+    "morecolorful:closed_daybloom",
+    "morecolorful:closed_water_lily",
+    "morecolorful:closed_white_water_lily",
+    "morecolorful:closed_blue_water_lily"
   ],
   "values": []
 }

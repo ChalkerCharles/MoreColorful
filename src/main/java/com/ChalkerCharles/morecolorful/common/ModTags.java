@@ -27,6 +27,10 @@ public class ModTags {
         public static final TagKey<Block> MAPLE_LOGS = create("maple_logs");
         public static final TagKey<Block> FROST_LOGS = create("frost_logs");
         public static final TagKey<Block> DAWN_REDWOOD_LOGS = create("dawn_redwood_logs");
+        public static final TagKey<Block> JACARANDA_LOGS = create("jacaranda_logs");
+        public static final TagKey<Block> WILLOW_LOGS = create("willow_logs");
+        public static final TagKey<Block> LAKES_CANNOT_REPLACE = create("lakes_cannot_replace");
+
         private static TagKey<Block> create(String path) {
             return BlockTags.create(ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, path));
         }
@@ -43,6 +47,8 @@ public class ModTags {
         public static final TagKey<Item> MAPLE_LOGS = create("maple_logs");
         public static final TagKey<Item> FROST_LOGS = create("frost_logs");
         public static final TagKey<Item> DAWN_REDWOOD_LOGS = create("dawn_redwood_logs");
+        public static final TagKey<Item> JACARANDA_LOGS = create("jacaranda_logs");
+        public static final TagKey<Item> WILLOW_LOGS = create("willow_logs");
         private static TagKey<Item> create(String path) {
             return ItemTags.create(ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, path));
         }

@@ -16,7 +16,7 @@
                     "flower_amount": "1"
                   }
                 },
-                "weight": 1
+                "weight": 2
               },
               {
                 "data": {
@@ -26,7 +26,7 @@
                     "flower_amount": "1"
                   }
                 },
-                "weight": 1
+                "weight": 2
               },
               {
                 "data": {
@@ -36,7 +36,7 @@
                     "flower_amount": "1"
                   }
                 },
-                "weight": 1
+                "weight": 2
               },
               {
                 "data": {
@@ -46,7 +46,7 @@
                     "flower_amount": "1"
                   }
                 },
-                "weight": 1
+                "weight": 2
               },
               {
                 "data": {
@@ -56,7 +56,7 @@
                     "flower_amount": "2"
                   }
                 },
-                "weight": 1
+                "weight": 2
               },
               {
                 "data": {
@@ -66,7 +66,7 @@
                     "flower_amount": "2"
                   }
                 },
-                "weight": 1
+                "weight": 2
               },
               {
                 "data": {
@@ -76,7 +76,7 @@
                     "flower_amount": "2"
                   }
                 },
-                "weight": 1
+                "weight": 2
               },
               {
                 "data": {
@@ -86,7 +86,7 @@
                     "flower_amount": "2"
                   }
                 },
-                "weight": 1
+                "weight": 2
               },
               {
                 "data": {
@@ -96,7 +96,7 @@
                     "flower_amount": "3"
                   }
                 },
-                "weight": 1
+                "weight": 2
               },
               {
                 "data": {
@@ -106,7 +106,7 @@
                     "flower_amount": "3"
                   }
                 },
-                "weight": 1
+                "weight": 2
               },
               {
                 "data": {
@@ -116,7 +116,7 @@
                     "flower_amount": "3"
                   }
                 },
-                "weight": 1
+                "weight": 2
               },
               {
                 "data": {
@@ -126,7 +126,7 @@
                     "flower_amount": "3"
                   }
                 },
-                "weight": 1
+                "weight": 2
               },
               {
                 "data": {
@@ -136,7 +136,7 @@
                     "flower_amount": "4"
                   }
                 },
-                "weight": 1
+                "weight": 2
               },
               {
                 "data": {
@@ -146,7 +146,7 @@
                     "flower_amount": "4"
                   }
                 },
-                "weight": 1
+                "weight": 2
               },
               {
                 "data": {
@@ -156,7 +156,7 @@
                     "flower_amount": "4"
                   }
                 },
-                "weight": 1
+                "weight": 2
               },
               {
                 "data": {
@@ -166,19 +166,19 @@
                     "flower_amount": "4"
                   }
                 },
-                "weight": 1
+                "weight": 2
               },
               {
                 "data": {
                   "Name": "morecolorful:edelweiss"
                 },
-                "weight": 2
+                "weight": 1
               },
               {
                 "data": {
                   "Name": "morecolorful:crocus"
                 },
-                "weight": 2
+                "weight": 1
               }
             ]
           }

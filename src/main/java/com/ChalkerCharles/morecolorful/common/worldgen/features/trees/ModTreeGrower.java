@@ -45,4 +45,16 @@ public class ModTreeGrower {
             Optional.empty(),
             Optional.of(ModTreeFeatures.DAWN_REDWOOD),
             Optional.empty());
+    public static final TreeGrower JACARANDA = new TreeGrower("jacaranda",
+            Optional.empty(),
+            Optional.of(ModTreeFeatures.JACARANDA),
+            Optional.of(ModTreeFeatures.JACARANDA_005));
+    public static final TreeGrower WILLOW = new TreeGrower("willow",
+            0.4F,
+            Optional.empty(),
+            Optional.empty(),
+            Optional.of(ModTreeFeatures.WILLOW),
+            Optional.of(ModTreeFeatures.FANCY_WILLOW),
+            Optional.empty(),
+            Optional.empty());
 }

@@ -3,13 +3,31 @@
     "#morecolorful:leaf_litters": {
       "chance": 0.3
     },
+    "morecolorful:baby-blue-eyes": {
+      "chance": 0.3
+    },
     "morecolorful:begonias": {
       "chance": 0.3
     },
     "morecolorful:blueberries": {
       "chance": 0.3
     },
+    "morecolorful:buttercups": {
+      "chance": 0.3
+    },
+    "morecolorful:cattail": {
+      "chance": 0.65
+    },
+    "morecolorful:closed_blue_water_lily": {
+      "chance": 0.65
+    },
     "morecolorful:closed_daybloom": {
+      "chance": 0.65
+    },
+    "morecolorful:closed_water_lily": {
+      "chance": 0.65
+    },
+    "morecolorful:closed_white_water_lily": {
       "chance": 0.65
     },
     "morecolorful:crabapple_leaves": {
@@ -21,14 +39,26 @@
     "morecolorful:crocus": {
       "chance": 0.65
     },
+    "morecolorful:daffodil": {
+      "chance": 0.65
+    },
     "morecolorful:dawn_redwood_leaves": {
+      "chance": 0.3
+    },
+    "morecolorful:dawn_redwood_roots": {
       "chance": 0.3
     },
     "morecolorful:dawn_redwood_sapling": {
       "chance": 0.3
     },
+    "morecolorful:duckweeds": {
+      "chance": 0.3
+    },
     "morecolorful:edelweiss": {
       "chance": 0.65
+    },
+    "morecolorful:forget-me-nots": {
+      "chance": 0.3
     },
     "morecolorful:frost_leaves": {
       "chance": 0.3
@@ -38,6 +68,9 @@
     },
     "morecolorful:frosty_petals": {
       "chance": 0.3
+    },
+    "morecolorful:gerbera_daisy": {
+      "chance": 0.65
     },
     "morecolorful:ginkgo_leaves": {
       "chance": 0.3
@@ -51,13 +84,31 @@
     "morecolorful:iris": {
       "chance": 0.65
     },
+    "morecolorful:jacaranda_leaves": {
+      "chance": 0.3
+    },
+    "morecolorful:jacaranda_sapling": {
+      "chance": 0.3
+    },
+    "morecolorful:lavender": {
+      "chance": 0.65
+    },
     "morecolorful:maple_leaves": {
       "chance": 0.3
     },
     "morecolorful:maple_sapling": {
       "chance": 0.3
     },
+    "morecolorful:open_blue_water_lily": {
+      "chance": 0.65
+    },
     "morecolorful:open_daybloom": {
+      "chance": 0.65
+    },
+    "morecolorful:open_water_lily": {
+      "chance": 0.65
+    },
+    "morecolorful:open_white_water_lily": {
       "chance": 0.65
     },
     "morecolorful:orange_birch_leaves": {
@@ -78,7 +129,22 @@
     "morecolorful:red_spider_lily": {
       "chance": 0.65
     },
+    "morecolorful:reed": {
+      "chance": 0.65
+    },
+    "morecolorful:short_water_grass": {
+      "chance": 0.3
+    },
+    "morecolorful:speedwells": {
+      "chance": 0.3
+    },
     "morecolorful:strawberry": {
+      "chance": 0.3
+    },
+    "morecolorful:tall_water_grass": {
+      "chance": 0.5
+    },
+    "morecolorful:violets": {
       "chance": 0.3
     },
     "morecolorful:white_carnation": {
@@ -91,6 +157,18 @@
       "chance": 0.3
     },
     "morecolorful:white_petals": {
+      "chance": 0.3
+    },
+    "morecolorful:willow_branches": {
+      "chance": 0.5
+    },
+    "morecolorful:willow_leaves": {
+      "chance": 0.3
+    },
+    "morecolorful:willow_sapling": {
+      "chance": 0.3
+    },
+    "morecolorful:wood_sorrels": {
       "chance": 0.3
     },
     "morecolorful:yellow_birch_leaves": {

@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "morecolorful:block/dawn_redwood_roots"
+      },
+      {
+        "model": "morecolorful:block/dawn_redwood_roots_alt"
+      }
+    ]
+  }
+}

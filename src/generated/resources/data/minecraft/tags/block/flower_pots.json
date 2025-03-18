@@ -8,6 +8,8 @@
     "morecolorful:potted_maple_sapling",
     "morecolorful:potted_frost_sapling",
     "morecolorful:potted_dawn_redwood_sapling",
+    "morecolorful:potted_jacaranda_sapling",
+    "morecolorful:potted_willow_sapling",
     "morecolorful:potted_pink_daisy",
     "morecolorful:potted_red_carnation",
     "morecolorful:potted_pink_carnation",
@@ -19,6 +21,9 @@
     "morecolorful:potted_closed_daybloom",
     "morecolorful:potted_edelweiss",
     "morecolorful:potted_crocus",
-    "morecolorful:potted_iris"
+    "morecolorful:potted_iris",
+    "morecolorful:potted_lavender",
+    "morecolorful:potted_daffodil",
+    "morecolorful:potted_gerbera_daisy"
   ]
 }

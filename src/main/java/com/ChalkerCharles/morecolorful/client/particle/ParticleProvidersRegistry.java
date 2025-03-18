@@ -20,5 +20,6 @@ public class ParticleProvidersRegistry {
         event.registerSpriteSet(ModParticles.MAPLE_LEAVES.get(), LeafParticle.Provider::new);
         event.registerSpriteSet(ModParticles.FROST_LEAVES.get(), PetalParticle.Provider::new);
         event.registerSpriteSet(ModParticles.DAWN_REDWOOD_LEAVES.get(), LeafParticle.Provider::new);
+        event.registerSpriteSet(ModParticles.JACARANDA_LEAVES.get(), PetalParticle.Provider::new);
     }
 }

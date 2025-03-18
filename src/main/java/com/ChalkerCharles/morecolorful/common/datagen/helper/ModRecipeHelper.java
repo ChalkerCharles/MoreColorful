@@ -3,10 +3,7 @@ package com.ChalkerCharles.morecolorful.common.datagen.helper;
 import com.ChalkerCharles.morecolorful.MoreColorful;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.data.recipes.ShapelessRecipeBuilder;
+import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -89,11 +86,32 @@ public abstract class ModRecipeHelper extends RecipeProvider implements IConditi
                 .save(output);
     }
 
-    protected static void simpleDye(RecipeOutput output, ItemLike pDye, ItemLike pMaterial, int count) {
-        String pKey = getItemName(pDye) + "_from_" + getItemName(pMaterial);
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, pDye, count).requires(pMaterial)
+    protected static void simpleRecipe(RecipeOutput output, ItemLike pResult, ItemLike pMaterial, int count, RecipeCategory category) {
+        String pKey = getItemName(pResult) + "_from_" + getItemName(pMaterial);
+        ShapelessRecipeBuilder.shapeless(category, pResult, count).requires(pMaterial)
                 .unlockedBy(getHasName(pMaterial), has(pMaterial))
-                .group(getItemName(pDye))
+                .group(getItemName(pResult))
                 .save(output, ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, pKey));
+    }
+
+    protected static void simpleMiscRecipe(RecipeOutput output, ItemLike pResult, ItemLike pMaterial, int count) {
+        simpleRecipe(output, pResult, pMaterial, count, RecipeCategory.MISC);
+    }
+
+    protected static void simpleMiscRecipe(RecipeOutput output, ItemLike pResult, ItemLike pMaterial) {
+        simpleMiscRecipe(output, pResult, pMaterial, 1);
+    }
+
+    protected static void simpleShapedRecipe(RecipeOutput output, ItemLike pResult, ItemLike pMaterial, int count, String pattern, RecipeCategory category) {
+        String pKey = getItemName(pResult) + "_from_" + getItemName(pMaterial);
+        ShapedRecipeBuilder.shaped(category, pResult, count)
+                .define('#', pMaterial)
+                .pattern(pattern)
+                .unlockedBy(getHasName(pMaterial), has(pMaterial))
+                .save(output, ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, pKey));
+    }
+
+    protected static void miscShapedRecipe(RecipeOutput output, ItemLike pResult, ItemLike pMaterial, int count, String pattern) {
+        simpleShapedRecipe(output, pResult, pMaterial, count, pattern, RecipeCategory.MISC);
     }
 }

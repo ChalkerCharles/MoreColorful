@@ -1,23 +1,15 @@
 package com.ChalkerCharles.morecolorful.common.datagen.loot;
 
-import com.ChalkerCharles.morecolorful.common.ModTags;
 import com.ChalkerCharles.morecolorful.common.block.ModBlocks;
-import com.ChalkerCharles.morecolorful.common.block.properties.DrumSetPart;
 import com.ChalkerCharles.morecolorful.common.block.properties.GrandPianoPart;
 import com.ChalkerCharles.morecolorful.common.block.properties.ModBlockStateProperties;
 import com.ChalkerCharles.morecolorful.common.block.properties.UprightPianoPart;
 import com.ChalkerCharles.morecolorful.common.datagen.helper.ModBlockLootTableHelper;
 import com.ChalkerCharles.morecolorful.common.item.ModItems;
-import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.storage.loot.LootPool;
-import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.entries.TagEntry;
-import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
-import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
 import java.util.Set;
@@ -52,17 +44,7 @@ public class ModBlockLootTableProvider extends ModBlockLootTableHelper {
         dropForHorizontalDoubleBlock(ModBlocks.GUZHENG.get());
         add(ModBlocks.UPRIGHT_PIANO.get(), createSinglePropConditionTable(ModBlocks.UPRIGHT_PIANO.get(), ModBlockStateProperties.UPRIGHT_PIANO_PART, UprightPianoPart.RIGHT_LOWER));
         add(ModBlocks.GRAND_PIANO.get(), createSinglePropConditionTable(ModBlocks.GRAND_PIANO.get(), ModBlockStateProperties.GRAND_PIANO_PART, GrandPianoPart.FRONT_RIGHT_LOWER));
-        add(ModBlocks.DRUM_SET.get(), LootTable.lootTable().withPool(this.applyExplosionCondition(ModBlocks.DRUM_SET.get(), LootPool.lootPool()
-                                .setRolls(ConstantValue.exactly(1.0F))
-                                .add(
-                                        TagEntry.tagContents(ModTags.Items.DRUM_SET_PARTS)
-                                                .when(
-                                                        LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.DRUM_SET.get())
-                                                                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(ModBlockStateProperties.DRUM_SET_PART, DrumSetPart.MID_LOWER))
-                                                )
-                                )
-                )
-        ));
+        add(ModBlocks.DRUM_SET.get(), createDrumSetDrops());
 
         // Common Blocks
         dropSelf(ModBlocks.CRABAPPLE_LOG.get());
@@ -94,11 +76,11 @@ public class ModBlockLootTableProvider extends ModBlockLootTableHelper {
         dropForLeavesWithLeafPile(ModBlocks.ORANGE_BIRCH_LEAVES.get(), ModBlocks.ORANGE_BIRCH_SAPLING.get(), ModItems.ORANGE_BIRCH_LEAF_LITTER);
         dropSelf(ModBlocks.ORANGE_BIRCH_SAPLING.get());
         dropPottedContents(ModBlocks.POTTED_ORANGE_BIRCH_SAPLING.get());
-        dropForLeafPile(ModBlocks.ORANGE_BIRCH_LEAF_LITTER.get());
+        dropForLeafLitter(ModBlocks.ORANGE_BIRCH_LEAF_LITTER.get());
         dropForLeavesWithLeafPile(ModBlocks.YELLOW_BIRCH_LEAVES.get(), ModBlocks.YELLOW_BIRCH_SAPLING.get(), ModItems.YELLOW_BIRCH_LEAF_LITTER);
         dropSelf(ModBlocks.YELLOW_BIRCH_SAPLING.get());
         dropPottedContents(ModBlocks.POTTED_YELLOW_BIRCH_SAPLING.get());
-        dropForLeafPile(ModBlocks.YELLOW_BIRCH_LEAF_LITTER.get());
+        dropForLeafLitter(ModBlocks.YELLOW_BIRCH_LEAF_LITTER.get());
 
         dropSelf(ModBlocks.EBONY_LOG.get());
         dropSelf(ModBlocks.STRIPPED_EBONY_LOG.get());
@@ -138,7 +120,7 @@ public class ModBlockLootTableProvider extends ModBlockLootTableHelper {
         dropForLeavesWithLeafPile(ModBlocks.GINKGO_LEAVES.get(), ModBlocks.GINKGO_SAPLING.get(), ModItems.GINKGO_LEAF_LITTER);
         dropSelf(ModBlocks.GINKGO_SAPLING.get());
         dropPottedContents(ModBlocks.POTTED_GINKGO_SAPLING.get());
-        dropForLeafPile(ModBlocks.GINKGO_LEAF_LITTER.get());
+        dropForLeafLitter(ModBlocks.GINKGO_LEAF_LITTER.get());
 
         dropSelf(ModBlocks.MAPLE_LOG.get());
         dropSelf(ModBlocks.STRIPPED_MAPLE_LOG.get());
@@ -160,7 +142,7 @@ public class ModBlockLootTableProvider extends ModBlockLootTableHelper {
         dropForLeavesWithLeafPile(ModBlocks.MAPLE_LEAVES.get(), ModBlocks.MAPLE_SAPLING.get(), ModItems.MAPLE_LEAF_LITTER);
         dropSelf(ModBlocks.MAPLE_SAPLING.get());
         dropPottedContents(ModBlocks.POTTED_MAPLE_SAPLING.get());
-        dropForLeafPile(ModBlocks.MAPLE_LEAF_LITTER.get());
+        dropForLeafLitter(ModBlocks.MAPLE_LEAF_LITTER.get());
 
         dropSelf(ModBlocks.FROST_LOG.get());
         dropSelf(ModBlocks.STRIPPED_FROST_LOG.get());
@@ -204,7 +186,57 @@ public class ModBlockLootTableProvider extends ModBlockLootTableHelper {
         dropForLeavesWithLeafPile(ModBlocks.DAWN_REDWOOD_LEAVES.get(), ModBlocks.DAWN_REDWOOD_SAPLING.get(), ModItems.DAWN_REDWOOD_LEAF_LITTER);
         dropSelf(ModBlocks.DAWN_REDWOOD_SAPLING.get());
         dropPottedContents(ModBlocks.POTTED_DAWN_REDWOOD_SAPLING.get());
-        dropForLeafPile(ModBlocks.DAWN_REDWOOD_LEAF_LITTER.get());
+        dropForLeafLitter(ModBlocks.DAWN_REDWOOD_LEAF_LITTER.get());
+        dropSelf(ModBlocks.DAWN_REDWOOD_ROOTS.get());
+
+        dropSelf(ModBlocks.JACARANDA_LOG.get());
+        dropSelf(ModBlocks.STRIPPED_JACARANDA_LOG.get());
+        dropSelf(ModBlocks.JACARANDA_WOOD.get());
+        dropSelf(ModBlocks.STRIPPED_JACARANDA_WOOD.get());
+        dropSelf(ModBlocks.JACARANDA_PLANKS.get());
+        dropSelf(ModBlocks.JACARANDA_STAIRS.get());
+        dropForSlab(ModBlocks.JACARANDA_SLAB.get());
+        dropSelf(ModBlocks.JACARANDA_FENCE.get());
+        dropSelf(ModBlocks.JACARANDA_FENCE_GATE.get());
+        dropForDoubleBlock(ModBlocks.JACARANDA_DOOR.get());
+        dropSelf(ModBlocks.JACARANDA_TRAPDOOR.get());
+        dropSelf(ModBlocks.JACARANDA_PRESSURE_PLATE.get());
+        dropSelf(ModBlocks.JACARANDA_BUTTON.get());
+        dropOther(ModBlocks.JACARANDA_SIGN.get(), ModItems.JACARANDA_SIGN.get());
+        dropOther(ModBlocks.JACARANDA_WALL_SIGN.get(), ModItems.JACARANDA_SIGN.get());
+        dropOther(ModBlocks.JACARANDA_HANGING_SIGN.get(), ModItems.JACARANDA_HANGING_SIGN.get());
+        dropOther(ModBlocks.JACARANDA_WALL_HANGING_SIGN.get(), ModItems.JACARANDA_HANGING_SIGN.get());
+        dropForLeaves(ModBlocks.JACARANDA_LEAVES.get(), ModBlocks.JACARANDA_SAPLING.get());
+        dropSelf(ModBlocks.JACARANDA_SAPLING.get());
+        dropPottedContents(ModBlocks.POTTED_JACARANDA_SAPLING.get());
+        dropForPetals(ModBlocks.VIOLETS.get());
+        dropForPetals(ModBlocks.BUTTERCUPS.get());
+        dropForPetals(ModBlocks.FORGET_ME_NOTS.get());
+        dropForPetals(ModBlocks.BABY_BLUE_EYES.get());
+        dropForPetals(ModBlocks.SPEEDWELLS.get());
+        dropForPetals(ModBlocks.WOOD_SORRELS.get());
+
+        dropSelf(ModBlocks.WILLOW_LOG.get());
+        dropSelf(ModBlocks.STRIPPED_WILLOW_LOG.get());
+        dropSelf(ModBlocks.WILLOW_WOOD.get());
+        dropSelf(ModBlocks.STRIPPED_WILLOW_WOOD.get());
+        dropSelf(ModBlocks.WILLOW_PLANKS.get());
+        dropSelf(ModBlocks.WILLOW_STAIRS.get());
+        dropForSlab(ModBlocks.WILLOW_SLAB.get());
+        dropSelf(ModBlocks.WILLOW_FENCE.get());
+        dropSelf(ModBlocks.WILLOW_FENCE_GATE.get());
+        dropForDoubleBlock(ModBlocks.WILLOW_DOOR.get());
+        dropSelf(ModBlocks.WILLOW_TRAPDOOR.get());
+        dropSelf(ModBlocks.WILLOW_PRESSURE_PLATE.get());
+        dropSelf(ModBlocks.WILLOW_BUTTON.get());
+        dropOther(ModBlocks.WILLOW_SIGN.get(), ModItems.WILLOW_SIGN.get());
+        dropOther(ModBlocks.WILLOW_WALL_SIGN.get(), ModItems.WILLOW_SIGN.get());
+        dropOther(ModBlocks.WILLOW_HANGING_SIGN.get(), ModItems.WILLOW_HANGING_SIGN.get());
+        dropOther(ModBlocks.WILLOW_WALL_HANGING_SIGN.get(), ModItems.WILLOW_HANGING_SIGN.get());
+        dropForLeaves(ModBlocks.WILLOW_LEAVES.get(), ModBlocks.WILLOW_SAPLING.get());
+        dropSelf(ModBlocks.WILLOW_SAPLING.get());
+        dropPottedContents(ModBlocks.POTTED_WILLOW_SAPLING.get());
+        dropWhenSheared(ModBlocks.WILLOW_BRANCHES.get());
 
         dropSelf(ModBlocks.PINK_DAISY.get());
         dropPottedContents(ModBlocks.POTTED_PINK_DAISY.get());
@@ -230,9 +262,27 @@ public class ModBlockLootTableProvider extends ModBlockLootTableHelper {
         dropPottedContents(ModBlocks.POTTED_CROCUS.get());
         dropSelf(ModBlocks.IRIS.get());
         dropPottedContents(ModBlocks.POTTED_IRIS.get());
+        dropSelf(ModBlocks.LAVENDER.get());
+        dropPottedContents(ModBlocks.POTTED_LAVENDER.get());
+        dropSelf(ModBlocks.DAFFODIL.get());
+        dropPottedContents(ModBlocks.POTTED_DAFFODIL.get());
+        dropSelf(ModBlocks.GERBERA_DAISY.get());
+        dropPottedContents(ModBlocks.POTTED_GERBERA_DAISY.get());
 
+        dropForDoubleBlock(ModBlocks.CATTAIL.get());
+
+        dropForWaterGrass(ModBlocks.SHORT_WATER_GRASS.get());
+        dropForWaterGrass(ModBlocks.TALL_WATER_GRASS.get());
+        add(ModBlocks.REED.get(), createReedDrops());
         dropBerries(ModBlocks.STRAWBERRY_BUSH.get(), ModItems.STRAWBERRY);
         dropBerries(ModBlocks.BLUEBERRY_BUSH.get(), ModItems.BLUEBERRIES);
+        dropSelf(ModBlocks.OPEN_WATER_LILY.get());
+        dropSelf(ModBlocks.OPEN_WHITE_WATER_LILY.get());
+        dropSelf(ModBlocks.OPEN_BLUE_WATER_LILY.get());
+        dropSelf(ModBlocks.CLOSED_WATER_LILY.get());
+        dropSelf(ModBlocks.CLOSED_WHITE_WATER_LILY.get());
+        dropSelf(ModBlocks.CLOSED_BLUE_WATER_LILY.get());
+        dropForLeafLitter(ModBlocks.DUCKWEEDS.get());
     }
 
     @Override

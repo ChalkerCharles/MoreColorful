@@ -1,0 +1,46 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "block": "morecolorful:reed",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "part": "lower"
+              }
+            }
+          ],
+          "functions": [
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "morecolorful:reed",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "tall_reed": "true"
+                  }
+                }
+              ],
+              "count": 2.0,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "morecolorful:reed"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "morecolorful:blocks/reed"
+}

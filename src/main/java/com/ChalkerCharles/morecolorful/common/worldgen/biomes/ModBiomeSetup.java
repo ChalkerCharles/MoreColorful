@@ -33,5 +33,11 @@ public class ModBiomeSetup {
         context.register(ModBiomes.SUNSET_VALLEY, ModOverworldBiomes.sunsetValley(placedFeature, carver));
         context.register(ModBiomes.FROST_GROVE, ModOverworldBiomes.frostGrove(placedFeature, carver));
         context.register(ModBiomes.DAWN_REDWOOD_SWAMP, ModOverworldBiomes.dawnRedwoodSwamp(placedFeature, carver));
+        context.register(ModBiomes.LAVENDER_FIELDS, ModOverworldBiomes.lavenderFields(placedFeature, carver));
+        context.register(ModBiomes.JACARANDA_GROVE, ModOverworldBiomes.jacarandaGrove(placedFeature, carver));
+        context.register(ModBiomes.MARSH, ModOverworldBiomes.marsh(placedFeature, carver));
+        context.register(ModBiomes.AZURE_FIELDS, ModOverworldBiomes.azureFields(placedFeature, carver));
+        context.register(ModBiomes.WILLOW_BAYOU, ModOverworldBiomes.willowBayou(placedFeature, carver));
+        context.register(ModBiomes.ICE_MARSH, ModOverworldBiomes.iceMarsh(placedFeature, carver));
     }
 }

@@ -1,0 +1,7 @@
+{
+	"parent": "morecolorful:block/template_reed",
+	"textures": {
+		"cross": "morecolorful:block/reed_bottom",
+		"overlay": "morecolorful:block/reed_bottom_overlay"
+	}
+}

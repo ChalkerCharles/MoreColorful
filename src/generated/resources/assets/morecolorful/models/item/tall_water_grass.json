@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "morecolorful:block/tall_water_grass_top"
+  }
+}

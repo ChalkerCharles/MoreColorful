@@ -1,8 +1,7 @@
 package com.ChalkerCharles.morecolorful.common.datagen.helper;
 
-import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.common.block.common.BerryBushBlock;
-import com.ChalkerCharles.morecolorful.common.block.common.LeafLitterBlock;
+import com.ChalkerCharles.morecolorful.common.block.common.WillowBranchesBlock;
 import com.ChalkerCharles.morecolorful.common.block.properties.HorizontalDoubleBlockHalf;
 import com.ChalkerCharles.morecolorful.common.block.properties.ModBlockStateProperties;
 import net.minecraft.core.Direction;
@@ -12,10 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
-import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
-import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
-import net.neoforged.neoforge.client.model.generators.ModelFile;
-import net.neoforged.neoforge.client.model.generators.MultiPartBlockStateBuilder;
+import net.neoforged.neoforge.client.model.generators.*;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 public abstract class ModBlockStateHelper extends BlockStateProvider {
@@ -88,32 +84,90 @@ public abstract class ModBlockStateHelper extends BlockStateProvider {
         simpleBlockItem(block, models().pressurePlate(name(block), tex));
     }
 
-    protected void leaves(LeavesBlock block) {
+    protected void leaves(Block block) {
         simpleBlockWithItem(block, models().leaves(name(block), blockTexture(block)));
     }
 
-    protected void cross(Block block) {
-        ResourceLocation texture = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "block/" + name(block));
-        simpleBlock(block, models().cross(name(block), texture).renderType(CUTOUT));
+    protected ModelBuilder<BlockModelBuilder> tintedCross(String name, ResourceLocation texture) {
+        return models().singleTexture(name, mcLoc("block/tinted_cross"), "cross", texture);
     }
 
-    protected void simpleFlowerPot(FlowerPotBlock potBlock, Block plantBlock) {
-        ResourceLocation plantTex = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "block/" + name(plantBlock));
+    protected void cross(Block block, boolean isTinted) {
+        ResourceLocation texture = modLoc("block/" + name(block));
+        if (isTinted) {
+            simpleBlock(block, tintedCross(name(block), texture).renderType(CUTOUT));
+        } else {
+            simpleBlock(block, models().cross(name(block), texture).renderType(CUTOUT));
+        }
+    }
+
+    protected void cross(Block block) {
+        cross(block, false);
+    }
+
+    protected void alternativeCross(Block block) {
+        ResourceLocation tex1 = modLoc("block/" + name(block));
+        ResourceLocation tex2 = modLoc("block/" + name(block) + "_alt");
+        simpleBlock(block,
+                new ConfiguredModel(models().cross(name(block), tex1).renderType(CUTOUT)),
+                new ConfiguredModel(models().cross(name(block) + "_alt", tex2).renderType(CUTOUT))
+        );
+    }
+
+    protected void doubleCross(Block block, boolean isTinted) {
+        ResourceLocation top = modLoc("block/" + name(block) + "_top");
+        ResourceLocation bottom = modLoc("block/" + name(block) + "_bottom");
+        if (isTinted) {
+            getVariantBuilder(block)
+                    .partialState().with(DoublePlantBlock.HALF, DoubleBlockHalf.LOWER)
+                    .addModels(new ConfiguredModel(tintedCross(name(block) + "_bottom", bottom).renderType(CUTOUT)))
+                    .partialState().with(DoublePlantBlock.HALF, DoubleBlockHalf.UPPER)
+                    .addModels(new ConfiguredModel(tintedCross(name(block) + "_top", top).renderType(CUTOUT)));
+        } else {
+            getVariantBuilder(block)
+                    .partialState().with(DoublePlantBlock.HALF, DoubleBlockHalf.LOWER)
+                    .addModels(new ConfiguredModel(models().cross(name(block) + "_bottom", bottom).renderType(CUTOUT)))
+                    .partialState().with(DoublePlantBlock.HALF, DoubleBlockHalf.UPPER)
+                    .addModels(new ConfiguredModel(models().cross(name(block) + "_top", top).renderType(CUTOUT)));
+        }
+    }
+
+    protected void doubleCross(Block block) {
+        doubleCross(block, false);
+    }
+
+    protected void simpleFlowerPot(FlowerPotBlock potBlock, boolean hasPottedPrefix) {
+        String path = hasPottedPrefix ? "block/potted_" : "block/";
+        ResourceLocation plantTex = modLoc(path + name(potBlock.getPotted()));
         simpleBlock(potBlock, models().singleTexture(name(potBlock), mcLoc("block/flower_pot_cross"), "plant", plantTex).renderType(CUTOUT));
     }
+    protected void simpleFlowerPot(FlowerPotBlock potBlock) {
+        simpleFlowerPot(potBlock, false);
+    }
 
-    protected void hangingSignBlock(CeilingHangingSignBlock pCeiling, WallHangingSignBlock pWall, ResourceLocation texture) {
+    protected void hangingSignBlock(Block pCeiling, Block pWall, ResourceLocation texture) {
         ModelFile sign = models().sign(name(pCeiling), texture);
         simpleBlock(pCeiling, sign);
         simpleBlock(pWall, sign);
     }
 
-    protected void berryBush(BerryBushBlock block) {
+    protected void berryBush(Block block) {
         getVariantBuilder(block).forAllStates(state -> {
             int age = state.getValue(BerryBushBlock.AGE);
-            ResourceLocation texture = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "block/" + name(block) + "_stage" + age);
+            ResourceLocation texture = modLoc("block/" + name(block) + "_stage" + age);
             return ConfiguredModel.builder()
                     .modelFile(models().cross(name(block) + "_stage" + age, texture).renderType(CUTOUT))
+                    .build();
+        });
+    }
+
+    protected void willowBranches(Block block) {
+        getVariantBuilder(block).forAllStates(state -> {
+            boolean tip = state.getValue(WillowBranchesBlock.TIP);
+            String name = tip ? name(block) + "_tip" : name(block);
+            ResourceLocation texture = modLoc("block/" + name);
+            return ConfiguredModel.builder()
+                    .modelFile(tintedCross(name, texture).renderType(CUTOUT))
                     .build();
         });
     }
@@ -176,7 +230,15 @@ public abstract class ModBlockStateHelper extends BlockStateProvider {
                     .build();
         });
     }
-    protected void petalBlock(PinkPetalsBlock block) {
+    protected void waterLilyBlock(Block block) {
+        ModelFile modelFile = new ModelFile.UncheckedModelFile(modLoc("block/" + name(block)));
+        VariantBlockStateBuilder builder = getVariantBuilder(block);
+        for (Direction direction : BlockStateProperties.HORIZONTAL_FACING.getPossibleValues()) {
+            int yRot = (int) ((direction.toYRot() + 180) % 360);
+            builder.partialState().addModels(ConfiguredModel.builder().modelFile(modelFile).rotationY(yRot).build());
+        }
+    }
+    protected void petalBlock(Block block) {
         ModelFile part1 = new ModelFile.UncheckedModelFile(modLoc("block/" + name(block) + "_1"));
         ModelFile part2 = new ModelFile.UncheckedModelFile(modLoc("block/" + name(block) + "_2"));
         ModelFile part3 = new ModelFile.UncheckedModelFile(modLoc("block/" + name(block) + "_3"));
@@ -198,7 +260,29 @@ public abstract class ModBlockStateHelper extends BlockStateProvider {
                     .condition(BlockStateProperties.FLOWER_AMOUNT, 4).end();
         }
     }
-    protected void leafLitterBlock(LeafLitterBlock block) {
+    protected void woodSorrelsBlock(Block block) {
+        ModelFile[] part1 = suffixForModels(getAlternatives(block, 4), "_1");
+        ModelFile[] part2 = suffixForModels(getAlternatives(block, 4), "_2");
+        ModelFile[] part3 = suffixForModels(getAlternatives(block, 4), "_3");
+        ModelFile[] part4 = suffixForModels(getAlternatives(block, 4), "_4");
+        MultiPartBlockStateBuilder builder = getMultipartBuilder(block);
+        for (Direction direction : BlockStateProperties.HORIZONTAL_FACING.getPossibleValues()) {
+            int yRot = (int) ((direction.toYRot() + 180) % 360);
+            addAlternativeModels(builder, part1, yRot)
+                    .condition(BlockStateProperties.HORIZONTAL_FACING, direction)
+                    .condition(BlockStateProperties.FLOWER_AMOUNT, 1, 2, 3, 4).end();
+            addAlternativeModels(builder, part2, yRot)
+                    .condition(BlockStateProperties.HORIZONTAL_FACING, direction)
+                    .condition(BlockStateProperties.FLOWER_AMOUNT, 2, 3, 4).end();
+            addAlternativeModels(builder, part3, yRot)
+                    .condition(BlockStateProperties.HORIZONTAL_FACING, direction)
+                    .condition(BlockStateProperties.FLOWER_AMOUNT, 3, 4).end();
+            addAlternativeModels(builder, part4, yRot)
+                    .condition(BlockStateProperties.HORIZONTAL_FACING, direction)
+                    .condition(BlockStateProperties.FLOWER_AMOUNT, 4).end();
+        }
+    }
+    protected void leafLitterBlock(Block block) {
         ModelFile part1 = new ModelFile.UncheckedModelFile(modLoc("block/" + name(block) + "_1"));
         ModelFile part2 = new ModelFile.UncheckedModelFile(modLoc("block/" + name(block) + "_2"));
         ModelFile part3 = new ModelFile.UncheckedModelFile(modLoc("block/" + name(block) + "_3"));
@@ -219,6 +303,36 @@ public abstract class ModBlockStateHelper extends BlockStateProvider {
                     .condition(BlockStateProperties.HORIZONTAL_FACING, direction)
                     .condition(ModBlockStateProperties.SEGMENT_AMOUNT, 4).end();
         }
+    }
+
+    @SuppressWarnings("SameParameterValue")
+    private ModelFile[] getAlternatives(Block block, int variants) {
+        ModelFile[] models = new ModelFile[variants];
+        for (int i = 0; i < variants; i++) {
+            String name = i == 0
+                    ? "block/" + name(block)
+                    : i == 1 ? "block/" + name(block) + "_alt" : "block/" + name(block) + "_alt" + (i - 1);
+            models[i] = new ModelFile.UncheckedModelFile(modLoc(name));
+        }
+        return models;
+    }
+
+    private ModelFile[] suffixForModels(ModelFile[] models, String suffix) {
+        ModelFile[] newModels = new ModelFile[models.length];
+        for (int i = 0; i < models.length ; i++) {
+            newModels[i] = new ModelFile.UncheckedModelFile(modLoc(models[i].getUncheckedLocation().getPath() + suffix));
+        }
+        return newModels;
+    }
+
+    private MultiPartBlockStateBuilder.PartBuilder addAlternativeModels(MultiPartBlockStateBuilder builder, ModelFile[] models, int yRot) {
+        ConfiguredModel.Builder<MultiPartBlockStateBuilder.PartBuilder> builderBuilder = builder.part();
+        for (int i = 0; i < models.length; i++) {
+            builderBuilder = i < models.length - 1
+                    ? builderBuilder.modelFile(models[i]).rotationY(yRot).nextModel()
+                    : builderBuilder.modelFile(models[i]).rotationY(yRot);
+        }
+        return builderBuilder.addModel();
     }
 
     private ResourceLocation key(Block block) {

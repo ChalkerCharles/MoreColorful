@@ -1,0 +1,372 @@
+{
+  "multipart": [
+    {
+      "apply": [
+        {
+          "model": "morecolorful:block/wood_sorrels_1"
+        },
+        {
+          "model": "morecolorful:block/wood_sorrels_alt_1"
+        },
+        {
+          "model": "morecolorful:block/wood_sorrels_alt1_1"
+        },
+        {
+          "model": "morecolorful:block/wood_sorrels_alt2_1"
+        }
+      ],
+      "when": {
+        "facing": "north",
+        "flower_amount": "1|2|3|4"
+      }
+    },
+    {
+      "apply": [
+        {
+          "model": "morecolorful:block/wood_sorrels_2"
+        },
+        {
+          "model": "morecolorful:block/wood_sorrels_alt_2"
+        },
+        {
+          "model": "morecolorful:block/wood_sorrels_alt1_2"
+        },
+        {
+          "model": "morecolorful:block/wood_sorrels_alt2_2"
+        }
+      ],
+      "when": {
+        "facing": "north",
+        "flower_amount": "2|3|4"
+      }
+    },
+    {
+      "apply": [
+        {
+          "model": "morecolorful:block/wood_sorrels_3"
+        },
+        {
+          "model": "morecolorful:block/wood_sorrels_alt_3"
+        },
+        {
+          "model": "morecolorful:block/wood_sorrels_alt1_3"
+        },
+        {
+          "model": "morecolorful:block/wood_sorrels_alt2_3"
+        }
+      ],
+      "when": {
+        "facing": "north",
+        "flower_amount": "3|4"
+      }
+    },
+    {
+      "apply": [
+        {
+          "model": "morecolorful:block/wood_sorrels_4"
+        },
+        {
+          "model": "morecolorful:block/wood_sorrels_alt_4"
+        },
+        {
+          "model": "morecolorful:block/wood_sorrels_alt1_4"
+        },
+        {
+          "model": "morecolorful:block/wood_sorrels_alt2_4"
+        }
+      ],
+      "when": {
+        "facing": "north",
+        "flower_amount": "4"
+      }
+    },
+    {
+      "apply": [
+        {
+          "model": "morecolorful:block/wood_sorrels_1",
+          "y": 180
+        },
+        {
+          "model": "morecolorful:block/wood_sorrels_alt_1",
+          "y": 180
+        },
+        {
+          "model": "morecolorful:block/wood_sorrels_alt1_1",
+          "y": 180
+        },
+        {
+          "model": "morecolorful:block/wood_sorrels_alt2_1",
+          "y": 180
+        }
+      ],
+      "when": {
+        "facing": "south",
+        "flower_amount": "1|2|3|4"
+      }
+    },
+    {
+      "apply": [
+        {
+          "model": "morecolorful:block/wood_sorrels_2",
+          "y": 180
+        },
+        {
+          "model": "morecolorful:block/wood_sorrels_alt_2",
+          "y": 180
+        },
+        {
+          "model": "morecolorful:block/wood_sorrels_alt1_2",
+          "y": 180
+        },
+        {
+          "model": "morecolorful:block/wood_sorrels_alt2_2",
+          "y": 180
+        }
+      ],
+      "when": {
+        "facing": "south",
+        "flower_amount": "2|3|4"
+      }
+    },
+    {
+      "apply": [
+        {
+          "model": "morecolorful:block/wood_sorrels_3",
+          "y": 180
+        },
+        {
+          "model": "morecolorful:block/wood_sorrels_alt_3",
+          "y": 180
+        },
+        {
+          "model": "morecolorful:block/wood_sorrels_alt1_3",
+          "y": 180
+        },
+        {
+          "model": "morecolorful:block/wood_sorrels_alt2_3",
+          "y": 180
+        }
+      ],
+      "when": {
+        "facing": "south",
+        "flower_amount": "3|4"
+      }
+    },
+    {
+      "apply": [
+        {
+          "model": "morecolorful:block/wood_sorrels_4",
+          "y": 180
+        },
+        {
+          "model": "morecolorful:block/wood_sorrels_alt_4",
+          "y": 180
+        },
+        {
+          "model": "morecolorful:block/wood_sorrels_alt1_4",
+          "y": 180
+        },
+        {
+          "model": "morecolorful:block/wood_sorrels_alt2_4",
+          "y": 180
+        }
+      ],
+      "when": {
+        "facing": "south",
+        "flower_amount": "4"
+      }
+    },
+    {
+      "apply": [
+        {
+          "model": "morecolorful:block/wood_sorrels_1",
+          "y": 270
+        },
+        {
+          "model": "morecolorful:block/wood_sorrels_alt_1",
+          "y": 270
+        },
+        {
+          "model": "morecolorful:block/wood_sorrels_alt1_1",
+          "y": 270
+        },
+        {
+          "model": "morecolorful:block/wood_sorrels_alt2_1",
+          "y": 270
+        }
+      ],
+      "when": {
+        "facing": "west",
+        "flower_amount": "1|2|3|4"
+      }
+    },
+    {
+      "apply": [
+        {
+          "model": "morecolorful:block/wood_sorrels_2",
+          "y": 270
+        },
+        {
+          "model": "morecolorful:block/wood_sorrels_alt_2",
+          "y": 270
+        },
+        {
+          "model": "morecolorful:block/wood_sorrels_alt1_2",
+          "y": 270
+        },
+        {
+          "model": "morecolorful:block/wood_sorrels_alt2_2",
+          "y": 270
+        }
+      ],
+      "when": {
+        "facing": "west",
+        "flower_amount": "2|3|4"
+      }
+    },
+    {
+      "apply": [
+        {
+          "model": "morecolorful:block/wood_sorrels_3",
+          "y": 270
+        },
+        {
+          "model": "morecolorful:block/wood_sorrels_alt_3",
+          "y": 270
+        },
+        {
+          "model": "morecolorful:block/wood_sorrels_alt1_3",
+          "y": 270
+        },
+        {
+          "model": "morecolorful:block/wood_sorrels_alt2_3",
+          "y": 270
+        }
+      ],
+      "when": {
+        "facing": "west",
+        "flower_amount": "3|4"
+      }
+    },
+    {
+      "apply": [
+        {
+          "model": "morecolorful:block/wood_sorrels_4",
+          "y": 270
+        },
+        {
+          "model": "morecolorful:block/wood_sorrels_alt_4",
+          "y": 270
+        },
+        {
+          "model": "morecolorful:block/wood_sorrels_alt1_4",
+          "y": 270
+        },
+        {
+          "model": "morecolorful:block/wood_sorrels_alt2_4",
+          "y": 270
+        }
+      ],
+      "when": {
+        "facing": "west",
+        "flower_amount": "4"
+      }
+    },
+    {
+      "apply": [
+        {
+          "model": "morecolorful:block/wood_sorrels_1",
+          "y": 90
+        },
+        {
+          "model": "morecolorful:block/wood_sorrels_alt_1",
+          "y": 90
+        },
+        {
+          "model": "morecolorful:block/wood_sorrels_alt1_1",
+          "y": 90
+        },
+        {
+          "model": "morecolorful:block/wood_sorrels_alt2_1",
+          "y": 90
+        }
+      ],
+      "when": {
+        "facing": "east",
+        "flower_amount": "1|2|3|4"
+      }
+    },
+    {
+      "apply": [
+        {
+          "model": "morecolorful:block/wood_sorrels_2",
+          "y": 90
+        },
+        {
+          "model": "morecolorful:block/wood_sorrels_alt_2",
+          "y": 90
+        },
+        {
+          "model": "morecolorful:block/wood_sorrels_alt1_2",
+          "y": 90
+        },
+        {
+          "model": "morecolorful:block/wood_sorrels_alt2_2",
+          "y": 90
+        }
+      ],
+      "when": {
+        "facing": "east",
+        "flower_amount": "2|3|4"
+      }
+    },
+    {
+      "apply": [
+        {
+          "model": "morecolorful:block/wood_sorrels_3",
+          "y": 90
+        },
+        {
+          "model": "morecolorful:block/wood_sorrels_alt_3",
+          "y": 90
+        },
+        {
+          "model": "morecolorful:block/wood_sorrels_alt1_3",
+          "y": 90
+        },
+        {
+          "model": "morecolorful:block/wood_sorrels_alt2_3",
+          "y": 90
+        }
+      ],
+      "when": {
+        "facing": "east",
+        "flower_amount": "3|4"
+      }
+    },
+    {
+      "apply": [
+        {
+          "model": "morecolorful:block/wood_sorrels_4",
+          "y": 90
+        },
+        {
+          "model": "morecolorful:block/wood_sorrels_alt_4",
+          "y": 90
+        },
+        {
+          "model": "morecolorful:block/wood_sorrels_alt1_4",
+          "y": 90
+        },
+        {
+          "model": "morecolorful:block/wood_sorrels_alt2_4",
+          "y": 90
+        }
+      ],
+      "when": {
+        "facing": "east",
+        "flower_amount": "4"
+      }
+    }
+  ]
+}

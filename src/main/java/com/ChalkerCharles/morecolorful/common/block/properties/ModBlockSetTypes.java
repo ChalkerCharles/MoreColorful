@@ -15,8 +15,10 @@ public class ModBlockSetTypes {
     public static final BlockSetType MAPLE = register(new BlockSetType(MODID + ":maple"));
     public static final BlockSetType FROST = registerCherry(MODID + ":frost");
     public static final BlockSetType DAWN_REDWOOD = register(new BlockSetType(MODID + ":dawn_redwood"));
+    public static final BlockSetType JACARANDA = registerCherry(MODID + ":jacaranda");
+    public static final BlockSetType WILLOW = register(new BlockSetType(MODID + ":willow"));
 
-    private static BlockSetType registerCherry(@SuppressWarnings("SameParameterValue") String name) {
+    private static BlockSetType registerCherry(String name) {
         return register(new BlockSetType(
                 name,
                 true,

@@ -78,6 +78,6 @@ public enum InstrumentsType implements StringRepresentable {
         ITEM,
         KEYBOARD,
         PERCUSSION,
-        OTHER;
+        OTHER
     }
 }

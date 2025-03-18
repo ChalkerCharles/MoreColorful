@@ -101,6 +101,32 @@ public class ModItemModelProvider extends ModItemModelHelper {
         basicItem(ModItems.DAWN_REDWOOD_CHEST_BOAT.get());
         blockItem2d(ModItems.DAWN_REDWOOD_SAPLING.get());
         blockItem2d(ModItems.DAWN_REDWOOD_LEAF_LITTER.get());
+        basicItem(ModItems.DAWN_REDWOOD_ROOTS.get());
+
+        buttonFenceWall(ModItems.JACARANDA_FENCE.get(), ModBlocks.JACARANDA_PLANKS.get(), "fence");
+        basicItem(ModItems.JACARANDA_DOOR.get());
+        buttonFenceWall(ModItems.JACARANDA_BUTTON.get(), ModBlocks.JACARANDA_PLANKS.get(), "button");
+        basicItem(ModItems.JACARANDA_SIGN.get());
+        basicItem(ModItems.JACARANDA_HANGING_SIGN.get());
+        basicItem(ModItems.JACARANDA_BOAT.get());
+        basicItem(ModItems.JACARANDA_CHEST_BOAT.get());
+        blockItem2d(ModItems.JACARANDA_SAPLING.get());
+        basicItem(ModItems.VIOLETS.get());
+        basicItem(ModItems.BUTTERCUPS.get());
+        basicItem(ModItems.FORGET_ME_NOTS.get());
+        basicItem(ModItems.BABY_BLUE_EYES.get());
+        basicItem(ModItems.SPEEDWELLS.get());
+        basicItem(ModItems.WOOD_SORRELS.get());
+
+        buttonFenceWall(ModItems.WILLOW_FENCE.get(), ModBlocks.WILLOW_PLANKS.get(), "fence");
+        basicItem(ModItems.WILLOW_DOOR.get());
+        buttonFenceWall(ModItems.WILLOW_BUTTON.get(), ModBlocks.WILLOW_PLANKS.get(), "button");
+        basicItem(ModItems.WILLOW_SIGN.get());
+        basicItem(ModItems.WILLOW_HANGING_SIGN.get());
+        basicItem(ModItems.WILLOW_BOAT.get());
+        basicItem(ModItems.WILLOW_CHEST_BOAT.get());
+        blockItem2d(ModItems.WILLOW_SAPLING.get());
+        blockItem2d(ModItems.WILLOW_BRANCHES.get(), "willow_branches_tip");
 
         blockItem2d(ModItems.PINK_DAISY.get());
         blockItem2d(ModItems.RED_CARNATION.get());
@@ -114,6 +140,22 @@ public class ModItemModelProvider extends ModItemModelHelper {
         blockItem2d(ModItems.EDELWEISS.get());
         blockItem2d(ModItems.CROCUS.get());
         blockItem2d(ModItems.IRIS.get());
+        blockItem2d(ModItems.LAVENDER.get());
+        blockItem2d(ModItems.DAFFODIL.get());
+        blockItem2d(ModItems.GERBERA_DAISY.get());
+
+        blockItem2d(ModItems.CATTAIL.get(), "cattail_top");
+
+        blockItem2d(ModItems.SHORT_WATER_GRASS.get(), "short_water_grass_top");
+        blockItem2d(ModItems.TALL_WATER_GRASS.get(), "tall_water_grass_top");
+        basicItem(ModItems.REED.get());
+        basicItem(ModItems.OPEN_WATER_LILY.get());
+        basicItem(ModItems.OPEN_WHITE_WATER_LILY.get());
+        basicItem(ModItems.OPEN_BLUE_WATER_LILY.get());
+        blockItem2d(ModItems.CLOSED_WATER_LILY.get());
+        blockItem2d(ModItems.CLOSED_WHITE_WATER_LILY.get());
+        blockItem2d(ModItems.CLOSED_BLUE_WATER_LILY.get());
+        blockItem2d(ModItems.DUCKWEEDS.get());
 
         basicItem(ModItems.STRAWBERRY.get());
         basicItem(ModItems.BLUEBERRIES.get());

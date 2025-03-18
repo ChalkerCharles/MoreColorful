@@ -90,6 +90,9 @@ public class KeyButton extends Button {
             PacketDistributor.sendToServer(new InstrumentPressingPacket(pScreen.pPlayer.getId(), true));
         }
     }
+    public void press() {
+        this.press(false);
+    }
     public void restore() {
         if (!this.active && this.isPressed) {
             this.isPressed = false;

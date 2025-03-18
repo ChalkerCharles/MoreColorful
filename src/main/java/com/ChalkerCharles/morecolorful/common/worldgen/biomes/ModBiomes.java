@@ -6,6 +6,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
 
+@SuppressWarnings("unused")
 public class ModBiomes {
     // ********** Overworld ********** //
     // Forests
@@ -30,7 +31,8 @@ public class ModBiomes {
     public static final ResourceKey<Biome> TUNDRA = register("tundra");
     public static final ResourceKey<Biome> GOLDEN_PASTURE = register("golden_pasture");
     public static final ResourceKey<Biome> OMINOUS_LAND = register("ominous_land");
-    public static final ResourceKey<Biome> RAPESEED_FLOWER_FIELDS = register("rapeseed_flower_fields");
+    public static final ResourceKey<Biome> RAPESEED_FIELDS = register("rapeseed_fields");
+    public static final ResourceKey<Biome> AZURE_FIELDS = register("azure_fields");
     public static final ResourceKey<Biome> LAVENDER_FIELDS = register("lavender_fields");
     public static final ResourceKey<Biome> SHRUBLAND = register("shrubland");
     public static final ResourceKey<Biome> WET_SAVANNA = register("wet_savanna");

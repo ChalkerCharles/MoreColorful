@@ -273,5 +273,19 @@ public final class EnumExtensions {
                 ModItems.DAWN_REDWOOD_CHEST_BOAT,
                 Items.STICK,
                 false);
+        public static final EnumProxy<Boat.Type> JACARANDA = new EnumProxy<>(Boat.Type.class,
+                ModBlocks.JACARANDA_PLANKS,
+                "morecolorful:jacaranda",
+                ModItems.JACARANDA_BOAT,
+                ModItems.JACARANDA_CHEST_BOAT,
+                Items.STICK,
+                false);
+        public static final EnumProxy<Boat.Type> WILLOW = new EnumProxy<>(Boat.Type.class,
+                ModBlocks.WILLOW_PLANKS,
+                "morecolorful:willow",
+                ModItems.WILLOW_BOAT,
+                ModItems.WILLOW_CHEST_BOAT,
+                Items.STICK,
+                false);
     }
 }

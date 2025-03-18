@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "tip=false": {
+      "model": "morecolorful:block/willow_branches"
+    },
+    "tip=true": {
+      "model": "morecolorful:block/willow_branches_tip"
+    }
+  }
+}

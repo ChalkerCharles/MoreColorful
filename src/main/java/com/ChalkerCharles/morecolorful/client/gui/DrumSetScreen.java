@@ -22,6 +22,8 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.NotNull;
 import org.lwjgl.glfw.GLFW;
 
+import java.util.Arrays;
+
 @OnlyIn(Dist.CLIENT)
 public class DrumSetScreen extends Screen {
     private DrumSetButton bass_drum;
@@ -134,10 +136,7 @@ public class DrumSetScreen extends Screen {
         return super.mouseReleased(pMouseX, pMouseY, pButton);
     }
     private void restoreAll() {
-        for (DrumSetButton button : allButtons) {
-            if (!button.pressedByClick) continue;
-            button.restore();
-        }
+        Arrays.stream(allButtons).filter(b -> b.pressedByClick).forEach(DrumSetButton::restore);
     }
 
     @Override

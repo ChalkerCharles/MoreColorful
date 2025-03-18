@@ -3,6 +3,10 @@
     {
       "id": "morecolorful:frost_grove",
       "required": false
+    },
+    {
+      "id": "morecolorful:ice_marsh",
+      "required": false
     }
   ]
 }

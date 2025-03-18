@@ -1,0 +1,18 @@
+{
+	"ambientocclusion": false,
+	"render_type": "cutout",
+	"textures": {
+		"texture": "morecolorful:block/duckweeds",
+		"particle": "morecolorful:block/duckweeds"
+	},
+	"elements": [
+		{
+			"from": [8, 0.1, 0],
+			"to": [16, 0.1, 8],
+			"faces": {
+				"up": {"uv": [8, 0, 16, 8], "texture": "#texture", "tintindex": 0 },
+				"down": {"uv": [8, 8, 16, 0], "texture": "#texture", "tintindex": 0 }
+			}
+		}
+	]
+}

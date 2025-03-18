@@ -10,6 +10,8 @@ import com.ChalkerCharles.morecolorful.common.item.musical_instruments.MusicalIn
 import com.ChalkerCharles.morecolorful.network.packets.InstrumentPressingPacket;
 import com.ChalkerCharles.morecolorful.network.packets.InstrumentTickingPacket;
 import com.ChalkerCharles.morecolorful.network.packets.PlayingScreenPacket;
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
@@ -22,6 +24,7 @@ import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.block.Block;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -29,35 +32,12 @@ import org.jetbrains.annotations.NotNull;
 import org.lwjgl.glfw.GLFW;
 
 import java.util.List;
+import java.util.Optional;
 
 @OnlyIn(Dist.CLIENT)
 public class PlayingScreen extends Screen {
-    private KeyButton blackKey_0;
-    private KeyButton whiteKey_1;
-    private KeyButton blackKey_2;
-    private KeyButton whiteKey_3;
-    private KeyButton blackKey_4;
-    private KeyButton whiteKey_5;
-    private KeyButton whiteKey_6;
-    private KeyButton blackKey_7;
-    private KeyButton whiteKey_8;
-    private KeyButton blackKey_9;
-    private KeyButton whiteKey_10;
-    private KeyButton whiteKey_11;
-    private KeyButton blackKey_12;
-    private KeyButton whiteKey_13;
-    private KeyButton blackKey_14;
-    private KeyButton whiteKey_15;
-    private KeyButton blackKey_16;
-    private KeyButton whiteKey_17;
-    private KeyButton whiteKey_18;
-    private KeyButton blackKey_19;
-    private KeyButton whiteKey_20;
-    private KeyButton blackKey_21;
-    private KeyButton whiteKey_22;
-    private KeyButton whiteKey_23;
-    private KeyButton blackKey_24;
-    private final KeyButton[] allKeys = new KeyButton[25];
+    private final Int2ObjectMap<KeyButton> allKeys = new Int2ObjectOpenHashMap<>();
+    private final Int2ObjectMap<KeyButton> keyCodes = new Int2ObjectOpenHashMap<>();
     private OctaveButton octaveButton;
     private static final ResourceLocation PLAYING_SCREEN_TEXTURE = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "textures/gui/playing_screen.png");
     private static final Component TITLE = Component.translatable("morecolorful.gui.playing_screen_title");
@@ -67,7 +47,7 @@ public class PlayingScreen extends Screen {
     public final Player pPlayer;
     public InstrumentsType pType;
     public final BlockPos pPos;
-    public static final BlockPos DEFAULT_POS = new BlockPos(0, -128, 0);
+    public static final BlockPos DEFAULT_POS = new BlockPos(0, -2048, 0);
     private float pTick = 0;
     private boolean isDragging;
     public boolean isPressing = false;
@@ -78,77 +58,112 @@ public class PlayingScreen extends Screen {
         this.pPlayer = pPlayer;
         this.pType = pType;
         this.pPos = pPos;
-        this.midiHandler = new MidiHandler(this::pressByKeyId, this::restoreByKeyId);
+        this.midiHandler = new MidiHandler(
+                id -> getKeyById(id).press(),
+                id -> getKeyById(id).restore()
+        );
     }
 
     @Override
     protected void init() {
         int i = this.width;
         Button button = this.addRenderableWidget(Button.builder(CommonComponents.GUI_DONE, pButton -> {
-            if (this.minecraft != null) {this.minecraft.setScreen(null);}
+            if (this.minecraft != null) this.minecraft.setScreen(null);
             isPressing = false;
             pPlayer.stopUsingItem();
             PacketDistributor.sendToServer(new PlayingScreenPacket(pType, pPos, pPlayer.getId(), false));
         }).pos((i - 186) / 2, 192).size(186, 20).build());
         this.addWidget(button);
-        this.blackKey_0 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 46, 111, -1, 0));
-        allKeys[0] = this.blackKey_0;
-        this.blackKey_2 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 63, 111, -1, 2));
-        allKeys[2] = this.blackKey_2;
-        this.blackKey_4 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 80, 111, -1, 4));
-        allKeys[4] = this.blackKey_4;
-        this.blackKey_7 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 110, 111, -1, 7));
-        allKeys[7] = this.blackKey_7;
-        this.blackKey_9 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 128, 111, -1, 9));
-        allKeys[9] = this.blackKey_9;
-        this.blackKey_12 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 30, 53, -1, 12));
-        allKeys[12] = this.blackKey_12;
-        this.blackKey_14 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 47, 53, -1, 14));
-        allKeys[14] = this.blackKey_14;
-        this.blackKey_16 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 64, 53, -1, 16));
-        allKeys[16] = this.blackKey_16;
-        this.blackKey_19 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 94, 53, -1, 19));
-        allKeys[19] = this.blackKey_19;
-        this.blackKey_21 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 112, 53, -1, 21));
-        allKeys[21] = this.blackKey_21;
-        this.blackKey_24 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 142, 53, -1, 24));
-        allKeys[24] = this.blackKey_24;
+        KeyButton blackKey_0 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 46, 111, -1, 0));
+        KeyButton blackKey_2 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 63, 111, -1, 2));
+        KeyButton blackKey_4 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 80, 111, -1, 4));
+        KeyButton blackKey_7 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 110, 111, -1, 7));
+        KeyButton blackKey_9 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 128, 111, -1, 9));
+        KeyButton blackKey_12 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 30, 53, -1, 12));
+        KeyButton blackKey_14 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 47, 53, -1, 14));
+        KeyButton blackKey_16 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 64, 53, -1, 16));
+        KeyButton blackKey_19 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 94, 53, -1, 19));
+        KeyButton blackKey_21 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 112, 53, -1, 21));
+        KeyButton blackKey_24 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 142, 53, -1, 24));
         KeyButton.width = 16;
         KeyButton.height = 48;
-        this.whiteKey_1 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 53, 111, 3, 1));
-        allKeys[1] = this.whiteKey_1;
-        this.whiteKey_3 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 69, 111, 4, 3));
-        allKeys[3] = this.whiteKey_3;
-        this.whiteKey_5 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 85, 111, 2, 5));
-        allKeys[5] = this.whiteKey_5;
-        this.whiteKey_6 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 101, 111, 0, 6));
-        allKeys[6] = this.whiteKey_6;
-        this.whiteKey_8 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 117, 111, 1, 8));
-        allKeys[8] = this.whiteKey_8;
-        this.whiteKey_10 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 133, 111, 2, 10));
-        allKeys[10] = this.whiteKey_10;
-        this.whiteKey_11 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 21, 53, 0, 11));
-        allKeys[11] = this.whiteKey_11;
-        this.whiteKey_13 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 37, 53, 3, 13));
-        allKeys[13] = this.whiteKey_13;
-        this.whiteKey_15 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 53, 53, 4, 15));
-        allKeys[15] = this.whiteKey_15;
-        this.whiteKey_17 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 69, 53, 2, 17));
-        allKeys[17] = this.whiteKey_17;
-        this.whiteKey_18 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 85, 53, 0, 18));
-        allKeys[18] = this.whiteKey_18;
-        this.whiteKey_20 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 101, 53, 1, 20));
-        allKeys[20] = this.whiteKey_20;
-        this.whiteKey_22 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 117, 53, 2, 22));
-        allKeys[22] = this.whiteKey_22;
-        this.whiteKey_23 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 133, 53, 0, 23));
-        allKeys[23] = this.whiteKey_23;
+        KeyButton whiteKey_1 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 53, 111, 3, 1));
+        KeyButton whiteKey_3 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 69, 111, 4, 3));
+        KeyButton whiteKey_5 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 85, 111, 2, 5));
+        KeyButton whiteKey_6 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 101, 111, 0, 6));
+        KeyButton whiteKey_8 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 117, 111, 1, 8));
+        KeyButton whiteKey_10 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 133, 111, 2, 10));
+        KeyButton whiteKey_11 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 21, 53, 0, 11));
+        KeyButton whiteKey_13 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 37, 53, 3, 13));
+        KeyButton whiteKey_15 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 53, 53, 4, 15));
+        KeyButton whiteKey_17 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 69, 53, 2, 17));
+        KeyButton whiteKey_18 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 85, 53, 0, 18));
+        KeyButton whiteKey_20 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 101, 53, 1, 20));
+        KeyButton whiteKey_22 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 117, 53, 2, 22));
+        KeyButton whiteKey_23 = this.addRenderableWidget(new KeyButton((i - 186) / 2 + 133, 53, 0, 23));
         KeyButton.width = 12;
         KeyButton.height = 32;
         if (pType == InstrumentsType.PIANO_LOW || pType == InstrumentsType.PIANO_HIGH) {
             this.octaveButton = this.addRenderableWidget(new OctaveButton((i - 186) / 2 + 169, 37, pType, Button -> octaveButton.toggleOctave(this)));
         }
+        addKeys(blackKey_0,
+                whiteKey_1,
+                blackKey_2,
+                whiteKey_3,
+                blackKey_4,
+                whiteKey_5,
+                whiteKey_6,
+                blackKey_7,
+                whiteKey_8,
+                blackKey_9,
+                whiteKey_10,
+                whiteKey_11,
+                blackKey_12,
+                whiteKey_13,
+                blackKey_14,
+                whiteKey_15,
+                blackKey_16,
+                whiteKey_17,
+                whiteKey_18,
+                blackKey_19,
+                whiteKey_20,
+                blackKey_21,
+                whiteKey_22,
+                whiteKey_23,
+                blackKey_24
+        );
+        keyCodes.put(GLFW.GLFW_KEY_A, blackKey_0);
+        keyCodes.put(GLFW.GLFW_KEY_Z, whiteKey_1);
+        keyCodes.put(GLFW.GLFW_KEY_S, blackKey_2);
+        keyCodes.put(GLFW.GLFW_KEY_X, whiteKey_3);
+        keyCodes.put(GLFW.GLFW_KEY_D, blackKey_4);
+        keyCodes.put(GLFW.GLFW_KEY_C, whiteKey_5);
+        keyCodes.put(GLFW.GLFW_KEY_V, whiteKey_6);
+        keyCodes.put(GLFW.GLFW_KEY_G, blackKey_7);
+        keyCodes.put(GLFW.GLFW_KEY_B, whiteKey_8);
+        keyCodes.put(GLFW.GLFW_KEY_H, blackKey_9);
+        keyCodes.put(GLFW.GLFW_KEY_N, whiteKey_10);
+        keyCodes.put(GLFW.GLFW_KEY_Q, whiteKey_11);
+        keyCodes.put(GLFW.GLFW_KEY_2, blackKey_12);
+        keyCodes.put(GLFW.GLFW_KEY_W, whiteKey_13);
+        keyCodes.put(GLFW.GLFW_KEY_3, blackKey_14);
+        keyCodes.put(GLFW.GLFW_KEY_E, whiteKey_15);
+        keyCodes.put(GLFW.GLFW_KEY_4, blackKey_16);
+        keyCodes.put(GLFW.GLFW_KEY_R, whiteKey_17);
+        keyCodes.put(GLFW.GLFW_KEY_T, whiteKey_18);
+        keyCodes.put(GLFW.GLFW_KEY_6, blackKey_19);
+        keyCodes.put(GLFW.GLFW_KEY_Y, whiteKey_20);
+        keyCodes.put(GLFW.GLFW_KEY_7, blackKey_21);
+        keyCodes.put(GLFW.GLFW_KEY_U, whiteKey_22);
+        keyCodes.put(GLFW.GLFW_KEY_I, whiteKey_23);
+        keyCodes.put(GLFW.GLFW_KEY_9, blackKey_24);
         super.init();
+    }
+
+    private void addKeys(KeyButton... keys) {
+        for (KeyButton key : keys) {
+            allKeys.put(key.keyId, key);
+        }
     }
 
     @Override
@@ -219,8 +234,8 @@ public class PlayingScreen extends Screen {
         if (this.octaveButton != null && this.octaveButton.isHovered()) {
             Component octaveMessage = pType == InstrumentsType.PIANO_HIGH ? Component.translatable("morecolorful.gui.octave_high_message") : Component.translatable("morecolorful.gui.octave_low_message");
             Component octaveToggle = Component.translatable("morecolorful.gui.octave_toggle", ModKeyMapping.OCTAVE_TOGGLE.get().getKey().getDisplayName());
-            List<Component> list = List.of(new Component[]{octaveMessage, octaveToggle});
-            pGuiGraphics.renderTooltip(this.font, list, java.util.Optional.empty(), mouseX, mouseY);
+            List<Component> list = List.of(octaveMessage, octaveToggle);
+            pGuiGraphics.renderTooltip(this.font, list, Optional.empty(), mouseX, mouseY);
         }
     }
 
@@ -232,7 +247,9 @@ public class PlayingScreen extends Screen {
     }
 
     @Override
-    public boolean isPauseScreen() {return false;}
+    public boolean isPauseScreen() {
+        return false;
+    }
 
     @Override
     public void removed() {
@@ -253,13 +270,13 @@ public class PlayingScreen extends Screen {
         if (pMouseX > (i - 186) / 2 + 37 && pMouseX < (i - 186) / 2 + 149 && pMouseY > 111 && pMouseY < 159){
             isDragging = true;
         } else isDragging = (pMouseX > (i - 186) / 2 + 21 && pMouseX < (i - 186) / 2 + 165 && pMouseY > 53 && pMouseY < 101);
-        for (KeyButton button: allKeys) {
-            if (button.isHovered() && (button == blackKey_0 || button == blackKey_24)) {
-                button.press(true);
+        for (KeyButton key: allKeys.values()) {
+            if (key.isHovered() && (key.keyId == 0 || key.keyId == 24)) {
+                key.press(true);
                 continue;
             }
-            if (button.isHovered() && (button.keyType >= 0 != (getNextKey(button).isHovered() || getLastKey(button).isHovered()))) {
-                button.press(true);
+            if (key.isHovered() && (key.keyType >= 0 != (getNextKey(key).isHovered() || getLastKey(key).isHovered()))) {
+                key.press(true);
             }
         }
         return super.mouseClicked(pMouseX, pMouseY, pButton);
@@ -271,17 +288,13 @@ public class PlayingScreen extends Screen {
         return super.mouseReleased(pMouseX, pMouseY, pButton);
     }
     private void restoreAll() {
-        for (KeyButton button : allKeys) {
-            if (!button.pressedByClick) continue;
-            button.restore();
-        }
+        allKeys.values().stream().filter(b -> b.pressedByClick).forEach(KeyButton::restore);
     }
     private void restoreAllExcept(KeyButton exceptedOne) {
-        for (KeyButton button : allKeys) {
-            if (exceptedOne == button) continue;
-            if (!button.pressedByClick) continue;
-            button.restore();
-        }
+        allKeys.values().stream()
+                .filter(b -> !b.equals(exceptedOne))
+                .filter(b -> b.pressedByClick)
+                .forEach(KeyButton::restore);
     }
 
     @Override
@@ -290,7 +303,7 @@ public class PlayingScreen extends Screen {
         if (pMouseX > (i - 186) / 2 + 37 && pMouseX < (i - 186) / 2 + 149 && pMouseY > 111 && pMouseY < 159 && isDragging) {
             for (int x = 0; x <= 10; x++) {
                 KeyButton key = getKeyById(x);
-                if (key.isHovered() && (key == blackKey_0 || key == blackKey_24)) {
+                if (key.isHovered() && (key.keyId == 0 || key.keyId == 24)) {
                     key.press(true);
                     continue;
                 }
@@ -303,7 +316,7 @@ public class PlayingScreen extends Screen {
         if (pMouseX > (i - 186) / 2 + 21 && pMouseX < (i - 186) / 2 + 165 && pMouseY > 53 && pMouseY < 101 && isDragging){
             for (int x = 11; x <= 24; x++) {
                 KeyButton key = getKeyById(x);
-                if (key.isHovered() && (key == blackKey_0 || key == blackKey_24)) {
+                if (key.isHovered() && (key.keyId == 0 || key.keyId == 24)) {
                     key.press(true);
                     continue;
                 }
@@ -322,71 +335,41 @@ public class PlayingScreen extends Screen {
         if (pKeyCode == ModKeyMapping.OCTAVE_TOGGLE.get().getKey().getValue() && octaveButton != null) {
             octaveButton.onPress();
         }
-        if (pKeyCode == GLFW.GLFW_KEY_A) blackKey_0.press(false);
-        if (pKeyCode == GLFW.GLFW_KEY_Z) whiteKey_1.press(false);
-        if (pKeyCode == GLFW.GLFW_KEY_S) blackKey_2.press(false);
-        if (pKeyCode == GLFW.GLFW_KEY_X) whiteKey_3.press(false);
-        if (pKeyCode == GLFW.GLFW_KEY_D) blackKey_4.press(false);
-        if (pKeyCode == GLFW.GLFW_KEY_C) whiteKey_5.press(false);
-        if (pKeyCode == GLFW.GLFW_KEY_V) whiteKey_6.press(false);
-        if (pKeyCode == GLFW.GLFW_KEY_G) blackKey_7.press(false);
-        if (pKeyCode == GLFW.GLFW_KEY_B) whiteKey_8.press(false);
-        if (pKeyCode == GLFW.GLFW_KEY_H) blackKey_9.press(false);
-        if (pKeyCode == GLFW.GLFW_KEY_N) whiteKey_10.press(false);
-        if (pKeyCode == GLFW.GLFW_KEY_Q) whiteKey_11.press(false);
-        if (pKeyCode == GLFW.GLFW_KEY_2) blackKey_12.press(false);
-        if (pKeyCode == GLFW.GLFW_KEY_W) whiteKey_13.press(false);
-        if (pKeyCode == GLFW.GLFW_KEY_3) blackKey_14.press(false);
-        if (pKeyCode == GLFW.GLFW_KEY_E) whiteKey_15.press(false);
-        if (pKeyCode == GLFW.GLFW_KEY_4) blackKey_16.press(false);
-        if (pKeyCode == GLFW.GLFW_KEY_R) whiteKey_17.press(false);
-        if (pKeyCode == GLFW.GLFW_KEY_T) whiteKey_18.press(false);
-        if (pKeyCode == GLFW.GLFW_KEY_6) blackKey_19.press(false);
-        if (pKeyCode == GLFW.GLFW_KEY_Y) whiteKey_20.press(false);
-        if (pKeyCode == GLFW.GLFW_KEY_7) blackKey_21.press(false);
-        if (pKeyCode == GLFW.GLFW_KEY_U) whiteKey_22.press(false);
-        if (pKeyCode == GLFW.GLFW_KEY_I) whiteKey_23.press(false);
-        if (pKeyCode == GLFW.GLFW_KEY_9) blackKey_24.press(false);
+        for (int keycode : keyCodes.keySet()) {
+            if (pKeyCode == keycode) {
+                keyCodes.get(keycode).press();
+            }
+        }
         return true;
     }
 
     @Override
     public boolean keyReleased(int pKeyCode, int pScanCode, int pModifiers){
         super.keyReleased(pKeyCode, pScanCode, pModifiers);
-        if (pKeyCode == GLFW.GLFW_KEY_A && !blackKey_0.pressedByClick) blackKey_0.restore();
-        if (pKeyCode == GLFW.GLFW_KEY_Z && !whiteKey_1.pressedByClick) whiteKey_1.restore();
-        if (pKeyCode == GLFW.GLFW_KEY_S && !blackKey_2.pressedByClick) blackKey_2.restore();
-        if (pKeyCode == GLFW.GLFW_KEY_X && !whiteKey_3.pressedByClick) whiteKey_3.restore();
-        if (pKeyCode == GLFW.GLFW_KEY_D && !blackKey_4.pressedByClick) blackKey_4.restore();
-        if (pKeyCode == GLFW.GLFW_KEY_C && !whiteKey_5.pressedByClick) whiteKey_5.restore();
-        if (pKeyCode == GLFW.GLFW_KEY_V && !whiteKey_6.pressedByClick) whiteKey_6.restore();
-        if (pKeyCode == GLFW.GLFW_KEY_G && !blackKey_7.pressedByClick) blackKey_7.restore();
-        if (pKeyCode == GLFW.GLFW_KEY_B && !whiteKey_8.pressedByClick) whiteKey_8.restore();
-        if (pKeyCode == GLFW.GLFW_KEY_H && !blackKey_9.pressedByClick) blackKey_9.restore();
-        if (pKeyCode == GLFW.GLFW_KEY_N && !whiteKey_10.pressedByClick) whiteKey_10.restore();
-        if (pKeyCode == GLFW.GLFW_KEY_Q && !whiteKey_11.pressedByClick) whiteKey_11.restore();
-        if (pKeyCode == GLFW.GLFW_KEY_2 && !blackKey_12.pressedByClick) blackKey_12.restore();
-        if (pKeyCode == GLFW.GLFW_KEY_W && !whiteKey_13.pressedByClick) whiteKey_13.restore();
-        if (pKeyCode == GLFW.GLFW_KEY_3 && !blackKey_14.pressedByClick) blackKey_14.restore();
-        if (pKeyCode == GLFW.GLFW_KEY_E && !whiteKey_15.pressedByClick) whiteKey_15.restore();
-        if (pKeyCode == GLFW.GLFW_KEY_4 && !blackKey_16.pressedByClick) blackKey_16.restore();
-        if (pKeyCode == GLFW.GLFW_KEY_R && !whiteKey_17.pressedByClick) whiteKey_17.restore();
-        if (pKeyCode == GLFW.GLFW_KEY_T && !whiteKey_18.pressedByClick) whiteKey_18.restore();
-        if (pKeyCode == GLFW.GLFW_KEY_6 && !blackKey_19.pressedByClick) blackKey_19.restore();
-        if (pKeyCode == GLFW.GLFW_KEY_Y && !whiteKey_20.pressedByClick) whiteKey_20.restore();
-        if (pKeyCode == GLFW.GLFW_KEY_7 && !blackKey_21.pressedByClick) blackKey_21.restore();
-        if (pKeyCode == GLFW.GLFW_KEY_U && !whiteKey_22.pressedByClick) whiteKey_22.restore();
-        if (pKeyCode == GLFW.GLFW_KEY_I && !whiteKey_23.pressedByClick) whiteKey_23.restore();
-        if (pKeyCode == GLFW.GLFW_KEY_9 && !blackKey_24.pressedByClick) blackKey_24.restore();
+        for (int keycode : keyCodes.keySet()) {
+            KeyButton key = keyCodes.get(keycode);
+            if (pKeyCode == keycode && !key.pressedByClick) {
+                key.restore();
+            }
+        }
         return true;
+    }
+
+    private boolean isAnyPressed() {
+        return allKeys.values().stream().anyMatch(k -> k.isPressed);
+    }
+
+    private boolean isAnyLeftKeysPressed() {
+        return allKeys.values().stream().filter(k -> k.keyId <= 11).anyMatch(k -> k.isPressed);
+    }
+
+    private boolean isAnyRightKeysPressed() {
+        return allKeys.values().stream().filter(k -> k.keyId >= 12).anyMatch(k -> k.isPressed);
     }
 
     @Override
     public void tick() {
-        if (!(blackKey_0.isPressed || whiteKey_1.isPressed || blackKey_2.isPressed || whiteKey_3.isPressed || blackKey_4.isPressed || whiteKey_5.isPressed || whiteKey_6.isPressed ||
-                blackKey_7.isPressed || whiteKey_8.isPressed || blackKey_9.isPressed || whiteKey_10.isPressed || whiteKey_11.isPressed || blackKey_12.isPressed || whiteKey_13.isPressed ||
-                blackKey_14.isPressed || whiteKey_15.isPressed || blackKey_16.isPressed || whiteKey_17.isPressed ||whiteKey_18.isPressed || blackKey_19.isPressed || whiteKey_20.isPressed ||
-                blackKey_21.isPressed || whiteKey_22.isPressed || whiteKey_23.isPressed || blackKey_24.isPressed)){
+        if (!isAnyPressed()){
             isPressing = false;
             PacketDistributor.sendToServer(new InstrumentPressingPacket(pPlayer.getId(), false));
         }
@@ -407,12 +390,10 @@ public class PlayingScreen extends Screen {
                 pPlayer.swing(drumstickHand);
 
             } else if (pType == InstrumentsType.GLOCKENSPIEL || pType == InstrumentsType.XYLOPHONE || pType == InstrumentsType.VIBRAPHONE) {
-                if (blackKey_0.isPressed || whiteKey_1.isPressed || blackKey_2.isPressed || whiteKey_3.isPressed || blackKey_4.isPressed || whiteKey_5.isPressed || whiteKey_6.isPressed ||
-                        blackKey_7.isPressed || whiteKey_8.isPressed || blackKey_9.isPressed || whiteKey_10.isPressed || whiteKey_11.isPressed) {
+                if (isAnyLeftKeysPressed()) {
                     pPlayer.swing(leftHand);
                 }
-                if (blackKey_12.isPressed || whiteKey_13.isPressed || blackKey_14.isPressed || whiteKey_15.isPressed || blackKey_16.isPressed || whiteKey_17.isPressed || whiteKey_18.isPressed ||
-                        blackKey_19.isPressed || whiteKey_20.isPressed || blackKey_21.isPressed || whiteKey_22.isPressed || whiteKey_23.isPressed || blackKey_24.isPressed) {
+                if (isAnyRightKeysPressed()) {
                     pPlayer.swing(rightHand);
                 }
 
@@ -421,11 +402,12 @@ public class PlayingScreen extends Screen {
             }
         }
 
-        boolean exception = pPlayer.level().getBlockState(pPos).getBlock() instanceof MusicalInstrumentBlock block && block.getType() == InstrumentsType.PIANO_LOW && this.pType == InstrumentsType.PIANO_HIGH;
+        Block pBlock = pPlayer.level().getBlockState(pPos).getBlock();
+        boolean exception = pBlock instanceof MusicalInstrumentBlock block && block.getType() == InstrumentsType.PIANO_LOW && this.pType == InstrumentsType.PIANO_HIGH;
 
         if (this.minecraft != null) {
             if (pPos != DEFAULT_POS) {
-                if ((!(pPlayer.level().getBlockState(pPos).getBlock() instanceof MusicalInstrumentBlock block) || block.getType() != this.pType) && !exception) {
+                if ((!(pBlock instanceof MusicalInstrumentBlock block) || block.getType() != this.pType) && !exception) {
                     minecraft.setScreen(null);
                     isPressing = false;
                     PacketDistributor.sendToServer(new PlayingScreenPacket(pType, pPos, pPlayer.getId(), false));
@@ -441,34 +423,7 @@ public class PlayingScreen extends Screen {
     }
 
     private KeyButton getKeyById(int keyId) {
-        return switch (keyId) {
-            case 0 -> blackKey_0;
-            case 1 -> whiteKey_1;
-            case 2 -> blackKey_2;
-            case 3 -> whiteKey_3;
-            case 4 -> blackKey_4;
-            case 5 -> whiteKey_5;
-            case 6 -> whiteKey_6;
-            case 7 -> blackKey_7;
-            case 8 -> whiteKey_8;
-            case 9 -> blackKey_9;
-            case 10 -> whiteKey_10;
-            case 11 -> whiteKey_11;
-            case 12 -> blackKey_12;
-            case 13 -> whiteKey_13;
-            case 14 -> blackKey_14;
-            case 15 -> whiteKey_15;
-            case 16 -> blackKey_16;
-            case 17 -> whiteKey_17;
-            case 18 -> whiteKey_18;
-            case 19 -> blackKey_19;
-            case 20 -> whiteKey_20;
-            case 21 -> blackKey_21;
-            case 22 -> whiteKey_22;
-            case 23 -> whiteKey_23;
-            case 24 -> blackKey_24;
-            default -> throw new IllegalStateException("Unexpected value: " + keyId);
-        };
+        return allKeys.get(keyId);
     }
     private KeyButton getNextKey(int keyId) {
         int nextKeyId = keyId + 1 > 24 ? 0 : keyId + 1;
@@ -483,12 +438,6 @@ public class PlayingScreen extends Screen {
     }
     private KeyButton getLastKey(KeyButton keyButton) {
         return getLastKey(keyButton.keyId);
-    }
-    private void pressByKeyId(int keyId) {
-        getKeyById(keyId).press(false);
-    }
-    private void restoreByKeyId(int keyId) {
-        getKeyById(keyId).restore();
     }
 
     public static void openPlayingScreen(Player pPlayer, InstrumentsType pType){

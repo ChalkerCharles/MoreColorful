@@ -2,6 +2,7 @@ package com.ChalkerCharles.morecolorful.common.item;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.common.block.ModBlocks;
+import com.ChalkerCharles.morecolorful.common.item.common.DuckweedsItem;
 import com.ChalkerCharles.morecolorful.common.item.musical_instruments.*;
 import com.ChalkerCharles.morecolorful.util.EnumExtensions;
 import net.minecraft.world.item.*;
@@ -10,6 +11,8 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
+
+import java.util.function.Supplier;
 
 
 public class ModItems {
@@ -128,6 +131,36 @@ public class ModItems {
     public static final DeferredItem<BlockItem> DAWN_REDWOOD_BUTTON = ITEMS.registerSimpleBlockItem(ModBlocks.DAWN_REDWOOD_BUTTON);
     public static final DeferredItem<BlockItem> DAWN_REDWOOD_SIGN = registerSign(ModBlocks.DAWN_REDWOOD_SIGN, ModBlocks.DAWN_REDWOOD_WALL_SIGN);
     public static final DeferredItem<BlockItem> DAWN_REDWOOD_HANGING_SIGN = registerHangingSign(ModBlocks.DAWN_REDWOOD_HANGING_SIGN, ModBlocks.DAWN_REDWOOD_WALL_HANGING_SIGN);
+    public static final DeferredItem<BlockItem> JACARANDA_LOG = ITEMS.registerSimpleBlockItem(ModBlocks.JACARANDA_LOG);
+    public static final DeferredItem<BlockItem> JACARANDA_WOOD = ITEMS.registerSimpleBlockItem(ModBlocks.JACARANDA_WOOD);
+    public static final DeferredItem<BlockItem> STRIPPED_JACARANDA_LOG = ITEMS.registerSimpleBlockItem(ModBlocks.STRIPPED_JACARANDA_LOG);
+    public static final DeferredItem<BlockItem> STRIPPED_JACARANDA_WOOD = ITEMS.registerSimpleBlockItem(ModBlocks.STRIPPED_JACARANDA_WOOD);
+    public static final DeferredItem<BlockItem> JACARANDA_PLANKS = ITEMS.registerSimpleBlockItem(ModBlocks.JACARANDA_PLANKS);
+    public static final DeferredItem<BlockItem> JACARANDA_STAIRS = ITEMS.registerSimpleBlockItem(ModBlocks.JACARANDA_STAIRS);
+    public static final DeferredItem<BlockItem> JACARANDA_SLAB = ITEMS.registerSimpleBlockItem(ModBlocks.JACARANDA_SLAB);
+    public static final DeferredItem<BlockItem> JACARANDA_FENCE = ITEMS.registerSimpleBlockItem(ModBlocks.JACARANDA_FENCE);
+    public static final DeferredItem<BlockItem> JACARANDA_FENCE_GATE = ITEMS.registerSimpleBlockItem(ModBlocks.JACARANDA_FENCE_GATE);
+    public static final DeferredItem<BlockItem> JACARANDA_DOOR = ITEMS.registerSimpleBlockItem(ModBlocks.JACARANDA_DOOR);
+    public static final DeferredItem<BlockItem> JACARANDA_TRAPDOOR = ITEMS.registerSimpleBlockItem(ModBlocks.JACARANDA_TRAPDOOR);
+    public static final DeferredItem<BlockItem> JACARANDA_PRESSURE_PLATE = ITEMS.registerSimpleBlockItem(ModBlocks.JACARANDA_PRESSURE_PLATE);
+    public static final DeferredItem<BlockItem> JACARANDA_BUTTON = ITEMS.registerSimpleBlockItem(ModBlocks.JACARANDA_BUTTON);
+    public static final DeferredItem<BlockItem> JACARANDA_SIGN = registerSign(ModBlocks.JACARANDA_SIGN, ModBlocks.JACARANDA_WALL_SIGN);
+    public static final DeferredItem<BlockItem> JACARANDA_HANGING_SIGN = registerHangingSign(ModBlocks.JACARANDA_HANGING_SIGN, ModBlocks.JACARANDA_WALL_HANGING_SIGN);
+    public static final DeferredItem<BlockItem> WILLOW_LOG = ITEMS.registerSimpleBlockItem(ModBlocks.WILLOW_LOG);
+    public static final DeferredItem<BlockItem> WILLOW_WOOD = ITEMS.registerSimpleBlockItem(ModBlocks.WILLOW_WOOD);
+    public static final DeferredItem<BlockItem> STRIPPED_WILLOW_LOG = ITEMS.registerSimpleBlockItem(ModBlocks.STRIPPED_WILLOW_LOG);
+    public static final DeferredItem<BlockItem> STRIPPED_WILLOW_WOOD = ITEMS.registerSimpleBlockItem(ModBlocks.STRIPPED_WILLOW_WOOD);
+    public static final DeferredItem<BlockItem> WILLOW_PLANKS = ITEMS.registerSimpleBlockItem(ModBlocks.WILLOW_PLANKS);
+    public static final DeferredItem<BlockItem> WILLOW_STAIRS = ITEMS.registerSimpleBlockItem(ModBlocks.WILLOW_STAIRS);
+    public static final DeferredItem<BlockItem> WILLOW_SLAB = ITEMS.registerSimpleBlockItem(ModBlocks.WILLOW_SLAB);
+    public static final DeferredItem<BlockItem> WILLOW_FENCE = ITEMS.registerSimpleBlockItem(ModBlocks.WILLOW_FENCE);
+    public static final DeferredItem<BlockItem> WILLOW_FENCE_GATE = ITEMS.registerSimpleBlockItem(ModBlocks.WILLOW_FENCE_GATE);
+    public static final DeferredItem<BlockItem> WILLOW_DOOR = ITEMS.registerSimpleBlockItem(ModBlocks.WILLOW_DOOR);
+    public static final DeferredItem<BlockItem> WILLOW_TRAPDOOR = ITEMS.registerSimpleBlockItem(ModBlocks.WILLOW_TRAPDOOR);
+    public static final DeferredItem<BlockItem> WILLOW_PRESSURE_PLATE = ITEMS.registerSimpleBlockItem(ModBlocks.WILLOW_PRESSURE_PLATE);
+    public static final DeferredItem<BlockItem> WILLOW_BUTTON = ITEMS.registerSimpleBlockItem(ModBlocks.WILLOW_BUTTON);
+    public static final DeferredItem<BlockItem> WILLOW_SIGN = registerSign(ModBlocks.WILLOW_SIGN, ModBlocks.WILLOW_WALL_SIGN);
+    public static final DeferredItem<BlockItem> WILLOW_HANGING_SIGN = registerHangingSign(ModBlocks.WILLOW_HANGING_SIGN, ModBlocks.WILLOW_WALL_HANGING_SIGN);
 
     public static final DeferredItem<BlockItem> CRABAPPLE_LEAVES = ITEMS.registerSimpleBlockItem(ModBlocks.CRABAPPLE_LEAVES);
     public static final DeferredItem<BlockItem> CRABAPPLE_SAPLING = ITEMS.registerSimpleBlockItem(ModBlocks.CRABAPPLE_SAPLING);
@@ -153,6 +186,18 @@ public class ModItems {
     public static final DeferredItem<BlockItem> DAWN_REDWOOD_LEAVES = ITEMS.registerSimpleBlockItem(ModBlocks.DAWN_REDWOOD_LEAVES);
     public static final DeferredItem<BlockItem> DAWN_REDWOOD_SAPLING = ITEMS.registerSimpleBlockItem(ModBlocks.DAWN_REDWOOD_SAPLING);
     public static final DeferredItem<BlockItem> DAWN_REDWOOD_LEAF_LITTER = ITEMS.registerSimpleBlockItem(ModBlocks.DAWN_REDWOOD_LEAF_LITTER);
+    public static final DeferredItem<BlockItem> DAWN_REDWOOD_ROOTS = ITEMS.registerSimpleBlockItem(ModBlocks.DAWN_REDWOOD_ROOTS);
+    public static final DeferredItem<BlockItem> JACARANDA_LEAVES = ITEMS.registerSimpleBlockItem(ModBlocks.JACARANDA_LEAVES);
+    public static final DeferredItem<BlockItem> JACARANDA_SAPLING = ITEMS.registerSimpleBlockItem(ModBlocks.JACARANDA_SAPLING);
+    public static final DeferredItem<BlockItem> VIOLETS = ITEMS.registerSimpleBlockItem(ModBlocks.VIOLETS);
+    public static final DeferredItem<BlockItem> BUTTERCUPS = ITEMS.registerSimpleBlockItem(ModBlocks.BUTTERCUPS);
+    public static final DeferredItem<BlockItem> FORGET_ME_NOTS = ITEMS.registerSimpleBlockItem(ModBlocks.FORGET_ME_NOTS);
+    public static final DeferredItem<BlockItem> BABY_BLUE_EYES = ITEMS.registerSimpleBlockItem(ModBlocks.BABY_BLUE_EYES);
+    public static final DeferredItem<BlockItem> SPEEDWELLS = ITEMS.registerSimpleBlockItem(ModBlocks.SPEEDWELLS);
+    public static final DeferredItem<BlockItem> WOOD_SORRELS = ITEMS.registerSimpleBlockItem(ModBlocks.WOOD_SORRELS);
+    public static final DeferredItem<BlockItem> WILLOW_LEAVES = ITEMS.registerSimpleBlockItem(ModBlocks.WILLOW_LEAVES);
+    public static final DeferredItem<BlockItem> WILLOW_SAPLING = ITEMS.registerSimpleBlockItem(ModBlocks.WILLOW_SAPLING);
+    public static final DeferredItem<BlockItem> WILLOW_BRANCHES = ITEMS.registerSimpleBlockItem(ModBlocks.WILLOW_BRANCHES);
 
     public static final DeferredItem<BlockItem> PINK_DAISY = ITEMS.registerSimpleBlockItem(ModBlocks.PINK_DAISY);
     public static final DeferredItem<BlockItem> RED_CARNATION = ITEMS.registerSimpleBlockItem(ModBlocks.RED_CARNATION);
@@ -166,6 +211,22 @@ public class ModItems {
     public static final DeferredItem<BlockItem> EDELWEISS = ITEMS.registerSimpleBlockItem(ModBlocks.EDELWEISS);
     public static final DeferredItem<BlockItem> CROCUS = ITEMS.registerSimpleBlockItem(ModBlocks.CROCUS);
     public static final DeferredItem<BlockItem> IRIS = ITEMS.registerSimpleBlockItem(ModBlocks.IRIS);
+    public static final DeferredItem<BlockItem> LAVENDER = ITEMS.registerSimpleBlockItem(ModBlocks.LAVENDER);
+    public static final DeferredItem<BlockItem> DAFFODIL = ITEMS.registerSimpleBlockItem(ModBlocks.DAFFODIL);
+    public static final DeferredItem<BlockItem> GERBERA_DAISY = ITEMS.registerSimpleBlockItem(ModBlocks.GERBERA_DAISY);
+
+    public static final DeferredItem<BlockItem> CATTAIL = ITEMS.registerSimpleBlockItem(ModBlocks.CATTAIL);
+
+    public static final DeferredItem<BlockItem> SHORT_WATER_GRASS = ITEMS.registerSimpleBlockItem(ModBlocks.SHORT_WATER_GRASS);
+    public static final DeferredItem<BlockItem> TALL_WATER_GRASS = ITEMS.registerSimpleBlockItem(ModBlocks.TALL_WATER_GRASS);
+    public static final DeferredItem<BlockItem> REED = ITEMS.registerSimpleBlockItem(ModBlocks.REED);
+    public static final DeferredItem<BlockItem> OPEN_WATER_LILY = registerPlaceOnWaterItem(ModBlocks.OPEN_WATER_LILY);
+    public static final DeferredItem<BlockItem> OPEN_WHITE_WATER_LILY = registerPlaceOnWaterItem(ModBlocks.OPEN_WHITE_WATER_LILY);
+    public static final DeferredItem<BlockItem> OPEN_BLUE_WATER_LILY = registerPlaceOnWaterItem(ModBlocks.OPEN_BLUE_WATER_LILY);
+    public static final DeferredItem<BlockItem> CLOSED_WATER_LILY = registerPlaceOnWaterItem(ModBlocks.CLOSED_WATER_LILY);
+    public static final DeferredItem<BlockItem> CLOSED_WHITE_WATER_LILY = registerPlaceOnWaterItem(ModBlocks.CLOSED_WHITE_WATER_LILY);
+    public static final DeferredItem<BlockItem> CLOSED_BLUE_WATER_LILY = registerPlaceOnWaterItem(ModBlocks.CLOSED_BLUE_WATER_LILY);
+    public static final DeferredItem<BlockItem> DUCKWEEDS = registerBlockItem(ModBlocks.DUCKWEEDS, () -> new DuckweedsItem(ModBlocks.DUCKWEEDS.get(), new Item.Properties()));
 
     // Items
     public static final DeferredItem<Item> VIOLIN = ITEMS.register("violin", ()-> new BowedStringInstrumentItem(InstrumentsType.VIOLIN, new Item.Properties().stacksTo(1)));
@@ -198,18 +259,28 @@ public class ModItems {
     public static final DeferredItem<Item> FROST_CHEST_BOAT = ITEMS.register("frost_chest_boat", ()-> new BoatItem(true, EnumExtensions.BoatType.FROST.getValue(), new Item.Properties().stacksTo(1)));
     public static final DeferredItem<Item> DAWN_REDWOOD_BOAT = ITEMS.register("dawn_redwood_boat", ()-> new BoatItem(false, EnumExtensions.BoatType.DAWN_REDWOOD.getValue(), new Item.Properties().stacksTo(1)));
     public static final DeferredItem<Item> DAWN_REDWOOD_CHEST_BOAT = ITEMS.register("dawn_redwood_chest_boat", ()-> new BoatItem(true, EnumExtensions.BoatType.DAWN_REDWOOD.getValue(), new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> JACARANDA_BOAT = ITEMS.register("jacaranda_boat", ()-> new BoatItem(false, EnumExtensions.BoatType.JACARANDA.getValue(), new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> JACARANDA_CHEST_BOAT = ITEMS.register("jacaranda_chest_boat", ()-> new BoatItem(true, EnumExtensions.BoatType.JACARANDA.getValue(), new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> WILLOW_BOAT = ITEMS.register("willow_boat", ()-> new BoatItem(false, EnumExtensions.BoatType.WILLOW.getValue(), new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> WILLOW_CHEST_BOAT = ITEMS.register("willow_chest_boat", ()-> new BoatItem(true, EnumExtensions.BoatType.WILLOW.getValue(), new Item.Properties().stacksTo(1)));
 
     public static final DeferredItem<Item> STRAWBERRY = ITEMS.register("strawberry", ()-> new ItemNameBlockItem(ModBlocks.STRAWBERRY_BUSH.get(), new Item.Properties().food(ModFoods.STRAWBERRY)));
     public static final DeferredItem<Item> BLUEBERRIES = ITEMS.register("blueberries", ()-> new ItemNameBlockItem(ModBlocks.BLUEBERRY_BUSH.get(), new Item.Properties().food(ModFoods.BLUEBERRY)));
 
+    private static DeferredItem<BlockItem> registerBlockItem(DeferredBlock<? extends Block> block, Supplier<BlockItem> blockItem) {
+        return ITEMS.register(block.getId().getPath(), blockItem);
+    }
     private static DeferredItem<BlockItem> registerSynthesizerKeyboard(DeferredBlock<Block> block) {
-        return ITEMS.register(block.getId().getPath(), () -> new SynthesizerKeyboardItem(block.get(), new Item.Properties()));
+        return registerBlockItem(block, () -> new SynthesizerKeyboardItem(block.get(), new Item.Properties()));
     }
     private static DeferredItem<BlockItem> registerSign(DeferredBlock<StandingSignBlock> sign, DeferredBlock<WallSignBlock> wallSign) {
-        return ITEMS.register(sign.getId().getPath(), () -> new SignItem(new Item.Properties().stacksTo(16), sign.get(), wallSign.get()));
+        return registerBlockItem(sign, () -> new SignItem(new Item.Properties().stacksTo(16), sign.get(), wallSign.get()));
     }
     private static DeferredItem<BlockItem> registerHangingSign(DeferredBlock<CeilingHangingSignBlock> hangingSign, DeferredBlock<WallHangingSignBlock> wallHangingSign) {
-        return ITEMS.register(hangingSign.getId().getPath(), () -> new HangingSignItem(hangingSign.get(), wallHangingSign.get(), new Item.Properties().stacksTo(16)));
+        return registerBlockItem(hangingSign,  () -> new HangingSignItem(hangingSign.get(), wallHangingSign.get(), new Item.Properties().stacksTo(16)));
+    }
+    private static DeferredItem<BlockItem> registerPlaceOnWaterItem(DeferredBlock<Block> block) {
+        return registerBlockItem(block, () -> new PlaceOnWaterBlockItem(block.get(), new Item.Properties()));
     }
 
     public static void register(IEventBus eventBus){

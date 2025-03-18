@@ -1,0 +1,8 @@
+{
+  "parent": "morecolorful:block/flowerbed_with_leaves_4",
+  "textures": {
+    "flowerbed": "morecolorful:block/wood_sorrels_alt1",
+    "stem": "minecraft:block/pink_petals_stem",
+    "texture" : "morecolorful:block/wood_sorrels_leaves"
+  }
+}

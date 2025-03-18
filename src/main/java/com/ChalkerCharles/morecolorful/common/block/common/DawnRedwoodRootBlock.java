@@ -1,50 +1,47 @@
 package com.ChalkerCharles.morecolorful.common.block.common;
 
 import com.mojang.serialization.MapCodec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.SaplingBlock;
+import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
-import net.minecraft.world.level.block.grower.TreeGrower;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nullable;
 
-public class DawnRedwoodSaplingBlock extends SaplingBlock implements SimpleWaterloggedBlock {
-    public static final MapCodec<DawnRedwoodSaplingBlock> CODEC = RecordCodecBuilder.mapCodec(
-            instance -> instance.group(TreeGrower.CODEC.fieldOf("tree").forGetter(block -> block.treeGrower), propertiesCodec())
-                    .apply(instance, DawnRedwoodSaplingBlock::new)
-    );
+public class DawnRedwoodRootBlock extends BushBlock implements SimpleWaterloggedBlock {
+    public static final MapCodec<DawnRedwoodRootBlock> CODEC = simpleCodec(DawnRedwoodRootBlock::new);
     private static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+    private static final VoxelShape SHAPE = Block.box(1.0, 0.0, 1.0, 15.0, 4.0, 15.0);
     @Override
-    public MapCodec<DawnRedwoodSaplingBlock> codec() {
+    protected MapCodec<? extends BushBlock> codec() {
         return CODEC;
     }
+    public DawnRedwoodRootBlock(Properties pProperties) {
+        super(pProperties);
+        this.registerDefaultState(this.stateDefinition.any().setValue(WATERLOGGED, false));
+    }
 
-    public DawnRedwoodSaplingBlock(TreeGrower grower, Properties properties) {
-        super(grower, properties);
-        this.registerDefaultState(
-                this.stateDefinition
-                        .any()
-                        .setValue(STAGE, 0)
-                        .setValue(WATERLOGGED, Boolean.FALSE)
-        );
+    @Override
+    protected VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
+        return SHAPE;
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-        pBuilder.add(STAGE).add(WATERLOGGED);
+        pBuilder.add(WATERLOGGED);
     }
 
     @Nullable
@@ -52,27 +49,19 @@ public class DawnRedwoodSaplingBlock extends SaplingBlock implements SimpleWater
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {
         FluidState fluidstate = pContext.getLevel().getFluidState(pContext.getClickedPos());
         boolean flag = fluidstate.getType() == Fluids.WATER;
-        //noinspection DataFlowIssue
-        return super.getStateForPlacement(pContext).setValue(WATERLOGGED, flag);
-    }
-
-    @Override
-    protected boolean canSurvive(BlockState pState, LevelReader pLevel, BlockPos pPos) {
-        if (pState.getValue(WATERLOGGED) && pLevel.getFluidState(pPos.above()).is(Fluids.WATER)) {
-            return false;
+        BlockState blockState = super.getStateForPlacement(pContext);
+        if (blockState != null) {
+            return blockState.setValue(WATERLOGGED, flag);
         }
-        return super.canSurvive(pState, pLevel, pPos);
+        return null;
     }
 
     @Override
-    protected BlockState updateShape(
-            BlockState pState, Direction pFacing, BlockState pFacingState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pFacingPos
-    ) {
+    protected BlockState updateShape(BlockState pState, Direction pFacing, BlockState pFacingState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pFacingPos) {
         if (pState.getValue(WATERLOGGED)) {
             pLevel.scheduleTick(pCurrentPos, Fluids.WATER, Fluids.WATER.getTickDelay(pLevel));
         }
-
-        return pFacing == Direction.UP && !pState.canSurvive(pLevel, pCurrentPos)
+        return !pState.canSurvive(pLevel, pCurrentPos)
                 ? Blocks.AIR.defaultBlockState()
                 : super.updateShape(pState, pFacing, pFacingState, pLevel, pCurrentPos, pFacingPos);
     }

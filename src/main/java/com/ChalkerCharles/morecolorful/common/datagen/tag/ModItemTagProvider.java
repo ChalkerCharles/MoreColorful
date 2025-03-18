@@ -31,6 +31,7 @@ public class ModItemTagProvider extends ItemTagsProvider {
         copy(BlockTags.PLANKS, ItemTags.PLANKS);
         copy(BlockTags.SAPLINGS, ItemTags.SAPLINGS);
         copy(BlockTags.SMALL_FLOWERS, ItemTags.SMALL_FLOWERS);
+        copy(BlockTags.TALL_FLOWERS, ItemTags.TALL_FLOWERS);
         copy(BlockTags.STANDING_SIGNS, ItemTags.SIGNS);
         copy(BlockTags.WOODEN_BUTTONS, ItemTags.WOODEN_BUTTONS);
         copy(BlockTags.WOODEN_DOORS, ItemTags.WOODEN_DOORS);
@@ -40,14 +41,20 @@ public class ModItemTagProvider extends ItemTagsProvider {
         copy(BlockTags.WOODEN_STAIRS, ItemTags.WOODEN_STAIRS);
         copy(BlockTags.WOODEN_TRAPDOORS, ItemTags.WOODEN_TRAPDOORS);
 
-        tag(ItemTags.BEE_FOOD).remove(ModItems.CLOSED_DAYBLOOM.get());
+        tag(ItemTags.BEE_FOOD).remove(
+                ModItems.CLOSED_DAYBLOOM.get(),
+                ModItems.CLOSED_WATER_LILY.get(),
+                ModItems.CLOSED_WHITE_WATER_LILY.get(),
+                ModItems.CLOSED_BLUE_WATER_LILY.get()
+        );
         tag(ItemTags.BOATS).add(
                 ModItems.CRABAPPLE_BOAT.get(),
                 ModItems.EBONY_BOAT.get(),
                 ModItems.GINKGO_BOAT.get(),
                 ModItems.MAPLE_BOAT.get(),
                 ModItems.FROST_BOAT.get(),
-                ModItems.DAWN_REDWOOD_BOAT.get()
+                ModItems.DAWN_REDWOOD_BOAT.get(),
+                ModItems.JACARANDA_BOAT.get()
         );
         tag(ItemTags.CHEST_BOATS).add(
                 ModItems.CRABAPPLE_CHEST_BOAT.get(),
@@ -55,7 +62,12 @@ public class ModItemTagProvider extends ItemTagsProvider {
                 ModItems.GINKGO_CHEST_BOAT.get(),
                 ModItems.MAPLE_CHEST_BOAT.get(),
                 ModItems.FROST_CHEST_BOAT.get(),
-                ModItems.DAWN_REDWOOD_CHEST_BOAT.get()
+                ModItems.DAWN_REDWOOD_CHEST_BOAT.get(),
+                ModItems.JACARANDA_CHEST_BOAT.get()
+        );
+        tag(ItemTags.FOX_FOOD).add(
+                ModItems.STRAWBERRY.get(),
+                ModItems.BLUEBERRIES.get()
         );
 
         // More Colorful Tags
@@ -66,6 +78,8 @@ public class ModItemTagProvider extends ItemTagsProvider {
         copy(ModTags.Blocks.LEAF_LITTERS, ModTags.Items.LEAF_LITTERS);
         copy(ModTags.Blocks.FROST_LOGS, ModTags.Items.FROST_LOGS);
         copy(ModTags.Blocks.DAWN_REDWOOD_LOGS, ModTags.Items.DAWN_REDWOOD_LOGS);
+        copy(ModTags.Blocks.JACARANDA_LOGS, ModTags.Items.JACARANDA_LOGS);
+        copy(ModTags.Blocks.WILLOW_LOGS, ModTags.Items.WILLOW_LOGS);
 
         tag(ModTags.Items.DRUM_SET_PARTS).add(
                 ModItems.BASS_DRUM.get(),
@@ -90,7 +104,8 @@ public class ModItemTagProvider extends ItemTagsProvider {
                 ModItems.GINKGO_FENCE_GATE.get(),
                 ModItems.MAPLE_FENCE_GATE.get(),
                 ModItems.FROST_FENCE_GATE.get(),
-                ModItems.DAWN_REDWOOD_FENCE_GATE.get()
+                ModItems.DAWN_REDWOOD_FENCE_GATE.get(),
+                ModItems.JACARANDA_FENCE_GATE.get()
         );
         tag(Tags.Items.FOODS_BERRY).add(
                 ModItems.STRAWBERRY.get(),

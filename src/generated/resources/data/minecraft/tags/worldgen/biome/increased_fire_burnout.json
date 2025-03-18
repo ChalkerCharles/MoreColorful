@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "morecolorful:marsh",
+      "required": false
+    },
+    {
+      "id": "morecolorful:willow_bayou",
+      "required": false
+    }
+  ]
+}

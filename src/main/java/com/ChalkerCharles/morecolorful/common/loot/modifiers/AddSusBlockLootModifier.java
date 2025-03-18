@@ -36,6 +36,6 @@ public class AddSusBlockLootModifier extends LootModifier {
 
     @Override
     public MapCodec<? extends IGlobalLootModifier> codec() {
-        return CODEC;
+        return ModLootModifiers.ADD_SUS_BLOCK.get();
     }
 }

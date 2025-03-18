@@ -28,17 +28,17 @@ public class LeafLitterBlock extends BushBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final IntegerProperty AMOUNT = ModBlockStateProperties.SEGMENT_AMOUNT;
     private static final BiFunction<Direction, Integer, VoxelShape> SHAPE_BY_PROPERTIES = Util.memoize(
-            (p_296142_, p_294775_) -> {
+            (direction, integer) -> {
                 VoxelShape[] avoxelshape = new VoxelShape[]{
-                        Block.box(8.0, 0.0, 8.0, 16.0, 2.0, 16.0),
-                        Block.box(8.0, 0.0, 0.0, 16.0, 2.0, 8.0),
-                        Block.box(0.0, 0.0, 0.0, 8.0, 2.0, 8.0),
-                        Block.box(0.0, 0.0, 8.0, 8.0, 2.0, 16.0)
+                        Block.box(8.0, 0.0, 8.0, 16.0, 1.0, 16.0),
+                        Block.box(8.0, 0.0, 0.0, 16.0, 1.0, 8.0),
+                        Block.box(0.0, 0.0, 0.0, 8.0, 1.0, 8.0),
+                        Block.box(0.0, 0.0, 8.0, 8.0, 1.0, 16.0)
                 };
                 VoxelShape voxelshape = Shapes.empty();
 
-                for (int i = 0; i < p_294775_; i++) {
-                    int j = Math.floorMod(i - p_296142_.get2DDataValue(), 4);
+                for (int i = 0; i < integer; i++) {
+                    int j = Math.floorMod(i - direction.get2DDataValue(), 4);
                     voxelshape = Shapes.or(voxelshape, avoxelshape[j]);
                 }
 
@@ -48,6 +48,7 @@ public class LeafLitterBlock extends BushBlock {
 
     public LeafLitterBlock(Properties pProperties) {
         super(pProperties);
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(AMOUNT, 1));
     }
 
     @Override

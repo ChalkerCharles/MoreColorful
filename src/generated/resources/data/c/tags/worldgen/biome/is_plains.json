@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "morecolorful:lavender_fields",
+      "required": false
+    },
+    {
+      "id": "morecolorful:azure_fields",
+      "required": false
+    }
+  ]
+}

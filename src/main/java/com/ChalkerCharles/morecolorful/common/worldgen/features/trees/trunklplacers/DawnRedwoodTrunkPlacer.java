@@ -52,10 +52,10 @@ public class DawnRedwoodTrunkPlacer extends TrunkPlacer {
         int baseBranchHeight = random.nextInt(min + 1, max + 2) + offset;
         int rootMaxHeight = baseBranchHeight - 2 - offset;
 
-        placeRoot(pLevel, pBlockSetter, pRandom, rootMaxHeight, pPos.north(), pConfig);
-        placeRoot(pLevel, pBlockSetter, pRandom, rootMaxHeight, pPos.south(), pConfig);
-        placeRoot(pLevel, pBlockSetter, pRandom, rootMaxHeight, pPos.east(), pConfig);
-        placeRoot(pLevel, pBlockSetter, pRandom, rootMaxHeight, pPos.west(), pConfig);
+        placeRootTrunk(pLevel, pBlockSetter, pRandom, rootMaxHeight, pPos.north(), pConfig);
+        placeRootTrunk(pLevel, pBlockSetter, pRandom, rootMaxHeight, pPos.south(), pConfig);
+        placeRootTrunk(pLevel, pBlockSetter, pRandom, rootMaxHeight, pPos.east(), pConfig);
+        placeRootTrunk(pLevel, pBlockSetter, pRandom, rootMaxHeight, pPos.west(), pConfig);
 
         BlockPos branchPos = pPos.above(baseBranchHeight);
         Function<BlockState, BlockState> functionX = state -> state.trySetValue(RotatedPillarBlock.AXIS, Direction.Axis.X);
@@ -70,7 +70,7 @@ public class DawnRedwoodTrunkPlacer extends TrunkPlacer {
         return ImmutableList.of(new FoliagePlacer.FoliageAttachment(pPos.above(pFreeTreeHeight), 0, false));
     }
 
-    private void placeRoot(LevelSimulatedReader pLevel, BiConsumer<BlockPos, BlockState> pBlockSetter, RandomSource pRandom, int rootMaxHeight, BlockPos pPos, TreeConfiguration pConfig) {
+    private void placeRootTrunk(LevelSimulatedReader pLevel, BiConsumer<BlockPos, BlockState> pBlockSetter, RandomSource pRandom, int rootMaxHeight, BlockPos pPos, TreeConfiguration pConfig) {
         int offset = pRandom.nextInt(4);
         int height = Math.max((rootMaxHeight - offset), 1);
         for (int i = 0; i < height; i ++) {

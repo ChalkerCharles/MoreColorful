@@ -17,8 +17,10 @@ import org.jetbrains.annotations.NotNull;
 
 public record PlayingScreenPacket(InstrumentsType pType, BlockPos pos, int id, boolean isOpen) implements CustomPacketPayload {
     public PlayingScreenPacket() {
-        this(InstrumentsType.HARP, new BlockPos(0, -128, 0), 0, false);
+        this(InstrumentsType.HARP, DEFAULT_POS, 0, false);
     }
+
+    private static final BlockPos DEFAULT_POS = new BlockPos(0, -2048, 0);
 
     public static final CustomPacketPayload.Type<PlayingScreenPacket> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "playing_screen_event"));
 

@@ -7,6 +7,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
+import java.util.List;
+
 import static com.ChalkerCharles.morecolorful.common.block.musical_instruments.HiHatBlock.HIT;
 
 public class HiHatBlockEntity extends BlockEntity implements ICymbalUtils {
@@ -17,7 +19,7 @@ public class HiHatBlockEntity extends BlockEntity implements ICymbalUtils {
 
     public static <T extends BlockEntity> void tick(Level pLevel, BlockPos pPos, BlockState pState, T pBlockEntity) {
         if (pBlockEntity instanceof HiHatBlockEntity blockEntity) {
-            var playerList = blockEntity.pressingPlayersForHiHat(pLevel, pPos);
+            List<Integer> playerList = blockEntity.pressingPlayersForHiHat(pLevel, pPos);
             if (!playerList.isEmpty()) {
                 pLevel.setBlock(pPos, pState.setValue(HIT, true), 3);
             } else {

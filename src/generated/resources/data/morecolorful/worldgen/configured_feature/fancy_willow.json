@@ -1,0 +1,70 @@
+{
+  "type": "minecraft:tree",
+  "config": {
+    "decorators": [
+      {
+        "type": "minecraft:leave_vine",
+        "probability": 0.1
+      },
+      {
+        "type": "morecolorful:dawn_redwood_root_placer",
+        "length": {
+          "type": "minecraft:uniform",
+          "max_inclusive": 8,
+          "min_inclusive": 1
+        },
+        "probability": 0.275
+      }
+    ],
+    "dirt_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "minecraft:dirt"
+      }
+    },
+    "foliage_placer": {
+      "type": "minecraft:cherry_foliage_placer",
+      "corner_hole_chance": 0.5,
+      "hanging_leaves_chance": 0.33333334,
+      "hanging_leaves_extension_chance": 0.4,
+      "height": 4,
+      "offset": 2,
+      "radius": 4,
+      "wide_bottom_layer_hole_chance": 0.5
+    },
+    "foliage_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "morecolorful:willow_leaves",
+        "Properties": {
+          "distance": "7",
+          "persistent": "false",
+          "waterlogged": "false"
+        }
+      }
+    },
+    "force_dirt": false,
+    "ignore_vines": true,
+    "minimum_size": {
+      "type": "minecraft:two_layers_feature_size",
+      "limit": 1,
+      "lower_size": 0,
+      "upper_size": 2
+    },
+    "trunk_placer": {
+      "type": "minecraft:fancy_trunk_placer",
+      "base_height": 8,
+      "height_rand_a": 2,
+      "height_rand_b": 4
+    },
+    "trunk_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "morecolorful:willow_log",
+        "Properties": {
+          "axis": "y"
+        }
+      }
+    }
+  }
+}

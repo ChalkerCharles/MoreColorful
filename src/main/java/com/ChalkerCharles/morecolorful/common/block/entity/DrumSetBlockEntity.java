@@ -8,6 +8,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
+import java.util.List;
+
 import static com.ChalkerCharles.morecolorful.common.block.musical_instruments.DrumSetBlock.HIT;
 import static com.ChalkerCharles.morecolorful.common.block.musical_instruments.DrumSetBlock.PART;
 
@@ -23,12 +25,12 @@ public class DrumSetBlockEntity extends BlockEntity implements ICymbalUtils {
     }
 
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, DrumSetBlockEntity pBlockEntity) {
-        var playerListBd = pBlockEntity.pressingBassDrumPlayers(pLevel, pPos);
-        var playerListHat = pBlockEntity.pressingHatPlayers(pLevel, pPos);
-        var playerListRide = pBlockEntity.pressingRidePlayers(pLevel, pPos);
-        var playerListCrash = pBlockEntity.pressingCrashPlayers(pLevel, pPos);
-        var bassDrumPos = pBlockEntity.getBassDrumPos(pPos, pState);
-        var hatPos = pBlockEntity.getHatPos(pPos, pState);
+        List<Integer> playerListBd = pBlockEntity.pressingBassDrumPlayers(pLevel, pPos);
+        List<Integer> playerListHat = pBlockEntity.pressingHatPlayers(pLevel, pPos);
+        List<Integer> playerListRide = pBlockEntity.pressingRidePlayers(pLevel, pPos);
+        List<Integer> playerListCrash = pBlockEntity.pressingCrashPlayers(pLevel, pPos);
+        BlockPos bassDrumPos = pBlockEntity.getBassDrumPos(pPos, pState);
+        BlockPos hatPos = pBlockEntity.getHatPos(pPos, pState);
         if (pState.getValue(PART) == DrumSetPart.MID_LOWER) {
             if (!playerListBd.isEmpty()) {
                 pLevel.setBlock(bassDrumPos, pState.setValue(HIT, true), 3);

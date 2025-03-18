@@ -1,0 +1,17 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": [
+    "minecraft:forest",
+    "minecraft:flower_forest",
+    "minecraft:birch_forest",
+    "minecraft:old_growth_birch_forest",
+    "minecraft:dark_forest",
+    "minecraft:plains",
+    "minecraft:meadow",
+    "morecolorful:autumn_birch_forest",
+    "morecolorful:golden_grove",
+    "morecolorful:sunset_valley"
+  ],
+  "features": "morecolorful:patch_wood_sorrels",
+  "step": "vegetal_decoration"
+}

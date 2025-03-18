@@ -22,7 +22,7 @@ public class ModGlobalLootModifierProvider extends GlobalLootModifierProvider {
     protected void start() {
         add("archaeology_trail_ruins_common", new AddSusBlockLootModifier(new LootItemCondition[] {
                 LootTableIdCondition.builder(BuiltInLootTables.TRAIL_RUINS_ARCHAEOLOGY_COMMON.location()).build(),
-                LootItemRandomChanceCondition.randomChance(0.4255319F).build() // 0.4255319F = 2/47
+                LootItemRandomChanceCondition.randomChance(0.04255319F).build() // 0.04255319F = 2/47
         }, ModLootTables.TRAIL_RUINS_ARCHAEOLOGY_COMMON_ADD));
     }
 }

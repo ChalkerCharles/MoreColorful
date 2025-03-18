@@ -1,0 +1,37 @@
+{
+	"ambientocclusion": false,
+	"render_type": "cutout",
+	"textures": {
+		"flowerbed": "morecolorful:block/violets",
+		"stem": "morecolorful:block/flower_stem_tall",
+		"particle": "morecolorful:block/violets"
+	},
+	"elements": [
+		{
+			"from": [8, 4, 0],
+			"to": [16, 4, 8],
+			"faces": {
+				"up": {"uv": [8, 0, 16, 8], "texture": "#flowerbed"},
+				"down": {"uv": [8, 8, 16, 0], "texture": "#flowerbed"}
+			}
+		},
+		{
+			"from": [11.44508, 0, 4.00538],
+			"to": [11.44508, 4, 6.00538],
+			"rotation": {"angle": -45, "axis": "y", "origin": [11.44508, 2, 4.50538]},
+			"faces": {
+				"east": {"uv": [7, 12, 5, 16], "texture": "#stem", "tintindex": 1},
+				"west": {"uv": [5, 12, 7, 16], "texture": "#stem", "tintindex": 1}
+			}
+		},
+		{
+			"from": [10.94508, 0, 4.50538],
+			"to": [12.94508, 4, 4.50538],
+			"rotation": {"angle": -45, "axis": "y", "origin": [11.44508, 2, 4.50538]},
+			"faces": {
+				"north": {"uv": [7, 12, 5, 16], "texture": "#stem", "tintindex": 1},
+				"south": {"uv": [5, 12, 7, 16], "texture": "#stem", "tintindex": 1}
+			}
+		}
+	]
+}

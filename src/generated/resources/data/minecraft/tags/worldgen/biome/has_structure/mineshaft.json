@@ -3,6 +3,26 @@
     {
       "id": "morecolorful:dawn_redwood_swamp",
       "required": false
+    },
+    {
+      "id": "morecolorful:marsh",
+      "required": false
+    },
+    {
+      "id": "morecolorful:willow_bayou",
+      "required": false
+    },
+    {
+      "id": "morecolorful:ice_marsh",
+      "required": false
+    },
+    {
+      "id": "morecolorful:lavender_fields",
+      "required": false
+    },
+    {
+      "id": "morecolorful:azure_fields",
+      "required": false
     }
   ]
 }

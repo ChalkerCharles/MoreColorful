@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "string",
+  "ingredients": [
+    {
+      "item": "morecolorful:cattail"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:string"
+  }
+}

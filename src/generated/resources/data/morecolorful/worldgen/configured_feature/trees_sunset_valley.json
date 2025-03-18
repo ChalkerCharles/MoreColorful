@@ -20,6 +20,14 @@
         "feature": "morecolorful:yellow_birch_0002"
       },
       {
+        "chance": 0.02,
+        "feature": "morecolorful:tall_orange_birch_0002"
+      },
+      {
+        "chance": 0.02,
+        "feature": "morecolorful:tall_yellow_birch_0002"
+      },
+      {
         "chance": 0.2,
         "feature": "morecolorful:ginkgo"
       },

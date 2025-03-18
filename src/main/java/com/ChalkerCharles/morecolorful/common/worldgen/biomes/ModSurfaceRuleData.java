@@ -7,6 +7,7 @@ import net.minecraft.world.level.levelgen.Noises;
 import net.minecraft.world.level.levelgen.SurfaceRules;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 
+@SuppressWarnings("unused")
 public class ModSurfaceRuleData {
     private static final SurfaceRules.RuleSource AIR = makeStateRule(Blocks.AIR);
     private static final SurfaceRules.RuleSource BEDROCK = makeStateRule(Blocks.BEDROCK);
@@ -57,7 +58,7 @@ public class ModSurfaceRuleData {
                         SurfaceRules.ON_FLOOR,
                         SurfaceRules.sequence(
                                 SurfaceRules.ifTrue(
-                                        SurfaceRules.isBiome(ModBiomes.DAWN_REDWOOD_SWAMP),
+                                        SurfaceRules.isBiome(ModBiomes.DAWN_REDWOOD_SWAMP, ModBiomes.MARSH, ModBiomes.WILLOW_BAYOU),
                                         SurfaceRules.ifTrue(
                                                 isAbove62,
                                                 SurfaceRules.ifTrue(

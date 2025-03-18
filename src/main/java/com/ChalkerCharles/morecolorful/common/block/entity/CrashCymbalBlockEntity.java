@@ -7,6 +7,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
+import java.util.List;
+
 public class CrashCymbalBlockEntity extends BlockEntity implements ICymbalUtils {
     public int ticks;
     public int ticksAfterStop;
@@ -18,7 +20,7 @@ public class CrashCymbalBlockEntity extends BlockEntity implements ICymbalUtils 
 
     public static <T extends BlockEntity> void tick(Level pLevel, BlockPos pPos, BlockState ignored, T pBlockEntity) {
         if (pBlockEntity instanceof CrashCymbalBlockEntity blockEntity) {
-            var playerList = blockEntity.pressingPlayers(pLevel, pPos);
+            List<Integer> playerList = blockEntity.pressingPlayers(pLevel, pPos);
             if (!playerList.isEmpty()) {
                 blockEntity.shaking = true;
             }

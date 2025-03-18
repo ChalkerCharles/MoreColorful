@@ -11,6 +11,18 @@
     {
       "id": "morecolorful:frost_grove",
       "required": false
+    },
+    {
+      "id": "morecolorful:lavender_fields",
+      "required": false
+    },
+    {
+      "id": "morecolorful:jacaranda_grove",
+      "required": false
+    },
+    {
+      "id": "morecolorful:azure_fields",
+      "required": false
     }
   ]
 }

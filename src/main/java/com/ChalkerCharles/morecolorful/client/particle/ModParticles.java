@@ -19,6 +19,7 @@ public class ModParticles {
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> MAPLE_LEAVES = PARTICLE_TYPES.register("maple_leaves", () -> new SimpleParticleType(false));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> FROST_LEAVES = PARTICLE_TYPES.register("frost_leaves", () -> new SimpleParticleType(false));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> DAWN_REDWOOD_LEAVES = PARTICLE_TYPES.register("dawn_redwood_leaves", () -> new SimpleParticleType(false));
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> JACARANDA_LEAVES = PARTICLE_TYPES.register("jacaranda_leaves", () -> new SimpleParticleType(false));
 
     public static void register(IEventBus eventBus){
         PARTICLE_TYPES.register(eventBus);

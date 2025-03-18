@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": [
+    "minecraft:swamp",
+    "minecraft:mangrove_swamp",
+    "morecolorful:willow_bayou"
+  ],
+  "features": "morecolorful:patch_water_lily",
+  "step": "vegetal_decoration"
+}

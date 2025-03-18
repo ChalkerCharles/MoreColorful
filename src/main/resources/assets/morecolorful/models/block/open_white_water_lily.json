@@ -1,0 +1,9 @@
+{
+	"parent": "morecolorful:block/template_open_water_lily",
+	"textures": {
+		"base": "morecolorful:block/water_lily_base",
+		"outer": "morecolorful:block/white_water_lily_outer",
+		"inner": "morecolorful:block/white_water_lily_inner",
+		"center": "morecolorful:block/white_water_lily_center"
+	}
+}

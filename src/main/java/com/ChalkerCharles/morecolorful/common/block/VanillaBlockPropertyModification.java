@@ -12,6 +12,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.event.TagsUpdatedEvent;
 
+import java.util.Arrays;
 import java.util.IdentityHashMap;
 
 import static com.ChalkerCharles.morecolorful.common.block.properties.NoteBlockInstrumentExtension.*;
@@ -65,74 +66,83 @@ public final class VanillaBlockPropertyModification {
             }
         });
         BuiltInRegistries.BLOCK.forEach(block -> {
-            if (block.equals(Blocks.PINK_PETALS)
-                    || block.equals(Blocks.PINK_TULIP)
-                    || block.equals(Blocks.PEONY)
-                    || block.equals(Blocks.POTTED_PINK_TULIP)
-                    || block.equals(Blocks.POTTED_CHERRY_SAPLING)) {
+            if (equalsBlocks(block,
+                    Blocks.PINK_PETALS,
+                    Blocks.PINK_TULIP,
+                    Blocks.PEONY,
+                    Blocks.POTTED_PINK_TULIP,
+                    Blocks.POTTED_CHERRY_SAPLING)) {
                 setMapColor(block, COLOR_PINK);
-            } else if (block.equals(Blocks.DANDELION)
-                    || block.equals(Blocks.SUNFLOWER)
-                    || block.equals(Blocks.POTTED_DANDELION)) {
+            } else if (equalsBlocks(block,
+                    Blocks.DANDELION,
+                    Blocks.SUNFLOWER,
+                    Blocks.POTTED_DANDELION)) {
                 setMapColor(block, COLOR_YELLOW);
-            } else if (block.equals(Blocks.POPPY)
-                    || block.equals(Blocks.RED_TULIP)
-                    || block.equals(Blocks.ROSE_BUSH)
-                    || block.equals(Blocks.RED_MUSHROOM)
-                    || block.equals(Blocks.POTTED_POPPY)
-                    || block.equals(Blocks.POTTED_RED_TULIP)
-                    || block.equals(Blocks.POTTED_RED_MUSHROOM)) {
+            } else if (equalsBlocks(block,
+                    Blocks.POPPY,
+                    Blocks.RED_TULIP,
+                    Blocks.ROSE_BUSH,
+                    Blocks.RED_MUSHROOM,
+                    Blocks.POTTED_POPPY,
+                    Blocks.POTTED_RED_TULIP,
+                    Blocks.POTTED_RED_MUSHROOM)) {
                 setMapColor(block, COLOR_RED);
-            } else if (block.equals(Blocks.TORCHFLOWER)
-                    || block.equals(Blocks.ORANGE_TULIP)
-                    || block.equals(Blocks.POTTED_TORCHFLOWER)
-                    || block.equals(Blocks.POTTED_ORANGE_TULIP)) {
+            } else if (equalsBlocks(block,
+                    Blocks.TORCHFLOWER,
+                    Blocks.ORANGE_TULIP,
+                    Blocks.POTTED_TORCHFLOWER,
+                    Blocks.POTTED_ORANGE_TULIP)) {
                 setMapColor(block, COLOR_ORANGE);
-            } else if (block.equals(Blocks.FLOWER_POT)
-                    || block.equals(Blocks.BROWN_MUSHROOM)
-                    || block.equals(Blocks.POTTED_BROWN_MUSHROOM)) {
+            } else if (equalsBlocks(block,
+                    Blocks.FLOWER_POT,
+                    Blocks.BROWN_MUSHROOM,
+                    Blocks.POTTED_BROWN_MUSHROOM)) {
                 setMapColor(block, DIRT);
-            } else if (block.equals(Blocks.POTTED_AZALEA)
-                    || block.equals(Blocks.POTTED_FLOWERING_AZALEA)
-                    || block.equals(Blocks.POTTED_CACTUS)
-                    || block.equals(Blocks.POTTED_BAMBOO)
-                    || block.equals(Blocks.POTTED_FERN)
-                    || block.equals(Blocks.POTTED_OAK_SAPLING)
-                    || block.equals(Blocks.POTTED_BIRCH_SAPLING)
-                    || block.equals(Blocks.POTTED_SPRUCE_SAPLING)
-                    || block.equals(Blocks.POTTED_JUNGLE_SAPLING)
-                    || block.equals(Blocks.POTTED_ACACIA_SAPLING)
-                    || block.equals(Blocks.POTTED_DARK_OAK_SAPLING)
-                    || block.equals(Blocks.POTTED_MANGROVE_PROPAGULE)) {
+            } else if (equalsBlocks(block,
+                    Blocks.POTTED_AZALEA,
+                    Blocks.POTTED_FLOWERING_AZALEA,
+                    Blocks.POTTED_CACTUS,
+                    Blocks.POTTED_BAMBOO,
+                    Blocks.POTTED_FERN,
+                    Blocks.POTTED_OAK_SAPLING,
+                    Blocks.POTTED_BIRCH_SAPLING,
+                    Blocks.POTTED_SPRUCE_SAPLING,
+                    Blocks.POTTED_JUNGLE_SAPLING,
+                    Blocks.POTTED_ACACIA_SAPLING,
+                    Blocks.POTTED_DARK_OAK_SAPLING,
+                    Blocks.POTTED_MANGROVE_PROPAGULE)) {
                 setMapColor(block, PLANT);
             } else if (block.equals(Blocks.POTTED_DEAD_BUSH)) {
                 setMapColor(block, WOOD);
             } else if (block.equals(Blocks.POTTED_CRIMSON_FUNGUS)
                     || block.equals(Blocks.POTTED_CRIMSON_ROOTS)) {
                 setMapColor(block, NETHER);
-            } else if (block.equals(Blocks.POTTED_WARPED_FUNGUS)
-                    || block.equals(Blocks.POTTED_WARPED_ROOTS)
-                    || block.equals(Blocks.PITCHER_PLANT)) {
+            } else if (equalsBlocks(block,
+                    Blocks.POTTED_WARPED_FUNGUS,
+                    Blocks.POTTED_WARPED_ROOTS,
+                    Blocks.PITCHER_PLANT)) {
                 setMapColor(block, COLOR_CYAN);
             } else if (block.equals(Blocks.BLUE_ORCHID)
                     || block.equals(Blocks.POTTED_BLUE_ORCHID)) {
                 setMapColor(block, COLOR_LIGHT_BLUE);
             } else if (block.equals(Blocks.CORNFLOWER)
-                        || block.equals(Blocks.POTTED_CORNFLOWER)) {
+                    || block.equals(Blocks.POTTED_CORNFLOWER)) {
                     setMapColor(block, COLOR_BLUE);
             } else if (block.equals(Blocks.AZURE_BLUET)
                     || block.equals(Blocks.POTTED_AZURE_BLUET)) {
                 setMapColor(block, CLAY);
-            } else if (block.equals(Blocks.ALLIUM)
-                    || block.equals(Blocks.LILAC)
-                    || block.equals(Blocks.POTTED_ALLIUM)) {
+            } else if (equalsBlocks(block,
+                    Blocks.ALLIUM,
+                    Blocks.LILAC,
+                    Blocks.POTTED_ALLIUM)) {
                 setMapColor(block, COLOR_MAGENTA);
-            } else if (block.equals(Blocks.WHITE_TULIP)
-                    || block.equals(Blocks.OXEYE_DAISY)
-                    || block.equals(Blocks.LILY_OF_THE_VALLEY)
-                    || block.equals(Blocks.POTTED_WHITE_TULIP)
-                    || block.equals(Blocks.POTTED_OXEYE_DAISY)
-                    || block.equals(Blocks.POTTED_LILY_OF_THE_VALLEY)) {
+            } else if (equalsBlocks(block,
+                    Blocks.WHITE_TULIP,
+                    Blocks.OXEYE_DAISY,
+                    Blocks.LILY_OF_THE_VALLEY,
+                    Blocks.POTTED_WHITE_TULIP,
+                    Blocks.POTTED_OXEYE_DAISY,
+                    Blocks.POTTED_LILY_OF_THE_VALLEY)) {
                 setMapColor(block, SNOW);
             } else if (block.equals(Blocks.WITHER_ROSE)
                     || block.equals(Blocks.POTTED_WITHER_ROSE)) {
@@ -153,5 +163,9 @@ public final class VanillaBlockPropertyModification {
             backupsMapColor.put(block, block.defaultMapColor());
         }
         block.getStateDefinition().getPossibleStates().forEach(blockState -> blockState.mapColor= mapColor);
+    }
+
+    private static boolean equalsBlocks(Block block, Block... blocks) {
+        return Arrays.asList(blocks).contains(block);
     }
 }

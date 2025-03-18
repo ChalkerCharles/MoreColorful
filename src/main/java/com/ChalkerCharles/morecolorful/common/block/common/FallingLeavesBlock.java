@@ -21,7 +21,7 @@ public class FallingLeavesBlock extends LeavesBlock {
     @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource randomSource) {
         super.animateTick(state, level, pos, randomSource);
-        if (randomSource.nextInt(25) == 0) {
+        if (randomSource.nextInt(50) == 0) {
             BlockPos blockpos = pos.below();
             BlockState blockstate = level.getBlockState(blockpos);
             if (!isFaceFull(blockstate.getCollisionShape(level, blockpos), Direction.UP)) {

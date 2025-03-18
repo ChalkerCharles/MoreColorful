@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": [
+    "minecraft:river",
+    "minecraft:swamp",
+    "morecolorful:marsh"
+  ],
+  "features": "morecolorful:trees_willow",
+  "step": "vegetal_decoration"
+}

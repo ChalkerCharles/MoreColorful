@@ -19,6 +19,10 @@
     {
       "id": "morecolorful:sunset_valley",
       "required": false
+    },
+    {
+      "id": "morecolorful:jacaranda_grove",
+      "required": false
     }
   ]
 }

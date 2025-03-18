@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": [
+    "minecraft:swamp",
+    "morecolorful:marsh",
+    "morecolorful:willow_bayou"
+  ],
+  "features": "morecolorful:patch_buttercups",
+  "step": "vegetal_decoration"
+}

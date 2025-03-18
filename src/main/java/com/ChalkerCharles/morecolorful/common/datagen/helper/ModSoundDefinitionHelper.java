@@ -1,6 +1,5 @@
 package com.ChalkerCharles.morecolorful.common.datagen.helper;
 
-import com.ChalkerCharles.morecolorful.MoreColorful;
 import net.minecraft.core.Holder;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -12,8 +11,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Supplier;
 
+import static com.ChalkerCharles.morecolorful.MoreColorful.MODID;
+
 public abstract class ModSoundDefinitionHelper extends SoundDefinitionsProvider {
-    private static final String modid = MoreColorful.MODID;
     protected ModSoundDefinitionHelper(PackOutput output, String modId, ExistingFileHelper helper) {
         super(output, modId, helper);
     }
@@ -22,7 +22,7 @@ public abstract class ModSoundDefinitionHelper extends SoundDefinitionsProvider 
         return "minecraft:music/" + name;
     }
     protected String modMusic(String name) {
-        return modid + ":music/" + name;
+        return MODID + ":music/" + name;
     }
 
     protected static SoundDefinition.Sound music(final String name, float volume, int weight) {
@@ -34,13 +34,13 @@ public abstract class ModSoundDefinitionHelper extends SoundDefinitionsProvider 
 
     protected void noteBlock(Holder<SoundEvent> soundEvent, String soundFile) {
         add(soundEvent.value(), SoundDefinition.definition()
-                .with(sound(modid + ":note/" + soundFile))
+                .with(sound(MODID + ":note/" + soundFile))
                 .subtitle("subtitles.block.note_block.note"));
     }
 
     protected void instrument(Holder<SoundEvent> soundEvent, String soundFile, String instrument, String type) { // "type" can only be "block" or "item"
         add(soundEvent.value(), SoundDefinition.definition()
-                .with(sound(modid + ":note/" + soundFile))
+                .with(sound(MODID + ":note/" + soundFile))
                 .subtitle("morecolorful.subtitles." + type + "." + instrument + ".play"));
     }
 
@@ -53,7 +53,7 @@ public abstract class ModSoundDefinitionHelper extends SoundDefinitionsProvider 
     protected void generic(Supplier<SoundEvent> soundEvent, @Nullable String subtitle, String... soundFiles) {
         SoundDefinition definition = SoundDefinition.definition();
         for (String i : soundFiles) {
-            definition.with(sound(ResourceLocation.fromNamespaceAndPath(modid, "block/" + i)));
+            definition.with(sound(ResourceLocation.fromNamespaceAndPath(MODID, "block/" + i)));
         }
         add(soundEvent, definition.subtitle(subtitle));
     }
