@@ -72,9 +72,12 @@ public class ModVegetationPlacements {
     public static final ResourceKey<PlacedFeature> TREES_WILLOW = registerKey("trees_willow");
     public static final ResourceKey<PlacedFeature> TREES_WILLOW_BAYOU = registerKey("trees_willow_bayou");
     public static final ResourceKey<PlacedFeature> PATCH_WOOD_SORRELS = registerKey("patch_wood_sorrels");
+    public static final ResourceKey<PlacedFeature> TREES_RAPESEED = registerKey("trees_rapeseed");
+    public static final ResourceKey<PlacedFeature> FLOWER_RAPESEED = registerKey("flower_rapeseed");
 
     public static void bootstrap(BootstrapContext<PlacedFeature> context) {
         HolderGetter<ConfiguredFeature<?, ?>> features = context.lookup(Registries.CONFIGURED_FEATURE);
+
         register(context, TREES_CRABAPPLE,
                 features.getOrThrow(ModTreeFeatures.CRABAPPLE_005),
                 treePlacement(PlacementUtils.countExtra(10, 0.1F, 1),
@@ -409,6 +412,19 @@ public class ModVegetationPlacements {
                 InSquarePlacement.spread(),
                 PlacementUtils.HEIGHTMAP,
                 BiomeFilter.biome()
+        );
+        register(context, TREES_RAPESEED,
+                features.getOrThrow(ModVegetationFeatures.TREES_RAPESEED),
+                PlacementUtils.countExtra(0, 0.05F, 1),
+                InSquarePlacement.spread(),
+                SurfaceWaterDepthFilter.forMaxDepth(0),
+                PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(Blocks.OAK_SAPLING.defaultBlockState(), BlockPos.ZERO)),
+                BiomeFilter.biome()
+        );
+        register(context, FLOWER_RAPESEED,
+                features.getOrThrow(ModVegetationFeatures.FLOWER_RAPESEED),
+                VegetationPlacements.worldSurfaceSquaredWithCount(12)
         );
     }
 }

@@ -1,7 +1,7 @@
 package com.ChalkerCharles.morecolorful.network.packets;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
-import com.ChalkerCharles.morecolorful.common.ModDataAttachments;
+import com.ChalkerCharles.morecolorful.common.attachment.ModDataAttachments;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.codec.ByteBufCodecs;

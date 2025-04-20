@@ -6,15 +6,44 @@
   "mixins": [
     "BeeMixin",
     "BeePollinateGoalMixin",
-    "FlowerPotBlockMixin",
     "FoxEatBerriesGoalMixin",
-    "NoteBlockInstrumentMixin"
+    "LevelMixin",
+    "NoteBlockInstrumentMixin",
+    "accessor.IBlockStateBaseMixin",
+    "accessor.IChunkStatusMixin",
+    "block.BlockMixin",
+    "block.BlockStateBaseMixin",
+    "block.FlowerPotBlockMixin",
+    "block.FrostedIceBlockMixin",
+    "block.IceBlockMixin",
+    "block.SnowLayerBlockMixin",
+    "chunk.ChunkHolderMixin",
+    "chunk.ChunkMapMixin",
+    "chunk.ChunkPyramidMixin",
+    "chunk.ChunkSourceMixin",
+    "chunk.LevelChunkMixin",
+    "chunk.MainThreadExecutorMixin",
+    "chunk.ProtoChunkMixin",
+    "chunk.ServerChunkCacheMixin",
+    "chunk.WorldGenContextMixin",
+    "map.HoldingPlayerMixin",
+    "map.MapColorMixin",
+    "map.MapItemMixin",
+    "map.MapItemSavedDataMixin",
+    "map.MapPatchMixin"
   ],
   "client": [
-    "HumanoidModelMixin",
-    "ItemInHandRendererMixin"
+    "client.ClientChunkCacheMixin",
+    "client.ClientLevelMixin",
+    "client.CreateWorldScreenMixin",
+    "client.HumanoidModelMixin",
+    "client.ItemInHandRendererMixin",
+    "client.LevelLoadingScreenMixin",
+    "client.LevelRendererMixin",
+    "client.MapInstanceMixin"
   ],
   "injectors": {
-    "defaultRequire": 1
+    "defaultRequire": 1,
+    "maxShiftBy": 5
   }
 }

@@ -1,5 +1,6 @@
 package com.ChalkerCharles.morecolorful.common.loot.modifiers;
 
+import com.ChalkerCharles.morecolorful.Config;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
@@ -27,10 +28,12 @@ public class AddSusBlockLootModifier extends LootModifier {
     @SuppressWarnings("deprecation")
     @Override
     protected ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context) {
-        context.getResolver().get(Registries.LOOT_TABLE, this.table).ifPresent(extraTable -> {
-            generatedLoot.clear();
-            extraTable.value().getRandomItemsRaw(context, LootTable.createStackSplitter(context.getLevel(), generatedLoot::add));
-        });
+        if (Config.ARCHAEOLOGY_LOOTS.isTrue()) {
+            context.getResolver().get(Registries.LOOT_TABLE, this.table).ifPresent(extraTable -> {
+                generatedLoot.clear();
+                extraTable.value().getRandomItemsRaw(context, LootTable.createStackSplitter(context.getLevel(), generatedLoot::add));
+            });
+        }
         return generatedLoot;
     }
 

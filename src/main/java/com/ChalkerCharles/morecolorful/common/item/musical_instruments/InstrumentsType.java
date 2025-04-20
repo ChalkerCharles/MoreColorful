@@ -1,6 +1,7 @@
 package com.ChalkerCharles.morecolorful.common.item.musical_instruments;
 
 import com.ChalkerCharles.morecolorful.common.ModSounds;
+import com.google.common.collect.ImmutableMap;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.core.Holder;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -8,7 +9,9 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.ByIdMap;
 import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 
+import java.util.Map;
 import java.util.function.IntFunction;
 
 public enum InstrumentsType implements StringRepresentable {
@@ -73,6 +76,20 @@ public enum InstrumentsType implements StringRepresentable {
     public String getSerializedName() {
         return this.name();
     }
+
+    public static final Map<NoteBlockInstrument, InstrumentsType> MAPPER = new ImmutableMap.Builder<NoteBlockInstrument, InstrumentsType>()
+            .put(NoteBlockInstrument.HARP, HARP)
+            .put(NoteBlockInstrument.BASEDRUM, BASS_DRUM)
+            .put(NoteBlockInstrument.SNARE, SNARE)
+            .put(NoteBlockInstrument.HAT, HAT)
+            .put(NoteBlockInstrument.BASS, BASS)
+            .put(NoteBlockInstrument.FLUTE, FLUTE)
+            .put(NoteBlockInstrument.BELL, GLOCKENSPIEL)
+            .put(NoteBlockInstrument.GUITAR, GUITAR)
+            .put(NoteBlockInstrument.CHIME, CHIMES)
+            .put(NoteBlockInstrument.XYLOPHONE, XYLOPHONE)
+            .put(NoteBlockInstrument.IRON_XYLOPHONE, VIBRAPHONE)
+            .build();
 
     public enum Type {
         ITEM,

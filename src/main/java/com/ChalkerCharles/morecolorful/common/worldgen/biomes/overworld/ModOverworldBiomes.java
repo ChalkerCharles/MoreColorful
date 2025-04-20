@@ -176,6 +176,7 @@ public class ModOverworldBiomes extends OverworldBiomes {
         BiomeDefaultFeatures.addDefaultOres(biomeBuilder);
         BiomeDefaultFeatures.addSwampClayDisk(biomeBuilder);
         ModBiomeFeatures.addMarshVegetation(biomeBuilder);
+        BiomeDefaultFeatures.addDefaultMushrooms(biomeBuilder);
         BiomeDefaultFeatures.addSwampExtraVegetation(biomeBuilder);
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AquaticPlacements.SEAGRASS_SWAMP);
         return biome(true, 0.6F, 0.7F, 0x4888a3, 0x072b42, 0x90bc63, 0x90bc63, spawnBuilder, biomeBuilder, SWAMP_MUSIC);
@@ -251,5 +252,18 @@ public class ModOverworldBiomes extends OverworldBiomes {
         BiomeDefaultFeatures.addSwampExtraVegetation(biomeBuilder);
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AquaticPlacements.SEAGRASS_SWAMP);
         return biome(true, 0.0F, 0.5F, 0x14559b, 0x050533, 0xabb381, 0x7da177, spawnBuilder, biomeBuilder, NORMAL_MUSIC);
+    }
+    public static Biome rapeseedFields(HolderGetter<PlacedFeature> pPlacedFeatures, HolderGetter<ConfiguredWorldCarver<?>> pWorldCarvers) {
+        BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(pPlacedFeatures, pWorldCarvers);
+        MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
+        BiomeDefaultFeatures.farmAnimals(spawnBuilder);
+        BiomeDefaultFeatures.commonSpawns(spawnBuilder);
+        globalOverworldGeneration(biomeBuilder);
+        BiomeDefaultFeatures.addPlainGrass(biomeBuilder);
+        BiomeDefaultFeatures.addDefaultOres(biomeBuilder);
+        BiomeDefaultFeatures.addDefaultSoftDisks(biomeBuilder);
+        ModBiomeFeatures.addRapeseedVegetation(biomeBuilder);
+        Music music = Musics.createGameMusic(SoundEvents.MUSIC_BIOME_FLOWER_FOREST);
+        return biome(true, 0.65F, 0.6F, 0x44aff5, 0x050533, 0x8fc93c, 0x7cbd3a, spawnBuilder, biomeBuilder, music);
     }
 }

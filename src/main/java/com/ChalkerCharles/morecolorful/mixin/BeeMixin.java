@@ -17,12 +17,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Bee.class)
 public abstract class BeeMixin extends Animal implements NeutralMob, FlyingAnimal {
-    protected BeeMixin(EntityType<? extends Animal> pEntityType, Level pLevel) {
+    private BeeMixin(EntityType<? extends Animal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 
-    @Inject(method = "isFlowerValid(Lnet/minecraft/core/BlockPos;)Z", at = @At("HEAD"), cancellable = true)
-    void moreColorful$isFlowerValid(BlockPos pPos, CallbackInfoReturnable<Boolean> cir) {
+    @Inject(method = "isFlowerValid", at = @At("HEAD"), cancellable = true)
+    private void isFlowerValid(BlockPos pPos, CallbackInfoReturnable<Boolean> cir) {
         BlockState state = this.level().getBlockState(pPos);
         if (this.level().isLoaded(pPos) && state.is(HolderSet.direct(
                 ModBlocks.CLOSED_DAYBLOOM,

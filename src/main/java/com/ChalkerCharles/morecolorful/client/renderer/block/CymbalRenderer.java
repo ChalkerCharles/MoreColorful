@@ -7,7 +7,7 @@ import com.ChalkerCharles.morecolorful.common.block.entity.DrumSetBlockEntity;
 import com.ChalkerCharles.morecolorful.common.block.entity.RideCymbalBlockEntity;
 import com.ChalkerCharles.morecolorful.common.block.properties.DrumSetPart;
 import com.ChalkerCharles.morecolorful.util.AnimationUtils;
-import com.ChalkerCharles.morecolorful.util.ICymbalUtils;
+import com.ChalkerCharles.morecolorful.util.CymbalUtils;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -31,7 +31,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 import static com.ChalkerCharles.morecolorful.common.block.musical_instruments.DrumSetBlock.PART;
 
 @OnlyIn(Dist.CLIENT)
-public class CymbalRenderer<T extends BlockEntity & ICymbalUtils> implements BlockEntityRenderer<T> {
+public class CymbalRenderer<T extends BlockEntity & CymbalUtils> implements BlockEntityRenderer<T> {
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final ResourceLocation CYMBAL_TEXTURE = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "textures/entity/cymbal.png");

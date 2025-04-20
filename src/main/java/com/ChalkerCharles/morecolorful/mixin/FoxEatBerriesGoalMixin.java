@@ -22,12 +22,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Fox.FoxEatBerriesGoal.class)
 public abstract class FoxEatBerriesGoalMixin extends MoveToBlockGoal {
-    public FoxEatBerriesGoalMixin(PathfinderMob pMob, double pSpeedModifier, int pSearchRange) {
+    private FoxEatBerriesGoalMixin(PathfinderMob pMob, double pSpeedModifier, int pSearchRange) {
         super(pMob, pSpeedModifier, pSearchRange);
     }
 
-    @Inject(method = "isValidTarget(Lnet/minecraft/world/level/LevelReader;Lnet/minecraft/core/BlockPos;)Z", at = @At("HEAD"), cancellable = true)
-    protected void moreColorful$isValidTarget(LevelReader pLevel, BlockPos pPos, CallbackInfoReturnable<Boolean> cir) {
+    @Inject(method = "isValidTarget", at = @At("HEAD"), cancellable = true)
+    private void isValidTarget(LevelReader pLevel, BlockPos pPos, CallbackInfoReturnable<Boolean> cir) {
         BlockState blockstate = pLevel.getBlockState(pPos);
         if (blockstate.getBlock() instanceof BerryBushBlock && blockstate.getValue(BerryBushBlock.AGE) == 4) {
             cir.setReturnValue(true);
@@ -35,7 +35,7 @@ public abstract class FoxEatBerriesGoalMixin extends MoveToBlockGoal {
     }
 
     @Inject(method = "onReachedTarget()V", at = @At(value = "INVOKE", target = "net/minecraft/world/level/Level.getBlockState(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/block/state/BlockState;", shift = At.Shift.AFTER))
-    protected void onReachedTarget(CallbackInfo ci) {
+    private void onReachedTarget(CallbackInfo ci) {
         BlockState blockstate = this.mob.level().getBlockState(this.blockPos);
         if (blockstate.getBlock() instanceof BerryBushBlock bushBlock) {
             this.moreColorful$pickBerries(blockstate, bushBlock);

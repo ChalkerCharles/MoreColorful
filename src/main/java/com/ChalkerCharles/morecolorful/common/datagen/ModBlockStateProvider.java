@@ -190,8 +190,11 @@ public class  ModBlockStateProvider extends ModBlockStateHelper {
         simpleFlowerPot(ModBlocks.POTTED_DAFFODIL.get());
         cross(ModBlocks.GERBERA_DAISY.get());
         simpleFlowerPot(ModBlocks.POTTED_GERBERA_DAISY.get());
+        cross(ModBlocks.RAPESEED_FLOWER.get());
+        simpleFlowerPot(ModBlocks.POTTED_RAPESEED_FLOWER.get());
 
         doubleCross(ModBlocks.CATTAIL.get());
+        doubleCross(ModBlocks.TALL_RAPESEED_FLOWER.get());
 
         doubleCross(ModBlocks.SHORT_WATER_GRASS.get(), true);
         doubleCross(ModBlocks.TALL_WATER_GRASS.get(), true);

@@ -1,5 +1,6 @@
 package com.ChalkerCharles.morecolorful.common.worldgen.biomes;
 
+import com.ChalkerCharles.morecolorful.Config;
 import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.common.worldgen.biomes.overworld.ModOverworldBiomes;
 import com.ChalkerCharles.morecolorful.common.worldgen.biomes.overworld.ModOverworldRegion;
@@ -14,7 +15,7 @@ import terrablender.api.SurfaceRuleManager;
 
 public class ModBiomeSetup {
     public static void registerRegions() {
-        Regions.register(new ModOverworldRegion(10));
+        Regions.register(new ModOverworldRegion(Config.OVERWORLD_REGION_WEIGHT.getAsInt()));
     }
 
     public static void registerSurfaceRules() {
@@ -39,5 +40,6 @@ public class ModBiomeSetup {
         context.register(ModBiomes.AZURE_FIELDS, ModOverworldBiomes.azureFields(placedFeature, carver));
         context.register(ModBiomes.WILLOW_BAYOU, ModOverworldBiomes.willowBayou(placedFeature, carver));
         context.register(ModBiomes.ICE_MARSH, ModOverworldBiomes.iceMarsh(placedFeature, carver));
+        context.register(ModBiomes.RAPESEED_FIELDS, ModOverworldBiomes.rapeseedFields(placedFeature, carver));
     }
 }

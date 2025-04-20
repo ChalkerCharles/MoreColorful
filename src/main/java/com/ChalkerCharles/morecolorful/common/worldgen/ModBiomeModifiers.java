@@ -18,6 +18,8 @@ import net.neoforged.neoforge.common.world.BiomeModifiers;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ModBiomeModifiers {
@@ -158,6 +160,29 @@ public class ModBiomeModifiers {
                 HolderSet.direct(placedFeatures.getOrThrow(ModVegetationPlacements.PATCH_WOOD_SORRELS)),
                 GenerationStep.Decoration.VEGETAL_DECORATION
         );
+    }
+
+    public static final List<String> ADD_FEATURE_MODIFIERS = getBiomeModifiers(
+            ADD_FLOWER_CHERRY,
+            PATCH_STRAWBERRY_BUSH,
+            PATCH_BLUEBERRY_BUSH,
+            PATCH_CROCUS,
+            PATCH_WATER_GRASS,
+            PATCH_GERBERA_DAISY,
+            PATCH_CATTAIL,
+            PATCH_REED,
+            PATCH_WATER_LILY,
+            PATCH_DUCKWEEDS,
+            PATCH_BUTTERCUPS,
+            PATCH_FORGET_ME_NOTS,
+            PATCH_SPEEDWELLS,
+            TREES_WILLOW,
+            PATCH_WOOD_SORRELS
+    );
+
+    @SafeVarargs
+    private static List<String> getBiomeModifiers(ResourceKey<BiomeModifier>... keys) {
+        return Arrays.stream(keys).map(k -> k.location().getPath()).collect(Collectors.toList());
     }
 
     private static ResourceKey<BiomeModifier> registerKey(String name) {

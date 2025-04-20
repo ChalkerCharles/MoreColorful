@@ -134,7 +134,8 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 ModBlocks.POTTED_IRIS.get(),
                 ModBlocks.POTTED_LAVENDER.get(),
                 ModBlocks.POTTED_DAFFODIL.get(),
-                ModBlocks.POTTED_GERBERA_DAISY.get()
+                ModBlocks.POTTED_GERBERA_DAISY.get(),
+                ModBlocks.POTTED_RAPESEED_FLOWER.get()
         );
         tag(BlockTags.FLOWERS).add(
                 ModBlocks.CRABAPPLE_LEAVES.get(),
@@ -237,6 +238,7 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 ModTags.Blocks.LEAF_LITTERS
         ).add(
                 ModBlocks.CATTAIL.get(),
+                ModBlocks.TALL_RAPESEED_FLOWER.get(),
                 ModBlocks.REED.get()
         );
         tag(BlockTags.SAPLINGS).add(
@@ -266,10 +268,12 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 ModBlocks.IRIS.get(),
                 ModBlocks.LAVENDER.get(),
                 ModBlocks.DAFFODIL.get(),
-                ModBlocks.GERBERA_DAISY.get()
+                ModBlocks.GERBERA_DAISY.get(),
+                ModBlocks.RAPESEED_FLOWER.get()
         );
         tag(BlockTags.TALL_FLOWERS).add(
-                ModBlocks.CATTAIL.get()
+                ModBlocks.CATTAIL.get(),
+                ModBlocks.TALL_RAPESEED_FLOWER.get()
         );
         tag(BlockTags.STANDING_SIGNS).add(
                 ModBlocks.CRABAPPLE_SIGN.get(),
@@ -296,6 +300,7 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 ModBlocks.SPEEDWELLS.get(),
                 ModBlocks.WOOD_SORRELS.get(),
                 ModBlocks.CATTAIL.get(),
+                ModBlocks.TALL_RAPESEED_FLOWER.get(),
                 ModBlocks.REED.get(),
                 ModBlocks.OPEN_WATER_LILY.get(),
                 ModBlocks.OPEN_WHITE_WATER_LILY.get(),

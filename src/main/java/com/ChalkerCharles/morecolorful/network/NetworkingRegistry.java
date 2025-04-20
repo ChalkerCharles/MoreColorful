@@ -42,5 +42,13 @@ public class NetworkingRegistry {
                 new DirectionalPayloadHandler<>(
                         DrumSetPacket::handleClient,
                         DrumSetPacket::handleServer));
+        registrar.playToClient(
+                ThermalUpdatePacket.TYPE,
+                ThermalUpdatePacket.STREAM_CODEC,
+                ThermalUpdatePacket::handle);
+        registrar.playToClient(
+                ThermalRemovalPacket.TYPE,
+                ThermalRemovalPacket.STREAM_CODEC,
+                ThermalRemovalPacket::handle);
     }
 }

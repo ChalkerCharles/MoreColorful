@@ -1,8 +1,9 @@
-package com.ChalkerCharles.morecolorful.common.item;
+package com.ChalkerCharles.morecolorful.client;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.client.gui.PlayingScreen;
-import com.ChalkerCharles.morecolorful.common.ModDataAttachments;
+import com.ChalkerCharles.morecolorful.common.attachment.ModDataAttachments;
+import com.ChalkerCharles.morecolorful.common.item.ModItems;
 import com.ChalkerCharles.morecolorful.util.EnumExtensions;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
@@ -21,7 +22,6 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
-import org.jetbrains.annotations.NotNull;
 
 @EventBusSubscriber(modid = MoreColorful.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ModItemClientSetup {
@@ -31,7 +31,7 @@ public class ModItemClientSetup {
         // Flute
         event.registerItem(new IClientItemExtensions() {
             @Override
-            public HumanoidModel.ArmPose getArmPose(@NotNull LivingEntity livingEntity, @NotNull InteractionHand hand, @NotNull ItemStack itemStack) {
+            public HumanoidModel.ArmPose getArmPose(LivingEntity livingEntity, InteractionHand hand, ItemStack itemStack) {
                 if (livingEntity.isUsingItem() && livingEntity.getUseItem() == itemStack) {
                     return EnumExtensions.ArmPose.FLUTE.getValue();
                 }
@@ -41,7 +41,7 @@ public class ModItemClientSetup {
         // Guitar-Like
         event.registerItem(new IClientItemExtensions() {
             @Override
-            public HumanoidModel.ArmPose getArmPose(@NotNull LivingEntity livingEntity, @NotNull InteractionHand hand, @NotNull ItemStack itemStack) {
+            public HumanoidModel.ArmPose getArmPose(LivingEntity livingEntity, InteractionHand hand, ItemStack itemStack) {
                 if (livingEntity.isUsingItem() && livingEntity.getUseItem() == itemStack
                         && livingEntity.getData(ModDataAttachments.IS_PLAYING_INSTRUMENT)) {
                     return EnumExtensions.ArmPose.GUITAR_PLAYING.getValue();
@@ -52,7 +52,7 @@ public class ModItemClientSetup {
         // Cow Bell
         event.registerItem(new IClientItemExtensions() {
             @Override
-            public HumanoidModel.ArmPose getArmPose(@NotNull LivingEntity livingEntity, @NotNull InteractionHand hand, @NotNull ItemStack itemStack) {
+            public HumanoidModel.ArmPose getArmPose(LivingEntity livingEntity, InteractionHand hand, ItemStack itemStack) {
                 if (livingEntity.isUsingItem() && livingEntity.getUseItem() == itemStack) {
                     return EnumExtensions.ArmPose.COW_BELL.getValue();
                 }
@@ -62,7 +62,7 @@ public class ModItemClientSetup {
         // Didgeridoo
         event.registerItem(new IClientItemExtensions() {
             @Override
-            public HumanoidModel.ArmPose getArmPose(@NotNull LivingEntity livingEntity, @NotNull InteractionHand hand, @NotNull ItemStack itemStack) {
+            public HumanoidModel.ArmPose getArmPose(LivingEntity livingEntity, InteractionHand hand, ItemStack itemStack) {
                 if (livingEntity.isUsingItem() && livingEntity.getUseItem() == itemStack) {
                     return EnumExtensions.ArmPose.DIDGERIDOO.getValue();
                 }
@@ -72,7 +72,7 @@ public class ModItemClientSetup {
         // Violin
         event.registerItem(new IClientItemExtensions() {
             @Override
-            public HumanoidModel.ArmPose getArmPose(@NotNull LivingEntity livingEntity, @NotNull InteractionHand hand, @NotNull ItemStack itemStack) {
+            public HumanoidModel.ArmPose getArmPose(LivingEntity livingEntity, InteractionHand hand, ItemStack itemStack) {
                 if (livingEntity.isUsingItem() && livingEntity.getUseItem() == itemStack
                         && livingEntity.getData(ModDataAttachments.IS_PLAYING_INSTRUMENT)) {
                     return EnumExtensions.ArmPose.VIOLIN_PLAYING.getValue();
@@ -85,7 +85,7 @@ public class ModItemClientSetup {
         // Fiddle Bow
         event.registerItem(new IClientItemExtensions() {
             @Override
-            public boolean applyForgeHandTransform(@NotNull PoseStack poseStack, @NotNull LocalPlayer player, @NotNull HumanoidArm arm, @NotNull ItemStack itemInHand, float partialTick, float equipProcess, float swingProcess) {
+            public boolean applyForgeHandTransform(PoseStack poseStack, LocalPlayer player, HumanoidArm arm, ItemStack itemInHand, float partialTick, float equipProcess, float swingProcess) {
                 float f = player.getTicksUsingItem();
                 float f1 = f % 20 >= 10 ? -(f % 20) + 10 : (f % 20) - 10;
                 if (Minecraft.getInstance().screen instanceof PlayingScreen pScreen && pScreen.isPressing) {
@@ -122,7 +122,7 @@ public class ModItemClientSetup {
         // Cello
         event.registerItem(new IClientItemExtensions() {
             @Override
-            public HumanoidModel.ArmPose getArmPose(@NotNull LivingEntity livingEntity, @NotNull InteractionHand hand, @NotNull ItemStack itemStack) {
+            public HumanoidModel.ArmPose getArmPose(LivingEntity livingEntity, InteractionHand hand, ItemStack itemStack) {
                 if (livingEntity.isUsingItem() && livingEntity.getUseItem() == itemStack
                         && livingEntity.getData(ModDataAttachments.IS_PLAYING_INSTRUMENT)) {
                     return EnumExtensions.ArmPose.CELLO_PLAYING.getValue();
@@ -135,7 +135,7 @@ public class ModItemClientSetup {
         // Trumpet
         event.registerItem(new IClientItemExtensions() {
             @Override
-            public HumanoidModel.ArmPose getArmPose(@NotNull LivingEntity livingEntity, @NotNull InteractionHand hand, @NotNull ItemStack itemStack) {
+            public HumanoidModel.ArmPose getArmPose(LivingEntity livingEntity, InteractionHand hand, ItemStack itemStack) {
                 if (livingEntity.isUsingItem() && livingEntity.getUseItem() == itemStack) {
                     return HumanoidModel.ArmPose.TOOT_HORN;
                 }
@@ -145,7 +145,7 @@ public class ModItemClientSetup {
         // Saxophone, Ocarina & Harmonica
         event.registerItem(new IClientItemExtensions() {
             @Override
-            public HumanoidModel.ArmPose getArmPose(@NotNull LivingEntity livingEntity, @NotNull InteractionHand hand, @NotNull ItemStack itemStack) {
+            public HumanoidModel.ArmPose getArmPose(LivingEntity livingEntity, InteractionHand hand, ItemStack itemStack) {
                 if (livingEntity.isUsingItem() && livingEntity.getUseItem() == itemStack) {
                     return EnumExtensions.ArmPose.SAXOPHONE.getValue();
                 }
@@ -155,7 +155,7 @@ public class ModItemClientSetup {
         // Pipa
         event.registerItem(new IClientItemExtensions() {
             @Override
-            public HumanoidModel.ArmPose getArmPose(@NotNull LivingEntity livingEntity, @NotNull InteractionHand hand, @NotNull ItemStack itemStack) {
+            public HumanoidModel.ArmPose getArmPose(LivingEntity livingEntity, InteractionHand hand, ItemStack itemStack) {
                 if (livingEntity.isUsingItem() && livingEntity.getUseItem() == itemStack
                         && livingEntity.getData(ModDataAttachments.IS_PLAYING_INSTRUMENT)) {
                     return EnumExtensions.ArmPose.PIPA_PLAYING.getValue();
@@ -166,7 +166,7 @@ public class ModItemClientSetup {
         // Erhu
         event.registerItem(new IClientItemExtensions() {
             @Override
-            public HumanoidModel.ArmPose getArmPose(@NotNull LivingEntity livingEntity, @NotNull InteractionHand hand, @NotNull ItemStack itemStack) {
+            public HumanoidModel.ArmPose getArmPose(LivingEntity livingEntity, InteractionHand hand, ItemStack itemStack) {
                 if (livingEntity.isUsingItem() && livingEntity.getUseItem() == itemStack
                         && livingEntity.getData(ModDataAttachments.IS_PLAYING_INSTRUMENT)) {
                     return EnumExtensions.ArmPose.ERHU_PLAYING.getValue();

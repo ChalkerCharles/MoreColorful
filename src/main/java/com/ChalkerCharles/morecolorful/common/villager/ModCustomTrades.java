@@ -42,6 +42,7 @@ public class ModCustomTrades {
                 buy(ModItems.LAVENDER, 1, 1, 12, 1),
                 buy(ModItems.DAFFODIL, 1, 1, 12, 1),
                 buy(ModItems.GERBERA_DAISY, 1, 1, 12, 1),
+                buy(ModItems.RAPESEED_FLOWER, 1, 1, 12, 1),
 
                 buy(ModItems.CRABAPPLE_SAPLING, 1, 5, 8, 1),
                 buy(ModItems.WHITE_CHERRY_SAPLING, 1, 5, 8, 1),

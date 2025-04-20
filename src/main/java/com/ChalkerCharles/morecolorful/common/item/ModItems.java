@@ -214,8 +214,10 @@ public class ModItems {
     public static final DeferredItem<BlockItem> LAVENDER = ITEMS.registerSimpleBlockItem(ModBlocks.LAVENDER);
     public static final DeferredItem<BlockItem> DAFFODIL = ITEMS.registerSimpleBlockItem(ModBlocks.DAFFODIL);
     public static final DeferredItem<BlockItem> GERBERA_DAISY = ITEMS.registerSimpleBlockItem(ModBlocks.GERBERA_DAISY);
+    public static final DeferredItem<BlockItem> RAPESEED_FLOWER = ITEMS.registerSimpleBlockItem(ModBlocks.RAPESEED_FLOWER);
 
     public static final DeferredItem<BlockItem> CATTAIL = ITEMS.registerSimpleBlockItem(ModBlocks.CATTAIL);
+    public static final DeferredItem<BlockItem> TALL_RAPESEED_FLOWER = ITEMS.registerSimpleBlockItem(ModBlocks.TALL_RAPESEED_FLOWER);
 
     public static final DeferredItem<BlockItem> SHORT_WATER_GRASS = ITEMS.registerSimpleBlockItem(ModBlocks.SHORT_WATER_GRASS);
     public static final DeferredItem<BlockItem> TALL_WATER_GRASS = ITEMS.registerSimpleBlockItem(ModBlocks.TALL_WATER_GRASS);

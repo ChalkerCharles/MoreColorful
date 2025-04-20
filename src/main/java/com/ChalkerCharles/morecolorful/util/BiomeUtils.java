@@ -1,5 +1,6 @@
 package com.ChalkerCharles.morecolorful.util;
 
+import com.ChalkerCharles.morecolorful.Config;
 import net.minecraft.core.Registry;
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
 import net.minecraft.resources.ResourceKey;
@@ -14,10 +15,14 @@ public class BiomeUtils {
             if (key == null)
                 continue;
 
-            // todo: config
-            return key;
+            if (isBiomeEnabled(key) || key.location().getNamespace().equals("minecraft"))
+                return key;
         }
         throw new RuntimeException("Failed to find fallback for biome!");
+    }
+
+    public static boolean isBiomeEnabled(ResourceKey<Biome> key) {
+        return !Config.disabledBiomes.contains(key);
     }
 
     public static void addDefaultSpawn(MobSpawnSettings.Builder builder) {

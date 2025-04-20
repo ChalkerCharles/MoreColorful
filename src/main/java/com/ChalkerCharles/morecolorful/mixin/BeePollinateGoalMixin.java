@@ -17,12 +17,12 @@ import java.util.function.Predicate;
 @Mixin(targets = "net.minecraft.world.entity.animal.Bee$BeePollinateGoal")
 public abstract class BeePollinateGoalMixin {
     @Shadow
-    @Mutable
     @Final
+    @Mutable
     private Predicate<BlockState> VALID_POLLINATION_BLOCKS;
 
-    @Inject(method = "<init>(Lnet/minecraft/world/entity/animal/Bee;)V", at = @At("TAIL"))
-    private void moreColorful$modify(Bee bee, CallbackInfo ci) {
+    @Inject(method = "<init>", at = @At("TAIL"))
+    private void setValidBlocks(Bee bee, CallbackInfo ci) {
         VALID_POLLINATION_BLOCKS = VALID_POLLINATION_BLOCKS.and(state ->
                 !(state.is(HolderSet.direct(
                         ModBlocks.CLOSED_DAYBLOOM,

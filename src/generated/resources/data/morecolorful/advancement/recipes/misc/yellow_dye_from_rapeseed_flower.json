@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_rapeseed_flower": {
+      "conditions": {
+        "items": [
+          {
+            "items": "morecolorful:rapeseed_flower"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "morecolorful:yellow_dye_from_rapeseed_flower"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_rapeseed_flower"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "morecolorful:yellow_dye_from_rapeseed_flower"
+    ]
+  }
+}

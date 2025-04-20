@@ -64,6 +64,7 @@ public final class ModCommonSetup {
             pot.addPlant(ModBlocks.LAVENDER.getId(), ModBlocks.POTTED_LAVENDER);
             pot.addPlant(ModBlocks.DAFFODIL.getId(), ModBlocks.POTTED_DAFFODIL);
             pot.addPlant(ModBlocks.GERBERA_DAISY.getId(), ModBlocks.POTTED_GERBERA_DAISY);
+            pot.addPlant(ModBlocks.RAPESEED_FLOWER.getId(), ModBlocks.POTTED_RAPESEED_FLOWER);
         });
     }
 
@@ -193,8 +194,10 @@ public final class ModCommonSetup {
             fireblock.setFlammable(ModBlocks.LAVENDER.get(), 60, 100);
             fireblock.setFlammable(ModBlocks.DAFFODIL.get(), 60, 100);
             fireblock.setFlammable(ModBlocks.GERBERA_DAISY.get(), 60, 100);
+            fireblock.setFlammable(ModBlocks.RAPESEED_FLOWER.get(), 60, 100);
 
             fireblock.setFlammable(ModBlocks.CATTAIL.get(), 60, 100);
+            fireblock.setFlammable(ModBlocks.TALL_RAPESEED_FLOWER.get(), 60, 100);
 
             fireblock.setFlammable(ModBlocks.SHORT_WATER_GRASS.get(), 60, 100);
             fireblock.setFlammable(ModBlocks.TALL_WATER_GRASS.get(), 60, 100);

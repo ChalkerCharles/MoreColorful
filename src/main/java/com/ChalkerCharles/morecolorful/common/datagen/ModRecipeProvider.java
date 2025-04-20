@@ -168,11 +168,13 @@ public class ModRecipeProvider extends ModRecipeHelper {
         simpleMiscRecipe(pRecipeOutput, Items.PURPLE_DYE, ModItems.LAVENDER);
         simpleMiscRecipe(pRecipeOutput, Items.YELLOW_DYE, ModItems.DAFFODIL);
         simpleMiscRecipe(pRecipeOutput, Items.MAGENTA_DYE, ModItems.GERBERA_DAISY);
+        simpleMiscRecipe(pRecipeOutput, Items.YELLOW_DYE, ModItems.RAPESEED_FLOWER);
         simpleMiscRecipe(pRecipeOutput, Items.PINK_DYE, ModItems.OPEN_WATER_LILY);
         simpleMiscRecipe(pRecipeOutput, Items.WHITE_DYE, ModItems.OPEN_WHITE_WATER_LILY);
         simpleMiscRecipe(pRecipeOutput, Items.BLUE_DYE, ModItems.OPEN_BLUE_WATER_LILY);
 
         simpleMiscRecipe(pRecipeOutput, Items.STRING, ModItems.CATTAIL);
+        simpleMiscRecipe(pRecipeOutput, Items.YELLOW_DYE, ModItems.TALL_RAPESEED_FLOWER, 2);
         miscShapedRecipe(pRecipeOutput, Items.PAPER, ModItems.REED, 3, "###");
     }
 }

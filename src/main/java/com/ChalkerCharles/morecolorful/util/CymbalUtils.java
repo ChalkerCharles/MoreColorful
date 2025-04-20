@@ -1,25 +1,26 @@
 package com.ChalkerCharles.morecolorful.util;
 
-import com.ChalkerCharles.morecolorful.common.ModDataAttachments;
+import com.ChalkerCharles.morecolorful.common.attachment.ModDataAttachments;
 import com.ChalkerCharles.morecolorful.common.block.ModBlocks;
 import com.ChalkerCharles.morecolorful.common.block.properties.DrumSetPart;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 
-import java.util.List;
-import java.util.stream.Stream;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import static com.ChalkerCharles.morecolorful.common.block.musical_instruments.DrumSetBlock.FACING;
 import static com.ChalkerCharles.morecolorful.common.block.musical_instruments.DrumSetBlock.PART;
 
-public interface ICymbalUtils {
+public interface CymbalUtils {
     EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
-    default List<Integer> pressingPlayers(Level level, BlockPos pos) {
+    default Set<Integer> pressingPlayers(Level level, BlockPos pos) {
         return level.players().stream()
                 .filter(p -> {
                     BlockPos pos1 = p.getData(ModDataAttachments.PLAYING_SCREEN_DATA).pos();
@@ -28,16 +29,16 @@ public interface ICymbalUtils {
                             ? pos1.above() : pos1;
                     return p.getData(ModDataAttachments.IS_PLAYING_INSTRUMENT) && pos.equals(pos1);
                 })
-                .flatMap(p -> Stream.of(p.getId())).toList();
+                .map(Entity::getId).collect(Collectors.toSet());
     }
 
-    default List<Integer> pressingPlayersForHiHat(Level level, BlockPos pos) {
+    default Set<Integer> pressingPlayersForHiHat(Level level, BlockPos pos) {
         return level.players().stream()
                 .filter(p -> p.getData(ModDataAttachments.IS_PLAYING_INSTRUMENT)
                                 && pos.equals(p.getData(ModDataAttachments.PLAYING_SCREEN_DATA).pos()))
-                .flatMap(p -> Stream.of(p.getId())).toList();
+                .map(Entity::getId).collect(Collectors.toSet());
     }
-    default List<Integer> pressingBassDrumPlayers(Level level, BlockPos pos) {
+    default Set<Integer> pressingBassDrumPlayers(Level level, BlockPos pos) {
         return level.players().stream()
                 .filter(p -> {
                     BlockPos pos1 = p.getData(ModDataAttachments.DRUM_SET_DATA).pos();
@@ -45,7 +46,7 @@ public interface ICymbalUtils {
                     pos1 = state.is(ModBlocks.DRUM_SET) ? getBassDrumPos(pos1, state) : pos1;
                     return p.getData(ModDataAttachments.DRUM_SET_DATA).isPressingBassDrum() && pos.equals(pos1);
                 })
-                .flatMap(p -> Stream.of(p.getId())).toList();
+                .map(Entity::getId).collect(Collectors.toSet());
     }
     default BlockPos getBassDrumPos(BlockPos pos, BlockState state) {
         Direction direction = state.getValue(FACING);
@@ -59,7 +60,7 @@ public interface ICymbalUtils {
             case RIGHT_UPPER -> pos.relative(direction.getClockWise()).below();
         };
     }
-    default List<Integer> pressingHatPlayers(Level level, BlockPos pos) {
+    default Set<Integer> pressingHatPlayers(Level level, BlockPos pos) {
         return level.players().stream()
                 .filter(p -> {
                     BlockPos pos1 = p.getData(ModDataAttachments.DRUM_SET_DATA).pos();
@@ -67,7 +68,7 @@ public interface ICymbalUtils {
                     pos1 = state.is(ModBlocks.DRUM_SET) ? getHatPos(pos1, state) : pos1;
                     return p.getData(ModDataAttachments.DRUM_SET_DATA).isPressingHat() && pos.equals(pos1);
                 })
-                .flatMap(p -> Stream.of(p.getId())).toList();
+                .map(Entity::getId).collect(Collectors.toSet());
     }
     default BlockPos getHatPos(BlockPos pos, BlockState state) {
         Direction direction = state.getValue(FACING);
@@ -81,7 +82,7 @@ public interface ICymbalUtils {
             case RIGHT_UPPER -> pos.relative(direction.getClockWise()).relative(direction.getClockWise()).below();
         };
     }
-    default List<Integer> pressingRidePlayers(Level level, BlockPos pos) {
+    default Set<Integer> pressingRidePlayers(Level level, BlockPos pos) {
         return level.players().stream()
                 .filter(p -> {
                     BlockPos pos1 = p.getData(ModDataAttachments.DRUM_SET_DATA).pos();
@@ -89,9 +90,9 @@ public interface ICymbalUtils {
                     pos1 = state.is(ModBlocks.DRUM_SET) ? getRidePos(pos1, state) : pos1;
                     return p.getData(ModDataAttachments.DRUM_SET_DATA).isPressingRide() && pos.equals(pos1);
                 })
-                .flatMap(p -> Stream.of(p.getId())).toList();
+                .map(Entity::getId).collect(Collectors.toSet());
     }
-    default BlockPos getRidePos(BlockPos pos, BlockState state) {
+    private BlockPos getRidePos(BlockPos pos, BlockState state) {
         Direction direction = state.getValue(FACING);
         DrumSetPart part = state.getValue(PART);
         return switch (part) {
@@ -103,7 +104,7 @@ public interface ICymbalUtils {
             case LEFT_UPPER -> pos.relative(direction.getCounterClockWise()).relative(direction.getCounterClockWise());
         };
     }
-    default List<Integer> pressingCrashPlayers(Level level, BlockPos pos) {
+    default Set<Integer> pressingCrashPlayers(Level level, BlockPos pos) {
         return level.players().stream()
                 .filter(p -> {
                     BlockPos pos1 = p.getData(ModDataAttachments.DRUM_SET_DATA).pos();
@@ -111,9 +112,9 @@ public interface ICymbalUtils {
                     pos1 = state.is(ModBlocks.DRUM_SET) ? getCrashPos(pos1, state) : pos1;
                     return p.getData(ModDataAttachments.DRUM_SET_DATA).isPressingCrash() && pos.equals(pos1);
                 })
-                .flatMap(p -> Stream.of(p.getId())).toList();
+                .map(Entity::getId).collect(Collectors.toSet());
     }
-    default BlockPos getCrashPos(BlockPos pos, BlockState state) {
+    private BlockPos getCrashPos(BlockPos pos, BlockState state) {
         Direction direction = state.getValue(FACING);
         DrumSetPart part = state.getValue(PART);
         return switch (part) {

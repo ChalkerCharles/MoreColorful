@@ -116,7 +116,7 @@ public class ModOverworldBiomeBuilder {
     protected final ResourceKey<Biome>[][] MOD_MIDDLE_BIOMES = new ResourceKey[][]{
             {null, null, null, null, null},
             {null, ModBiomes.GOLDEN_GROVE, ModBiomes.AUTUMN_BIRCH_FOREST, ModBiomes.MAPLE_FOREST, null},
-            {null, null, ModBiomes.AZURE_FIELDS, null, null},
+            {null, ModBiomes.RAPESEED_FIELDS, ModBiomes.AZURE_FIELDS, null, null},
             {null, ModBiomes.LAVENDER_FIELDS, ModBiomes.JACARANDA_GROVE, null, null},
             {null, null, null, null, null}
     };
@@ -653,8 +653,7 @@ public class ModOverworldBiomeBuilder {
             Climate.Parameter pErosion,
             Climate.Parameter pWeirdness,
             float offset,
-            ResourceKey<Biome> pKey
-    ) {
+            ResourceKey<Biome> pKey) {
         mapper.accept(Pair.of(Climate.parameters(pTemperature, pHumidity, pContinentalness, pErosion, Climate.Parameter.point(0.0F), pWeirdness, offset), pKey));
         mapper.accept(Pair.of(Climate.parameters(pTemperature, pHumidity, pContinentalness, pErosion, Climate.Parameter.point(1.0F), pWeirdness, offset), pKey));
     }
@@ -667,8 +666,7 @@ public class ModOverworldBiomeBuilder {
             Climate.Parameter pErosion,
             Climate.Parameter pWeirdness,
             float offset,
-            ResourceKey<Biome> pKey
-    ) {
+            ResourceKey<Biome> pKey) {
         mapper.accept(Pair.of(Climate.parameters(pTemperature, pHumidity, pContinentalness, pErosion, Climate.Parameter.span(0.2F, 0.9F), pWeirdness, offset), pKey));
     }
 
@@ -680,8 +678,7 @@ public class ModOverworldBiomeBuilder {
             Climate.Parameter pErosion,
             Climate.Parameter pWeirdness,
             float offset,
-            ResourceKey<Biome> pKey
-    ) {
+            ResourceKey<Biome> pKey) {
         mapper.accept(Pair.of(Climate.parameters(pTemperature, pHumidity, pContinentalness, pErosion, Climate.Parameter.point(1.1F), pWeirdness, offset), pKey));
     }
 }

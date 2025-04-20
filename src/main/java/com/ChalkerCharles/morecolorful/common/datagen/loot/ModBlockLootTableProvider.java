@@ -268,8 +268,11 @@ public class ModBlockLootTableProvider extends ModBlockLootTableHelper {
         dropPottedContents(ModBlocks.POTTED_DAFFODIL.get());
         dropSelf(ModBlocks.GERBERA_DAISY.get());
         dropPottedContents(ModBlocks.POTTED_GERBERA_DAISY.get());
+        dropSelf(ModBlocks.RAPESEED_FLOWER.get());
+        dropPottedContents(ModBlocks.POTTED_RAPESEED_FLOWER.get());
 
         dropForDoubleBlock(ModBlocks.CATTAIL.get());
+        dropForDoubleBlock(ModBlocks.TALL_RAPESEED_FLOWER.get());
 
         dropForWaterGrass(ModBlocks.SHORT_WATER_GRASS.get());
         dropForWaterGrass(ModBlocks.TALL_WATER_GRASS.get());

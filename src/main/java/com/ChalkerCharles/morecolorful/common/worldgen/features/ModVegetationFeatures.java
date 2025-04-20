@@ -75,9 +75,12 @@ public class ModVegetationFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_WILLOW = registerKey("trees_willow");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_WILLOW_BAYOU = registerKey("trees_willow_bayou");
     public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_WOOD_SORRELS = registerKey("patch_wood_sorrels");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_RAPESEED = registerKey("trees_rapeseed");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> FLOWER_RAPESEED = registerKey("flower_rapeseed");
 
     public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context) {
         HolderGetter<PlacedFeature> placedFeature = context.lookup(Registries.PLACED_FEATURE);
+
         SimpleWeightedRandomList.Builder<BlockState> begonias = SimpleWeightedRandomList.builder();
         addPetals(begonias, ModBlocks.BEGONIAS.get(), 3);
         begonias.add(ModBlocks.RED_CARNATION.get().defaultBlockState(), 2);
@@ -570,6 +573,35 @@ public class ModVegetationFeatures {
                 Feature.FLOWER,
                 new RandomPatchConfiguration(
                         32, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(woodSorrels)))
+                )
+        );
+        register(context, TREES_RAPESEED,
+                Feature.RANDOM_SELECTOR,
+                new RandomFeatureConfiguration(
+                        List.of(
+                                new WeightedPlacedFeature(
+                                        placedFeature.getOrThrow(TreePlacements.FANCY_OAK_BEES),
+                                        0.1F
+                                ),
+                                new WeightedPlacedFeature(
+                                        placedFeature.getOrThrow(ModTreePlacements.OAK_BEES),
+                                        0.3F
+                                )
+                        ),
+                        placedFeature.getOrThrow(ModTreePlacements.CHERRY_BEES)
+                )
+        );
+        register(context, FLOWER_RAPESEED,
+                Feature.FLOWER,
+                new RandomPatchConfiguration(
+                        128, 6, 2, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
+                                new WeightedStateProvider(
+                                        SimpleWeightedRandomList.<BlockState>builder()
+                                                .add(ModBlocks.RAPESEED_FLOWER.get().defaultBlockState(), 12)
+                                                .add(ModBlocks.TALL_RAPESEED_FLOWER.get().defaultBlockState())
+                                                .add(Blocks.DANDELION.defaultBlockState())
+                                )
+                        ))
                 )
         );
     }

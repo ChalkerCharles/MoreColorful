@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "morecolorful:block/tall_rapeseed_flower_bottom"
+    },
+    "half=upper": {
+      "model": "morecolorful:block/tall_rapeseed_flower_top"
+    }
+  }
+}

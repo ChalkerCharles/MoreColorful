@@ -143,8 +143,10 @@ public class ModItemModelProvider extends ModItemModelHelper {
         blockItem2d(ModItems.LAVENDER.get());
         blockItem2d(ModItems.DAFFODIL.get());
         blockItem2d(ModItems.GERBERA_DAISY.get());
+        blockItem2d(ModItems.RAPESEED_FLOWER.get());
 
         blockItem2d(ModItems.CATTAIL.get(), "cattail_top");
+        blockItem2d(ModItems.TALL_RAPESEED_FLOWER.get(), "tall_rapeseed_flower_top");
 
         blockItem2d(ModItems.SHORT_WATER_GRASS.get(), "short_water_grass_top");
         blockItem2d(ModItems.TALL_WATER_GRASS.get(), "tall_water_grass_top");

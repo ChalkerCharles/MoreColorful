@@ -1,7 +1,7 @@
 package com.ChalkerCharles.morecolorful.network.packets;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
-import com.ChalkerCharles.morecolorful.common.ModDataAttachments;
+import com.ChalkerCharles.morecolorful.common.attachment.ModDataAttachments;
 import com.ChalkerCharles.morecolorful.common.item.musical_instruments.InstrumentsType;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.core.BlockPos;

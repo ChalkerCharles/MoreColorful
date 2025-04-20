@@ -60,15 +60,16 @@ public final class AnimationUtils {
         modelPart.zRot = Mth.rotLerp(f1 / 8, 0.0F, angle * (float)(pRightHanded ? 1 : -1));
         modelPart.z = Mth.lerp(f1 / 8, 0.0F, 1.0F);
     }
-    public static void animateCymbalShaking(float ticks,
-                                            float ticksAfterStop,
-                                            boolean shaking,
-                                            ModelPart part,
-                                            float pPartialTick,
-                                            PoseStack pPoseStack,
-                                            MultiBufferSource pBufferSource,
-                                            int pPackedLight,
-                                            int pPackedOverlay) {
+    public static void animateCymbalShaking(
+            float ticks,
+            float ticksAfterStop,
+            boolean shaking,
+            ModelPart part,
+            float pPartialTick,
+            PoseStack pPoseStack,
+            MultiBufferSource pBufferSource,
+            int pPackedLight,
+            int pPackedOverlay) {
         float f = ticks + pPartialTick;
         float f0 = ticksAfterStop + pPartialTick;
         float f1 = 0.0F;
@@ -84,16 +85,17 @@ public final class AnimationUtils {
         VertexConsumer vertexconsumer = pBufferSource.getBuffer(RenderType.entitySolid(CymbalRenderer.CYMBAL_TEXTURE));
         part.render(pPoseStack, vertexconsumer, pPackedLight, pPackedOverlay);
     }
-    public static <T extends BlockEntity & ICymbalUtils> void animateCymbalShakingWithOffset(T blockEntity,
-                                                                                             float ticks,
-                                                                                             float ticksAfterStop,
-                                                                                             boolean shaking,
-                                                                                             ModelPart part,
-                                                                                             float pPartialTick,
-                                                                                             PoseStack pPoseStack,
-                                                                                             MultiBufferSource pBufferSource,
-                                                                                             int pPackedLight,
-                                                                                             int pPackedOverlay) {
+    public static <T extends BlockEntity & CymbalUtils> void animateCymbalShakingWithOffset(
+            T blockEntity,
+            float ticks,
+            float ticksAfterStop,
+            boolean shaking,
+            ModelPart part,
+            float pPartialTick,
+            PoseStack pPoseStack,
+            MultiBufferSource pBufferSource,
+            int pPackedLight,
+            int pPackedOverlay) {
         BlockState blockState = blockEntity.getBlockState();
         float rot = blockState.getValue(HorizontalDirectionalBlock.FACING).getOpposite().toYRot();
         pPoseStack.pushPose();

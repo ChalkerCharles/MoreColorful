@@ -52,30 +52,31 @@ public class MidiHandler {
         public MidiInputReceiver(String name) {
             this.name = name;
         }
+
         @Override
-            public void send(MidiMessage message, long timeStamp) {
-                if (message instanceof ShortMessage msg) {
-                    int keyId = msg.getData1() - 54;
-                    if(keyId < 0 || keyId > 24){
-                        return;
+        public void send(MidiMessage message, long timeStamp) {
+            if (message instanceof ShortMessage msg) {
+                int keyId = msg.getData1() - 54;
+                if(keyId < 0 || keyId > 24){
+                    return;
+                }
+                if (msg.getCommand() == ShortMessage.NOTE_ON) {
+                    try {
+                        Minecraft.getInstance().submit(() -> noteOnHandler.accept(keyId)).get();
+                    } catch (InterruptedException | ExecutionException e) {
+                        throw new RuntimeException(e);
                     }
-                    if (msg.getCommand() == ShortMessage.NOTE_ON) {
-                        try {
-                            Minecraft.getInstance().submit(() -> noteOnHandler.accept(keyId)).get();
-                        } catch (InterruptedException | ExecutionException e) {
-                            throw new RuntimeException(e);
-                        }
-                    } else if (msg.getCommand() == ShortMessage.NOTE_OFF) {
-                        try {
-                            Minecraft.getInstance().submit(() -> noteOffHandler.accept(keyId)).get();
-                        } catch (InterruptedException | ExecutionException e) {
-                            throw new RuntimeException(e);
-                        }
+                } else if (msg.getCommand() == ShortMessage.NOTE_OFF) {
+                    try {
+                        Minecraft.getInstance().submit(() -> noteOffHandler.accept(keyId)).get();
+                    } catch (InterruptedException | ExecutionException e) {
+                        throw new RuntimeException(e);
                     }
                 }
             }
+        }
 
-            @Override
-            public void close() {}
+        @Override
+        public void close() {}
     }
 }

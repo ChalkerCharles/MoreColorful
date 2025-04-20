@@ -5,6 +5,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import org.spongepowered.asm.mixin.*;
+import org.spongepowered.asm.mixin.gen.Invoker;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -14,26 +15,25 @@ import java.util.Arrays;
 import static com.ChalkerCharles.morecolorful.common.block.properties.NoteBlockInstrumentExtension.*;
 
 @Mixin(NoteBlockInstrument.class)
-public class NoteBlockInstrumentMixin {
+public abstract class NoteBlockInstrumentMixin {
     @Shadow
-    @Mutable
     @Final
+    @Mutable
     private static NoteBlockInstrument[] $VALUES;
 
-    @SuppressWarnings("unused")
-    NoteBlockInstrumentMixin(String enumName, int ordinal, String name, Holder<SoundEvent> sound, NoteBlockInstrument.Type type) {
-        throw new UnsupportedOperationException("Replaced by Mixin");
+    @SuppressWarnings("SameParameterValue")
+    @Invoker("<init>")
+    private static NoteBlockInstrument create(String enumName, int ordinal, String name, Holder<SoundEvent> pSoundEvent, NoteBlockInstrument.Type pType) {
+        throw new UnsupportedOperationException();
     }
 
     @Unique
     private static NoteBlockInstrument moreColorful$create(String enumName, int ordinal, String name, Holder<SoundEvent> pSoundEvent) {
-        return (NoteBlockInstrument)(Object) new NoteBlockInstrumentMixin(
-                enumName, ordinal, name, pSoundEvent, NoteBlockInstrument.Type.BASE_BLOCK
-        );
+        return create(enumName, ordinal, name, pSoundEvent, NoteBlockInstrument.Type.BASE_BLOCK);
     }
 
     @Inject(method = "<clinit>", at = @At(value = "FIELD", target = "Lnet/minecraft/world/level/block/state/properties/NoteBlockInstrument;$VALUES:[Lnet/minecraft/world/level/block/state/properties/NoteBlockInstrument;", shift = At.Shift.AFTER))
-    private static void moreColorful$inject(CallbackInfo ci) {
+    private static void addNewInstruments(CallbackInfo ci) {
         int ordinal = $VALUES.length;
         $VALUES = Arrays.copyOf($VALUES, ordinal + 20);
 

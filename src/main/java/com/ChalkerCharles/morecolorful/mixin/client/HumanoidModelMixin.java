@@ -1,6 +1,6 @@
-package com.ChalkerCharles.morecolorful.mixin;
+package com.ChalkerCharles.morecolorful.mixin.client;
 
-import com.ChalkerCharles.morecolorful.common.ModDataAttachments;
+import com.ChalkerCharles.morecolorful.common.attachment.ModDataAttachments;
 import com.ChalkerCharles.morecolorful.common.block.ModBlocks;
 import com.ChalkerCharles.morecolorful.common.block.properties.ModBlockStateProperties;
 import com.ChalkerCharles.morecolorful.common.item.musical_instruments.InstrumentsType;
@@ -34,7 +34,7 @@ public abstract class HumanoidModelMixin<T extends LivingEntity> extends Ageable
     public ModelPart leftArm;
 
     @Unique
-    protected void moreColorful$setupKeyboardAnimation(T pLivingEntity) {
+    private void moreColorful$setupKeyboardAnimation(T pLivingEntity) {
         if (pLivingEntity instanceof Player) {
             PlayingScreenPacket data = pLivingEntity.getData(ModDataAttachments.PLAYING_SCREEN_DATA);
             InstrumentsType pType = data.pType();
@@ -67,7 +67,7 @@ public abstract class HumanoidModelMixin<T extends LivingEntity> extends Ageable
         }
     }
     @Unique
-    protected void moreColorful$setupGuzhengAnimation(T pLivingEntity) {
+    private void moreColorful$setupGuzhengAnimation(T pLivingEntity) {
         if (pLivingEntity instanceof Player) {
             PlayingScreenPacket data = pLivingEntity.getData(ModDataAttachments.PLAYING_SCREEN_DATA);
             InstrumentsType pType = data.pType();
@@ -95,7 +95,7 @@ public abstract class HumanoidModelMixin<T extends LivingEntity> extends Ageable
     }
 
     @Inject(method = "setupAnim(Lnet/minecraft/world/entity/LivingEntity;FFFFF)V", at = @At("TAIL"))
-    public void moreColorful$setupAnim(@NotNull T pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch, CallbackInfo ci) {
+    private void setupAnim(@NotNull T pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch, CallbackInfo ci) {
         this.moreColorful$setupKeyboardAnimation(pEntity);
         this.moreColorful$setupGuzhengAnimation(pEntity);
     }

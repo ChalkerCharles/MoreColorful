@@ -1,15 +1,17 @@
 package com.ChalkerCharles.morecolorful;
 
+import com.ChalkerCharles.morecolorful.client.ModClientEvents;
 import com.ChalkerCharles.morecolorful.client.particle.ModParticles;
 import com.ChalkerCharles.morecolorful.common.ModCommonSetup;
-import com.ChalkerCharles.morecolorful.common.ModDataAttachments;
+import com.ChalkerCharles.morecolorful.common.attachment.ModDataAttachments;
 import com.ChalkerCharles.morecolorful.common.ModSounds;
 import com.ChalkerCharles.morecolorful.common.ModStats;
 import com.ChalkerCharles.morecolorful.common.block.ModBlockEntities;
 import com.ChalkerCharles.morecolorful.common.block.ModBlocks;
-import com.ChalkerCharles.morecolorful.common.block.VanillaBlockPropertyModification;
+import com.ChalkerCharles.morecolorful.common.block.VanillaBlockPropertyModifier;
 import com.ChalkerCharles.morecolorful.common.item.ModCreativeTabs;
 import com.ChalkerCharles.morecolorful.common.item.ModItems;
+import com.ChalkerCharles.morecolorful.common.level.ModChunkStatus;
 import com.ChalkerCharles.morecolorful.common.loot.modifiers.ModLootModifiers;
 import com.ChalkerCharles.morecolorful.common.worldgen.biomes.ModBiomeSetup;
 import com.ChalkerCharles.morecolorful.common.worldgen.features.ModFeatures;
@@ -18,11 +20,16 @@ import com.ChalkerCharles.morecolorful.common.worldgen.features.trees.ModRootPla
 import com.ChalkerCharles.morecolorful.common.worldgen.features.trees.ModTreeDecorators;
 import com.ChalkerCharles.morecolorful.common.worldgen.features.trees.ModTrunkPlacers;
 import com.mojang.logging.LogUtils;
+import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.client.gui.ConfigurationScreen;
+import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.neoforged.neoforge.event.server.ServerStoppingEvent;
@@ -36,7 +43,7 @@ public class MoreColorful {
     public static final Logger LOGGER = LogUtils.getLogger();
     private final Random random = new Random();
 
-    public MoreColorful(IEventBus modEventBus, ModContainer modContainer) {
+    public MoreColorful(IEventBus modEventBus, ModContainer modContainer, Dist dist) {
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(ModCreativeTabs::insertInVanillaTabs);
         modEventBus.register(ModCommonSetup.class);
@@ -55,12 +62,18 @@ public class MoreColorful {
         ModRootPlacers.register(modEventBus);
         ModTreeDecorators.register(modEventBus);
         ModFeatures.register(modEventBus);
+        ModChunkStatus.register(modEventBus);
 
-        NeoForge.EVENT_BUS.register(VanillaBlockPropertyModification.class);
+        NeoForge.EVENT_BUS.addListener(VanillaBlockPropertyModifier::modifyProperties);
+        //NeoForge.EVENT_BUS.register(new MelodyHandler());
         NeoForge.EVENT_BUS.register(this);
 
-        // Register our mod's ModConfigSpec so that FML can create and load the config file for us
-        //modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+        modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC_COMMON);
+
+        if (dist.isClient()) {
+            NeoForge.EVENT_BUS.register(ModClientEvents.class);
+            modContainer.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
+        }
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
@@ -72,18 +85,16 @@ public class MoreColorful {
             case 3 -> LOGGER.info("Long Time No See!");
         }
 
-//        if (Config.logDirtBlock)
-//            LOGGER.info("DIRT BLOCK >> {}", BuiltInRegistries.BLOCK.getKey(Blocks.DIRT));
-//
-//        LOGGER.info(Config.magicNumberIntroduction + Config.magicNumber);
-//
-//        Config.items.forEach((item) -> LOGGER.info("ITEM >> {}", item.toString()));
+        Config.disabledBiomes.forEach(biome -> LOGGER.info("Biome Disabled: {}", biome.location()));
 
-        event.enqueueWork(() -> {
-            ModStats.init();
+        ModStats.init();
+        ModChunkStatus.modifyFullStatus();
+
+        ModList modList = ModList.get();
+        if (modList.isLoaded("terrablender")) {
             ModBiomeSetup.registerRegions();
             ModBiomeSetup.registerSurfaceRules();
-        });
+        }
     }
 
     @SubscribeEvent

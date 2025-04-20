@@ -55,6 +55,10 @@
     {
       "id": "morecolorful:ice_marsh",
       "required": false
+    },
+    {
+      "id": "morecolorful:rapeseed_fields",
+      "required": false
     }
   ]
 }

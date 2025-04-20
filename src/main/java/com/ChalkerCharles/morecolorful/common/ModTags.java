@@ -8,7 +8,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 
-public class ModTags {
+public abstract class ModTags {
     public static class Blocks {
         public static final TagKey<Block> QUARTZ_BLOCKS = create("quartz_blocks");
         public static final TagKey<Block> PRISMARINES = create("prismarines");

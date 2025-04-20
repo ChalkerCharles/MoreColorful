@@ -23,6 +23,10 @@
     {
       "id": "morecolorful:azure_fields",
       "required": false
+    },
+    {
+      "id": "morecolorful:rapeseed_fields",
+      "required": false
     }
   ]
 }

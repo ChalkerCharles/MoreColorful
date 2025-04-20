@@ -1,4 +1,4 @@
-package com.ChalkerCharles.morecolorful.mixin;
+package com.ChalkerCharles.morecolorful.mixin.block;
 
 import com.ChalkerCharles.morecolorful.common.block.ModBlocks;
 import net.minecraft.core.BlockPos;
@@ -20,7 +20,7 @@ public abstract class FlowerPotBlockMixin extends Block {
     @Final
     private Supplier<? extends Block> flowerDelegate;
 
-    public FlowerPotBlockMixin(Properties properties) {
+    private FlowerPotBlockMixin(Properties properties) {
         super(properties);
     }
 

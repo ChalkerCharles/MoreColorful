@@ -26,7 +26,8 @@ public class ModBiomeTagProvider extends BiomeTagsProvider {
                 .addOptional(ModBiomes.WILLOW_BAYOU.location())
                 .addOptional(ModBiomes.ICE_MARSH.location())
                 .addOptional(ModBiomes.LAVENDER_FIELDS.location())
-                .addOptional(ModBiomes.AZURE_FIELDS.location());
+                .addOptional(ModBiomes.AZURE_FIELDS.location())
+                .addOptional(ModBiomes.RAPESEED_FIELDS.location());
         tag(BiomeTags.HAS_TRIAL_CHAMBERS)
                 .addOptional(ModBiomes.CRABAPPLE_GARDEN.location())
                 .addOptional(ModBiomes.WHITE_CHERRY_GROVE.location())
@@ -67,7 +68,8 @@ public class ModBiomeTagProvider extends BiomeTagsProvider {
                 .addOptional(ModBiomes.MARSH.location())
                 .addOptional(ModBiomes.AZURE_FIELDS.location())
                 .addOptional(ModBiomes.WILLOW_BAYOU.location())
-                .addOptional(ModBiomes.ICE_MARSH.location());
+                .addOptional(ModBiomes.ICE_MARSH.location())
+                .addOptional(ModBiomes.RAPESEED_FIELDS.location());
         tag(BiomeTags.INCREASED_FIRE_BURNOUT)
                 .addOptional(ModBiomes.MARSH.location())
                 .addOptional(ModBiomes.WILLOW_BAYOU.location());
@@ -79,7 +81,8 @@ public class ModBiomeTagProvider extends BiomeTagsProvider {
                 .addOptional(ModBiomes.SUNSET_VALLEY.location())
                 .addOptional(ModBiomes.LAVENDER_FIELDS.location())
                 .addOptional(ModBiomes.JACARANDA_GROVE.location())
-                .addOptional(ModBiomes.AZURE_FIELDS.location());
+                .addOptional(ModBiomes.AZURE_FIELDS.location())
+                .addOptional(ModBiomes.RAPESEED_FIELDS.location());
         tag(BiomeTags.SPAWNS_COLD_VARIANT_FROGS)
                 .addOptional(ModBiomes.FROST_GROVE.location())
                 .addOptional(ModBiomes.ICE_MARSH.location());
@@ -107,14 +110,16 @@ public class ModBiomeTagProvider extends BiomeTagsProvider {
                 .addOptional(ModBiomes.DAWN_REDWOOD_SWAMP.location());
         tag(Tags.Biomes.IS_PLAINS)
                 .addOptional(ModBiomes.LAVENDER_FIELDS.location())
-                .addOptional(ModBiomes.AZURE_FIELDS.location());
+                .addOptional(ModBiomes.AZURE_FIELDS.location())
+                .addOptional(ModBiomes.RAPESEED_FIELDS.location());
         tag(Tags.Biomes.IS_FLORAL)
                 .addOptional(ModBiomes.CRABAPPLE_GARDEN.location())
                 .addOptional(ModBiomes.WHITE_CHERRY_GROVE.location())
                 .addOptional(ModBiomes.FROST_GROVE.location())
                 .addOptional(ModBiomes.LAVENDER_FIELDS.location())
                 .addOptional(ModBiomes.JACARANDA_GROVE.location())
-                .addOptional(ModBiomes.AZURE_FIELDS.location());
+                .addOptional(ModBiomes.AZURE_FIELDS.location())
+                .addOptional(ModBiomes.RAPESEED_FIELDS.location());
         tag(Tags.Biomes.IS_DECIDUOUS_TREE)
                 .addOptional(ModBiomes.AUTUMN_BIRCH_FOREST.location())
                 .addOptional(ModBiomes.GOLDEN_GROVE.location())

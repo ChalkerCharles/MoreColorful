@@ -233,7 +233,8 @@ public class ModCreativeTabs {
                     ModItems.IRIS,
                     ModItems.LAVENDER,
                     ModItems.DAFFODIL,
-                    ModItems.GERBERA_DAISY
+                    ModItems.GERBERA_DAISY,
+                    ModItems.RAPESEED_FLOWER
             );
             insertAfterBySequence(event, Items.PINK_PETALS,
                     ModItems.BEGONIAS,
@@ -252,7 +253,8 @@ public class ModCreativeTabs {
                     ModItems.DAWN_REDWOOD_LEAF_LITTER
             );
             insertAfterBySequence(event, Items.PITCHER_PLANT,
-                    ModItems.CATTAIL
+                    ModItems.CATTAIL,
+                    ModItems.TALL_RAPESEED_FLOWER
             );
             insertAfterBySequence(event, Items.SWEET_BERRIES,
                     ModItems.STRAWBERRY,
