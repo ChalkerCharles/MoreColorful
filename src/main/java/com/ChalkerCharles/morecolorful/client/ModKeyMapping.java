@@ -27,14 +27,14 @@ public class ModKeyMapping {
             CATEGORY
     ));
     public static final Lazy<KeyMapping> DEBUG_TEXT_SCROLL_DOWN = Lazy.of(() -> new KeyMapping(
-            "key.morecolorful.debug_text_scroll_up",
+            "key.morecolorful.debug_text_scroll_down",
             DEBUG_SCREEN,
             InputConstants.Type.KEYSYM,
             GLFW.GLFW_KEY_UP,
             CATEGORY
     ));
     public static final Lazy<KeyMapping> DEBUG_TEXT_SCROLL_UP = Lazy.of(() -> new KeyMapping(
-            "key.morecolorful.debug_text_scroll_down",
+            "key.morecolorful.debug_text_scroll_up",
             DEBUG_SCREEN,
             InputConstants.Type.KEYSYM,
             GLFW.GLFW_KEY_DOWN,

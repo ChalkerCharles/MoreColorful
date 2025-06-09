@@ -1,7 +1,7 @@
 package com.ChalkerCharles.morecolorful.common.level;
 
-import com.ChalkerCharles.morecolorful.util.mixin.IBlockStateBaseExtension;
-import com.ChalkerCharles.morecolorful.util.mixin.IChunkSourceExtension;
+import com.ChalkerCharles.morecolorful.mixin.extensions.IBlockStateBaseExtension;
+import com.ChalkerCharles.morecolorful.mixin.extensions.IChunkSourceExtension;
 import it.unimi.dsi.fastutil.longs.LongArrayFIFOQueue;
 import it.unimi.dsi.fastutil.longs.LongIterator;
 import it.unimi.dsi.fastutil.longs.LongOpenHashSet;

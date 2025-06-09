@@ -21,18 +21,18 @@ import org.jetbrains.annotations.NotNull;
 
 @OnlyIn(Dist.CLIENT)
 public class KeyButton extends Button {
-    private static final ResourceLocation WHITE_KEY_CF = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "key/white_key_cf");
-    private static final ResourceLocation WHITE_KEY_CF_PRESSED = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "key/white_key_cf_pressed");
-    private static final ResourceLocation WHITE_KEY_D = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "key/white_key_d");
-    private static final ResourceLocation WHITE_KEY_D_PRESSED = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "key/white_key_d_pressed");
-    private static final ResourceLocation WHITE_KEY_EB = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "key/white_key_eb");
-    private static final ResourceLocation WHITE_KEY_EB_PRESSED = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "key/white_key_eb_pressed");
-    private static final ResourceLocation WHITE_KEY_G = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "key/white_key_g");
-    private static final ResourceLocation WHITE_KEY_G_PRESSED = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "key/white_key_g_pressed");
-    private static final ResourceLocation WHITE_KEY_A = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "key/white_key_a");
-    private static final ResourceLocation WHITE_KEY_A_PRESSED = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "key/white_key_a_pressed");
-    private static final ResourceLocation BLACK_KEY = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "key/black_key");
-    private static final ResourceLocation BLACK_KEY_PRESSED = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "key/black_key_pressed");
+    private static final ResourceLocation WHITE_KEY_CF = MoreColorful.location("key/white_key_cf");
+    private static final ResourceLocation WHITE_KEY_CF_PRESSED = MoreColorful.location("key/white_key_cf_pressed");
+    private static final ResourceLocation WHITE_KEY_D = MoreColorful.location("key/white_key_d");
+    private static final ResourceLocation WHITE_KEY_D_PRESSED = MoreColorful.location("key/white_key_d_pressed");
+    private static final ResourceLocation WHITE_KEY_EB = MoreColorful.location("key/white_key_eb");
+    private static final ResourceLocation WHITE_KEY_EB_PRESSED = MoreColorful.location("key/white_key_eb_pressed");
+    private static final ResourceLocation WHITE_KEY_G = MoreColorful.location("key/white_key_g");
+    private static final ResourceLocation WHITE_KEY_G_PRESSED = MoreColorful.location("key/white_key_g_pressed");
+    private static final ResourceLocation WHITE_KEY_A = MoreColorful.location("key/white_key_a");
+    private static final ResourceLocation WHITE_KEY_A_PRESSED = MoreColorful.location("key/white_key_a_pressed");
+    private static final ResourceLocation BLACK_KEY = MoreColorful.location("key/black_key");
+    private static final ResourceLocation BLACK_KEY_PRESSED = MoreColorful.location("key/black_key_pressed");
     public final int keyType;
     public boolean isPressed;
     public final int keyId;
@@ -93,6 +93,7 @@ public class KeyButton extends Button {
     public void press() {
         this.press(false);
     }
+
     public void restore() {
         if (!this.active && this.isPressed) {
             this.isPressed = false;

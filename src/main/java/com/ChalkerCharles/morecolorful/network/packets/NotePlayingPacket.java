@@ -2,13 +2,13 @@ package com.ChalkerCharles.morecolorful.network.packets;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.common.item.musical_instruments.InstrumentsType;
+import com.ChalkerCharles.morecolorful.util.NetworkUtils;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
@@ -19,7 +19,7 @@ import org.jetbrains.annotations.NotNull;
 
 public record NotePlayingPacket(InstrumentsType pType, BlockPos pos, int keyId, boolean isBlock) implements CustomPacketPayload {
 
-    public static final CustomPacketPayload.Type<NotePlayingPacket> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "note_playing"));
+    public static final CustomPacketPayload.Type<NotePlayingPacket> TYPE = new CustomPacketPayload.Type<>(MoreColorful.location("note_playing"));
 
     public static final StreamCodec<ByteBuf, NotePlayingPacket> STREAM_CODEC = StreamCodec.composite(
             InstrumentsType.STREAM_CODEC,
@@ -37,12 +37,12 @@ public record NotePlayingPacket(InstrumentsType pType, BlockPos pos, int keyId, 
         return TYPE;
     }
 
-    public static void handle(final NotePlayingPacket data, final IPayloadContext context) {
-        InstrumentsType pType = data.pType();
-        BlockPos pos = data.pos();
-        int keyId = data.keyId();
+    public static void handle(final NotePlayingPacket packet, final IPayloadContext context) {
+        InstrumentsType pType = packet.pType();
+        BlockPos pos = packet.pos();
+        int keyId = packet.keyId();
         int pitchId = keyId - 12;
-        boolean isBlock = data.isBlock();
+        boolean isBlock = packet.isBlock();
         double random = 2 * (Math.random() - Math.random());
         double random1 = 2 * (Math.random() - Math.random());
         Player player = context.player();
@@ -57,6 +57,6 @@ public record NotePlayingPacket(InstrumentsType pType, BlockPos pos, int keyId, 
                 ((ServerLevel) level).sendParticles(ParticleTypes.NOTE, player.getX() + random, player.getY()+2.2, player.getZ() + random1, 0, 1.0, 0.0, 0.0, keyId / 24.0);
                 level.gameEvent(player, GameEvent.INSTRUMENT_PLAY, player.position());
             }
-        });
+        }).exceptionally(NetworkUtils.handleException(context));
     }
 }

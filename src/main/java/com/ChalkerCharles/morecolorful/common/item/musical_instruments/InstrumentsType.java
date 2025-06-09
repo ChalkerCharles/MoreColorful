@@ -11,6 +11,7 @@ import net.minecraft.util.ByIdMap;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 
+import java.util.Locale;
 import java.util.Map;
 import java.util.function.IntFunction;
 
@@ -74,7 +75,7 @@ public enum InstrumentsType implements StringRepresentable {
 
     @Override
     public String getSerializedName() {
-        return this.name();
+        return this.name().toLowerCase(Locale.ROOT);
     }
 
     public static final Map<NoteBlockInstrument, InstrumentsType> MAPPER = new ImmutableMap.Builder<NoteBlockInstrument, InstrumentsType>()

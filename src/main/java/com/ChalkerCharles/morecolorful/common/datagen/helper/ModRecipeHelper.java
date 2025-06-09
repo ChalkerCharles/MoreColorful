@@ -4,7 +4,6 @@ import com.ChalkerCharles.morecolorful.MoreColorful;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -91,7 +90,7 @@ public abstract class ModRecipeHelper extends RecipeProvider implements IConditi
         ShapelessRecipeBuilder.shapeless(category, pResult, count).requires(pMaterial)
                 .unlockedBy(getHasName(pMaterial), has(pMaterial))
                 .group(getItemName(pResult))
-                .save(output, ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, pKey));
+                .save(output, MoreColorful.location(pKey));
     }
 
     protected static void simpleMiscRecipe(RecipeOutput output, ItemLike pResult, ItemLike pMaterial, int count) {
@@ -108,7 +107,7 @@ public abstract class ModRecipeHelper extends RecipeProvider implements IConditi
                 .define('#', pMaterial)
                 .pattern(pattern)
                 .unlockedBy(getHasName(pMaterial), has(pMaterial))
-                .save(output, ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, pKey));
+                .save(output, MoreColorful.location(pKey));
     }
 
     protected static void miscShapedRecipe(RecipeOutput output, ItemLike pResult, ItemLike pMaterial, int count, String pattern) {

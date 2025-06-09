@@ -48,4 +48,11 @@ public class MapColorExtension extends MapColor {
         int i = pPackedId & 0xFF;
         return byIdUnsafe(i >> 2).calculateRGBColor(MapColor.Brightness.byId(i & 3));
     }
+
+    public static byte getPackedId(MapColor mapColor, MapColor.Brightness pBrightness) {
+        if (mapColor instanceof MapColorExtension mapColorExtension) {
+            return (byte)(mapColorExtension.id << 2 | pBrightness.id & 3);
+        }
+        return 0;
+    }
 }

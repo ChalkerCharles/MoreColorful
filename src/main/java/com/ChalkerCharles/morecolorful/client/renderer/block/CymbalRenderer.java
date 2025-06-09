@@ -2,12 +2,12 @@ package com.ChalkerCharles.morecolorful.client.renderer.block;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.client.model.ModModelLayers;
+import com.ChalkerCharles.morecolorful.common.block.entity.AbstractCymbalBlockEntity;
 import com.ChalkerCharles.morecolorful.common.block.entity.CrashCymbalBlockEntity;
 import com.ChalkerCharles.morecolorful.common.block.entity.DrumSetBlockEntity;
 import com.ChalkerCharles.morecolorful.common.block.entity.RideCymbalBlockEntity;
 import com.ChalkerCharles.morecolorful.common.block.properties.DrumSetPart;
 import com.ChalkerCharles.morecolorful.util.AnimationUtils;
-import com.ChalkerCharles.morecolorful.util.CymbalUtils;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -20,7 +20,6 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
@@ -31,10 +30,10 @@ import net.neoforged.api.distmarker.OnlyIn;
 import static com.ChalkerCharles.morecolorful.common.block.musical_instruments.DrumSetBlock.PART;
 
 @OnlyIn(Dist.CLIENT)
-public class CymbalRenderer<T extends BlockEntity & CymbalUtils> implements BlockEntityRenderer<T> {
+public class CymbalRenderer implements BlockEntityRenderer<AbstractCymbalBlockEntity> {
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
-    public static final ResourceLocation CYMBAL_TEXTURE = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "textures/entity/cymbal.png");
+    public static final ResourceLocation CYMBAL_TEXTURE = MoreColorful.location("textures/entity/cymbal.png");
     private final ModelPart rideCymbal;
     private final ModelPart crashCymbal;
     private final ModelPart drumSetRide;
@@ -49,13 +48,12 @@ public class CymbalRenderer<T extends BlockEntity & CymbalUtils> implements Bloc
 
     public static LayerDefinition createRide() {
         MeshDefinition meshdefinition = new MeshDefinition();
-        PartDefinition partdefinition = meshdefinition.getRoot();
-        PartDefinition partdefinition1 = partdefinition.addOrReplaceChild("ride_cymbal", CubeListBuilder.create()
+        PartDefinition partdefinition = meshdefinition.getRoot().addOrReplaceChild("ride_cymbal", CubeListBuilder.create()
                         .texOffs(0, 0)
                         .addBox(-6.0F, 0.0F, -6.0F, 12.0F, 0.0F, 12.0F),
                 PartPose.offset(8.0F, 9.0F, 8.0F)
         );
-        partdefinition1.addOrReplaceChild("ride_center", CubeListBuilder.create()
+        partdefinition.addOrReplaceChild("ride_center", CubeListBuilder.create()
                         .texOffs(0, 12)
                         .addBox(-2.0F, -0.5F, -2.0F, 4.0F, 1.0F, 4.0F),
                 PartPose.offset(0.0F, 0.0F, 0.0F)
@@ -64,13 +62,12 @@ public class CymbalRenderer<T extends BlockEntity & CymbalUtils> implements Bloc
     }
     public static LayerDefinition createCrash() {
         MeshDefinition meshdefinition = new MeshDefinition();
-        PartDefinition partdefinition = meshdefinition.getRoot();
-        PartDefinition partdefinition1 = partdefinition.addOrReplaceChild("crash_cymbal", CubeListBuilder.create()
+        PartDefinition partdefinition = meshdefinition.getRoot().addOrReplaceChild("crash_cymbal", CubeListBuilder.create()
                         .texOffs(0, 0)
                         .addBox(-6.0F, 0.0F, -6.0F, 12.0F, 0.0F, 12.0F),
                 PartPose.offset(8.0F, 10.0F, 6.0F)
         );
-        partdefinition1.addOrReplaceChild("crash_center", CubeListBuilder.create()
+        partdefinition.addOrReplaceChild("crash_center", CubeListBuilder.create()
                         .texOffs(0, 12)
                         .addBox(-2.0F, -0.5F, -2.0F, 4.0F, 1.0F, 4.0F),
                 PartPose.offset(0.0F, 0.0F, 0.0F)
@@ -79,13 +76,12 @@ public class CymbalRenderer<T extends BlockEntity & CymbalUtils> implements Bloc
     }
     public static LayerDefinition createDrumSetRide() {
         MeshDefinition meshdefinition = new MeshDefinition();
-        PartDefinition partdefinition = meshdefinition.getRoot();
-        PartDefinition partdefinition1 = partdefinition.addOrReplaceChild("drum_set_ride", CubeListBuilder.create()
+        PartDefinition partdefinition = meshdefinition.getRoot().addOrReplaceChild("drum_set_ride", CubeListBuilder.create()
                         .texOffs(0, 0)
                         .addBox(-6.0F, 0.0F, -6.0F, 12.0F, 0.0F, 12.0F),
                 PartPose.offset(8.0F, 9.0F, 11.0F)
         );
-        partdefinition1.addOrReplaceChild("drum_set_ride_center", CubeListBuilder.create()
+        partdefinition.addOrReplaceChild("drum_set_ride_center", CubeListBuilder.create()
                         .texOffs(0, 12)
                         .addBox(-2.0F, -0.5F, -2.0F, 4.0F, 1.0F, 4.0F),
                 PartPose.offset(0.0F, 0.0F, 0.0F)
@@ -94,13 +90,12 @@ public class CymbalRenderer<T extends BlockEntity & CymbalUtils> implements Bloc
     }
     public static LayerDefinition createDrumSetCrash() {
         MeshDefinition meshdefinition = new MeshDefinition();
-        PartDefinition partdefinition = meshdefinition.getRoot();
-        PartDefinition partdefinition1 = partdefinition.addOrReplaceChild("drum_set_crash", CubeListBuilder.create()
+        PartDefinition partdefinition = meshdefinition.getRoot().addOrReplaceChild("drum_set_crash", CubeListBuilder.create()
                         .texOffs(0, 0)
                         .addBox(-6.0F, 0.0F, -6.0F, 12.0F, 0.0F, 12.0F),
                 PartPose.offset(8.0F, 10.0F, 11.0F)
         );
-        partdefinition1.addOrReplaceChild("drum_set_crash_center", CubeListBuilder.create()
+        partdefinition.addOrReplaceChild("drum_set_crash_center", CubeListBuilder.create()
                         .texOffs(0, 12)
                         .addBox(-2.0F, -0.5F, -2.0F, 4.0F, 1.0F, 4.0F),
                 PartPose.offset(0.0F, 0.0F, 0.0F)
@@ -109,7 +104,7 @@ public class CymbalRenderer<T extends BlockEntity & CymbalUtils> implements Bloc
     }
 
     @Override
-    public void render(T pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBufferSource, int pPackedLight, int pPackedOverlay) {
+    public void render(AbstractCymbalBlockEntity pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBufferSource, int pPackedLight, int pPackedOverlay) {
         switch (pBlockEntity) {
             case RideCymbalBlockEntity blockEntity when blockEntity.getBlockState().getValue(HALF) == DoubleBlockHalf.UPPER ->
                     AnimationUtils.animateCymbalShaking(

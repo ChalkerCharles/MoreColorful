@@ -1,6 +1,7 @@
 package com.ChalkerCharles.morecolorful.util;
 
 import com.ChalkerCharles.morecolorful.client.renderer.block.CymbalRenderer;
+import com.ChalkerCharles.morecolorful.common.block.entity.AbstractCymbalBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
@@ -10,7 +11,6 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -85,8 +85,8 @@ public final class AnimationUtils {
         VertexConsumer vertexconsumer = pBufferSource.getBuffer(RenderType.entitySolid(CymbalRenderer.CYMBAL_TEXTURE));
         part.render(pPoseStack, vertexconsumer, pPackedLight, pPackedOverlay);
     }
-    public static <T extends BlockEntity & CymbalUtils> void animateCymbalShakingWithOffset(
-            T blockEntity,
+    public static void animateCymbalShakingWithOffset(
+            AbstractCymbalBlockEntity blockEntity,
             float ticks,
             float ticksAfterStop,
             boolean shaking,

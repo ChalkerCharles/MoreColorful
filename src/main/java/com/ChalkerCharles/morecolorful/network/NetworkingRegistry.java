@@ -50,5 +50,9 @@ public class NetworkingRegistry {
                 ThermalRemovalPacket.TYPE,
                 ThermalRemovalPacket.STREAM_CODEC,
                 ThermalRemovalPacket::handle);
+        registrar.playToClient(
+                WindPacket.TYPE,
+                WindPacket.STREAM_CODEC,
+                WindPacket::handle);
     }
 }

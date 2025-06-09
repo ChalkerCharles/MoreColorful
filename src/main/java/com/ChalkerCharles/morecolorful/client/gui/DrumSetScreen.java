@@ -40,7 +40,7 @@ public class DrumSetScreen extends Screen {
     private DrumSetButton ride;
     private DrumSetButton crash;
     private final DrumSetButton[] allButtons = new DrumSetButton[13];
-    private static final ResourceLocation DRUM_SET_SCREEN_TEXTURE = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "textures/gui/drum_set_screen.png");
+    private static final ResourceLocation DRUM_SET_SCREEN_TEXTURE = MoreColorful.location("textures/gui/drum_set_screen.png");
     private static final Component TITLE = Component.translatable("block.morecolorful.drum_set");
     private static final FormattedCharSequence TITLE_LENGTH = TITLE.getVisualOrderText();
     private static final FormattedCharSequence LETTER_WITH_BRACKETS = Component.literal("[C]").getVisualOrderText();

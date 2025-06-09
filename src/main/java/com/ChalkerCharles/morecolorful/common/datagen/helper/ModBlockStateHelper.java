@@ -1,7 +1,7 @@
 package com.ChalkerCharles.morecolorful.common.datagen.helper;
 
-import com.ChalkerCharles.morecolorful.common.block.common.BerryBushBlock;
-import com.ChalkerCharles.morecolorful.common.block.common.WillowBranchesBlock;
+import com.ChalkerCharles.morecolorful.common.block.nature.BerryBushBlock;
+import com.ChalkerCharles.morecolorful.common.block.nature.WillowBranchesBlock;
 import com.ChalkerCharles.morecolorful.common.block.properties.HorizontalDoubleBlockHalf;
 import com.ChalkerCharles.morecolorful.common.block.properties.ModBlockStateProperties;
 import net.minecraft.core.Direction;

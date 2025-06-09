@@ -1,6 +1,6 @@
 package com.ChalkerCharles.morecolorful.common.level;
 
-import com.ChalkerCharles.morecolorful.util.mixin.IChunkSourceExtension;
+import com.ChalkerCharles.morecolorful.mixin.extensions.IChunkSourceExtension;
 import it.unimi.dsi.fastutil.longs.*;
 import it.unimi.dsi.fastutil.objects.ObjectIterator;
 import net.minecraft.core.BlockPos;

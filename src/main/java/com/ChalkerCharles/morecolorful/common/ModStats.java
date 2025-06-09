@@ -32,7 +32,7 @@ public class ModStats {
     public static final Supplier<ResourceLocation> INTERACT_WITH_GUZHENG = makeCustomStat("interact_with_guzheng");
 
     private static Supplier<ResourceLocation> makeCustomStat(String pKey) {
-        ResourceLocation resourcelocation = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, pKey);
+        ResourceLocation resourcelocation = MoreColorful.location(pKey);
         STAT_SETUP.add(() -> Stats.CUSTOM.get(resourcelocation, StatFormatter.DEFAULT));
         return STATS.register(pKey, () -> resourcelocation);
     }

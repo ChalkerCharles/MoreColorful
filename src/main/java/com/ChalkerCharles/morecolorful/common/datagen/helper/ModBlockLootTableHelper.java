@@ -2,8 +2,8 @@ package com.ChalkerCharles.morecolorful.common.datagen.helper;
 
 import com.ChalkerCharles.morecolorful.common.ModTags;
 import com.ChalkerCharles.morecolorful.common.block.ModBlocks;
-import com.ChalkerCharles.morecolorful.common.block.common.BerryBushBlock;
-import com.ChalkerCharles.morecolorful.common.block.common.LeafLitterBlock;
+import com.ChalkerCharles.morecolorful.common.block.nature.BerryBushBlock;
+import com.ChalkerCharles.morecolorful.common.block.nature.LeafLitterBlock;
 import com.ChalkerCharles.morecolorful.common.block.properties.DrumSetPart;
 import com.ChalkerCharles.morecolorful.common.block.properties.HorizontalDoubleBlockHalf;
 import com.ChalkerCharles.morecolorful.common.block.properties.ModBlockStateProperties;

@@ -60,7 +60,7 @@ public final class StringParser {
             return definition.getPossibleStates().stream().anyMatch(stateMatches(map));
         }
 
-        public static Predicate<BlockState> stateMatches(Map<Property<?>, Comparable<?>> map) {
+        private static Predicate<BlockState> stateMatches(Map<Property<?>, Comparable<?>> map) {
             return state -> {
                 if (map == null || map.isEmpty()) return false;
                 for (Map.Entry<Property<?>, Comparable<?>> e : map.entrySet()) {

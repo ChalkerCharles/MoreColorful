@@ -2,7 +2,7 @@ package com.ChalkerCharles.morecolorful.client;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.common.block.ModBlocks;
-import com.ChalkerCharles.morecolorful.common.block.common.ReedBlock;
+import com.ChalkerCharles.morecolorful.common.block.nature.ReedBlock;
 import com.ChalkerCharles.morecolorful.common.item.ModItems;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.core.BlockPos;

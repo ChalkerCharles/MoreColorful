@@ -2,8 +2,9 @@ package com.ChalkerCharles.morecolorful.common.block;
 
 import com.ChalkerCharles.morecolorful.Config;
 import com.ChalkerCharles.morecolorful.common.ModTags;
-import com.ChalkerCharles.morecolorful.mixin.accessor.IBlockStateBaseMixin;
-import com.ChalkerCharles.morecolorful.util.mixin.IBlockStateBaseExtension;
+import com.ChalkerCharles.morecolorful.mixin.extensions.IBlockStateBaseExtension;
+import com.ChalkerCharles.morecolorful.mixin.mixins.accessor.IBlockStateBaseMixin;
+import com.ChalkerCharles.morecolorful.util.Predicates;
 import com.google.common.collect.Maps;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -13,6 +14,7 @@ import net.minecraft.world.level.EmptyBlockGetter;
 import net.minecraft.world.level.block.AbstractFurnaceBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.CampfireBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
@@ -21,7 +23,9 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.event.TagsUpdatedEvent;
 
-import java.util.*;
+import java.util.IdentityHashMap;
+import java.util.List;
+import java.util.Optional;
 
 import static com.ChalkerCharles.morecolorful.common.block.properties.NoteBlockInstrumentExtension.*;
 import static net.minecraft.world.level.material.MapColor.*;
@@ -86,19 +90,19 @@ public final class VanillaBlockPropertyModifier {
     }
 
     private static void setMapColors(Block block) {
-        if (blockMatches(block,
+        if (Predicates.blockMatches(block,
                 Blocks.PINK_PETALS,
                 Blocks.PINK_TULIP,
                 Blocks.PEONY,
                 Blocks.POTTED_PINK_TULIP,
                 Blocks.POTTED_CHERRY_SAPLING)) {
             setMapColor(block, COLOR_PINK);
-        } else if (blockMatches(block,
+        } else if (Predicates.blockMatches(block,
                 Blocks.DANDELION,
                 Blocks.SUNFLOWER,
                 Blocks.POTTED_DANDELION)) {
             setMapColor(block, COLOR_YELLOW);
-        } else if (blockMatches(block,
+        } else if (Predicates.blockMatches(block,
                 Blocks.POPPY,
                 Blocks.RED_TULIP,
                 Blocks.ROSE_BUSH,
@@ -107,18 +111,18 @@ public final class VanillaBlockPropertyModifier {
                 Blocks.POTTED_RED_TULIP,
                 Blocks.POTTED_RED_MUSHROOM)) {
             setMapColor(block, COLOR_RED);
-        } else if (blockMatches(block,
+        } else if (Predicates.blockMatches(block,
                 Blocks.TORCHFLOWER,
                 Blocks.ORANGE_TULIP,
                 Blocks.POTTED_TORCHFLOWER,
                 Blocks.POTTED_ORANGE_TULIP)) {
             setMapColor(block, COLOR_ORANGE);
-        } else if (blockMatches(block,
+        } else if (Predicates.blockMatches(block,
                 Blocks.FLOWER_POT,
                 Blocks.BROWN_MUSHROOM,
                 Blocks.POTTED_BROWN_MUSHROOM)) {
             setMapColor(block, DIRT);
-        } else if (blockMatches(block,
+        } else if (Predicates.blockMatches(block,
                 Blocks.POTTED_AZALEA,
                 Blocks.POTTED_FLOWERING_AZALEA,
                 Blocks.POTTED_CACTUS,
@@ -137,7 +141,7 @@ public final class VanillaBlockPropertyModifier {
         } else if (block.equals(Blocks.POTTED_CRIMSON_FUNGUS)
                 || block.equals(Blocks.POTTED_CRIMSON_ROOTS)) {
             setMapColor(block, NETHER);
-        } else if (blockMatches(block,
+        } else if (Predicates.blockMatches(block,
                 Blocks.POTTED_WARPED_FUNGUS,
                 Blocks.POTTED_WARPED_ROOTS,
                 Blocks.PITCHER_PLANT)) {
@@ -151,12 +155,12 @@ public final class VanillaBlockPropertyModifier {
         } else if (block.equals(Blocks.AZURE_BLUET)
                 || block.equals(Blocks.POTTED_AZURE_BLUET)) {
             setMapColor(block, CLAY);
-        } else if (blockMatches(block,
+        } else if (Predicates.blockMatches(block,
                 Blocks.ALLIUM,
                 Blocks.LILAC,
                 Blocks.POTTED_ALLIUM)) {
             setMapColor(block, COLOR_MAGENTA);
-        } else if (blockMatches(block,
+        } else if (Predicates.blockMatches(block,
                 Blocks.WHITE_TULIP,
                 Blocks.OXEYE_DAISY,
                 Blocks.LILY_OF_THE_VALLEY,
@@ -171,9 +175,8 @@ public final class VanillaBlockPropertyModifier {
     }
 
     private static void setTemperatures(Block block) {
-        if (blockMatches(block,
+        if (Predicates.blockMatches(block,
                 Blocks.FIRE,
-                Blocks.CAMPFIRE,
                 Blocks.LAVA,
                 Blocks.LAVA_CAULDRON,
                 Blocks.MAGMA_BLOCK)) {
@@ -181,13 +184,13 @@ public final class VanillaBlockPropertyModifier {
         } else if (block instanceof AbstractFurnaceBlock) {
             setTemperature(block.getStateDefinition().getPossibleStates().stream()
                     .filter(state -> state.getValue(AbstractFurnaceBlock.LIT)).toList(), 12);
-        } else if (blockMatches(block,
+        } else if (Predicates.blockMatches(block,
                 Blocks.SHROOMLIGHT,
                 Blocks.OCHRE_FROGLIGHT,
                 Blocks.VERDANT_FROGLIGHT,
                 Blocks.PEARLESCENT_FROGLIGHT)) {
             setTemperature(block, 9);
-        } else if (blockMatches(block,
+        } else if (Predicates.blockMatches(block,
                 Blocks.SOUL_FIRE,
                 Blocks.SOUL_CAMPFIRE,
                 Blocks.SOUL_LANTERN,
@@ -201,6 +204,9 @@ public final class VanillaBlockPropertyModifier {
                 Blocks.CAVE_VINES,
                 Blocks.CAVE_VINES_PLANT)) {
             setTemperature(block, 0);
+        } else if (block instanceof CampfireBlock) {
+            setTemperature(block.getStateDefinition().getPossibleStates().stream()
+                    .filter(state -> state.getValue(CampfireBlock.LIT)).toList(), 15);
         }
 
         Config.blockTemperature.forEach(VanillaBlockPropertyModifier::setTemperature);
@@ -217,7 +223,7 @@ public final class VanillaBlockPropertyModifier {
                     return property.isPresent() && property.get() && ((IBlockStateBaseExtension) state).moreColorful$getThermalResistance() > 4;
                 }).toList(), 4);
 
-        if (blockMatches(block,
+        if (Predicates.blockMatches(block,
                 Blocks.DIAMOND_BLOCK,
                 Blocks.COPPER_BLOCK,
                 Blocks.CUT_COPPER,
@@ -244,7 +250,7 @@ public final class VanillaBlockPropertyModifier {
                 Blocks.WAXED_EXPOSED_CHISELED_COPPER,
                 Blocks.WAXED_EXPOSED_COPPER_BULB)) {
             setThermalResistance(block, 1);
-        } else if (blockMatches(block,
+        } else if (Predicates.blockMatches(block,
                 Blocks.WEATHERED_COPPER,
                 Blocks.WEATHERED_CUT_COPPER,
                 Blocks.WEATHERED_CUT_COPPER_STAIRS,
@@ -274,7 +280,7 @@ public final class VanillaBlockPropertyModifier {
                 Blocks.NETHERITE_BLOCK,
                 Blocks.ANCIENT_DEBRIS)) {
             setThermalResistance(block, 2);
-        } else if (blockMatches(block,
+        } else if (Predicates.blockMatches(block,
                 Blocks.PISTON,
                 Blocks.PISTON_HEAD,
                 Blocks.CHAIN,
@@ -312,12 +318,13 @@ public final class VanillaBlockPropertyModifier {
                 Blocks.SPAWNER,
                 Blocks.TRIAL_SPAWNER,
                 Blocks.VAULT)
-                || holder.is(BlockTags.ANVIL)
-                || holder.is(BlockTags.CAULDRONS)
-                || holder.is(Tags.Blocks.GLASS_BLOCKS)
-                || holder.is(BlockTags.WALLS)) {
+                || Predicates.tagMatches(holder,
+                BlockTags.ANVIL,
+                BlockTags.CAULDRONS,
+                Tags.Blocks.GLASS_BLOCKS,
+                BlockTags.WALLS)) {
             setThermalResistance(block, 3);
-        } else if (blockMatches(block,
+        } else if (Predicates.blockMatches(block,
                 Blocks.WATER,
                 Blocks.CRAFTING_TABLE,
                 Blocks.FLETCHING_TABLE,
@@ -337,13 +344,14 @@ public final class VanillaBlockPropertyModifier {
                 Blocks.SCULK,
                 Blocks.SPONGE,
                 Blocks.WET_SPONGE)
-                || holder.is(BlockTags.LOGS)
-                || holder.is(BlockTags.PLANKS)
-                || holder.is(BlockTags.WOODEN_STAIRS)
-                || holder.is(BlockTags.WOODEN_SLABS)
-                || holder.is(BlockTags.WOOL)
-                || holder.is(Tags.Blocks.BARRELS_WOODEN)
-                || holder.is(Tags.Blocks.BOOKSHELVES)) {
+                || Predicates.tagMatches(holder,
+                BlockTags.LOGS,
+                BlockTags.PLANKS,
+                BlockTags.WOODEN_STAIRS,
+                BlockTags.WOODEN_SLABS,
+                BlockTags.WOOL,
+                Tags.Blocks.BARRELS_WOODEN,
+                Tags.Blocks.BOOKSHELVES)) {
             setThermalResistance(block, 4);
         }
 
@@ -378,9 +386,5 @@ public final class VanillaBlockPropertyModifier {
         if (!hashMap.containsKey(block)) {
             hashMap.put(block, value);
         }
-    }
-
-    private static boolean blockMatches(Block block, Block... blocks) {
-        return Arrays.asList(blocks).contains(block);
     }
 }

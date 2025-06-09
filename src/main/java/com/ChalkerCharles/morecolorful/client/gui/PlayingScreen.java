@@ -39,7 +39,7 @@ public class PlayingScreen extends Screen {
     private final Int2ObjectMap<KeyButton> allKeys = new Int2ObjectOpenHashMap<>();
     private final Int2ObjectMap<KeyButton> keyCodes = new Int2ObjectOpenHashMap<>();
     private OctaveButton octaveButton;
-    private static final ResourceLocation PLAYING_SCREEN_TEXTURE = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "textures/gui/playing_screen.png");
+    private static final ResourceLocation PLAYING_SCREEN_TEXTURE = MoreColorful.location("textures/gui/playing_screen.png");
     private static final Component TITLE = Component.translatable("morecolorful.gui.playing_screen_title");
     private static final FormattedCharSequence TITLE_LENGTH = TITLE.getVisualOrderText();
     private static final FormattedCharSequence SINGLE_LETTER_LENGTH = Component.literal("C").getVisualOrderText();

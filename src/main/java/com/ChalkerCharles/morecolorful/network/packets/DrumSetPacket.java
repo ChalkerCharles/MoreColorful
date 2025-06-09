@@ -2,12 +2,12 @@ package com.ChalkerCharles.morecolorful.network.packets;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.common.attachment.ModDataAttachments;
+import com.ChalkerCharles.morecolorful.util.NetworkUtils;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -20,7 +20,7 @@ public record DrumSetPacket(boolean isPressingBassDrum, boolean isPressingHat, b
 
     private static final BlockPos DEFAULT_POS = new BlockPos(0, -2048, 0);
 
-    public static final CustomPacketPayload.Type<DrumSetPacket> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "drum_set_event"));
+    public static final CustomPacketPayload.Type<DrumSetPacket> TYPE = new CustomPacketPayload.Type<>(MoreColorful.location("drum_set_event"));
 
     public static final StreamCodec<ByteBuf, DrumSetPacket> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.BOOL,
@@ -42,25 +42,25 @@ public record DrumSetPacket(boolean isPressingBassDrum, boolean isPressingHat, b
         return TYPE;
     }
 
-    public static void handleClient(final DrumSetPacket data, final IPayloadContext context) {
-        int id = data.id();
+    public static void handleClient(final DrumSetPacket packet, final IPayloadContext context) {
+        int id = packet.id();
         Player player = context.player();
         Entity entity = player.level().getEntity(id);
         context.enqueueWork(() -> {
             if (entity instanceof Player) {
-                entity.setData(ModDataAttachments.DRUM_SET_DATA, data);
+                entity.setData(ModDataAttachments.DRUM_SET_DATA, packet);
             }
-        });
+        }).exceptionally(NetworkUtils.handleException(context));
     }
-    public static void handleServer(final DrumSetPacket data, final IPayloadContext context) {
-        int id = data.id();
+    public static void handleServer(final DrumSetPacket packet, final IPayloadContext context) {
+        int id = packet.id();
         Player player = context.player();
         Entity entity = player.level().getEntity(id);
         context.enqueueWork(() -> {
             if (entity instanceof Player) {
-                entity.setData(ModDataAttachments.DRUM_SET_DATA, data);
-                PacketDistributor.sendToAllPlayers(data);
+                entity.setData(ModDataAttachments.DRUM_SET_DATA, packet);
+                PacketDistributor.sendToAllPlayers(packet);
             }
-        });
+        }).exceptionally(NetworkUtils.handleException(context));
     }
 }

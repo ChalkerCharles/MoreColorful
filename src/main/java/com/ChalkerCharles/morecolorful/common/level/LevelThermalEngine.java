@@ -9,7 +9,7 @@ import net.minecraft.world.level.chunk.DataLayer;
 
 import javax.annotation.Nullable;
 
-public class LevelThermalEngine implements ThermalEventListener{
+public class LevelThermalEngine implements ILevelThermalEngine {
     protected final LevelHeightAccessor levelHeightAccessor;
     @Nullable
     private final BlockThermalEngine engine;
@@ -61,37 +61,44 @@ public class LevelThermalEngine implements ThermalEventListener{
         }
     }
 
+    @Override
     public LayerThermalEventListener getLayerListener() {
         return this.engine == null
                 ? LayerThermalEventListener.DummyThermalLayerEventListener.INSTANCE
                 : this.engine;
     }
 
+    @Override
     public void queueSectionData(SectionPos pSectionPos, @Nullable DataLayer pDataLayer) {
         if (this.engine != null) {
             this.engine.queueSectionData(pSectionPos.asLong(), pDataLayer);
         }
     }
 
+    @Override
     public void retainData(ChunkPos pPos, boolean pRetain) {
         if (this.engine != null) {
             this.engine.retainData(pPos, pRetain);
         }
     }
 
+    @Override
     public boolean temperatureOnInSection(SectionPos pSectionPos) {
         long i = pSectionPos.asLong();
         return this.engine == null || this.engine.storage.temperatureOnInSection(i);
     }
 
+    @Override
     public int getThermalSectionCount() {
         return this.levelHeightAccessor.getSectionsCount() + 2;
     }
 
+    @Override
     public int getMinThermalSection() {
         return this.levelHeightAccessor.getMinSection() - 1;
     }
 
+    @Override
     public int getMaxThermalSection() {
         return this.getMinThermalSection() + this.getThermalSectionCount();
     }

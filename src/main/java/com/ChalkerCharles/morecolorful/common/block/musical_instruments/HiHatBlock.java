@@ -86,14 +86,18 @@ public class HiHatBlock extends PercussionInstrumentBlock implements EntityBlock
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
         pBuilder.add(HIT, FACING);
     }
-    @Nullable
+
     @Override
+    @Nullable
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
         return new HiHatBlockEntity(pPos, pState);
     }
-    @Override
+
     @Nullable
+    @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return pBlockEntityType == ModBlockEntities.HIHAT.get() ? HiHatBlockEntity::tick : null;
+        return pBlockEntityType == ModBlockEntities.HIHAT.get()
+                ? (level, pos, state, blockEntity) -> HiHatBlockEntity.tick(level, pos, state)
+                : null;
     }
 }

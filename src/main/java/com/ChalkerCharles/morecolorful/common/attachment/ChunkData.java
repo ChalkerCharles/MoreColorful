@@ -1,10 +1,10 @@
 package com.ChalkerCharles.morecolorful.common.attachment;
 
 import com.ChalkerCharles.morecolorful.Config;
-import com.ChalkerCharles.morecolorful.common.level.LevelThermalEngine;
+import com.ChalkerCharles.morecolorful.common.level.ILevelThermalEngine;
 import com.ChalkerCharles.morecolorful.common.level.ModChunkStatus;
-import com.ChalkerCharles.morecolorful.util.mixin.IChunkSourceExtension;
-import com.ChalkerCharles.morecolorful.util.mixin.IProtoChunkExtension;
+import com.ChalkerCharles.morecolorful.mixin.extensions.IChunkSourceExtension;
+import com.ChalkerCharles.morecolorful.mixin.extensions.IProtoChunkExtension;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.SectionPos;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -51,13 +51,18 @@ public final class ChunkData implements INBTSerializable<CompoundTag> {
     @UnknownNullability
     public CompoundTag serializeNBT(HolderLookup.Provider provider) {
         CompoundTag nbt = new CompoundTag();
-        if (Config.THERMAL_SYSTEM.isFalse()) return nbt;
+        serializeThermal(nbt);
+        return nbt;
+    }
+
+    private void serializeThermal(CompoundTag nbt) {
+        if (Config.THERMAL_SYSTEM.isFalse()) return;
         ListTag temperatures = new ListTag();
         ServerLevel level = (ServerLevel) this.chunk.getLevel();
         ChunkPos chunkpos = this.chunk.getPos();
         nbt.putString("status", BuiltInRegistries.CHUNK_STATUS.getKey(this.chunk.getPersistedStatus()).toString());
         if (level != null) {
-            LevelThermalEngine thermalEngine = ((IChunkSourceExtension) level.getChunkSource()).moreColorful$getThermalEngine();
+            ILevelThermalEngine thermalEngine = ((IChunkSourceExtension) level.getChunkSource()).moreColorful$getThermalEngine();
             for (int i = thermalEngine.getMinThermalSection(); i < thermalEngine.getMaxThermalSection(); i++) {
                 DataLayer dataLayer = thermalEngine.getLayerListener().getDataLayerData(SectionPos.of(chunkpos, i));
                 if (dataLayer != null) {
@@ -66,7 +71,7 @@ public final class ChunkData implements INBTSerializable<CompoundTag> {
                         compoundTag.putByteArray("temperature", dataLayer.getData());
                     }
                     if (!compoundTag.isEmpty()) {
-                        compoundTag.putByte("Y", (byte)i);
+                        compoundTag.putByte("Y", (byte) i);
                         temperatures.add(compoundTag);
                     }
                 }
@@ -76,17 +81,20 @@ public final class ChunkData implements INBTSerializable<CompoundTag> {
         if (this.isThermalOn) {
             nbt.putBoolean("isThermalOn", true);
         }
-        return nbt;
     }
 
     @Override
     public void deserializeNBT(HolderLookup.Provider provider, CompoundTag nbt) {
+        deserializeThermal(nbt);
+    }
+
+    private void deserializeThermal(CompoundTag nbt) {
         if (Config.THERMAL_SYSTEM.isFalse()) return;
         ServerLevel level = (ServerLevel) this.chunk.getLevel();
         ChunkPos chunkpos = this.chunk.getPos();
         if (level != null) {
             ChunkSource chunksource = level.getChunkSource();
-            LevelThermalEngine thermalEngine = ((IChunkSourceExtension) chunksource).moreColorful$getThermalEngine();
+            ILevelThermalEngine thermalEngine = ((IChunkSourceExtension) chunksource).moreColorful$getThermalEngine();
             ListTag temperatures = nbt.getList("blockTemperatures", Tag.TAG_COMPOUND);
             boolean flag = false;
             for (int i = 0; i < temperatures.size(); i++) {

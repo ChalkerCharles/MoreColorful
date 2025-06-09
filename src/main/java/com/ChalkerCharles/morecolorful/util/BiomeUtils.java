@@ -8,7 +8,7 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 
-public class BiomeUtils {
+public final class BiomeUtils {
     @SafeVarargs
     public static ResourceKey<Biome> biomeOrFallback(Registry<Biome> ignored, ResourceKey<Biome>... biomes) {
         for (ResourceKey<Biome> key : biomes) {

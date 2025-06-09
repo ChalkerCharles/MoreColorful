@@ -2,7 +2,6 @@ package com.ChalkerCharles.morecolorful.client.model;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
 import net.minecraft.client.model.geom.ModelLayerLocation;
-import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
@@ -19,6 +18,6 @@ public class ModModelLayers {
     }
     @SuppressWarnings("SameParameterValue")
     private static ModelLayerLocation register(String pPath, String pModel) {
-        return new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, pPath), pModel);
+        return new ModelLayerLocation(MoreColorful.location(pPath), pModel);
     }
 }

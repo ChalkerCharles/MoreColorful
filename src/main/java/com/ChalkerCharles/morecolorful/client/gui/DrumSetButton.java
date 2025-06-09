@@ -20,18 +20,18 @@ import org.jetbrains.annotations.NotNull;
 
 @OnlyIn(Dist.CLIENT)
 public class DrumSetButton extends Button {
-    private static final ResourceLocation BUTTON_BASS_DRUM = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "drum_set/button_bass_drum");
-    private static final ResourceLocation BUTTON_BASS_DRUM_PRESSED = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "drum_set/button_bass_drum_pressed");
-    private static final ResourceLocation BUTTON_SNARE = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "drum_set/button_snare");
-    private static final ResourceLocation BUTTON_SNARE_PRESSED = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "drum_set/button_snare_pressed");
-    private static final ResourceLocation BUTTON_TOM = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "drum_set/button_tom");
-    private static final ResourceLocation BUTTON_TOM_PRESSED = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "drum_set/button_tom_pressed");
-    private static final ResourceLocation BUTTON_HAT = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "drum_set/button_hat");
-    private static final ResourceLocation BUTTON_HAT_PRESSED = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "drum_set/button_hat_pressed");
-    private static final ResourceLocation BUTTON_RIDE = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "drum_set/button_ride");
-    private static final ResourceLocation BUTTON_RIDE_PRESSED = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "drum_set/button_ride_pressed");
-    private static final ResourceLocation BUTTON_CRASH = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "drum_set/button_crash");
-    private static final ResourceLocation BUTTON_CRASH_PRESSED = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "drum_set/button_crash_pressed");
+    private static final ResourceLocation BUTTON_BASS_DRUM = MoreColorful.location("drum_set/button_bass_drum");
+    private static final ResourceLocation BUTTON_BASS_DRUM_PRESSED = MoreColorful.location("drum_set/button_bass_drum_pressed");
+    private static final ResourceLocation BUTTON_SNARE = MoreColorful.location("drum_set/button_snare");
+    private static final ResourceLocation BUTTON_SNARE_PRESSED = MoreColorful.location("drum_set/button_snare_pressed");
+    private static final ResourceLocation BUTTON_TOM = MoreColorful.location("drum_set/button_tom");
+    private static final ResourceLocation BUTTON_TOM_PRESSED = MoreColorful.location("drum_set/button_tom_pressed");
+    private static final ResourceLocation BUTTON_HAT = MoreColorful.location("drum_set/button_hat");
+    private static final ResourceLocation BUTTON_HAT_PRESSED = MoreColorful.location("drum_set/button_hat_pressed");
+    private static final ResourceLocation BUTTON_RIDE = MoreColorful.location("drum_set/button_ride");
+    private static final ResourceLocation BUTTON_RIDE_PRESSED = MoreColorful.location("drum_set/button_ride_pressed");
+    private static final ResourceLocation BUTTON_CRASH = MoreColorful.location("drum_set/button_crash");
+    private static final ResourceLocation BUTTON_CRASH_PRESSED = MoreColorful.location("drum_set/button_crash_pressed");
     private final InstrumentsType pType;
     private final int keyId;
     public boolean pressedByClick;

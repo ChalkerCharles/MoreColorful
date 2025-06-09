@@ -1,7 +1,6 @@
 package com.ChalkerCharles.morecolorful.common;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
@@ -32,7 +31,7 @@ public abstract class ModTags {
         public static final TagKey<Block> LAKES_CANNOT_REPLACE = create("lakes_cannot_replace");
 
         private static TagKey<Block> create(String path) {
-            return BlockTags.create(ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, path));
+            return BlockTags.create(MoreColorful.location(path));
         }
     }
 
@@ -50,7 +49,7 @@ public abstract class ModTags {
         public static final TagKey<Item> JACARANDA_LOGS = create("jacaranda_logs");
         public static final TagKey<Item> WILLOW_LOGS = create("willow_logs");
         private static TagKey<Item> create(String path) {
-            return ItemTags.create(ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, path));
+            return ItemTags.create(MoreColorful.location(path));
         }
     }
 }

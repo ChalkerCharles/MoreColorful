@@ -116,6 +116,7 @@ public class CrashCymbalBlock extends PercussionInstrumentBlock implements Entit
         }
         return super.playerWillDestroy(level, pos, state, player);
     }
+    @Nullable
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {
         BlockPos blockpos = pContext.getClickedPos();
@@ -144,6 +145,8 @@ public class CrashCymbalBlock extends PercussionInstrumentBlock implements Entit
     @Override
     @Nullable
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return pBlockEntityType == ModBlockEntities.CRASH_CYMBAL.get() ? CrashCymbalBlockEntity::tick : null;
+        return pBlockEntityType == ModBlockEntities.CRASH_CYMBAL.get()
+                ? (level, pos, state, blockEntity) -> CrashCymbalBlockEntity.tick(level, pos, (CrashCymbalBlockEntity) blockEntity)
+                : null;
     }
 }

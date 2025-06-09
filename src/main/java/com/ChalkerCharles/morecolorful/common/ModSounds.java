@@ -3,7 +3,6 @@ package com.ChalkerCharles.morecolorful.common;
 import com.ChalkerCharles.morecolorful.MoreColorful;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -104,10 +103,10 @@ public class ModSounds {
     //public static final Holder<SoundEvent> MUSIC_BIOME_AUTUMN = registerForHolder("music.overworld.autumn");
 
     private static Holder<SoundEvent> registerForHolder(String name) {
-        return SOUND_EVENTS.register(name, ()-> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, name)));
+        return SOUND_EVENTS.register(name, ()-> SoundEvent.createVariableRangeEvent(MoreColorful.location(name)));
     }
     private static Supplier<SoundEvent> register(String name) {
-        return SOUND_EVENTS.register(name, ()-> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, name)));
+        return SOUND_EVENTS.register(name, ()-> SoundEvent.createVariableRangeEvent(MoreColorful.location(name)));
     }
     public static void register(IEventBus eventBus){
         SOUND_EVENTS.register(eventBus);

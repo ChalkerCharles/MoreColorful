@@ -2,8 +2,8 @@ package com.ChalkerCharles.morecolorful.common.block;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.client.particle.ModParticles;
-import com.ChalkerCharles.morecolorful.common.block.common.*;
 import com.ChalkerCharles.morecolorful.common.block.musical_instruments.*;
+import com.ChalkerCharles.morecolorful.common.block.nature.*;
 import com.ChalkerCharles.morecolorful.common.block.properties.*;
 import com.ChalkerCharles.morecolorful.common.item.musical_instruments.InstrumentsType;
 import com.ChalkerCharles.morecolorful.common.worldgen.features.trees.ModTreeGrower;
@@ -42,7 +42,7 @@ public class ModBlocks {
     public static final DeferredBlock<Block> GLOCKENSPIEL = BLOCKS.register("glockenspiel", ()-> new GlockenspielBlock(InstrumentsType.GLOCKENSPIEL, ofFullCopy(Blocks.COPPER_GRATE).mapColor(MapColor.GOLD).instrument(NoteBlockInstrument.BELL).pushReaction(PushReaction.DESTROY).forceSolidOn()));
     public static final DeferredBlock<Block> XYLOPHONE = BLOCKS.register("xylophone", ()-> new XylophoneBlock(InstrumentsType.XYLOPHONE, ofFullCopy(Blocks.BONE_BLOCK).mapColor(MapColor.WOOD).pushReaction(PushReaction.DESTROY)));
     public static final DeferredBlock<Block> VIBRAPHONE = BLOCKS.register("vibraphone", ()-> new VibraphoneBlock(InstrumentsType.VIBRAPHONE, ofFullCopy(Blocks.COPPER_BLOCK).mapColor(MapColor.METAL).instrument(NoteBlockInstrument.IRON_XYLOPHONE).pushReaction(PushReaction.DESTROY)));
-    public static final DeferredBlock<Block> SYNTHESIZER_KEYBOARD_BIT = BLOCKS.register("synthesizer_keyboard_bit", ()-> new SynthesizerKeyboardBlock(InstrumentsType.BIT, ofFullCopy(Blocks.IRON_BARS).mapColor(MapColor.DEEPSLATE).instrument(NoteBlockInstrument.BIT).emissiveRendering(Blocks::always)));
+    public static final DeferredBlock<Block> SYNTHESIZER_KEYBOARD_BIT = BLOCKS.register("synthesizer_keyboard_bit", ()-> new SynthesizerKeyboardBlock(InstrumentsType.BIT, ofFullCopy(Blocks.IRON_BARS).mapColor(MapColor.DEEPSLATE).instrument(NoteBlockInstrument.BIT)));
     public static final DeferredBlock<Block> SYNTHESIZER_KEYBOARD_PLING = BLOCKS.register("synthesizer_keyboard_pling", ()-> new SynthesizerKeyboardBlock(InstrumentsType.PLING, ofFullCopy(Blocks.IRON_BARS).mapColor(MapColor.COLOR_BLACK).instrument(NoteBlockInstrument.PLING)));
     public static final DeferredBlock<Block> SYNTHESIZER_KEYBOARD_SCULK = BLOCKS.register("synthesizer_keyboard_sculk", ()-> new SynthesizerKeyboardBlock(InstrumentsType.SCULK, ofFullCopy(Blocks.SCULK_CATALYST).instrument(NoteBlockInstrumentExtension.SCULK).emissiveRendering(Blocks::always)));
     public static final DeferredBlock<Block> SYNTHESIZER_KEYBOARD_AMETHYST = BLOCKS.register("synthesizer_keyboard_amethyst", ()-> new SynthesizerKeyboardBlock(InstrumentsType.CRYSTAL, ofFullCopy(Blocks.AMETHYST_CLUSTER).instrument(NoteBlockInstrumentExtension.CRYSTAL).emissiveRendering(Blocks::always)));

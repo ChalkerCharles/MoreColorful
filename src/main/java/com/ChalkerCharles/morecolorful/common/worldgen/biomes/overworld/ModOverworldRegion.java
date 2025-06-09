@@ -17,7 +17,7 @@ public class ModOverworldRegion extends Region {
         super(LOCATION, RegionType.OVERWORLD, weight);
     }
 
-    private static final ResourceLocation LOCATION = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "overworld");
+    private static final ResourceLocation LOCATION = MoreColorful.location("overworld");
 
     @Override
     public void addBiomes(Registry<Biome> registry, Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> mapper) {

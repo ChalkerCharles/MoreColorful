@@ -316,7 +316,7 @@ public class ModCreativeTabs {
     }
 
     private static void insertAfterBySequence(BuildCreativeModeTabContentsEvent event, ItemLike... entries) {
-        for (int i = 1; i < entries.length; i ++) {
+        for (int i = 1, l = entries.length; i < l; i ++) {
             event.insertAfter(new ItemStack(entries[i - 1]), new ItemStack(entries[i]), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
         }
     }

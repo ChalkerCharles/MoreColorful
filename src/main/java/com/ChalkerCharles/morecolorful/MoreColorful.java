@@ -2,10 +2,11 @@ package com.ChalkerCharles.morecolorful;
 
 import com.ChalkerCharles.morecolorful.client.ModClientEvents;
 import com.ChalkerCharles.morecolorful.client.particle.ModParticles;
+import com.ChalkerCharles.morecolorful.common.ModCommonEvents;
 import com.ChalkerCharles.morecolorful.common.ModCommonSetup;
-import com.ChalkerCharles.morecolorful.common.attachment.ModDataAttachments;
 import com.ChalkerCharles.morecolorful.common.ModSounds;
 import com.ChalkerCharles.morecolorful.common.ModStats;
+import com.ChalkerCharles.morecolorful.common.attachment.ModDataAttachments;
 import com.ChalkerCharles.morecolorful.common.block.ModBlockEntities;
 import com.ChalkerCharles.morecolorful.common.block.ModBlocks;
 import com.ChalkerCharles.morecolorful.common.block.VanillaBlockPropertyModifier;
@@ -20,6 +21,7 @@ import com.ChalkerCharles.morecolorful.common.worldgen.features.trees.ModRootPla
 import com.ChalkerCharles.morecolorful.common.worldgen.features.trees.ModTreeDecorators;
 import com.ChalkerCharles.morecolorful.common.worldgen.features.trees.ModTrunkPlacers;
 import com.mojang.logging.LogUtils;
+import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -64,6 +66,7 @@ public class MoreColorful {
         ModFeatures.register(modEventBus);
         ModChunkStatus.register(modEventBus);
 
+        NeoForge.EVENT_BUS.register(ModCommonEvents.class);
         NeoForge.EVENT_BUS.addListener(VanillaBlockPropertyModifier::modifyProperties);
         //NeoForge.EVENT_BUS.register(new MelodyHandler());
         NeoForge.EVENT_BUS.register(this);
@@ -72,6 +75,7 @@ public class MoreColorful {
 
         if (dist.isClient()) {
             NeoForge.EVENT_BUS.register(ModClientEvents.class);
+            modContainer.registerConfig(ModConfig.Type.CLIENT, Config.SPEC_CLIENT);
             modContainer.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
         }
     }
@@ -117,5 +121,9 @@ public class MoreColorful {
             case 2 -> LOGGER.info("I'll Miss You.");
             case 3 -> LOGGER.info("See You Around!");
         }
+    }
+
+    public static ResourceLocation location(String key) {
+        return ResourceLocation.fromNamespaceAndPath(MODID, key);
     }
 }

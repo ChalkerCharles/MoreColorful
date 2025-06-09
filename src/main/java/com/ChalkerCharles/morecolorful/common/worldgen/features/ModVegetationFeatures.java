@@ -1,8 +1,8 @@
 package com.ChalkerCharles.morecolorful.common.worldgen.features;
 
 import com.ChalkerCharles.morecolorful.common.block.ModBlocks;
-import com.ChalkerCharles.morecolorful.common.block.common.BerryBushBlock;
-import com.ChalkerCharles.morecolorful.common.block.common.LeafLitterBlock;
+import com.ChalkerCharles.morecolorful.common.block.nature.BerryBushBlock;
+import com.ChalkerCharles.morecolorful.common.block.nature.LeafLitterBlock;
 import com.ChalkerCharles.morecolorful.common.worldgen.placements.ModTreePlacements;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderGetter;

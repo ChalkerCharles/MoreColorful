@@ -12,8 +12,8 @@ import org.jetbrains.annotations.NotNull;
 
 @OnlyIn(Dist.CLIENT)
 public class OctaveButton extends Button {
-    private static final ResourceLocation TREBLE_CLEF = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "widget/treble_clef");
-    private static final ResourceLocation BASS_CLEF = ResourceLocation.fromNamespaceAndPath(MoreColorful.MODID, "widget/bass_clef");
+    private static final ResourceLocation TREBLE_CLEF = MoreColorful.location("widget/treble_clef");
+    private static final ResourceLocation BASS_CLEF = MoreColorful.location("widget/bass_clef");
     private InstrumentsType pType;
     public OctaveButton(int pX, int pY, InstrumentsType pType, Button.OnPress pOnPress) {
         super(pX, pY, 12, 17, CommonComponents.EMPTY, pOnPress, DEFAULT_NARRATION);

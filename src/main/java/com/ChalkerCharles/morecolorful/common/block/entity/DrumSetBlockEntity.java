@@ -3,17 +3,15 @@ package com.ChalkerCharles.morecolorful.common.block.entity;
 import com.ChalkerCharles.morecolorful.common.block.ModBlockEntities;
 import com.ChalkerCharles.morecolorful.common.block.properties.DrumSetPart;
 import com.ChalkerCharles.morecolorful.util.CymbalUtils;
+import it.unimi.dsi.fastutil.ints.IntSet;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-
-import java.util.Set;
 
 import static com.ChalkerCharles.morecolorful.common.block.musical_instruments.DrumSetBlock.HIT;
 import static com.ChalkerCharles.morecolorful.common.block.musical_instruments.DrumSetBlock.PART;
 
-public class DrumSetBlockEntity extends BlockEntity implements CymbalUtils {
+public class DrumSetBlockEntity extends AbstractCymbalBlockEntity {
     public int ticksRide;
     public int ticksAfterStopRide;
     public boolean shakingRide;
@@ -25,12 +23,12 @@ public class DrumSetBlockEntity extends BlockEntity implements CymbalUtils {
     }
 
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, DrumSetBlockEntity pBlockEntity) {
-        Set<Integer> playerSetBd = pBlockEntity.pressingBassDrumPlayers(pLevel, pPos);
-        Set<Integer> playerSetHat = pBlockEntity.pressingHatPlayers(pLevel, pPos);
-        Set<Integer> playerSetRide = pBlockEntity.pressingRidePlayers(pLevel, pPos);
-        Set<Integer> playerSetCrash = pBlockEntity.pressingCrashPlayers(pLevel, pPos);
-        BlockPos bassDrumPos = pBlockEntity.getBassDrumPos(pPos, pState);
-        BlockPos hatPos = pBlockEntity.getHatPos(pPos, pState);
+        IntSet playerSetBd = CymbalUtils.pressingBassDrumPlayers(pLevel, pPos);
+        IntSet playerSetHat = CymbalUtils.pressingHatPlayers(pLevel, pPos);
+        IntSet playerSetRide = CymbalUtils.pressingRidePlayers(pLevel, pPos);
+        IntSet playerSetCrash = CymbalUtils.pressingCrashPlayers(pLevel, pPos);
+        BlockPos bassDrumPos = CymbalUtils.getBassDrumPos(pPos, pState);
+        BlockPos hatPos = CymbalUtils.getHatPos(pPos, pState);
         if (pState.getValue(PART) == DrumSetPart.MID_LOWER) {
             if (!playerSetBd.isEmpty()) {
                 pLevel.setBlock(bassDrumPos, pState.setValue(HIT, true), 3);
