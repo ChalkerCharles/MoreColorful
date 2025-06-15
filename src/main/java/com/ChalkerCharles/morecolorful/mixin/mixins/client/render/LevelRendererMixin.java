@@ -5,8 +5,9 @@ import com.ChalkerCharles.morecolorful.client.shader.ModRenderTypes;
 import com.ChalkerCharles.morecolorful.common.level.ILevelThermalEngine;
 import com.ChalkerCharles.morecolorful.mixin.extensions.ILevelExtension;
 import com.ChalkerCharles.morecolorful.mixin.extensions.ILevelRendererExtension;
+import com.ChalkerCharles.morecolorful.util.RenderUtils;
+import com.ChalkerCharles.morecolorful.util.WeatherUtils;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-import com.llamalad7.mixinextras.injector.ModifyReceiver;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.Share;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
@@ -63,17 +64,8 @@ public abstract class LevelRendererMixin implements ILevelRendererExtension {
             )
     )
     private void renderLevel$1(DeltaTracker pDeltaTracker, boolean pRenderBlockOutline, Camera pCamera, GameRenderer pGameRenderer, LightTexture pLightTexture, Matrix4f pFrustumMatrix, Matrix4f pProjectionMatrix, CallbackInfo ci,
-                             @Local(ordinal = 0) double d0, @Local(ordinal = 1) double d1, @Local(ordinal = 2) double d2) {
+                               @Local(ordinal = 0) double d0, @Local(ordinal = 1) double d1, @Local(ordinal = 2) double d2) {
         this.renderSectionLayer(ModRenderTypes.WAVY_CUTOUT, d0, d1, d2, pFrustumMatrix, pProjectionMatrix);
-    }
-
-    @ModifyReceiver(method = "renderSectionLayer",
-            at = {@At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/RenderType;setupRenderState()V"),
-                    @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/RenderType;clearRenderState()V")
-    })
-    private RenderType modifyRenderType(RenderType instance) {
-        if (Config.WIND_EFFECT_CLIENT.isFalse()) return instance;
-        return instance == RenderType.translucent() ? ModRenderTypes.WAVY_TRANSLUCENT : instance;
     }
 
     @Inject(method = "compileSections", at = @At("HEAD"))
@@ -93,12 +85,16 @@ public abstract class LevelRendererMixin implements ILevelRendererExtension {
     @Override
     public void moreColorful$updateWavySections() {
         if (this.viewArea == null) return;
+        SectionPos sectionPos;
         for (SectionRenderDispatcher.RenderSection section : this.viewArea.sections) {
             SectionRenderDispatcher.CompiledSection compiled = section.getCompiled();
             if (!compiled.isEmpty(ModRenderTypes.WAVY_CUTOUT_MIPPED)
                     || !compiled.isEmpty(ModRenderTypes.WAVY_CUTOUT)
                     || !compiled.isEmpty(RenderType.translucent())) {
                 section.setDirty(false);
+                sectionPos = SectionPos.of(section.getOrigin());
+                RenderUtils.VERTICES.remove(sectionPos);
+                WeatherUtils.WINDY_BLOCKS.remove(sectionPos);
             }
         }
     }

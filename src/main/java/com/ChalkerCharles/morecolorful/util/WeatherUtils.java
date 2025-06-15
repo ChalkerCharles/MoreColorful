@@ -6,6 +6,7 @@ import com.ChalkerCharles.morecolorful.common.attachment.LevelSavedData;
 import it.unimi.dsi.fastutil.Pair;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.SectionPos;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
@@ -25,12 +26,19 @@ import net.neoforged.neoforge.common.Tags;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 
+import java.util.Map;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ConcurrentHashMap;
+
 public final class WeatherUtils {
+    public static final Map<SectionPos, Map<BlockPos, Boolean>> WINDY_BLOCKS = new ConcurrentHashMap<>();
+
     public static boolean isWindy(Level level) {
         return !isWindless(level);
     }
 
     public static boolean isWindless(Level level) {
+        if (Config.WIND_SYSTEM.isFalse()) return true;
         return Config.windlessDimensions.contains(level.dimension());
     }
 
@@ -46,23 +54,27 @@ public final class WeatherUtils {
     public static boolean canApplyWind(Level level, BlockPos pos) {
         if (LevelSavedData.getGlobalWindSpeed(level).equals(0, 0)) return false;
         if (!level.getFluidState(pos).isEmpty()) return false;
-        BlockHitResult hitResult = getHitResult(level, Vec3.atCenterOf(pos), pos);
-        return hitResult.getType() == HitResult.Type.MISS;
+        SectionPos sectionPos = SectionPos.of(pos);
+        return WINDY_BLOCKS.computeIfAbsent(sectionPos, k -> new ConcurrentHashMap<>())
+                .computeIfAbsent(pos, p -> {
+                    CompletableFuture<BlockHitResult> future = getHitResult(level, Vec3.atCenterOf(p), p);
+                    return future.thenApply(hitResult -> hitResult.getType() == HitResult.Type.MISS).join();
+                });
     }
 
-    public static boolean canApplyWind(Level level, Vec3 pos) {
-        if (LevelSavedData.getGlobalWindSpeed(level).equals(0, 0)) return false;
+    public static CompletableFuture<Boolean> canApplyWind(Level level, Vec3 pos) {
+        if (LevelSavedData.getGlobalWindSpeed(level).equals(0, 0)) return Constants.FALSE_FUTURE;
         BlockPos currentPos = BlockPos.containing(pos);
-        if (!level.getFluidState(currentPos).isEmpty()) return false;
-        BlockHitResult hitResult = getHitResult(level, pos, currentPos);
-        return hitResult.getType() == HitResult.Type.MISS;
+        if (!level.getFluidState(currentPos).isEmpty()) return Constants.FALSE_FUTURE;
+        CompletableFuture<BlockHitResult> future = getHitResult(level, pos, currentPos);
+        return future.thenApply(hitResult ->  hitResult.getType() == HitResult.Type.MISS);
     }
 
-    private static BlockHitResult getHitResult(Level level, Vec3 start, BlockPos currentPos) {
+    private static CompletableFuture<BlockHitResult> getHitResult(Level level, Vec3 start, BlockPos currentPos) {
         Vector2f wind = LevelSavedData.getGlobalWindSpeed(level);
         int skyLight = level.getBrightness(LightLayer.SKY, currentPos) - level.getMaxLightLevel();
         Vec3 end = new Vec3(wind.x(), 0, wind.y()).normalize().scale(2 * skyLight - 4).add(start);
-        return isBlockThatBlocksWindInLine(level, Pair.of(start, end));
+        return CompletableFuture.supplyAsync(() -> isBlockThatBlocksWindInLine(level, Pair.of(start, end)), ThreadUtils.WIND_EXECUTOR);
     }
 
     private static BlockHitResult isBlockThatBlocksWindInLine(Level level, Pair<Vec3, Vec3> pair) {
@@ -111,7 +123,8 @@ public final class WeatherUtils {
     }
 
     public static int chanceByWind(Level level, int chance) {
-        float windSpeed = LevelSavedData.getGlobalWindSpeed(level).length();
+        if (Config.WIND_EFFECT_CLIENT.isFalse()) return chance;
+        float windSpeed = getWindSpeed(level).length();
         return Math.max(0, chance - Mth.floor(windSpeed * chance * 0.04F));
     }
 

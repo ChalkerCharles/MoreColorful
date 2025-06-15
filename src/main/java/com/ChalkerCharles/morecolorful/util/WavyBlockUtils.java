@@ -22,6 +22,8 @@ import org.joml.Vector2i;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
 
+import java.util.concurrent.CompletableFuture;
+
 @OnlyIn(Dist.CLIENT)
 public final class WavyBlockUtils {
     private static final Range FLOWER_POT = Range.of(0.3F, 0.7F);
@@ -31,20 +33,18 @@ public final class WavyBlockUtils {
     private static final Pair<VertexState, Vector2i> FIXED = Pair.of(VertexState.FIXED, new Vector2i());
     private static final Pair<VertexState, Vector2i> DEPEND0 = Pair.of(VertexState.DEPEND, new Vector2i());
     private static final Pair<VertexState, Vector2i> DEPEND1 = Pair.of(VertexState.DEPEND, new Vector2i(0, 1));
-    private static final Vector4f ZERO4 = new Vector4f(0);
-    private static final Vector3f ZERO3 = new Vector3f();
-    private static final BooleanIntPair FIXED_LIQUID = BooleanIntPair.of(false, 0);
+    private static final CompletableFuture<BooleanIntPair> FIXED_LIQUID = CompletableFuture.completedFuture(BooleanIntPair.of(false, 3));
 
     public static Vector4f getWindSpeedByVertex(Level level, BlockState state, BlockPos pos, float x, float y, float z, int type) {
-        if (level == null || !WeatherUtils.isWindSensitiveBlock(state.getBlock())) return ZERO4;
+        if (level == null || !WeatherUtils.isWindSensitiveBlock(state.getBlock())) return Constants.ZERO_VEC4;
         Vector3f wind = WeatherUtils.getWindSpeed(level);
         Pair<VertexState, Vector2i> result = canVertexApplyWind(level, state, pos, x, y, z);
         return switch (result.left()) {
             case WAVING -> packData(wind, result.right(), type, x, y, z);
-            case FIXED -> ZERO4;
+            case FIXED -> Constants.ZERO_VEC4;
             case DEPEND -> WeatherUtils.canApplyWind(level, pos)
                     ? packData(wind, result.right(), type, x, y, z)
-                    : ZERO4;
+                    : Constants.ZERO_VEC4;
         };
     }
 
@@ -345,48 +345,46 @@ public final class WavyBlockUtils {
         DEPEND
     }
 
-    public static Vector3f getWindSpeedByLiquidVertex(Level level, BlockPos pos, float x, float y, float z) {
-        if (level == null) return ZERO3;
+    public static CompletableFuture<Vector4f> getWindSpeedByLiquidVertex(Level level, BlockPos pos, float x, float y, float z) {
+        if (level == null) return Constants.ZERO_VEC4_FUTURE;
         Vector3f wind = WeatherUtils.getWindSpeed(level);
-        BooleanIntPair result = canLiquidVertexApplyWind(level, pos, (pos.getX() & -16) + x, (pos.getY() & -16) + y, (pos.getZ() & -16) + z);
-        return y % 1 > 0.125F && result.leftBoolean()
-                ? packData(wind, result.rightInt())
-                : ZERO3;
+        return canLiquidVertexApplyWind(level, pos, (pos.getX() & -16) + x, (pos.getY() & -16) + y, (pos.getZ() & -16) + z)
+                .thenApply(result -> y % 1 > 0.125F && result.leftBoolean()
+                        ? packData(wind, result.rightInt())
+                        : Constants.ZERO_VEC4);
     }
 
-    private static BooleanIntPair canLiquidVertexApplyWind(Level level, BlockPos pos, float x, float y, float z) {
+    private static CompletableFuture<BooleanIntPair> canLiquidVertexApplyWind(Level level, BlockPos pos, float x, float y, float z) {
         BlockPos pos1 = pos.above();
         BlockState state = level.getBlockState(pos1);
         if (WeatherUtils.canBlockWind(level, pos1, state, Direction.DOWN))
             return FIXED_LIQUID;
-        boolean waving = isFluidVertexWaving(level, pos, x, y, z);
-        int edge = isEdge(level, pos, x, y, z) ? 1 : 2;
-        return BooleanIntPair.of(waving, edge);
+        int edge = isEdge(level, pos, x, z) ? 2 : 1;
+        return isFluidVertexWaving(level, pos, x, y, z).thenApply(b -> BooleanIntPair.of(b, edge));
     }
 
-    private static boolean isFluidVertexWaving(Level level, BlockPos pos, float x, float y, float z) {
-        Corner corner = getCorner(pos, x, y, z);
+    private static CompletableFuture<Boolean> isFluidVertexWaving(Level level, BlockPos pos, float x, float y, float z) {
+        Corner corner = getCorner(pos, x, z);
         Direction d1 = corner.first, d2 = corner.second;
         BlockPos pos1 = pos.relative(d1).above(), pos2 = pos.relative(d2).above(), pos3 = pos1.relative(d2);
         if (WeatherUtils.canBlockWind(level, pos1, level.getBlockState(pos1), Direction.DOWN)
                 || WeatherUtils.canBlockWind(level, pos2, level.getBlockState(pos2), Direction.DOWN)
                 || WeatherUtils.canBlockWind(level, pos3, level.getBlockState(pos3), Direction.DOWN))
-            return false;
+            return Constants.FALSE_FUTURE;
         return WeatherUtils.canApplyWind(level, new Vec3(x, y + 1, z));
     }
 
-    private static boolean isEdge(Level level, BlockPos pos, float x, float y, float z) {
-        Corner corner = getCorner(pos, x, y, z);
+    private static boolean isEdge(Level level, BlockPos pos, float x, float z) {
+        Corner corner = getCorner(pos, x, z);
         Direction d1 = corner.first, d2 = corner.second;
         BlockPos pos1 = pos.relative(d1), pos2 = pos.relative(d2), pos3 = pos1.relative(d2);
         return isValidEdgeBlock(level, pos1, d1) || isValidEdgeBlock(level, pos2, d2)
                 || isValidEdgeBlock(level, pos3, d1) || isValidEdgeBlock(level, pos3, d2);
     }
 
-    private static Corner getCorner(BlockPos pos, float x, float y, float z) {
-        Vec3 center = Vec3.atCenterOf(pos), origin = new Vec3(x, y, z);
-        Vec3 offset = origin.subtract(center);
-        return getCorner(offset.x(), offset.z());
+    private static Corner getCorner(BlockPos pos, float x, float z) {
+        float centerX = pos.getX() + 0.5F, centerZ = pos.getZ() + 0.5F;
+        return getCorner(x - centerX, z - centerZ);
     }
 
     private static Corner getCorner(double x, double z) {
@@ -426,14 +424,14 @@ public final class WavyBlockUtils {
     }
 
     public static Vector4f getSignAngle(Level level, float partialTick, BlockState state, BlockPos pos) {
-        if (level == null) return ZERO4;
+        if (level == null) return Constants.ZERO_VEC4;
         Pair<VertexState, Vector2i> result = canHangingSignApplyWind(level, pos);
         return switch (result.left()) {
             case WAVING -> yieldAngle(level, partialTick, state, pos, result.right());
-            case FIXED -> ZERO4;
+            case FIXED -> Constants.ZERO_VEC4;
             case DEPEND -> WeatherUtils.canApplyWind(level, pos)
                     ? yieldAngle(level, partialTick, state, pos, result.right())
-                    : ZERO4;
+                    : Constants.ZERO_VEC4;
         };
     }
 
@@ -634,13 +632,13 @@ public final class WavyBlockUtils {
         return new Vector4f(vx, vy, vz, vw);
     }
 
-    private static Vector3f packData(Vector3f vector3f, int value) {
+    private static Vector4f packData(Vector3f vector3f, int value) {
         short i = floatToFixed10(vector3f.x);
         short j = floatToFixed10(vector3f.z);
         int x = packShortToInt(i, j);
         short k = floatToFixed10(vector3f.y);
         int y = packShortToInt((short) 3, k);
-        return new Vector3f(x, y, value);
+        return new Vector4f(x, y, value, 0);
     }
 
     private static int packShortToInt(short high, short low) {

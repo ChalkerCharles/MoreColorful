@@ -2,7 +2,7 @@ package com.ChalkerCharles.morecolorful.network.packets;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.common.attachment.LevelSavedData;
-import com.ChalkerCharles.morecolorful.util.NetworkUtils;
+import com.ChalkerCharles.morecolorful.util.ThreadUtils;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -30,6 +30,6 @@ public record WindPacket(float x, float z) implements CustomPacketPayload {
         Player player = context.player();
         if (!player.isLocalPlayer()) return;
         context.enqueueWork(() -> LevelSavedData.setGlobalWindSpeed(player.level(), packet.x(), packet.z()))
-                .exceptionally(NetworkUtils.handleException(context));
+                .exceptionally(ThreadUtils.handlePayloadException(context));
     }
 }

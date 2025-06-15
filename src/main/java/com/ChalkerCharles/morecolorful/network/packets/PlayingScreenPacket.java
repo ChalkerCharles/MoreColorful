@@ -3,7 +3,8 @@ package com.ChalkerCharles.morecolorful.network.packets;
 import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.common.attachment.ModDataAttachments;
 import com.ChalkerCharles.morecolorful.common.item.musical_instruments.InstrumentsType;
-import com.ChalkerCharles.morecolorful.util.NetworkUtils;
+import com.ChalkerCharles.morecolorful.util.Constants;
+import com.ChalkerCharles.morecolorful.util.ThreadUtils;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -17,10 +18,8 @@ import org.jetbrains.annotations.NotNull;
 
 public record PlayingScreenPacket(InstrumentsType pType, BlockPos pos, int id, boolean isOpen) implements CustomPacketPayload {
     public PlayingScreenPacket() {
-        this(InstrumentsType.HARP, DEFAULT_POS, 0, false);
+        this(InstrumentsType.HARP, Constants.DEFAULT_INSTRUMENT_POS, 0, false);
     }
-
-    private static final BlockPos DEFAULT_POS = new BlockPos(0, -2048, 0);
 
     public static final CustomPacketPayload.Type<PlayingScreenPacket> TYPE = new CustomPacketPayload.Type<>(MoreColorful.location("playing_screen_event"));
 
@@ -47,7 +46,7 @@ public record PlayingScreenPacket(InstrumentsType pType, BlockPos pos, int id, b
             if (entity instanceof Player) {
                 entity.setData(ModDataAttachments.PLAYING_SCREEN_DATA, packet);
             }
-        }).exceptionally(NetworkUtils.handleException(context));
+        }).exceptionally(ThreadUtils.handlePayloadException(context));
     }
     public static void handleServer(final PlayingScreenPacket packet, final IPayloadContext context) {
         int id = packet.id();
@@ -64,6 +63,6 @@ public record PlayingScreenPacket(InstrumentsType pType, BlockPos pos, int id, b
                     PacketDistributor.sendToAllPlayers(new InstrumentPressingPacket(id, false));
                 }
             }
-        }).exceptionally(NetworkUtils.handleException(context));
+        }).exceptionally(ThreadUtils.handlePayloadException(context));
     }
 }

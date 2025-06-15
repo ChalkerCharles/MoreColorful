@@ -18,6 +18,13 @@ public final class ModRenderTypes extends RenderType {
     private static final RenderStateShard.ShaderStateShard WAVY_TRANSLUCENT_SHADER = new RenderStateShard.ShaderStateShard(
             () -> ModShaders.wavyTranslucentShader
     );
+    public static final RenderType.CompositeState WAVY_TRANSLUCENT_STATE = RenderType.CompositeState.builder()
+            .setLightmapState(LIGHTMAP)
+            .setShaderState(WAVY_TRANSLUCENT_SHADER)
+            .setTextureState(BLOCK_SHEET_MIPPED)
+            .setTransparencyState(TRANSLUCENT_TRANSPARENCY)
+            .setOutputState(TRANSLUCENT_TARGET)
+            .createCompositeState(true);
 
     public static final RenderType WAVY_CUTOUT_MIPPED = createModded(
             "wavy_cutout_mipped",
@@ -43,21 +50,6 @@ public final class ModRenderTypes extends RenderType {
                     .setLightmapState(LIGHTMAP)
                     .setShaderState(WAVY_CUTOUT_SHADER)
                     .setTextureState(BLOCK_SHEET)
-                    .createCompositeState(true)
-    );
-    public static final RenderType WAVY_TRANSLUCENT = createModded(
-            "wavy_translucent",
-            ModVertexFormat.WAVY_BLOCK.get(),
-            VertexFormat.Mode.QUADS,
-            786432,
-            true,
-            true,
-            RenderType.CompositeState.builder()
-                    .setLightmapState(LIGHTMAP)
-                    .setShaderState(WAVY_TRANSLUCENT_SHADER)
-                    .setTextureState(BLOCK_SHEET_MIPPED)
-                    .setTransparencyState(TRANSLUCENT_TRANSPARENCY)
-                    .setOutputState(TRANSLUCENT_TARGET)
                     .createCompositeState(true)
     );
 

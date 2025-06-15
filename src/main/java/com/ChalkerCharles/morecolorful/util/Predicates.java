@@ -1,5 +1,6 @@
 package com.ChalkerCharles.morecolorful.util;
 
+import it.unimi.dsi.fastutil.booleans.BooleanConsumer;
 import net.minecraft.core.Holder;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
@@ -24,5 +25,11 @@ public final class Predicates {
     @SafeVarargs
     public static boolean tagMatches(BlockState state, TagKey<Block>... tags) {
         return Arrays.stream(tags).anyMatch(state::is);
+    }
+
+    public static BooleanConsumer ifTrueThen(Runnable task) {
+        return b -> {
+            if (b) task.run();
+        };
     }
 }

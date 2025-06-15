@@ -17,7 +17,6 @@ public abstract class RenderTypeMixin {
                 .addAll(original)
                 .add(ModRenderTypes.WAVY_CUTOUT_MIPPED)
                 .add(ModRenderTypes.WAVY_CUTOUT)
-                .add(ModRenderTypes.WAVY_TRANSLUCENT)
                 .build();
     }
 }

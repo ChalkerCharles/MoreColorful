@@ -1,5 +1,3 @@
-#version 150
-
 float speed_multiplier(float speed) {
     return floor(speed + 0.5);
 }

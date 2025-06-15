@@ -10,6 +10,7 @@ import com.ChalkerCharles.morecolorful.common.item.musical_instruments.MusicalIn
 import com.ChalkerCharles.morecolorful.network.packets.InstrumentPressingPacket;
 import com.ChalkerCharles.morecolorful.network.packets.InstrumentTickingPacket;
 import com.ChalkerCharles.morecolorful.network.packets.PlayingScreenPacket;
+import com.ChalkerCharles.morecolorful.util.Constants;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.minecraft.client.Minecraft;
@@ -47,7 +48,7 @@ public class PlayingScreen extends Screen {
     public final Player pPlayer;
     public InstrumentsType pType;
     public final BlockPos pPos;
-    public static final BlockPos DEFAULT_POS = new BlockPos(0, -2048, 0);
+    public static final BlockPos DEFAULT_POS = Constants.DEFAULT_INSTRUMENT_POS;
     private float pTick = 0;
     private boolean isDragging;
     public boolean isPressing = false;

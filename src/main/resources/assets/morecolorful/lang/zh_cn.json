@@ -286,7 +286,9 @@
   "block.morecolorful.guzheng": "古筝",
 
   "commands.morecolorful.weather.wind.set": "风速已设为%s, %s",
+  "commands.morecolorful.weather.wind.set.fail": "无法设置风速。因为该维度为无风维度，或者风系统已关闭。",
   "commands.morecolorful.weather.wind.reset": "风速已重置",
+  "commands.morecolorful.weather.wind.reset.fail": "无法重置风速。因为该维度为无风维度，或者风系统已关闭。",
 
   "creativetab.morecolorful.musical_instruments_tab": "乐器",
 
@@ -357,6 +359,8 @@
   "morecolorful.config.archaeology_loots.tooltip": "向可疑的方块中添加了新的战利品，可以通过考古获得。",
   "morecolorful.config.world": "世界",
   "morecolorful.config.world.tooltip": "世界配置",
+  "morecolorful.config.wind_system": "风系统",
+  "morecolorful.config.wind_system.tooltip": "风是全局的、随机发生的一种天气事件。风由在X轴和Z轴上的两个分量组成，每个分量的最大风度是17.5（米/秒）。",
   "morecolorful.config.windless_dimensions": "无风维度",
   "morecolorful.config.windless_dimensions.tooltip": "此列表中的维度里不会起风。",
   "morecolorful.config.wind_effect_client": "风效果",

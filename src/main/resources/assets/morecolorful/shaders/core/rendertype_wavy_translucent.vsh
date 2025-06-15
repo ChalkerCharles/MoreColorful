@@ -39,10 +39,10 @@ void main() {
     float ys = 0.0;
     float zs = 0.0;
 
-    if (type == 3 && wave_level > 0) {
+    if (type == 3 && wave_level < 3) {
         float m0 = distance(Position.xz, vec2(8.0, 8.0)) * 10.0;
         ys = cos(m0 + animation * speed_multiplier(length(vec2(speedX, speedZ)))) * 0.65;
-        if (wave_level == 2) {
+        if (wave_level == 1) {
             xs = sin(position.x + animation * speed_multiplier(speedX)) * cos(GameTime * 300);
             zs = cos(position.z + animation * speed_multiplier(speedZ)) * sin(GameTime * 300);
         }

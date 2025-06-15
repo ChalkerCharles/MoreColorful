@@ -2,7 +2,8 @@ package com.ChalkerCharles.morecolorful.network.packets;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.common.attachment.ModDataAttachments;
-import com.ChalkerCharles.morecolorful.util.NetworkUtils;
+import com.ChalkerCharles.morecolorful.util.Constants;
+import com.ChalkerCharles.morecolorful.util.ThreadUtils;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -15,10 +16,8 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public record DrumSetPacket(boolean isPressingBassDrum, boolean isPressingHat, boolean isPressingRide, boolean isPressingCrash, BlockPos pos, int id) implements CustomPacketPayload {
     public DrumSetPacket() {
-        this(false, false, false, false, DEFAULT_POS, 0);
+        this(false, false, false, false, Constants.DEFAULT_INSTRUMENT_POS, 0);
     }
-
-    private static final BlockPos DEFAULT_POS = new BlockPos(0, -2048, 0);
 
     public static final CustomPacketPayload.Type<DrumSetPacket> TYPE = new CustomPacketPayload.Type<>(MoreColorful.location("drum_set_event"));
 
@@ -50,7 +49,7 @@ public record DrumSetPacket(boolean isPressingBassDrum, boolean isPressingHat, b
             if (entity instanceof Player) {
                 entity.setData(ModDataAttachments.DRUM_SET_DATA, packet);
             }
-        }).exceptionally(NetworkUtils.handleException(context));
+        }).exceptionally(ThreadUtils.handlePayloadException(context));
     }
     public static void handleServer(final DrumSetPacket packet, final IPayloadContext context) {
         int id = packet.id();
@@ -61,6 +60,6 @@ public record DrumSetPacket(boolean isPressingBassDrum, boolean isPressingHat, b
                 entity.setData(ModDataAttachments.DRUM_SET_DATA, packet);
                 PacketDistributor.sendToAllPlayers(packet);
             }
-        }).exceptionally(NetworkUtils.handleException(context));
+        }).exceptionally(ThreadUtils.handlePayloadException(context));
     }
 }

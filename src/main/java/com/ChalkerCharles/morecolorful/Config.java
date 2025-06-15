@@ -30,6 +30,7 @@ public class Config {
     private static final ModConfigSpec.ConfigValue<List<? extends String>> BLOCK_TEMPERATURE;
     private static final ModConfigSpec.ConfigValue<List<? extends String>> THERMAL_RESISTANCE;
     public static final ModConfigSpec.BooleanValue ARCHAEOLOGY_LOOTS;
+    public static final ModConfigSpec.BooleanValue WIND_SYSTEM;
     private static final ModConfigSpec.ConfigValue<List<? extends String>> WINDLESS_DIMENSIONS;
     public static final ModConfigSpec.IntValue OVERWORLD_REGION_WEIGHT;
     private static final ModConfigSpec.ConfigValue<List<? extends String>> DISABLED_BIOMES;
@@ -74,6 +75,10 @@ public class Config {
         builder.pop();
 
         builder.comment("World").translation(prefix + "world").push("world");
+        WIND_SYSTEM = builder
+                .translation(prefix + "wind_system")
+                .comment("Wind is a global weather occurrence that randomly happens. The wind consists of two components on X axis and Z axis, and the max speed of each component is 17.5 (m/s).")
+                .define("windSystem", true);
         WINDLESS_DIMENSIONS = builder
                 .translation(prefix + "windless_dimensions")
                 .comment("Wind won't blow in dimensions in this list.")

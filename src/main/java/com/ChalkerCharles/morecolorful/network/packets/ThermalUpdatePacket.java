@@ -4,7 +4,7 @@ import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.common.level.ILevelThermalEngine;
 import com.ChalkerCharles.morecolorful.mixin.extensions.IChunkSourceExtension;
 import com.ChalkerCharles.morecolorful.mixin.extensions.ILevelExtension;
-import com.ChalkerCharles.morecolorful.util.NetworkUtils;
+import com.ChalkerCharles.morecolorful.util.ThreadUtils;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -67,7 +67,7 @@ public record ThermalUpdatePacket(int x, int z, ThermalUpdateData data, boolean 
                     enableChunkLight(level, levelchunk, x, z);
                 }
             }
-        })).exceptionally(NetworkUtils.handleException(context));
+        })).exceptionally(ThreadUtils.handlePayloadException(context));
     }
 
     private static void applyThermalData(ClientLevel level, int pX, int pZ, ThermalUpdateData pData) {

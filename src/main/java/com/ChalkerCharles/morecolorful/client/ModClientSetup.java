@@ -3,9 +3,11 @@ package com.ChalkerCharles.morecolorful.client;
 import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.client.gui.PlayingScreen;
 import com.ChalkerCharles.morecolorful.client.model.WavyBlockBakedModel;
+import com.ChalkerCharles.morecolorful.client.shader.ModRenderTypes;
 import com.ChalkerCharles.morecolorful.client.shader.ModVertexFormat;
 import com.ChalkerCharles.morecolorful.common.attachment.ModDataAttachments;
 import com.ChalkerCharles.morecolorful.common.item.ModItems;
+import com.ChalkerCharles.morecolorful.mixin.mixins.client.accessor.IRenderStateShardMixin;
 import com.ChalkerCharles.morecolorful.mixin.mixins.client.accessor.IRenderTypeMixin;
 import com.ChalkerCharles.morecolorful.util.EnumExtensions;
 import com.ChalkerCharles.morecolorful.util.WeatherUtils;
@@ -14,6 +16,7 @@ import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.BlockModelShaper;
 import net.minecraft.client.renderer.item.ItemProperties;
@@ -43,6 +46,14 @@ public class ModClientSetup {
             ModVertexFormat.WAVY_BLOCK.get();
 
             ((IRenderTypeMixin) RenderType.TRANSLUCENT).setFormat(ModVertexFormat.WAVY_BLOCK.get());
+            RenderType.CompositeState state = ModRenderTypes.WAVY_TRANSLUCENT_STATE;
+            ((IRenderStateShardMixin) RenderType.TRANSLUCENT).setSetupState(
+                    () -> ((IRenderTypeMixin.ICompositeStateMixin) (Object) state).getStates().forEach(RenderStateShard::setupRenderState)
+            );
+            ((IRenderStateShardMixin) RenderType.TRANSLUCENT).setClearState(
+                    () -> ((IRenderTypeMixin.ICompositeStateMixin) (Object) state).getStates().forEach(RenderStateShard::clearRenderState)
+            );
+            ((IRenderTypeMixin.ICompositeRenderTypeMixin) RenderType.TRANSLUCENT).setState(state);
         });
     }
 

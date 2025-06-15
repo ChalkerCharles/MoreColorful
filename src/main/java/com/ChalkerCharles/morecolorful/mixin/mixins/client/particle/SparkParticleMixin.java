@@ -2,6 +2,7 @@ package com.ChalkerCharles.morecolorful.mixin.mixins.client.particle;
 
 import com.ChalkerCharles.morecolorful.common.attachment.LevelSavedData;
 import com.ChalkerCharles.morecolorful.mixin.extensions.IParticleExtension;
+import com.ChalkerCharles.morecolorful.util.Predicates;
 import com.ChalkerCharles.morecolorful.util.WeatherUtils;
 import com.ChalkerCharles.morecolorful.util.WindSensitive;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -18,12 +19,12 @@ public abstract class SparkParticleMixin extends SimpleAnimatedParticle implemen
 
     @Override
     public void moreColorful$applyWind() {
-        if (WeatherUtils.canApplyWind(level, this.getPos())) {
+        WeatherUtils.canApplyWind(level, this.getPos()).thenAccept(Predicates.ifTrueThen(() -> {
             Vector2f globalWind = LevelSavedData.getGlobalWindSpeed(this.level);
             double windX = globalWind.x() * 0.001 * WeatherUtils.getRandomSpeedMultiplier(random);
             double windZ = globalWind.y() * 0.001 * WeatherUtils.getRandomSpeedMultiplier(random);
             this.xd += windX;
             this.zd += windZ;
-        }
+        }));
     }
 }

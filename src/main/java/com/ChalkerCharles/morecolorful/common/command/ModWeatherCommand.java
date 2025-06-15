@@ -1,6 +1,7 @@
 package com.ChalkerCharles.morecolorful.common.command;
 
 import com.ChalkerCharles.morecolorful.common.attachment.LevelSavedData;
+import com.ChalkerCharles.morecolorful.util.WeatherUtils;
 import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -27,14 +28,22 @@ public class ModWeatherCommand {
     private static int setWindSpeed(CommandSourceStack pSource, Vec2 vec) {
         float x = Mth.clamp(vec.x, -17.5F, 17.5F);
         float z = Mth.clamp(vec.y, -17.5F, 17.5F);
-        LevelSavedData.setWindSpeedByCommand(pSource.getLevel(), x, z);
-        pSource.sendSuccess(() -> Component.translatable("commands.morecolorful.weather.wind.set", x, z), true);
+        if (WeatherUtils.isWindy(pSource.getLevel())) {
+            LevelSavedData.setWindSpeedByCommand(pSource.getLevel(), x, z);
+            pSource.sendSuccess(() -> Component.translatable("commands.morecolorful.weather.wind.set", x, z), true);
+        } else {
+            pSource.sendFailure(Component.translatable("commands.morecolorful.weather.wind.set.fail"));
+        }
         return Mth.floor(Math.hypot(x, z));
     }
 
     private static int resetWindSpeed(CommandSourceStack pSource) {
-        LevelSavedData.resetWindSpeed(pSource.getLevel());
-        pSource.sendSuccess(() -> Component.translatable("commands.morecolorful.weather.wind.reset"), true);
+        if (WeatherUtils.isWindy(pSource.getLevel())) {
+            LevelSavedData.resetWindSpeed(pSource.getLevel());
+            pSource.sendSuccess(() -> Component.translatable("commands.morecolorful.weather.wind.reset"), true);
+        } else {
+            pSource.sendFailure(Component.translatable("commands.morecolorful.weather.wind.reset.fail"));
+        }
         return 1;
     }
 }

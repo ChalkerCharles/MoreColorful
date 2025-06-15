@@ -47,7 +47,22 @@
     "client.LevelLoadingScreenMixin",
     "client.MapInstanceMixin",
     "client.accessor.IQuadLighterMixin",
+    "client.accessor.IRenderStateShardMixin",
     "client.accessor.IRenderTypeMixin",
+    "client.accessor.IRenderTypeMixin$ICompositeRenderTypeMixin",
+    "client.accessor.IRenderTypeMixin$ICompositeStateMixin",
+    "client.compat.sodium.AbstractBlockRenderContextMixin",
+    "client.compat.sodium.AbstractBlockRenderContextMixin$BlockRendererMixin",
+    "client.compat.sodium.DefaultFluidRendererMixin",
+    "client.compat.sodium.DefaultMaterialsMixin",
+    "client.compat.sodium.DefaultTerrainRenderPassesMixin",
+    "client.compat.sodium.DeviceResourcesMixin",
+    "client.compat.sodium.RenderSectionManagerMixin",
+    "client.compat.sodium.ShaderLoaderMixin",
+    "client.compat.sodium.SodiumLevelRendererMixin",
+    "client.compat.sodium.SodiumVertexMixin",
+    "client.compat.sodium.SodiumWorldRendererMixin",
+    "client.compat.sodium.SodiumWorldRendererMixin$Access",
     "client.particle.CampfireSmokeParticleMixin",
     "client.particle.CherryParticleMixin",
     "client.particle.ParticleEngineMixin",
@@ -68,5 +83,6 @@
   "injectors": {
     "defaultRequire": 1,
     "maxShiftBy": 5
-  }
+  },
+  "plugin": "com.ChalkerCharles.morecolorful.util.MixinUtils"
 }

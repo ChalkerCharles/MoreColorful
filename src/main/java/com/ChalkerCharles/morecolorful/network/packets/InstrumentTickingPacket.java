@@ -2,7 +2,7 @@ package com.ChalkerCharles.morecolorful.network.packets;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.common.attachment.ModDataAttachments;
-import com.ChalkerCharles.morecolorful.util.NetworkUtils;
+import com.ChalkerCharles.morecolorful.util.ThreadUtils;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -38,7 +38,7 @@ public record InstrumentTickingPacket(float tick, int id) implements CustomPacke
             if (entity instanceof Player) {
                 entity.setData(ModDataAttachments.PLAYING_SCREEN_TICK, tick);
             }
-        }).exceptionally(NetworkUtils.handleException(context));
+        }).exceptionally(ThreadUtils.handlePayloadException(context));
     }
     public static void handleServer(final InstrumentTickingPacket packet, final IPayloadContext context) {
         float tick = packet.tick();
@@ -50,6 +50,6 @@ public record InstrumentTickingPacket(float tick, int id) implements CustomPacke
                 entity.setData(ModDataAttachments.PLAYING_SCREEN_TICK, tick);
                 PacketDistributor.sendToAllPlayers(packet);
             }
-        }).exceptionally(NetworkUtils.handleException(context));
+        }).exceptionally(ThreadUtils.handlePayloadException(context));
     }
 }

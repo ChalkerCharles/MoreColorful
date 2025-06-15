@@ -3,7 +3,7 @@ package com.ChalkerCharles.morecolorful.network.packets;
 import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.common.level.ILevelThermalEngine;
 import com.ChalkerCharles.morecolorful.mixin.extensions.ILevelExtension;
-import com.ChalkerCharles.morecolorful.util.NetworkUtils;
+import com.ChalkerCharles.morecolorful.util.ThreadUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.SectionPos;
@@ -32,7 +32,7 @@ public record ThermalRemovalPacket(ChunkPos pos) implements CustomPacketPayload 
         ClientLevel level = Minecraft.getInstance().level;
         if (level == null) return;
         context.enqueueWork(() -> queueThermalRemoval(packet.pos(), level))
-                .exceptionally(NetworkUtils.handleException(context));
+                .exceptionally(ThreadUtils.handlePayloadException(context));
     }
 
     private static void queueThermalRemoval(ChunkPos pos, ClientLevel level) {

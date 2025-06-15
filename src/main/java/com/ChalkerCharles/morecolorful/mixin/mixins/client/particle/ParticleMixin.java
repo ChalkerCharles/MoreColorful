@@ -2,6 +2,7 @@ package com.ChalkerCharles.morecolorful.mixin.mixins.client.particle;
 
 import com.ChalkerCharles.morecolorful.common.attachment.LevelSavedData;
 import com.ChalkerCharles.morecolorful.mixin.extensions.IParticleExtension;
+import com.ChalkerCharles.morecolorful.util.Predicates;
 import com.ChalkerCharles.morecolorful.util.WeatherUtils;
 import com.ChalkerCharles.morecolorful.util.WindSensitive;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -39,12 +40,14 @@ public abstract class ParticleMixin implements IParticleExtension {
     @Override
     public void moreColorful$applyWind() {
         if (!(this instanceof WindSensitive windSensitive && windSensitive.isWindSensitive())) return;
-        if (!this.stoppedByCollision && WeatherUtils.canApplyWind(level, this.getPos())) {
-            Vector2f globalWind = LevelSavedData.getGlobalWindSpeed(this.level);
-            double windX = globalWind.x() * 0.05 * WeatherUtils.getRandomSpeedMultiplier(random);
-            double windZ = globalWind.y() * 0.05 * WeatherUtils.getRandomSpeedMultiplier(random);
-            this.xd = Mth.clamp(xd + windX * 0.02, -Math.abs(windX), Math.abs(windX));
-            this.zd = Mth.clamp(zd + windZ * 0.02, -Math.abs(windZ), Math.abs(windZ));
+        if (!this.stoppedByCollision) {
+            WeatherUtils.canApplyWind(level, this.getPos()).thenAccept(Predicates.ifTrueThen(() -> {
+                Vector2f globalWind = LevelSavedData.getGlobalWindSpeed(this.level);
+                double windX = globalWind.x() * 0.05 * WeatherUtils.getRandomSpeedMultiplier(random);
+                double windZ = globalWind.y() * 0.05 * WeatherUtils.getRandomSpeedMultiplier(random);
+                this.xd = Mth.clamp(xd + windX * 0.02, -Math.abs(windX), Math.abs(windX));
+                this.zd = Mth.clamp(zd + windZ * 0.02, -Math.abs(windZ), Math.abs(windZ));
+            }));
         }
     }
 }

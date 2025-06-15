@@ -35,7 +35,7 @@ public abstract class ModelBlockRendererMixin {
     @WrapOperation(method = "tesselateWithoutAO(Lnet/minecraft/world/level/BlockAndTintGetter;Lnet/minecraft/client/resources/model/BakedModel;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/BlockPos;Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/mojang/blaze3d/vertex/VertexConsumer;ZLnet/minecraft/util/RandomSource;JILnet/neoforged/neoforge/client/model/data/ModelData;Lnet/minecraft/client/renderer/RenderType;)V",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/block/ModelBlockRenderer;renderModelFaceFlat(Lnet/minecraft/world/level/BlockAndTintGetter;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/BlockPos;IIZLcom/mojang/blaze3d/vertex/PoseStack;Lcom/mojang/blaze3d/vertex/VertexConsumer;Ljava/util/List;Ljava/util/BitSet;)V"))
     private void tesselateWithoutAO(ModelBlockRenderer instance, BlockAndTintGetter pLevel, BlockState pState, BlockPos pPos, int pPackedLight, int pPackedOverlay, boolean pRepackLight, PoseStack pPoseStack, VertexConsumer pConsumer, List<BakedQuad> pQuads, BitSet pShapeFlags, Operation<Void> original,
-                                 @Local(argsOnly = true) RenderType renderType) {
+                                    @Local(argsOnly = true) RenderType renderType) {
         if (renderType.format() == ModVertexFormat.WAVY_BLOCK.get()) {
             RenderUtils.renderModelFaceFlat(instance, pLevel, pState, pPos, pPackedLight, pRepackLight, pPoseStack, pConsumer, pQuads, pShapeFlags);
         } else {

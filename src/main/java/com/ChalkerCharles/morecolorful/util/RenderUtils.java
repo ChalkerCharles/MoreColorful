@@ -1,12 +1,12 @@
 package com.ChalkerCharles.morecolorful.util;
 
 import com.ChalkerCharles.morecolorful.Config;
-import com.ChalkerCharles.morecolorful.client.shader.ModVertexFormat;
 import com.ChalkerCharles.morecolorful.common.block.nature.DuckweedsBlock;
 import com.ChalkerCharles.morecolorful.common.block.properties.HangingBlock;
 import com.ChalkerCharles.morecolorful.mixin.mixins.client.accessor.IQuadLighterMixin;
 import com.google.common.base.Suppliers;
 import com.mojang.blaze3d.vertex.BufferBuilder;
+import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
@@ -16,6 +16,7 @@ import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.block.ModelBlockRenderer;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.SectionPos;
 import net.minecraft.core.Vec3i;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.util.FastColor;
@@ -35,14 +36,17 @@ import org.lwjgl.system.MemoryUtil;
 
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
+import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.*;
 
 @OnlyIn(Dist.CLIENT)
 public final class RenderUtils {
-    private static final Vector4f ZERO = new Vector4f(0);
+    private static final Minecraft minecraft = Minecraft.getInstance();
     private static final float[] WHITE = new float[] { 1.0f, 1.0f, 1.0f };
-    private static final Lazy<Object2IntMap<Block>> VERTEX_TYPE = Lazy.of(Suppliers.memoize(
+    public static final Lazy<Object2IntMap<Block>> VERTEX_TYPE = Lazy.of(Suppliers.memoize(
             () -> {
                 Object2IntMap<Block> map = new Object2IntOpenHashMap<>();
                 BuiltInRegistries.BLOCK.forEach(block -> {
@@ -58,10 +62,15 @@ public final class RenderUtils {
                         map.put(block, 4);
                     else if (block instanceof HangingBlock)
                         map.put(block, 5);
+                    else if (block instanceof LeavesBlock)
+                        map.put(block, 6);
+                    else if (WeatherUtils.isWindSensitiveBlock(block))
+                        map.put(block, 7);
                 });
                 return map;
             }
     ));
+    public static final Map<SectionPos, ConcurrentMap<VertexPos, Vector4f>> VERTICES = new ConcurrentHashMap<>();
 
     public static void renderModelFaceAO(
             ModelBlockRenderer renderer,
@@ -74,28 +83,33 @@ public final class RenderUtils {
             float[] pShape,
             BitSet pShapeFlags,
             ModelBlockRenderer.AmbientOcclusionFace pAoFace) {
+        List<CompletableFuture<Void>> list = new ArrayList<>(pQuads.size());
         for (BakedQuad bakedquad : pQuads) {
             renderer.calculateShape(pLevel, pState, pPos, bakedquad.getVertices(), bakedquad.getDirection(), pShape, pShapeFlags);
             if (!ClientHooks.calculateFaceWithoutAO(pLevel, pState, pPos, bakedquad, pShapeFlags.get(0), pAoFace.brightness, pAoFace.lightmap))
                 pAoFace.calculate(pLevel, pState, pPos, bakedquad.getDirection(), pShape, pShapeFlags, bakedquad.isShade());
-            putQuadData(
-                    renderer,
-                    pLevel,
-                    pState,
-                    pPos,
-                    pConsumer,
-                    pPoseStack.last(),
-                    bakedquad,
-                    pAoFace.brightness[0],
-                    pAoFace.brightness[1],
-                    pAoFace.brightness[2],
-                    pAoFace.brightness[3],
-                    pAoFace.lightmap[0],
-                    pAoFace.lightmap[1],
-                    pAoFace.lightmap[2],
-                    pAoFace.lightmap[3]
-            );
+            list.add(CompletableFuture.runAsync(
+                    () -> putQuadData(
+                            renderer,
+                            pLevel,
+                            pState,
+                            pPos,
+                            pConsumer,
+                            pPoseStack.last(),
+                            bakedquad,
+                            pAoFace.brightness[0],
+                            pAoFace.brightness[1],
+                            pAoFace.brightness[2],
+                            pAoFace.brightness[3],
+                            pAoFace.lightmap[0],
+                            pAoFace.lightmap[1],
+                            pAoFace.lightmap[2],
+                            pAoFace.lightmap[3]
+                    ),
+                    ThreadUtils.VERTEX_EXECUTOR
+            ));
         }
+        CompletableFuture.allOf(list.toArray(CompletableFuture[]::new)).join();
     }
 
     public static void renderModelFaceFlat(
@@ -109,17 +123,23 @@ public final class RenderUtils {
             VertexConsumer pConsumer,
             List<BakedQuad> pQuads,
             BitSet pShapeFlags) {
+        List<CompletableFuture<Void>> list = new ArrayList<>(pQuads.size());
         for (BakedQuad bakedquad : pQuads) {
             if (pRepackLight) {
                 renderer.calculateShape(pLevel, pState, pPos, bakedquad.getVertices(), bakedquad.getDirection(), null, pShapeFlags);
                 BlockPos blockpos = pShapeFlags.get(0) ? pPos.relative(bakedquad.getDirection()) : pPos;
                 pPackedLight = LevelRenderer.getLightColor(pLevel, pState, blockpos);
             }
+            int packedLight = pPackedLight;
             float f = pLevel.getShade(bakedquad.getDirection(), bakedquad.isShade());
-            putQuadData(
-                    renderer, pLevel, pState, pPos, pConsumer, pPoseStack.last(), bakedquad, f, f, f, f, pPackedLight, pPackedLight, pPackedLight, pPackedLight
-            );
+            list.add(CompletableFuture.runAsync(
+                    () -> putQuadData(
+                            renderer, pLevel, pState, pPos, pConsumer, pPoseStack.last(), bakedquad, f, f, f, f, packedLight, packedLight, packedLight, packedLight
+                    ),
+                    ThreadUtils.VERTEX_EXECUTOR
+            ));
         }
+        CompletableFuture.allOf(list.toArray(CompletableFuture[]::new)).join();
     }
 
     private static void putQuadData(
@@ -187,9 +207,10 @@ public final class RenderUtils {
         Vector3f vector3f = pPose.transformNormal((float) vec3i.getX(), (float) vec3i.getY(), (float) vec3i.getZ(), new Vector3f());
         int j = vertices.length / 8;
         int k = (int) (pAlpha * 255.0F);
+        List<CompletableFuture<Void>> list = new ArrayList<>(j);
 
         try (MemoryStack memorystack = MemoryStack.stackPush()) {
-            ByteBuffer bytebuffer = memorystack.malloc(ModVertexFormat.WAVY_BLOCK.get().getVertexSize());
+            ByteBuffer bytebuffer = memorystack.malloc(DefaultVertexFormat.BLOCK.getVertexSize());
             IntBuffer intbuffer = bytebuffer.asIntBuffer();
 
             for (int l = 0; l < j; l++) {
@@ -198,6 +219,8 @@ public final class RenderUtils {
                 float f = bytebuffer.getFloat(0);
                 float f1 = bytebuffer.getFloat(4);
                 float f2 = bytebuffer.getFloat(8);
+                int type = VERTEX_TYPE.get().getOrDefault(state.getBlock(), 0);
+                CompletableFuture<Vector4f> future = CompletableFuture.supplyAsync(() -> getWaveData(pPos, state, f, f1, f2, type), ThreadUtils.WAVE_EXECUTOR);
                 float f3;
                 float f4;
                 float f5;
@@ -220,16 +243,12 @@ public final class RenderUtils {
                 float f9 = bytebuffer.getFloat(20);
                 Vector3f vector3f1 = matrix4f.transformPosition(f, f1, f2, new Vector3f());
                 consumer.applyBakedNormals(vector3f, bytebuffer, pPose.normal());
-                Vector4f wave;
-                if (Config.WIND_EFFECT_CLIENT.isTrue()) {
-                    int type = VERTEX_TYPE.get().getOrDefault(state.getBlock(), 0);
-                    wave = WavyBlockUtils.getWindSpeedByVertex(Minecraft.getInstance().level, state, pPos, f, f1, f2, type);
-                } else {
-                    wave = ZERO;
-                }
-                addVertex((BufferBuilder) consumer, vector3f1.x(), vector3f1.y(), vector3f1.z(), i1, f10, f9, j1, vector3f.x(), vector3f.y(), vector3f.z(), wave);
+                list.add(future.thenAccept(wave ->
+                        addVertex((BufferBuilder) consumer, vector3f1.x(), vector3f1.y(), vector3f1.z(), i1, f10, f9, j1, vector3f.x(), vector3f.y(), vector3f.z(), wave)
+                ));
             }
         }
+        CompletableFuture.allOf(list.toArray(CompletableFuture[]::new)).join();
     }
 
     private static void addVertex(
@@ -281,10 +300,7 @@ public final class RenderUtils {
             float pU,
             float pV,
             int pPackedLight,
-            BlockPos pos) {
-        Vector3f wave = Config.WIND_EFFECT_CLIENT.isTrue()
-                ? WavyBlockUtils.getWindSpeedByLiquidVertex(Minecraft.getInstance().level, pos, pX, pY, pZ)
-                : new Vector3f();
+            Vector4f wave) {
         long i = ((BufferBuilder) consumer).beginVertex();
         MemoryUtil.memPutFloat(i, pX);
         MemoryUtil.memPutFloat(i + 4L, pY);
@@ -303,5 +319,31 @@ public final class RenderUtils {
         MemoryUtil.memPutFloat(i + 35L, wave.y);
         MemoryUtil.memPutFloat(i + 39L, wave.z);
         MemoryUtil.memPutFloat(i + 43L, 0);
+    }
+
+    public static Vector4f getWaveData(BlockPos pos, BlockState state, float x, float y, float z, int type) {
+        if (Config.WIND_EFFECT_CLIENT.isTrue()) {
+            SectionPos sectionPos = SectionPos.of(pos);
+            VertexPos vertexPos = VertexPos.of(pos, x, y, z);
+            return VERTICES.computeIfAbsent(sectionPos, k -> new ConcurrentHashMap<>())
+                    .computeIfAbsent(vertexPos, k -> WavyBlockUtils.getWindSpeedByVertex(minecraft.level, state, pos, x, y, z, type));
+        }
+        return Constants.ZERO_VEC4;
+    }
+
+    public static Vector4f getFluidWaveData(BlockPos pos, float x, float y, float z) {
+        if (Config.WIND_EFFECT_CLIENT.isTrue()) {
+            SectionPos sectionPos = SectionPos.of(pos);
+            VertexPos vertexPos = VertexPos.of(pos, x, y, z);
+            return VERTICES.computeIfAbsent(sectionPos, k -> new ConcurrentHashMap<>())
+                    .computeIfAbsent(vertexPos, k -> WavyBlockUtils.getWindSpeedByLiquidVertex(minecraft.level, pos, x, y, z).join());
+        }
+        return Constants.ZERO_VEC4;
+    }
+
+    public record VertexPos(BlockPos blockPos, float x, float y, float z) {
+        public static VertexPos of(BlockPos blockPos, float x, float y, float z) {
+            return new VertexPos(blockPos, x, y, z);
+        }
     }
 }

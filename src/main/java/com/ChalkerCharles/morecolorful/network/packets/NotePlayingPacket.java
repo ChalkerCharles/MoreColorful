@@ -2,7 +2,7 @@ package com.ChalkerCharles.morecolorful.network.packets;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.common.item.musical_instruments.InstrumentsType;
-import com.ChalkerCharles.morecolorful.util.NetworkUtils;
+import com.ChalkerCharles.morecolorful.util.ThreadUtils;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -57,6 +57,6 @@ public record NotePlayingPacket(InstrumentsType pType, BlockPos pos, int keyId, 
                 ((ServerLevel) level).sendParticles(ParticleTypes.NOTE, player.getX() + random, player.getY()+2.2, player.getZ() + random1, 0, 1.0, 0.0, 0.0, keyId / 24.0);
                 level.gameEvent(player, GameEvent.INSTRUMENT_PLAY, player.position());
             }
-        }).exceptionally(NetworkUtils.handleException(context));
+        }).exceptionally(ThreadUtils.handlePayloadException(context));
     }
 }

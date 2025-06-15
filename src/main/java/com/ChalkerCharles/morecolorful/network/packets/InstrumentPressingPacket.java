@@ -2,7 +2,7 @@ package com.ChalkerCharles.morecolorful.network.packets;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.common.attachment.ModDataAttachments;
-import com.ChalkerCharles.morecolorful.util.NetworkUtils;
+import com.ChalkerCharles.morecolorful.util.ThreadUtils;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -35,7 +35,7 @@ public record InstrumentPressingPacket(int id, boolean isPressing) implements Cu
             if (entity instanceof Player) {
                 entity.setData(ModDataAttachments.IS_PLAYING_INSTRUMENT, isPressing);
             }
-        }).exceptionally(NetworkUtils.handleException(context));
+        }).exceptionally(ThreadUtils.handlePayloadException(context));
     }
     public static void handleServer(final InstrumentPressingPacket packet, final IPayloadContext context) {
         int id = packet.id();
@@ -47,6 +47,6 @@ public record InstrumentPressingPacket(int id, boolean isPressing) implements Cu
                 entity.setData(ModDataAttachments.IS_PLAYING_INSTRUMENT, isPressing);
                 PacketDistributor.sendToAllPlayers(packet);
             }
-        }).exceptionally(NetworkUtils.handleException(context));
+        }).exceptionally(ThreadUtils.handlePayloadException(context));
     }
 }

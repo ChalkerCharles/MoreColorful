@@ -1,6 +1,7 @@
 package com.ChalkerCharles.morecolorful.mixin.mixins.client.particle;
 
 import com.ChalkerCharles.morecolorful.common.attachment.LevelSavedData;
+import com.ChalkerCharles.morecolorful.util.Predicates;
 import com.ChalkerCharles.morecolorful.util.WeatherUtils;
 import com.ChalkerCharles.morecolorful.util.WindSensitive;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -19,12 +20,12 @@ public abstract class CampfireSmokeParticleMixin extends TextureSheetParticle im
 
     @Inject(method = "tick", at = @At("TAIL"))
     private void tick(CallbackInfo ci) {
-        if (WeatherUtils.canApplyWind(level, this.getPos())) {
+        WeatherUtils.canApplyWind(level, this.getPos()).thenAccept(Predicates.ifTrueThen(() -> {
             if (this.age < 20) return;
             float wind = LevelSavedData.getGlobalWindSpeed(level).length();
             float i = this.lifetime > 150 ? 0.015F : 0.025F;
             float j = Math.max(0.25F, wind * 0.1F);
             this.alpha = Math.max(0, alpha - (float) Math.tanh(wind * 0.5) * i * j);
-        }
+        }));
     }
 }
