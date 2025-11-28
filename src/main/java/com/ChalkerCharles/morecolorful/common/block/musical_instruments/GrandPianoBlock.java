@@ -4,8 +4,9 @@ import com.ChalkerCharles.morecolorful.client.gui.PlayingScreen;
 import com.ChalkerCharles.morecolorful.common.ModStats;
 import com.ChalkerCharles.morecolorful.common.block.properties.GrandPianoPart;
 import com.ChalkerCharles.morecolorful.common.block.properties.ModBlockStateProperties;
-import com.ChalkerCharles.morecolorful.common.item.musical_instruments.InstrumentsType;
+import com.ChalkerCharles.morecolorful.util.InstrumentsType;
 import com.ChalkerCharles.morecolorful.network.packets.PlayingScreenPacket;
+import com.ChalkerCharles.morecolorful.util.MusicalInstrument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionResult;
@@ -21,6 +22,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -29,7 +31,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 
 import javax.annotation.Nullable;
 
-public class GrandPianoBlock extends MusicalInstrumentBlock {
+public class GrandPianoBlock extends Block implements MusicalInstrument {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final EnumProperty<GrandPianoPart> PART = ModBlockStateProperties.GRAND_PIANO_PART;
     private static final VoxelShape NORTH_FRONT_LEFT_LOWER = Shapes.or(
@@ -245,18 +247,23 @@ public class GrandPianoBlock extends MusicalInstrumentBlock {
             Block.box(0.0, 13.5, 4.0, 6.0, 15.0, 8.0),
             Block.box(0.0, 15.0, 8.0, 6.0, 16.5, 12.0));
 
-    public GrandPianoBlock(InstrumentsType pType, Properties properties) {
-        super(pType, properties);
+    public GrandPianoBlock(Properties properties) {
+        super(properties);
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(PART, GrandPianoPart.FRONT_LEFT_LOWER)
         );
     }
 
     @Override
+    public InstrumentsType getType() {
+        return InstrumentsType.PIANO_LOW;
+    }
+
+    @Override
     public InteractionResult useWithoutItem (BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, BlockHitResult pHitResult) {
         if (pLevel.isClientSide){
-            PlayingScreen.openPlayingScreen(pPlayer, pType, pPos);
-            PacketDistributor.sendToServer(new PlayingScreenPacket(pType, pPos, pPlayer.getId(), true));
+            PlayingScreen.openPlayingScreen(pPlayer, this.getType(), pPos);
+            PacketDistributor.sendToServer(new PlayingScreenPacket(this.getType(), pPos, pPlayer.getId(), true));
         }
         pPlayer.awardStat(ModStats.INTERACT_WITH_PIANO.get());
         return InteractionResult.CONSUME;
@@ -267,7 +274,7 @@ public class GrandPianoBlock extends MusicalInstrumentBlock {
         Direction direction = pState.getValue(FACING);
         GrandPianoPart part = pState.getValue(PART);
         return switch (direction){
-            case WEST -> switch (part){
+            case WEST -> switch (part) {
                 case FRONT_LEFT_UPPER -> WEST_FRONT_LEFT_UPPER;
                 case FRONT_RIGHT_LOWER -> WEST_FRONT_RIGHT_LOWER;
                 case FRONT_RIGHT_UPPER -> WEST_FRONT_RIGHT_UPPER;
@@ -276,7 +283,7 @@ public class GrandPianoBlock extends MusicalInstrumentBlock {
                 case BACK_RIGHT_UPPER -> WEST_BACK_RIGHT_UPPER;
                 default -> WEST_FRONT_LEFT_LOWER;
             };
-            case SOUTH -> switch (part){
+            case SOUTH -> switch (part) {
                 case FRONT_LEFT_UPPER -> SOUTH_FRONT_LEFT_UPPER;
                 case FRONT_RIGHT_LOWER -> SOUTH_FRONT_RIGHT_LOWER;
                 case FRONT_RIGHT_UPPER -> SOUTH_FRONT_RIGHT_UPPER;
@@ -285,7 +292,7 @@ public class GrandPianoBlock extends MusicalInstrumentBlock {
                 case BACK_RIGHT_UPPER -> SOUTH_BACK_RIGHT_UPPER;
                 default -> SOUTH_FRONT_LEFT_LOWER;
             };
-            case EAST -> switch (part){
+            case EAST -> switch (part) {
                 case FRONT_LEFT_UPPER -> EAST_FRONT_LEFT_UPPER;
                 case FRONT_RIGHT_LOWER -> EAST_FRONT_RIGHT_LOWER;
                 case FRONT_RIGHT_UPPER -> EAST_FRONT_RIGHT_UPPER;
@@ -294,7 +301,7 @@ public class GrandPianoBlock extends MusicalInstrumentBlock {
                 case BACK_RIGHT_UPPER -> EAST_BACK_RIGHT_UPPER;
                 default -> EAST_FRONT_LEFT_LOWER;
             };
-            default -> switch (part){
+            default -> switch (part) {
                 case FRONT_LEFT_UPPER -> NORTH_FRONT_LEFT_UPPER;
                 case FRONT_RIGHT_LOWER -> NORTH_FRONT_RIGHT_LOWER;
                 case FRONT_RIGHT_UPPER -> NORTH_FRONT_RIGHT_UPPER;
@@ -305,45 +312,53 @@ public class GrandPianoBlock extends MusicalInstrumentBlock {
             };
         };
     }
+
     @Override
     protected BlockState updateShape(BlockState pState, Direction pDirection, BlockState pNeighborState, LevelAccessor pLevel, BlockPos pPos, BlockPos pNeighborPos) {
-        if (pDirection == getNeighbourDirection(pState.getValue(PART), pState.getValue(FACING)) && pState.getValue(PART) != GrandPianoPart.BACK_LEFT_LOWER) {
-            return pNeighborState.is(this) && pNeighborState.getValue(PART) != pState.getValue(PART)
+        GrandPianoPart part = pState.getValue(PART);
+        Direction direction = pState.getValue(FACING);
+        if (pDirection == getNeighbourDirectionX(part, direction) && part != GrandPianoPart.BACK_LEFT_LOWER) {
+            return pNeighborState.is(this) && pNeighborState.getValue(PART) != part
                     ? super.updateShape(pState, pDirection, pNeighborState, pLevel, pPos, pNeighborPos)
                     : Blocks.AIR.defaultBlockState();
-        } else if (pDirection == getNeighbourDirectionAlt(pState.getValue(PART), pState.getValue(FACING)) && pState.getValue(PART) != GrandPianoPart.FRONT_RIGHT_LOWER) {
-                return pNeighborState.is(this) && pNeighborState.getValue(PART) != pState.getValue(PART)
-                        ? super.updateShape(pState, pDirection, pNeighborState, pLevel, pPos, pNeighborPos)
-                        : Blocks.AIR.defaultBlockState();
-        } else if (pDirection == getNeighbourDirection(pState.getValue(PART)) && pState.getValue(PART) != GrandPianoPart.BACK_RIGHT_UPPER) {
-            return pNeighborState.is(this) && pNeighborState.getValue(PART) != pState.getValue(PART)
+        } else if (pDirection == getNeighbourDirectionZ(part, direction) && part != GrandPianoPart.FRONT_RIGHT_LOWER) {
+            return pNeighborState.is(this) && pNeighborState.getValue(PART) != part
+                    ? super.updateShape(pState, pDirection, pNeighborState, pLevel, pPos, pNeighborPos)
+                    : Blocks.AIR.defaultBlockState();
+        } else if (pDirection == getNeighbourDirectionY(part) && part != GrandPianoPart.BACK_RIGHT_UPPER) {
+            return pNeighborState.is(this) && pNeighborState.getValue(PART) != part
                     ? super.updateShape(pState, pDirection, pNeighborState, pLevel, pPos, pNeighborPos)
                     : Blocks.AIR.defaultBlockState();
         } else {
             return super.updateShape(pState, pDirection, pNeighborState, pLevel, pPos, pNeighborPos);
         }
     }
-    private static Direction getNeighbourDirection(GrandPianoPart pPart, Direction pDirection) {
-        return (pPart == GrandPianoPart.FRONT_LEFT_LOWER || pPart == GrandPianoPart.FRONT_LEFT_UPPER || pPart == GrandPianoPart.BACK_LEFT_UPPER) ? pDirection.getCounterClockWise() : pDirection.getClockWise();
+
+    private static Direction getNeighbourDirectionX(GrandPianoPart part, Direction direction) {
+        return part.isLeft() ? direction.getCounterClockWise() : direction.getClockWise();
     }
-    private static Direction getNeighbourDirectionAlt(GrandPianoPart pPart, Direction pDirection) {
-        return (pPart == GrandPianoPart.FRONT_LEFT_LOWER || pPart == GrandPianoPart.FRONT_LEFT_UPPER || pPart == GrandPianoPart.FRONT_RIGHT_UPPER) ? pDirection.getOpposite() : pDirection;
+
+    private static Direction getNeighbourDirectionZ(GrandPianoPart part, Direction direction) {
+        return part.isFront() ? direction.getOpposite() : direction;
     }
-    private static Direction getNeighbourDirection(GrandPianoPart pPart) {
-        return (pPart == GrandPianoPart.FRONT_LEFT_LOWER || pPart == GrandPianoPart.FRONT_RIGHT_LOWER || pPart == GrandPianoPart.BACK_LEFT_LOWER) ? Direction.UP : Direction.DOWN;
+
+    private static Direction getNeighbourDirectionY(GrandPianoPart part) {
+        return part.isLower() ? Direction.UP : Direction.DOWN;
     }
+
     @Override
     public BlockState playerWillDestroy(Level pLevel, BlockPos pPos, BlockState pState, Player pPlayer) {
         if (!pLevel.isClientSide && (pPlayer.isCreative() || !pPlayer.hasCorrectToolForDrops(pState, pLevel, pPos))) {
             GrandPianoPart part = pState.getValue(PART);
+            Direction direction = pState.getValue(FACING);
             if (part != GrandPianoPart.FRONT_RIGHT_LOWER) {
                 BlockPos blockpos = switch (part) {
-                    case FRONT_LEFT_LOWER ->  pPos.relative(getNeighbourDirection(part, pState.getValue(FACING)));
-                    case FRONT_LEFT_UPPER -> pPos.relative(getNeighbourDirection(part, pState.getValue(FACING))).below();
+                    case FRONT_LEFT_LOWER ->  pPos.relative(getNeighbourDirectionX(part, direction));
+                    case FRONT_LEFT_UPPER -> pPos.relative(getNeighbourDirectionX(part, direction)).below();
                     case FRONT_RIGHT_UPPER -> pPos.below();
-                    case BACK_LEFT_LOWER -> pPos.relative(getNeighbourDirectionAlt(part, pState.getValue(FACING))).relative(getNeighbourDirection(part, pState.getValue(FACING)));
-                    case BACK_LEFT_UPPER -> pPos.relative(getNeighbourDirectionAlt(part, pState.getValue(FACING))).relative(getNeighbourDirection(part, pState.getValue(FACING))).below();
-                    case BACK_RIGHT_UPPER -> pPos.relative(getNeighbourDirectionAlt(part, pState.getValue(FACING))).below();
+                    case BACK_LEFT_LOWER -> pPos.relative(getNeighbourDirectionZ(part, direction)).relative(getNeighbourDirectionX(part, direction));
+                    case BACK_LEFT_UPPER -> pPos.relative(getNeighbourDirectionZ(part, direction)).relative(getNeighbourDirectionX(part, direction)).below();
+                    case BACK_RIGHT_UPPER -> pPos.relative(getNeighbourDirectionZ(part, direction)).below();
                     default -> null;
                 };
                 BlockState blockstate = pLevel.getBlockState(blockpos);
@@ -355,6 +370,7 @@ public class GrandPianoBlock extends MusicalInstrumentBlock {
         }
         return super.playerWillDestroy(pLevel, pPos, pState, pPlayer);
     }
+
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {
@@ -374,24 +390,34 @@ public class GrandPianoBlock extends MusicalInstrumentBlock {
             return null;
         }
     }
+
     @Override
     public void setPlacedBy(Level pLevel, BlockPos pPos, BlockState pState, LivingEntity pPlacer, ItemStack pStack) {
+        Direction direction = pState.getValue(FACING);
         pLevel.setBlock(pPos.above(), pState.setValue(PART, GrandPianoPart.FRONT_LEFT_UPPER), 3);
-        pLevel.setBlock(pPos.relative(pState.getValue(FACING).getCounterClockWise()), pState.setValue(PART, GrandPianoPart.FRONT_RIGHT_LOWER), 3);
-        pLevel.setBlock(pPos.relative(pState.getValue(FACING).getCounterClockWise()).above(), pState.setValue(PART, GrandPianoPart.FRONT_RIGHT_UPPER), 3);
-        pLevel.setBlock(pPos.relative(pState.getValue(FACING).getOpposite()), pState.setValue(PART, GrandPianoPart.BACK_LEFT_LOWER), 3);
-        pLevel.setBlock(pPos.relative(pState.getValue(FACING).getOpposite()).above(), pState.setValue(PART, GrandPianoPart.BACK_LEFT_UPPER), 3);
-        pLevel.setBlock(pPos.relative(pState.getValue(FACING).getCounterClockWise()).relative(pState.getValue(FACING).getOpposite()).above(), pState.setValue(PART, GrandPianoPart.BACK_RIGHT_UPPER), 3);
+        pLevel.setBlock(pPos.relative(direction.getCounterClockWise()), pState.setValue(PART, GrandPianoPart.FRONT_RIGHT_LOWER), 3);
+        pLevel.setBlock(pPos.relative(direction.getCounterClockWise()).above(), pState.setValue(PART, GrandPianoPart.FRONT_RIGHT_UPPER), 3);
+        pLevel.setBlock(pPos.relative(direction.getOpposite()), pState.setValue(PART, GrandPianoPart.BACK_LEFT_LOWER), 3);
+        pLevel.setBlock(pPos.relative(direction.getOpposite()).above(), pState.setValue(PART, GrandPianoPart.BACK_LEFT_UPPER), 3);
+        pLevel.setBlock(pPos.relative(direction.getCounterClockWise()).relative(direction.getOpposite()).above(), pState.setValue(PART, GrandPianoPart.BACK_RIGHT_UPPER), 3);
     }
+
     @Override
     protected BlockState rotate(BlockState pState, Rotation pRot) {
         return pState.setValue(FACING, pRot.rotate(pState.getValue(FACING)));
     }
+
     @SuppressWarnings("deprecation")
     @Override
     protected BlockState mirror(BlockState pState, Mirror pMirror) {
         return pState.rotate(pMirror.getRotation(pState.getValue(FACING)));
     }
+
+    @Override
+    protected boolean isPathfindable(BlockState pState, PathComputationType pPathComputationType) {
+        return false;
+    }
+
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
         pBuilder.add(FACING, PART);

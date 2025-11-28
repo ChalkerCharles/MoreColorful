@@ -1,6 +1,7 @@
 package com.ChalkerCharles.morecolorful.mixin.mixins.chunk;
 
-import com.ChalkerCharles.morecolorful.common.level.ILevelThermalEngine;
+import com.ChalkerCharles.morecolorful.common.level.thermal.ILevelThermalEngine;
+import com.ChalkerCharles.morecolorful.common.level.wind.ILevelVentEngine;
 import com.ChalkerCharles.morecolorful.mixin.extensions.IChunkSourceExtension;
 import net.minecraft.core.SectionPos;
 import net.minecraft.world.level.chunk.ChunkAccess;
@@ -28,6 +29,21 @@ public abstract class ChunkSourceMixin implements IChunkSourceExtension {
 
     @Override
     public ILevelThermalEngine moreColorful$getThermalEngine() {
-        return ILevelThermalEngine.DummyLevelThermalEngine.INSTANCE;
+        return ILevelThermalEngine.Dummy.INSTANCE;
+    }
+
+    @Override
+    @Nullable
+    public ChunkAccess moreColorful$getVentChunk(int pChunkX, int pChunkZ) {
+        return this.getChunk(pChunkX, pChunkZ, ChunkStatus.EMPTY, false);
+    }
+
+    @Override
+    public void moreColorful$onVentUpdate(SectionPos pPos) {
+    }
+
+    @Override
+    public ILevelVentEngine moreColorful$getVentEngine() {
+        return ILevelVentEngine.Dummy.INSTANCE;
     }
 }

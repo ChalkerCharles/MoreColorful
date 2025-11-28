@@ -2,19 +2,21 @@ package com.ChalkerCharles.morecolorful.client;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
 import net.minecraft.client.Minecraft;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 import javax.sound.midi.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
-import java.util.function.Consumer;
+import java.util.function.IntConsumer;
 
+@OnlyIn(Dist.CLIENT)
 public class MidiHandler {
-    private final ArrayList<MidiDevice> devices = new ArrayList<>();
-    private final Consumer<Integer> noteOnHandler;
-    private final Consumer<Integer> noteOffHandler;
+    private final List<MidiDevice> devices = new ArrayList<>();
+    private final IntConsumer noteOnHandler;
+    private final IntConsumer noteOffHandler;
 
-    public MidiHandler(Consumer<Integer> noteOnHandler, Consumer<Integer> noteOffHandler) {
+    public MidiHandler(IntConsumer noteOnHandler, IntConsumer noteOffHandler) {
         this.noteOnHandler = noteOnHandler;
         this.noteOffHandler = noteOffHandler;
 
@@ -40,15 +42,16 @@ public class MidiHandler {
     }
 
     public void closeDevices() {
-        for(MidiDevice device : devices){
-            if(device.isOpen()){
+        for (MidiDevice device : devices) {
+            if (device.isOpen()) {
                 device.close();
             }
         }
     }
 
-    public class MidiInputReceiver implements Receiver {
+    private class MidiInputReceiver implements Receiver {
         public final String name;
+
         public MidiInputReceiver(String name) {
             this.name = name;
         }
@@ -57,21 +60,15 @@ public class MidiHandler {
         public void send(MidiMessage message, long timeStamp) {
             if (message instanceof ShortMessage msg) {
                 int keyId = msg.getData1() - 54;
-                if(keyId < 0 || keyId > 24){
+                if (keyId < 0 || keyId > 24) {
                     return;
                 }
+                Minecraft minecraft = Minecraft.getInstance();
                 if (msg.getCommand() == ShortMessage.NOTE_ON) {
-                    try {
-                        Minecraft.getInstance().submit(() -> noteOnHandler.accept(keyId)).get();
-                    } catch (InterruptedException | ExecutionException e) {
-                        throw new RuntimeException(e);
-                    }
-                } else if (msg.getCommand() == ShortMessage.NOTE_OFF) {
-                    try {
-                        Minecraft.getInstance().submit(() -> noteOffHandler.accept(keyId)).get();
-                    } catch (InterruptedException | ExecutionException e) {
-                        throw new RuntimeException(e);
-                    }
+                    var ignore = minecraft.submit(() -> MidiHandler.this.noteOnHandler.accept(keyId));
+                }
+                if (msg.getCommand() == ShortMessage.NOTE_OFF) {
+                    var ignore = minecraft.submit(() -> MidiHandler.this.noteOffHandler.accept(keyId));
                 }
             }
         }

@@ -2,6 +2,7 @@ package com.ChalkerCharles.morecolorful.common.item.musical_instruments;
 
 import com.ChalkerCharles.morecolorful.client.gui.PlayingScreen;
 import com.ChalkerCharles.morecolorful.network.packets.PlayingScreenPacket;
+import com.ChalkerCharles.morecolorful.util.InstrumentsType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
@@ -13,27 +14,29 @@ import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 public class BothHandsInstrumentItem extends MusicalInstrumentItem {
-
-    public BothHandsInstrumentItem(InstrumentsType pType, Properties pProperties) {
-        super(pType, pProperties);
-        this.pType = pType;
+    public BothHandsInstrumentItem(InstrumentsType type, Properties pProperties) {
+        super(type, pProperties);
     }
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pHand) {
-        ItemStack pStack = pPlayer.getItemInHand(pHand);
-        if ((pHand == InteractionHand.MAIN_HAND && !pPlayer.hasItemInSlot(EquipmentSlot.OFFHAND))
-                || (pHand == InteractionHand.OFF_HAND && !pPlayer.hasItemInSlot(EquipmentSlot.MAINHAND))){
+        ItemStack stack = pPlayer.getItemInHand(pHand);
+        if (emptyHanded(pPlayer, pHand)) {
             if (pLevel.isClientSide) {
-                PlayingScreen.openPlayingScreen(pPlayer, pType);
-                PacketDistributor.sendToServer(new PlayingScreenPacket(pType, PlayingScreen.DEFAULT_POS, pPlayer.getId(), true));
+                PlayingScreen.openPlayingScreen(pPlayer, type);
+                PacketDistributor.sendToServer(new PlayingScreenPacket(type, pPlayer.getId(), true));
             }
             pPlayer.startUsingItem(pHand);
             pPlayer.awardStat(Stats.ITEM_USED.get(this));
         } else {
             pPlayer.displayClientMessage(Component.translatable("info.morecolorful.instruments.busy_hands"), true);
-            return InteractionResultHolder.fail(pStack);
+            return InteractionResultHolder.fail(stack);
         }
-        return InteractionResultHolder.consume(pStack);
+        return InteractionResultHolder.consume(stack);
+    }
+
+    private static boolean emptyHanded(Player player, InteractionHand hand) {
+        if (hand == InteractionHand.MAIN_HAND && !player.hasItemInSlot(EquipmentSlot.OFFHAND)) return true;
+        return hand == InteractionHand.OFF_HAND && !player.hasItemInSlot(EquipmentSlot.MAINHAND);
     }
 }

@@ -1,130 +1,172 @@
 package com.ChalkerCharles.morecolorful.util;
 
 import com.ChalkerCharles.morecolorful.Config;
-import com.ChalkerCharles.morecolorful.common.ModTags;
 import com.ChalkerCharles.morecolorful.common.attachment.LevelSavedData;
-import it.unimi.dsi.fastutil.Pair;
+import com.ChalkerCharles.morecolorful.util.client.RenderUtils;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.core.SectionPos;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LightLayer;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.lighting.LightEngine;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.common.Tags;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 
-import java.util.Map;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ConcurrentHashMap;
-
 public final class WeatherUtils {
-    public static final Map<SectionPos, Map<BlockPos, Boolean>> WINDY_BLOCKS = new ConcurrentHashMap<>();
-
     public static boolean isWindy(Level level) {
         return !isWindless(level);
     }
 
     public static boolean isWindless(Level level) {
-        if (Config.WIND_SYSTEM.isFalse()) return true;
+        if (Config.WIND_SYSTEM.isFalse() || level.isDebug()) return true;
         return Config.windlessDimensions.contains(level.dimension());
     }
 
-    public static Vector3f getWindSpeed(Level level) {
-        Vector2f vector2f = LevelSavedData.getGlobalWindSpeed(level);
-        return new Vector3f(vector2f.x(), 0, vector2f.y());
+    private static Vector2f getGlobalWindSpeed(Level level) {
+        return level.isClientSide ? RenderUtils.WIND_SPEED : LevelSavedData.getGlobalWindSpeed(level);
     }
 
-    public static boolean isWindSensitiveBlock(Block block) {
-        return block instanceof WindSensitive windSensitive && windSensitive.isWindSensitive();
+    private static boolean isWindCalm(Level level) {
+        return level.isClientSide ? RenderUtils.isCalm : LevelSavedData.isWindCalm(level);
     }
 
-    public static boolean canApplyWind(Level level, BlockPos pos) {
-        if (LevelSavedData.getGlobalWindSpeed(level).equals(0, 0)) return false;
-        if (!level.getFluidState(pos).isEmpty()) return false;
-        SectionPos sectionPos = SectionPos.of(pos);
-        return WINDY_BLOCKS.computeIfAbsent(sectionPos, k -> new ConcurrentHashMap<>())
-                .computeIfAbsent(pos, p -> {
-                    CompletableFuture<BlockHitResult> future = getHitResult(level, Vec3.atCenterOf(p), p);
-                    return future.thenApply(hitResult -> hitResult.getType() == HitResult.Type.MISS).join();
-                });
+    private static Vector2f getWindDirection(Level level) {
+        return level.isClientSide ? RenderUtils.WIND_DIR : LevelSavedData.getWindDirection(level);
     }
 
-    public static CompletableFuture<Boolean> canApplyWind(Level level, Vec3 pos) {
-        if (LevelSavedData.getGlobalWindSpeed(level).equals(0, 0)) return Constants.FALSE_FUTURE;
-        BlockPos currentPos = BlockPos.containing(pos);
-        if (!level.getFluidState(currentPos).isEmpty()) return Constants.FALSE_FUTURE;
-        CompletableFuture<BlockHitResult> future = getHitResult(level, pos, currentPos);
-        return future.thenApply(hitResult ->  hitResult.getType() == HitResult.Type.MISS);
+    public static Vector3f getWindSpeedAt(Level level, double x, double y, double z, boolean isGloballyWindy) {
+        Vector3f local = LevelSavedData.getLocalWindSpeedAt(level, x, y, z);
+        if (isGloballyWindy) {
+            Vector2f vec = getGlobalWindSpeed(level);
+            return local.add(vec.x, 0, vec.y);
+        } else {
+            return local;
+        }
     }
 
-    private static CompletableFuture<BlockHitResult> getHitResult(Level level, Vec3 start, BlockPos currentPos) {
-        Vector2f wind = LevelSavedData.getGlobalWindSpeed(level);
-        int skyLight = level.getBrightness(LightLayer.SKY, currentPos) - level.getMaxLightLevel();
-        Vec3 end = new Vec3(wind.x(), 0, wind.y()).normalize().scale(2 * skyLight - 4).add(start);
-        return CompletableFuture.supplyAsync(() -> isBlockThatBlocksWindInLine(level, Pair.of(start, end)), ThreadUtils.WIND_EXECUTOR);
+    public static Vector3f getWindSpeedAffectingEntity(Level level, Vec3 vec3, boolean isGloballyWindy) {
+        Vector3f local = LevelSavedData.getLocalWindSpeedAffectingEntity(level, vec3);
+        if (isGloballyWindy) {
+            Vector2f vec = getGlobalWindSpeed(level);
+            return local.add(vec.x, 0, vec.y);
+        } else {
+            return local;
+        }
     }
 
-    private static BlockHitResult isBlockThatBlocksWindInLine(Level level, Pair<Vec3, Vec3> pair) {
-        return BlockGetter.traverseBlocks(
-                pair.left(),
-                pair.right(),
-                pair,
-                (p, pos) -> {
-                    BlockState state = level.getBlockState(pos);
-                    Vec3 vec3 = p.left().subtract(p.right());
-                    Direction direction = Direction.getNearest(vec3.x, vec3.y, vec3.z);
-                    return canBlockWind(level, pos, state, direction)
-                            ? new BlockHitResult(p.right(), direction, BlockPos.containing(p.right()), false)
-                            : null;
-                },
-                p -> {
-                    Vec3 vec3 = p.left().subtract(p.right());
-                    return BlockHitResult.miss(p.right(), Direction.getNearest(vec3.x, vec3.y, vec3.z), BlockPos.containing(p.right()));
+    public static boolean isWindSensitive(Object o) {
+        return o instanceof WindSensitive w && w.moreColorful$isWindSensitive();
+    }
+
+    public static boolean canApplyWind(Level level, double x, double y, double z) {
+        if (isWindCalm(level)) return false;
+        int px = Mth.floor(x), py = Mth.floor(y), pz = Mth.floor(z);
+        if (!LevelSavedData.getFluidState(level, px, py, pz).isEmpty()) return false;
+        int result = getWindResult(level, x, y, z, px, py, pz);
+        return result == 1;
+    }
+
+    public static boolean canApplyWind(Level level, int x, double y, int z, BlockPos pos) {
+        return canApplyWindI(level, x, y, z, pos) == 1;
+    }
+
+    public static int canApplyWindI(Level level, BlockPos pos) {
+        if (isWindCalm(level)) return 0;
+        if (!level.getFluidState(pos).isEmpty()) return 0;
+        return getWindResult(level, pos.getCenter(), pos);
+    }
+
+    public static int canApplyWindI(Level level, int x, double y, int z, BlockPos pos) {
+        if (isWindCalm(level)) return 0;
+        if (level.isOutsideBuildHeight(pos.getY())) return 1;
+        if (!level.getFluidState(pos).isEmpty()) return 0;
+        return getWindResult(level, x, y, z, pos);
+    }
+
+    public static int canApplyWindI(Level level, int x, int y, int z) {
+        if (isWindCalm(level)) return 0;
+        if (!LevelSavedData.getFluidState(level, x, y, z).isEmpty()) return 0;
+        return getWindResult(level, x + 0.5, y + 0.5, z + 0.5, x, y, z);
+    }
+
+    public static int canApplyWindI(Level level, int x, double y, int z, int px, int py, int pz) {
+        if (isWindCalm(level)) return 0;
+        if (level.isOutsideBuildHeight(py)) return 1;
+        if (!LevelSavedData.getFluidState(level, px, py, pz).isEmpty()) return 0;
+        return getWindResult(level, x, y, z, px, py, pz);
+    }
+
+    public static int getWindResult(Level level, Vec3 start, BlockPos currentPos) {
+        Vector2f vec = getWindDirection(level);
+        int vent = LevelSavedData.getVentilation(level, currentPos) - 15;
+        int a = 2 * vent - 4;
+        double toX = (vec.x * a) + start.x, toZ = (vec.y * a) + start.z;
+        return canWindPassThrough(level, start.x, start.z, toX, toZ, start.y);
+    }
+
+    public static int getWindResult(Level level, double x, double y, double z, BlockPos pos) {
+        Vector2f vec = getWindDirection(level);
+        int vent = LevelSavedData.getVentilation(level, pos) - 15;
+        int a = 2 * vent - 4;
+        double toX = (vec.x * a) + x, toZ = (vec.y * a) + z;
+        return canWindPassThrough(level, x, z, toX, toZ, y);
+    }
+
+    public static int getWindResult(Level level, double x, double y, double z, int px, int py, int pz) {
+        int vent = LevelSavedData.getVentilation(level, px, py, pz) - 15;
+        int a = 2 * vent - 4;
+        Vector2f dir = getWindDirection(level);
+        double toX = (dir.x * a) + x, toZ = (dir.y * a) + z;
+        return canWindPassThrough(level, x, z, toX, toZ, y);
+    }
+
+    private static int canWindPassThrough(Level level, double fromX, double fromZ, double toX, double toZ, double y) {
+        if (Maths.equals(fromX, fromZ, toX, toZ)) {
+            return 1;
+        } else {
+            int airBlock = AirBlocking.FULL_BLOCK;
+            double d0 = Mth.lerp(-1.0E-7, toX, fromX);
+            double d2 = Mth.lerp(-1.0E-7, toZ, fromZ);
+            double d3 = Mth.lerp(-1.0E-7, fromX, toX);
+            double d5 = Mth.lerp(-1.0E-7, fromZ, toZ);
+            int i = Mth.floor(d3);
+            int j = Mth.floor(y);
+            int k = Mth.floor(d5);
+            airBlock -= AirBlocking.getAirBlock(level, i, j, k);
+            if (airBlock <= 0) {
+                return 0;
+            } else {
+                double d6 = d0 - d3;
+                double d8 = d2 - d5;
+                int l = Mth.sign(d6);
+                int j1 = Mth.sign(d8);
+                double d9 = l == 0 ? Double.MAX_VALUE : (double) l / d6;
+                double d11 = j1 == 0 ? Double.MAX_VALUE : (double) j1 / d8;
+                double d12 = d9 * (l > 0 ? 1.0 - Mth.frac(d3) : Mth.frac(d3));
+                double d14 = d11 * (j1 > 0 ? 1.0 - Mth.frac(d5) : Mth.frac(d5));
+
+                while (d12 <= 1.0 || d14 <= 1.0) {
+                    if (d12 < d14) {
+                        i += l;
+                        d12 += d9;
+                    } else {
+                        k += j1;
+                        d14 += d11;
+                    }
+
+                    airBlock -= AirBlocking.getAirBlock(level, i, j, k);
+                    if (airBlock <= 0) {
+                        return 0;
+                    }
                 }
-        );
-    }
 
-    public static boolean canBlockWind(Level level, BlockPos pos, BlockState state, Direction direction) {
-        if (state.isAir() || Predicates.tagMatches(state, BlockTags.LEAVES, ModTags.Blocks.COPPER_GRATES)
-                || Predicates.blockMatches(state, Blocks.SPAWNER, Blocks.MANGROVE_ROOTS)
-        ) return false;
-        if (Predicates.blockMatches(state, Blocks.TRIAL_SPAWNER, Blocks.VAULT))
-            return direction.getAxis() == Direction.Axis.Y;
-        if (state.is(Tags.Blocks.GLASS_PANES))
-            return direction.getAxis() != Direction.Axis.Y;
-        if (state.is(Tags.Blocks.GLASS_BLOCKS)
-                || Predicates.blockMatches(state, Blocks.COMPOSTER, Blocks.HONEY_BLOCK)
-                || !state.getFluidState().isEmpty()
-        ) return true;
-        if (state.isSuffocating(level, pos)) return true;
-        return Block.isFaceFull(state.getCollisionShape(level, pos), direction)
-                || isMergedFaceFull(level, pos, state, direction);
-    }
-
-    private static boolean isMergedFaceFull(Level level, BlockPos pos, BlockState state, Direction direction) {
-        BlockPos pos1 = pos.relative(direction);
-        BlockState state1 = level.getBlockState(pos1);
-        VoxelShape shape = LightEngine.getOcclusionShape(level, pos, state, direction);
-        VoxelShape shape1 = LightEngine.getOcclusionShape(level, pos1, state1, direction.getOpposite());
-        return Shapes.faceShapeOccludes(shape, shape1);
+                return 1;
+            }
+        }
     }
 
     public static int chanceByWind(Level level, int chance) {
-        if (Config.WIND_EFFECT_CLIENT.isFalse()) return chance;
-        float windSpeed = getWindSpeed(level).length();
+        if (!RenderUtils.isClientWindOn) return chance;
+        float windSpeed = getGlobalWindSpeed(level).length();
         return Math.max(0, chance - Mth.floor(windSpeed * chance * 0.04F));
     }
 

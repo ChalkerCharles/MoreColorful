@@ -1,8 +1,7 @@
 package com.ChalkerCharles.morecolorful.mixin.mixins.client.render;
 
-import com.ChalkerCharles.morecolorful.Config;
-import com.ChalkerCharles.morecolorful.util.WavyBlockUtils;
-import com.ChalkerCharles.morecolorful.util.WeatherUtils;
+import com.ChalkerCharles.morecolorful.util.Maths;
+import com.ChalkerCharles.morecolorful.util.client.RenderUtils;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -34,16 +33,16 @@ public abstract class BannerRendererMixin {
     @Inject(method = "render(Lnet/minecraft/world/level/block/entity/BannerBlockEntity;FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;II)V",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/blockentity/BannerRenderer;renderPatterns(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;IILnet/minecraft/client/model/geom/ModelPart;Lnet/minecraft/client/resources/model/Material;ZLnet/minecraft/world/item/DyeColor;Lnet/minecraft/world/level/block/entity/BannerPatternLayers;)V"))
     private void applyWind(BannerBlockEntity pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBufferSource, int pPackedLight, int pPackedOverlay, CallbackInfo ci) {
-        if (Config.WIND_EFFECT_CLIENT.isFalse()) return;
+        if (!RenderUtils.isClientWindOn) return;
         Level level = pBlockEntity.getLevel();
         if (level == null) return;
         BlockPos pos = pBlockEntity.getBlockPos();
         BlockState state = pBlockEntity.getBlockState();
         boolean onWall = state.getBlock() instanceof WallBannerBlock;
-        if (!WeatherUtils.canApplyWind(level, pos)
-                && !WeatherUtils.canApplyWind(level, onWall ? pos.below() : pos.above()))
+        if (!RenderUtils.isWindyAt(level, pos)
+                && !RenderUtils.isWindyAt(level, onWall ? pos.below() : pos.above()))
             return;
-        Vector3f wind = WeatherUtils.getWindSpeed(level);
+        Vector3f wind = RenderUtils.getWindSpeedAt(level, pos);
         Vector3f facing;
         if (onWall) {
             Direction direction = state.getValue(WallBannerBlock.FACING);
@@ -52,9 +51,9 @@ public abstract class BannerRendererMixin {
             float degree = RotationSegment.convertToDegrees(state.getValue(BannerBlock.ROTATION));
             facing = new Vector3f(-Mth.sin(degree * Mth.DEG_TO_RAD), 0.0F, Mth.cos(degree * Mth.DEG_TO_RAD));
         }
-        float f = Mth.sin(WavyBlockUtils.getTick(level, pPartialTick) * 0.8F * WavyBlockUtils.speedMultiplier(wind)) / 2 + 0.5F;
-        float angle = wind.dot(facing) / 24.0F;
-        float rot = -Mth.rotLerp(f, angle * 0.75F, angle * 1.25F);
+        float f = Mth.sin(RenderUtils.anim * Math.round(wind.length()) * 1.5F) * 0.5F + 0.5F;
+        float angle = wind.dot(facing) * Maths.INV24;
+        float rot = angle * -Mth.rotLerp(f, 0.75F, 1.25F);
         if (onWall) {
             Direction direction = state.getValue(WallBannerBlock.FACING);
             BlockPos pos1 = pos.relative(direction.getOpposite());

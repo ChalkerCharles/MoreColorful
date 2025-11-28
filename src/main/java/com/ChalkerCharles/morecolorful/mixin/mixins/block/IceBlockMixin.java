@@ -1,7 +1,7 @@
 package com.ChalkerCharles.morecolorful.mixin.mixins.block;
 
 import com.ChalkerCharles.morecolorful.Config;
-import com.ChalkerCharles.morecolorful.mixin.extensions.ILevelExtension;
+import com.ChalkerCharles.morecolorful.common.attachment.LevelSavedData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -22,7 +22,7 @@ public abstract class IceBlockMixin {
     @Inject(method = "randomTick", at = @At("HEAD"), cancellable = true)
     private void randomTick(BlockState pState, ServerLevel pLevel, BlockPos pPos, RandomSource pRandom, CallbackInfo ci) {
         if (Config.THERMAL_SYSTEM.isTrue()) {
-            if (((ILevelExtension) pLevel).moreColorful$getTemperature(pPos) > 5) {
+            if (LevelSavedData.getTemperature(pLevel, pPos) > 5) {
                 this.melt(pState, pLevel, pPos);
             }
             ci.cancel();

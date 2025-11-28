@@ -1,10 +1,12 @@
 package com.ChalkerCharles.morecolorful.mixin.mixins.chunk;
 
 import com.ChalkerCharles.morecolorful.Config;
-import com.ChalkerCharles.morecolorful.common.level.LevelThermalEngine;
+import com.ChalkerCharles.morecolorful.common.level.thermal.LevelThermalEngine;
 import com.ChalkerCharles.morecolorful.common.level.ModChunkStatus;
+import com.ChalkerCharles.morecolorful.common.level.wind.LevelVentEngine;
 import com.ChalkerCharles.morecolorful.mixin.extensions.IChunkHolderExtension;
 import com.ChalkerCharles.morecolorful.network.packets.ThermalUpdatePacket;
+import com.ChalkerCharles.morecolorful.network.packets.VentUpdatePacket;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import net.minecraft.server.level.ChunkHolder;
 import net.minecraft.server.level.GenerationChunkHolder;
@@ -34,35 +36,57 @@ public abstract class ChunkHolderMixin extends GenerationChunkHolder implements 
     @Shadow
     @Final
     private ChunkHolder.PlayerProvider playerProvider;
-
     @Unique
     private final BitSet moreColorful$changedThermalSectionFilter = new BitSet();
     @Unique
     private LevelThermalEngine moreColorful$thermalEngine;
+    @Unique
+    private final BitSet moreColorful$changedVentSectionFilter = new BitSet();
+    @Unique
+    private LevelVentEngine moreColorful$ventEngine;
 
     private ChunkHolderMixin(ChunkPos pPos) {
         super(pPos);
     }
 
-    @ModifyExpressionValue(method = "broadcastChanges", at = @At(value = "FIELD", target = "Lnet/minecraft/server/level/ChunkHolder;hasChangedSections:Z", opcode = Opcodes.GETFIELD))
+    @ModifyExpressionValue(method = "broadcastChanges", at = @At(value = "FIELD", target = "Lnet/minecraft/server/level/ChunkHolder;hasChangedSections:Z", opcode = Opcodes.GETFIELD, ordinal = 0))
     private boolean broadcastChanges$modifyCondition(boolean original) {
-        if (Config.THERMAL_SYSTEM.isFalse()) return original;
-        return original || !this.moreColorful$changedThermalSectionFilter.isEmpty();
+        if (Config.THERMAL_SYSTEM.isTrue()) {
+            original = original || !this.moreColorful$changedThermalSectionFilter.isEmpty();
+        }
+        if (Config.WIND_SYSTEM.isTrue()) {
+            original = original || !this.moreColorful$changedVentSectionFilter.isEmpty();
+        }
+        return original;
     }
 
     @Inject(method = "broadcastChanges", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/chunk/LevelChunk;getLevel()Lnet/minecraft/world/level/Level;", shift = At.Shift.AFTER))
     private void broadcastChanges(LevelChunk pChunk, CallbackInfo ci) {
-        if (Config.THERMAL_SYSTEM.isFalse()) return;
-        if (!this.moreColorful$changedThermalSectionFilter.isEmpty()) {
-            List<ServerPlayer> list = this.playerProvider.getPlayers(this.pos, true);
-            if (!list.isEmpty()) {
-                ThermalUpdatePacket packet = new ThermalUpdatePacket(
-                        pChunk.getPos(), this.moreColorful$thermalEngine, this.moreColorful$changedThermalSectionFilter, false
-                );
-                list.forEach(p -> PacketDistributor.sendToPlayer(p, packet));
-            }
+        if (Config.THERMAL_SYSTEM.isTrue()) {
+            if (!this.moreColorful$changedThermalSectionFilter.isEmpty()) {
+                List<ServerPlayer> list = this.playerProvider.getPlayers(this.pos, true);
+                if (!list.isEmpty()) {
+                    ThermalUpdatePacket packet = new ThermalUpdatePacket(
+                            pChunk.getPos(), this.moreColorful$thermalEngine, this.moreColorful$changedThermalSectionFilter, false
+                    );
+                    list.forEach(p -> PacketDistributor.sendToPlayer(p, packet));
+                }
 
-            this.moreColorful$changedThermalSectionFilter.clear();
+                this.moreColorful$changedThermalSectionFilter.clear();
+            }
+        }
+        if (Config.WIND_SYSTEM.isTrue()) {
+            if (!this.moreColorful$changedVentSectionFilter.isEmpty()) {
+                List<ServerPlayer> list = this.playerProvider.getPlayers(this.pos, true);
+                if (!list.isEmpty()) {
+                    VentUpdatePacket packet = new VentUpdatePacket(
+                            pChunk.getPos(), this.moreColorful$ventEngine, this.moreColorful$changedVentSectionFilter, false
+                    );
+                    list.forEach(p -> PacketDistributor.sendToPlayer(p, packet));
+                }
+
+                this.moreColorful$changedVentSectionFilter.clear();
+            }
         }
     }
 
@@ -84,6 +108,29 @@ public abstract class ChunkHolderMixin extends GenerationChunkHolder implements 
                 if (pSectionY >= i && pSectionY <= j) {
                     int k = pSectionY - i;
                     this.moreColorful$changedThermalSectionFilter.set(k);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void moreColorful$setVentEngine(LevelVentEngine engine) {
+        this.moreColorful$ventEngine = engine;
+    }
+
+    @Override
+    public void moreColorful$sectionVentChanged(int pSectionY) {
+        if (Config.WIND_SYSTEM.isFalse()) return;
+        ChunkAccess chunkaccess = this.getChunkIfPresent(ModChunkStatus.INITIALIZE_VENT.get());
+        if (chunkaccess != null) {
+            chunkaccess.setUnsaved(true);
+            LevelChunk levelchunk = this.getTickingChunk();
+            if (levelchunk != null) {
+                int i = this.moreColorful$ventEngine.getMinVentSection();
+                int j = this.moreColorful$ventEngine.getMaxVentSection();
+                if (pSectionY >= i && pSectionY <= j) {
+                    int k = pSectionY - i;
+                    this.moreColorful$changedVentSectionFilter.set(k);
                 }
             }
         }

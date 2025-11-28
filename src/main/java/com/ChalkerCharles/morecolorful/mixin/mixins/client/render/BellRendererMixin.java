@@ -1,8 +1,7 @@
 package com.ChalkerCharles.morecolorful.mixin.mixins.client.render;
 
-import com.ChalkerCharles.morecolorful.Config;
-import com.ChalkerCharles.morecolorful.util.WavyBlockUtils;
-import com.ChalkerCharles.morecolorful.util.WeatherUtils;
+import com.ChalkerCharles.morecolorful.util.Maths;
+import com.ChalkerCharles.morecolorful.util.client.RenderUtils;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -32,17 +31,17 @@ public abstract class BellRendererMixin {
     @Inject(method = "render(Lnet/minecraft/world/level/block/entity/BellBlockEntity;FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;II)V",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/client/model/geom/ModelPart;render(Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/mojang/blaze3d/vertex/VertexConsumer;II)V"))
     private void applyWind(BellBlockEntity pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBufferSource, int pPackedLight, int pPackedOverlay, CallbackInfo ci) {
-        if (Config.WIND_EFFECT_CLIENT.isFalse()) return;
+        if (!RenderUtils.isClientWindOn) return;
         Level level = pBlockEntity.getLevel();
         if (level == null) return;
         BlockPos pos = pBlockEntity.getBlockPos();
-        if (!WeatherUtils.canApplyWind(level, pos)) return;
+        if (!RenderUtils.isWindyAt(level, pos)) return;
         BlockState state = pBlockEntity.getBlockState();
-        Vector3f wind = WeatherUtils.getWindSpeed(level);
-        float f = Mth.sin(WavyBlockUtils.getTick(level, pPartialTick) * 0.8F * WavyBlockUtils.speedMultiplier(wind)) / 2 + 0.5F;
-        float angleX = wind.x / 48.0F, angleZ = wind.z / 48.0F;
-        float xRot = Mth.rotLerp(f, angleX * 0.75F, angleX * 1.25F);
-        float zRot = Mth.rotLerp(f, angleZ * 0.75F, angleZ * 1.25F);
+        Vector3f wind = RenderUtils.getWindSpeedAt(level, pos);
+        float f = Mth.sin(RenderUtils.anim * Math.round(wind.length()) * 1.5F) * 0.5F + 0.5F;
+        float angleX = wind.x * Maths.INV48, angleZ = wind.z * Maths.INV48;
+        float xRot = angleX * Mth.rotLerp(f, 0.75F, 1.25F);
+        float zRot = angleZ * Mth.rotLerp(f, 0.75F, 1.25F);
         BellAttachType type = state.getValue(BellBlock.ATTACHMENT);
         Direction direction = state.getValue(BellBlock.FACING);
         switch (type) {

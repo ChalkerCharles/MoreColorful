@@ -289,6 +289,10 @@
   "commands.morecolorful.weather.wind.set.fail": "Cannot set the wind speed. Because this dimension is windless, or the wind system is off.",
   "commands.morecolorful.weather.wind.reset": "Reset the wind speed",
   "commands.morecolorful.weather.wind.reset.fail": "Cannot reset the wind speed. Because this dimension is windless, or the wind system is off.",
+  "commands.morecolorful.weather.wind.freeze": "Freeze the wind speed",
+  "commands.morecolorful.weather.wind.freeze.fail": "Cannot freeze the wind speed. Because this dimension is windless, or the wind system is off.",
+  "commands.morecolorful.weather.wind.unfreeze": "Unfreeze the wind speed",
+  "commands.morecolorful.weather.wind.unfreeze.fail": "Cannot unfreeze the wind speed. Because this dimension is windless, or the wind system is off.",
 
   "creativetab.morecolorful.musical_instruments_tab": "Musical Instruments",
 
@@ -361,6 +365,8 @@
   "morecolorful.config.world.tooltip": "Configs about world.",
   "morecolorful.config.wind_system": "Wind System",
   "morecolorful.config.wind_system.tooltip": "Wind is a global weather occurrence that randomly happens. The wind consists of two components on X axis and Z axis, and the max speed of each component is 17.5 (m/s).",
+  "morecolorful.config.wind_physics": "Wind Physics",
+  "morecolorful.config.wind_physics.tooltip": "Allowing wind to push entities.",
   "morecolorful.config.windless_dimensions": "Windless Dimensions",
   "morecolorful.config.windless_dimensions.tooltip": "Wind won't blow in dimensions in this list.",
   "morecolorful.config.wind_effect_client": "Wind Effect",

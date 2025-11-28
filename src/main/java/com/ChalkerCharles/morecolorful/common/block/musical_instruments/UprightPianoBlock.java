@@ -4,8 +4,9 @@ import com.ChalkerCharles.morecolorful.client.gui.PlayingScreen;
 import com.ChalkerCharles.morecolorful.common.ModStats;
 import com.ChalkerCharles.morecolorful.common.block.properties.ModBlockStateProperties;
 import com.ChalkerCharles.morecolorful.common.block.properties.UprightPianoPart;
-import com.ChalkerCharles.morecolorful.common.item.musical_instruments.InstrumentsType;
+import com.ChalkerCharles.morecolorful.util.InstrumentsType;
 import com.ChalkerCharles.morecolorful.network.packets.PlayingScreenPacket;
+import com.ChalkerCharles.morecolorful.util.MusicalInstrument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionResult;
@@ -21,6 +22,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -29,7 +31,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 
 import javax.annotation.Nullable;
 
-public class UprightPianoBlock extends MusicalInstrumentBlock {
+public class UprightPianoBlock extends Block implements MusicalInstrument {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final EnumProperty<UprightPianoPart> PART = ModBlockStateProperties.UPRIGHT_PIANO_PART;
     private static final VoxelShape NORTH_LEFT_LOWER = Shapes.or(
@@ -109,18 +111,23 @@ public class UprightPianoBlock extends MusicalInstrumentBlock {
             Block.box(6.0, 0.0, 0.0, 7.0, 5.0, 16.0),
             Block.box(0.0, 0.0, 14.0, 6.0, 2.0, 16.0));
 
-    public UprightPianoBlock(InstrumentsType pType, Properties properties) {
-        super(pType, properties);
+    public UprightPianoBlock(Properties properties) {
+        super(properties);
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(PART, UprightPianoPart.LEFT_LOWER)
         );
     }
 
     @Override
-    public InteractionResult useWithoutItem (BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, BlockHitResult pHitResult) {
-        if (pLevel.isClientSide){
-            PlayingScreen.openPlayingScreen(pPlayer, pType, pPos);
-            PacketDistributor.sendToServer(new PlayingScreenPacket(pType, pPos, pPlayer.getId(), true));
+    public InstrumentsType getType() {
+        return InstrumentsType.PIANO_LOW;
+    }
+
+    @Override
+    public InteractionResult useWithoutItem(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, BlockHitResult pHitResult) {
+        if (pLevel.isClientSide) {
+            PlayingScreen.openPlayingScreen(pPlayer, this.getType(), pPos);
+            PacketDistributor.sendToServer(new PlayingScreenPacket(this.getType(), pPos, pPlayer.getId(), true));
         }
         pPlayer.awardStat(ModStats.INTERACT_WITH_PIANO.get());
         return InteractionResult.CONSUME;
@@ -157,6 +164,7 @@ public class UprightPianoBlock extends MusicalInstrumentBlock {
             };
         };
     }
+
     @Override
     protected BlockState updateShape(BlockState pState, Direction pDirection, BlockState pNeighborState, LevelAccessor pLevel, BlockPos pPos, BlockPos pNeighborPos) {
         if (pDirection == getNeighbourDirection(pState.getValue(PART), pState.getValue(FACING))) {
@@ -171,12 +179,15 @@ public class UprightPianoBlock extends MusicalInstrumentBlock {
             return super.updateShape(pState, pDirection, pNeighborState, pLevel, pPos, pNeighborPos);
         }
     }
+
     private static Direction getNeighbourDirection(UprightPianoPart pPart, Direction pDirection) {
         return (pPart == UprightPianoPart.LEFT_LOWER || pPart == UprightPianoPart.LEFT_UPPER) ? pDirection.getCounterClockWise() : pDirection.getClockWise();
     }
+
     private static Direction getNeighbourDirection(UprightPianoPart pPart) {
         return (pPart == UprightPianoPart.LEFT_LOWER || pPart == UprightPianoPart.RIGHT_LOWER) ? Direction.UP : Direction.DOWN;
     }
+
     @Override
     public BlockState playerWillDestroy(Level pLevel, BlockPos pPos, BlockState pState, Player pPlayer) {
         if (!pLevel.isClientSide && (pPlayer.isCreative() || !pPlayer.hasCorrectToolForDrops(pState, pLevel, pPos))) {
@@ -197,6 +208,7 @@ public class UprightPianoBlock extends MusicalInstrumentBlock {
         }
         return super.playerWillDestroy(pLevel, pPos, pState, pPlayer);
     }
+
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {
@@ -212,21 +224,30 @@ public class UprightPianoBlock extends MusicalInstrumentBlock {
             return null;
         }
     }
+
     @Override
     public void setPlacedBy(Level pLevel, BlockPos pPos, BlockState pState, LivingEntity pPlacer, ItemStack pStack) {
         pLevel.setBlock(pPos.above(), pState.setValue(PART, UprightPianoPart.LEFT_UPPER), 3);
         pLevel.setBlock(pPos.relative(pState.getValue(FACING).getCounterClockWise()), pState.setValue(PART, UprightPianoPart.RIGHT_LOWER), 3);
         pLevel.setBlock(pPos.relative(pState.getValue(FACING).getCounterClockWise()).above(), pState.setValue(PART, UprightPianoPart.RIGHT_UPPER), 3);
     }
+
     @Override
     protected BlockState rotate(BlockState pState, Rotation pRot) {
         return pState.setValue(FACING, pRot.rotate(pState.getValue(FACING)));
     }
+
     @SuppressWarnings("deprecation")
     @Override
     protected BlockState mirror(BlockState pState, Mirror pMirror) {
         return pState.rotate(pMirror.getRotation(pState.getValue(FACING)));
     }
+
+    @Override
+    protected boolean isPathfindable(BlockState pState, PathComputationType pPathComputationType) {
+        return false;
+    }
+
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
         pBuilder.add(FACING, PART);

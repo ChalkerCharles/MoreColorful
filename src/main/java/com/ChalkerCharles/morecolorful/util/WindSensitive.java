@@ -1,8 +1,8 @@
 package com.ChalkerCharles.morecolorful.util;
 
-/// A Marker Interface that indicates the block or particle can be affected by wind.
+/// A Marker Interface that indicates an object (like Block, Entity or Particle) can be affected by wind.
 public interface WindSensitive {
-    default boolean isWindSensitive() {
+    default boolean moreColorful$isWindSensitive() {
         return true;
     }
 }

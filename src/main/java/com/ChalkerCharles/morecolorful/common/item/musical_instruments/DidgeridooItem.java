@@ -1,9 +1,9 @@
 package com.ChalkerCharles.morecolorful.common.item.musical_instruments;
 
-public class DidgeridooItem extends BothHandsInstrumentItem {
+import com.ChalkerCharles.morecolorful.util.InstrumentsType;
 
-    public DidgeridooItem(InstrumentsType pType, Properties pProperties) {
-        super(pType, pProperties);
-        this.pType = pType;
+public class DidgeridooItem extends BothHandsInstrumentItem {
+    public DidgeridooItem(InstrumentsType type, Properties pProperties) {
+        super(type, pProperties);
     }
 }

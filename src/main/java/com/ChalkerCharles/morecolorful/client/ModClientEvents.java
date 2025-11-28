@@ -1,55 +1,41 @@
 package com.ChalkerCharles.morecolorful.client;
 
 import com.ChalkerCharles.morecolorful.Config;
+import com.ChalkerCharles.morecolorful.common.attachment.ClientLevelData;
 import com.ChalkerCharles.morecolorful.common.attachment.LevelSavedData;
-import com.ChalkerCharles.morecolorful.mixin.extensions.IChunkSourceExtension;
-import com.ChalkerCharles.morecolorful.mixin.extensions.ILevelExtension;
 import com.ChalkerCharles.morecolorful.mixin.extensions.ILevelRendererExtension;
-import com.ChalkerCharles.morecolorful.util.RenderUtils;
-import com.ChalkerCharles.morecolorful.util.ThreadUtils;
+import com.ChalkerCharles.morecolorful.network.packets.WindInitiationPacket;
 import com.ChalkerCharles.morecolorful.util.WeatherUtils;
+import com.ChalkerCharles.morecolorful.util.client.RenderUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.DebugScreenOverlay;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.SectionPos;
-import net.minecraft.util.Mth;
 import net.minecraft.util.profiling.ProfilerFiller;
-import net.minecraft.world.level.ChunkPos;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.chunk.ChunkAccess;
+import net.minecraft.world.entity.Entity;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.ModList;
+import net.neoforged.neoforge.client.event.ClientPlayerNetworkEvent;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.CustomizeGuiOverlayEvent;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
-import net.neoforged.neoforge.event.GameShuttingDownEvent;
-import net.neoforged.neoforge.event.level.ChunkEvent;
-import net.neoforged.neoforge.event.level.LevelEvent;
+import net.neoforged.neoforge.network.PacketDistributor;
 import org.joml.Vector2f;
-import org.joml.Vector3f;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Objects;
 
 @OnlyIn(Dist.CLIENT)
 public final class ModClientEvents {
-    private static final Minecraft minecraft = Minecraft.getInstance();
-    private static final boolean isSodiumLoaded = ModList.get().isLoaded("sodium");
     private static int removedLines = 0;
-    private static Vector3f lastWindSpeed;
-    private static int tickCounter = 0;
 
     @SubscribeEvent
     public static void onClientTickPost(ClientTickEvent.Post event) {
-        DebugScreenOverlay debugScreenOverlay = minecraft.getDebugOverlay();
+        DebugScreenOverlay debugScreenOverlay = Minecraft.getInstance().getDebugOverlay();
         boolean isDebugScreenOn = debugScreenOverlay.showDebugScreen();
         while (isDebugScreenOn && ModKeyMapping.DEBUG_TEXT_SCROLL_DOWN.get().consumeClick()) {
             removedLines = Math.max(0, removedLines - 1);
@@ -57,50 +43,34 @@ public final class ModClientEvents {
         while (isDebugScreenOn && ModKeyMapping.DEBUG_TEXT_SCROLL_UP.get().consumeClick()) {
             removedLines = Math.min(removedLines + 1, 20);
         }
-
-        if (Config.WIND_EFFECT_CLIENT.isTrue()) {
-            if (tickCounter > 10) {
-                updateWavySections();
-                tickCounter = 0;
-            }
-            tickCounter++;
-        }
-    }
-
-    private static void updateWavySections() {
-        Level level = minecraft.level;
-        if (level == null) return;
-        Vector3f wind = WeatherUtils.getWindSpeed(level);
-        if (lastWindSpeed != null) {
-            float dx = Mth.abs(wind.x - lastWindSpeed.x);
-            float dz = Mth.abs(wind.z - lastWindSpeed.z);
-            if (dx > 0.01F || dz > 0.01F) {
-                if (isSodiumLoaded) {
-                    ((ILevelRendererExtension) minecraft.levelRenderer).moreColorful$updateWavySectionsSodium();
-                } else {
-                    ((ILevelRendererExtension) minecraft.levelRenderer).moreColorful$updateWavySections();
-                }
-            }
-        }
-        lastWindSpeed = wind;
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void renderDebugText(CustomizeGuiOverlayEvent.DebugText event) {
+        Minecraft minecraft = Minecraft.getInstance();
+        Entity camera = minecraft.getCameraEntity();
+        if (camera == null) return;
+        BlockPos blockpos = camera.blockPosition();
         ClientLevel level = minecraft.level;
         List<String> left = event.getLeft();
         List<String> right = event.getRight();
-        BlockPos blockpos = Objects.requireNonNull(minecraft.getCameraEntity()).blockPosition();
         List<String> addLeft = new ArrayList<>();
 
         if (level != null) {
             if (Config.THERMAL_SYSTEM.isTrue()) {
-                int temperature = ((ILevelExtension) level).moreColorful$getTemperature(blockpos);
+                int temperature = LevelSavedData.getTemperature(level, blockpos);
                 addLeft.add("Block Temperature: " + temperature);
             }
-            if (WeatherUtils.isWindy(level)) {
-                Vector2f wind = LevelSavedData.getGlobalWindSpeed(level);
-                addLeft.add(String.format(Locale.ROOT, "Global Wind: %.4f / %.4f", wind.x(), wind.y()));
+            if (Config.WIND_SYSTEM.isTrue()) {
+                if (WeatherUtils.isWindy(level)) {
+                    int ventilation = LevelSavedData.getVentilation(level, blockpos);
+                    addLeft.add("Ventilation Level: " + ventilation);
+                    Vector2f wind = LevelSavedData.getGlobalWindSpeed(level);
+                    addLeft.add(String.format(Locale.ROOT, "Global Wind: %.4f / %.4f", wind.x, wind.y));
+                    if (RenderUtils.isClientWindOn)
+                        addLeft.add(ILevelRendererExtension.getStatistics());
+                }
+                addLeft.add(LevelSavedData.getWindZoneStats(level));
             }
         }
 
@@ -116,52 +86,29 @@ public final class ModClientEvents {
 
     @SubscribeEvent
     public static void onLevelRender(RenderLevelStageEvent event) {
-        ClientLevel level = minecraft.level;
+        ClientLevel level = Minecraft.getInstance().level;
         if (level == null) return;
         ProfilerFiller profilerfiller = level.getProfiler();
-        if (Config.THERMAL_SYSTEM.isTrue()) {
-            if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_SKY) {
+        if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_SKY) {
+            if (Config.THERMAL_SYSTEM.isTrue()) {
                 profilerfiller.popPush("thermal_update_queue");
-                ((ILevelExtension) level).moreColorful$pollThermalUpdates();
+                ClientLevelData.pollThermalUpdates(level);
                 profilerfiller.popPush("thermal_updates");
-                ((IChunkSourceExtension) level.getChunkSource()).moreColorful$getThermalEngine().runThermalUpdates();
+                LevelSavedData.getThermalEngine(level).runThermalUpdates();
+            }
+            if (Config.WIND_SYSTEM.isTrue()) {
+                profilerfiller.popPush("vent_update_queue");
+                ClientLevelData.pollVentUpdates(level);
+                profilerfiller.popPush("vent_updates");
+                LevelSavedData.getVentEngine(level).runVentUpdates();
             }
         }
     }
 
     @SubscribeEvent
-    public static void onClientLevelUnload(LevelEvent.Unload event) {
-        if (Config.WIND_EFFECT_CLIENT.isFalse()) return;
-        LevelAccessor level = event.getLevel();
-        if (level.isClientSide()) {
-            lastWindSpeed = null;
-            tickCounter = 0;
-            RenderUtils.VERTICES.clear();
-            WeatherUtils.WINDY_BLOCKS.clear();
+    public static void onPlayerLoggingIn(ClientPlayerNetworkEvent.LoggingIn event) {
+        if (WeatherUtils.isWindy(event.getPlayer().clientLevel)) {
+            PacketDistributor.sendToServer(WindInitiationPacket.INSTANCE);
         }
-    }
-
-    @SubscribeEvent
-    public static void onClientChunkUnload(ChunkEvent.Unload event) {
-        if (Config.WIND_EFFECT_CLIENT.isFalse()) return;
-        LevelAccessor level = event.getLevel();
-        if (level.isClientSide()) {
-            ChunkAccess chunk = event.getChunk();
-            ChunkPos chunkPos = chunk.getPos();
-            SectionPos pos;
-            for (int i = chunk.getMinSection(), l = chunk.getMaxSection(); i < l; i++) {
-                pos = SectionPos.of(chunkPos, i);
-                RenderUtils.VERTICES.remove(pos);
-                WeatherUtils.WINDY_BLOCKS.remove(pos);
-            }
-        }
-    }
-
-    @SubscribeEvent
-    public static void onClientGameShuttingDown(GameShuttingDownEvent event) {
-        ThreadUtils.VERTEX_EXECUTOR.shutdown();
-        ThreadUtils.WAVE_EXECUTOR.shutdown();
-        ThreadUtils.FLUID_EXECUTOR.shutdown();
-        ThreadUtils.WIND_EXECUTOR.shutdown();
     }
 }

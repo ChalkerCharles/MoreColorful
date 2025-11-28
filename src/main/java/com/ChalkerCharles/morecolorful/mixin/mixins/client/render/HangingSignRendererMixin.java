@@ -1,11 +1,9 @@
 package com.ChalkerCharles.morecolorful.mixin.mixins.client.render;
 
-import com.ChalkerCharles.morecolorful.Config;
-import com.ChalkerCharles.morecolorful.util.WavyBlockUtils;
-import com.ChalkerCharles.morecolorful.util.WeatherUtils;
+import com.ChalkerCharles.morecolorful.util.client.RenderUtils;
+import com.ChalkerCharles.morecolorful.util.client.WavyBlockUtils;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
@@ -40,16 +38,16 @@ public abstract class HangingSignRendererMixin extends SignRenderer {
 
     @WrapOperation(method = "render(Lnet/minecraft/world/level/block/entity/SignBlockEntity;FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;II)V",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/blockentity/HangingSignRenderer;renderSignWithText(Lnet/minecraft/world/level/block/entity/SignBlockEntity;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;IILnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/block/SignBlock;Lnet/minecraft/world/level/block/state/properties/WoodType;Lnet/minecraft/client/model/Model;)V"))
-    private void render(HangingSignRenderer instance, SignBlockEntity signBlockEntity, PoseStack poseStack, MultiBufferSource multiBufferSource, int packedLight, int packedOverlay, BlockState state, SignBlock signBlock, WoodType woodType, Model model, Operation<Void> original, @Local(argsOnly = true) float partialTick) {
-        if (Config.WIND_EFFECT_CLIENT.isTrue()) {
-            this.moreColorful$renderSignWithText(signBlockEntity, poseStack, multiBufferSource, packedLight, packedOverlay, state, signBlock, woodType, model, partialTick);
+    private void render(HangingSignRenderer instance, SignBlockEntity signBlockEntity, PoseStack poseStack, MultiBufferSource multiBufferSource, int packedLight, int packedOverlay, BlockState state, SignBlock signBlock, WoodType woodType, Model model, Operation<Void> original) {
+        if (RenderUtils.isClientWindOn) {
+            this.moreColorful$renderWavySign(signBlockEntity, poseStack, multiBufferSource, packedLight, packedOverlay, state, signBlock, woodType, model);
         } else {
             original.call(instance, signBlockEntity, poseStack, multiBufferSource, packedLight, packedOverlay, state, signBlock, woodType, model);
         }
     }
 
     @Unique
-    private void moreColorful$renderSignWithText(
+    private void moreColorful$renderWavySign(
             SignBlockEntity pSignEntity,
             PoseStack pPoseStack,
             MultiBufferSource pBuffer,
@@ -58,8 +56,7 @@ public abstract class HangingSignRendererMixin extends SignRenderer {
             BlockState pState,
             SignBlock pSignBlock,
             WoodType pWoodType,
-            Model pModel,
-            float partialTick) {
+            Model pModel) {
         pPoseStack.pushPose();
         boolean onWall = WavyBlockUtils.onWall(pState);
         boolean attached = !onWall && pState.hasProperty(CeilingHangingSignBlock.ATTACHED) && pState.getValue(CeilingHangingSignBlock.ATTACHED);
@@ -76,11 +73,11 @@ public abstract class HangingSignRendererMixin extends SignRenderer {
         pPoseStack.pushPose();
         Quaternionf pitch;
         BlockPos pos = pSignEntity.getBlockPos();
-        Vector4f result = WavyBlockUtils.getSignAngle(level, partialTick, pState, pos);
+        Vector4f result = WavyBlockUtils.getSignAngle(level, pState, pos);
         float rotX = result.w;
         if (!onWall && attached) {
-            float rotY = level != null && WeatherUtils.canApplyWind(level, pos)
-                    ? WavyBlockUtils.getSignAngleVertical(level, partialTick, pState)
+            float rotY = level != null && RenderUtils.isWindyAt(level, pos)
+                    ? WavyBlockUtils.getSignAngleVertical(level, pState, pos)
                     : 0.0F;
             pitch = Axis.XP.rotation(rotX).mul(Axis.YP.rotation(rotY));
         } else {

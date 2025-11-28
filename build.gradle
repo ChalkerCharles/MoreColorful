@@ -83,6 +83,7 @@ dependencies {
     implementation 'com.github.glitchfiend:TerraBlender-neoforge:' + minecraft_version + '-' + terrablender_version
 
     compileOnly 'curse.maven:sodium-394468:6382651'
+    compileOnly 'curse.maven:irisshaders-455508:6213632'
 }
 
 tasks.withType(ProcessResources).configureEach {

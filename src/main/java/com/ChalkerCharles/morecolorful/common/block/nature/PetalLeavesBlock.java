@@ -1,5 +1,6 @@
 package com.ChalkerCharles.morecolorful.common.block.nature;
 
+import com.ChalkerCharles.morecolorful.mixin.extensions.ILeavesBlockExtension;
 import com.ChalkerCharles.morecolorful.util.WeatherUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -12,7 +13,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.function.Supplier;
 
-public class PetalLeavesBlock extends LeavesBlock {
+public class PetalLeavesBlock extends LeavesBlock implements ILeavesBlockExtension {
     private final Supplier<SimpleParticleType> particleType;
 
     public PetalLeavesBlock(Properties properties, Supplier<SimpleParticleType> particleType) {
@@ -21,13 +22,12 @@ public class PetalLeavesBlock extends LeavesBlock {
     }
 
     @Override
-    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource randomSource) {
-        super.animateTick(state, level, pos, randomSource);
-        if (randomSource.nextInt(WeatherUtils.chanceByWind(level, 10)) == 0) {
+    public void moreColorful$makeFallingLeavesParticles(Level level, BlockPos pos, RandomSource random) {
+        if (random.nextInt(WeatherUtils.chanceByWind(level, 10)) == 0) {
             BlockPos blockpos = pos.below();
             BlockState blockstate = level.getBlockState(blockpos);
             if (!isFaceFull(blockstate.getCollisionShape(level, blockpos), Direction.UP)) {
-                ParticleUtils.spawnParticleBelow(level, pos, randomSource, particleType.get());
+                ParticleUtils.spawnParticleBelow(level, pos, random, particleType.get());
             }
         }
     }

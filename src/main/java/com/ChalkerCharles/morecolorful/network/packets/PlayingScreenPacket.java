@@ -1,24 +1,25 @@
 package com.ChalkerCharles.morecolorful.network.packets;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
-import com.ChalkerCharles.morecolorful.common.attachment.ModDataAttachments;
-import com.ChalkerCharles.morecolorful.common.item.musical_instruments.InstrumentsType;
-import com.ChalkerCharles.morecolorful.util.Constants;
-import com.ChalkerCharles.morecolorful.util.ThreadUtils;
+import com.ChalkerCharles.morecolorful.common.attachment.InstrumentData;
+import com.ChalkerCharles.morecolorful.common.attachment.PlayerData;
+import com.ChalkerCharles.morecolorful.util.InstrumentsType;
+import com.ChalkerCharles.morecolorful.network.NetworkUtils;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.network.PacketDistributor;
+import net.neoforged.neoforge.network.handling.DirectionalPayloadHandler;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
-import org.jetbrains.annotations.NotNull;
+import net.neoforged.neoforge.network.handling.IPayloadHandler;
 
 public record PlayingScreenPacket(InstrumentsType pType, BlockPos pos, int id, boolean isOpen) implements CustomPacketPayload {
-    public PlayingScreenPacket() {
-        this(InstrumentsType.HARP, Constants.DEFAULT_INSTRUMENT_POS, 0, false);
+    public PlayingScreenPacket(InstrumentsType pType, int id, boolean isOpen) {
+        this(pType, BlockPos.ZERO, id, isOpen);
     }
 
     public static final CustomPacketPayload.Type<PlayingScreenPacket> TYPE = new CustomPacketPayload.Type<>(MoreColorful.location("playing_screen_event"));
@@ -33,36 +34,36 @@ public record PlayingScreenPacket(InstrumentsType pType, BlockPos pos, int id, b
             ByteBufCodecs.BOOL,
             PlayingScreenPacket::isOpen,
             PlayingScreenPacket::new);
+
     @Override
-    public @NotNull Type<? extends CustomPacketPayload> type() {
+    public Type<? extends CustomPacketPayload> type() {
         return TYPE;
     }
 
-    public static void handleClient(final PlayingScreenPacket packet, final IPayloadContext context) {
-        int id = packet.id();
-        Player player = context.player();
-        Entity entity = player.level().getEntity(id);
+    public static final IPayloadHandler<PlayingScreenPacket> HANDLER = new DirectionalPayloadHandler<>(
+            PlayingScreenPacket::handleClient, PlayingScreenPacket::handleServer
+    );
+
+    private void handleClient(IPayloadContext context) {
         context.enqueueWork(() -> {
-            if (entity instanceof Player) {
-                entity.setData(ModDataAttachments.PLAYING_SCREEN_DATA, packet);
-            }
-        }).exceptionally(ThreadUtils.handlePayloadException(context));
+            Level level = context.player().level();
+            Player player = (Player) level.getEntity(id);
+            InstrumentData data = PlayerData.getInstrumentData(player);
+            data.setPlayingScreenData(pType, pos, isOpen);
+        }).exceptionally(NetworkUtils.handlePayloadException(context));
     }
-    public static void handleServer(final PlayingScreenPacket packet, final IPayloadContext context) {
-        int id = packet.id();
-        boolean isOpen = packet.isOpen();
-        Player player = context.player();
-        Entity entity = player.level().getEntity(id);
+
+    private void handleServer(IPayloadContext context) {
         context.enqueueWork(() -> {
-            if (entity instanceof Player) {
-                entity.setData(ModDataAttachments.PLAYING_SCREEN_DATA, packet);
-                PacketDistributor.sendToAllPlayers(packet);
-                if (!isOpen) {
-                    ((Player) entity).stopUsingItem();
-                    entity.setData(ModDataAttachments.IS_PLAYING_INSTRUMENT, false);
-                    PacketDistributor.sendToAllPlayers(new InstrumentPressingPacket(id, false));
-                }
+            Player player = context.player();
+            InstrumentData data = PlayerData.getInstrumentData(player);
+            data.setPlayingScreenData(pType, pos, isOpen);
+            PacketDistributor.sendToAllPlayers(this);
+            if (!isOpen) {
+                player.stopUsingItem();
+                data.isPlaying = false;
+                PacketDistributor.sendToAllPlayers(new InstrumentPressingPacket(id, false));
             }
-        }).exceptionally(ThreadUtils.handlePayloadException(context));
+        }).exceptionally(NetworkUtils.handlePayloadException(context));
     }
 }

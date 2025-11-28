@@ -31,6 +31,7 @@ public class Config {
     private static final ModConfigSpec.ConfigValue<List<? extends String>> THERMAL_RESISTANCE;
     public static final ModConfigSpec.BooleanValue ARCHAEOLOGY_LOOTS;
     public static final ModConfigSpec.BooleanValue WIND_SYSTEM;
+    public static final ModConfigSpec.BooleanValue WIND_PHYSICS;
     private static final ModConfigSpec.ConfigValue<List<? extends String>> WINDLESS_DIMENSIONS;
     public static final ModConfigSpec.IntValue OVERWORLD_REGION_WEIGHT;
     private static final ModConfigSpec.ConfigValue<List<? extends String>> DISABLED_BIOMES;
@@ -76,9 +77,15 @@ public class Config {
 
         builder.comment("World").translation(prefix + "world").push("world");
         WIND_SYSTEM = builder
+                .gameRestart()
                 .translation(prefix + "wind_system")
                 .comment("Wind is a global weather occurrence that randomly happens. The wind consists of two components on X axis and Z axis, and the max speed of each component is 17.5 (m/s).")
                 .define("windSystem", true);
+        WIND_PHYSICS = builder
+                .gameRestart()
+                .translation(prefix + "wind_physics")
+                .comment("Allowing wind to push entities.")
+                .define("windPhysics", true);
         WINDLESS_DIMENSIONS = builder
                 .translation(prefix + "windless_dimensions")
                 .comment("Wind won't blow in dimensions in this list.")
@@ -91,7 +98,7 @@ public class Config {
                 .defineInRange("overworldRegionWeight", 10, 0, Integer.MAX_VALUE);
         DISABLED_BIOMES = builder
                 .translation(prefix + "disabled_biomes")
-                .comment("Biomes in this list are disabled from world generation.")
+                .comment("A list of biomes that are disabled from world generation.")
                 .defineListAllowEmpty("disabledBiomes", ArrayList::new, () -> "", Config::validLocation);
         ALLOW_ADDING_FEATURES = builder
                 .translation(prefix + "allow_adding_features")
@@ -109,6 +116,7 @@ public class Config {
 
         builder.comment("World").translation(prefix + "world").push("world");
         WIND_EFFECT_CLIENT = builder
+                .worldRestart()
                 .translation(prefix + "wind_effect_client")
                 .comment("Wind effects on the client side, including visual effect (such as leaves waving).")
                 .define("windEffect", true);
@@ -118,7 +126,7 @@ public class Config {
     }
 
     @SubscribeEvent
-    static void onLoad(final ModConfigEvent event) {
+    static void onLoad(ModConfigEvent event) {
         ModConfig config = event.getConfig();
         if (config.getType() == ModConfig.Type.COMMON) {
             blockTemperature = BLOCK_TEMPERATURE.get().stream()

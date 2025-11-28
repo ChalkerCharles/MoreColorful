@@ -2,23 +2,27 @@ package com.ChalkerCharles.morecolorful.common.block.entity;
 
 import com.ChalkerCharles.morecolorful.common.block.ModBlockEntities;
 import com.ChalkerCharles.morecolorful.util.CymbalUtils;
-import it.unimi.dsi.fastutil.ints.IntSet;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class RideCymbalBlockEntity extends AbstractCymbalBlockEntity {
+public class RideCymbalBlockEntity extends BlockEntity {
+    public int ticks;
+    public int ticksAfterStop;
+    public boolean shaking;
+
     public RideCymbalBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntities.RIDE_CYMBAL.get(), pPos, pBlockState);
     }
 
-    public static void tick(Level pLevel, BlockPos pPos, RideCymbalBlockEntity blockEntity) {
-        IntSet playerSet = CymbalUtils.pressingPlayers(pLevel, pPos);
-        if (!playerSet.isEmpty()) {
+    public static void tick(Level pLevel, BlockPos pPos, BlockState ignore, RideCymbalBlockEntity blockEntity) {
+        boolean pressing = CymbalUtils.playerPressing(pLevel, pPos);
+        if (pressing) {
             blockEntity.shaking = true;
         }
 
-        if (playerSet.isEmpty() && blockEntity.shaking) {
+        if (!pressing && blockEntity.shaking) {
             blockEntity.ticksAfterStop ++;
         } else {
             blockEntity.ticksAfterStop = 0;

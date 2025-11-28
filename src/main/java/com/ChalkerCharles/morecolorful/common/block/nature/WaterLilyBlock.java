@@ -1,7 +1,6 @@
 package com.ChalkerCharles.morecolorful.common.block.nature;
 
 import com.ChalkerCharles.morecolorful.common.block.ModBlocks;
-import com.google.common.base.Suppliers;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableBiMap;
 import net.minecraft.core.BlockPos;
@@ -23,16 +22,12 @@ import net.neoforged.neoforge.common.util.Lazy;
 public class WaterLilyBlock extends WaterlilyBlock implements BonemealableBlock {
     private static final VoxelShape COLLISION = Block.box(1.0, 0.0, 1.0, 15.0, 1.5, 15.0);
     private static final VoxelShape SHAPE = Block.box(1.0, 0.0, 1.0, 15.0, 6.0, 15.0);
-    private static final Lazy<BiMap<Block, Block>> FALLING_ASLEEP = Lazy.of(Suppliers.memoize(
-            () -> ImmutableBiMap.of(
-                    ModBlocks.OPEN_WATER_LILY.get(), ModBlocks.CLOSED_WATER_LILY.get(),
-                    ModBlocks.OPEN_WHITE_WATER_LILY.get(), ModBlocks.CLOSED_WHITE_WATER_LILY.get(),
-                    ModBlocks.OPEN_BLUE_WATER_LILY.get(), ModBlocks.CLOSED_BLUE_WATER_LILY.get()
-            )
-    ));
-    private static final Lazy<BiMap<Block, Block>> WAKING_UP = Lazy.of(Suppliers.memoize(
-            () -> FALLING_ASLEEP.get().inverse()
-    ));
+    private static final Lazy<BiMap<Block, Block>> FALLING_ASLEEP = Lazy.of(() -> ImmutableBiMap.of(
+            ModBlocks.OPEN_WATER_LILY.get(), ModBlocks.CLOSED_WATER_LILY.get(),
+            ModBlocks.OPEN_WHITE_WATER_LILY.get(), ModBlocks.CLOSED_WHITE_WATER_LILY.get(),
+            ModBlocks.OPEN_BLUE_WATER_LILY.get(), ModBlocks.CLOSED_BLUE_WATER_LILY.get())
+    );
+    private static final Lazy<BiMap<Block, Block>> WAKING_UP = Lazy.of(() -> FALLING_ASLEEP.get().inverse());
     private final boolean isOpen;
     public WaterLilyBlock(boolean isOpen, Properties properties) {
         super(properties);

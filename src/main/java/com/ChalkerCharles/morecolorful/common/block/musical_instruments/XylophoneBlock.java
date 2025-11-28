@@ -1,10 +1,17 @@
 package com.ChalkerCharles.morecolorful.common.block.musical_instruments;
 
+import com.ChalkerCharles.morecolorful.client.gui.PlayingScreen;
+import com.ChalkerCharles.morecolorful.common.ModStats;
 import com.ChalkerCharles.morecolorful.common.block.properties.HorizontalDoubleBlockHalf;
 import com.ChalkerCharles.morecolorful.common.block.properties.ModBlockStateProperties;
-import com.ChalkerCharles.morecolorful.common.item.musical_instruments.InstrumentsType;
+import com.ChalkerCharles.morecolorful.network.packets.PlayingScreenPacket;
+import com.ChalkerCharles.morecolorful.util.InstrumentsType;
+import com.ChalkerCharles.morecolorful.util.MusicalInstrument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -18,13 +25,16 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 import javax.annotation.Nullable;
 
-public class XylophoneBlock extends PercussionInstrumentBlock {
+public class XylophoneBlock extends Block implements MusicalInstrument {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final EnumProperty<HorizontalDoubleBlockHalf> HALF = ModBlockStateProperties.HORIZONTAL_HALF;
     protected static final VoxelShape NORTH_LEFT_BASE = Shapes.or(
@@ -148,11 +158,16 @@ public class XylophoneBlock extends PercussionInstrumentBlock {
             Block.box(10.5, 11.0, 0.0, 11.5, 12.0, 7.0),
             WEST_RIGHT_BASE);
 
-    public XylophoneBlock(InstrumentsType pType, Properties properties) {
-        super(pType, properties);
+    public XylophoneBlock(Properties properties) {
+        super(properties);
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(HALF, HorizontalDoubleBlockHalf.LEFT)
         );
+    }
+
+    @Override
+    public InstrumentsType getType() {
+        return InstrumentsType.XYLOPHONE;
     }
 
     @Override
@@ -166,6 +181,7 @@ public class XylophoneBlock extends PercussionInstrumentBlock {
             default -> flag ? NORTH_LEFT_COLLISION : NORTH_RIGHT_COLLISION;
         };
     }
+
     @Override
     protected VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
         Direction direction = pState.getValue(FACING);
@@ -177,10 +193,12 @@ public class XylophoneBlock extends PercussionInstrumentBlock {
             default -> flag ? NORTH_LEFT : NORTH_RIGHT;
         };
     }
+
     @Override
     protected boolean canSurvive(BlockState pState, LevelReader pLevel, BlockPos pPos) {
         return Block.canSupportRigidBlock(pLevel, pPos.below());
     }
+
     @Override
     protected BlockState updateShape(BlockState pState, Direction pDirection, BlockState pNeighborState, LevelAccessor pLevel, BlockPos pPos, BlockPos pNeighborPos) {
         if ((Direction.DOWN == pDirection && !this.canSurvive(pState, pLevel, pPos))) {
@@ -194,9 +212,11 @@ public class XylophoneBlock extends PercussionInstrumentBlock {
             return super.updateShape(pState, pDirection, pNeighborState, pLevel, pPos, pNeighborPos);
         }
     }
+
     private static Direction getNeighbourDirection(HorizontalDoubleBlockHalf pHalf, Direction pDirection) {
         return pHalf == HorizontalDoubleBlockHalf.LEFT ? pDirection.getCounterClockWise() : pDirection.getClockWise();
     }
+
     @Override
     public BlockState playerWillDestroy(Level pLevel, BlockPos pPos, BlockState pState, Player pPlayer) {
         if (!pLevel.isClientSide && (pPlayer.isCreative() || !pPlayer.hasCorrectToolForDrops(pState, pLevel, pPos))) {
@@ -212,6 +232,21 @@ public class XylophoneBlock extends PercussionInstrumentBlock {
         }
         return super.playerWillDestroy(pLevel, pPos, pState, pPlayer);
     }
+
+    @Override
+    protected ItemInteractionResult useItemOn(ItemStack pStack, BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHitResult) {
+        if (MusicalInstrument.withDrumsticks(pPlayer)) {
+            if (pLevel.isClientSide) {
+                PlayingScreen.openPlayingScreen(pPlayer, this.getType(), pPos);
+                PacketDistributor.sendToServer(new PlayingScreenPacket(this.getType(), pPos, pPlayer.getId(), true));
+            }
+            pPlayer.awardStat(ModStats.INTERACT_WITH_XYLOPHONE.get());
+        } else {
+            pPlayer.displayClientMessage(Component.translatable("info.morecolorful.instruments.need_drumsticks"), true);
+        }
+        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+    }
+
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {
@@ -224,19 +259,28 @@ public class XylophoneBlock extends PercussionInstrumentBlock {
                 ? this.defaultBlockState().setValue(FACING, direction.getOpposite())
                 : null;
     }
+
     @Override
     public void setPlacedBy(Level pLevel, BlockPos pPos, BlockState pState, LivingEntity pPlacer, ItemStack pStack) {
         pLevel.setBlock(pPos.relative(pState.getValue(FACING).getCounterClockWise()), pState.setValue(HALF, HorizontalDoubleBlockHalf.RIGHT), 3);
     }
+
     @Override
     protected BlockState rotate(BlockState pState, Rotation pRot) {
         return pState.setValue(FACING, pRot.rotate(pState.getValue(FACING)));
     }
+
     @SuppressWarnings("deprecation")
     @Override
     protected BlockState mirror(BlockState pState, Mirror pMirror) {
         return pState.rotate(pMirror.getRotation(pState.getValue(FACING)));
     }
+
+    @Override
+    protected boolean isPathfindable(BlockState pState, PathComputationType pPathComputationType) {
+        return false;
+    }
+
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
         pBuilder.add(FACING, HALF);

@@ -1,89 +1,57 @@
 package com.ChalkerCharles.morecolorful.mixin.mixins.client.compat.sodium;
 
-import com.ChalkerCharles.morecolorful.Config;
-import com.ChalkerCharles.morecolorful.mixin.extensions.compat.IVertexExtension;
-import com.ChalkerCharles.morecolorful.util.RenderUtils;
-import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import com.ChalkerCharles.morecolorful.client.compat.SodiumCompat;
+import com.ChalkerCharles.morecolorful.client.compat.SodiumWavyVertices;
+import com.ChalkerCharles.morecolorful.util.client.RenderUtils;
 import com.llamalad7.mixinextras.sugar.Local;
-import net.caffeinemc.mods.sodium.api.util.NormI8;
-import net.caffeinemc.mods.sodium.client.model.light.data.QuadLightData;
-import net.caffeinemc.mods.sodium.client.model.quad.ModelQuadView;
 import net.caffeinemc.mods.sodium.client.model.quad.properties.ModelQuadFacing;
-import net.caffeinemc.mods.sodium.client.render.chunk.compile.buffers.ChunkModelBuilder;
-import net.caffeinemc.mods.sodium.client.render.chunk.compile.pipeline.DefaultFluidRenderer;
 import net.caffeinemc.mods.sodium.client.render.chunk.terrain.material.Material;
-import net.caffeinemc.mods.sodium.client.render.chunk.translucent_sorting.TranslucentGeometryCollector;
 import net.caffeinemc.mods.sodium.client.render.chunk.vertex.builder.ChunkMeshBufferBuilder;
 import net.caffeinemc.mods.sodium.client.render.chunk.vertex.format.ChunkVertexEncoder;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.core.BlockPos;
-import org.joml.Vector4f;
+import net.caffeinemc.mods.sodium.client.render.chunk.vertex.format.impl.CompactChunkVertex;
+import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Pseudo
 @Mixin(targets = "net.caffeinemc.mods.sodium.client.render.chunk.compile.pipeline.DefaultFluidRenderer", remap = false)
 public abstract class DefaultFluidRendererMixin {
-    @Shadow
-    @Final
-    private int[] quadColors;
-    @Shadow
-    @Final
-    private float[] brightness;
-    @Shadow
-    @Final
-    private QuadLightData quadLightData;
-    @Shadow
-    @Final
-    private ChunkVertexEncoder.Vertex[] vertices;
+    @Unique
+    private final long[] moreColorful$waveData = new long[4];
+    @Unique
+    private final float[] moreColorful$posData = new float[12];
 
-    @WrapOperation(method = "render", at = @At(value = "INVOKE", target = "Lnet/caffeinemc/mods/sodium/client/render/chunk/compile/pipeline/DefaultFluidRenderer;writeQuad(Lnet/caffeinemc/mods/sodium/client/render/chunk/compile/buffers/ChunkModelBuilder;Lnet/caffeinemc/mods/sodium/client/render/chunk/translucent_sorting/TranslucentGeometryCollector;Lnet/caffeinemc/mods/sodium/client/render/chunk/terrain/material/Material;Lnet/minecraft/core/BlockPos;Lnet/caffeinemc/mods/sodium/client/model/quad/ModelQuadView;Lnet/caffeinemc/mods/sodium/client/model/quad/properties/ModelQuadFacing;Z)V"))
-    public void render(DefaultFluidRenderer instance, ChunkModelBuilder builder, TranslucentGeometryCollector collector, Material material, BlockPos offset, ModelQuadView quad, ModelQuadFacing facing, boolean flip, Operation<Void> original, @Local(ordinal = 0, argsOnly = true) BlockPos blockPos) {
-        if (Config.WIND_EFFECT_CLIENT.isTrue() && material.isTranslucent()) {
-            this.moreColorful$writeQuad(builder, collector, material, offset, quad, facing, flip, blockPos);
-        } else {
-            original.call(instance, builder, collector, material, offset, quad, facing, flip);
-        }
+    @Inject(method = "writeQuad", at = @At(value = "FIELD", target = "Lnet/caffeinemc/mods/sodium/client/render/chunk/vertex/format/ChunkVertexEncoder$Vertex;light:I", opcode = Opcodes.PUTFIELD, shift = At.Shift.AFTER))
+    private void writeQuad$0(CallbackInfo ci, @Local int i, @Local ChunkVertexEncoder.Vertex out, @Local(argsOnly = true) boolean flip) {
+        if (!RenderUtils.isClientWindOn) return;
+        float x = out.x, y = out.y, z = out.z;
+        long wave = RenderUtils.getFluidWaveData(x, y, z);
+        int idx = flip ? (3 - i + 1) & 3 : i;
+        this.moreColorful$waveData[idx] = wave;
+        int j = idx * 3;
+        this.moreColorful$posData[j] = x;
+        this.moreColorful$posData[j + 1] = y;
+        this.moreColorful$posData[j + 2] = z;
     }
 
-    @Unique
-    private void moreColorful$writeQuad(ChunkModelBuilder builder, TranslucentGeometryCollector collector, Material material, BlockPos offset, ModelQuadView quad, ModelQuadFacing facing, boolean flip, BlockPos pos) {
-        ChunkVertexEncoder.Vertex[] vertices = this.vertices;
-
-        for(int i = 0; i < 4; ++i) {
-            ChunkVertexEncoder.Vertex out = vertices[flip ? 3 - i + 1 & 3 : i];
-            out.x = (float)offset.getX() + quad.getX(i);
-            out.y = (float)offset.getY() + quad.getY(i);
-            out.z = (float)offset.getZ() + quad.getZ(i);
-            out.color = this.quadColors[i];
-            out.ao = this.brightness[i];
-            out.u = quad.getTexU(i);
-            out.v = quad.getTexV(i);
-            out.light = this.quadLightData.lm[i];
-            Vector4f wave = RenderUtils.getFluidWaveData(pos, out.x, out.y, out.z);
-            ((IVertexExtension) out).moreColorful$setWave(wave);
+    @Inject(method = "writeQuad", at = @At(value = "INVOKE", target = "Lnet/caffeinemc/mods/sodium/client/render/chunk/vertex/builder/ChunkMeshBufferBuilder;push([Lnet/caffeinemc/mods/sodium/client/render/chunk/vertex/format/ChunkVertexEncoder$Vertex;Lnet/caffeinemc/mods/sodium/client/render/chunk/terrain/material/Material;)V"))
+    private void writeQuad$1(CallbackInfo ci, @Local(argsOnly = true) Material material, @Local(argsOnly = true) ModelQuadFacing facing, @Local ChunkMeshBufferBuilder vertexBuffer) {
+        if (!RenderUtils.isClientWindOn) return;
+        SodiumWavyVertices vertices = SodiumCompat.getWavyVertices(material.pass);
+        if (vertices == null) return;
+        boolean translucent = material.isTranslucent();
+        int stride = CompactChunkVertex.STRIDE;
+        int index = vertexBuffer.count() * stride;
+        for (int i = 0; i < 4; i++, index += stride) {
+            long wave = this.moreColorful$waveData[i];
+            if (!translucent && wave == 0L) continue;
+            int j = i * 3;
+            float x = this.moreColorful$posData[j];
+            float y = this.moreColorful$posData[j + 1];
+            float z = this.moreColorful$posData[j + 2];
+            vertices.addVertex(facing, index, wave, x, y, z);
         }
-
-        TextureAtlasSprite sprite = quad.getSprite();
-        if (sprite != null) {
-            builder.addSprite(sprite);
-        }
-
-        if (material.isTranslucent() && collector != null) {
-            int normal;
-            if (facing.isAligned()) {
-                normal = facing.getPackedAlignedNormal();
-            } else {
-                normal = quad.getFaceNormal();
-            }
-            if (flip) {
-                normal = NormI8.flipPacked(normal);
-            }
-            collector.appendQuad(normal, vertices, facing);
-        }
-
-        ChunkMeshBufferBuilder vertexBuffer = builder.getVertexBuffer(facing);
-        vertexBuffer.push(vertices, material);
     }
 }

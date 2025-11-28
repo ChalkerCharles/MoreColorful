@@ -24,4 +24,8 @@ public enum UprightPianoPart implements StringRepresentable {
     public @NotNull String getSerializedName() {
         return this.name;
     }
+
+    public boolean isUpper() {
+        return this == LEFT_UPPER || this == RIGHT_UPPER;
+    }
 }

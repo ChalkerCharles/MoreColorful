@@ -1,6 +1,6 @@
 package com.ChalkerCharles.morecolorful.util.melody;
 
-import com.ChalkerCharles.morecolorful.common.item.musical_instruments.InstrumentsType;
+import com.ChalkerCharles.morecolorful.util.InstrumentsType;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import org.jetbrains.annotations.Nullable;
 

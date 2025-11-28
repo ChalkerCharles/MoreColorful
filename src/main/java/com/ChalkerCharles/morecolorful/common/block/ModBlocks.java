@@ -5,8 +5,9 @@ import com.ChalkerCharles.morecolorful.client.particle.ModParticles;
 import com.ChalkerCharles.morecolorful.common.block.musical_instruments.*;
 import com.ChalkerCharles.morecolorful.common.block.nature.*;
 import com.ChalkerCharles.morecolorful.common.block.properties.*;
-import com.ChalkerCharles.morecolorful.common.item.musical_instruments.InstrumentsType;
+import com.ChalkerCharles.morecolorful.util.InstrumentsType;
 import com.ChalkerCharles.morecolorful.common.worldgen.features.trees.ModTreeGrower;
+import com.ChalkerCharles.morecolorful.util.EnumExtensions;
 import net.minecraft.core.Direction;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.level.block.*;
@@ -28,28 +29,28 @@ public class ModBlocks {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MoreColorful.MODID);
 
     // Musical Instruments
-    public static final DeferredBlock<Block> HARP = BLOCKS.register("harp", ()-> new HarpBlock(InstrumentsType.HARP, ofFullCopy(Blocks.IRON_BARS).mapColor(MapColor.TERRACOTTA_YELLOW).strength(3.0F, 6.0F).pushReaction(PushReaction.DESTROY)));
-    public static final DeferredBlock<Block> UPRIGHT_PIANO = BLOCKS.register("upright_piano", ()-> new UprightPianoBlock(InstrumentsType.PIANO_LOW, ofFullCopy(Blocks.IRON_BARS).mapColor(MapColor.COLOR_BLACK).strength(3.0F, 6.0F).pushReaction(PushReaction.BLOCK)));
-    public static final DeferredBlock<Block> GRAND_PIANO = BLOCKS.register("grand_piano", ()-> new GrandPianoBlock(InstrumentsType.PIANO_LOW, ofFullCopy(Blocks.IRON_BARS).mapColor(MapColor.COLOR_BLACK).strength(3.0F, 6.0F).pushReaction(PushReaction.BLOCK)));
-    public static final DeferredBlock<Block> BASS_DRUM = BLOCKS.register("bass_drum", ()-> new BassDrumBlock(InstrumentsType.BASS_DRUM, of().mapColor(MapColor.QUARTZ).instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
-    public static final DeferredBlock<Block> SNARE_DRUM = BLOCKS.register("snare_drum", ()-> new SnareDrumBlock(InstrumentsType.SNARE, ofFullCopy(Blocks.COPPER_BLOCK).mapColor(MapColor.QUARTZ).pushReaction(PushReaction.DESTROY).forceSolidOn()));
-    public static final DeferredBlock<Block> TOMTOM_DRUM = BLOCKS.register("tom-tom_drum", ()-> new TomTomDrumBlock(InstrumentsType.TOM, of().mapColor(MapColor.QUARTZ).instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).sound(SoundType.CHERRY_WOOD).forceSolidOn()));
-    public static final DeferredBlock<Block> HIHAT = BLOCKS.register("hi-hat", ()-> new HiHatBlock(InstrumentsType.HAT, ofFullCopy(Blocks.COPPER_GRATE).mapColor(MapColor.GOLD).pushReaction(PushReaction.DESTROY)));
-    public static final DeferredBlock<Block> RIDE_CYMBAL = BLOCKS.register("ride_cymbal", ()-> new RideCymbalBlock(InstrumentsType.RIDE, ofFullCopy(Blocks.COPPER_GRATE).mapColor(MapColor.GOLD).pushReaction(PushReaction.DESTROY).forceSolidOn()));
-    public static final DeferredBlock<Block> CRASH_CYMBAL = BLOCKS.register("crash_cymbal", ()-> new CrashCymbalBlock(InstrumentsType.CRASH, ofFullCopy(Blocks.COPPER_GRATE).mapColor(MapColor.GOLD).pushReaction(PushReaction.DESTROY).forceSolidOn()));
+    public static final DeferredBlock<Block> HARP = BLOCKS.register("harp", ()-> new HarpBlock(ofFullCopy(Blocks.IRON_BARS).mapColor(MapColor.TERRACOTTA_YELLOW).strength(3.0F, 6.0F).pushReaction(PushReaction.DESTROY)));
+    public static final DeferredBlock<Block> UPRIGHT_PIANO = BLOCKS.register("upright_piano", ()-> new UprightPianoBlock(ofFullCopy(Blocks.IRON_BARS).mapColor(MapColor.COLOR_BLACK).strength(3.0F, 6.0F).pushReaction(PushReaction.BLOCK)));
+    public static final DeferredBlock<Block> GRAND_PIANO = BLOCKS.register("grand_piano", ()-> new GrandPianoBlock(ofFullCopy(Blocks.IRON_BARS).mapColor(MapColor.COLOR_BLACK).strength(3.0F, 6.0F).pushReaction(PushReaction.BLOCK)));
+    public static final DeferredBlock<Block> BASS_DRUM = BLOCKS.register("bass_drum", ()-> new BassDrumBlock(of().mapColor(MapColor.QUARTZ).instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
+    public static final DeferredBlock<Block> SNARE_DRUM = BLOCKS.register("snare_drum", ()-> new SnareDrumBlock(ofFullCopy(Blocks.COPPER_BLOCK).mapColor(MapColor.QUARTZ).pushReaction(PushReaction.DESTROY).forceSolidOn()));
+    public static final DeferredBlock<Block> TOMTOM_DRUM = BLOCKS.register("tom-tom_drum", ()-> new TomTomDrumBlock(of().mapColor(MapColor.QUARTZ).instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).sound(SoundType.CHERRY_WOOD).forceSolidOn()));
+    public static final DeferredBlock<Block> HIHAT = BLOCKS.register("hi-hat", ()-> new HiHatBlock(ofFullCopy(Blocks.COPPER_GRATE).mapColor(MapColor.GOLD).pushReaction(PushReaction.DESTROY)));
+    public static final DeferredBlock<Block> RIDE_CYMBAL = BLOCKS.register("ride_cymbal", ()-> new RideCymbalBlock(ofFullCopy(Blocks.COPPER_GRATE).mapColor(MapColor.GOLD).pushReaction(PushReaction.DESTROY).forceSolidOn()));
+    public static final DeferredBlock<Block> CRASH_CYMBAL = BLOCKS.register("crash_cymbal", ()-> new CrashCymbalBlock(ofFullCopy(Blocks.COPPER_GRATE).mapColor(MapColor.GOLD).pushReaction(PushReaction.DESTROY).forceSolidOn()));
     public static final DeferredBlock<Block> DRUM_SET = BLOCKS.register("drum_set", ()-> new DrumSetBlock(of().mapColor(MapColor.METAL).strength(3.0F, 6.0F).noOcclusion().pushReaction(PushReaction.DESTROY).sound(SoundType.COPPER).forceSolidOn()));
-    public static final DeferredBlock<Block> CHIMES = BLOCKS.register("chimes", ()-> new ChimesBlock(InstrumentsType.CHIMES, ofFullCopy(Blocks.COPPER_GRATE).mapColor(MapColor.METAL).instrument(NoteBlockInstrument.CHIME).pushReaction(PushReaction.DESTROY)));
-    public static final DeferredBlock<Block> GLOCKENSPIEL = BLOCKS.register("glockenspiel", ()-> new GlockenspielBlock(InstrumentsType.GLOCKENSPIEL, ofFullCopy(Blocks.COPPER_GRATE).mapColor(MapColor.GOLD).instrument(NoteBlockInstrument.BELL).pushReaction(PushReaction.DESTROY).forceSolidOn()));
-    public static final DeferredBlock<Block> XYLOPHONE = BLOCKS.register("xylophone", ()-> new XylophoneBlock(InstrumentsType.XYLOPHONE, ofFullCopy(Blocks.BONE_BLOCK).mapColor(MapColor.WOOD).pushReaction(PushReaction.DESTROY)));
-    public static final DeferredBlock<Block> VIBRAPHONE = BLOCKS.register("vibraphone", ()-> new VibraphoneBlock(InstrumentsType.VIBRAPHONE, ofFullCopy(Blocks.COPPER_BLOCK).mapColor(MapColor.METAL).instrument(NoteBlockInstrument.IRON_XYLOPHONE).pushReaction(PushReaction.DESTROY)));
+    public static final DeferredBlock<Block> CHIMES = BLOCKS.register("chimes", ()-> new ChimesBlock(ofFullCopy(Blocks.COPPER_GRATE).mapColor(MapColor.METAL).instrument(NoteBlockInstrument.CHIME).pushReaction(PushReaction.DESTROY)));
+    public static final DeferredBlock<Block> GLOCKENSPIEL = BLOCKS.register("glockenspiel", ()-> new GlockenspielBlock(ofFullCopy(Blocks.COPPER_GRATE).mapColor(MapColor.GOLD).instrument(NoteBlockInstrument.BELL).pushReaction(PushReaction.DESTROY).forceSolidOn()));
+    public static final DeferredBlock<Block> XYLOPHONE = BLOCKS.register("xylophone", ()-> new XylophoneBlock(ofFullCopy(Blocks.BONE_BLOCK).mapColor(MapColor.WOOD).pushReaction(PushReaction.DESTROY)));
+    public static final DeferredBlock<Block> VIBRAPHONE = BLOCKS.register("vibraphone", ()-> new VibraphoneBlock(ofFullCopy(Blocks.COPPER_BLOCK).mapColor(MapColor.METAL).instrument(NoteBlockInstrument.IRON_XYLOPHONE).pushReaction(PushReaction.DESTROY)));
     public static final DeferredBlock<Block> SYNTHESIZER_KEYBOARD_BIT = BLOCKS.register("synthesizer_keyboard_bit", ()-> new SynthesizerKeyboardBlock(InstrumentsType.BIT, ofFullCopy(Blocks.IRON_BARS).mapColor(MapColor.DEEPSLATE).instrument(NoteBlockInstrument.BIT)));
     public static final DeferredBlock<Block> SYNTHESIZER_KEYBOARD_PLING = BLOCKS.register("synthesizer_keyboard_pling", ()-> new SynthesizerKeyboardBlock(InstrumentsType.PLING, ofFullCopy(Blocks.IRON_BARS).mapColor(MapColor.COLOR_BLACK).instrument(NoteBlockInstrument.PLING)));
-    public static final DeferredBlock<Block> SYNTHESIZER_KEYBOARD_SCULK = BLOCKS.register("synthesizer_keyboard_sculk", ()-> new SynthesizerKeyboardBlock(InstrumentsType.SCULK, ofFullCopy(Blocks.SCULK_CATALYST).instrument(NoteBlockInstrumentExtension.SCULK).emissiveRendering(Blocks::always)));
-    public static final DeferredBlock<Block> SYNTHESIZER_KEYBOARD_AMETHYST = BLOCKS.register("synthesizer_keyboard_amethyst", ()-> new SynthesizerKeyboardBlock(InstrumentsType.CRYSTAL, ofFullCopy(Blocks.AMETHYST_CLUSTER).instrument(NoteBlockInstrumentExtension.CRYSTAL).emissiveRendering(Blocks::always)));
-    public static final DeferredBlock<Block> SYNTHESIZER_KEYBOARD_SAW = BLOCKS.register("synthesizer_keyboard_saw", ()-> new SynthesizerKeyboardBlock(InstrumentsType.SAW, ofFullCopy(Blocks.IRON_BARS).mapColor(MapColor.CRIMSON_NYLIUM).instrument(NoteBlockInstrumentExtension.SAW)));
-    public static final DeferredBlock<Block> SYNTHESIZER_KEYBOARD_PLUCK = BLOCKS.register("synthesizer_keyboard_pluck", ()-> new SynthesizerKeyboardBlock(InstrumentsType.PLUCK, ofFullCopy(Blocks.IRON_BARS).mapColor(MapColor.LAPIS).instrument(NoteBlockInstrumentExtension.PLUCK)));
-    public static final DeferredBlock<Block> SYNTHESIZER_KEYBOARD_SYNTH_BASS = BLOCKS.register("synthesizer_keyboard_synth_bass", ()-> new SynthesizerKeyboardBlock(InstrumentsType.SYNTH_BASS, ofFullCopy(Blocks.IRON_BARS).mapColor(MapColor.METAL).instrument(NoteBlockInstrumentExtension.SYNTH_BASS)));
-    public static final DeferredBlock<Block> GUZHENG = BLOCKS.register("guzheng", ()-> new GuzhengBlock(InstrumentsType.GUZHENG, ofFullCopy(Blocks.CHERRY_PLANKS).mapColor(MapColor.COLOR_BROWN).pushReaction(PushReaction.DESTROY)));
+    public static final DeferredBlock<Block> SYNTHESIZER_KEYBOARD_SCULK = BLOCKS.register("synthesizer_keyboard_sculk", ()-> new SynthesizerKeyboardBlock(InstrumentsType.SCULK, ofFullCopy(Blocks.SCULK_CATALYST).instrument(EnumExtensions.Instrument.SCULK).emissiveRendering(Blocks::always)));
+    public static final DeferredBlock<Block> SYNTHESIZER_KEYBOARD_AMETHYST = BLOCKS.register("synthesizer_keyboard_amethyst", ()-> new SynthesizerKeyboardBlock(InstrumentsType.CRYSTAL, ofFullCopy(Blocks.AMETHYST_CLUSTER).instrument(EnumExtensions.Instrument.CRYSTAL).emissiveRendering(Blocks::always)));
+    public static final DeferredBlock<Block> SYNTHESIZER_KEYBOARD_SAW = BLOCKS.register("synthesizer_keyboard_saw", ()-> new SynthesizerKeyboardBlock(InstrumentsType.SAW, ofFullCopy(Blocks.IRON_BARS).mapColor(MapColor.CRIMSON_NYLIUM).instrument(EnumExtensions.Instrument.SAW)));
+    public static final DeferredBlock<Block> SYNTHESIZER_KEYBOARD_PLUCK = BLOCKS.register("synthesizer_keyboard_pluck", ()-> new SynthesizerKeyboardBlock(InstrumentsType.PLUCK, ofFullCopy(Blocks.IRON_BARS).mapColor(MapColor.LAPIS).instrument(EnumExtensions.Instrument.PLUCK)));
+    public static final DeferredBlock<Block> SYNTHESIZER_KEYBOARD_SYNTH_BASS = BLOCKS.register("synthesizer_keyboard_synth_bass", ()-> new SynthesizerKeyboardBlock(InstrumentsType.SYNTH_BASS, ofFullCopy(Blocks.IRON_BARS).mapColor(MapColor.METAL).instrument(EnumExtensions.Instrument.SYNTH_BASS)));
+    public static final DeferredBlock<Block> GUZHENG = BLOCKS.register("guzheng", ()-> new GuzhengBlock(ofFullCopy(Blocks.CHERRY_PLANKS).mapColor(MapColor.COLOR_BROWN).pushReaction(PushReaction.DESTROY)));
 
     // Common Blocks
     public static final DeferredBlock<RotatedPillarBlock> CRABAPPLE_LOG = BLOCKS.register("crabapple_log", ()-> log(Blocks.CHERRY_LOG, MapColor.TERRACOTTA_PINK, MapColor.TERRACOTTA_GRAY));
@@ -75,22 +76,22 @@ public class ModBlocks {
     public static final DeferredBlock<PinkPetalsBlock> BEGONIAS = BLOCKS.register("begonias", ()-> new PinkPetalsBlock(ofFullCopy(Blocks.PINK_PETALS).mapColor(MapColorExtension.BEGONIA)));
 
     public static final DeferredBlock<RotatedPillarBlock> EBONY_LOG = BLOCKS.register("ebony_log", ()-> rareLog(MapColor.TERRACOTTA_BLACK, MapColor.TERRACOTTA_LIGHT_GRAY));
-    public static final DeferredBlock<RotatedPillarBlock> EBONY_WOOD = BLOCKS.register("ebony_wood", ()-> new RotatedPillarBlock(ofFullCopy(Blocks.OAK_WOOD).mapColor(MapColor.TERRACOTTA_LIGHT_GRAY).strength(2.5F).sound(ModSoundTypes.RARE_WOOD).instrument(NoteBlockInstrumentExtension.GUZHENG)));
-    public static final DeferredBlock<RotatedPillarBlock> STRIPPED_EBONY_LOG = BLOCKS.register("stripped_ebony_log", ()-> new RotatedPillarBlock(ofFullCopy(Blocks.STRIPPED_OAK_LOG).mapColor(MapColor.TERRACOTTA_BLACK).strength(2.5F).sound(ModSoundTypes.RARE_WOOD).instrument(NoteBlockInstrumentExtension.GUZHENG)));
-    public static final DeferredBlock<RotatedPillarBlock> STRIPPED_EBONY_WOOD = BLOCKS.register("stripped_ebony_wood", ()-> new RotatedPillarBlock(ofFullCopy(Blocks.STRIPPED_OAK_WOOD).mapColor(MapColor.TERRACOTTA_BLACK).strength(2.5F).sound(ModSoundTypes.RARE_WOOD).instrument(NoteBlockInstrumentExtension.GUZHENG)));
-    public static final DeferredBlock<Block> EBONY_PLANKS = BLOCKS.register("ebony_planks", ()-> new Block(ofFullCopy(Blocks.OAK_PLANKS).mapColor(MapColor.TERRACOTTA_BLACK).strength(2.5F, 3.0F).sound(ModSoundTypes.RARE_WOOD).instrument(NoteBlockInstrumentExtension.GUZHENG)));
+    public static final DeferredBlock<RotatedPillarBlock> EBONY_WOOD = BLOCKS.register("ebony_wood", ()-> new RotatedPillarBlock(ofFullCopy(Blocks.OAK_WOOD).mapColor(MapColor.TERRACOTTA_LIGHT_GRAY).strength(2.5F).sound(ModSoundTypes.RARE_WOOD).instrument(EnumExtensions.Instrument.GUZHENG)));
+    public static final DeferredBlock<RotatedPillarBlock> STRIPPED_EBONY_LOG = BLOCKS.register("stripped_ebony_log", ()-> new RotatedPillarBlock(ofFullCopy(Blocks.STRIPPED_OAK_LOG).mapColor(MapColor.TERRACOTTA_BLACK).strength(2.5F).sound(ModSoundTypes.RARE_WOOD).instrument(EnumExtensions.Instrument.GUZHENG)));
+    public static final DeferredBlock<RotatedPillarBlock> STRIPPED_EBONY_WOOD = BLOCKS.register("stripped_ebony_wood", ()-> new RotatedPillarBlock(ofFullCopy(Blocks.STRIPPED_OAK_WOOD).mapColor(MapColor.TERRACOTTA_BLACK).strength(2.5F).sound(ModSoundTypes.RARE_WOOD).instrument(EnumExtensions.Instrument.GUZHENG)));
+    public static final DeferredBlock<Block> EBONY_PLANKS = BLOCKS.register("ebony_planks", ()-> new Block(ofFullCopy(Blocks.OAK_PLANKS).mapColor(MapColor.TERRACOTTA_BLACK).strength(2.5F, 3.0F).sound(ModSoundTypes.RARE_WOOD).instrument(EnumExtensions.Instrument.GUZHENG)));
     public static final DeferredBlock<StairBlock> EBONY_STAIRS = BLOCKS.register("ebony_stairs", ()-> stair(EBONY_PLANKS.get()));
-    public static final DeferredBlock<SlabBlock> EBONY_SLAB = BLOCKS.register("ebony_slab", ()-> new SlabBlock(ofFullCopy(Blocks.OAK_SLAB).mapColor(MapColor.TERRACOTTA_BLACK).strength(2.5F, 3.0F).sound(ModSoundTypes.RARE_WOOD).instrument(NoteBlockInstrumentExtension.GUZHENG)));
-    public static final DeferredBlock<FenceBlock> EBONY_FENCE = BLOCKS.register("ebony_fence", ()-> new FenceBlock(ofFullCopy(Blocks.OAK_FENCE).mapColor(MapColor.TERRACOTTA_BLACK).strength(2.5F, 3.0F).sound(ModSoundTypes.RARE_WOOD).instrument(NoteBlockInstrumentExtension.GUZHENG)));
-    public static final DeferredBlock<FenceGateBlock> EBONY_FENCE_GATE = BLOCKS.register("ebony_fence_gate", ()-> new FenceGateBlock(ModWoodTypes.EBONY, ofFullCopy(Blocks.OAK_FENCE).mapColor(MapColor.TERRACOTTA_BLACK).strength(2.5F, 3.0F).instrument(NoteBlockInstrumentExtension.GUZHENG)));
-    public static final DeferredBlock<DoorBlock> EBONY_DOOR = BLOCKS.register("ebony_door", ()-> new DoorBlock(ModBlockSetTypes.EBONY, ofFullCopy(Blocks.OAK_DOOR).mapColor(MapColor.TERRACOTTA_BLACK).strength(3.5F).instrument(NoteBlockInstrumentExtension.GUZHENG)));
-    public static final DeferredBlock<TrapDoorBlock> EBONY_TRAPDOOR = BLOCKS.register("ebony_trapdoor", ()-> new TrapDoorBlock(ModBlockSetTypes.EBONY, ofFullCopy(Blocks.OAK_TRAPDOOR).mapColor(MapColor.TERRACOTTA_BLACK).strength(3.5F).instrument(NoteBlockInstrumentExtension.GUZHENG)));
-    public static final DeferredBlock<PressurePlateBlock> EBONY_PRESSURE_PLATE = BLOCKS.register("ebony_pressure_plate", ()-> new PressurePlateBlock(ModBlockSetTypes.EBONY, ofFullCopy(Blocks.OAK_PRESSURE_PLATE).mapColor(MapColor.TERRACOTTA_BLACK).instrument(NoteBlockInstrumentExtension.GUZHENG)));
+    public static final DeferredBlock<SlabBlock> EBONY_SLAB = BLOCKS.register("ebony_slab", ()-> new SlabBlock(ofFullCopy(Blocks.OAK_SLAB).mapColor(MapColor.TERRACOTTA_BLACK).strength(2.5F, 3.0F).sound(ModSoundTypes.RARE_WOOD).instrument(EnumExtensions.Instrument.GUZHENG)));
+    public static final DeferredBlock<FenceBlock> EBONY_FENCE = BLOCKS.register("ebony_fence", ()-> new FenceBlock(ofFullCopy(Blocks.OAK_FENCE).mapColor(MapColor.TERRACOTTA_BLACK).strength(2.5F, 3.0F).sound(ModSoundTypes.RARE_WOOD).instrument(EnumExtensions.Instrument.GUZHENG)));
+    public static final DeferredBlock<FenceGateBlock> EBONY_FENCE_GATE = BLOCKS.register("ebony_fence_gate", ()-> new FenceGateBlock(ModWoodTypes.EBONY, ofFullCopy(Blocks.OAK_FENCE).mapColor(MapColor.TERRACOTTA_BLACK).strength(2.5F, 3.0F).instrument(EnumExtensions.Instrument.GUZHENG)));
+    public static final DeferredBlock<DoorBlock> EBONY_DOOR = BLOCKS.register("ebony_door", ()-> new DoorBlock(ModBlockSetTypes.EBONY, ofFullCopy(Blocks.OAK_DOOR).mapColor(MapColor.TERRACOTTA_BLACK).strength(3.5F).instrument(EnumExtensions.Instrument.GUZHENG)));
+    public static final DeferredBlock<TrapDoorBlock> EBONY_TRAPDOOR = BLOCKS.register("ebony_trapdoor", ()-> new TrapDoorBlock(ModBlockSetTypes.EBONY, ofFullCopy(Blocks.OAK_TRAPDOOR).mapColor(MapColor.TERRACOTTA_BLACK).strength(3.5F).instrument(EnumExtensions.Instrument.GUZHENG)));
+    public static final DeferredBlock<PressurePlateBlock> EBONY_PRESSURE_PLATE = BLOCKS.register("ebony_pressure_plate", ()-> new PressurePlateBlock(ModBlockSetTypes.EBONY, ofFullCopy(Blocks.OAK_PRESSURE_PLATE).mapColor(MapColor.TERRACOTTA_BLACK).instrument(EnumExtensions.Instrument.GUZHENG)));
     public static final DeferredBlock<ButtonBlock> EBONY_BUTTON = BLOCKS.register("ebony_button", ()-> rareWoodButton(ModBlockSetTypes.EBONY, Blocks.OAK_BUTTON, MapColor.TERRACOTTA_BLACK));
-    public static final DeferredBlock<StandingSignBlock> EBONY_SIGN = BLOCKS.register("ebony_sign", ()-> new StandingSignBlock(ModWoodTypes.EBONY, ofFullCopy(Blocks.OAK_SIGN).mapColor(MapColor.TERRACOTTA_BLACK).strength(1.5F).instrument(NoteBlockInstrumentExtension.GUZHENG)));
-    public static final DeferredBlock<WallSignBlock> EBONY_WALL_SIGN = BLOCKS.register("ebony_wall_sign", ()-> new WallSignBlock(ModWoodTypes.EBONY, ofFullCopy(Blocks.OAK_WALL_SIGN).mapColor(MapColor.TERRACOTTA_BLACK).lootFrom(EBONY_SIGN).strength(1.5F).instrument(NoteBlockInstrumentExtension.GUZHENG)));
-    public static final DeferredBlock<CeilingHangingSignBlock> EBONY_HANGING_SIGN = BLOCKS.register("ebony_hanging_sign", ()-> new CeilingHangingSignBlock(ModWoodTypes.EBONY, ofFullCopy(Blocks.OAK_HANGING_SIGN).mapColor(MapColor.TERRACOTTA_BLACK).strength(1.5F).instrument(NoteBlockInstrumentExtension.GUZHENG)));
-    public static final DeferredBlock<WallHangingSignBlock> EBONY_WALL_HANGING_SIGN = BLOCKS.register("ebony_wall_hanging_sign", ()-> new WallHangingSignBlock(ModWoodTypes.EBONY, ofFullCopy(Blocks.OAK_WALL_HANGING_SIGN).mapColor(MapColor.TERRACOTTA_BLACK).lootFrom(EBONY_HANGING_SIGN).strength(1.5F).instrument(NoteBlockInstrumentExtension.GUZHENG)));
+    public static final DeferredBlock<StandingSignBlock> EBONY_SIGN = BLOCKS.register("ebony_sign", ()-> new StandingSignBlock(ModWoodTypes.EBONY, ofFullCopy(Blocks.OAK_SIGN).mapColor(MapColor.TERRACOTTA_BLACK).strength(1.5F).instrument(EnumExtensions.Instrument.GUZHENG)));
+    public static final DeferredBlock<WallSignBlock> EBONY_WALL_SIGN = BLOCKS.register("ebony_wall_sign", ()-> new WallSignBlock(ModWoodTypes.EBONY, ofFullCopy(Blocks.OAK_WALL_SIGN).mapColor(MapColor.TERRACOTTA_BLACK).lootFrom(EBONY_SIGN).strength(1.5F).instrument(EnumExtensions.Instrument.GUZHENG)));
+    public static final DeferredBlock<CeilingHangingSignBlock> EBONY_HANGING_SIGN = BLOCKS.register("ebony_hanging_sign", ()-> new CeilingHangingSignBlock(ModWoodTypes.EBONY, ofFullCopy(Blocks.OAK_HANGING_SIGN).mapColor(MapColor.TERRACOTTA_BLACK).strength(1.5F).instrument(EnumExtensions.Instrument.GUZHENG)));
+    public static final DeferredBlock<WallHangingSignBlock> EBONY_WALL_HANGING_SIGN = BLOCKS.register("ebony_wall_hanging_sign", ()-> new WallHangingSignBlock(ModWoodTypes.EBONY, ofFullCopy(Blocks.OAK_WALL_HANGING_SIGN).mapColor(MapColor.TERRACOTTA_BLACK).lootFrom(EBONY_HANGING_SIGN).strength(1.5F).instrument(EnumExtensions.Instrument.GUZHENG)));
 
     public static final DeferredBlock<LeavesBlock> WHITE_CHERRY_LEAVES = BLOCKS.register("white_cherry_leaves", ()-> new PetalLeavesBlock(ofFullCopy(Blocks.CHERRY_LEAVES).mapColor(MapColor.SNOW), ModParticles.WHITE_CHERRY_LEAVES));
     public static final DeferredBlock<SaplingBlock> WHITE_CHERRY_SAPLING = BLOCKS.register("white_cherry_sapling", ()-> new SaplingBlock(ModTreeGrower.WHITE_CHERRY, ofFullCopy(Blocks.CHERRY_SAPLING).mapColor(MapColor.SNOW)));
@@ -301,7 +302,7 @@ public class ModBlocks {
         return new RotatedPillarBlock(
                 ofFullCopy(Blocks.OAK_LOG)
                         .mapColor(state -> state.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? pTopMapColor : pSideMapColor)
-                        .sound(ModSoundTypes.RARE_WOOD).strength(2.5F).instrument(NoteBlockInstrumentExtension.GUZHENG)
+                        .sound(ModSoundTypes.RARE_WOOD).strength(2.5F).instrument(EnumExtensions.Instrument.GUZHENG)
         );
     }
     private static StairBlock stair(Block pBaseBlock) {
@@ -312,7 +313,7 @@ public class ModBlocks {
     }
     @SuppressWarnings("SameParameterValue")
     private static ButtonBlock rareWoodButton(BlockSetType pType, Block pBlock, MapColor pColor) {
-        return new ButtonBlock(pType, 30, ofFullCopy(pBlock).mapColor(pColor).instrument(NoteBlockInstrumentExtension.GUZHENG));
+        return new ButtonBlock(pType, 30, ofFullCopy(pBlock).mapColor(pColor).instrument(EnumExtensions.Instrument.GUZHENG));
     }
     private static FlowerPotBlock flowerPot(Supplier<FlowerPotBlock> emptyPot, Supplier<? extends Block> pPotted) {
         return new FlowerPotBlock(emptyPot, pPotted, flowerPotProperties().mapColor(pPotted.get().defaultMapColor()));

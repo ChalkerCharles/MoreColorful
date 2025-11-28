@@ -1,35 +1,26 @@
 package com.ChalkerCharles.morecolorful.network.packets;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
-import com.ChalkerCharles.morecolorful.common.attachment.ModDataAttachments;
-import com.ChalkerCharles.morecolorful.util.Constants;
-import com.ChalkerCharles.morecolorful.util.ThreadUtils;
+import com.ChalkerCharles.morecolorful.common.attachment.PlayerData;
+import com.ChalkerCharles.morecolorful.network.NetworkUtils;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.network.PacketDistributor;
+import net.neoforged.neoforge.network.handling.DirectionalPayloadHandler;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
+import net.neoforged.neoforge.network.handling.IPayloadHandler;
 
-public record DrumSetPacket(boolean isPressingBassDrum, boolean isPressingHat, boolean isPressingRide, boolean isPressingCrash, BlockPos pos, int id) implements CustomPacketPayload {
-    public DrumSetPacket() {
-        this(false, false, false, false, Constants.DEFAULT_INSTRUMENT_POS, 0);
-    }
-
+public record DrumSetPacket(byte pressingMask, BlockPos pos, int id) implements CustomPacketPayload {
     public static final CustomPacketPayload.Type<DrumSetPacket> TYPE = new CustomPacketPayload.Type<>(MoreColorful.location("drum_set_event"));
 
     public static final StreamCodec<ByteBuf, DrumSetPacket> STREAM_CODEC = StreamCodec.composite(
-            ByteBufCodecs.BOOL,
-            DrumSetPacket::isPressingBassDrum,
-            ByteBufCodecs.BOOL,
-            DrumSetPacket::isPressingHat,
-            ByteBufCodecs.BOOL,
-            DrumSetPacket::isPressingRide,
-            ByteBufCodecs.BOOL,
-            DrumSetPacket::isPressingCrash,
+            ByteBufCodecs.BYTE,
+            DrumSetPacket::pressingMask,
             BlockPos.STREAM_CODEC,
             DrumSetPacket::pos,
             ByteBufCodecs.INT,
@@ -41,25 +32,23 @@ public record DrumSetPacket(boolean isPressingBassDrum, boolean isPressingHat, b
         return TYPE;
     }
 
-    public static void handleClient(final DrumSetPacket packet, final IPayloadContext context) {
-        int id = packet.id();
-        Player player = context.player();
-        Entity entity = player.level().getEntity(id);
+    public static final IPayloadHandler<DrumSetPacket> HANDLER = new DirectionalPayloadHandler<>(
+            DrumSetPacket::handleClient, DrumSetPacket::handleServer
+    );
+
+    private void handleClient(IPayloadContext context) {
         context.enqueueWork(() -> {
-            if (entity instanceof Player) {
-                entity.setData(ModDataAttachments.DRUM_SET_DATA, packet);
-            }
-        }).exceptionally(ThreadUtils.handlePayloadException(context));
+            Level level = context.player().level();
+            Player player = (Player) level.getEntity(id);
+            PlayerData.getInstrumentData(player).setDrumSetData(pressingMask, pos);
+        }).exceptionally(NetworkUtils.handlePayloadException(context));
     }
-    public static void handleServer(final DrumSetPacket packet, final IPayloadContext context) {
-        int id = packet.id();
-        Player player = context.player();
-        Entity entity = player.level().getEntity(id);
+
+    private void handleServer(IPayloadContext context) {
         context.enqueueWork(() -> {
-            if (entity instanceof Player) {
-                entity.setData(ModDataAttachments.DRUM_SET_DATA, packet);
-                PacketDistributor.sendToAllPlayers(packet);
-            }
-        }).exceptionally(ThreadUtils.handlePayloadException(context));
+            Player player = context.player();
+            PlayerData.getInstrumentData(player).setDrumSetData(pressingMask, pos);
+            PacketDistributor.sendToAllPlayers(this);
+        }).exceptionally(NetworkUtils.handlePayloadException(context));
     }
 }

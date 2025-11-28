@@ -5,6 +5,7 @@ import com.ChalkerCharles.morecolorful.common.block.ModBlocks;
 import com.ChalkerCharles.morecolorful.common.item.common.DuckweedsItem;
 import com.ChalkerCharles.morecolorful.common.item.musical_instruments.*;
 import com.ChalkerCharles.morecolorful.util.EnumExtensions;
+import com.ChalkerCharles.morecolorful.util.InstrumentsType;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.*;
 import net.neoforged.bus.api.IEventBus;

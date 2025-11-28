@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Set;
 
 public class MixinUtils implements IMixinConfigPlugin {
+    private static final boolean SODIUM_ON = LoadingModList.get().getModFileById("sodium") != null;
+
     @Override
     public void onLoad(String mixinPackage) {
     }
@@ -21,7 +23,7 @@ public class MixinUtils implements IMixinConfigPlugin {
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
         if (mixinClassName.contains("client.compat.sodium")) {
-            return LoadingModList.get().getModFileById("sodium") != null;
+            return SODIUM_ON;
         }
         return true;
     }

@@ -2,10 +2,7 @@ package com.ChalkerCharles.morecolorful;
 
 import com.ChalkerCharles.morecolorful.client.ModClientEvents;
 import com.ChalkerCharles.morecolorful.client.particle.ModParticles;
-import com.ChalkerCharles.morecolorful.common.ModCommonEvents;
-import com.ChalkerCharles.morecolorful.common.ModCommonSetup;
-import com.ChalkerCharles.morecolorful.common.ModSounds;
-import com.ChalkerCharles.morecolorful.common.ModStats;
+import com.ChalkerCharles.morecolorful.common.*;
 import com.ChalkerCharles.morecolorful.common.attachment.ModDataAttachments;
 import com.ChalkerCharles.morecolorful.common.block.ModBlockEntities;
 import com.ChalkerCharles.morecolorful.common.block.ModBlocks;
@@ -67,7 +64,7 @@ public class MoreColorful {
         ModChunkStatus.register(modEventBus);
 
         NeoForge.EVENT_BUS.register(ModCommonEvents.class);
-        NeoForge.EVENT_BUS.addListener(VanillaBlockPropertyModifier::modifyProperties);
+        NeoForge.EVENT_BUS.addListener(VanillaBlockPropertyModifier::modifyDynamicProperties);
         //NeoForge.EVENT_BUS.register(new MelodyHandler());
         NeoForge.EVENT_BUS.register(this);
 
@@ -80,7 +77,7 @@ public class MoreColorful {
         }
     }
 
-    private void commonSetup(final FMLCommonSetupEvent event) {
+    private void commonSetup(FMLCommonSetupEvent event) {
         int i = random.nextInt(4);
         switch (i) {
             case 0 -> LOGGER.info("Thank You For Downloading!");
@@ -93,6 +90,7 @@ public class MoreColorful {
 
         ModStats.init();
         ModChunkStatus.modifyFullStatus();
+        VanillaBlockPropertyModifier.modifyStaticProperties();
 
         ModList modList = ModList.get();
         if (modList.isLoaded("terrablender")) {

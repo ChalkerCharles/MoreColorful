@@ -3,15 +3,15 @@ package com.ChalkerCharles.morecolorful.common.block.entity;
 import com.ChalkerCharles.morecolorful.common.block.ModBlockEntities;
 import com.ChalkerCharles.morecolorful.common.block.properties.DrumSetPart;
 import com.ChalkerCharles.morecolorful.util.CymbalUtils;
-import it.unimi.dsi.fastutil.ints.IntSet;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
 import static com.ChalkerCharles.morecolorful.common.block.musical_instruments.DrumSetBlock.HIT;
 import static com.ChalkerCharles.morecolorful.common.block.musical_instruments.DrumSetBlock.PART;
 
-public class DrumSetBlockEntity extends AbstractCymbalBlockEntity {
+public class DrumSetBlockEntity extends BlockEntity {
     public int ticksRide;
     public int ticksAfterStopRide;
     public boolean shakingRide;
@@ -23,28 +23,29 @@ public class DrumSetBlockEntity extends AbstractCymbalBlockEntity {
     }
 
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, DrumSetBlockEntity pBlockEntity) {
-        IntSet playerSetBd = CymbalUtils.pressingBassDrumPlayers(pLevel, pPos);
-        IntSet playerSetHat = CymbalUtils.pressingHatPlayers(pLevel, pPos);
-        IntSet playerSetRide = CymbalUtils.pressingRidePlayers(pLevel, pPos);
-        IntSet playerSetCrash = CymbalUtils.pressingCrashPlayers(pLevel, pPos);
+        boolean pressingBd = CymbalUtils.playerPressingBassDrum(pLevel, pPos);
+        boolean pressingHat = CymbalUtils.playerPressingHat(pLevel, pPos);
+        boolean pressingRide = CymbalUtils.playerPressingRide(pLevel, pPos);
+        boolean pressingCrash = CymbalUtils.playerPressingCrash(pLevel, pPos);
         BlockPos bassDrumPos = CymbalUtils.getBassDrumPos(pPos, pState);
         BlockPos hatPos = CymbalUtils.getHatPos(pPos, pState);
-        if (pState.getValue(PART) == DrumSetPart.MID_LOWER) {
-            if (!playerSetBd.isEmpty()) {
+        DrumSetPart part = pState.getValue(PART);
+        if (part == DrumSetPart.MID_LOWER) {
+            if (pressingBd) {
                 pLevel.setBlock(bassDrumPos, pState.setValue(HIT, true), 3);
             } else {
                 pLevel.setBlock(bassDrumPos, pState.setValue(HIT, false), 3);
             }
-        } else if (pState.getValue(PART) == DrumSetPart.LEFT_LOWER) {
-            if (!playerSetHat.isEmpty()) {
+        } else if (part == DrumSetPart.LEFT_LOWER) {
+            if (pressingHat) {
                 pLevel.setBlock(hatPos, pState.setValue(HIT, true), 3);
             } else {
                 pLevel.setBlock(hatPos, pState.setValue(HIT, false), 3);
             }
-        } else if (pState.getValue(PART) == DrumSetPart.RIGHT_UPPER) {
-            if (!playerSetRide.isEmpty()) pBlockEntity.shakingRide = true;
+        } else if (part == DrumSetPart.RIGHT_UPPER) {
+            if (pressingRide) pBlockEntity.shakingRide = true;
 
-            if (playerSetRide.isEmpty() && pBlockEntity.shakingRide) {
+            if (!pressingRide && pBlockEntity.shakingRide) {
                 pBlockEntity.ticksAfterStopRide++;
             } else {
                 pBlockEntity.ticksAfterStopRide = 0;
@@ -57,10 +58,10 @@ public class DrumSetBlockEntity extends AbstractCymbalBlockEntity {
                 pBlockEntity.ticksRide = 0;
                 pBlockEntity.ticksAfterStopRide = 0;
             }
-        } else if (pState.getValue(PART) == DrumSetPart.LEFT_UPPER) {
-            if (!playerSetCrash.isEmpty()) pBlockEntity.shakingCrash = true;
+        } else if (part == DrumSetPart.LEFT_UPPER) {
+            if (pressingCrash) pBlockEntity.shakingCrash = true;
 
-            if (playerSetCrash.isEmpty() && pBlockEntity.shakingCrash) {
+            if (!pressingCrash && pBlockEntity.shakingCrash) {
                 pBlockEntity.ticksAfterStopCrash++;
             } else {
                 pBlockEntity.ticksAfterStopCrash = 0;

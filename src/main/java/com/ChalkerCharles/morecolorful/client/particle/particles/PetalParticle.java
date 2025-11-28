@@ -19,9 +19,11 @@ public class PetalParticle extends CherryParticle {
     @OnlyIn(Dist.CLIENT)
     public static class Provider implements ParticleProvider<SimpleParticleType> {
         private final SpriteSet sprites;
+
         public Provider(SpriteSet sprites) {
             this.sprites = sprites;
         }
+
         @Nullable
         @Override
         public Particle createParticle(SimpleParticleType pType, ClientLevel pLevel, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed) {

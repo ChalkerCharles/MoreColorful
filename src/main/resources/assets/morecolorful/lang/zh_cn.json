@@ -289,6 +289,10 @@
   "commands.morecolorful.weather.wind.set.fail": "无法设置风速。因为该维度为无风维度，或者风系统已关闭。",
   "commands.morecolorful.weather.wind.reset": "风速已重置",
   "commands.morecolorful.weather.wind.reset.fail": "无法重置风速。因为该维度为无风维度，或者风系统已关闭。",
+  "commands.morecolorful.weather.wind.freeze": "风速已冻结",
+  "commands.morecolorful.weather.wind.freeze.fail": "无法冻结风速。因为该维度为无风维度，或者风系统已关闭。",
+  "commands.morecolorful.weather.wind.unfreeze": "风速已解冻",
+  "commands.morecolorful.weather.wind.unfreeze.fail": "无法解冻风速。因为该维度为无风维度，或者风系统已关闭。",
 
   "creativetab.morecolorful.musical_instruments_tab": "乐器",
 
@@ -361,6 +365,8 @@
   "morecolorful.config.world.tooltip": "世界配置",
   "morecolorful.config.wind_system": "风系统",
   "morecolorful.config.wind_system.tooltip": "风是全局的、随机发生的一种天气事件。风由在X轴和Z轴上的两个分量组成，每个分量的最大风度是17.5（米/秒）。",
+  "morecolorful.config.wind_physics": "风物理",
+  "morecolorful.config.wind_physics.tooltip": "允许风推动实体。",
   "morecolorful.config.windless_dimensions": "无风维度",
   "morecolorful.config.windless_dimensions.tooltip": "此列表中的维度里不会起风。",
   "morecolorful.config.wind_effect_client": "风效果",

@@ -31,13 +31,13 @@ public abstract class FlowerPotBlockMixin extends Block implements WindSensitive
             boolean flag = this.flowerDelegate == ModBlocks.OPEN_DAYBLOOM;
             boolean flag1 = pLevel.isNight();
             if (flag == flag1) {
-                pLevel.setBlock(pPos, this.moreColorful$opposite(pState), 3);
+                pLevel.setBlock(pPos, moreColorful$opposite(pState), 3);
             }
         }
     }
 
     @Unique
-    private BlockState moreColorful$opposite(BlockState state) {
+    private static BlockState moreColorful$opposite(BlockState state) {
         if (state.is(ModBlocks.POTTED_OPEN_DAYBLOOM)) {
             return ModBlocks.POTTED_CLOSED_DAYBLOOM.get().defaultBlockState();
         } else {

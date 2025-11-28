@@ -2,8 +2,9 @@ package com.ChalkerCharles.morecolorful.common.block.musical_instruments;
 
 import com.ChalkerCharles.morecolorful.client.gui.PlayingScreen;
 import com.ChalkerCharles.morecolorful.common.ModStats;
-import com.ChalkerCharles.morecolorful.common.item.musical_instruments.InstrumentsType;
+import com.ChalkerCharles.morecolorful.util.InstrumentsType;
 import com.ChalkerCharles.morecolorful.network.packets.PlayingScreenPacket;
+import com.ChalkerCharles.morecolorful.util.MusicalInstrument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionResult;
@@ -23,13 +24,14 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.network.PacketDistributor;
 
-public class HarpBlock extends MusicalInstrumentBlock {
+public class HarpBlock extends Block implements MusicalInstrument {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
     private static final VoxelShape NORTH_LOWER_COLLISION = Shapes.or(
@@ -125,8 +127,8 @@ public class HarpBlock extends MusicalInstrumentBlock {
             Block.box(7.0, 0.0, 8.0, 9.0, 11.0, 14.0),
             WEST_UPPER_COLLISION);
 
-    public HarpBlock(InstrumentsType pType, BlockBehaviour.Properties pProperties) {
-        super(pType, pProperties);
+    public HarpBlock(BlockBehaviour.Properties pProperties) {
+        super(pProperties);
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(FACING, Direction.NORTH)
                 .setValue(HALF, DoubleBlockHalf.LOWER)
@@ -134,10 +136,15 @@ public class HarpBlock extends MusicalInstrumentBlock {
     }
 
     @Override
+    public InstrumentsType getType() {
+        return InstrumentsType.HARP;
+    }
+
+    @Override
     public InteractionResult useWithoutItem (BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, BlockHitResult pHitResult) {
         if (pLevel.isClientSide){
-            PlayingScreen.openPlayingScreen(pPlayer, pType, pPos);
-            PacketDistributor.sendToServer(new PlayingScreenPacket(pType, pPos, pPlayer.getId(), true));
+            PlayingScreen.openPlayingScreen(pPlayer, this.getType(), pPos);
+            PacketDistributor.sendToServer(new PlayingScreenPacket(this.getType(), pPos, pPlayer.getId(), true));
         }
         pPlayer.awardStat(ModStats.INTERACT_WITH_HARP.get());
         return InteractionResult.SUCCESS;
@@ -154,6 +161,7 @@ public class HarpBlock extends MusicalInstrumentBlock {
             default -> flag ? NORTH_LOWER_COLLISION : NORTH_UPPER_COLLISION;
         };
     }
+
     @Override
     protected VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
         Direction direction = pState.getValue(FACING);
@@ -165,12 +173,14 @@ public class HarpBlock extends MusicalInstrumentBlock {
             default -> flag ? NORTH_LOWER : NORTH_UPPER;
         };
     }
+
     @Override
     protected boolean canSurvive(BlockState pState, LevelReader pLevel, BlockPos pPos) {
         BlockPos blockpos = pPos.below();
         BlockState blockstate = pLevel.getBlockState(blockpos);
         return pState.getValue(HALF) == DoubleBlockHalf.LOWER ? blockstate.isFaceSturdy(pLevel, blockpos, Direction.UP) : blockstate.is(this);
     }
+
     @Override
     protected BlockState updateShape(BlockState pState, Direction pFacing, BlockState pFacingState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pFacingPos) {
         DoubleBlockHalf doubleblockhalf = pState.getValue(HALF);
@@ -184,6 +194,7 @@ public class HarpBlock extends MusicalInstrumentBlock {
                     : Blocks.AIR.defaultBlockState();
         }
     }
+
     @Override
     public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
         DoubleBlockHalf doubleBlockHalf = state.getValue(HALF);
@@ -200,6 +211,7 @@ public class HarpBlock extends MusicalInstrumentBlock {
         }
         return super.playerWillDestroy(level, pos, state, player);
     }
+
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {
         BlockPos blockpos = pContext.getClickedPos();
@@ -212,14 +224,17 @@ public class HarpBlock extends MusicalInstrumentBlock {
             return null;
         }
     }
+
     @Override
     public void setPlacedBy(Level pLevel, BlockPos pPos, BlockState pState, LivingEntity pPlacer, ItemStack pStack) {
         pLevel.setBlock(pPos.above(), pState.setValue(HALF, DoubleBlockHalf.UPPER), 3);
     }
+
     @Override
     protected BlockState rotate(BlockState pState, Rotation pRot) {
         return pState.setValue(FACING, pRot.rotate(pState.getValue(FACING)));
     }
+
     @SuppressWarnings("deprecation")
     @Override
     protected BlockState mirror(BlockState pState, Mirror pMirror) {
@@ -229,5 +244,10 @@ public class HarpBlock extends MusicalInstrumentBlock {
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
         pBuilder.add(HALF, FACING);
+    }
+
+    @Override
+    protected boolean isPathfindable(BlockState pState, PathComputationType pPathComputationType) {
+        return false;
     }
 }

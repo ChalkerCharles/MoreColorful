@@ -8,9 +8,6 @@ import net.minecraft.world.level.chunk.status.ChunkStatus;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(LevelLoadingScreen.class)
 public abstract class LevelLoadingScreenMixin {
@@ -18,10 +15,14 @@ public abstract class LevelLoadingScreenMixin {
     @Final
     private static Object2IntMap<ChunkStatus> COLORS;
 
-    @Inject(method = "<clinit>", at = @At("TAIL"))
-    private static void addColors(CallbackInfo ci) {
-        if (Config.THERMAL_SYSTEM.isFalse()) return;
-        COLORS.put(ModChunkStatus.INITIALIZE_THERMAL.get(), 13421772);
-        COLORS.put(ModChunkStatus.THERMAL.get(), 16769184);
+    static {
+        if (Config.THERMAL_SYSTEM.isTrue()) {
+            COLORS.put(ModChunkStatus.INITIALIZE_THERMAL.get(), 0xf5c469);
+            COLORS.put(ModChunkStatus.THERMAL.get(), 0xff9555);
+        }
+        if (Config.WIND_SYSTEM.isTrue()) {
+            COLORS.put(ModChunkStatus.INITIALIZE_VENT.get(), 0x94dbf7);
+            COLORS.put(ModChunkStatus.VENTILATION.get(), 0x7492ff);
+        }
     }
 }

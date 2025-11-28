@@ -19,7 +19,7 @@ public abstract class MapItemMixin {
                                        @Local(ordinal = 6) int k1,
                                        @Local(ordinal = 7) int l1,
                                        @Local MapColor mapcolor,
-                                       @Local MapColor.Brightness mapcolor$brightness) {
-        return original | ((IMapItemSavedDataExtension) pData).moreColorful$updateColor(k1, l1, MapColorExtension.getPackedId(mapcolor, mapcolor$brightness));
+                                       @Local MapColor.Brightness brightness) {
+        return original | IMapItemSavedDataExtension.updateColor(pData, k1, l1, MapColorExtension.getPackedId(mapcolor, brightness));
     }
 }

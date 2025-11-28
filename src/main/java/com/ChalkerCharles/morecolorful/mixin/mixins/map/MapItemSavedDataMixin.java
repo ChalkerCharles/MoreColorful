@@ -33,7 +33,7 @@ public abstract class MapItemSavedDataMixin implements IMapItemSavedDataExtensio
     private static void load(CompoundTag tag, HolderLookup.Provider provider, CallbackInfoReturnable<MapItemSavedData> cir, @Local MapItemSavedData mapitemsaveddata) {
         byte[] bytes = tag.getByteArray("moreColorful_colors");
         if (bytes.length == 16384) {
-            ((IMapItemSavedDataExtension) mapitemsaveddata).moreColorful$setColors(bytes);
+            IMapItemSavedDataExtension.setColors(mapitemsaveddata, bytes);
         }
     }
 
@@ -44,7 +44,7 @@ public abstract class MapItemSavedDataMixin implements IMapItemSavedDataExtensio
 
     @Inject(method = "locked", at = @At(value = "INVOKE", target = "net/minecraft/world/level/saveddata/maps/MapItemSavedData.setDirty ()V"))
     private void locked(CallbackInfoReturnable<MapItemSavedData> cir, @Local(ordinal = 1) MapItemSavedData mapitemsaveddata) {
-        System.arraycopy(this.moreColorful$colors, 0, ((IMapItemSavedDataExtension) mapitemsaveddata).moreColorful$getColors(), 0, this.moreColorful$colors.length);
+        System.arraycopy(this.moreColorful$colors, 0, IMapItemSavedDataExtension.getColors(mapitemsaveddata), 0, this.moreColorful$colors.length);
     }
 
     @Override
@@ -85,11 +85,11 @@ public abstract class MapItemSavedDataMixin implements IMapItemSavedDataExtensio
             byte[] bytes = new byte[k * l];
             for (int i1 = 0; i1 < k; i1++) {
                 for (int j1 = 0; j1 < l; j1++) {
-                    bytes[i1 + j1 * k] = ((IMapItemSavedDataExtension) this$0).moreColorful$getColors()[i + i1 + (j + j1) * 128];
+                    bytes[i1 + j1 * k] = IMapItemSavedDataExtension.getColors(this$0)[i + i1 + (j + j1) * 128];
                 }
             }
             MapItemSavedData.MapPatch mapPatch = cir.getReturnValue();
-            ((IMapPatchExtension) (Object) mapPatch).moreColorful$setColors(bytes);
+            IMapPatchExtension.setColors(mapPatch, bytes);
             cir.setReturnValue(mapPatch);
         }
     }
@@ -111,20 +111,20 @@ public abstract class MapItemSavedDataMixin implements IMapItemSavedDataExtensio
         @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
         @Inject(method = "write", at = @At(value = "INVOKE", target = "Lnet/minecraft/network/FriendlyByteBuf;writeByteArray(Lio/netty/buffer/ByteBuf;[B)V", shift = At.Shift.AFTER))
         private static void write(ByteBuf byteBuf, Optional<MapItemSavedData.MapPatch> mapPatchOptional, CallbackInfo ci, @Local MapItemSavedData.MapPatch mapPatch) {
-            FriendlyByteBuf.writeByteArray(byteBuf, ((IMapPatchExtension) (Object) mapPatch).moreColorful$getColors());
+            FriendlyByteBuf.writeByteArray(byteBuf, IMapPatchExtension.getColors(mapPatch));
         }
 
         @Inject(method = "read", at = @At(value = "RETURN", ordinal = 0), cancellable = true)
         private static void read(ByteBuf byteBuf, CallbackInfoReturnable<Optional<MapItemSavedData.MapPatch>> cir) {
             byte[] bytes = FriendlyByteBuf.readByteArray(byteBuf);
             MapItemSavedData.MapPatch mapPatch = cir.getReturnValue().orElseThrow();
-            ((IMapPatchExtension) (Object) mapPatch).moreColorful$setColors(bytes);
+            IMapPatchExtension.setColors(mapPatch, bytes);
             cir.setReturnValue(Optional.of(mapPatch));
         }
 
         @Inject(method = "applyToMap", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/saveddata/maps/MapItemSavedData;setColor(IIB)V", shift = At.Shift.AFTER), locals = LocalCapture.CAPTURE_FAILSOFT)
         private void applyToMap(MapItemSavedData pSavedData, CallbackInfo ci, int i, int j) {
-            ((IMapItemSavedDataExtension) pSavedData).moreColorful$setColor(this.startX + i, this.startY + j, this.moreColorful$Colors[i + j * this.width]);
+            IMapItemSavedDataExtension.setColor(pSavedData, this.startX + i, this.startY + j, this.moreColorful$Colors[i + j * this.width]);
         }
 
         @Override

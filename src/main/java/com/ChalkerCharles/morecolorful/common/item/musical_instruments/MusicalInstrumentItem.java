@@ -1,7 +1,8 @@
 package com.ChalkerCharles.morecolorful.common.item.musical_instruments;
 
 import com.ChalkerCharles.morecolorful.common.block.musical_instruments.DrumSetBlock;
-import com.ChalkerCharles.morecolorful.common.block.musical_instruments.MusicalInstrumentBlock;
+import com.ChalkerCharles.morecolorful.util.InstrumentsType;
+import com.ChalkerCharles.morecolorful.util.MusicalInstrument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -11,13 +12,15 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 
-public abstract class MusicalInstrumentItem extends Item{
-    protected InstrumentsType pType;
-    public MusicalInstrumentItem(InstrumentsType pType, Item.Properties pProperties) {
+public abstract class MusicalInstrumentItem extends Item implements MusicalInstrument {
+    protected InstrumentsType type;
+
+    public MusicalInstrumentItem(InstrumentsType type, Item.Properties pProperties) {
         super(pProperties);
-        this.pType = pType;
+        this.type = type;
     }
 
     @Override
@@ -26,11 +29,17 @@ public abstract class MusicalInstrumentItem extends Item{
         Level level = pContext.getLevel();
         BlockPos blockpos = pContext.getClickedPos();
         BlockState blockstate = level.getBlockState(blockpos);
-        if (player != null && !player.isCrouching() && (blockstate.getBlock() instanceof MusicalInstrumentBlock || blockstate.getBlock() instanceof DrumSetBlock)) {
+        if (player != null && !player.isCrouching() && isMusicalInstrumentBlock(blockstate)) {
             return InteractionResult.FAIL;
         }
         return InteractionResult.PASS;
     }
+
+    private static boolean isMusicalInstrumentBlock(BlockState state) {
+        Block block = state.getBlock();
+        return block instanceof MusicalInstrument || block instanceof DrumSetBlock;
+    }
+
     @Override
     public UseAnim getUseAnimation(ItemStack pStack) {
         return UseAnim.NONE;
@@ -41,7 +50,8 @@ public abstract class MusicalInstrumentItem extends Item{
         return 72000;
     }
 
+    @Override
     public InstrumentsType getType() {
-        return pType;
+        return this.type;
     }
 }

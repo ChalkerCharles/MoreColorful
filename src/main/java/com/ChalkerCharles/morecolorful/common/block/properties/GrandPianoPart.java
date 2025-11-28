@@ -27,4 +27,20 @@ public enum GrandPianoPart implements StringRepresentable {
     public @NotNull String getSerializedName() {
         return this.name;
     }
+
+    public boolean isLeft() {
+        return this == FRONT_LEFT_LOWER || this == FRONT_LEFT_UPPER || this == BACK_LEFT_UPPER || this == BACK_LEFT_LOWER;
+    }
+
+    public boolean isFront() {
+        return this == FRONT_LEFT_LOWER || this == FRONT_LEFT_UPPER || this == FRONT_RIGHT_UPPER || this == FRONT_RIGHT_LOWER;
+    }
+
+    public boolean isLower() {
+        return this == FRONT_LEFT_LOWER || this == FRONT_RIGHT_LOWER || this == BACK_LEFT_LOWER;
+    }
+
+    public boolean isUpper() {
+        return !this.isLower();
+    }
 }

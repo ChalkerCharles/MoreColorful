@@ -184,6 +184,7 @@ public class DrumSetBlock extends BaseEntityBlock {
     protected MapCodec<DrumSetBlock> codec() {
         return CODEC;
     }
+
     public DrumSetBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any()
@@ -233,7 +234,7 @@ public class DrumSetBlock extends BaseEntityBlock {
     }
 
     @Override
-    public InteractionResult useWithoutItem (BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, BlockHitResult pHitResult) {
+    public InteractionResult useWithoutItem(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, BlockHitResult pHitResult) {
         if ((pPlayer.getItemInHand(InteractionHand.MAIN_HAND).getItem() != ModItems.DRUMSTICK.get() ||
                 pPlayer.getItemInHand(InteractionHand.OFF_HAND).getItem() != ModItems.DRUMSTICK.get())) {
             pPlayer.displayClientMessage(Component.translatable("info.morecolorful.instruments.need_drumsticks"), true);
@@ -241,7 +242,7 @@ public class DrumSetBlock extends BaseEntityBlock {
         } else {
             if (pLevel.isClientSide) {
                 DrumSetScreen.openScreen(pPlayer, pPos);
-                PacketDistributor.sendToServer(new DrumSetPacket(false, false, false, false, pPos, pPlayer.getId()));
+                PacketDistributor.sendToServer(new DrumSetPacket((byte) 0, pPos, pPlayer.getId()));
             }
             pPlayer.awardStat(ModStats.INTERACT_WITH_DRUM_SET.get());
         }
@@ -256,6 +257,7 @@ public class DrumSetBlock extends BaseEntityBlock {
         return (part == DrumSetPart.LEFT_LOWER || part == DrumSetPart.MID_LOWER || part == DrumSetPart.RIGHT_LOWER)
                 ? blockstate.isFaceSturdy(pLevel, blockpos, Direction.UP) : blockstate.is(this);
     }
+
     @Override
     protected BlockState updateShape(BlockState pState, Direction pDirection, BlockState pNeighborState, LevelAccessor pLevel, BlockPos pPos, BlockPos pNeighborPos) {
         if ((Direction.DOWN == pDirection && !this.canSurvive(pState, pLevel, pPos))) {
@@ -277,15 +279,19 @@ public class DrumSetBlock extends BaseEntityBlock {
             return super.updateShape(pState, pDirection, pNeighborState, pLevel, pPos, pNeighborPos);
         }
     }
+
     private static Direction getNeighbourDirectionLeft(DrumSetPart pPart, Direction pDirection) {
         return (pPart == DrumSetPart.LEFT_LOWER || pPart == DrumSetPart.LEFT_UPPER) ? pDirection.getCounterClockWise() : pDirection.getClockWise();
     }
+
     private static Direction getNeighbourDirectionRight(DrumSetPart pPart, Direction pDirection) {
         return (pPart == DrumSetPart.RIGHT_LOWER || pPart == DrumSetPart.RIGHT_UPPER) ? pDirection.getClockWise() : pDirection.getCounterClockWise();
     }
+
     private static Direction getNeighbourDirection(DrumSetPart pPart) {
         return (pPart == DrumSetPart.LEFT_LOWER || pPart == DrumSetPart.MID_LOWER || pPart == DrumSetPart.RIGHT_LOWER) ? Direction.UP : Direction.DOWN;
     }
+
     @Override
     public BlockState playerWillDestroy(Level pLevel, BlockPos pPos, BlockState pState, Player pPlayer) {
         ItemStack stack = pPlayer.getMainHandItem();
@@ -304,6 +310,7 @@ public class DrumSetBlock extends BaseEntityBlock {
         }
         return super.playerWillDestroy(pLevel, pPos, pState, pPlayer);
     }
+
     private BlockPos getBassDrumPos(BlockPos pPos, BlockState pState) {
         DrumSetPart part = pState.getValue(PART);
         Direction direction = pState.getValue(FACING);
@@ -316,6 +323,7 @@ public class DrumSetBlock extends BaseEntityBlock {
             case RIGHT_UPPER -> pPos.relative(direction.getClockWise()).below();
         };
     }
+
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {
@@ -335,6 +343,7 @@ public class DrumSetBlock extends BaseEntityBlock {
             return null;
         }
     }
+
     @Override
     public void setPlacedBy(Level pLevel, BlockPos pPos, BlockState pState, LivingEntity pPlacer, ItemStack pStack) {
         pLevel.setBlock(pPos.above(), pState.setValue(PART, DrumSetPart.MID_UPPER), 3);
@@ -343,15 +352,18 @@ public class DrumSetBlock extends BaseEntityBlock {
         pLevel.setBlock(pPos.relative(pState.getValue(FACING).getCounterClockWise()), pState.setValue(PART, DrumSetPart.RIGHT_LOWER), 3);
         pLevel.setBlock(pPos.relative(pState.getValue(FACING).getCounterClockWise()).above(), pState.setValue(PART, DrumSetPart.RIGHT_UPPER), 3);
     }
+
     @Override
     protected BlockState rotate(BlockState pState, Rotation pRot) {
         return pState.setValue(FACING, pRot.rotate(pState.getValue(FACING)));
     }
+
     @SuppressWarnings("deprecation")
     @Override
     protected BlockState mirror(BlockState pState, Mirror pMirror) {
         return pState.rotate(pMirror.getRotation(pState.getValue(FACING)));
     }
+
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
         pBuilder.add(HIT, FACING, PART);

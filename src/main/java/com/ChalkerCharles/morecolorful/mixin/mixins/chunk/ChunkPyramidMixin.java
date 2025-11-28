@@ -4,8 +4,10 @@ import com.ChalkerCharles.morecolorful.Config;
 import com.ChalkerCharles.morecolorful.common.level.ModChunkStatus;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import net.minecraft.world.level.chunk.status.ChunkPyramid;
+import net.minecraft.world.level.chunk.status.ChunkStep;
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Slice;
 
@@ -19,10 +21,14 @@ public abstract class ChunkPyramidMixin {
                     to = @At(value = "FIELD", target = "Lnet/minecraft/world/level/chunk/status/ChunkStatus;FULL:Lnet/minecraft/world/level/chunk/status/ChunkStatus;", opcode = Opcodes.GETSTATIC, ordinal = 0)
             )
     )
-    private static ChunkPyramid.Builder addThermalGeneration(ChunkPyramid.Builder original) {
+    private static ChunkPyramid.Builder addGenerationPyramid(ChunkPyramid.Builder original) {
         if (Config.THERMAL_SYSTEM.isTrue()) {
-            original.step(ModChunkStatus.INITIALIZE_THERMAL.get(), b -> b.setTask(ModChunkStatus::initializeThermal))
-                    .step(ModChunkStatus.THERMAL.get(), b -> b.addRequirement(ModChunkStatus.INITIALIZE_THERMAL.get(), 0).setTask(ModChunkStatus::thermal));
+            original.step(ModChunkStatus.INITIALIZE_THERMAL.get(), ChunkPyramidMixin::lambda$initializeThermal)
+                    .step(ModChunkStatus.THERMAL.get(), ChunkPyramidMixin::lambda$thermal);
+        }
+        if (Config.WIND_SYSTEM.isTrue()) {
+            original.step(ModChunkStatus.INITIALIZE_VENT.get(), ChunkPyramidMixin::lambda$initializeVent)
+                    .step(ModChunkStatus.VENTILATION.get(), ChunkPyramidMixin::lambda$ventilation);
         }
         return original;
     }
@@ -35,11 +41,35 @@ public abstract class ChunkPyramidMixin {
                     to = @At(value = "FIELD", target = "Lnet/minecraft/world/level/chunk/status/ChunkStatus;FULL:Lnet/minecraft/world/level/chunk/status/ChunkStatus;", opcode = Opcodes.GETSTATIC, ordinal = 1)
             )
     )
-    private static ChunkPyramid.Builder addThermalLoading(ChunkPyramid.Builder original) {
+    private static ChunkPyramid.Builder addLoadingPyramid(ChunkPyramid.Builder original) {
         if (Config.THERMAL_SYSTEM.isTrue()) {
-            original.step(ModChunkStatus.INITIALIZE_THERMAL.get(), b -> b.setTask(ModChunkStatus::initializeThermal))
-                    .step(ModChunkStatus.THERMAL.get(), b -> b.addRequirement(ModChunkStatus.INITIALIZE_THERMAL.get(), 0).setTask(ModChunkStatus::thermal));
+            original.step(ModChunkStatus.INITIALIZE_THERMAL.get(), ChunkPyramidMixin::lambda$initializeThermal)
+                    .step(ModChunkStatus.THERMAL.get(), ChunkPyramidMixin::lambda$thermal);
+        }
+        if (Config.WIND_SYSTEM.isTrue()) {
+            original.step(ModChunkStatus.INITIALIZE_VENT.get(), ChunkPyramidMixin::lambda$initializeVent)
+                    .step(ModChunkStatus.VENTILATION.get(), ChunkPyramidMixin::lambda$ventilation);
         }
         return original;
+    }
+
+    @Unique
+    private static ChunkStep.Builder lambda$initializeThermal(ChunkStep.Builder builder) {
+        return builder.setTask(ModChunkStatus::initializeThermal);
+    }
+
+    @Unique
+    private static ChunkStep.Builder lambda$thermal(ChunkStep.Builder builder) {
+        return builder.addRequirement(ModChunkStatus.INITIALIZE_THERMAL.get(), 0).setTask(ModChunkStatus::thermal);
+    }
+
+    @Unique
+    private static ChunkStep.Builder lambda$initializeVent(ChunkStep.Builder builder) {
+        return builder.setTask(ModChunkStatus::initializeVent);
+    }
+
+    @Unique
+    private static ChunkStep.Builder lambda$ventilation(ChunkStep.Builder builder) {
+        return builder.addRequirement(ModChunkStatus.INITIALIZE_VENT.get(), 0).setTask(ModChunkStatus::ventilate);
     }
 }

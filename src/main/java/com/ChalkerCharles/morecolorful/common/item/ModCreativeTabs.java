@@ -4,10 +4,7 @@ import com.ChalkerCharles.morecolorful.MoreColorful;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
@@ -17,50 +14,50 @@ public class ModCreativeTabs {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MoreColorful.MODID);
 
     @SuppressWarnings("unused")
-    public static final ResourceKey<CreativeModeTab> MUSICAL_INSTRUMENTS_TAB = CREATIVE_MODE_TABS.register("musical_instruments_tab",() -> CreativeModeTab.builder()
+    public static final ResourceKey<CreativeModeTab> MUSICAL_INSTRUMENTS_TAB = CREATIVE_MODE_TABS.register("musical_instruments_tab", () -> CreativeModeTab.builder()
             .withTabsBefore(CreativeModeTabs.SPAWN_EGGS)
             .title(Component.translatable("creativetab.morecolorful.musical_instruments_tab"))
-            .icon(()-> ModItems.VIOLIN.get().getDefaultInstance())
-            .displayItems((pParameters, pOutput) -> {
-                pOutput.accept(ModItems.GRAND_PIANO.get());
-                pOutput.accept(ModItems.UPRIGHT_PIANO.get());
-                pOutput.accept(ModItems.HARP.get());
-                pOutput.accept(ModItems.GUZHENG.get());
-                pOutput.accept(ModItems.VIOLIN.get());
-                pOutput.accept(ModItems.CELLO.get());
-                pOutput.accept(ModItems.ERHU.get());
-                pOutput.accept(ModItems.FIDDLE_BOW.get());
-                pOutput.accept(ModItems.BASS.get());
-                pOutput.accept(ModItems.GUITAR.get());
-                pOutput.accept(ModItems.ELECTRIC_GUITAR.get());
-                pOutput.accept(ModItems.BANJO.get());
-                pOutput.accept(ModItems.PIPA.get());
-                pOutput.accept(ModItems.FLUTE.get());
-                pOutput.accept(ModItems.DIDGERIDOO.get());
-                pOutput.accept(ModItems.TRUMPET.get());
-                pOutput.accept(ModItems.SAXOPHONE.get());
-                pOutput.accept(ModItems.OCARINA.get());
-                pOutput.accept(ModItems.HARMONICA.get());
-                pOutput.accept(ModItems.COW_BELL.get());
-                pOutput.accept(ModItems.BASS_DRUM.get());
-                pOutput.accept(ModItems.SNARE_DRUM.get());
-                pOutput.accept(ModItems.TOMTOM_DRUM.get());
-                pOutput.accept(ModItems.HIHAT.get());
-                pOutput.accept(ModItems.RIDE_CYMBAL.get());
-                pOutput.accept(ModItems.CRASH_CYMBAL.get());
-                pOutput.accept(ModItems.DRUM_SET.get());
-                pOutput.accept(ModItems.CHIMES.get());
-                pOutput.accept(ModItems.GLOCKENSPIEL.get());
-                pOutput.accept(ModItems.XYLOPHONE.get());
-                pOutput.accept(ModItems.VIBRAPHONE.get());
-                pOutput.accept(ModItems.DRUMSTICK.get());
-                pOutput.accept(ModItems.SYNTHESIZER_KEYBOARD_BIT.get());
-                pOutput.accept(ModItems.SYNTHESIZER_KEYBOARD_PLING.get());
-                pOutput.accept(ModItems.SYNTHESIZER_KEYBOARD_SCULK.get());
-                pOutput.accept(ModItems.SYNTHESIZER_KEYBOARD_AMETHYST.get());
-                pOutput.accept(ModItems.SYNTHESIZER_KEYBOARD_SAW.get());
-                pOutput.accept(ModItems.SYNTHESIZER_KEYBOARD_PLUCK.get());
-                pOutput.accept(ModItems.SYNTHESIZER_KEYBOARD_SYNTH_BASS.get());
+            .icon(() -> ModItems.VIOLIN.get().getDefaultInstance())
+            .displayItems((parameters, output) -> {
+                output.accept(ModItems.GRAND_PIANO);
+                output.accept(ModItems.UPRIGHT_PIANO);
+                output.accept(ModItems.HARP);
+                output.accept(ModItems.GUZHENG);
+                output.accept(ModItems.VIOLIN);
+                output.accept(ModItems.CELLO);
+                output.accept(ModItems.ERHU);
+                output.accept(ModItems.FIDDLE_BOW);
+                output.accept(ModItems.BASS);
+                output.accept(ModItems.GUITAR);
+                output.accept(ModItems.ELECTRIC_GUITAR);
+                output.accept(ModItems.BANJO);
+                output.accept(ModItems.PIPA);
+                output.accept(ModItems.FLUTE);
+                output.accept(ModItems.DIDGERIDOO);
+                output.accept(ModItems.TRUMPET);
+                output.accept(ModItems.SAXOPHONE);
+                output.accept(ModItems.OCARINA);
+                output.accept(ModItems.HARMONICA);
+                output.accept(ModItems.COW_BELL);
+                output.accept(ModItems.BASS_DRUM);
+                output.accept(ModItems.SNARE_DRUM);
+                output.accept(ModItems.TOMTOM_DRUM);
+                output.accept(ModItems.HIHAT);
+                output.accept(ModItems.RIDE_CYMBAL);
+                output.accept(ModItems.CRASH_CYMBAL);
+                output.accept(ModItems.DRUM_SET);
+                output.accept(ModItems.CHIMES);
+                output.accept(ModItems.GLOCKENSPIEL);
+                output.accept(ModItems.XYLOPHONE);
+                output.accept(ModItems.VIBRAPHONE);
+                output.accept(ModItems.DRUMSTICK);
+                output.accept(ModItems.SYNTHESIZER_KEYBOARD_BIT);
+                output.accept(ModItems.SYNTHESIZER_KEYBOARD_PLING);
+                output.accept(ModItems.SYNTHESIZER_KEYBOARD_SCULK);
+                output.accept(ModItems.SYNTHESIZER_KEYBOARD_AMETHYST);
+                output.accept(ModItems.SYNTHESIZER_KEYBOARD_SAW);
+                output.accept(ModItems.SYNTHESIZER_KEYBOARD_PLUCK);
+                output.accept(ModItems.SYNTHESIZER_KEYBOARD_SYNTH_BASS);
             })
             .build()).getKey();
 
@@ -315,8 +312,9 @@ public class ModCreativeTabs {
         }
     }
 
-    private static void insertAfterBySequence(BuildCreativeModeTabContentsEvent event, ItemLike... entries) {
-        for (int i = 1, l = entries.length; i < l; i ++) {
+    private static void insertAfterBySequence(BuildCreativeModeTabContentsEvent event, Item existing, ItemLike... entries) {
+        event.insertAfter(existing.getDefaultInstance(), new ItemStack(entries[0]), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+        for (int i = 1, l = entries.length; i < l; i++) {
             event.insertAfter(new ItemStack(entries[i - 1]), new ItemStack(entries[i]), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
         }
     }

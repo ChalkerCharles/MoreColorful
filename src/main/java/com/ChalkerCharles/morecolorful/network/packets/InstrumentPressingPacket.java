@@ -1,17 +1,18 @@
 package com.ChalkerCharles.morecolorful.network.packets;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
-import com.ChalkerCharles.morecolorful.common.attachment.ModDataAttachments;
-import com.ChalkerCharles.morecolorful.util.ThreadUtils;
+import com.ChalkerCharles.morecolorful.common.attachment.PlayerData;
+import com.ChalkerCharles.morecolorful.network.NetworkUtils;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.network.PacketDistributor;
+import net.neoforged.neoforge.network.handling.DirectionalPayloadHandler;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
-import org.jetbrains.annotations.NotNull;
+import net.neoforged.neoforge.network.handling.IPayloadHandler;
 
 public record InstrumentPressingPacket(int id, boolean isPressing) implements CustomPacketPayload {
     public static final CustomPacketPayload.Type<InstrumentPressingPacket> TYPE = new CustomPacketPayload.Type<>(MoreColorful.location("playing_screen_closed"));
@@ -22,31 +23,27 @@ public record InstrumentPressingPacket(int id, boolean isPressing) implements Cu
             InstrumentPressingPacket::isPressing,
             InstrumentPressingPacket::new);
     @Override
-    public @NotNull Type<? extends CustomPacketPayload> type() {
+    public Type<? extends CustomPacketPayload> type() {
         return TYPE;
     }
 
-    public static void handleClient(final InstrumentPressingPacket packet, final IPayloadContext context) {
-        int id = packet.id();
-        boolean isPressing = packet.isPressing();
-        Player player = context.player();
-        Entity entity = player.level().getEntity(id);
+    public static final IPayloadHandler<InstrumentPressingPacket> HANDLER = new DirectionalPayloadHandler<>(
+            InstrumentPressingPacket::handleClient, InstrumentPressingPacket::handleServer
+    );
+
+    private void handleClient(IPayloadContext context) {
         context.enqueueWork(() -> {
-            if (entity instanceof Player) {
-                entity.setData(ModDataAttachments.IS_PLAYING_INSTRUMENT, isPressing);
-            }
-        }).exceptionally(ThreadUtils.handlePayloadException(context));
+            Level level = context.player().level();
+            Player player = (Player) level.getEntity(id);
+            PlayerData.getInstrumentData(player).isPlaying = isPressing;
+        }).exceptionally(NetworkUtils.handlePayloadException(context));
     }
-    public static void handleServer(final InstrumentPressingPacket packet, final IPayloadContext context) {
-        int id = packet.id();
-        boolean isPressing = packet.isPressing();
-        Player player = context.player();
-        Entity entity = player.level().getEntity(id);
+
+    private void handleServer(IPayloadContext context) {
         context.enqueueWork(() -> {
-            if (entity instanceof Player) {
-                entity.setData(ModDataAttachments.IS_PLAYING_INSTRUMENT, isPressing);
-                PacketDistributor.sendToAllPlayers(packet);
-            }
-        }).exceptionally(ThreadUtils.handlePayloadException(context));
+            Player player = context.player();
+            PlayerData.getInstrumentData(player).isPlaying = isPressing;
+            PacketDistributor.sendToAllPlayers(this);
+        }).exceptionally(NetworkUtils.handlePayloadException(context));
     }
 }

@@ -1,6 +1,6 @@
 package com.ChalkerCharles.morecolorful.util.melody;
 
-import com.ChalkerCharles.morecolorful.common.item.musical_instruments.InstrumentsType;
+import com.ChalkerCharles.morecolorful.util.InstrumentsType;
 
 public class Melodies {
     public static final Melody EXAMPLE = Melody.of(InstrumentsType.HARP,

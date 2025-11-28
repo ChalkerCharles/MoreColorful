@@ -1,20 +1,17 @@
 package com.ChalkerCharles.morecolorful.mixin.mixins.client;
 
-import com.ChalkerCharles.morecolorful.common.attachment.ModDataAttachments;
+import com.ChalkerCharles.morecolorful.common.attachment.InstrumentData;
+import com.ChalkerCharles.morecolorful.common.attachment.PlayerData;
 import com.ChalkerCharles.morecolorful.common.block.ModBlocks;
 import com.ChalkerCharles.morecolorful.common.block.properties.ModBlockStateProperties;
-import com.ChalkerCharles.morecolorful.common.item.musical_instruments.InstrumentsType;
-import com.ChalkerCharles.morecolorful.network.packets.PlayingScreenPacket;
-import net.minecraft.client.model.AgeableListModel;
-import net.minecraft.client.model.ArmedModel;
-import net.minecraft.client.model.HeadedModel;
+import com.ChalkerCharles.morecolorful.util.InstrumentsType;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -24,7 +21,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(HumanoidModel.class)
-public abstract class HumanoidModelMixin<T extends LivingEntity> extends AgeableListModel<T> implements ArmedModel, HeadedModel {
+public abstract class HumanoidModelMixin<T extends LivingEntity> {
     @Shadow
     @Final
     public ModelPart rightArm;
@@ -34,27 +31,27 @@ public abstract class HumanoidModelMixin<T extends LivingEntity> extends Ageable
 
     @Unique
     private void moreColorful$setupKeyboardAnimation(T pLivingEntity) {
-        if (pLivingEntity instanceof Player) {
-            PlayingScreenPacket data = pLivingEntity.getData(ModDataAttachments.PLAYING_SCREEN_DATA);
-            InstrumentsType pType = data.pType();
-            BlockPos pos = data.pos();
-            Entity pPlayer = pLivingEntity.level().getEntity(data.id());
-            boolean isOpen = data.isOpen();
-            if (isOpen && pType.getType() == InstrumentsType.Type.KEYBOARD && pPlayer != null) {
-                double deltaY = (pos.getY() - pPlayer.getY());
-                if (pType == InstrumentsType.PIANO_LOW || pType == InstrumentsType.PIANO_HIGH) {
-                    if ((pPlayer.level().getBlockState(pos).is(ModBlocks.GRAND_PIANO) && pPlayer.level().getBlockState(pos).getValue(ModBlockStateProperties.GRAND_PIANO_PART).ordinal() > 2)
-                            || (pPlayer.level().getBlockState(pos).is(ModBlocks.UPRIGHT_PIANO) && pPlayer.level().getBlockState(pos).getValue(ModBlockStateProperties.UPRIGHT_PIANO_PART).ordinal() > 1)) {
+        if (pLivingEntity instanceof Player player) {
+            InstrumentData data = PlayerData.getInstrumentData(player);
+            InstrumentsType type = data.type;
+            BlockPos pos = data.pos;
+            boolean isOpen = data.isOpen;
+            if (isOpen && type.isKeyBoard()) {
+                double deltaY = (pos.getY() - player.getY());
+                if (type == InstrumentsType.PIANO_LOW || type == InstrumentsType.PIANO_HIGH) {
+                    BlockState state = player.level().getBlockState(pos);
+                    if ((state.is(ModBlocks.GRAND_PIANO) && state.getValue(ModBlockStateProperties.GRAND_PIANO_PART).isUpper())
+                            || (state.is(ModBlocks.UPRIGHT_PIANO) && state.getValue(ModBlockStateProperties.UPRIGHT_PIANO_PART).isUpper())) {
                         deltaY -= 1;
                     }
                 }
                 this.rightArm.xRot = (float) (-1.221731F - Math.tanh(deltaY));
                 this.leftArm.xRot = (float) (-1.221731F - Math.tanh(deltaY));
                 float angle = (float) -(Math.PI / 12);
-                float f = pPlayer.getData(ModDataAttachments.PLAYING_SCREEN_TICK);
+                float f = data.tick;
                 float f1 = f % 6 >= 3 ? -(f % 6) + 4.5F : (f % 6) - 1.5F;
                 float f2 = f % 12 >= 6 ? -(f % 12) + 9 : (f % 12) - 3;
-                if (pPlayer.getData(ModDataAttachments.IS_PLAYING_INSTRUMENT)) {
+                if (data.isPlaying) {
                     this.rightArm.xRot = Mth.rotLerp(f1 / 8, this.rightArm.xRot, angle + this.rightArm.xRot);
                     this.rightArm.yRot = Mth.rotLerp(f2 / 4, 0.0F, angle);
                     this.rightArm.zRot = Mth.rotLerp(f2 / 4, 0.0F, angle);
@@ -67,21 +64,20 @@ public abstract class HumanoidModelMixin<T extends LivingEntity> extends Ageable
     }
     @Unique
     private void moreColorful$setupGuzhengAnimation(T pLivingEntity) {
-        if (pLivingEntity instanceof Player) {
-            PlayingScreenPacket data = pLivingEntity.getData(ModDataAttachments.PLAYING_SCREEN_DATA);
-            InstrumentsType pType = data.pType();
-            BlockPos pos = data.pos();
-            Entity pPlayer = pLivingEntity.level().getEntity(data.id());
-            boolean isOpen = data.isOpen();
-            if (isOpen && pType == InstrumentsType.GUZHENG && pPlayer != null) {
-                double deltaY = (pos.getY() - pPlayer.getY());
+        if (pLivingEntity instanceof Player player) {
+            InstrumentData data = PlayerData.getInstrumentData(player);
+            InstrumentsType type = data.type;
+            BlockPos pos = data.pos;
+            boolean isOpen = data.isOpen;
+            if (isOpen && type == InstrumentsType.GUZHENG) {
+                double deltaY = (pos.getY() - player.getY());
                 this.rightArm.xRot = (float) (-1.221731F - Math.tanh(deltaY));
                 this.leftArm.xRot = (float) (-1.221731F - Math.tanh(deltaY));
                 float angle = (float) -(Math.PI / 6);
-                float f = pPlayer.getData(ModDataAttachments.PLAYING_SCREEN_TICK);
+                float f = data.tick;
                 float f1 = f % 12 >= 6 ? -(f % 12) + 9F : (f % 12) - 3F;
                 float f2 = f % 12 >= 6 ? -(f % 12) + 9 : (f % 12) - 3;
-                if (pPlayer.getData(ModDataAttachments.IS_PLAYING_INSTRUMENT)) {
+                if (data.isPlaying) {
                     this.rightArm.xRot = Mth.rotLerp(f1 / 32, this.rightArm.xRot, angle + this.rightArm.xRot);
                     this.rightArm.yRot = Mth.rotLerp(f2 / 8, 0.0F, angle);
                     this.rightArm.zRot = Mth.rotLerp(f2 / 8, 0.0F, angle);

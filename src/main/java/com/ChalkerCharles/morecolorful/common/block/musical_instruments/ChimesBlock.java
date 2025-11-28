@@ -1,8 +1,15 @@
 package com.ChalkerCharles.morecolorful.common.block.musical_instruments;
 
-import com.ChalkerCharles.morecolorful.common.item.musical_instruments.InstrumentsType;
+import com.ChalkerCharles.morecolorful.client.gui.PlayingScreen;
+import com.ChalkerCharles.morecolorful.common.ModStats;
+import com.ChalkerCharles.morecolorful.network.packets.PlayingScreenPacket;
+import com.ChalkerCharles.morecolorful.util.InstrumentsType;
+import com.ChalkerCharles.morecolorful.util.MusicalInstrument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -18,11 +25,14 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.network.PacketDistributor;
 
-public class ChimesBlock extends PercussionInstrumentBlock{
+public class ChimesBlock extends Block implements MusicalInstrument {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
     private static final VoxelShape NORTH_SOUTH_LOWER = Shapes.or(
@@ -94,12 +104,17 @@ public class ChimesBlock extends PercussionInstrumentBlock{
             Block.box(7.9, 11.0, 6.0, 8.1, 16.0, 10.0),
             Block.box(7.9, 11.0, 12.0, 8.1, 16.0, 14.0));
 
-    public ChimesBlock(InstrumentsType pType, Properties properties) {
-        super(pType, properties);
+    public ChimesBlock(Properties properties) {
+        super(properties);
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(FACING, Direction.NORTH)
                 .setValue(HALF, DoubleBlockHalf.LOWER)
         );
+    }
+
+    @Override
+    public InstrumentsType getType() {
+        return InstrumentsType.CHIMES;
     }
 
     @Override
@@ -113,6 +128,7 @@ public class ChimesBlock extends PercussionInstrumentBlock{
             default -> flag ? NORTH_LOWER_COLLISION : NORTH_SOUTH_UPPER_COLLISION;
         };
     }
+
     @Override
     protected VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
         Direction direction = pState.getValue(FACING);
@@ -122,12 +138,14 @@ public class ChimesBlock extends PercussionInstrumentBlock{
             default -> flag ? NORTH_SOUTH_LOWER : NORTH_SOUTH_UPPER;
         };
     }
+
     @Override
     protected boolean canSurvive(BlockState pState, LevelReader pLevel, BlockPos pPos) {
         BlockPos blockpos = pPos.below();
         BlockState blockstate = pLevel.getBlockState(blockpos);
         return pState.getValue(HALF) == DoubleBlockHalf.LOWER ? blockstate.isFaceSturdy(pLevel, blockpos, Direction.UP) : blockstate.is(this);
     }
+
     @Override
     protected BlockState updateShape(BlockState pState, Direction pFacing, BlockState pFacingState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pFacingPos) {
         DoubleBlockHalf doubleblockhalf = pState.getValue(HALF);
@@ -141,6 +159,7 @@ public class ChimesBlock extends PercussionInstrumentBlock{
                     : Blocks.AIR.defaultBlockState();
         }
     }
+
     @Override
     public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
         DoubleBlockHalf doubleBlockHalf = state.getValue(HALF);
@@ -157,6 +176,21 @@ public class ChimesBlock extends PercussionInstrumentBlock{
         }
         return super.playerWillDestroy(level, pos, state, player);
     }
+
+    @Override
+    protected ItemInteractionResult useItemOn(ItemStack pStack, BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHitResult) {
+        if (MusicalInstrument.withDrumstick(pPlayer)) {
+            if (pLevel.isClientSide) {
+                PlayingScreen.openPlayingScreen(pPlayer, this.getType(), pPos);
+                PacketDistributor.sendToServer(new PlayingScreenPacket(this.getType(), pPos, pPlayer.getId(), true));
+            }
+            pPlayer.awardStat(ModStats.INTERACT_WITH_CHIMES.get());
+        } else {
+            pPlayer.displayClientMessage(Component.translatable("info.morecolorful.instruments.need_drumstick"), true);
+        }
+        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+    }
+
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {
         BlockPos blockpos = pContext.getClickedPos();
@@ -169,21 +203,30 @@ public class ChimesBlock extends PercussionInstrumentBlock{
             return null;
         }
     }
+
     @Override
     public void setPlacedBy(Level pLevel, BlockPos pPos, BlockState pState, LivingEntity pPlacer, ItemStack pStack) {
         pLevel.setBlock(pPos.above(), pState.setValue(HALF, DoubleBlockHalf.UPPER), 3);
     }
+
     @Override
     protected BlockState rotate(BlockState pState, Rotation pRot) {
         return pState.setValue(FACING, pRot.rotate(pState.getValue(FACING)));
     }
+
     @SuppressWarnings("deprecation")
     @Override
     protected BlockState mirror(BlockState pState, Mirror pMirror) {
         return pState.rotate(pMirror.getRotation(pState.getValue(FACING)));
     }
+
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
         pBuilder.add(HALF, FACING);
+    }
+
+    @Override
+    protected boolean isPathfindable(BlockState pState, PathComputationType pPathComputationType) {
+        return false;
     }
 }

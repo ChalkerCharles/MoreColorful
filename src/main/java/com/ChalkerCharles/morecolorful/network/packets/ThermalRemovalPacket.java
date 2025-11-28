@@ -1,12 +1,8 @@
 package com.ChalkerCharles.morecolorful.network.packets;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
-import com.ChalkerCharles.morecolorful.common.level.ILevelThermalEngine;
-import com.ChalkerCharles.morecolorful.mixin.extensions.ILevelExtension;
-import com.ChalkerCharles.morecolorful.util.ThreadUtils;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.core.SectionPos;
+import com.ChalkerCharles.morecolorful.network.ClientPacketHandler;
+import com.ChalkerCharles.morecolorful.network.NetworkUtils;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
@@ -28,26 +24,8 @@ public record ThermalRemovalPacket(ChunkPos pos) implements CustomPacketPayload 
         return TYPE;
     }
 
-    public static void handle(final ThermalRemovalPacket packet, final IPayloadContext context) {
-        ClientLevel level = Minecraft.getInstance().level;
-        if (level == null) return;
-        context.enqueueWork(() -> queueThermalRemoval(packet.pos(), level))
-                .exceptionally(ThreadUtils.handlePayloadException(context));
-    }
-
-    private static void queueThermalRemoval(ChunkPos pos, ClientLevel level) {
-        ((ILevelExtension) level).moreColorful$queueThermalUpdate(() -> {
-            ILevelThermalEngine thermalEngine = ((ILevelExtension) level).moreColorful$getThermalEngine();
-            thermalEngine.setThermalEnabled(pos, false);
-
-            for (int i = thermalEngine.getMinThermalSection(); i < thermalEngine.getMaxThermalSection(); i++) {
-                SectionPos sectionpos = SectionPos.of(pos, i);
-                thermalEngine.queueSectionData(sectionpos, null);
-            }
-
-            for (int j = level.getMinSection(); j < level.getMaxSection(); j++) {
-                thermalEngine.updateSectionStatus(SectionPos.of(pos, j), true);
-            }
-        });
+    public void handle(IPayloadContext context) {
+        context.enqueueWork(() -> ClientPacketHandler.handleThermalRemoval(this))
+                .exceptionally(NetworkUtils.handlePayloadException(context));
     }
 }

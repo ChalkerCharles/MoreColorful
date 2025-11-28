@@ -1,7 +1,7 @@
 package com.ChalkerCharles.morecolorful.mixin.mixins.block;
 
 import com.ChalkerCharles.morecolorful.Config;
-import com.ChalkerCharles.morecolorful.mixin.extensions.ILevelExtension;
+import com.ChalkerCharles.morecolorful.common.attachment.LevelSavedData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -18,7 +18,7 @@ public abstract class BlockMixin {
     @Inject(method = "stepOn", at = @At("HEAD"))
     private void stepOn(Level pLevel, BlockPos pPos, BlockState pState, Entity pEntity, CallbackInfo ci) {
         if (Config.THERMAL_SYSTEM.isTrue()) {
-            boolean overheated = ((ILevelExtension) pLevel).moreColorful$getTemperature(pPos) > 12;
+            boolean overheated = LevelSavedData.getTemperature(pLevel, pPos) > 12;
             if (overheated && !pEntity.isSteppingCarefully() && pEntity instanceof LivingEntity) {
                 pEntity.hurt(pLevel.damageSources().hotFloor(), 1.0F);
             }
