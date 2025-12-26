@@ -47,6 +47,16 @@ public final class BurstWindZone extends WindZone {
     }
 
     @Override
+    public AABB getRenderBoundingBox() {
+        return this.bb.move(-origin.x, -origin.y, -origin.z);
+    }
+
+    @Override
+    public Vec3 getRenderOffset(Vec3 camera) {
+        return this.origin.subtract(camera);
+    }
+
+    @Override
     public void tick() {
         if (removed) return;
         this.lifetime--;

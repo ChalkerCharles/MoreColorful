@@ -1,0 +1,22 @@
+{
+  "variants": {
+    "wind_level=0": {
+      "model": "morecolorful:block/potted_windflower"
+    },
+    "wind_level=1": {
+      "model": "morecolorful:block/potted_windflower_1"
+    },
+    "wind_level=2": {
+      "model": "morecolorful:block/potted_windflower_2"
+    },
+    "wind_level=3": {
+      "model": "morecolorful:block/potted_windflower_3"
+    },
+    "wind_level=4": {
+      "model": "morecolorful:block/potted_windflower_4"
+    },
+    "wind_level=5": {
+      "model": "morecolorful:block/potted_windflower_5"
+    }
+  }
+}

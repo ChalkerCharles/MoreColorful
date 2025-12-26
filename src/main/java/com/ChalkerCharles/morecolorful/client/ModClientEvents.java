@@ -18,12 +18,8 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.neoforge.client.event.ClientPlayerNetworkEvent;
-import net.neoforged.neoforge.client.event.ClientTickEvent;
-import net.neoforged.neoforge.client.event.CustomizeGuiOverlayEvent;
-import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
+import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.network.PacketDistributor;
-import org.joml.Vector2f;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +28,15 @@ import java.util.Locale;
 @OnlyIn(Dist.CLIENT)
 public final class ModClientEvents {
     private static int removedLines = 0;
+
+    @SubscribeEvent
+    public static void onClientTickPre(ClientTickEvent.Pre event) {
+        RenderUtils.leavesRustling = false;
+        ClientLevel level = Minecraft.getInstance().level;
+        if (level != null) {
+            RenderUtils.setWindContext(level);
+        }
+    }
 
     @SubscribeEvent
     public static void onClientTickPost(ClientTickEvent.Post event) {
@@ -43,6 +48,11 @@ public final class ModClientEvents {
         while (isDebugScreenOn && ModKeyMapping.DEBUG_TEXT_SCROLL_UP.get().consumeClick()) {
             removedLines = Math.min(removedLines + 1, 20);
         }
+    }
+
+    @SubscribeEvent
+    public static void onRenderFramePre(RenderFrameEvent.Pre event) {
+        RenderUtils.setRenderTime();
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
@@ -65,12 +75,11 @@ public final class ModClientEvents {
                 if (WeatherUtils.isWindy(level)) {
                     int ventilation = LevelSavedData.getVentilation(level, blockpos);
                     addLeft.add("Ventilation Level: " + ventilation);
-                    Vector2f wind = LevelSavedData.getGlobalWindSpeed(level);
-                    addLeft.add(String.format(Locale.ROOT, "Global Wind: %.4f / %.4f", wind.x, wind.y));
-                    if (RenderUtils.isClientWindOn)
+                    addLeft.add(String.format(Locale.ROOT, "Global Wind: %.4f / %.4f", RenderUtils.windSpeed.x, RenderUtils.windSpeed.y));
+                    if (RenderUtils.wavyBlocks)
                         addLeft.add(ILevelRendererExtension.getStatistics());
                 }
-                addLeft.add(LevelSavedData.getWindZoneStats(level));
+                addLeft.add(ClientLevelData.getWindZoneStats(level));
             }
         }
 
@@ -88,8 +97,9 @@ public final class ModClientEvents {
     public static void onLevelRender(RenderLevelStageEvent event) {
         ClientLevel level = Minecraft.getInstance().level;
         if (level == null) return;
-        ProfilerFiller profilerfiller = level.getProfiler();
-        if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_SKY) {
+        RenderLevelStageEvent.Stage stage = event.getStage();
+        if (stage == RenderLevelStageEvent.Stage.AFTER_SKY) {
+            ProfilerFiller profilerfiller = level.getProfiler();
             if (Config.THERMAL_SYSTEM.isTrue()) {
                 profilerfiller.popPush("thermal_update_queue");
                 ClientLevelData.pollThermalUpdates(level);
@@ -101,6 +111,13 @@ public final class ModClientEvents {
                 ClientLevelData.pollVentUpdates(level);
                 profilerfiller.popPush("vent_updates");
                 LevelSavedData.getVentEngine(level).runVentUpdates();
+            }
+        } else if (stage == RenderLevelStageEvent.Stage.AFTER_ENTITIES) {
+            if (Config.WIND_SYSTEM.isTrue()) {
+                ClientLevelData.fillWindZonesInView(level, event.getFrustum());
+                if (RenderUtils.renderWindZones) {
+                    ClientLevelData.renderWindZonesInView(level, event.getPoseStack(), event.getCamera().getPosition());
+                }
             }
         }
     }

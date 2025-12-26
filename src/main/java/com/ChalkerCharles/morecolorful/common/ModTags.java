@@ -1,10 +1,12 @@
 package com.ChalkerCharles.morecolorful.common;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 
 public abstract class ModTags {
@@ -48,8 +50,17 @@ public abstract class ModTags {
         public static final TagKey<Item> DAWN_REDWOOD_LOGS = create("dawn_redwood_logs");
         public static final TagKey<Item> JACARANDA_LOGS = create("jacaranda_logs");
         public static final TagKey<Item> WILLOW_LOGS = create("willow_logs");
+
         private static TagKey<Item> create(String path) {
             return ItemTags.create(MoreColorful.location(path));
+        }
+    }
+
+    public static class Biomes {
+        public static final TagKey<Biome> IS_WINDY = create("is_windy");
+
+        private static TagKey<Biome> create(String path) {
+            return TagKey.create(Registries.BIOME, MoreColorful.location(path));
         }
     }
 }

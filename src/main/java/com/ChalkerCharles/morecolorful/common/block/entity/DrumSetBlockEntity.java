@@ -8,8 +8,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
-import static com.ChalkerCharles.morecolorful.common.block.musical_instruments.DrumSetBlock.HIT;
-import static com.ChalkerCharles.morecolorful.common.block.musical_instruments.DrumSetBlock.PART;
+import static com.ChalkerCharles.morecolorful.common.block.musical.DrumSetBlock.HIT;
+import static com.ChalkerCharles.morecolorful.common.block.musical.DrumSetBlock.PART;
 
 public class DrumSetBlockEntity extends BlockEntity {
     public int ticksRide;

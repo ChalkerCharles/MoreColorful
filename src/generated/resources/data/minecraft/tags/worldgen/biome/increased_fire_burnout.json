@@ -1,12 +1,6 @@
 {
   "values": [
-    {
-      "id": "morecolorful:marsh",
-      "required": false
-    },
-    {
-      "id": "morecolorful:willow_bayou",
-      "required": false
-    }
+    "morecolorful:marsh",
+    "morecolorful:willow_bayou"
   ]
 }

@@ -15,6 +15,7 @@ import org.spongepowered.asm.mixin.Mixin;
         DeadBushBlock.class,
         DoublePlantBlock.class,
         FlowerBlock.class,
+        FlowerPotBlock.class,
         HangingRootsBlock.class,
         LanternBlock.class,
         LeavesBlock.class,

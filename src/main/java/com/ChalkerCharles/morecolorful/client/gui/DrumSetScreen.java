@@ -1,7 +1,7 @@
 package com.ChalkerCharles.morecolorful.client.gui;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
-import com.ChalkerCharles.morecolorful.common.block.musical_instruments.DrumSetBlock;
+import com.ChalkerCharles.morecolorful.common.block.musical.DrumSetBlock;
 import com.ChalkerCharles.morecolorful.util.InstrumentsType;
 import com.ChalkerCharles.morecolorful.network.packets.DrumSetPacket;
 import com.ChalkerCharles.morecolorful.network.packets.NotePlayingPacket;

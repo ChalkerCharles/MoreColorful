@@ -24,9 +24,9 @@ public abstract class WindZone {
 
     public abstract void addSpeedAt(Vector3f vec, double x, double y, double z);
 
-    public void addSpeedAt(Vector3f vec, Vec3 pos) {
-        this.addSpeedAt(vec, pos.x, pos.y, pos.z);
-    }
+    public abstract AABB getRenderBoundingBox();
+
+    public abstract Vec3 getRenderOffset(Vec3 camera);
 
     public long[] getSections() {
         AABB bb = this.bb;
@@ -48,10 +48,6 @@ public abstract class WindZone {
 
     public boolean contains(double x, double y, double z) {
         return this.bb.contains(x, y, z);
-    }
-
-    public boolean contains(Vec3 vec) {
-        return this.bb.contains(vec);
     }
 
     public void tick() {}

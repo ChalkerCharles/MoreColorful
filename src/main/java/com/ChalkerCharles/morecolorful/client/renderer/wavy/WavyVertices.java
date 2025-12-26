@@ -20,7 +20,6 @@ import org.lwjgl.opengl.GL45C;
 import org.lwjgl.system.MemoryUtil;
 
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 @OnlyIn(Dist.CLIENT)
 public abstract class WavyVertices {
@@ -28,13 +27,10 @@ public abstract class WavyVertices {
     private volatile List<WindZone> windZones;
     private final WindSectionMap map;
     protected volatile boolean closed = false;
-    protected volatile int state = CLEARING;
-    protected final AtomicBoolean addLock = new AtomicBoolean(false);
     private final Vector3i blockPos = new Vector3i();
     private final Vector3i sectionRelativePos = new Vector3i();
     private final Vector3f vector = new Vector3f();
     private static final int ACCESS = GL45C.GL_MAP_WRITE_BIT | GL45C.GL_MAP_UNSYNCHRONIZED_BIT;
-    protected static final int CLEARING = 0, BUILDING = 1, ENCAPSULATED = 2, UPDATING = 3;
 
     protected WavyVertices(BlockPos origin, WindSectionMap map, List<WindZone> list) {
         this.origin = origin;
@@ -50,10 +46,6 @@ public abstract class WavyVertices {
 
     public void setWindZones(List<WindZone> list) {
         this.windZones = list;
-    }
-
-    protected boolean isBuilding() {
-        return this.state < ENCAPSULATED;
     }
 
     public abstract void clear();
@@ -324,14 +316,16 @@ public abstract class WavyVertices {
         private final FloatArrayList posXList = new FloatArrayList(128);
         private final FloatArrayList posYList = new FloatArrayList(128);
         private final FloatArrayList posZList = new FloatArrayList(128);
-        private volatile int[] index;
-        private volatile long[] data;
+        private volatile int[] index = Maths.EMPTY_INT_ARRAY;
+        private volatile long[] data = Maths.EMPTY_LONG_ARRAY;
         private volatile float[] posX, posY, posZ;
         private volatile float[] dX, dY, dZ;
 
         protected Default(BlockPos origin, WindSectionMap map, List<WindZone> list, int id) {
             super(origin, map, list);
             this.id = id;
+            this.posX = this.posY = this.posZ = Maths.EMPTY_FLOAT_ARRAY;
+            this.dX = this.dY = this.dZ = Maths.EMPTY_FLOAT_ARRAY;
         }
 
         public void setLength(int length) {
@@ -340,57 +334,52 @@ public abstract class WavyVertices {
 
         @Override
         public boolean isInvalid() {
-            return this.size == 0 || this.closed || this.isBuilding();
+            return this.size == 0 || this.closed;
         }
 
         @Override
         public void clear() {
-            this.state = CLEARING;
-            this.size = 0;
             this.indexList.clear();
             this.dataList.clear();
             this.posXList.clear();
             this.posYList.clear();
             this.posZList.clear();
-            this.state = BUILDING;
         }
 
         public void addVertex(int index, long data, float x, float y, float z) {
-            if (this.state != BUILDING) return;
-            if (!this.addLock.compareAndSet(false, true)) return;
-            this.indexList.add(index);
-            this.dataList.add(data);
-            this.posXList.add(x);
-            this.posYList.add(y);
-            this.posZList.add(z);
-            this.addLock.set(false);
+            try {
+                this.indexList.add(index);
+                this.dataList.add(data);
+                this.posXList.add(x);
+                this.posYList.add(y);
+                this.posZList.add(z);
+            } catch (Exception ignored) {}
         }
 
         @Override
         public void encapsulate() {
-            if (this.state != BUILDING) return;
+            int size0 = this.size;
             int size = this.size = this.indexList.size();
             this.index = this.indexList.toIntArray();
             this.data = this.dataList.toLongArray();
             this.posX = this.posXList.toFloatArray();
             this.posY = this.posYList.toFloatArray();
             this.posZ = this.posZList.toFloatArray();
-            this.dX = new float[size];
-            this.dY = new float[size];
-            this.dZ = new float[size];
-            this.state = ENCAPSULATED;
+            if (size0 != size) {
+                this.dX = new float[size];
+                this.dY = new float[size];
+                this.dZ = new float[size];
+            }
         }
 
         @Override
         public void computeData() {
-            if (this.isBuilding()) return;
-            this.computeData(RenderUtils.anim, RenderUtils.time, RenderUtils.WIND_SPEED.x, RenderUtils.WIND_SPEED.y,
-                    this.posX, this.dX, this.posY, this.dY, this.posZ, this.dZ, this.data, this.size, new Vector3f());
-            this.state = UPDATING;
+            this.computeData(RenderUtils.anim, RenderUtils.time, RenderUtils.windSpeed.x, RenderUtils.windSpeed.y,
+                    this.posX, this.dX, this.posY, this.dY, this.posZ, this.dZ, this.data, this.size, new Vector3f()
+            );
         }
 
         public void update() {
-            if (this.state != UPDATING) return;
             long address = GL45C.nglMapNamedBufferRange(id, 0, length, ACCESS);
             if (address == 0L) return;
             int[] idx = this.index;

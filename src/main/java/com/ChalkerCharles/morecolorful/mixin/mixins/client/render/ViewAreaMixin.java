@@ -34,7 +34,7 @@ public abstract class ViewAreaMixin implements IViewAreaExtension {
 
     @Inject(method = "repositionCamera", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/chunk/SectionRenderDispatcher$RenderSection;setOrigin(III)V", shift = At.Shift.AFTER))
     private void repositionCamera(double pViewEntityX, double pViewEntityZ, CallbackInfo ci, @Local SectionRenderDispatcher.RenderSection section) {
-        if (RenderUtils.isClientWindOn) {
+        if (RenderUtils.wavyBlocks) {
             IRenderSectionExtension.getWavyTask(section).setWindZones(this.level);
         }
     }

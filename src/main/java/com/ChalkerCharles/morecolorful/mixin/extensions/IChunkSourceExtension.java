@@ -5,23 +5,38 @@ import com.ChalkerCharles.morecolorful.common.level.wind.ILevelVentEngine;
 import net.minecraft.core.SectionPos;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.chunk.ChunkSource;
+import net.minecraft.world.level.chunk.status.ChunkStatus;
 
 import javax.annotation.Nullable;
 
 public interface IChunkSourceExtension {
-    @Nullable
-    ChunkAccess moreColorful$getThermalChunk(int pChunkX, int pChunkZ);
-
-    void moreColorful$onThermalUpdate(SectionPos pPos);
-
-    ILevelThermalEngine moreColorful$getThermalEngine();
+    private ChunkSource self() {
+        return (ChunkSource) this;
+    }
 
     @Nullable
-    ChunkAccess moreColorful$getVentChunk(int pChunkX, int pChunkZ);
+    default ChunkAccess moreColorful$getThermalChunk(int pChunkX, int pChunkZ) {
+        return self().getChunk(pChunkX, pChunkZ, ChunkStatus.EMPTY, false);
+    }
 
-    void moreColorful$onVentUpdate(SectionPos pPos);
+    default void moreColorful$onThermalUpdate(SectionPos pPos) {
+    }
 
-    ILevelVentEngine moreColorful$getVentEngine();
+    default ILevelThermalEngine moreColorful$getThermalEngine() {
+        return ILevelThermalEngine.Dummy.INSTANCE;
+    }
+
+    @Nullable
+    default ChunkAccess moreColorful$getVentChunk(int pChunkX, int pChunkZ) {
+        return self().getChunk(pChunkX, pChunkZ, ChunkStatus.EMPTY, false);
+    }
+
+    default void moreColorful$onVentUpdate(SectionPos pPos) {
+    }
+
+    default ILevelVentEngine moreColorful$getVentEngine() {
+        return ILevelVentEngine.Dummy.INSTANCE;
+    }
 
     private static IChunkSourceExtension self(ChunkSource chunkSource) {
         return (IChunkSourceExtension) chunkSource;

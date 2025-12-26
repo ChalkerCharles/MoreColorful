@@ -7,11 +7,12 @@ import com.ChalkerCharles.morecolorful.common.attachment.ModDataAttachments;
 import com.ChalkerCharles.morecolorful.common.block.ModBlockEntities;
 import com.ChalkerCharles.morecolorful.common.block.ModBlocks;
 import com.ChalkerCharles.morecolorful.common.block.VanillaBlockPropertyModifier;
+import com.ChalkerCharles.morecolorful.common.entity.ModEntities;
 import com.ChalkerCharles.morecolorful.common.item.ModCreativeTabs;
 import com.ChalkerCharles.morecolorful.common.item.ModItems;
 import com.ChalkerCharles.morecolorful.common.level.ModChunkStatus;
 import com.ChalkerCharles.morecolorful.common.loot.modifiers.ModLootModifiers;
-import com.ChalkerCharles.morecolorful.common.worldgen.biomes.ModBiomeSetup;
+import com.ChalkerCharles.morecolorful.common.worldgen.biomes.TerraBlenderUtils;
 import com.ChalkerCharles.morecolorful.common.worldgen.features.ModFeatures;
 import com.ChalkerCharles.morecolorful.common.worldgen.features.trees.ModFoliagePlacers;
 import com.ChalkerCharles.morecolorful.common.worldgen.features.trees.ModRootPlacers;
@@ -21,7 +22,6 @@ import com.mojang.logging.LogUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.Mod;
@@ -30,8 +30,6 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.event.server.ServerStartingEvent;
-import net.neoforged.neoforge.event.server.ServerStoppingEvent;
 import org.slf4j.Logger;
 
 import java.util.Random;
@@ -40,10 +38,9 @@ import java.util.Random;
 public class MoreColorful {
     public static final String MODID = "morecolorful";
     public static final Logger LOGGER = LogUtils.getLogger();
-    private final Random random = new Random();
 
     public MoreColorful(IEventBus modEventBus, ModContainer modContainer, Dist dist) {
-        modEventBus.addListener(this::commonSetup);
+        modEventBus.addListener(MoreColorful::commonSetup);
         modEventBus.addListener(ModCreativeTabs::insertInVanillaTabs);
         modEventBus.register(ModCommonSetup.class);
 
@@ -51,6 +48,7 @@ public class MoreColorful {
         ModCreativeTabs.register(modEventBus);
         ModBlocks.register(modEventBus);
         ModBlockEntities.register(modEventBus);
+        ModEntities.register(modEventBus);
         ModSounds.register(modEventBus);
         ModStats.register(modEventBus);
         ModDataAttachments.register(modEventBus);
@@ -65,8 +63,6 @@ public class MoreColorful {
 
         NeoForge.EVENT_BUS.register(ModCommonEvents.class);
         NeoForge.EVENT_BUS.addListener(VanillaBlockPropertyModifier::modifyDynamicProperties);
-        //NeoForge.EVENT_BUS.register(new MelodyHandler());
-        NeoForge.EVENT_BUS.register(this);
 
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC_COMMON);
 
@@ -77,14 +73,8 @@ public class MoreColorful {
         }
     }
 
-    private void commonSetup(FMLCommonSetupEvent event) {
-        int i = random.nextInt(4);
-        switch (i) {
-            case 0 -> LOGGER.info("Thank You For Downloading!");
-            case 1 -> LOGGER.info("Hope You Have Fun!");
-            case 2 -> LOGGER.info("I'm Doing Well! :)");
-            case 3 -> LOGGER.info("Long Time No See!");
-        }
+    private static void commonSetup(FMLCommonSetupEvent event) {
+        greetings();
 
         Config.disabledBiomes.forEach(biome -> LOGGER.info("Biome Disabled: {}", biome.location()));
 
@@ -94,34 +84,32 @@ public class MoreColorful {
 
         ModList modList = ModList.get();
         if (modList.isLoaded("terrablender")) {
-            ModBiomeSetup.registerRegions();
-            ModBiomeSetup.registerSurfaceRules();
+            TerraBlenderUtils.registerRegions();
+            TerraBlenderUtils.registerSurfaceRules();
         }
     }
 
-    @SubscribeEvent
-    public void onServerStarting(ServerStartingEvent event) {
-        int i = random.nextInt(4);
-        switch (i) {
-            case 0 -> LOGGER.info("More Colorful!");
-            case 1 -> LOGGER.info("Hello Server!");
-            case 2 -> LOGGER.info("Have A Nice Day!");
-            case 3 -> LOGGER.info("YAY! Server Time!");
-        }
-    }
-
-    @SubscribeEvent
-    public void onServerStopping(ServerStoppingEvent event) {
-        int i = random.nextInt(4);
-        switch (i) {
-            case 0 -> LOGGER.info("Goodbye!");
-            case 1 -> LOGGER.info("Bye-bye!");
-            case 2 -> LOGGER.info("I'll Miss You.");
-            case 3 -> LOGGER.info("See You Around!");
-        }
+    private static void greetings() {
+        int i = new Random().nextInt(10);
+        LOGGER.info(switch (i) {
+            case 0 -> "Thank You For Downloading!";
+            case 1 -> "Hope You Have Fun!";
+            case 2 -> "I'm Doing Well! :)";
+            case 3 -> "Long Time No See!";
+            case 4 -> "Yay, Minecraft Time!";
+            case 5 -> "Hello World!";
+            case 6 -> "Hi There!";
+            case 7 -> "How are you today?";
+            case 8 -> "Remember to Smile :)";
+            default -> "More Colorful!";
+        });
     }
 
     public static ResourceLocation location(String key) {
         return ResourceLocation.fromNamespaceAndPath(MODID, key);
+    }
+
+    public static String key(String name) {
+        return MODID + ':' + name;
     }
 }

@@ -11,13 +11,13 @@ import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class ModCreativeTabs {
-    public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MoreColorful.MODID);
+    private static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MoreColorful.MODID);
 
     @SuppressWarnings("unused")
     public static final ResourceKey<CreativeModeTab> MUSICAL_INSTRUMENTS_TAB = CREATIVE_MODE_TABS.register("musical_instruments_tab", () -> CreativeModeTab.builder()
             .withTabsBefore(CreativeModeTabs.SPAWN_EGGS)
             .title(Component.translatable("creativetab.morecolorful.musical_instruments_tab"))
-            .icon(() -> ModItems.VIOLIN.get().getDefaultInstance())
+            .icon(ModItems.VIOLIN::toStack)
             .displayItems((parameters, output) -> {
                 output.accept(ModItems.GRAND_PIANO);
                 output.accept(ModItems.UPRIGHT_PIANO);
@@ -231,7 +231,8 @@ public class ModCreativeTabs {
                     ModItems.LAVENDER,
                     ModItems.DAFFODIL,
                     ModItems.GERBERA_DAISY,
-                    ModItems.RAPESEED_FLOWER
+                    ModItems.RAPESEED_FLOWER,
+                    ModItems.WINDFLOWER
             );
             insertAfterBySequence(event, Items.PINK_PETALS,
                     ModItems.BEGONIAS,
@@ -267,6 +268,12 @@ public class ModCreativeTabs {
                     ModItems.DUCKWEEDS
             );
         } else if (tab == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
+            insertAfterBySequence(event, Items.CAULDRON,
+                    ModItems.FAN_BLOCK
+            );
+            insertAfterBySequence(event, Items.LIGHTNING_ROD,
+                    ModItems.WEATHER_VANE
+            );
             insertAfterBySequence(event, Items.CHERRY_HANGING_SIGN,
                     ModItems.CRABAPPLE_SIGN,
                     ModItems.CRABAPPLE_HANGING_SIGN,
@@ -284,6 +291,13 @@ public class ModCreativeTabs {
                     ModItems.JACARANDA_HANGING_SIGN,
                     ModItems.WILLOW_SIGN,
                     ModItems.WILLOW_HANGING_SIGN
+            );
+        } else if (tab == CreativeModeTabs.REDSTONE_BLOCKS) {
+            insertAfterBySequence(event, Items.LIGHTNING_ROD,
+                    ModItems.WEATHER_VANE
+            );
+            insertAfterBySequence(event, Items.CAULDRON,
+                    ModItems.FAN_BLOCK
             );
         } else if (tab == CreativeModeTabs.TOOLS_AND_UTILITIES) {
             insertAfterBySequence(event, Items.CHERRY_CHEST_BOAT,
@@ -304,6 +318,8 @@ public class ModCreativeTabs {
                     ModItems.WILLOW_BOAT,
                     ModItems.WILLOW_CHEST_BOAT
             );
+            insertBeforeBySequence(event, Items.MUSIC_DISC_13,
+                    ModItems.PAPER_PLANE);
         } else if (tab == CreativeModeTabs.FOOD_AND_DRINKS) {
             insertAfterBySequence(event, Items.SWEET_BERRIES,
                     ModItems.STRAWBERRY,
@@ -314,6 +330,13 @@ public class ModCreativeTabs {
 
     private static void insertAfterBySequence(BuildCreativeModeTabContentsEvent event, Item existing, ItemLike... entries) {
         event.insertAfter(existing.getDefaultInstance(), new ItemStack(entries[0]), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+        for (int i = 1, l = entries.length; i < l; i++) {
+            event.insertAfter(new ItemStack(entries[i - 1]), new ItemStack(entries[i]), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+        }
+    }
+
+    private static void insertBeforeBySequence(BuildCreativeModeTabContentsEvent event, Item existing, ItemLike... entries) {
+        event.insertBefore(existing.getDefaultInstance(), new ItemStack(entries[0]), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
         for (int i = 1, l = entries.length; i < l; i++) {
             event.insertAfter(new ItemStack(entries[i - 1]), new ItemStack(entries[i]), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
         }

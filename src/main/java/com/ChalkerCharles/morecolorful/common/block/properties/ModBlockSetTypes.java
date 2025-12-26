@@ -1,26 +1,28 @@
 package com.ChalkerCharles.morecolorful.common.block.properties;
 
+import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.common.ModSounds;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 
-import static com.ChalkerCharles.morecolorful.MoreColorful.MODID;
-import static net.minecraft.world.level.block.state.properties.BlockSetType.register;
-
 public class ModBlockSetTypes {
-    public static final BlockSetType CRABAPPLE = registerCherry(MODID + ":crabapple");
-    public static final BlockSetType EBONY = registerRareWood(MODID + ":ebony");
-    public static final BlockSetType GINKGO = register(new BlockSetType(MODID + ":ginkgo"));
-    public static final BlockSetType MAPLE = register(new BlockSetType(MODID + ":maple"));
-    public static final BlockSetType FROST = registerCherry(MODID + ":frost");
-    public static final BlockSetType DAWN_REDWOOD = register(new BlockSetType(MODID + ":dawn_redwood"));
-    public static final BlockSetType JACARANDA = registerCherry(MODID + ":jacaranda");
-    public static final BlockSetType WILLOW = register(new BlockSetType(MODID + ":willow"));
+    public static final BlockSetType CRABAPPLE = registerCherry("crabapple");
+    public static final BlockSetType EBONY = registerRareWood("ebony");
+    public static final BlockSetType GINKGO = register("ginkgo");
+    public static final BlockSetType MAPLE = register("maple");
+    public static final BlockSetType FROST = registerCherry("frost");
+    public static final BlockSetType DAWN_REDWOOD = register("dawn_redwood");
+    public static final BlockSetType JACARANDA = registerCherry("jacaranda");
+    public static final BlockSetType WILLOW = register("willow");
+
+    private static BlockSetType register(String name) {
+        return BlockSetType.register(new BlockSetType(MoreColorful.key(name)));
+    }
 
     private static BlockSetType registerCherry(String name) {
-        return register(new BlockSetType(
-                name,
+        return BlockSetType.register(new BlockSetType(
+                MoreColorful.key(name),
                 true,
                 true,
                 true,
@@ -36,8 +38,8 @@ public class ModBlockSetTypes {
                 SoundEvents.CHERRY_WOOD_BUTTON_CLICK_ON));
     }
     private static BlockSetType registerRareWood(@SuppressWarnings("SameParameterValue") String name) {
-        return register(new BlockSetType(
-                name,
+        return BlockSetType.register(new BlockSetType(
+                MoreColorful.key(name),
                 true,
                 true,
                 true,

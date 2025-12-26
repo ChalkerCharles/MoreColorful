@@ -1,20 +1,29 @@
 package com.ChalkerCharles.morecolorful.common.level.wind;
 
+import com.ChalkerCharles.morecolorful.client.particle.ModParticles;
+import com.ChalkerCharles.morecolorful.common.ModSounds;
 import com.ChalkerCharles.morecolorful.mixin.extensions.ILevelRendererExtension;
 import com.ChalkerCharles.morecolorful.network.packets.WindPacket;
 import com.ChalkerCharles.morecolorful.util.Maths;
 import com.ChalkerCharles.morecolorful.util.WeatherUtils;
+import com.ChalkerCharles.morecolorful.util.client.RenderUtils;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.joml.Vector2f;
 
 public abstract class WindManager {
+    private static final float INV_MAX_WIND_SPEED_SQ = 0.0016326531F;
     public final Vector2f globalWindSpeed = new Vector2f();
     public final Vector2f windDirection = new Vector2f(1, 0);
     private final Vector2f cachedDirection = new Vector2f(1, 0);
@@ -74,7 +83,7 @@ public abstract class WindManager {
         this.nearestDirection = this.getNearestDirection();
     }
 
-    public void update() {
+    public void tick() {
     }
 
     public void serialize(CompoundTag nbt) {
@@ -85,10 +94,78 @@ public abstract class WindManager {
 
     @OnlyIn(Dist.CLIENT)
     public static class Client extends WindManager {
+        private final ClientLevel level;
+
+        public Client(ClientLevel level) {
+            this.level = level;
+        }
+
         @Override
         protected void setCache() {
             ILevelRendererExtension.clearWindCache();
             super.setCache();
+        }
+
+        @Override
+        public void tick() {
+            if (this.isCalm) return;
+            if (RenderUtils.windParticles) {
+                if (this.shouldSpawnParticle()) {
+                    Vec3 pos = Minecraft.getInstance().gameRenderer.getMainCamera().getPosition();
+                    double dx = globalWindSpeed.x, dz = globalWindSpeed.y;
+                    double d0 = (level.random.nextDouble() - 0.5) * 32;
+                    double d1 = (level.random.nextDouble() - 0.5) * 16;
+                    double x = pos.x - dx - d0 * windDirection.y;
+                    double y = pos.y + d1;
+                    double z = pos.z - dz + d0 * windDirection.x;
+                    if (WeatherUtils.canApplyWind(this.level, x, y, z)) {
+                        level.addParticle(ModParticles.WIND_GLOBAL.get(), x, y, z, dx * 0.0625, 0, dz * 0.0625);
+                    }
+                }
+            }
+            if (RenderUtils.windSounds) {
+                float windSpeed = this.globalWindSpeed.length();
+                if (this.shouldPlayWindSound(windSpeed)) {
+                    Vec3 pos = Minecraft.getInstance().gameRenderer.getMainCamera().getPosition();
+                    if (this.isInWind(pos, windSpeed)) {
+                        float volume = windSpeed * windSpeed * INV_MAX_WIND_SPEED_SQ;
+                        float pitch = volume * 0.5F + 0.5F;
+                        level.playLocalSound(pos.x, pos.y, pos.z, getWindSound(windSpeed), SoundSource.WEATHER, volume, pitch, false);
+                    }
+                }
+            }
+        }
+
+        private boolean shouldSpawnParticle() {
+            float windSpeed = this.globalWindSpeed.length();
+            if (windSpeed < 8) return false;
+            int chance = Math.max(1, 100 - Mth.floor(windSpeed * 4));
+            return this.level.random.nextInt(chance) <= 1;
+        }
+
+        private boolean shouldPlayWindSound(float windSpeed) {
+            int chance = Math.max(1, 100 - Mth.floor(windSpeed * 4)) + 50;
+            return this.level.random.nextInt(chance) == 0;
+        }
+
+        private boolean isInWind(Vec3 pos, float windSpeed) {
+            double x = pos.x, y = pos.y, z = pos.z;
+            if (WeatherUtils.canApplyWind(this.level, x, y, z)) return true;
+            double f = windSpeed * 0.5;
+            x += Mth.nextDouble(level.random, -f, f);
+            y += Mth.nextDouble(level.random, -f, f);
+            z += Mth.nextDouble(level.random, -f, f);
+            return WeatherUtils.canApplyWind(this.level, x, y, z);
+        }
+
+        private static SoundEvent getWindSound(float windSpeed) {
+            if (windSpeed < 8) {
+                return ModSounds.WEATHER_BREEZE.get();
+            } else if (windSpeed < 16) {
+                return ModSounds.WEATHER_WIND.get();
+            } else {
+                return ModSounds.WEATHER_GALE.get();
+            }
         }
     }
 
@@ -129,7 +206,7 @@ public abstract class WindManager {
         }
 
         @Override
-        public void update() {
+        public void tick() {
             if (isWindFrozen) return;
             float windSpeedXCurrent = globalWindSpeed.x;
             float windSpeedZCurrent = globalWindSpeed.y;
@@ -137,12 +214,10 @@ public abstract class WindManager {
             float correctedZTarget = windSpeedZTarget * (1 + level.getRainLevel(1.0F) * 0.55556F);
             float deltaX = 0.001F + Math.abs(correctedXTarget / 50 - windSpeedXCurrent / 50) * 0.0045F;
             float deltaZ = 0.001F + Math.abs(correctedZTarget / 50 - windSpeedZCurrent / 50) * 0.0045F;
-            windSpeedXCurrent = windSpeedXCurrent < correctedXTarget
-                    ? Math.min(windSpeedXCurrent + deltaX, correctedXTarget)
-                    : Math.max(windSpeedXCurrent - deltaX, correctedXTarget);
-            windSpeedZCurrent = windSpeedZCurrent < correctedZTarget
-                    ? Math.min(windSpeedZCurrent + deltaZ, correctedZTarget)
-                    : Math.max(windSpeedZCurrent - deltaZ, correctedZTarget);
+            windSpeedXCurrent = approachTo(windSpeedXCurrent, correctedXTarget, deltaX);
+            windSpeedZCurrent = approachTo(windSpeedZCurrent, correctedZTarget, deltaZ);
+            windSpeedXCurrent = clampWind(windSpeedXCurrent);
+            windSpeedZCurrent = clampWind(windSpeedZCurrent);
             this.setWindSpeed(windSpeedXCurrent, windSpeedZCurrent);
             PacketDistributor.sendToPlayersInDimension(this.level, new WindPacket(windSpeedXCurrent, windSpeedZCurrent));
             gustCounter--;
@@ -185,8 +260,8 @@ public abstract class WindManager {
                 if (random.nextInt(3) != 0 && flagZ * windSpeedZTarget < 0)
                     windSpeedZTarget *= -1;
             }
-            windSpeedXTarget = Mth.clamp(windSpeedXTarget, -17.5F, 17.5F);
-            windSpeedZTarget = Mth.clamp(windSpeedZTarget, -17.5F, 17.5F);
+            windSpeedXTarget = clampWind(windSpeedXTarget);
+            windSpeedZTarget = clampWind(windSpeedZTarget);
         }
 
         private float getTargetSpeed() {
@@ -195,6 +270,14 @@ public abstract class WindManager {
                 case 2, 3, 4 -> Mth.nextFloat(random, -1, 1);
                 default -> Mth.nextFloat(random, -2, 2);
             };
+        }
+
+        private static float approachTo(float value, float target, float delta) {
+            return value < target ? Math.min(value + delta, target) : Math.max(value - delta, target);
+        }
+
+        private static float clampWind(float value) {
+            return Mth.clamp(value, -17.5F, 17.5F);
         }
 
         @Override

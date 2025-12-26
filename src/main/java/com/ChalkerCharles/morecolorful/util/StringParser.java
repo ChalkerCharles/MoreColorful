@@ -45,12 +45,16 @@ public final class StringParser {
     }
 
     public record BlockEntry(String block, @Nullable String states, String value) {
+        public int parseValue() {
+            return Integer.parseInt(this.value);
+        }
+
         public static boolean validate(BlockEntry entry) {
             return entry != null && isBlock(entry.block) && isValidState(entry) && StringUtils.isNumeric(entry.value);
         }
 
-        public static boolean validate(String s) {
-            return validate(parseBlockEntry(s));
+        public static boolean validate(Object o) {
+            return o instanceof String s && validate(parseBlockEntry(s));
         }
 
         private static boolean isValidState(BlockEntry entry) {

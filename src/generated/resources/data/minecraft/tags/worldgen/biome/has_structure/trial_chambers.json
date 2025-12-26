@@ -1,44 +1,14 @@
 {
   "values": [
-    {
-      "id": "morecolorful:crabapple_garden",
-      "required": false
-    },
-    {
-      "id": "morecolorful:white_cherry_grove",
-      "required": false
-    },
-    {
-      "id": "morecolorful:autumn_birch_forest",
-      "required": false
-    },
-    {
-      "id": "morecolorful:golden_grove",
-      "required": false
-    },
-    {
-      "id": "morecolorful:maple_forest",
-      "required": false
-    },
-    {
-      "id": "morecolorful:sunset_valley",
-      "required": false
-    },
-    {
-      "id": "morecolorful:dawn_redwood_swamp",
-      "required": false
-    },
-    {
-      "id": "morecolorful:marsh",
-      "required": false
-    },
-    {
-      "id": "morecolorful:willow_bayou",
-      "required": false
-    },
-    {
-      "id": "morecolorful:ice_marsh",
-      "required": false
-    }
+    "morecolorful:crabapple_garden",
+    "morecolorful:white_cherry_grove",
+    "morecolorful:autumn_birch_forest",
+    "morecolorful:golden_grove",
+    "morecolorful:maple_forest",
+    "morecolorful:sunset_valley",
+    "morecolorful:dawn_redwood_swamp",
+    "morecolorful:marsh",
+    "morecolorful:willow_bayou",
+    "morecolorful:ice_marsh"
   ]
 }

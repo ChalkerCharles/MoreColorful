@@ -12,8 +12,8 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.ProbabilityFeatureConfiguration;
 
-import static com.ChalkerCharles.morecolorful.common.block.nature.ReedBlock.PART;
-import static com.ChalkerCharles.morecolorful.common.block.nature.ReedBlock.TALL_REED;
+import static com.ChalkerCharles.morecolorful.common.block.natural.ReedBlock.PART;
+import static com.ChalkerCharles.morecolorful.common.block.natural.ReedBlock.TALL_REED;
 
 public class ReedFeature extends Feature<ProbabilityFeatureConfiguration> {
     private static final BlockState REED_BOTTOM = ModBlocks.REED.get().defaultBlockState();

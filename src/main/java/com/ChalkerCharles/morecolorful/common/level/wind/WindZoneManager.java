@@ -1,9 +1,13 @@
 package com.ChalkerCharles.morecolorful.common.level.wind;
 
 import com.ChalkerCharles.morecolorful.mixin.extensions.ILevelRendererExtension;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import it.unimi.dsi.fastutil.longs.Long2ReferenceMap;
 import it.unimi.dsi.fastutil.longs.Long2ReferenceOpenHashMap;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.LevelRenderer;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.core.SectionPos;
 import net.minecraft.world.level.ChunkPos;
@@ -17,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WindZoneManager {
-    private final List<WindZone> windZones = new ArrayList<>();
+    protected final List<WindZone> windZones = new ArrayList<>();
     private final List<WindZone> windZonesToAdd = new ArrayList<>();
     private final Long2ReferenceMap<List<WindZone>> windZoneMap = new Long2ReferenceOpenHashMap<>();
 
@@ -93,24 +97,24 @@ public class WindZoneManager {
         return false;
     }
 
-    public Vector3f getLocalWindSpeedAffectingEntity(Vec3 pos, long sectionPos) {
+    public Vector3f getLocalWindSpeedAffectingEntity(double x, double y, double z, long sectionPos) {
         Vector3f vec = new Vector3f();
         List<WindZone> windZones = this.getWindZones(sectionPos);
         for (WindZone w : windZones) {
-            if (w.contains(pos) && w.affectEntity) w.addSpeedAt(vec, pos);
+            if (w.contains(x, y, z) && w.affectEntity) w.addSpeedAt(vec, x, y, z);
         }
-        return vec;
+        return vec.mul(4.0F);
     }
 
-    public boolean isInWindZoneAffectingEntity(Vec3 pos, long sectionPos) {
+    public boolean isInWindZoneAffectingEntity(double x, double y, double z, long sectionPos) {
         List<WindZone> windZones = this.getWindZones(sectionPos);
         for (WindZone w : windZones) {
-            if (w.contains(pos) && w.affectEntity) return true;
+            if (w.contains(x, y, z) && w.affectEntity) return true;
         }
         return false;
     }
 
-    public void updateWindZones() {
+    public void tick() {
         List<WindZone> toRemove = new ArrayList<>();
         for (WindZone zone : this.windZones) {
             zone.tick();
@@ -123,12 +127,10 @@ public class WindZoneManager {
         this.windZonesToAdd.clear();
     }
 
-    public String getStats() {
-        return "";
-    }
-
     @OnlyIn(Dist.CLIENT)
     public static class Client extends WindZoneManager {
+        private final List<WindZone> windZonesInView = new ArrayList<>();
+
         @Override
         protected List<WindZone> createList(long pos) {
             List<WindZone> list = new ArrayList<>();
@@ -136,19 +138,28 @@ public class WindZoneManager {
             return list;
         }
 
-        @Override
         public String getStats() {
-            List<WindZone> zones = super.windZones;
-            return "Wind Zones: " + countWindZonesInView(zones) + "/" + zones.size();
+            return "Wind Zones: " + this.windZonesInView.size() + "/" + this.windZones.size();
         }
 
-        private static int countWindZonesInView(List<WindZone> zones) {
-            Frustum frustum = Minecraft.getInstance().levelRenderer.getFrustum();
-            int i = 0;
-            for (WindZone zone : zones) {
-                if (frustum.isVisible(zone.bb)) i++;
+        public void fillWindZonesInView(Frustum frustum) {
+            this.windZonesInView.clear();
+            for (WindZone zone : this.windZones) {
+                if (frustum.isVisible(zone.bb)) {
+                    this.windZonesInView.add(zone);
+                }
             }
-            return i;
+        }
+
+        public void renderWindZonesInView(PoseStack poseStack, Vec3 camera) {
+            VertexConsumer consumer = Minecraft.getInstance().renderBuffers().bufferSource().getBuffer(RenderType.lines());
+            for (WindZone zone : this.windZonesInView) {
+                Vec3 offset = zone.getRenderOffset(camera);
+                poseStack.pushPose();
+                poseStack.translate(offset.x, offset.y, offset.z);
+                LevelRenderer.renderLineBox(poseStack, consumer, zone.getRenderBoundingBox(), 0.5F, 0.75F, 1.0F, 1.0F);
+                poseStack.popPose();
+            }
         }
     }
 }

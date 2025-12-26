@@ -135,7 +135,8 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 ModBlocks.POTTED_LAVENDER.get(),
                 ModBlocks.POTTED_DAFFODIL.get(),
                 ModBlocks.POTTED_GERBERA_DAISY.get(),
-                ModBlocks.POTTED_RAPESEED_FLOWER.get()
+                ModBlocks.POTTED_RAPESEED_FLOWER.get(),
+                ModBlocks.POTTED_WINDFLOWER.get()
         );
         tag(BlockTags.FLOWERS).add(
                 ModBlocks.CRABAPPLE_LEAVES.get(),
@@ -269,7 +270,8 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 ModBlocks.LAVENDER.get(),
                 ModBlocks.DAFFODIL.get(),
                 ModBlocks.GERBERA_DAISY.get(),
-                ModBlocks.RAPESEED_FLOWER.get()
+                ModBlocks.RAPESEED_FLOWER.get(),
+                ModBlocks.WINDFLOWER.get()
         );
         tag(BlockTags.TALL_FLOWERS).add(
                 ModBlocks.CATTAIL.get(),

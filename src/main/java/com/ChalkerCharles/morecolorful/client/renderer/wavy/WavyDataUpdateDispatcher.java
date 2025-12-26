@@ -1,8 +1,6 @@
 package com.ChalkerCharles.morecolorful.client.renderer.wavy;
 
 import com.google.common.collect.Queues;
-import net.minecraft.CrashReport;
-import net.minecraft.client.Minecraft;
 import net.minecraft.util.thread.ProcessorMailbox;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
@@ -40,13 +38,7 @@ public abstract class WavyDataUpdateDispatcher<T extends WavyDataTask<?>> {
         T task = this.pollTask();
         if (task == null) return;
         CompletableFuture.runAsync(() -> this.upload(task), this.executor)
-                .whenComplete((unused, throwable) -> {
-                    if (throwable != null) {
-                        Minecraft.getInstance().delayCrash(CrashReport.forThrowable(throwable, "Updating Wind Data"));
-                    } else {
-                        this.mailbox.tell(this::runTask);
-                    }
-                });
+                .whenComplete((unused, throwable) -> this.mailbox.tell(this::runTask));
     }
 
     @Nullable

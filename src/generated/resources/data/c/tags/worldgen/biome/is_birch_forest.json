@@ -1,8 +1,5 @@
 {
   "values": [
-    {
-      "id": "morecolorful:autumn_birch_forest",
-      "required": false
-    }
+    "morecolorful:autumn_birch_forest"
   ]
 }

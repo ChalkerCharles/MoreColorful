@@ -2,6 +2,7 @@ package com.ChalkerCharles.morecolorful.common.attachment;
 
 import com.ChalkerCharles.morecolorful.util.InstrumentsType;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.player.Player;
 
 public class InstrumentData {
     public boolean isPlaying;
@@ -10,6 +11,10 @@ public class InstrumentData {
     public InstrumentsType type = InstrumentsType.HARP;
     public BlockPos pos = BlockPos.ZERO;
     public byte pressingMask;
+
+    public static InstrumentData get(Player player) {
+        return player.getData(ModDataAttachments.INSTRUMENT_DATA);
+    }
 
     public boolean isPressingBassDrum() {
         return (this.pressingMask & 1) != 0;

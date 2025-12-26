@@ -108,7 +108,6 @@ public abstract class MapItemSavedDataMixin implements IMapItemSavedDataExtensio
         @Unique
         private byte[] moreColorful$Colors;
 
-        @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
         @Inject(method = "write", at = @At(value = "INVOKE", target = "Lnet/minecraft/network/FriendlyByteBuf;writeByteArray(Lio/netty/buffer/ByteBuf;[B)V", shift = At.Shift.AFTER))
         private static void write(ByteBuf byteBuf, Optional<MapItemSavedData.MapPatch> mapPatchOptional, CallbackInfo ci, @Local MapItemSavedData.MapPatch mapPatch) {
             FriendlyByteBuf.writeByteArray(byteBuf, IMapPatchExtension.getColors(mapPatch));

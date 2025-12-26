@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "morecolorful:light_gray_dye_from_windflower"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_windflower": {
+      "conditions": {
+        "items": [
+          {
+            "items": "morecolorful:windflower"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_windflower"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "morecolorful:light_gray_dye_from_windflower"
+    ]
+  }
+}

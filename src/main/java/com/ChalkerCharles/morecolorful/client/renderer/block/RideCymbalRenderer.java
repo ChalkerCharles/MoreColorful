@@ -2,7 +2,7 @@ package com.ChalkerCharles.morecolorful.client.renderer.block;
 
 import com.ChalkerCharles.morecolorful.client.model.ModModelLayers;
 import com.ChalkerCharles.morecolorful.common.block.entity.RideCymbalBlockEntity;
-import com.ChalkerCharles.morecolorful.common.block.musical_instruments.RideCymbalBlock;
+import com.ChalkerCharles.morecolorful.common.block.musical.RideCymbalBlock;
 import com.ChalkerCharles.morecolorful.util.client.AnimationUtils;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.model.geom.ModelPart;
@@ -16,7 +16,10 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
+@OnlyIn(Dist.CLIENT)
 public class RideCymbalRenderer implements BlockEntityRenderer<RideCymbalBlockEntity> {
     private final ModelPart cymbal;
 

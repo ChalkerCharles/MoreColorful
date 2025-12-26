@@ -8,13 +8,14 @@ import net.minecraft.stats.Stats;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Supplier;
 
 public class ModStats {
-    public static final DeferredRegister<ResourceLocation> STATS = DeferredRegister.create(Registries.CUSTOM_STAT, MoreColorful.MODID);
-    private static final List<Runnable> STAT_SETUP = new ArrayList<>();
+    private static final DeferredRegister<ResourceLocation> STATS = DeferredRegister.create(Registries.CUSTOM_STAT, MoreColorful.MODID);
+    private static final Map<ResourceLocation, StatFormatter> STAT_SETUP = new HashMap<>();
+
     public static final Supplier<ResourceLocation> INTERACT_WITH_HARP = makeCustomStat("interact_with_harp");
     public static final Supplier<ResourceLocation> INTERACT_WITH_PIANO = makeCustomStat("interact_with_piano");
     public static final Supplier<ResourceLocation> INTERACT_WITH_BASS_DRUM = makeCustomStat("interact_with_bass_drum");
@@ -31,14 +32,17 @@ public class ModStats {
     public static final Supplier<ResourceLocation> INTERACT_WITH_SYNTHESIZER_KEYBOARD = makeCustomStat("interact_with_synthesizer_keyboard");
     public static final Supplier<ResourceLocation> INTERACT_WITH_GUZHENG = makeCustomStat("interact_with_guzheng");
 
-    private static Supplier<ResourceLocation> makeCustomStat(String pKey) {
-        ResourceLocation resourcelocation = MoreColorful.location(pKey);
-        STAT_SETUP.add(() -> Stats.CUSTOM.get(resourcelocation, StatFormatter.DEFAULT));
-        return STATS.register(pKey, () -> resourcelocation);
+    private static Supplier<ResourceLocation> makeCustomStat(String key) {
+        return STATS.register(key, location -> {
+            STAT_SETUP.put(location, StatFormatter.DEFAULT);
+            return location;
+        });
     }
+
     public static void init() {
-        STAT_SETUP.forEach(Runnable::run);
+        STAT_SETUP.forEach(Stats.CUSTOM::get);
     }
+
     public static void register(IEventBus eventBus){
         STATS.register(eventBus);
     }

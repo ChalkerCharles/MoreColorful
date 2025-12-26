@@ -2,7 +2,6 @@ package com.ChalkerCharles.morecolorful.network.packets;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.common.attachment.InstrumentData;
-import com.ChalkerCharles.morecolorful.common.attachment.PlayerData;
 import com.ChalkerCharles.morecolorful.util.InstrumentsType;
 import com.ChalkerCharles.morecolorful.network.NetworkUtils;
 import io.netty.buffer.ByteBuf;
@@ -48,7 +47,8 @@ public record PlayingScreenPacket(InstrumentsType pType, BlockPos pos, int id, b
         context.enqueueWork(() -> {
             Level level = context.player().level();
             Player player = (Player) level.getEntity(id);
-            InstrumentData data = PlayerData.getInstrumentData(player);
+            if (player == null) return;
+            InstrumentData data = InstrumentData.get(player);
             data.setPlayingScreenData(pType, pos, isOpen);
         }).exceptionally(NetworkUtils.handlePayloadException(context));
     }
@@ -56,7 +56,7 @@ public record PlayingScreenPacket(InstrumentsType pType, BlockPos pos, int id, b
     private void handleServer(IPayloadContext context) {
         context.enqueueWork(() -> {
             Player player = context.player();
-            InstrumentData data = PlayerData.getInstrumentData(player);
+            InstrumentData data = InstrumentData.get(player);
             data.setPlayingScreenData(pType, pos, isOpen);
             PacketDistributor.sendToAllPlayers(this);
             if (!isOpen) {

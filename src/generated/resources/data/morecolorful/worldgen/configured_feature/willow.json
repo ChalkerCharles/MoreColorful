@@ -7,7 +7,7 @@
         "probability": 0.08
       },
       {
-        "type": "morecolorful:dawn_redwood_root_placer",
+        "type": "morecolorful:willow_branches_tree_decorator",
         "length": {
           "type": "minecraft:uniform",
           "max_inclusive": 5,

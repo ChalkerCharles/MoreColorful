@@ -14,8 +14,8 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(CherryLeavesBlock.class)
 public abstract class CherryLeavesBlockMixin implements ILeavesBlockExtension {
     @ModifyExpressionValue(method = "animateTick", at = @At(value = "CONSTANT", args = "intValue=10"))
-    public int animateTick(int original, BlockState state, Level level) {
-        return WeatherUtils.chanceByWind(level, original);
+    public int animateTick(int original, BlockState state, Level level, BlockPos pos) {
+        return WeatherUtils.chanceByWind(level, pos, original);
     }
 
     @Override

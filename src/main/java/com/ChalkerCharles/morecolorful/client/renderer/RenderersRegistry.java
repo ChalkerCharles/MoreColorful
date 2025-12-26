@@ -4,7 +4,10 @@ import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.client.renderer.block.CrashCymbalRenderer;
 import com.ChalkerCharles.morecolorful.client.renderer.block.DrumSetRenderer;
 import com.ChalkerCharles.morecolorful.client.renderer.block.RideCymbalRenderer;
+import com.ChalkerCharles.morecolorful.client.renderer.block.WeatherVaneRenderer;
+import com.ChalkerCharles.morecolorful.client.renderer.entity.PaperPlaneRenderer;
 import com.ChalkerCharles.morecolorful.common.block.ModBlockEntities;
+import com.ChalkerCharles.morecolorful.common.entity.ModEntities;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -17,5 +20,8 @@ public class RenderersRegistry {
         event.registerBlockEntityRenderer(ModBlockEntities.RIDE_CYMBAL.get(), RideCymbalRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.CRASH_CYMBAL.get(), CrashCymbalRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.DRUM_SET.get(), DrumSetRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntities.WEATHER_VANE.get(), WeatherVaneRenderer::new);
+
+        event.registerEntityRenderer(ModEntities.PAPER_PLANE.get(), PaperPlaneRenderer::new);
     }
 }

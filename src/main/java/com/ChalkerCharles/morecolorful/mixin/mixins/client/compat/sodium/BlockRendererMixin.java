@@ -28,7 +28,7 @@ public abstract class BlockRendererMixin {
 
     @Inject(method = "bufferQuad", at = @At(value = "FIELD", target = "Lnet/caffeinemc/mods/sodium/client/render/chunk/vertex/format/ChunkVertexEncoder$Vertex;light:I", opcode = Opcodes.PUTFIELD, shift = At.Shift.AFTER))
     private void bufferQuad$0(CallbackInfo ci, @Local(ordinal = 0) int i, @Local ChunkVertexEncoder.Vertex out, @Local Vector3f offset) {
-        if (!RenderUtils.isClientWindOn) return;
+        if (!RenderUtils.wavyBlocks) return;
         float x = out.x - offset.x;
         float y = out.y - offset.y;
         float z = out.z - offset.z;
@@ -42,7 +42,7 @@ public abstract class BlockRendererMixin {
 
     @Inject(method = "bufferQuad", at = @At(value = "INVOKE", target = "Lnet/caffeinemc/mods/sodium/client/render/chunk/vertex/builder/ChunkMeshBufferBuilder;push([Lnet/caffeinemc/mods/sodium/client/render/chunk/vertex/format/ChunkVertexEncoder$Vertex;I)V"))
     private void bufferQuad$1(CallbackInfo ci, @Local(ordinal = 0) TerrainRenderPass pass, @Local ModelQuadFacing facing, @Local ChunkMeshBufferBuilder vertexBuffer) {
-        if (!RenderUtils.isClientWindOn) return;
+        if (!RenderUtils.wavyBlocks) return;
         SodiumWavyVertices vertices = SodiumCompat.getWavyVertices(pass);
         if (vertices == null) return;
         boolean translucent = pass.isTranslucent();

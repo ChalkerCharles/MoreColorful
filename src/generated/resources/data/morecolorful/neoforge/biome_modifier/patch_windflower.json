@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#morecolorful:is_windy",
+  "features": "morecolorful:patch_windflower",
+  "step": "vegetal_decoration"
+}

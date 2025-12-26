@@ -14,7 +14,7 @@ import java.util.function.Supplier;
 
 @SuppressWarnings("deprecation")
 public class ModFeatures {
-    public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(Registries.FEATURE, MoreColorful.MODID);
+    private static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(Registries.FEATURE, MoreColorful.MODID);
 
     public static final Supplier<ModLakeFeature> LAKE = FEATURES.register("lake", () -> new ModLakeFeature(LakeFeature.Configuration.CODEC));
     public static final Supplier<ReedFeature> REED = FEATURES.register("reed", () -> new ReedFeature(ProbabilityFeatureConfiguration.CODEC));

@@ -1,9 +1,14 @@
 package com.ChalkerCharles.morecolorful.util.client;
 
 import com.ChalkerCharles.morecolorful.client.particle.ModParticles;
+import com.ChalkerCharles.morecolorful.common.ModSounds;
+import com.ChalkerCharles.morecolorful.util.WeatherUtils;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ColorParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -30,11 +35,32 @@ public class ClientWrapper {
             Blocks.FLOWERING_AZALEA_LEAVES, AZALEA_GETTER
     );
 
-    public static boolean isClientWindOn() {
-        return RenderUtils.isClientWindOn;
+    public static boolean wavyBlocks() {
+        return RenderUtils.wavyBlocks;
+    }
+
+    public static boolean windParticles() {
+        return RenderUtils.windParticles;
     }
 
     public static void clearDataInLine(Level level, BlockPos pos) {
         RenderUtils.clearDataInLine(level, pos);
+    }
+
+    public static double distToCameraSq(BlockPos pos) {
+        double x = pos.getX() + 0.5, y = pos.getY() + 0.5, z = pos.getZ() + 0.5;
+        return Minecraft.getInstance().gameRenderer.getMainCamera().getPosition().distanceToSqr(x, y, z);
+    }
+
+    public static void playRustlingSound(Level level, BlockPos pos, RandomSource random) {
+        if (RenderUtils.windSounds && !RenderUtils.isCalm && !RenderUtils.leavesRustling && distToCameraSq(pos) < 576) {
+            int chance = WeatherUtils.chanceByWind(level, pos, 240);
+            if (random.nextInt(chance) == 0) {
+                float volume = 1.0F - chance * 0.00416667F;
+                float pitch = volume * 0.5F + 0.5F;
+                level.playLocalSound(pos, ModSounds.LEAVES_RUSTLE.get(), SoundSource.BLOCKS, volume, pitch, false);
+                RenderUtils.leavesRustling = true;
+            }
+        }
     }
 }

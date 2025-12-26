@@ -1,5 +1,6 @@
 package com.ChalkerCharles.morecolorful.mixin.mixins.entity;
 
+import com.ChalkerCharles.morecolorful.mixin.extensions.IEntityExtension;
 import com.ChalkerCharles.morecolorful.util.WindSensitive;
 import net.minecraft.core.Holder;
 import net.minecraft.world.entity.LivingEntity;
@@ -9,7 +10,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(LivingEntity.class)
-public abstract class LivingEntityMixin extends EntityMixin implements WindSensitive {
+public abstract class LivingEntityMixin implements IEntityExtension, WindSensitive {
     @Shadow
     public abstract double getAttributeValue(Holder<Attribute> pAttribute);
 
@@ -19,7 +20,7 @@ public abstract class LivingEntityMixin extends EntityMixin implements WindSensi
     }
 
     @Override
-    public double moreColorful$windResistance() {
+    public double moreColorful$windSensitivity() {
         return 1.0 - this.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE);
     }
 }

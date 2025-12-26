@@ -2,18 +2,22 @@ package com.ChalkerCharles.morecolorful.common.attachment;
 
 import com.ChalkerCharles.morecolorful.common.level.wind.WindManager;
 import com.ChalkerCharles.morecolorful.common.level.wind.WindZoneManager;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.renderer.culling.Frustum;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
 
 public class ClientLevelData extends LevelSavedData {
-    private final WindManager.Client windManager = new WindManager.Client();
+    private final WindManager.Client windManager;
+    private final WindZoneManager.Client windZoneManager = new WindZoneManager.Client();
     private final Deque<Runnable> thermalUpdateQueue = new ArrayDeque<>();
     private final Deque<Runnable> ventUpdateQueue = new ArrayDeque<>();
 
-    public ClientLevelData() {
-        super(new WindZoneManager.Client());
+    public ClientLevelData(ClientLevel level) {
+        this.windManager = new WindManager.Client(level);
     }
 
     private static ClientLevelData get(ClientLevel level) {
@@ -23,6 +27,11 @@ public class ClientLevelData extends LevelSavedData {
     @Override
     protected WindManager.Client windManager() {
         return this.windManager;
+    }
+
+    @Override
+    protected WindZoneManager.Client windZoneManager() {
+        return this.windZoneManager;
     }
 
     private void queueThermalUpdate(Runnable pTask) {
@@ -75,5 +84,17 @@ public class ClientLevelData extends LevelSavedData {
 
     public static void pollVentUpdates(ClientLevel level) {
         get(level).pollVentUpdates();
+    }
+
+    public static String getWindZoneStats(ClientLevel level) {
+        return get(level).windZoneManager.getStats();
+    }
+
+    public static void fillWindZonesInView(ClientLevel level, Frustum frustum) {
+        get(level).windZoneManager.fillWindZonesInView(frustum);
+    }
+
+    public static void renderWindZonesInView(ClientLevel level, PoseStack poseStack, Vec3 camera) {
+        get(level).windZoneManager.renderWindZonesInView(poseStack, camera);
     }
 }

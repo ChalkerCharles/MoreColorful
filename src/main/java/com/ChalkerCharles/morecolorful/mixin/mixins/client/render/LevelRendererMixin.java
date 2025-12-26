@@ -15,9 +15,13 @@ import com.ChalkerCharles.morecolorful.mixin.extensions.IViewAreaExtension;
 import com.ChalkerCharles.morecolorful.util.client.RenderUtils;
 import com.ChalkerCharles.morecolorful.util.client.WindSectionMap;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.Share;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
+import com.mojang.blaze3d.vertex.BufferBuilder;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.Util;
 import net.minecraft.client.Camera;
@@ -36,6 +40,8 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
+import org.spongepowered.asm.mixin.injection.Slice;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import javax.annotation.Nullable;
@@ -52,6 +58,8 @@ public abstract class LevelRendererMixin implements ILevelRendererExtension {
     @Shadow
     @Nullable
     private ViewArea viewArea;
+    @Shadow
+    private int ticks;
     @Nullable
     @Unique
     private WavyDataUpdateDispatcher<?> moreColorful$dispatcher;
@@ -60,24 +68,44 @@ public abstract class LevelRendererMixin implements ILevelRendererExtension {
     @Unique
     private Frustum moreColorful$windFrustum;
 
+    @WrapOperation(method = "renderSnowAndRain", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/vertex/BufferBuilder;addVertex(FFF)Lcom/mojang/blaze3d/vertex/VertexConsumer;"))
+    private VertexConsumer renderSnowAndRain(BufferBuilder instance, float pX, float pY, float pZ, Operation<VertexConsumer> original) {
+        if (!RenderUtils.isCalm && RenderUtils.windAndRain) {
+            float f = pY * RenderUtils.windStrength * 0.04F;
+            pX -= RenderUtils.windDir.x * f;
+            pZ -= RenderUtils.windDir.y * f;
+        }
+        return original.call(instance, pX, pY, pZ);
+    }
+
+    @WrapOperation(method = "renderSnowAndRain", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/vertex/VertexConsumer;setUv(FF)Lcom/mojang/blaze3d/vertex/VertexConsumer;"),
+            slice = @Slice(from = @At(value = "FIELD", target = "Lnet/minecraft/client/renderer/LevelRenderer;SNOW_LOCATION:Lnet/minecraft/resources/ResourceLocation;")))
+    private VertexConsumer renderSnow(VertexConsumer instance, float u, float v, Operation<VertexConsumer> original, @Local(argsOnly = true) float partialTick) {
+        if (!RenderUtils.isCalm && RenderUtils.windAndRain) {
+            float f = ((this.ticks & 511) + partialTick) / 512.0F;
+            v -= RenderUtils.windStrength * f;
+        }
+        return original.call(instance, u, v);
+    }
+
     @Inject(method = "prepareCullFrustum", at = @At("TAIL"))
     private void prepareCullFrustum(Vec3 pCameraPosition, Matrix4f pFrustumMatrix, Matrix4f pProjectionMatrix, CallbackInfo ci) {
-        if (RenderUtils.SODIUM_ON || !RenderUtils.isClientWindOn) return;
+        if (RenderUtils.SODIUM_ON || !RenderUtils.wavyBlocks) return;
         this.moreColorful$windFrustum = new WindFrustum(pFrustumMatrix, pProjectionMatrix);
         this.moreColorful$windFrustum.prepare(pCameraPosition.x, pCameraPosition.y, pCameraPosition.z);
     }
 
     @Inject(method = "applyFrustum", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/SectionOcclusionGraph;addSectionsInFrustum(Lnet/minecraft/client/renderer/culling/Frustum;Ljava/util/List;)V", shift = At.Shift.AFTER))
     private void applyFrustum(Frustum pFrustum, CallbackInfo ci) {
-        if (RenderUtils.SODIUM_ON || !RenderUtils.isClientWindOn) return;
+        if (RenderUtils.SODIUM_ON || !RenderUtils.wavyBlocks) return;
         this.moreColorful$windySections.clear();
         this.sectionOcclusionGraph.addSectionsInFrustum(this.moreColorful$windFrustum, this.moreColorful$windySections);
     }
 
     @Inject(method = "setLevel", at = @At(value = "INVOKE", target = "Ljava/util/Set;clear()V"))
     private void setLevel(ClientLevel pLevel, CallbackInfo ci) {
-        boolean windOn = RenderUtils.setClientWindOn();
-        if (!windOn) return;
+        RenderUtils.setClientWindFlags();
+        if (!RenderUtils.wavyBlocks) return;
         if (this.moreColorful$dispatcher != null) {
             this.moreColorful$dispatcher.dispose();
         }
@@ -87,8 +115,8 @@ public abstract class LevelRendererMixin implements ILevelRendererExtension {
 
     @Inject(method = "allChanged", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/chunk/SectionRenderDispatcher;blockUntilClear()V"))
     private void allChanged(CallbackInfo ci) {
-        boolean windOn = RenderUtils.setClientWindOn();
-        if (!windOn) return;
+        RenderUtils.setClientWindFlags();
+        if (!RenderUtils.wavyBlocks) return;
         if (this.moreColorful$dispatcher == null) {
             this.moreColorful$dispatcher = RenderUtils.SODIUM_ON
                     ? SodiumCompat.createDispatcher(Util.backgroundExecutor())
@@ -102,9 +130,8 @@ public abstract class LevelRendererMixin implements ILevelRendererExtension {
     @Inject(method = "renderLevel", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/LevelRenderer;compileSections(Lnet/minecraft/client/Camera;)V", shift = At.Shift.AFTER))
     private void updateWindData(DeltaTracker pDeltaTracker, boolean pRenderBlockOutline, Camera pCamera, GameRenderer pGameRenderer, LightTexture pLightTexture, Matrix4f pFrustumMatrix, Matrix4f pProjectionMatrix, CallbackInfo ci,
                                 @Local ProfilerFiller profilerFiller) {
-        if (this.moreColorful$dispatcher == null || !RenderUtils.isClientWindOn) return;
+        if (this.moreColorful$dispatcher == null || !RenderUtils.wavyBlocks) return;
         this.moreColorful$dispatcher.setCamera(pCamera.getPosition());
-        RenderUtils.setWindContext(this.level);
         profilerFiller.popPush("update_wind_data");
         this.moreColorful$dispatcher.uploadAllPending();
         if (RenderUtils.SODIUM_ON) {
@@ -115,6 +142,22 @@ public abstract class LevelRendererMixin implements ILevelRendererExtension {
                 dispatcher.trySchedule(IRenderSectionExtension.getWavyTask(section));
             }
         }
+    }
+
+    @ModifyVariable(method = "renderClouds", at = @At(value = "STORE", ordinal = 0), ordinal = 5)
+    private double renderClouds$x(double d2, @Local(ordinal = 4) double d1, @Local(argsOnly = true) float partialTick) {
+        if (!RenderUtils.isCalm && RenderUtils.windAndCloud) {
+            return d2 - d1 * RenderUtils.lerpWindSpeedX(partialTick) * 0.03125;
+        }
+        return d2;
+    }
+
+    @ModifyVariable(method = "renderClouds", at = @At(value = "STORE", ordinal = 0), ordinal = 7)
+    private double renderClouds$z(double d4, @Local(ordinal = 4) double d1, @Local(argsOnly = true) float partialTick) {
+        if (!RenderUtils.isCalm && RenderUtils.windAndCloud) {
+            return d4 - d1 * RenderUtils.lerpWindSpeedZ(partialTick) * 0.03125;
+        }
+        return d4;
     }
 
     @Inject(method = "compileSections", at = @At("HEAD"))

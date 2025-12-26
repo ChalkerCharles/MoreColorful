@@ -11,7 +11,7 @@
     "foliage_placer": {
       "type": "morecolorful:ginkgo_foliage_placer",
       "foliage_height": 4,
-      "leaf_placement_attempts": 135,
+      "leaf_placement_attempts": 30,
       "offset": 0,
       "radius": 3
     },

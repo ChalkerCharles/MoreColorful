@@ -1,6 +1,5 @@
 package com.ChalkerCharles.morecolorful.mixin.mixins.client.particle;
 
-import com.ChalkerCharles.morecolorful.common.attachment.LevelSavedData;
 import com.ChalkerCharles.morecolorful.mixin.extensions.IParticleExtension;
 import com.ChalkerCharles.morecolorful.util.WeatherUtils;
 import com.ChalkerCharles.morecolorful.util.WindSensitive;
@@ -18,9 +17,8 @@ public abstract class SparkParticleMixin extends SimpleAnimatedParticle implemen
 
     @Override
     public void moreColorful$applyWind() {
-        boolean global = WeatherUtils.canApplyWind(level, x, y, z);
-        if (global || LevelSavedData.isInWindZone(level, x, y, z)) {
-            Vector3f wind = WeatherUtils.getWindSpeedAt(this.level, x, y, z, global);
+        Vector3f wind = WeatherUtils.getEffectiveWindSpeedAt(level, x, y, z);
+        if (wind != null) {
             double windX = wind.x() * 0.001 * WeatherUtils.getRandomSpeedMultiplier(random);
             double windY = wind.y() * 0.001 * WeatherUtils.getRandomSpeedMultiplier(random);
             double windZ = wind.z() * 0.001 * WeatherUtils.getRandomSpeedMultiplier(random);

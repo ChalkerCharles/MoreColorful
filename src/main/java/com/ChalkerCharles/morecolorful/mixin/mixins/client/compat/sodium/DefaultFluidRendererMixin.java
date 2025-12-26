@@ -25,7 +25,7 @@ public abstract class DefaultFluidRendererMixin {
 
     @Inject(method = "writeQuad", at = @At(value = "FIELD", target = "Lnet/caffeinemc/mods/sodium/client/render/chunk/vertex/format/ChunkVertexEncoder$Vertex;light:I", opcode = Opcodes.PUTFIELD, shift = At.Shift.AFTER))
     private void writeQuad$0(CallbackInfo ci, @Local int i, @Local ChunkVertexEncoder.Vertex out, @Local(argsOnly = true) boolean flip) {
-        if (!RenderUtils.isClientWindOn) return;
+        if (!RenderUtils.wavyBlocks) return;
         float x = out.x, y = out.y, z = out.z;
         long wave = RenderUtils.getFluidWaveData(x, y, z);
         int idx = flip ? (3 - i + 1) & 3 : i;
@@ -38,7 +38,7 @@ public abstract class DefaultFluidRendererMixin {
 
     @Inject(method = "writeQuad", at = @At(value = "INVOKE", target = "Lnet/caffeinemc/mods/sodium/client/render/chunk/vertex/builder/ChunkMeshBufferBuilder;push([Lnet/caffeinemc/mods/sodium/client/render/chunk/vertex/format/ChunkVertexEncoder$Vertex;Lnet/caffeinemc/mods/sodium/client/render/chunk/terrain/material/Material;)V"))
     private void writeQuad$1(CallbackInfo ci, @Local(argsOnly = true) Material material, @Local(argsOnly = true) ModelQuadFacing facing, @Local ChunkMeshBufferBuilder vertexBuffer) {
-        if (!RenderUtils.isClientWindOn) return;
+        if (!RenderUtils.wavyBlocks) return;
         SodiumWavyVertices vertices = SodiumCompat.getWavyVertices(material.pass);
         if (vertices == null) return;
         boolean translucent = material.isTranslucent();

@@ -1,8 +1,5 @@
 {
   "values": [
-    {
-      "id": "morecolorful:ice_marsh",
-      "required": false
-    }
+    "morecolorful:ice_marsh"
   ]
 }

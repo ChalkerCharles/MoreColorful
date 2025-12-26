@@ -3,7 +3,7 @@ package com.ChalkerCharles.morecolorful.client.renderer.block;
 import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.client.model.ModModelLayers;
 import com.ChalkerCharles.morecolorful.common.block.entity.DrumSetBlockEntity;
-import com.ChalkerCharles.morecolorful.common.block.musical_instruments.DrumSetBlock;
+import com.ChalkerCharles.morecolorful.common.block.musical.DrumSetBlock;
 import com.ChalkerCharles.morecolorful.common.block.properties.DrumSetPart;
 import com.ChalkerCharles.morecolorful.util.client.AnimationUtils;
 import com.mojang.blaze3d.vertex.PoseStack;

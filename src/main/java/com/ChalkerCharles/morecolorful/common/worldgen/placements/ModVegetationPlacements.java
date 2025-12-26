@@ -74,6 +74,7 @@ public class ModVegetationPlacements {
     public static final ResourceKey<PlacedFeature> PATCH_WOOD_SORRELS = registerKey("patch_wood_sorrels");
     public static final ResourceKey<PlacedFeature> TREES_RAPESEED = registerKey("trees_rapeseed");
     public static final ResourceKey<PlacedFeature> FLOWER_RAPESEED = registerKey("flower_rapeseed");
+    public static final ResourceKey<PlacedFeature> PATCH_WINDFLOWER = registerKey("patch_windflower");
 
     public static void bootstrap(BootstrapContext<PlacedFeature> context) {
         HolderGetter<ConfiguredFeature<?, ?>> features = context.lookup(Registries.CONFIGURED_FEATURE);
@@ -425,6 +426,13 @@ public class ModVegetationPlacements {
         register(context, FLOWER_RAPESEED,
                 features.getOrThrow(ModVegetationFeatures.FLOWER_RAPESEED),
                 VegetationPlacements.worldSurfaceSquaredWithCount(12)
+        );
+        register(context, PATCH_WINDFLOWER,
+                features.getOrThrow(ModVegetationFeatures.PATCH_WINDFLOWER),
+                RarityFilter.onAverageOnceEvery(32),
+                InSquarePlacement.spread(),
+                PlacementUtils.HEIGHTMAP,
+                BiomeFilter.biome()
         );
     }
 }

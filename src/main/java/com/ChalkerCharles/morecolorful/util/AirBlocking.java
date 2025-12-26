@@ -44,6 +44,12 @@ public final class AirBlocking {
         return airBlock;
     }
 
+    public static int getMaxAirBlock(BlockState state, Direction direction) {
+        int airBlock = getAirBlock(state, direction);
+        if (airBlock == FULL_BLOCK) return FULL_BLOCK;
+        return Math.max(airBlock, getAirBlock(state, direction.getOpposite()));
+    }
+
     public static boolean isMergedFaceFull(BlockGetter level, BlockPos pos, BlockState state, Direction direction) {
         BlockPos pos1 = pos.relative(direction);
         BlockState state1 = level.getBlockState(pos1);
@@ -64,6 +70,6 @@ public final class AirBlocking {
     public static int getAirBlock(Level level, int x, int y, int z) {
         BlockState state = LevelSavedData.getBlockState(level, x, y, z);
         Direction direction = level.isClientSide ? RenderUtils.nearestWindDirection : LevelSavedData.getNearestWindDirection(level);
-        return getAirBlock(state, direction);
+        return getMaxAirBlock(state, direction);
     }
 }

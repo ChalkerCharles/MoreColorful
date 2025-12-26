@@ -1,4 +1,4 @@
-// 1.21	2025-04-20T00:22:42.6939226	Loot Tables
+// 1.21	2025-12-16T20:47:36.0939928	Loot Tables
 f4a289ffbac099d2c4b9b5d100073692eef09ea1 data/morecolorful/loot_table/archaeology/trail_ruins_common_add.json
 e054af3624d12ff4e2914684513873472bea0ce3 data/morecolorful/loot_table/blocks/baby-blue-eyes.json
 901491be093e8563cc1694d8924813b00f115542 data/morecolorful/loot_table/blocks/bass_drum.json
@@ -62,6 +62,7 @@ af83bed74443f1379ee0e3c7fa0740af494bc505 data/morecolorful/loot_table/blocks/ebo
 4653c9f20332c4abda03bc7a23f67c226a513135 data/morecolorful/loot_table/blocks/ebony_trapdoor.json
 2378eb48a36c9b833953878d9a720ee71006945d data/morecolorful/loot_table/blocks/ebony_wood.json
 c64ed419357fce1f23b046e9f0ef96deb02208d4 data/morecolorful/loot_table/blocks/edelweiss.json
+6ef1d8a0d14887d68fd8e7733f08e5c7981f6044 data/morecolorful/loot_table/blocks/fan_block.json
 12331e0e5740eb63f965755d0bd6cdc3b73d045b data/morecolorful/loot_table/blocks/forget-me-nots.json
 1d8ace9a9601e799f75897ee1b115e41e52d2aef data/morecolorful/loot_table/blocks/frosty_petals.json
 163c6295e193254ac224f3cb2de48723a1504191 data/morecolorful/loot_table/blocks/frost_button.json
@@ -168,6 +169,7 @@ b27f6ba0267540550e6f55c7fdcb7004e38dd984 data/morecolorful/loot_table/blocks/pot
 025a075a8121c4d87c55c69e5b4c0eb43f70b6be data/morecolorful/loot_table/blocks/potted_white_carnation.json
 88aca99c39fd6a0afb57389acfc800f782f64f81 data/morecolorful/loot_table/blocks/potted_white_cherry_sapling.json
 be47ed944e148216f4c9ca88081e463504882acf data/morecolorful/loot_table/blocks/potted_willow_sapling.json
+e8a6f307490848dd122b203282098db60fa2b48d data/morecolorful/loot_table/blocks/potted_windflower.json
 e1c4b5adf772f0c5d0611392a94e065bd6d84b69 data/morecolorful/loot_table/blocks/potted_yellow_birch_sapling.json
 87f8ddb22ede5954849b84a56f961603540ed3db data/morecolorful/loot_table/blocks/potted_yellow_chrysanthemum.json
 f23a0cde9d23a1b2d7a09a0f2c575942a64180f2 data/morecolorful/loot_table/blocks/rapeseed_flower.json
@@ -208,6 +210,7 @@ db51dc7cb5aa03f3c4fbe938254a180b4b91a9eb data/morecolorful/loot_table/blocks/syn
 ffcb9b55c2ee8247e187f294a9f34cbbae07c27d data/morecolorful/loot_table/blocks/upright_piano.json
 206df612fe61558e0cfe791f649cb891e4a68997 data/morecolorful/loot_table/blocks/vibraphone.json
 221592d4b803d9f6db8fed6f3f4c27ecb9934ad1 data/morecolorful/loot_table/blocks/violets.json
+5924315c39dd6eed0327fa62afde1ec9248db54f data/morecolorful/loot_table/blocks/weather_vane.json
 72b60d985a953b11758ba0eb2ce2ab7e26126fc4 data/morecolorful/loot_table/blocks/white_carnation.json
 6294f620025aafb923f5eb9a13148f7b68fec9db data/morecolorful/loot_table/blocks/white_cherry_leaves.json
 341fad5e508f29a9e03855194279c6d0058620ca data/morecolorful/loot_table/blocks/white_cherry_sapling.json
@@ -228,6 +231,7 @@ e24d8d1e0c5ea2e392b9c24c4fb4d9b87da47ca6 data/morecolorful/loot_table/blocks/wil
 c253a2b501409d8f54a7b508d277f3eb899b581d data/morecolorful/loot_table/blocks/willow_stairs.json
 190cbd0c441efdde2a4f02fdb6816ad8499c7630 data/morecolorful/loot_table/blocks/willow_trapdoor.json
 74afc286a4bd6bb489772288aa88ec351ed6b861 data/morecolorful/loot_table/blocks/willow_wood.json
+92b668f2f57db024fc51d02f4ccc038e021c029d data/morecolorful/loot_table/blocks/windflower.json
 5467688096c1f321e23347445d7390ce73523584 data/morecolorful/loot_table/blocks/wood_sorrels.json
 b36f64f8ff46e1820e1bb7b9901515363620d647 data/morecolorful/loot_table/blocks/xylophone.json
 9e30e529d59e727367cc1b688eea4af1d2494d66 data/morecolorful/loot_table/blocks/yellow_birch_leaf_litter.json

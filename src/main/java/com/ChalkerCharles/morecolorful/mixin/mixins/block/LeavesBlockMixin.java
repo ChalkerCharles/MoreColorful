@@ -28,13 +28,14 @@ public abstract class LeavesBlockMixin extends Block implements ILeavesBlockExte
     @Inject(method = "animateTick", at = @At("TAIL"))
     public void animateTick(BlockState pState, Level pLevel, BlockPos pPos, RandomSource pRandom, CallbackInfo ci) {
         this.moreColorful$makeFallingLeavesParticles(pLevel, pPos, pRandom);
+        ClientWrapper.playRustlingSound(pLevel, pPos, pRandom);
     }
 
     @Override
     public void moreColorful$makeFallingLeavesParticles(Level level, BlockPos pos, RandomSource random) {
         BiFunction<Level, BlockPos, ParticleOptions> function = ClientWrapper.LEAVES_PARTICLES.get(this);
         if (function == null) return;
-        if (random.nextInt(WeatherUtils.chanceByWind(level, 100)) == 0) {
+        if (random.nextInt(WeatherUtils.chanceByWind(level, pos, 100)) == 0) {
             BlockPos blockpos = pos.below();
             BlockState blockstate = level.getBlockState(blockpos);
             if (!isFaceFull(blockstate.getCollisionShape(level, blockpos), Direction.UP)) {

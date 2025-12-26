@@ -14,4 +14,5 @@ public class ModBlockStateProperties {
     public static final EnumProperty<ReedPart> REED_PART = EnumProperty.create("part", ReedPart.class);
     public static final BooleanProperty TALL_REED = BooleanProperty.create("tall_reed");
     public static final BooleanProperty TIP = BooleanProperty.create("tip");
+    public static final IntegerProperty WIND_LEVEL = IntegerProperty.create("wind_level", 0, 5);
 }

@@ -2,9 +2,10 @@ package com.ChalkerCharles.morecolorful.util;
 
 import net.minecraft.core.Direction;
 import net.minecraft.core.SectionPos;
-import net.minecraft.world.phys.Vec3;
+import net.minecraft.util.Mth;
 import org.joml.Vector4f;
 
+import java.util.function.BinaryOperator;
 import java.util.function.IntSupplier;
 
 public final class Maths {
@@ -16,6 +17,7 @@ public final class Maths {
     public static final float INV64 = 1.0F / 64.0F;
     public static final Vector4f ZERO_VEC4 = new Vector4f(0);
     public static final IntSupplier SUPPLIER_0 = () -> 0;
+    public static final BinaryOperator<Integer> ONLY_SECOND = (i, j) -> j;
     public static final Direction[] DIRECTIONS = Direction.values();
     public static final int[] EMPTY_INT_ARRAY = new int[0];
     public static final long[] EMPTY_LONG_ARRAY = new long[0];
@@ -38,7 +40,7 @@ public final class Maths {
         return SectionPos.asLong(SectionPos.blockToSectionCoord(x), SectionPos.blockToSectionCoord(y), SectionPos.blockToSectionCoord(z));
     }
 
-    public static long sectionPos(Vec3 vec) {
-        return sectionPos(vec.x, vec.y, vec.z);
+    public static float vectorToAngle(float x, float z) {
+        return (90 - (float) Mth.atan2(-z, x) * Mth.RAD_TO_DEG) % 360;
     }
 }

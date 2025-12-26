@@ -11,8 +11,6 @@ import net.minecraft.world.level.levelgen.feature.configurations.TreeConfigurati
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 
-import java.util.Random;
-
 public class DawnRedwoodFoliagePlacer extends FoliagePlacer {
     public static final MapCodec<DawnRedwoodFoliagePlacer> CODEC = RecordCodecBuilder.mapCodec(
             instance -> foliagePlacerParts(instance)
@@ -20,7 +18,7 @@ public class DawnRedwoodFoliagePlacer extends FoliagePlacer {
                     .apply(instance, DawnRedwoodFoliagePlacer::new)
     );
     private final IntProvider trunkHeight;
-    private final Random random = new Random(1234L);
+
     public DawnRedwoodFoliagePlacer(IntProvider pRadius, IntProvider pOffset, IntProvider trunkHeight) {
         super(pRadius, pOffset);
         this.trunkHeight = trunkHeight;
@@ -38,7 +36,7 @@ public class DawnRedwoodFoliagePlacer extends FoliagePlacer {
         int j = 1;
         int k = 0;
         int f = 0;
-        int offset = random.nextInt(pMaxFreeTreeHeight / 5);
+        int offset = pRandom.nextInt(pMaxFreeTreeHeight / 5);
 
         for (int l = pOffset; l >= -(pFoliageHeight - offset); l--) {
             if (j >= 3) {
@@ -62,9 +60,7 @@ public class DawnRedwoodFoliagePlacer extends FoliagePlacer {
 
     @Override
     public int foliageHeight(RandomSource pRandom, int pHeight, TreeConfiguration pConfig) {
-        int max = this.trunkHeight.getMaxValue();
-        int min = this.trunkHeight.getMinValue();
-        return Math.max(4, pHeight - random.nextInt(min, max + 1));
+        return Math.max(4, pHeight - this.trunkHeight.sample(pRandom));
     }
 
     @Override

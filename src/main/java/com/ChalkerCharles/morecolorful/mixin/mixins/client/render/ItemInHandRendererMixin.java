@@ -2,8 +2,8 @@ package com.ChalkerCharles.morecolorful.mixin.mixins.client.render;
 
 import com.ChalkerCharles.morecolorful.client.gui.PlayingScreen;
 import com.ChalkerCharles.morecolorful.common.item.ModItems;
-import com.ChalkerCharles.morecolorful.common.item.musical_instruments.DidgeridooItem;
-import com.ChalkerCharles.morecolorful.common.item.musical_instruments.GuitarItem;
+import com.ChalkerCharles.morecolorful.common.item.musical.DidgeridooItem;
+import com.ChalkerCharles.morecolorful.common.item.musical.GuitarItem;
 import com.ChalkerCharles.morecolorful.util.InstrumentsType;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;

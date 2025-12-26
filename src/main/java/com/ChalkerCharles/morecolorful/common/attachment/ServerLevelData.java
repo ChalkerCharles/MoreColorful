@@ -6,9 +6,9 @@ import net.minecraft.server.level.ServerLevel;
 
 public class ServerLevelData extends LevelSavedData {
     private final WindManager.Server windManager;
+    private final WindZoneManager windZoneManager = new WindZoneManager();
 
     public ServerLevelData(ServerLevel level) {
-        super(new WindZoneManager());
         this.windManager = new WindManager.Server(level);
     }
 
@@ -19,6 +19,11 @@ public class ServerLevelData extends LevelSavedData {
     @Override
     protected WindManager.Server windManager() {
         return this.windManager;
+    }
+
+    @Override
+    protected WindZoneManager windZoneManager() {
+        return this.windZoneManager;
     }
 
     public static void setWindSpeedByCommand(ServerLevel level, float x, float z) {

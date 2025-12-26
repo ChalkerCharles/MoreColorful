@@ -1,0 +1,6 @@
+{
+	"parent": "morecolorful:block/fan_block",
+	"textures": {
+		"top": "morecolorful:block/fan_block_powered"
+	}
+}

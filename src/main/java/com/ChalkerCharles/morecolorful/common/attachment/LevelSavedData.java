@@ -8,9 +8,12 @@ import com.ChalkerCharles.morecolorful.common.level.wind.WindZoneManager;
 import com.ChalkerCharles.morecolorful.mixin.extensions.IChunkSourceExtension;
 import com.ChalkerCharles.morecolorful.mixin.extensions.ILevelChunkExtension;
 import com.ChalkerCharles.morecolorful.util.Maths;
+import com.ChalkerCharles.morecolorful.util.WeatherUtils;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.SectionPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.ChunkPos;
@@ -20,7 +23,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.attachment.IAttachmentHolder;
 import net.neoforged.neoforge.common.util.INBTSerializable;
 import org.jetbrains.annotations.UnknownNullability;
@@ -30,16 +32,10 @@ import org.joml.Vector3f;
 import java.util.List;
 
 public abstract class LevelSavedData implements INBTSerializable<CompoundTag> {
-    private final WindZoneManager windZoneManager;
-
-    protected LevelSavedData(WindZoneManager manager) {
-        this.windZoneManager = manager;
-    }
-
     public static LevelSavedData create(IAttachmentHolder holder) {
         Level level = (Level) holder;
         if (level.isClientSide) {
-            return new ClientLevelData();
+            return new ClientLevelData((ClientLevel) level);
         } else {
             return new ServerLevelData((ServerLevel) level);
         }
@@ -50,6 +46,8 @@ public abstract class LevelSavedData implements INBTSerializable<CompoundTag> {
     }
 
     protected abstract WindManager windManager();
+
+    protected abstract WindZoneManager windZoneManager();
 
     public static BlockState getBlockState(Level level, int x, int y, int z) {
         if (level.isOutsideBuildHeight(y)) {
@@ -117,24 +115,28 @@ public abstract class LevelSavedData implements INBTSerializable<CompoundTag> {
         get(level).windManager().initWindSpeed(x, z);
     }
 
-    public static void updateGlobalWind(Level level) {
-        get(level).windManager().update();
+    public static void tickWind(Level level) {
+        LevelSavedData data = get(level);
+        data.windZoneManager().tick();
+        if (WeatherUtils.isWindy(level)) {
+            data.windManager().tick();
+        }
     }
 
     public static void addWindZone(Level level, WindZone windZone) {
-        get(level).windZoneManager.addWindZone(windZone);
+        get(level).windZoneManager().addWindZone(windZone);
     }
 
     public static void updateWindZoneSections(Level level, WindZone zone, long[] oldSections, long[] newSections) {
-        get(level).windZoneManager.updateWindZoneSections(zone, oldSections, newSections);
+        get(level).windZoneManager().updateWindZoneSections(zone, oldSections, newSections);
     }
 
     public static List<WindZone> getWindZones(Level level, long sectionPos) {
-        return get(level).windZoneManager.getWindZones(sectionPos);
+        return get(level).windZoneManager().getWindZones(sectionPos);
     }
 
     public static Vector3f getLocalWindSpeedAt(Level level, double x, double y, double z, long sectionPos) {
-        return get(level).windZoneManager.getLocalWindSpeedAt(x, y, z, sectionPos);
+        return get(level).windZoneManager().getLocalWindSpeedAt(x, y, z, sectionPos);
     }
 
     public static Vector3f getLocalWindSpeedAt(Level level, double x, double y, double z) {
@@ -142,31 +144,35 @@ public abstract class LevelSavedData implements INBTSerializable<CompoundTag> {
         return getLocalWindSpeedAt(level, x, y, z, sectionPos);
     }
 
+    public static Vector3f getLocalWindSpeedAt(Level level, BlockPos pos) {
+        long sectionPos = SectionPos.asLong(pos);
+        double x = pos.getX() + 0.5, y = pos.getY() + 0.5, z = pos.getZ() + 0.5;
+        return getLocalWindSpeedAt(level, x, y, z, sectionPos);
+    }
+
     public static boolean isInWindZone(Level level, double x, double y, double z) {
         long sectionPos = Maths.sectionPos(x, y, z);
-        return get(level).windZoneManager.isInWindZone(x, y, z, sectionPos);
+        return get(level).windZoneManager().isInWindZone(x, y, z, sectionPos);
     }
 
-    public static Vector3f getLocalWindSpeedAffectingEntity(Level level, Vec3 pos) {
-        long sectionPos = Maths.sectionPos(pos);
-        return get(level).windZoneManager.getLocalWindSpeedAffectingEntity(pos, sectionPos);
+    public static boolean isInWindZone(Level level, BlockPos pos) {
+        long sectionPos = SectionPos.asLong(pos);
+        double x = pos.getX() + 0.5, y = pos.getY() + 0.5, z = pos.getZ() + 0.5;
+        return get(level).windZoneManager().isInWindZone(x, y, z, sectionPos);
     }
 
-    public static boolean isInWindZoneAffectingEntity(Level level, Vec3 pos) {
-        long sectionPos = Maths.sectionPos(pos);
-        return get(level).windZoneManager.isInWindZoneAffectingEntity(pos, sectionPos);
+    public static Vector3f getLocalWindSpeedAffectingEntity(Level level, double x, double y, double z) {
+        long sectionPos = Maths.sectionPos(x, y, z);
+        return get(level).windZoneManager().getLocalWindSpeedAffectingEntity(x, y, z, sectionPos);
     }
 
-    public static void updateWindZones(Level level) {
-        get(level).windZoneManager.updateWindZones();
+    public static boolean isInWindZoneAffectingEntity(Level level, double x, double y, double z) {
+        long sectionPos = Maths.sectionPos(x, y, z);
+        return get(level).windZoneManager().isInWindZoneAffectingEntity(x, y, z, sectionPos);
     }
 
     public static void onChunkUnload(Level level, ChunkPos pos) {
-        get(level).windZoneManager.onChunkUnload(level, pos);
-    }
-
-    public static String getWindZoneStats(Level level) {
-        return get(level).windZoneManager.getStats();
+        get(level).windZoneManager().onChunkUnload(level, pos);
     }
 
     @Override

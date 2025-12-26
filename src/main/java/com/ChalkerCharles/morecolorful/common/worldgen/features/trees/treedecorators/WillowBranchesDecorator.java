@@ -1,7 +1,7 @@
 package com.ChalkerCharles.morecolorful.common.worldgen.features.trees.treedecorators;
 
 import com.ChalkerCharles.morecolorful.common.block.ModBlocks;
-import com.ChalkerCharles.morecolorful.common.block.nature.WillowBranchesBlock;
+import com.ChalkerCharles.morecolorful.common.block.natural.WillowBranchesBlock;
 import com.ChalkerCharles.morecolorful.common.worldgen.features.trees.ModTreeDecorators;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;

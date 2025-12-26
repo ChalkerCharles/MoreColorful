@@ -91,7 +91,7 @@ public class ModLakeFeature extends LakeFeature {
                     for(u = 0; u < 8; u++) {
                         if (booleans[(s * 16 + t) * 8 + u]) {
                             BlockPos blockPos2 = blockPos.offset(s, u, t);
-                            if (this.canReplaceBlock(worldGenLevel.getBlockState(blockPos2))) {
+                            if (canReplaceBlock(worldGenLevel.getBlockState(blockPos2))) {
                                 bl2 = u >= 4;
                                 worldGenLevel.setBlock(blockPos2, bl2 ? AIR : blockState, 2);
                                 if (bl2) {
@@ -127,7 +127,7 @@ public class ModLakeFeature extends LakeFeature {
         }
     }
 
-    private boolean canReplaceBlock(BlockState pState) {
-        return !(pState.is(ModTags.Blocks.LAKES_CANNOT_REPLACE));
+    private static boolean canReplaceBlock(BlockState pState) {
+        return !pState.is(ModTags.Blocks.LAKES_CANNOT_REPLACE);
     }
 }

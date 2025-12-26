@@ -7,7 +7,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
-import static com.ChalkerCharles.morecolorful.common.block.musical_instruments.HiHatBlock.HIT;
+import static com.ChalkerCharles.morecolorful.common.block.musical.HiHatBlock.HIT;
 
 public class HiHatBlockEntity extends BlockEntity {
     public HiHatBlockEntity(BlockPos pPos, BlockState pBlockState) {

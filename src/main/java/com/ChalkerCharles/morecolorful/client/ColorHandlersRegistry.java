@@ -2,7 +2,7 @@ package com.ChalkerCharles.morecolorful.client;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.common.block.ModBlocks;
-import com.ChalkerCharles.morecolorful.common.block.nature.ReedBlock;
+import com.ChalkerCharles.morecolorful.common.block.natural.ReedBlock;
 import com.ChalkerCharles.morecolorful.common.item.ModItems;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.core.BlockPos;
@@ -83,10 +83,9 @@ public class ColorHandlersRegistry {
     }
 
     private static int getReedColor(BlockAndTintGetter pLevel, BlockPos pPos) {
-        Color color = new Color(BiomeColors.getAverageGrassColor(pLevel, pPos));
-        float[] hsb = Color.RGBtoHSB(color.getRed(), color.getGreen(), color.getBlue(), null);
+        int rgb = BiomeColors.getAverageGrassColor(pLevel, pPos);
+        float[] hsb = Color.RGBtoHSB((rgb >> 16) & 0xFF, (rgb >> 8) & 0xFF, rgb & 0xFF, null);
         float hue = hsb[0];
-        Color newColor = Color.getHSBColor((hue + 64) / 2, 0.1F, 0.85F);
-        return newColor.getRGB();
+        return Color.HSBtoRGB((hue + 64) / 2, 0.1F, 0.85F);
     }
 }

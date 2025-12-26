@@ -25,8 +25,7 @@ public class DawnRedwoodRootPlacer extends RootPlacer {
                     .apply(instance, DawnRedwoodRootPlacer::new)
     );
     private static final int RADIUS = 5;
-    
-    @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
+
     public DawnRedwoodRootPlacer(IntProvider pTrunkOffset, BlockStateProvider pRootProvider, Optional<AboveRootPlacement> pAboveRootPlacement) {
         super(pTrunkOffset, pRootProvider, pAboveRootPlacement);
     }

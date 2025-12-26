@@ -5,7 +5,7 @@ import com.ChalkerCharles.morecolorful.common.worldgen.features.trees.foliagepla
 import com.ChalkerCharles.morecolorful.common.worldgen.features.trees.foliageplacers.GinkgoFoliagePlacer;
 import com.ChalkerCharles.morecolorful.common.worldgen.features.trees.rootplacers.DawnRedwoodRootPlacer;
 import com.ChalkerCharles.morecolorful.common.worldgen.features.trees.treedecorators.WillowBranchesDecorator;
-import com.ChalkerCharles.morecolorful.common.worldgen.features.trees.trunklplacers.DawnRedwoodTrunkPlacer;
+import com.ChalkerCharles.morecolorful.common.worldgen.features.trees.trunkplacers.DawnRedwoodTrunkPlacer;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.data.worldgen.features.TreeFeatures;
 import net.minecraft.util.random.SimpleWeightedRandomList;
@@ -68,7 +68,7 @@ public class ModTreeConfigurations {
             BlockStateProvider.simple(ModBlocks.GINKGO_LOG.get()),
             new StraightTrunkPlacer(5, 2, 0),
             BlockStateProvider.simple(ModBlocks.GINKGO_LEAVES.get()),
-            new GinkgoFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0), ConstantInt.of(4), 135),
+            new GinkgoFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0), ConstantInt.of(4), 30),
             new TwoLayersFeatureSize(1, 0, 1)
     ).build();
     public static final TreeConfiguration FANCY_GINKGO = new TreeConfiguration.TreeConfigurationBuilder(
@@ -116,12 +116,10 @@ public class ModTreeConfigurations {
     ).ignoreVines().build();
     public static final TreeConfiguration DAWN_REDWOOD = new TreeConfiguration.TreeConfigurationBuilder(
             BlockStateProvider.simple(ModBlocks.DAWN_REDWOOD_LOG.get()),
-            new DawnRedwoodTrunkPlacer(12, 10, 8, UniformInt.of(3, 5)),
+            new DawnRedwoodTrunkPlacer(12, 10, 8),
             BlockStateProvider.simple(ModBlocks.DAWN_REDWOOD_LEAVES.get()),
             new DawnRedwoodFoliagePlacer(UniformInt.of(3, 4), UniformInt.of(0, 2), UniformInt.of(3, 5)),
-            Optional.of(
-                    new DawnRedwoodRootPlacer(ConstantInt.of(0), BlockStateProvider.simple(ModBlocks.DAWN_REDWOOD_ROOTS.get()), Optional.empty())
-            ),
+            Optional.of(new DawnRedwoodRootPlacer(ConstantInt.of(0), BlockStateProvider.simple(ModBlocks.DAWN_REDWOOD_ROOTS.get()), Optional.empty())),
             new TwoLayersFeatureSize(2, 0, 2)
     ).ignoreVines().build();
     public static final TreeConfiguration JACARANDA = jacaranda().build();

@@ -2,8 +2,8 @@ package com.ChalkerCharles.morecolorful.common.block;
 
 import com.ChalkerCharles.morecolorful.Config;
 import com.ChalkerCharles.morecolorful.common.ModTags;
-import com.ChalkerCharles.morecolorful.common.block.nature.DuckweedsBlock;
-import com.ChalkerCharles.morecolorful.common.block.nature.WillowBranchesBlock;
+import com.ChalkerCharles.morecolorful.common.block.natural.DuckweedsBlock;
+import com.ChalkerCharles.morecolorful.common.block.natural.WillowBranchesBlock;
 import com.ChalkerCharles.morecolorful.util.*;
 import com.ChalkerCharles.morecolorful.common.block.properties.HangingBlock;
 import com.ChalkerCharles.morecolorful.mixin.extensions.IBlockStateExtension;

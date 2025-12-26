@@ -19,7 +19,7 @@ public abstract class RenderSectionMixin implements IRenderSectionExtension, Sel
 
     @Inject(method = "<init>", at = @At("TAIL"))
     private void constructor(RenderRegion region, int chunkX, int chunkY, int chunkZ, CallbackInfo ci) {
-        if (!RenderUtils.isClientWindOn) return;
+        if (!RenderUtils.wavyBlocks) return;
         this.moreColorful$wavyTask = new SodiumWavyTask(moreColorful$self());
     }
 

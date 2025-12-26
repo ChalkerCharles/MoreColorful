@@ -1,7 +1,7 @@
 package com.ChalkerCharles.morecolorful.network.packets;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
-import com.ChalkerCharles.morecolorful.common.attachment.PlayerData;
+import com.ChalkerCharles.morecolorful.common.attachment.InstrumentData;
 import com.ChalkerCharles.morecolorful.network.NetworkUtils;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -38,14 +38,15 @@ public record InstrumentTickingPacket(float tick, int id) implements CustomPacke
         context.enqueueWork(() -> {
             Level level = context.player().level();
             Player player = (Player) level.getEntity(id);
-            PlayerData.getInstrumentData(player).tick = tick;
+            if (player == null) return;
+            InstrumentData.get(player).tick = tick;
         }).exceptionally(NetworkUtils.handlePayloadException(context));
     }
 
     private void handleServer(IPayloadContext context) {
         context.enqueueWork(() -> {
             Player player = context.player();
-            PlayerData.getInstrumentData(player).tick = tick;
+            InstrumentData.get(player).tick = tick;
             PacketDistributor.sendToAllPlayers(this);
         }).exceptionally(NetworkUtils.handlePayloadException(context));
     }

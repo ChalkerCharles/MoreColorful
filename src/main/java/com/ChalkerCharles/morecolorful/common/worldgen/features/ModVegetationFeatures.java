@@ -1,8 +1,8 @@
 package com.ChalkerCharles.morecolorful.common.worldgen.features;
 
 import com.ChalkerCharles.morecolorful.common.block.ModBlocks;
-import com.ChalkerCharles.morecolorful.common.block.nature.BerryBushBlock;
-import com.ChalkerCharles.morecolorful.common.block.nature.LeafLitterBlock;
+import com.ChalkerCharles.morecolorful.common.block.natural.BerryBushBlock;
+import com.ChalkerCharles.morecolorful.common.block.natural.LeafLitterBlock;
 import com.ChalkerCharles.morecolorful.common.worldgen.placements.ModTreePlacements;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderGetter;
@@ -77,6 +77,7 @@ public class ModVegetationFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_WOOD_SORRELS = registerKey("patch_wood_sorrels");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_RAPESEED = registerKey("trees_rapeseed");
     public static final ResourceKey<ConfiguredFeature<?, ?>> FLOWER_RAPESEED = registerKey("flower_rapeseed");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_WINDFLOWER = registerKey("patch_windflower");
 
     public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context) {
         HolderGetter<PlacedFeature> placedFeature = context.lookup(Registries.PLACED_FEATURE);
@@ -604,16 +605,20 @@ public class ModVegetationFeatures {
                         ))
                 )
         );
-    }
-
-    private static RandomPatchConfiguration grassPatch(BlockStateProvider pStateProvider, int pTries) {
-        return FeatureUtils.simpleRandomPatchConfiguration(
-                pTries, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(pStateProvider))
+        register(context, PATCH_WINDFLOWER,
+                Feature.FLOWER,
+                grassPatch(BlockStateProvider.simple(ModBlocks.WINDFLOWER.get()), 64)
         );
     }
-    private static RandomPatchConfiguration waterPatchConfiguration(BlockStateProvider pStateProvider) {
+
+    private static RandomPatchConfiguration grassPatch(BlockStateProvider stateProvider, int tries) {
         return FeatureUtils.simpleRandomPatchConfiguration(
-                96, PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(pStateProvider), BlockPredicate.matchesBlocks(Blocks.WATER))
+                tries, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(stateProvider))
+        );
+    }
+    private static RandomPatchConfiguration waterPatchConfiguration(BlockStateProvider stateProvider) {
+        return FeatureUtils.simpleRandomPatchConfiguration(
+                96, PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(stateProvider), BlockPredicate.matchesBlocks(Blocks.WATER))
         );
     }
     private static void addPetalsOrLeafLitters(SimpleWeightedRandomList.Builder<BlockState> builder, Block block, boolean isPetals, int weight) {

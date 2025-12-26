@@ -1,32 +1,11 @@
 {
   "values": [
-    {
-      "id": "morecolorful:crabapple_garden",
-      "required": false
-    },
-    {
-      "id": "morecolorful:white_cherry_grove",
-      "required": false
-    },
-    {
-      "id": "morecolorful:frost_grove",
-      "required": false
-    },
-    {
-      "id": "morecolorful:lavender_fields",
-      "required": false
-    },
-    {
-      "id": "morecolorful:jacaranda_grove",
-      "required": false
-    },
-    {
-      "id": "morecolorful:azure_fields",
-      "required": false
-    },
-    {
-      "id": "morecolorful:rapeseed_fields",
-      "required": false
-    }
+    "morecolorful:crabapple_garden",
+    "morecolorful:white_cherry_grove",
+    "morecolorful:frost_grove",
+    "morecolorful:lavender_fields",
+    "morecolorful:jacaranda_grove",
+    "morecolorful:azure_fields",
+    "morecolorful:rapeseed_fields"
   ]
 }

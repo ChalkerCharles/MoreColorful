@@ -10,7 +10,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import java.util.function.Supplier;
 
 public class ModRootPlacers {
-    public static final DeferredRegister<RootPlacerType<?>> ROOT_PLACERS = DeferredRegister.create(Registries.ROOT_PLACER_TYPE, MoreColorful.MODID);
+    private static final DeferredRegister<RootPlacerType<?>> ROOT_PLACERS = DeferredRegister.create(Registries.ROOT_PLACER_TYPE, MoreColorful.MODID);
 
     public static final Supplier<RootPlacerType<DawnRedwoodRootPlacer>> DAWN_REDWOOD_PLACER =
             ROOT_PLACERS.register("dawn_redwood_root_placer", () -> new RootPlacerType<>(DawnRedwoodRootPlacer.CODEC));

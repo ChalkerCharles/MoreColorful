@@ -1,6 +1,6 @@
 package com.ChalkerCharles.morecolorful.mixin.mixins.entity;
 
-import com.ChalkerCharles.morecolorful.common.block.nature.BerryBushBlock;
+import com.ChalkerCharles.morecolorful.common.block.natural.BerryBushBlock;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.sounds.SoundEvents;

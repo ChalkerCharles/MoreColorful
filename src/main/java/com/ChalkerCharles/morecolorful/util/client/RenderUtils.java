@@ -33,11 +33,20 @@ import java.util.Arrays;
 
 @OnlyIn(Dist.CLIENT)
 public final class RenderUtils {
-    public static final Vector2f WIND_SPEED = new Vector2f(), WIND_DIR = new Vector2f();
     public static float time, anim;
+    public static final Vector2f windSpeed = new Vector2f(), windDir = new Vector2f();
+    private static final Vector2f oWindSpeed = new Vector2f();
+    public static float windStrength;
     public static boolean isCalm;
     public static Direction nearestWindDirection;
-    public static boolean isClientWindOn;
+    public static boolean wavyBlocks;
+    public static boolean wavyParticles;
+    public static boolean windAndRain;
+    public static boolean windAndCloud;
+    public static boolean windParticles;
+    public static boolean windSounds;
+    public static boolean renderWindZones;
+    public static boolean leavesRustling;
     public static final boolean SODIUM_ON = ModList.get().isLoaded("sodium");
     private static final ThreadLocal<VertexCache> VERTEX_CACHE = ThreadLocal.withInitial(VertexCache::new);
     private static final ThreadLocal<FluidVertexCache> FLUID_CACHE = ThreadLocal.withInitial(FluidVertexCache::new);
@@ -98,18 +107,36 @@ public final class RenderUtils {
         }
     }
 
-    public static boolean setClientWindOn() {
-        return isClientWindOn = Config.WIND_SYSTEM.isTrue() && Config.WIND_EFFECT_CLIENT.isTrue();
+    public static void setClientWindFlags() {
+        boolean b = Config.WIND_SYSTEM.isTrue();
+        wavyBlocks = b && Config.WAVY_BLOCKS.isTrue();
+        wavyParticles = b && Config.WAVY_PARTICLES.isTrue();
+        windAndRain = b && Config.WIND_AND_RAIN.isTrue();
+        windAndCloud = b && Config.WIND_AND_CLOUD.isTrue();
+        windParticles = b && Config.WIND_PARTICLES.isTrue();
+        windSounds = b && Config.WIND_SOUNDS.isTrue();
     }
 
     public static void setWindContext(Level level) {
-        time = RenderSystem.getShaderGameTime();
-        anim = time * 800;
-        if (level == null) return;
-        WIND_SPEED.set(LevelSavedData.getGlobalWindSpeed(level));
-        WIND_DIR.set(LevelSavedData.getWindDirection(level));
+        oWindSpeed.set(windSpeed);
+        windSpeed.set(LevelSavedData.getGlobalWindSpeed(level));
+        windDir.set(LevelSavedData.getWindDirection(level));
+        windStrength = windSpeed.length();
         isCalm = LevelSavedData.isWindCalm(level);
         nearestWindDirection = LevelSavedData.getNearestWindDirection(level);
+    }
+
+    public static void setRenderTime() {
+        time = RenderSystem.getShaderGameTime();
+        anim = time * 800;
+    }
+
+    public static float lerpWindSpeedX(float partialTick) {
+        return Mth.lerp(partialTick, oWindSpeed.x, windSpeed.x);
+    }
+
+    public static float lerpWindSpeedZ(float partialTick) {
+        return Mth.lerp(partialTick, oWindSpeed.y, windSpeed.y);
     }
 
     @Nullable
@@ -150,7 +177,7 @@ public final class RenderUtils {
         long sectionPos = SectionPos.asLong(pos);
         double x = pos.getX() + 0.5, y = pos.getY() + 0.5, z = pos.getZ() + 0.5;
         Vector3f vec = LevelSavedData.getLocalWindSpeedAt(level, x, y, z, sectionPos);
-        return isGloballyWindyAt(level, pos) ? vec.add(WIND_SPEED.x, 0, WIND_SPEED.y) : vec;
+        return isGloballyWindyAt(level, pos) ? vec.add(windSpeed.x, 0, windSpeed.y) : vec;
     }
 
     public static boolean isWavyRenderType(RenderType type) {
@@ -159,7 +186,7 @@ public final class RenderUtils {
 
     public static void clearDataInLine(Level level, BlockPos pos) {
         int i = pos.getX(), j = pos.getY(), k = pos.getZ();
-        double d6 = WIND_DIR.x * 34, d8 = WIND_DIR.y * 34;
+        double d6 = windDir.x * 34, d8 = windDir.y * 34;
         int l = Mth.sign(d6), j1 = Mth.sign(d8);
         double d9 = l == 0 ? Double.MAX_VALUE : (double) l / d6;
         double d11 = j1 == 0 ? Double.MAX_VALUE : (double) j1 / d8;

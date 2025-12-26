@@ -1,7 +1,6 @@
 package com.ChalkerCharles.morecolorful.mixin.mixins.client;
 
 import com.ChalkerCharles.morecolorful.common.attachment.InstrumentData;
-import com.ChalkerCharles.morecolorful.common.attachment.PlayerData;
 import com.ChalkerCharles.morecolorful.common.block.ModBlocks;
 import com.ChalkerCharles.morecolorful.common.block.properties.ModBlockStateProperties;
 import com.ChalkerCharles.morecolorful.util.InstrumentsType;
@@ -32,7 +31,7 @@ public abstract class HumanoidModelMixin<T extends LivingEntity> {
     @Unique
     private void moreColorful$setupKeyboardAnimation(T pLivingEntity) {
         if (pLivingEntity instanceof Player player) {
-            InstrumentData data = PlayerData.getInstrumentData(player);
+            InstrumentData data = InstrumentData.get(player);
             InstrumentsType type = data.type;
             BlockPos pos = data.pos;
             boolean isOpen = data.isOpen;
@@ -65,7 +64,7 @@ public abstract class HumanoidModelMixin<T extends LivingEntity> {
     @Unique
     private void moreColorful$setupGuzhengAnimation(T pLivingEntity) {
         if (pLivingEntity instanceof Player player) {
-            InstrumentData data = PlayerData.getInstrumentData(player);
+            InstrumentData data = InstrumentData.get(player);
             InstrumentsType type = data.type;
             BlockPos pos = data.pos;
             boolean isOpen = data.isOpen;

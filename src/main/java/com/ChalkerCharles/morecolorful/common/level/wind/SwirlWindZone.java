@@ -44,6 +44,16 @@ public final class SwirlWindZone extends WindZone {
     }
 
     @Override
+    public AABB getRenderBoundingBox() {
+        return this.bb.move(-origin.x, -origin.y, -origin.z);
+    }
+
+    @Override
+    public Vec3 getRenderOffset(Vec3 camera) {
+        return this.origin.subtract(camera);
+    }
+
+    @Override
     protected void encode(FriendlyByteBuf byteBuf) {
         byteBuf.writeEnum(Type.SWIRL);
         byteBuf.writeVec3(this.origin);

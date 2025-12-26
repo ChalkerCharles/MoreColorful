@@ -2,7 +2,7 @@ package com.ChalkerCharles.morecolorful.common.datagen;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.common.worldgen.ModBiomeModifiers;
-import com.ChalkerCharles.morecolorful.common.worldgen.biomes.ModBiomeSetup;
+import com.ChalkerCharles.morecolorful.common.worldgen.biomes.ModBiomes;
 import com.ChalkerCharles.morecolorful.common.worldgen.features.ModConfiguredFeatures;
 import com.ChalkerCharles.morecolorful.common.worldgen.placements.ModPlacedFeatures;
 import net.minecraft.core.HolderLookup;
@@ -23,7 +23,6 @@ public class ModDatapackProvider extends DatapackBuiltinEntriesProvider {
     public static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
             .add(Registries.CONFIGURED_FEATURE, ModConfiguredFeatures::bootstrap)
             .add(Registries.PLACED_FEATURE, ModPlacedFeatures::bootstrap)
-            .add(Registries.BIOME, ModBiomeSetup::bootstrap)
+            .add(Registries.BIOME, ModBiomes::bootstrap)
             .add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, ModBiomeModifiers::bootstrap);
-
 }

@@ -1,9 +1,8 @@
 package com.ChalkerCharles.morecolorful.util;
 
 import com.ChalkerCharles.morecolorful.common.attachment.InstrumentData;
-import com.ChalkerCharles.morecolorful.common.attachment.PlayerData;
 import com.ChalkerCharles.morecolorful.common.block.ModBlocks;
-import com.ChalkerCharles.morecolorful.common.block.musical_instruments.DrumSetBlock;
+import com.ChalkerCharles.morecolorful.common.block.musical.DrumSetBlock;
 import com.ChalkerCharles.morecolorful.common.block.properties.DrumSetPart;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -16,7 +15,7 @@ import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 public final class CymbalUtils {
     public static boolean playerPressing(Level level, BlockPos pos) {
         for (Player player : level.players()) {
-            InstrumentData data = PlayerData.getInstrumentData(player);
+            InstrumentData data = InstrumentData.get(player);
             BlockPos pos1 = data.pos;
             BlockState state = level.getBlockState(pos1);
             pos1 = (state.is(ModBlocks.RIDE_CYMBAL) || state.is(ModBlocks.CRASH_CYMBAL))
@@ -31,7 +30,7 @@ public final class CymbalUtils {
 
     public static boolean playerPressingHiHat(Level level, BlockPos pos) {
         for (Player player : level.players()) {
-            InstrumentData data = PlayerData.getInstrumentData(player);
+            InstrumentData data = InstrumentData.get(player);
             if (data.isPlaying && pos.equals(data.pos)) {
                 return true;
             }
@@ -41,7 +40,7 @@ public final class CymbalUtils {
 
     public static boolean playerPressingBassDrum(Level level, BlockPos pos) {
         for (Player player : level.players()) {
-            InstrumentData data = PlayerData.getInstrumentData(player);
+            InstrumentData data = InstrumentData.get(player);
             BlockPos pos1 = data.pos;
             BlockState state = level.getBlockState(pos1);
             pos1 = state.is(ModBlocks.DRUM_SET) ? getBassDrumPos(pos1, state) : pos1;
@@ -67,7 +66,7 @@ public final class CymbalUtils {
 
     public static boolean playerPressingHat(Level level, BlockPos pos) {
         for (Player player : level.players()) {
-            InstrumentData data = PlayerData.getInstrumentData(player);
+            InstrumentData data = InstrumentData.get(player);
             BlockPos pos1 = data.pos;
             BlockState state = level.getBlockState(pos1);
             pos1 = state.is(ModBlocks.DRUM_SET) ? getHatPos(pos1, state) : pos1;
@@ -93,7 +92,7 @@ public final class CymbalUtils {
 
     public static boolean playerPressingRide(Level level, BlockPos pos) {
         for (Player player : level.players()) {
-            InstrumentData data = PlayerData.getInstrumentData(player);
+            InstrumentData data = InstrumentData.get(player);
             BlockPos pos1 = data.pos;
             BlockState state = level.getBlockState(pos1);
             pos1 = state.is(ModBlocks.DRUM_SET) ? getRidePos(pos1, state) : pos1;
@@ -119,7 +118,7 @@ public final class CymbalUtils {
 
     public static boolean playerPressingCrash(Level level, BlockPos pos) {
         for (Player player : level.players()) {
-            InstrumentData data = PlayerData.getInstrumentData(player);
+            InstrumentData data = InstrumentData.get(player);
             BlockPos pos1 = data.pos;
             BlockState state = level.getBlockState(pos1);
             pos1 = state.is(ModBlocks.DRUM_SET) ? getCrashPos(pos1, state) : pos1;

@@ -1,7 +1,7 @@
 package com.ChalkerCharles.morecolorful.network.packets;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
-import com.ChalkerCharles.morecolorful.common.attachment.PlayerData;
+import com.ChalkerCharles.morecolorful.common.attachment.InstrumentData;
 import com.ChalkerCharles.morecolorful.network.NetworkUtils;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -35,14 +35,15 @@ public record InstrumentPressingPacket(int id, boolean isPressing) implements Cu
         context.enqueueWork(() -> {
             Level level = context.player().level();
             Player player = (Player) level.getEntity(id);
-            PlayerData.getInstrumentData(player).isPlaying = isPressing;
+            if (player == null) return;
+            InstrumentData.get(player).isPlaying = isPressing;
         }).exceptionally(NetworkUtils.handlePayloadException(context));
     }
 
     private void handleServer(IPayloadContext context) {
         context.enqueueWork(() -> {
             Player player = context.player();
-            PlayerData.getInstrumentData(player).isPlaying = isPressing;
+            InstrumentData.get(player).isPlaying = isPressing;
             PacketDistributor.sendToAllPlayers(this);
         }).exceptionally(NetworkUtils.handlePayloadException(context));
     }

@@ -88,12 +88,12 @@ public abstract class LevelChunkMixin extends ChunkAccess implements ILevelChunk
                 profilerfiller.push("queueCheckVent");
                 LevelSavedData.getVentEngine(this.level).checkBlock(pPos);
                 profilerfiller.pop();
-                if (this.level.isClientSide && ClientWrapper.isClientWindOn()) {
+                if (this.level.isClientSide && ClientWrapper.wavyBlocks()) {
                     ClientWrapper.clearDataInLine(this.level, pPos);
                 }
             }
         }
-        if (this.level.isClientSide && ClientWrapper.isClientWindOn()) {
+        if (this.level.isClientSide && ClientWrapper.wavyBlocks()) {
             boolean isPrevGroup = IBlockStateExtension.isGroupBlock(blockstate);
             boolean isNowGroup = IBlockStateExtension.isGroupBlock(pState);
             if (isPrevGroup || isNowGroup) {

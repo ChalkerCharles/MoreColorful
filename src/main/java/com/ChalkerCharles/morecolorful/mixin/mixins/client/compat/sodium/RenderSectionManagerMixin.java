@@ -31,7 +31,7 @@ public abstract class RenderSectionManagerMixin implements IRenderSectionManager
 
     @Inject(method = "scheduleRebuild", at = @At(value = "INVOKE", target = "Lnet/caffeinemc/mods/sodium/client/render/chunk/RenderSection;setPendingUpdate(Lnet/caffeinemc/mods/sodium/client/render/chunk/ChunkUpdateType;)V"))
     private void scheduleRebuild(int x, int y, int z, boolean important, CallbackInfo ci) {
-        if (RenderUtils.isClientWindOn) {
+        if (RenderUtils.wavyBlocks) {
             this.moreColorful$setGroupDirty(x, y, z);
         }
     }

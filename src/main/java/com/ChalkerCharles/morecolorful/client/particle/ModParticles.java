@@ -17,7 +17,7 @@ import java.util.function.Supplier;
 
 @SuppressWarnings("SameParameterValue")
 public class ModParticles {
-    public static final DeferredRegister<ParticleType<?>> PARTICLE_TYPES = DeferredRegister.create(BuiltInRegistries.PARTICLE_TYPE, MoreColorful.MODID);
+    private static final DeferredRegister<ParticleType<?>> PARTICLE_TYPES = DeferredRegister.create(BuiltInRegistries.PARTICLE_TYPE, MoreColorful.MODID);
 
     public static final Supplier<SimpleParticleType> CRABAPPLE_LEAVES = register("crabapple_leaves", false);
     public static final Supplier<SimpleParticleType> WHITE_CHERRY_LEAVES = register("white_cherry_leaves", false);
@@ -30,6 +30,8 @@ public class ModParticles {
     public static final Supplier<SimpleParticleType> JACARANDA_LEAVES = register("jacaranda_leaves", false);
     public static final Supplier<ParticleType<ColorParticleOption>> TINTED_LEAVES = register("tinted_leaves", false, ColorParticleOption::codec, ColorParticleOption::streamCodec);
     public static final Supplier<ParticleType<ColorParticleOption>> SPRUCE_LEAVES = register("spruce_leaves", false, ColorParticleOption::codec, ColorParticleOption::streamCodec);
+    public static final Supplier<SimpleParticleType> WIND_GLOBAL = register("wind_global", true);
+    public static final Supplier<SimpleParticleType> WIND_FAN = register("wind_fan", false);
 
     private static Supplier<SimpleParticleType> register(String name, boolean overrideLimiter) {
         return PARTICLE_TYPES.register(name, () -> new SimpleParticleType(overrideLimiter));

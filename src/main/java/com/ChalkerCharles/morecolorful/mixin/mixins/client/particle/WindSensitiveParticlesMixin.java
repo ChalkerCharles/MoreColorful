@@ -6,6 +6,7 @@ import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(value = {
         BaseAshSmokeParticle.class,
+        CherryParticle.class,
         DustParticle.class,
         FallingDustParticle.class,
         ExplodeParticle.class,

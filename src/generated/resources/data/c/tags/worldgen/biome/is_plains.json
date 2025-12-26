@@ -1,16 +1,7 @@
 {
   "values": [
-    {
-      "id": "morecolorful:lavender_fields",
-      "required": false
-    },
-    {
-      "id": "morecolorful:azure_fields",
-      "required": false
-    },
-    {
-      "id": "morecolorful:rapeseed_fields",
-      "required": false
-    }
+    "morecolorful:lavender_fields",
+    "morecolorful:azure_fields",
+    "morecolorful:rapeseed_fields"
   ]
 }

@@ -1,32 +1,11 @@
 {
   "values": [
-    {
-      "id": "morecolorful:dawn_redwood_swamp",
-      "required": false
-    },
-    {
-      "id": "morecolorful:marsh",
-      "required": false
-    },
-    {
-      "id": "morecolorful:willow_bayou",
-      "required": false
-    },
-    {
-      "id": "morecolorful:ice_marsh",
-      "required": false
-    },
-    {
-      "id": "morecolorful:lavender_fields",
-      "required": false
-    },
-    {
-      "id": "morecolorful:azure_fields",
-      "required": false
-    },
-    {
-      "id": "morecolorful:rapeseed_fields",
-      "required": false
-    }
+    "morecolorful:dawn_redwood_swamp",
+    "morecolorful:marsh",
+    "morecolorful:willow_bayou",
+    "morecolorful:ice_marsh",
+    "morecolorful:lavender_fields",
+    "morecolorful:azure_fields",
+    "morecolorful:rapeseed_fields"
   ]
 }

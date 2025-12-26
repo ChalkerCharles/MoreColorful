@@ -427,7 +427,7 @@ public final class WavyBlockUtils {
     }
 
     private static void addChainTranslation(Vector3f vec, Vector2f facing, float angle) {
-        Vector2f dir = RenderUtils.WIND_DIR;
+        Vector2f dir = RenderUtils.windDir;
         float i = (facing.x * dir.x + facing.y * dir.y) * 0.8F;
         float j = (facing.x * dir.y - facing.y * dir.x) * 0.8F;
         float sin = Mth.sin(angle);

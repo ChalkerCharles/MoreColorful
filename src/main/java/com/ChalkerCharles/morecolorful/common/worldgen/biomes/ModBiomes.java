@@ -1,9 +1,14 @@
 package com.ChalkerCharles.morecolorful.common.worldgen.biomes;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
+import com.ChalkerCharles.morecolorful.common.worldgen.biomes.overworld.ModOverworldBiomes;
+import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
+import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
 @SuppressWarnings("unused")
 public class ModBiomes {
@@ -78,5 +83,26 @@ public class ModBiomes {
 
     private static ResourceKey<Biome> register(String pKey) {
         return ResourceKey.create(Registries.BIOME, MoreColorful.location(pKey));
+    }
+
+    public static void bootstrap(BootstrapContext<Biome> context) {
+        HolderGetter<ConfiguredWorldCarver<?>> carver = context.lookup(Registries.CONFIGURED_CARVER);
+        HolderGetter<PlacedFeature> placedFeature = context.lookup(Registries.PLACED_FEATURE);
+
+        context.register(CRABAPPLE_GARDEN, ModOverworldBiomes.crabappleGarden(placedFeature, carver));
+        context.register(WHITE_CHERRY_GROVE, ModOverworldBiomes.whiteCherryGrove(placedFeature, carver));
+        context.register(AUTUMN_BIRCH_FOREST, ModOverworldBiomes.autumnBirchForest(placedFeature, carver));
+        context.register(GOLDEN_GROVE, ModOverworldBiomes.goldenGrove(placedFeature, carver));
+        context.register(MAPLE_FOREST, ModOverworldBiomes.mapleForest(placedFeature, carver));
+        context.register(SUNSET_VALLEY, ModOverworldBiomes.sunsetValley(placedFeature, carver));
+        context.register(FROST_GROVE, ModOverworldBiomes.frostGrove(placedFeature, carver));
+        context.register(DAWN_REDWOOD_SWAMP, ModOverworldBiomes.dawnRedwoodSwamp(placedFeature, carver));
+        context.register(LAVENDER_FIELDS, ModOverworldBiomes.lavenderFields(placedFeature, carver));
+        context.register(JACARANDA_GROVE, ModOverworldBiomes.jacarandaGrove(placedFeature, carver));
+        context.register(MARSH, ModOverworldBiomes.marsh(placedFeature, carver));
+        context.register(AZURE_FIELDS, ModOverworldBiomes.azureFields(placedFeature, carver));
+        context.register(WILLOW_BAYOU, ModOverworldBiomes.willowBayou(placedFeature, carver));
+        context.register(ICE_MARSH, ModOverworldBiomes.iceMarsh(placedFeature, carver));
+        context.register(RAPESEED_FIELDS, ModOverworldBiomes.rapeseedFields(placedFeature, carver));
     }
 }

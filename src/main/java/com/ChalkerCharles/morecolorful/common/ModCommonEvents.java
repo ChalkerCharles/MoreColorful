@@ -8,7 +8,6 @@ import com.ChalkerCharles.morecolorful.common.level.wind.BurstWindZone;
 import com.ChalkerCharles.morecolorful.common.level.wind.ILevelVentEngine;
 import com.ChalkerCharles.morecolorful.mixin.extensions.IEntityExtension;
 import com.ChalkerCharles.morecolorful.network.packets.*;
-import com.ChalkerCharles.morecolorful.util.WeatherUtils;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Explosion;
@@ -30,10 +29,7 @@ public final class ModCommonEvents {
         Level level = event.getLevel();
         if (level.tickRateManager().runsNormally()) {
             if (Config.WIND_SYSTEM.isTrue()) {
-                LevelSavedData.updateWindZones(level);
-                if (WeatherUtils.isWindy(level)) {
-                    LevelSavedData.updateGlobalWind(level);
-                }
+                LevelSavedData.tickWind(level);
             }
         }
     }
@@ -83,7 +79,7 @@ public final class ModCommonEvents {
     }
 
     @SubscribeEvent
-    public static void onCommandsRegister(RegisterCommandsEvent event) {
+    public static void registerCommands(RegisterCommandsEvent event) {
         ModWeatherCommand.register(event.getDispatcher());
     }
 

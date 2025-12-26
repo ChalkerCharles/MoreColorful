@@ -1,8 +1,10 @@
 package com.ChalkerCharles.morecolorful.common.worldgen;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
+import com.ChalkerCharles.morecolorful.common.ModTags;
 import com.ChalkerCharles.morecolorful.common.worldgen.biomes.ModBiomes;
 import com.ChalkerCharles.morecolorful.common.worldgen.placements.ModVegetationPlacements;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
@@ -16,10 +18,8 @@ import net.neoforged.neoforge.common.world.BiomeModifier;
 import net.neoforged.neoforge.common.world.BiomeModifiers;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class ModBiomeModifiers {
     public static final ResourceKey<BiomeModifier> ADD_FLOWER_CHERRY = registerKey("add_flower_cherry");
@@ -37,6 +37,7 @@ public class ModBiomeModifiers {
     public static final ResourceKey<BiomeModifier> PATCH_SPEEDWELLS = registerKey("patch_speedwells");
     public static final ResourceKey<BiomeModifier> TREES_WILLOW = registerKey("trees_willow");
     public static final ResourceKey<BiomeModifier> PATCH_WOOD_SORRELS = registerKey("patch_wood_sorrels");
+    public static final ResourceKey<BiomeModifier> PATCH_WINDFLOWER = registerKey("patch_windflower");
     
     public static void bootstrap(BootstrapContext<BiomeModifier> context) {
         HolderGetter<PlacedFeature> placedFeatures = context.lookup(Registries.PLACED_FEATURE);
@@ -159,6 +160,11 @@ public class ModBiomeModifiers {
                 HolderSet.direct(placedFeatures.getOrThrow(ModVegetationPlacements.PATCH_WOOD_SORRELS)),
                 GenerationStep.Decoration.VEGETAL_DECORATION
         );
+        addFeature(context, PATCH_WINDFLOWER,
+                biomes.getOrThrow(ModTags.Biomes.IS_WINDY),
+                HolderSet.direct(placedFeatures.getOrThrow(ModVegetationPlacements.PATCH_WINDFLOWER)),
+                GenerationStep.Decoration.VEGETAL_DECORATION
+        );
     }
 
     public static final List<String> ADD_FEATURE_MODIFIERS = getBiomeModifiers(
@@ -176,12 +182,18 @@ public class ModBiomeModifiers {
             PATCH_FORGET_ME_NOTS,
             PATCH_SPEEDWELLS,
             TREES_WILLOW,
-            PATCH_WOOD_SORRELS
+            PATCH_WOOD_SORRELS,
+            PATCH_WINDFLOWER
     );
 
     @SafeVarargs
     private static List<String> getBiomeModifiers(ResourceKey<BiomeModifier>... keys) {
-        return Arrays.stream(keys).map(k -> k.location().getPath()).collect(Collectors.toList());
+        List<String> list = new ArrayList<>();
+        for (ResourceKey<BiomeModifier> k : keys) {
+            String path = k.location().getPath();
+            list.add(path);
+        }
+        return list;
     }
 
     private static ResourceKey<BiomeModifier> registerKey(String name) {
@@ -190,15 +202,20 @@ public class ModBiomeModifiers {
 
     @SafeVarargs
     private static HolderSet<Biome> biomes(HolderGetter<Biome> getter, ResourceKey<Biome>... biomes) {
-        return HolderSet.direct(Arrays.stream(biomes).flatMap(b -> Stream.of(getter.getOrThrow(b))).toList());
+        List<Holder.Reference<Biome>> list = new ArrayList<>();
+        for (ResourceKey<Biome> b : biomes) {
+            list.add(getter.getOrThrow(b));
+        }
+        return HolderSet.direct(list);
     }
     
     @SuppressWarnings("SameParameterValue")
-    private static void addFeature(BootstrapContext<BiomeModifier> context,
-                                   ResourceKey<BiomeModifier> biomeModifier,
-                                   HolderSet<Biome> biomes,
-                                   HolderSet<PlacedFeature> features,
-                                   GenerationStep.Decoration step) {
+    private static void addFeature(
+            BootstrapContext<BiomeModifier> context,
+            ResourceKey<BiomeModifier> biomeModifier,
+            HolderSet<Biome> biomes,
+            HolderSet<PlacedFeature> features,
+            GenerationStep.Decoration step) {
         context.register(biomeModifier, new BiomeModifiers.AddFeaturesBiomeModifier(biomes, features, step));
     }
 }

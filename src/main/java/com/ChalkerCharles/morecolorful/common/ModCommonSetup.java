@@ -1,11 +1,10 @@
 package com.ChalkerCharles.morecolorful.common;
 
 import com.ChalkerCharles.morecolorful.common.block.ModBlocks;
-import com.google.common.collect.Maps;
+import com.ChalkerCharles.morecolorful.common.item.ModItems;
+import com.google.common.collect.ImmutableMap;
 import net.minecraft.world.item.AxeItem;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.FireBlock;
-import net.minecraft.world.level.block.FlowerPotBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -15,23 +14,25 @@ public final class ModCommonSetup {
     @SubscribeEvent
     public static void setStrippedWoodBlocks(FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
-            AxeItem.STRIPPABLES = Maps.newHashMap(AxeItem.STRIPPABLES);
-            AxeItem.STRIPPABLES.put(ModBlocks.CRABAPPLE_LOG.get(), ModBlocks.STRIPPED_CRABAPPLE_LOG.get());
-            AxeItem.STRIPPABLES.put(ModBlocks.CRABAPPLE_WOOD.get(), ModBlocks.STRIPPED_CRABAPPLE_WOOD.get());
-            AxeItem.STRIPPABLES.put(ModBlocks.EBONY_LOG.get(), ModBlocks.STRIPPED_EBONY_LOG.get());
-            AxeItem.STRIPPABLES.put(ModBlocks.EBONY_WOOD.get(), ModBlocks.STRIPPED_EBONY_WOOD.get());
-            AxeItem.STRIPPABLES.put(ModBlocks.GINKGO_LOG.get(), ModBlocks.STRIPPED_GINKGO_LOG.get());
-            AxeItem.STRIPPABLES.put(ModBlocks.GINKGO_WOOD.get(), ModBlocks.STRIPPED_GINKGO_WOOD.get());
-            AxeItem.STRIPPABLES.put(ModBlocks.MAPLE_LOG.get(), ModBlocks.STRIPPED_MAPLE_LOG.get());
-            AxeItem.STRIPPABLES.put(ModBlocks.MAPLE_WOOD.get(), ModBlocks.STRIPPED_MAPLE_WOOD.get());
-            AxeItem.STRIPPABLES.put(ModBlocks.FROST_LOG.get(), ModBlocks.STRIPPED_FROST_LOG.get());
-            AxeItem.STRIPPABLES.put(ModBlocks.FROST_WOOD.get(), ModBlocks.STRIPPED_FROST_WOOD.get());
-            AxeItem.STRIPPABLES.put(ModBlocks.DAWN_REDWOOD_LOG.get(), ModBlocks.STRIPPED_DAWN_REDWOOD_LOG.get());
-            AxeItem.STRIPPABLES.put(ModBlocks.DAWN_REDWOOD_WOOD.get(), ModBlocks.STRIPPED_DAWN_REDWOOD_WOOD.get());
-            AxeItem.STRIPPABLES.put(ModBlocks.JACARANDA_LOG.get(), ModBlocks.STRIPPED_JACARANDA_LOG.get());
-            AxeItem.STRIPPABLES.put(ModBlocks.JACARANDA_WOOD.get(), ModBlocks.STRIPPED_JACARANDA_WOOD.get());
-            AxeItem.STRIPPABLES.put(ModBlocks.WILLOW_LOG.get(), ModBlocks.STRIPPED_WILLOW_LOG.get());
-            AxeItem.STRIPPABLES.put(ModBlocks.WILLOW_WOOD.get(), ModBlocks.STRIPPED_WILLOW_WOOD.get());
+            AxeItem.STRIPPABLES = ImmutableMap.<Block, Block>builder()
+                    .putAll(AxeItem.STRIPPABLES)
+                    .put(ModBlocks.CRABAPPLE_LOG.get(), ModBlocks.STRIPPED_CRABAPPLE_LOG.get())
+                    .put(ModBlocks.CRABAPPLE_WOOD.get(), ModBlocks.STRIPPED_CRABAPPLE_WOOD.get())
+                    .put(ModBlocks.EBONY_LOG.get(), ModBlocks.STRIPPED_EBONY_LOG.get())
+                    .put(ModBlocks.EBONY_WOOD.get(), ModBlocks.STRIPPED_EBONY_WOOD.get())
+                    .put(ModBlocks.GINKGO_LOG.get(), ModBlocks.STRIPPED_GINKGO_LOG.get())
+                    .put(ModBlocks.GINKGO_WOOD.get(), ModBlocks.STRIPPED_GINKGO_WOOD.get())
+                    .put(ModBlocks.MAPLE_LOG.get(), ModBlocks.STRIPPED_MAPLE_LOG.get())
+                    .put(ModBlocks.MAPLE_WOOD.get(), ModBlocks.STRIPPED_MAPLE_WOOD.get())
+                    .put(ModBlocks.FROST_LOG.get(), ModBlocks.STRIPPED_FROST_LOG.get())
+                    .put(ModBlocks.FROST_WOOD.get(), ModBlocks.STRIPPED_FROST_WOOD.get())
+                    .put(ModBlocks.DAWN_REDWOOD_LOG.get(), ModBlocks.STRIPPED_DAWN_REDWOOD_LOG.get())
+                    .put(ModBlocks.DAWN_REDWOOD_WOOD.get(), ModBlocks.STRIPPED_DAWN_REDWOOD_WOOD.get())
+                    .put(ModBlocks.JACARANDA_LOG.get(), ModBlocks.STRIPPED_JACARANDA_LOG.get())
+                    .put(ModBlocks.JACARANDA_WOOD.get(), ModBlocks.STRIPPED_JACARANDA_WOOD.get())
+                    .put(ModBlocks.WILLOW_LOG.get(), ModBlocks.STRIPPED_WILLOW_LOG.get())
+                    .put(ModBlocks.WILLOW_WOOD.get(), ModBlocks.STRIPPED_WILLOW_WOOD.get())
+                    .build();
         });
     }
 
@@ -65,6 +66,7 @@ public final class ModCommonSetup {
             pot.addPlant(ModBlocks.DAFFODIL.getId(), ModBlocks.POTTED_DAFFODIL);
             pot.addPlant(ModBlocks.GERBERA_DAISY.getId(), ModBlocks.POTTED_GERBERA_DAISY);
             pot.addPlant(ModBlocks.RAPESEED_FLOWER.getId(), ModBlocks.POTTED_RAPESEED_FLOWER);
+            pot.addPlant(ModBlocks.WINDFLOWER.getId(), ModBlocks.POTTED_WINDFLOWER);
         });
     }
 
@@ -195,6 +197,7 @@ public final class ModCommonSetup {
             fireblock.setFlammable(ModBlocks.DAFFODIL.get(), 60, 100);
             fireblock.setFlammable(ModBlocks.GERBERA_DAISY.get(), 60, 100);
             fireblock.setFlammable(ModBlocks.RAPESEED_FLOWER.get(), 60, 100);
+            fireblock.setFlammable(ModBlocks.WINDFLOWER.get(), 60, 100);
 
             fireblock.setFlammable(ModBlocks.CATTAIL.get(), 60, 100);
             fireblock.setFlammable(ModBlocks.TALL_RAPESEED_FLOWER.get(), 60, 100);
@@ -204,6 +207,13 @@ public final class ModCommonSetup {
             fireblock.setFlammable(ModBlocks.REED.get(), 60, 100);
             fireblock.setFlammable(ModBlocks.STRAWBERRY_BUSH.get(), 60, 100);
             fireblock.setFlammable(ModBlocks.BLUEBERRY_BUSH.get(), 60, 100);
+        });
+    }
+
+    @SubscribeEvent
+    public static void registerDispenserBehaviors(FMLCommonSetupEvent event) {
+        event.enqueueWork(() -> {
+            DispenserBlock.registerProjectileBehavior(ModItems.PAPER_PLANE);
         });
     }
 

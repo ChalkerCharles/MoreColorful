@@ -86,6 +86,7 @@ public class ModDataMapProvider extends DataMapProvider {
                 .add(ModItems.DAFFODIL, new Compostable(0.65F), false)
                 .add(ModItems.GERBERA_DAISY, new Compostable(0.65F), false)
                 .add(ModItems.RAPESEED_FLOWER, new Compostable(0.65F), false)
+                .add(ModItems.WINDFLOWER, new Compostable(0.65F), false)
                 .add(ModItems.CATTAIL, new Compostable(0.65F), false)
                 .add(ModItems.TALL_RAPESEED_FLOWER, new Compostable(0.65F), false)
                 .add(ModItems.SHORT_WATER_GRASS, new Compostable(0.3F), false)

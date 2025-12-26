@@ -1,28 +1,23 @@
 package com.ChalkerCharles.morecolorful.client.particle.particles;
 
-import com.ChalkerCharles.morecolorful.common.attachment.LevelSavedData;
-import com.ChalkerCharles.morecolorful.mixin.extensions.IParticleExtension;
-import com.ChalkerCharles.morecolorful.util.WeatherUtils;
 import com.ChalkerCharles.morecolorful.util.WindSensitive;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 import net.minecraft.core.particles.ColorParticleOption;
 import net.minecraft.core.particles.SimpleParticleType;
-import net.minecraft.util.Mth;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.Nullable;
-import org.joml.Vector3f;
 
 @OnlyIn(Dist.CLIENT)
-public class LeafParticle extends TextureSheetParticle implements WindSensitive, IParticleExtension {
+public class LeafParticle extends TextureSheetParticle implements WindSensitive {
     private float rotSpeed;
     private final float particleRandom;
     private final float spinAcceleration;
 
     public LeafParticle(ClientLevel pLevel, double pX, double pY, double pZ, SpriteSet pSpriteSet) {
         super(pLevel, pX, pY, pZ);
-        this.setSprite(pSpriteSet.get(this.random.nextInt(8), 8));
+        this.setSprite(pSpriteSet.get(this.random.nextInt(12), 12));
         this.rotSpeed = (float) Math.toRadians(this.random.nextBoolean() ? -30.0 : 30.0);
         this.particleRandom = this.random.nextFloat();
         this.spinAcceleration = (float) Math.toRadians(this.random.nextBoolean() ? -5.0 : 5.0);
@@ -70,20 +65,6 @@ public class LeafParticle extends TextureSheetParticle implements WindSensitive,
                 this.yd = this.yd * (double) this.friction;
                 this.zd = this.zd * (double) this.friction;
             }
-        }
-    }
-
-    @Override
-    public void moreColorful$applyWind() {
-        boolean global = WeatherUtils.canApplyWind(level, x, y, z);
-        if (global || LevelSavedData.isInWindZone(level, x, y, z)) {
-            Vector3f wind = WeatherUtils.getWindSpeedAt(this.level, x, y, z, global);
-            double windX = wind.x * 0.05 * WeatherUtils.getRandomSpeedMultiplier(random);
-            double windY = wind.y * 0.05 * WeatherUtils.getRandomSpeedMultiplier(random);
-            double windZ = wind.z * 0.05 * WeatherUtils.getRandomSpeedMultiplier(random);
-            this.xd = Mth.clamp(xd + windX * 0.02, Math.min(xd, windX), Math.max(xd, windX));
-            this.yd += windY * 0.02;
-            this.zd = Mth.clamp(zd + windZ * 0.02, Math.min(zd, windZ), Math.max(zd, windZ));
         }
     }
 

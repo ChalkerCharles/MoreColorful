@@ -3,6 +3,7 @@ package com.ChalkerCharles.morecolorful.client.particle;
 import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.client.particle.particles.LeafParticle;
 import com.ChalkerCharles.morecolorful.client.particle.particles.PetalParticle;
+import com.ChalkerCharles.morecolorful.client.particle.particles.WindParticle;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -23,5 +24,7 @@ public class ParticleProvidersRegistry {
         event.registerSpriteSet(ModParticles.JACARANDA_LEAVES.get(), PetalParticle.Provider::new);
         event.registerSpriteSet(ModParticles.TINTED_LEAVES.get(), LeafParticle.TintedProvider::new);
         event.registerSpriteSet(ModParticles.SPRUCE_LEAVES.get(), LeafParticle.TintedProvider::new);
+        event.registerSpriteSet(ModParticles.WIND_GLOBAL.get(), WindParticle.GlobalProvider::new);
+        event.registerSpriteSet(ModParticles.WIND_FAN.get(), WindParticle.FanProvider::new);
     }
 }

@@ -23,6 +23,17 @@
     ],
     "subtitle": "morecolorful.subtitles.block.crash_cymbal.play"
   },
+  "block.fan_block.whir": {
+    "sounds": [
+      "morecolorful:block/fan_block/whir1",
+      "morecolorful:block/fan_block/whir2",
+      "morecolorful:block/fan_block/whir3",
+      "morecolorful:block/fan_block/whir4",
+      "morecolorful:block/fan_block/whir5",
+      "morecolorful:block/fan_block/whir6"
+    ],
+    "subtitle": "morecolorful.subtitles.block.fan_block.whir"
+  },
   "block.glockenspiel.play": {
     "sounds": [
       {
@@ -107,6 +118,17 @@
       "morecolorful:block/leaf_litter/step6"
     ],
     "subtitle": "subtitles.block.generic.footsteps"
+  },
+  "block.leaves.rustle": {
+    "sounds": [
+      "morecolorful:block/leaves/rustle1",
+      "morecolorful:block/leaves/rustle2",
+      "morecolorful:block/leaves/rustle3",
+      "morecolorful:block/leaves/rustle4",
+      "morecolorful:block/leaves/rustle5",
+      "morecolorful:block/leaves/rustle6"
+    ],
+    "subtitle": "morecolorful.subtitles.block.leaves.rustle"
   },
   "block.note_block.cello": {
     "sounds": [
@@ -504,6 +526,15 @@
     ],
     "subtitle": "morecolorful.subtitles.block.vibraphone.play"
   },
+  "block.weather_vane.sway": {
+    "sounds": [
+      "morecolorful:block/weather_vane/sway1",
+      "morecolorful:block/weather_vane/sway2",
+      "morecolorful:block/weather_vane/sway3",
+      "morecolorful:block/weather_vane/sway4"
+    ],
+    "subtitle": "morecolorful.subtitles.block.weather_vane.sway"
+  },
   "block.xylophone.play": {
     "sounds": [
       {
@@ -512,6 +543,20 @@
       }
     ],
     "subtitle": "morecolorful.subtitles.block.xylophone.play"
+  },
+  "entity.paper_plane.hit": {
+    "sounds": [
+      "morecolorful:entity/paper_plane/hit1",
+      "morecolorful:entity/paper_plane/hit2",
+      "morecolorful:entity/paper_plane/hit3"
+    ],
+    "subtitle": "morecolorful.subtitles.entity.paper_plane.hit"
+  },
+  "entity.paper_plane.throw": {
+    "sounds": [
+      "random/bow"
+    ],
+    "subtitle": "morecolorful.subtitles.entity.paper_plane.throw"
   },
   "item.banjo.play": {
     "sounds": [
@@ -620,5 +665,38 @@
       "morecolorful:note/violin"
     ],
     "subtitle": "morecolorful.subtitles.item.violin.play"
+  },
+  "weather.breeze": {
+    "sounds": [
+      "morecolorful:ambient/weather/wind1",
+      "morecolorful:ambient/weather/wind2",
+      "morecolorful:ambient/weather/wind3",
+      "morecolorful:ambient/weather/wind4",
+      "morecolorful:ambient/weather/wind5",
+      "morecolorful:ambient/weather/wind6"
+    ],
+    "subtitle": "morecolorful.subtitles.weather.breeze"
+  },
+  "weather.gale": {
+    "sounds": [
+      "morecolorful:ambient/weather/wind1",
+      "morecolorful:ambient/weather/wind2",
+      "morecolorful:ambient/weather/wind3",
+      "morecolorful:ambient/weather/wind4",
+      "morecolorful:ambient/weather/wind5",
+      "morecolorful:ambient/weather/wind6"
+    ],
+    "subtitle": "morecolorful.subtitles.weather.gale"
+  },
+  "weather.wind": {
+    "sounds": [
+      "morecolorful:ambient/weather/wind1",
+      "morecolorful:ambient/weather/wind2",
+      "morecolorful:ambient/weather/wind3",
+      "morecolorful:ambient/weather/wind4",
+      "morecolorful:ambient/weather/wind5",
+      "morecolorful:ambient/weather/wind6"
+    ],
+    "subtitle": "morecolorful.subtitles.weather.wind"
   }
 }

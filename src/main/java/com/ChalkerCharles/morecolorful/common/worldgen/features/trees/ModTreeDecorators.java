@@ -10,10 +10,10 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import java.util.function.Supplier;
 
 public class ModTreeDecorators {
-    public static final DeferredRegister<TreeDecoratorType<?>> TREE_DECORATORS = DeferredRegister.create(Registries.TREE_DECORATOR_TYPE, MoreColorful.MODID);
+    private static final DeferredRegister<TreeDecoratorType<?>> TREE_DECORATORS = DeferredRegister.create(Registries.TREE_DECORATOR_TYPE, MoreColorful.MODID);
 
     public static final Supplier<TreeDecoratorType<WillowBranchesDecorator>> WILLOW_BRANCHES_DECORATOR =
-            TREE_DECORATORS.register("dawn_redwood_root_placer", () -> new TreeDecoratorType<>(WillowBranchesDecorator.CODEC));
+            TREE_DECORATORS.register("willow_branches_tree_decorator", () -> new TreeDecoratorType<>(WillowBranchesDecorator.CODEC));
 
     public static void register(IEventBus eventBus) {
         TREE_DECORATORS.register(eventBus);

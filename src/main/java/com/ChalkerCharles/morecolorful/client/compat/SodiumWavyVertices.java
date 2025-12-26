@@ -35,7 +35,7 @@ public class SodiumWavyVertices extends WavyVertices {
     private final int[][] index = new int[COUNT][];
     private final long[][] data = new long[COUNT][];
     private final float[][] posX  = new float[COUNT][], posY  = new float[COUNT][], posZ = new float[COUNT][];
-    private final float[][] dX= new float[COUNT][], dY = new float[COUNT][], dZ = new float[COUNT][];
+    private final float[][] dX = new float[COUNT][], dY = new float[COUNT][], dZ = new float[COUNT][];
     private static final int COUNT = ModelQuadFacing.COUNT;
 
     public SodiumWavyVertices(BlockPos origin, WindSectionMap map, List<WindZone> list) {
@@ -46,6 +46,7 @@ public class SodiumWavyVertices extends WavyVertices {
             this.posXList[i] = new FloatArrayList();
             this.posYList[i] = new FloatArrayList();
             this.posZList[i] = new FloatArrayList();
+            this.fillEmptyData(i);
         }
     }
 
@@ -55,7 +56,7 @@ public class SodiumWavyVertices extends WavyVertices {
 
     @Override
     public boolean isInvalid() {
-        if (this.invalid || this.closed || this.isBuilding()) return true;
+        if (this.invalid || this.closed) return true;
         for (int i : size) {
             if (i != 0) return false;
         }
@@ -64,38 +65,34 @@ public class SodiumWavyVertices extends WavyVertices {
 
     @Override
     public void clear() {
-        this.state = CLEARING;
         this.forceUnassigned = false;
         for (int i = 0; i < COUNT; i++) {
-            this.size[i] = 0;
             this.indexList[i].clear();
             this.dataList[i].clear();
             this.posXList[i].clear();
             this.posYList[i].clear();
             this.posZList[i].clear();
         }
-        this.state = BUILDING;
     }
 
     public void addVertex(ModelQuadFacing facing, int index, long data, float x, float y, float z) {
-        if (this.state != BUILDING) return;
-        if (!this.addLock.compareAndSet(false, true)) return;
-        int i = facing.ordinal();
-        this.indexList[i].add(index);
-        this.dataList[i].add(data);
-        this.posXList[i].add(x);
-        this.posYList[i].add(y);
-        this.posZList[i].add(z);
-        this.addLock.set(false);
+        try {
+            int i = facing.ordinal();
+            this.indexList[i].add(index);
+            this.dataList[i].add(data);
+            this.posXList[i].add(x);
+            this.posYList[i].add(y);
+            this.posZList[i].add(z);
+        } catch (Exception ignored) {}
     }
 
     @Override
     public void encapsulate() {
-        if (this.state != BUILDING) return;
         if (this.forceUnassigned) {
             this.merge();
         } else {
             for (int i = 0; i < COUNT; i++) {
+                int size0 = this.size[i];
                 int size = this.size[i] = this.indexList[i].size();
                 if (size == 0) {
                     this.fillEmptyData(i);
@@ -106,12 +103,13 @@ public class SodiumWavyVertices extends WavyVertices {
                 this.posX[i] = this.posXList[i].toFloatArray();
                 this.posY[i] = this.posYList[i].toFloatArray();
                 this.posZ[i] = this.posZList[i].toFloatArray();
-                this.dX[i] = new float[size];
-                this.dY[i] = new float[size];
-                this.dZ[i] = new float[size];
+                if (size0 != size) {
+                    this.dX[i] = new float[size];
+                    this.dY[i] = new float[size];
+                    this.dZ[i] = new float[size];
+                }
             }
         }
-        this.state = ENCAPSULATED;
     }
 
     private void merge() {
@@ -124,6 +122,7 @@ public class SodiumWavyVertices extends WavyVertices {
             total += size;
         }
         total += this.indexList[j].size();
+        int total0 = this.size[j];
         this.size[j] = total;
         int[] index = new int[total];
         long[] data = new long[total];
@@ -147,9 +146,11 @@ public class SodiumWavyVertices extends WavyVertices {
         this.posX[j] = posX;
         this.posY[j] = posY;
         this.posZ[j] = posZ;
-        this.dX[j] = new float[total];
-        this.dY[j] = new float[total];
-        this.dZ[j] = new float[total];
+        if (total0 != total) {
+            this.dX[j] = new float[total];
+            this.dY[j] = new float[total];
+            this.dZ[j] = new float[total];
+        }
     }
 
     private void fillEmptyData(int i) {
@@ -161,19 +162,17 @@ public class SodiumWavyVertices extends WavyVertices {
 
     @Override
     public void computeData() {
-        if (this.isBuilding()) return;
-        float anim = RenderUtils.anim, time = RenderUtils.time, windX = RenderUtils.WIND_SPEED.x, windZ = RenderUtils.WIND_SPEED.y;
+        float anim = RenderUtils.anim, time = RenderUtils.time, windX = RenderUtils.windSpeed.x, windZ = RenderUtils.windSpeed.y;
         Vector3f localWind = new Vector3f();
         for (int i = 0; i < COUNT; i++) {
             this.computeData(anim, time, windX, windZ,
                     this.posX[i], this.dX[i], this.posY[i], this.dY[i], this.posZ[i], this.dZ[i],
                     this.data[i], this.size[i], localWind);
         }
-        this.state = UPDATING;
     }
 
     public void update(long address, long pMeshData, int slice) {
-        if (this.state != UPDATING || this.invalid) return;
+        if (this.invalid) return;
         for (int i = 0; i < COUNT; i++) {
             if (((slice >> i) & 1) == 0) continue;
             long offset = SectionRenderDataUnsafe.getVertexOffset(pMeshData, i) * CompactChunkVertex.STRIDE;
