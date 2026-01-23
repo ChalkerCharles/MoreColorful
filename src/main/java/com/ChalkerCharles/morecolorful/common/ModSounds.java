@@ -72,6 +72,44 @@ public class ModSounds {
     public static final Holder<SoundEvent> PIPA_PLAY = register("item.pipa.play");
     public static final Holder<SoundEvent> ERHU_PLAY = register("item.erhu.play");
     public static final Holder<SoundEvent> GUZHENG_PLAY = register("block.guzheng.play");
+
+    // Music Boxes
+    public static final Holder<SoundEvent> MUSIC_BOX_HARP = register("block.music_box.harp");
+    public static final Holder<SoundEvent> MUSIC_BOX_BASEDRUM = register("block.music_box.basedrum");
+    public static final Holder<SoundEvent> MUSIC_BOX_SNARE = register("block.music_box.snare");
+    public static final Holder<SoundEvent> MUSIC_BOX_HAT = register("block.music_box.hat");
+    public static final Holder<SoundEvent> MUSIC_BOX_BASS = register("block.music_box.bass");
+    public static final Holder<SoundEvent> MUSIC_BOX_CHIME = register("block.music_box.chime");
+    public static final Holder<SoundEvent> MUSIC_BOX_BELL = register("block.music_box.bell");
+    public static final Holder<SoundEvent> MUSIC_BOX_FLUTE = register("block.music_box.flute");
+    public static final Holder<SoundEvent> MUSIC_BOX_GUITAR = register("block.music_box.guitar");
+    public static final Holder<SoundEvent> MUSIC_BOX_XYLOPHONE = register("block.music_box.xylophone");
+    public static final Holder<SoundEvent> MUSIC_BOX_IRON_XYLOPHONE = register("block.music_box.iron_xylophone");
+    public static final Holder<SoundEvent> MUSIC_BOX_COW_BELL = register("block.music_box.cow_bell");
+    public static final Holder<SoundEvent> MUSIC_BOX_DIDGERIDOO = register("block.music_box.didgeridoo");
+    public static final Holder<SoundEvent> MUSIC_BOX_BIT = register("block.music_box.bit");
+    public static final Holder<SoundEvent> MUSIC_BOX_BANJO = register("block.music_box.banjo");
+    public static final Holder<SoundEvent> MUSIC_BOX_PLING = register("block.music_box.pling");
+    public static final Holder<SoundEvent> MUSIC_BOX_PIANO_LOW = register("block.music_box.piano_low");
+    public static final Holder<SoundEvent> MUSIC_BOX_PIANO_HIGH = register("block.music_box.piano_high");
+    public static final Holder<SoundEvent> MUSIC_BOX_TOM = register("block.music_box.tom");
+    public static final Holder<SoundEvent> MUSIC_BOX_RIDE = register("block.music_box.ride");
+    public static final Holder<SoundEvent> MUSIC_BOX_CRASH = register("block.music_box.crash");
+    public static final Holder<SoundEvent> MUSIC_BOX_VIOLIN = register("block.music_box.violin");
+    public static final Holder<SoundEvent> MUSIC_BOX_CELLO = register("block.music_box.cello");
+    public static final Holder<SoundEvent> MUSIC_BOX_ELECTRIC_GUITAR = register("block.music_box.electric_guitar");
+    public static final Holder<SoundEvent> MUSIC_BOX_TRUMPET = register("block.music_box.trumpet");
+    public static final Holder<SoundEvent> MUSIC_BOX_SAXOPHONE = register("block.music_box.saxophone");
+    public static final Holder<SoundEvent> MUSIC_BOX_OCARINA = register("block.music_box.ocarina");
+    public static final Holder<SoundEvent> MUSIC_BOX_HARMONICA = register("block.music_box.harmonica");
+    public static final Holder<SoundEvent> MUSIC_BOX_SCULK = register("block.music_box.sculk");
+    public static final Holder<SoundEvent> MUSIC_BOX_CRYSTAL = register("block.music_box.crystal");
+    public static final Holder<SoundEvent> MUSIC_BOX_SAW = register("block.music_box.saw");
+    public static final Holder<SoundEvent> MUSIC_BOX_PLUCK = register("block.music_box.pluck");
+    public static final Holder<SoundEvent> MUSIC_BOX_SYNTH_BASS = register("block.music_box.synth_bass");
+    public static final Holder<SoundEvent> MUSIC_BOX_PIPA = register("block.music_box.pipa");
+    public static final Holder<SoundEvent> MUSIC_BOX_ERHU = register("block.music_box.erhu");
+    public static final Holder<SoundEvent> MUSIC_BOX_GUZHENG = register("block.music_box.guzheng");
     
     // Blocks
     public static final Supplier<SoundEvent> RARE_WOOD_BREAK = register("block.rare_wood.break");
@@ -102,10 +140,18 @@ public class ModSounds {
     public static final Supplier<SoundEvent> FAN_BLOCK_WHIR = register("block.fan_block.whir");
     public static final Supplier<SoundEvent> LEAVES_RUSTLE = register("block.leaves.rustle");
     public static final Supplier<SoundEvent> WEATHER_VANE_SWAY = register("block.weather_vane.sway");
+    public static final Supplier<SoundEvent> RIBBON_TIED = register("block.ribbon.tied");
 
     // Entities
     public static final Supplier<SoundEvent> PAPER_PLANE_THROW = register("entity.paper_plane.throw");
     public static final Supplier<SoundEvent> PAPER_PLANE_HIT = register("entity.paper_plane.hit");
+
+    // Items
+    public static final Supplier<SoundEvent> PARTY_POPPER_POP = register("item.party_popper.pop");
+    public static final Supplier<SoundEvent> SHEARS_SNIP = register("item.shears.snip");
+    public static final Supplier<SoundEvent> SPARKLER_LIT = register("item.sparkler.lit");
+    public static final Supplier<SoundEvent> SPARKLER_FIZZ = register("item.sparkler.fizz");
+    public static final Supplier<SoundEvent> SPARKLER_EXTINGUISH = register("item.sparkler.extinguish");
 
     // Environment & Ambient
     public static final Supplier<SoundEvent> WEATHER_BREEZE = register("weather.breeze");

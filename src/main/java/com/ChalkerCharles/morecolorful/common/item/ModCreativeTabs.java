@@ -1,6 +1,10 @@
 package com.ChalkerCharles.morecolorful.common.item;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
+import com.ChalkerCharles.morecolorful.common.block.ornamental.RibbonBlock;
+import com.ChalkerCharles.morecolorful.common.item.misc.PartyPopperItem;
+import com.ChalkerCharles.morecolorful.common.item.misc.PinwheelItem;
+import com.ChalkerCharles.morecolorful.common.item.misc.SparklerItem;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
@@ -14,52 +18,63 @@ public class ModCreativeTabs {
     private static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MoreColorful.MODID);
 
     @SuppressWarnings("unused")
-    public static final ResourceKey<CreativeModeTab> MUSICAL_INSTRUMENTS_TAB = CREATIVE_MODE_TABS.register("musical_instruments_tab", () -> CreativeModeTab.builder()
+    public static final ResourceKey<CreativeModeTab> ENTERTAINMENT_AND_NOVELTIES = CREATIVE_MODE_TABS.register("musical_instruments_tab", () -> CreativeModeTab.builder()
             .withTabsBefore(CreativeModeTabs.SPAWN_EGGS)
-            .title(Component.translatable("creativetab.morecolorful.musical_instruments_tab"))
+            .title(Component.translatable("creativetab.morecolorful.entertainment_and_novelties"))
             .icon(ModItems.VIOLIN::toStack)
             .displayItems((parameters, output) -> {
-                output.accept(ModItems.GRAND_PIANO);
-                output.accept(ModItems.UPRIGHT_PIANO);
-                output.accept(ModItems.HARP);
-                output.accept(ModItems.GUZHENG);
-                output.accept(ModItems.VIOLIN);
-                output.accept(ModItems.CELLO);
-                output.accept(ModItems.ERHU);
-                output.accept(ModItems.FIDDLE_BOW);
-                output.accept(ModItems.BASS);
-                output.accept(ModItems.GUITAR);
-                output.accept(ModItems.ELECTRIC_GUITAR);
-                output.accept(ModItems.BANJO);
-                output.accept(ModItems.PIPA);
-                output.accept(ModItems.FLUTE);
-                output.accept(ModItems.DIDGERIDOO);
-                output.accept(ModItems.TRUMPET);
-                output.accept(ModItems.SAXOPHONE);
-                output.accept(ModItems.OCARINA);
-                output.accept(ModItems.HARMONICA);
-                output.accept(ModItems.COW_BELL);
-                output.accept(ModItems.BASS_DRUM);
-                output.accept(ModItems.SNARE_DRUM);
-                output.accept(ModItems.TOMTOM_DRUM);
-                output.accept(ModItems.HIHAT);
-                output.accept(ModItems.RIDE_CYMBAL);
-                output.accept(ModItems.CRASH_CYMBAL);
-                output.accept(ModItems.DRUM_SET);
-                output.accept(ModItems.CHIMES);
-                output.accept(ModItems.GLOCKENSPIEL);
-                output.accept(ModItems.XYLOPHONE);
-                output.accept(ModItems.VIBRAPHONE);
-                output.accept(ModItems.DRUMSTICK);
-                output.accept(ModItems.SYNTHESIZER_KEYBOARD_BIT);
-                output.accept(ModItems.SYNTHESIZER_KEYBOARD_PLING);
-                output.accept(ModItems.SYNTHESIZER_KEYBOARD_SCULK);
-                output.accept(ModItems.SYNTHESIZER_KEYBOARD_AMETHYST);
-                output.accept(ModItems.SYNTHESIZER_KEYBOARD_SAW);
-                output.accept(ModItems.SYNTHESIZER_KEYBOARD_PLUCK);
-                output.accept(ModItems.SYNTHESIZER_KEYBOARD_SYNTH_BASS);
+                appendBySequence(output,
+                        ModItems.GRAND_PIANO,
+                        ModItems.UPRIGHT_PIANO,
+                        ModItems.HARP,
+                        ModItems.GUZHENG,
+                        ModItems.VIOLIN,
+                        ModItems.CELLO,
+                        ModItems.ERHU,
+                        ModItems.FIDDLE_BOW,
+                        ModItems.BASS,
+                        ModItems.GUITAR,
+                        ModItems.ELECTRIC_GUITAR,
+                        ModItems.BANJO,
+                        ModItems.PIPA,
+                        ModItems.FLUTE,
+                        ModItems.DIDGERIDOO,
+                        ModItems.TRUMPET,
+                        ModItems.SAXOPHONE,
+                        ModItems.OCARINA,
+                        ModItems.HARMONICA,
+                        ModItems.COW_BELL,
+                        ModItems.BASS_DRUM,
+                        ModItems.SNARE_DRUM,
+                        ModItems.TOMTOM_DRUM,
+                        ModItems.HIHAT,
+                        ModItems.RIDE_CYMBAL,
+                        ModItems.CRASH_CYMBAL,
+                        ModItems.DRUM_SET,
+                        ModItems.CHIMES,
+                        ModItems.GLOCKENSPIEL,
+                        ModItems.XYLOPHONE,
+                        ModItems.VIBRAPHONE,
+                        ModItems.DRUMSTICK,
+                        ModItems.SYNTHESIZER_KEYBOARD_BIT,
+                        ModItems.SYNTHESIZER_KEYBOARD_PLING,
+                        ModItems.SYNTHESIZER_KEYBOARD_SCULK,
+                        ModItems.SYNTHESIZER_KEYBOARD_AMETHYST,
+                        ModItems.SYNTHESIZER_KEYBOARD_SAW,
+                        ModItems.SYNTHESIZER_KEYBOARD_PLUCK,
+                        ModItems.SYNTHESIZER_KEYBOARD_SYNTH_BASS,
+                        ModItems.MUSIC_BOX,
+                        ModItems.WRITABLE_SHEET_MUSIC,
+                        ModItems.PAPER_PLANE,
+                        ModItems.PAPER_BOAT
+                );
+                appendBySequence(output, PartyPopperItem.ALL_COLORS);
+                appendBySequence(output, SparklerItem.ALL_ITEMS);
+                appendBySequence(output, PinwheelItem.ALL_DYE_COLORS);
+                output.accept(ModItems.MULTICOLORED_PINWHEEL);
             })
-            .build()).getKey();
+            .build()
+    ).getKey();
 
     public static void insertInVanillaTabs(BuildCreativeModeTabContentsEvent event) {
         ResourceKey<CreativeModeTab> tab = event.getTabKey();
@@ -170,6 +185,10 @@ public class ModCreativeTabs {
                     ModItems.WILLOW_PRESSURE_PLATE,
                     ModItems.WILLOW_BUTTON
             );
+        } else if (tab == CreativeModeTabs.COLORED_BLOCKS) {
+            appendBySequence(event, RibbonBlock.ALL_ITEMS);
+            appendBySequence(event, PinwheelItem.ALL_DYE_COLORS);
+            event.accept(ModItems.MULTICOLORED_PINWHEEL);
         } else if (tab == CreativeModeTabs.NATURAL_BLOCKS) {
             insertAfterBySequence(event, Items.CHERRY_LOG,
                     ModItems.CRABAPPLE_LOG,
@@ -318,13 +337,21 @@ public class ModCreativeTabs {
                     ModItems.WILLOW_BOAT,
                     ModItems.WILLOW_CHEST_BOAT
             );
-            insertBeforeBySequence(event, Items.MUSIC_DISC_13,
-                    ModItems.PAPER_PLANE);
         } else if (tab == CreativeModeTabs.FOOD_AND_DRINKS) {
             insertAfterBySequence(event, Items.SWEET_BERRIES,
                     ModItems.STRAWBERRY,
                     ModItems.BLUEBERRIES
             );
+        } else if (tab == CreativeModeTabs.INGREDIENTS) {
+            insertAfterBySequence(event, Items.PINK_DYE,
+                    ModItems.CONFETTI
+            );
+        }
+    }
+
+    private static void appendBySequence(CreativeModeTab.Output output, ItemLike... entries) {
+        for (ItemLike entry : entries) {
+            output.accept(entry);
         }
     }
 
@@ -335,12 +362,12 @@ public class ModCreativeTabs {
         }
     }
 
-    private static void insertBeforeBySequence(BuildCreativeModeTabContentsEvent event, Item existing, ItemLike... entries) {
-        event.insertBefore(existing.getDefaultInstance(), new ItemStack(entries[0]), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-        for (int i = 1, l = entries.length; i < l; i++) {
-            event.insertAfter(new ItemStack(entries[i - 1]), new ItemStack(entries[i]), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-        }
-    }
+//    private static void insertBeforeBySequence(BuildCreativeModeTabContentsEvent event, Item existing, ItemLike... entries) {
+//        event.insertBefore(existing.getDefaultInstance(), new ItemStack(entries[0]), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+//        for (int i = 1, l = entries.length; i < l; i++) {
+//            event.insertAfter(new ItemStack(entries[i - 1]), new ItemStack(entries[i]), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+//        }
+//    }
 
     public static void register(IEventBus eventBus){
         CREATIVE_MODE_TABS.register(eventBus);

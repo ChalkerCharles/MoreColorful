@@ -1,0 +1,6 @@
+{
+  "parent": "morecolorful:block/template_ribbon",
+  "textures": {
+    "texture": "morecolorful:block/yellow_ribbon_hor"
+  }
+}

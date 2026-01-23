@@ -10,7 +10,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import org.jetbrains.annotations.Nullable;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
@@ -157,14 +156,7 @@ public class WindParticle extends TextureSheetParticle {
     }
 
     @OnlyIn(Dist.CLIENT)
-    public static class GlobalProvider implements ParticleProvider<SimpleParticleType> {
-        private final SpriteSet sprites;
-
-        public GlobalProvider(SpriteSet spriteSet) {
-            this.sprites = spriteSet;
-        }
-
-        @Nullable
+    public record GlobalProvider(SpriteSet sprites) implements ParticleProvider<SimpleParticleType> {
         @Override
         public Particle createParticle(SimpleParticleType pType, ClientLevel level, double x, double y, double z, double dx, double dy, double dz) {
             WindParticle particle = new WindParticle(level, x, y, z, dx, dy, dz, this.sprites);
@@ -174,14 +166,7 @@ public class WindParticle extends TextureSheetParticle {
     }
 
     @OnlyIn(Dist.CLIENT)
-    public static class FanProvider implements ParticleProvider<SimpleParticleType> {
-        private final SpriteSet sprites;
-
-        public FanProvider(SpriteSet spriteSet) {
-            this.sprites = spriteSet;
-        }
-
-        @Nullable
+    public record FanProvider(SpriteSet sprites) implements ParticleProvider<SimpleParticleType> {
         @Override
         public Particle createParticle(SimpleParticleType pType, ClientLevel level, double x, double y, double z, double dx, double dy, double dz) {
             WindParticle particle = new WindParticle(level, x, y, z, dx, dy, dz, this.sprites);

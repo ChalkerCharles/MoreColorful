@@ -1,14 +1,16 @@
 package com.ChalkerCharles.morecolorful.common.datagen;
 
+import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.common.ModTags;
 import com.ChalkerCharles.morecolorful.common.datagen.helper.ModRecipeHelper;
 import com.ChalkerCharles.morecolorful.common.item.ModItems;
+import com.ChalkerCharles.morecolorful.common.recipe.SheetMusicCloningRecipe;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.data.recipes.*;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
+import net.neoforged.neoforge.common.Tags;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -188,12 +190,92 @@ public class ModRecipeProvider extends ModRecipeHelper {
                 .pattern(" | ")
                 .unlockedBy("has_iron_ingot", has(Items.IRON_INGOT))
                 .save(recipeOutput);
-
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.PAPER_PLANE, 3)
                 .define('#', Items.PAPER)
                 .pattern("##")
                 .pattern(" #")
                 .unlockedBy("has_paper", has(Items.PAPER))
                 .save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.PAPER_BOAT, 3)
+                .define('#', Items.PAPER)
+                .pattern("# #")
+                .pattern(" # ")
+                .unlockedBy("has_paper", has(Items.PAPER))
+                .save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.MUSIC_BOX)
+                .define('#', ItemTags.PLANKS)
+                .define('@', Tags.Items.INGOTS_IRON)
+                .define('L', Items.LEVER)
+                .define('N', Items.NOTE_BLOCK)
+                .pattern("###")
+                .pattern("#@L")
+                .pattern("#N#")
+                .unlockedBy("has_note_block", has(Items.NOTE_BLOCK))
+                .save(recipeOutput);
+        sheetMusicRecipe(recipeOutput);
+        SpecialRecipeBuilder.special(SheetMusicCloningRecipe::new).save(recipeOutput, MoreColorful.location("sheet_music_cloning"));
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.CONFETTI, 3)
+                .requires(Items.PAPER, 3)
+                .requires(Items.RED_DYE)
+                .requires(Items.YELLOW_DYE)
+                .requires(Items.BLUE_DYE)
+                .unlockedBy("has_paper", has(Items.PAPER))
+                .save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.WHITE_PARTY_POPPER)
+                .define('#', Items.PAPER)
+                .define('@', ModItems.CONFETTI)
+                .define('S', Tags.Items.STRINGS)
+                .pattern(" #@")
+                .pattern(" ##")
+                .pattern("S  ")
+                .group("party_popper")
+                .unlockedBy("has_confetti", has(ModItems.CONFETTI))
+                .save(recipeOutput);
+        partyPopperRecipes(recipeOutput);
+        ribbon(recipeOutput, ModItems.WHITE_RIBBON, Items.WHITE_WOOL);
+        ribbon(recipeOutput, ModItems.ORANGE_RIBBON, Items.ORANGE_WOOL);
+        ribbon(recipeOutput, ModItems.MAGENTA_RIBBON, Items.MAGENTA_WOOL);
+        ribbon(recipeOutput, ModItems.LIGHT_BLUE_RIBBON, Items.LIGHT_BLUE_WOOL);
+        ribbon(recipeOutput, ModItems.YELLOW_RIBBON, Items.YELLOW_WOOL);
+        ribbon(recipeOutput, ModItems.LIME_RIBBON, Items.LIME_WOOL);
+        ribbon(recipeOutput, ModItems.PINK_RIBBON, Items.PINK_WOOL);
+        ribbon(recipeOutput, ModItems.GRAY_RIBBON, Items.GRAY_WOOL);
+        ribbon(recipeOutput, ModItems.LIGHT_GRAY_RIBBON, Items.LIGHT_GRAY_WOOL);
+        ribbon(recipeOutput, ModItems.CYAN_RIBBON, Items.CYAN_WOOL);
+        ribbon(recipeOutput, ModItems.PURPLE_RIBBON, Items.PURPLE_WOOL);
+        ribbon(recipeOutput, ModItems.BLUE_RIBBON, Items.BLUE_WOOL);
+        ribbon(recipeOutput, ModItems.BROWN_RIBBON, Items.BROWN_WOOL);
+        ribbon(recipeOutput, ModItems.GREEN_RIBBON, Items.GREEN_WOOL);
+        ribbon(recipeOutput, ModItems.RED_RIBBON, Items.RED_WOOL);
+        ribbon(recipeOutput, ModItems.BLACK_RIBBON, Items.BLACK_WOOL);
+        ribbonDyeRecipes(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.WHITE_PINWHEEL)
+                .define('#', Items.PAPER)
+                .define('|', Tags.Items.RODS_WOODEN)
+                .pattern(" # ")
+                .pattern("#|#")
+                .pattern("|# ")
+                .group("pinwheel")
+                .unlockedBy("has_paper", has(Items.PAPER))
+                .save(recipeOutput);
+        pinwheelRecipes(recipeOutput);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.MULTICOLORED_PINWHEEL)
+                .requires(Items.RED_DYE)
+                .requires(Items.YELLOW_DYE)
+                .requires(Items.BLUE_DYE)
+                .requires(ModTags.Items.PINWHEELS)
+                .group("pinwheel")
+                .unlockedBy("has_pinwheel", has(ModTags.Items.PINWHEELS))
+                .save(recipeOutput);
+        sparkler(recipeOutput, ModItems.WHITE_SPARKLER, Tags.Items.GEMS_PRISMARINE);
+        sparkler(recipeOutput, ModItems.BROWN_SPARKLER, Tags.Items.DUSTS_GLOWSTONE);
+        sparkler(recipeOutput, ModItems.RED_SPARKLER, Tags.Items.DUSTS_REDSTONE);
+        sparkler(recipeOutput, ModItems.YELLOW_SPARKLER, Items.BLAZE_POWDER);
+        sparkler(recipeOutput, ModItems.LIME_SPARKLER, Tags.Items.GEMS_EMERALD);
+        sparkler(recipeOutput, ModItems.CYAN_SPARKLER, ItemTags.SOUL_FIRE_BASE_BLOCKS);
+        sparkler(recipeOutput, ModItems.LIGHT_BLUE_SPARKLER, Tags.Items.GEMS_DIAMOND);
+        sparkler(recipeOutput, ModItems.BLUE_SPARKLER, Tags.Items.GEMS_LAPIS);
+        sparkler(recipeOutput, ModItems.PURPLE_SPARKLER, Tags.Items.GEMS_AMETHYST);
+        sparkler(recipeOutput, ModItems.MAGENTA_SPARKLER, Items.DRAGON_BREATH);
     }
 }

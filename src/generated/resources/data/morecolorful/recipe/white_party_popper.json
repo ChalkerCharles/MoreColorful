@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "party_popper",
+  "key": {
+    "#": {
+      "item": "minecraft:paper"
+    },
+    "@": {
+      "item": "morecolorful:confetti"
+    },
+    "S": {
+      "tag": "c:strings"
+    }
+  },
+  "pattern": [
+    " #@",
+    " ##",
+    "S  "
+  ],
+  "result": {
+    "count": 1,
+    "id": "morecolorful:white_party_popper"
+  }
+}

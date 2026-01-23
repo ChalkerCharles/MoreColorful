@@ -2,9 +2,14 @@ package com.ChalkerCharles.morecolorful.common.datagen;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.common.block.ModBlocks;
+import com.ChalkerCharles.morecolorful.common.block.ornamental.RibbonBlock;
 import com.ChalkerCharles.morecolorful.common.datagen.helper.ModItemModelHelper;
 import com.ChalkerCharles.morecolorful.common.item.ModItems;
+import com.ChalkerCharles.morecolorful.common.item.misc.PartyPopperItem;
+import com.ChalkerCharles.morecolorful.common.item.misc.PinwheelItem;
+import com.ChalkerCharles.morecolorful.common.item.misc.SparklerItem;
 import net.minecraft.data.PackOutput;
+import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 public class ModItemModelProvider extends ModItemModelHelper {
@@ -36,6 +41,9 @@ public class ModItemModelProvider extends ModItemModelHelper {
         itemWithCustomName(ModItems.SYNTHESIZER_KEYBOARD_PLUCK, "synthesizer_keyboard_blue");
         itemWithCustomName(ModItems.SYNTHESIZER_KEYBOARD_SYNTH_BASS, "synthesizer_keyboard_silver");
         basicItem(ModItems.GUZHENG);
+        basicItem(ModItems.MUSIC_BOX);
+        basicItem(ModItems.WRITABLE_SHEET_MUSIC);
+        basicItem(ModItems.SHEET_MUSIC);
 
         buttonFenceWall(ModItems.CRABAPPLE_FENCE, ModBlocks.CRABAPPLE_PLANKS, "fence");
         basicItem(ModItems.CRABAPPLE_DOOR);
@@ -167,5 +175,20 @@ public class ModItemModelProvider extends ModItemModelHelper {
         blockItem2d(ModItems.WEATHER_VANE);
 
         basicItem(ModItems.PAPER_PLANE);
+        basicItem(ModItems.PAPER_BOAT);
+        basicItem(ModItems.CONFETTI);
+        for (ItemLike item : PartyPopperItem.ALL_COLORS) {
+            basicItem(item);
+        }
+        for (ItemLike item : RibbonBlock.ALL_ITEMS) {
+            ribbon(item);
+        }
+        for (ItemLike item : PinwheelItem.ALL_DYE_COLORS) {
+            pinwheel(item);
+        }
+        pinwheel(ModItems.MULTICOLORED_PINWHEEL);
+        for (ItemLike item : SparklerItem.ALL_ITEMS) {
+            sparkler(item);
+        }
     }
 }

@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class BlockMixin {
     @Inject(method = "stepOn", at = @At("HEAD"))
     private void stepOn(Level pLevel, BlockPos pPos, BlockState pState, Entity pEntity, CallbackInfo ci) {
-        if (Config.THERMAL_SYSTEM.isTrue()) {
+        if (Config.thermalSystem) {
             boolean overheated = LevelSavedData.getTemperature(pLevel, pPos) > 12;
             if (overheated && !pEntity.isSteppingCarefully() && pEntity instanceof LivingEntity) {
                 pEntity.hurt(pLevel.damageSources().hotFloor(), 1.0F);

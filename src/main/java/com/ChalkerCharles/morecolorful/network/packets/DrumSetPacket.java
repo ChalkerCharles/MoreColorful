@@ -16,7 +16,7 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.neoforged.neoforge.network.handling.IPayloadHandler;
 
 public record DrumSetPacket(byte pressingMask, BlockPos pos, int id) implements CustomPacketPayload {
-    public static final CustomPacketPayload.Type<DrumSetPacket> TYPE = new CustomPacketPayload.Type<>(MoreColorful.location("drum_set_event"));
+    public static final Type<DrumSetPacket> TYPE = new Type<>(MoreColorful.location("drum_set_event"));
 
     public static final StreamCodec<ByteBuf, DrumSetPacket> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.BYTE,

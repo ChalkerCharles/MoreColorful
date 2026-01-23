@@ -9,9 +9,11 @@ import com.ChalkerCharles.morecolorful.common.block.ModBlocks;
 import com.ChalkerCharles.morecolorful.common.block.VanillaBlockPropertyModifier;
 import com.ChalkerCharles.morecolorful.common.entity.ModEntities;
 import com.ChalkerCharles.morecolorful.common.item.ModCreativeTabs;
+import com.ChalkerCharles.morecolorful.common.item.ModDataComponents;
 import com.ChalkerCharles.morecolorful.common.item.ModItems;
 import com.ChalkerCharles.morecolorful.common.level.ModChunkStatus;
 import com.ChalkerCharles.morecolorful.common.loot.modifiers.ModLootModifiers;
+import com.ChalkerCharles.morecolorful.common.recipe.ModRecipeSerializers;
 import com.ChalkerCharles.morecolorful.common.worldgen.biomes.TerraBlenderUtils;
 import com.ChalkerCharles.morecolorful.common.worldgen.features.ModFeatures;
 import com.ChalkerCharles.morecolorful.common.worldgen.features.trees.ModFoliagePlacers;
@@ -51,8 +53,10 @@ public class MoreColorful {
         ModEntities.register(modEventBus);
         ModSounds.register(modEventBus);
         ModStats.register(modEventBus);
+        ModDataComponents.register(modEventBus);
         ModDataAttachments.register(modEventBus);
         ModParticles.register(modEventBus);
+        ModRecipeSerializers.register(modEventBus);
         ModLootModifiers.register(modEventBus);
         ModFoliagePlacers.register(modEventBus);
         ModTrunkPlacers.register(modEventBus);
@@ -64,11 +68,11 @@ public class MoreColorful {
         NeoForge.EVENT_BUS.register(ModCommonEvents.class);
         NeoForge.EVENT_BUS.addListener(VanillaBlockPropertyModifier::modifyDynamicProperties);
 
-        modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC_COMMON);
+        modContainer.registerConfig(ModConfig.Type.COMMON, Config.COMMON_SPEC);
 
         if (dist.isClient()) {
             NeoForge.EVENT_BUS.register(ModClientEvents.class);
-            modContainer.registerConfig(ModConfig.Type.CLIENT, Config.SPEC_CLIENT);
+            modContainer.registerConfig(ModConfig.Type.CLIENT, Config.CLIENT_SPEC);
             modContainer.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
         }
     }
@@ -111,5 +115,9 @@ public class MoreColorful {
 
     public static String key(String name) {
         return MODID + ':' + name;
+    }
+
+    public static String name(String name) {
+        return MODID + '_' + name;
     }
 }

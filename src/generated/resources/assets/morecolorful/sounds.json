@@ -130,6 +130,330 @@
     ],
     "subtitle": "morecolorful.subtitles.block.leaves.rustle"
   },
+  "block.music_box.banjo": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.note_block.banjo"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.block.music_box.play"
+  },
+  "block.music_box.basedrum": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.note_block.basedrum"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.block.music_box.play"
+  },
+  "block.music_box.bass": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.note_block.bass"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.block.music_box.play"
+  },
+  "block.music_box.bell": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.note_block.bell"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.block.music_box.play"
+  },
+  "block.music_box.bit": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.note_block.bit"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.block.music_box.play"
+  },
+  "block.music_box.cello": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "morecolorful:block.note_block.cello"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.block.music_box.play"
+  },
+  "block.music_box.chime": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.note_block.chime"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.block.music_box.play"
+  },
+  "block.music_box.cow_bell": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.note_block.cow_bell"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.block.music_box.play"
+  },
+  "block.music_box.crash": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "morecolorful:block.note_block.crash"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.block.music_box.play"
+  },
+  "block.music_box.crystal": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "morecolorful:block.note_block.crystal"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.block.music_box.play"
+  },
+  "block.music_box.didgeridoo": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.note_block.didgeridoo"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.block.music_box.play"
+  },
+  "block.music_box.electric_guitar": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "morecolorful:block.note_block.electric_guitar"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.block.music_box.play"
+  },
+  "block.music_box.erhu": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "morecolorful:block.note_block.erhu"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.block.music_box.play"
+  },
+  "block.music_box.flute": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.note_block.flute"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.block.music_box.play"
+  },
+  "block.music_box.guitar": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.note_block.guitar"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.block.music_box.play"
+  },
+  "block.music_box.guzheng": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "morecolorful:block.note_block.guzheng"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.block.music_box.play"
+  },
+  "block.music_box.harmonica": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "morecolorful:block.note_block.harmonica"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.block.music_box.play"
+  },
+  "block.music_box.harp": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.note_block.harp"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.block.music_box.play"
+  },
+  "block.music_box.hat": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.note_block.hat"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.block.music_box.play"
+  },
+  "block.music_box.iron_xylophone": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.note_block.iron_xylophone"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.block.music_box.play"
+  },
+  "block.music_box.ocarina": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "morecolorful:block.note_block.ocarina"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.block.music_box.play"
+  },
+  "block.music_box.piano_high": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "morecolorful:block.note_block.piano_high"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.block.music_box.play"
+  },
+  "block.music_box.piano_low": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "morecolorful:block.note_block.piano_low"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.block.music_box.play"
+  },
+  "block.music_box.pipa": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "morecolorful:block.note_block.pipa"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.block.music_box.play"
+  },
+  "block.music_box.pling": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.note_block.pling"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.block.music_box.play"
+  },
+  "block.music_box.pluck": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "morecolorful:block.note_block.pluck"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.block.music_box.play"
+  },
+  "block.music_box.ride": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "morecolorful:block.note_block.ride"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.block.music_box.play"
+  },
+  "block.music_box.saw": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "morecolorful:block.note_block.saw"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.block.music_box.play"
+  },
+  "block.music_box.saxophone": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "morecolorful:block.note_block.saxophone"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.block.music_box.play"
+  },
+  "block.music_box.sculk": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "morecolorful:block.note_block.sculk"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.block.music_box.play"
+  },
+  "block.music_box.snare": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.note_block.snare"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.block.music_box.play"
+  },
+  "block.music_box.synth_bass": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "morecolorful:block.note_block.synth_bass"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.block.music_box.play"
+  },
+  "block.music_box.tom": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "morecolorful:block.note_block.tom"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.block.music_box.play"
+  },
+  "block.music_box.trumpet": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "morecolorful:block.note_block.trumpet"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.block.music_box.play"
+  },
+  "block.music_box.violin": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "morecolorful:block.note_block.violin"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.block.music_box.play"
+  },
+  "block.music_box.xylophone": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.note_block.xylophone"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.block.music_box.play"
+  },
   "block.note_block.cello": {
     "sounds": [
       "morecolorful:note/cello"
@@ -448,6 +772,15 @@
     ],
     "subtitle": "subtitles.block.trapdoor.toggle"
   },
+  "block.ribbon.tied": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "entity.leash_knot.place"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.block.ribbon.tied"
+  },
   "block.ride.play": {
     "sounds": [
       "morecolorful:note/ride"
@@ -554,7 +887,10 @@
   },
   "entity.paper_plane.throw": {
     "sounds": [
-      "random/bow"
+      {
+        "type": "event",
+        "name": "entity.snowball.throw"
+      }
     ],
     "subtitle": "morecolorful.subtitles.entity.paper_plane.throw"
   },
@@ -642,6 +978,15 @@
     ],
     "subtitle": "morecolorful.subtitles.item.ocarina.play"
   },
+  "item.party_popper.pop": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "entity.firework_rocket.blast"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.item.party_popper.pop"
+  },
   "item.pipa.play": {
     "sounds": [
       "morecolorful:note/pipa"
@@ -653,6 +998,44 @@
       "morecolorful:note/saxophone"
     ],
     "subtitle": "morecolorful.subtitles.item.saxophone.play"
+  },
+  "item.shears.snip": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "entity.sheep.shear"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.item.shears.snip"
+  },
+  "item.sparkler.extinguish": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.fire.extinguish"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.item.sparkler.extinguish"
+  },
+  "item.sparkler.fizz": {
+    "sounds": [
+      "morecolorful:item/sparkler/fizz1",
+      "morecolorful:item/sparkler/fizz2",
+      "morecolorful:item/sparkler/fizz3",
+      "morecolorful:item/sparkler/fizz4",
+      "morecolorful:item/sparkler/fizz5",
+      "morecolorful:item/sparkler/fizz6"
+    ],
+    "subtitle": "morecolorful.subtitles.item.sparkler.fizz"
+  },
+  "item.sparkler.lit": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "item.flintandsteel.use"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.item.sparkler.lit"
   },
   "item.trumpet.play": {
     "sounds": [

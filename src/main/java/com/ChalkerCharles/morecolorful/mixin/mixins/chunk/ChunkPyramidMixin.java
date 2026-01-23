@@ -22,11 +22,11 @@ public abstract class ChunkPyramidMixin {
             )
     )
     private static ChunkPyramid.Builder addGenerationPyramid(ChunkPyramid.Builder original) {
-        if (Config.THERMAL_SYSTEM.isTrue()) {
+        if (Config.thermalSystem) {
             original.step(ModChunkStatus.INITIALIZE_THERMAL.get(), ChunkPyramidMixin::lambda$initializeThermal)
                     .step(ModChunkStatus.THERMAL.get(), ChunkPyramidMixin::lambda$thermal);
         }
-        if (Config.WIND_SYSTEM.isTrue()) {
+        if (Config.windSystem) {
             original.step(ModChunkStatus.INITIALIZE_VENT.get(), ChunkPyramidMixin::lambda$initializeVent)
                     .step(ModChunkStatus.VENTILATION.get(), ChunkPyramidMixin::lambda$ventilation);
         }
@@ -42,11 +42,11 @@ public abstract class ChunkPyramidMixin {
             )
     )
     private static ChunkPyramid.Builder addLoadingPyramid(ChunkPyramid.Builder original) {
-        if (Config.THERMAL_SYSTEM.isTrue()) {
+        if (Config.thermalSystem) {
             original.step(ModChunkStatus.INITIALIZE_THERMAL.get(), ChunkPyramidMixin::lambda$initializeThermal)
                     .step(ModChunkStatus.THERMAL.get(), ChunkPyramidMixin::lambda$thermal);
         }
-        if (Config.WIND_SYSTEM.isTrue()) {
+        if (Config.windSystem) {
             original.step(ModChunkStatus.INITIALIZE_VENT.get(), ChunkPyramidMixin::lambda$initializeVent)
                     .step(ModChunkStatus.VENTILATION.get(), ChunkPyramidMixin::lambda$ventilation);
         }

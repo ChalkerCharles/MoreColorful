@@ -27,7 +27,7 @@ public class WeatherVaneBlockEntity extends BlockEntity {
     }
 
     public static void tick(Level level, BlockPos pos, BlockState state, WeatherVaneBlockEntity blockEntity) {
-        if (Config.WIND_SYSTEM.isFalse()) return;
+        if (!Config.windSystem) return;
         float speed = blockEntity.rotate(level, pos);
         int power = state.getValue(WeatherVaneBlock.POWER);
         int power1 = getSignal(speed);

@@ -20,7 +20,7 @@ public final class WeatherUtils {
     }
 
     public static boolean isWindless(Level level) {
-        if (Config.WIND_SYSTEM.isFalse() || level.isDebug()) return true;
+        if (!Config.windSystem || level.isDebug()) return true;
         return Config.windlessDimensions.contains(level.dimension());
     }
 
@@ -203,7 +203,7 @@ public final class WeatherUtils {
     }
 
     public static int chanceByWind(Level level, BlockPos pos, int chance) {
-        if (Config.WIND_SYSTEM.isFalse()) return chance;
+        if (!Config.windSystem) return chance;
         Vector3f wind = getEffectiveWindSpeedAt(level, pos);
         if (wind != null) {
             float windSpeed = wind.length();

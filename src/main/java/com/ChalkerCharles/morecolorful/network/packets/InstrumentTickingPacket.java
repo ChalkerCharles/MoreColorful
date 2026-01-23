@@ -16,7 +16,7 @@ import net.neoforged.neoforge.network.handling.IPayloadHandler;
 import org.jetbrains.annotations.NotNull;
 
 public record InstrumentTickingPacket(float tick, int id) implements CustomPacketPayload {
-    public static final CustomPacketPayload.Type<InstrumentTickingPacket> TYPE = new CustomPacketPayload.Type<>(MoreColorful.location("tick"));
+    public static final Type<InstrumentTickingPacket> TYPE = new Type<>(MoreColorful.location("tick"));
 
     public static final StreamCodec<ByteBuf, InstrumentTickingPacket> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.FLOAT,

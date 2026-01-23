@@ -4,10 +4,7 @@ import com.ChalkerCharles.morecolorful.common.ModTags;
 import com.ChalkerCharles.morecolorful.common.block.ModBlocks;
 import com.ChalkerCharles.morecolorful.common.block.natural.BerryBushBlock;
 import com.ChalkerCharles.morecolorful.common.block.natural.LeafLitterBlock;
-import com.ChalkerCharles.morecolorful.common.block.properties.DrumSetPart;
-import com.ChalkerCharles.morecolorful.common.block.properties.HorizontalDoubleBlockHalf;
-import com.ChalkerCharles.morecolorful.common.block.properties.ModBlockStateProperties;
-import com.ChalkerCharles.morecolorful.common.block.properties.ReedPart;
+import com.ChalkerCharles.morecolorful.common.block.properties.*;
 import com.ChalkerCharles.morecolorful.common.item.ModItems;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.core.HolderLookup;
@@ -26,7 +23,6 @@ import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
-import net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer;
 import net.minecraft.world.level.storage.loot.entries.TagEntry;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
@@ -53,63 +49,43 @@ public abstract class ModBlockLootTableHelper extends BlockLootSubProvider {
 
     protected LootTable.Builder createLeavesWithExtraDrop(Block leavesBlock, Block saplingBlock, ItemLike extraDrop) {
         HolderLookup.RegistryLookup<Enchantment> registrylookup = this.registries.lookupOrThrow(Registries.ENCHANTMENT);
-        return this.createLeavesDrops(leavesBlock, saplingBlock, NORMAL_LEAVES_SAPLING_CHANCES)
-                .withPool(
-                        LootPool.lootPool()
-                                .setRolls(ConstantValue.exactly(1.0F))
-                                .when(this.doesNotHaveShearsOrSilkTouch())
-                                .add(
-                                        ((LootPoolSingletonContainer.Builder<?>)this.applyExplosionCondition(leavesBlock, LootItem.lootTableItem(extraDrop)))
-                                                .when(
-                                                        BonusLevelTableCondition.bonusLevelFlatChance(
-                                                                registrylookup.getOrThrow(Enchantments.FORTUNE), NORMAL_LEAVES_FRUIT_CHANCES
-                                                        )
-                                                )
-                                )
-                );
+        return this.createLeavesDrops(leavesBlock, saplingBlock, NORMAL_LEAVES_SAPLING_CHANCES).withPool(
+                LootPool.lootPool()
+                        .setRolls(ConstantValue.exactly(1.0F))
+                        .when(this.doesNotHaveShearsOrSilkTouch())
+                        .add(this.applyExplosionCondition(leavesBlock, LootItem.lootTableItem(extraDrop))
+                                .when(BonusLevelTableCondition.bonusLevelFlatChance(registrylookup.getOrThrow(Enchantments.FORTUNE), NORMAL_LEAVES_FRUIT_CHANCES))
+                        )
+        );
     }
 
     protected LootTable.Builder createLeavesWithLeafPile(Block leavesBlock, Block saplingBlock, ItemLike extraDrop) {
         HolderLookup.RegistryLookup<Enchantment> registrylookup = this.registries.lookupOrThrow(Registries.ENCHANTMENT);
-        return this.createLeavesDrops(leavesBlock, saplingBlock, NORMAL_LEAVES_SAPLING_CHANCES)
-                .withPool(
-                        LootPool.lootPool()
-                                .setRolls(ConstantValue.exactly(1.0F))
-                                .when(this.doesNotHaveShearsOrSilkTouch())
-                                .add(
-                                        ((LootPoolSingletonContainer.Builder<?>)this.applyExplosionCondition(leavesBlock, LootItem.lootTableItem(extraDrop)
-                                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))))
-                                                .when(
-                                                        BonusLevelTableCondition.bonusLevelFlatChance(
-                                                                registrylookup.getOrThrow(Enchantments.FORTUNE), NORMAL_LEAVES_SAPLING_CHANCES
-                                                        )
-                                                )
-                                )
-                );
+        return this.createLeavesDrops(leavesBlock, saplingBlock, NORMAL_LEAVES_SAPLING_CHANCES).withPool(
+                LootPool.lootPool()
+                        .setRolls(ConstantValue.exactly(1.0F))
+                        .when(this.doesNotHaveShearsOrSilkTouch())
+                        .add(this.applyExplosionCondition(leavesBlock, LootItem.lootTableItem(extraDrop).apply(
+                                SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))))
+                        .when(BonusLevelTableCondition.bonusLevelFlatChance(registrylookup.getOrThrow(Enchantments.FORTUNE), NORMAL_LEAVES_SAPLING_CHANCES))
+        );
     }
 
     protected LootTable.Builder createLeafLitterDrops(Block leafPileBlock) {
-        return LootTable.lootTable()
-                .withPool(
-                        LootPool.lootPool()
-                                .setRolls(ConstantValue.exactly(1.0F))
-                                .add(
-                                        this.applyExplosionDecay(
-                                                leafPileBlock,
-                                                LootItem.lootTableItem(leafPileBlock)
-                                                        .apply(
-                                                                IntStream.rangeClosed(1, 4).boxed().toList(),
-                                                                integer -> SetItemCountFunction.setCount(ConstantValue.exactly((float) integer))
-                                                                        .when(
-                                                                                LootItemBlockStatePropertyCondition.hasBlockStateProperties(leafPileBlock)
-                                                                                        .setProperties(
-                                                                                                StatePropertiesPredicate.Builder.properties().hasProperty(LeafLitterBlock.AMOUNT, integer)
-                                                                                        )
-                                                                        )
-                                                        )
+        return LootTable.lootTable().withPool(
+                LootPool.lootPool()
+                        .setRolls(ConstantValue.exactly(1.0F))
+                        .add(this.applyExplosionDecay(leafPileBlock, LootItem.lootTableItem(leafPileBlock).apply(
+                                IntStream.rangeClosed(1, 4).boxed().toList(),
+                                integer -> SetItemCountFunction.setCount(ConstantValue.exactly(integer))
+                                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(leafPileBlock)
+                                                .setProperties(
+                                                        StatePropertiesPredicate.Builder.properties().hasProperty(LeafLitterBlock.AMOUNT, integer)
+                                                )
                                         )
-                                )
-                );
+                                ))
+                        )
+        );
     }
 
     protected LootTable.Builder createWaterGrassDrops(Block waterGrassBlock) {
@@ -123,52 +99,54 @@ public abstract class ModBlockLootTableHelper extends BlockLootSubProvider {
 
     protected LootTable.Builder createBerryBushDrops(Block berryBush, ItemLike berry) {
         HolderLookup.RegistryLookup<Enchantment> registrylookup = this.registries.lookupOrThrow(Registries.ENCHANTMENT);
-        return LootTable.lootTable()
-                .withPool(
-                        LootPool.lootPool()
-                                .when(
-                                        LootItemBlockStatePropertyCondition.hasBlockStateProperties(berryBush)
-                                                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(BerryBushBlock.AGE, 4))
-                                )
-                                .add(LootItem.lootTableItem(berry))
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
-                                .apply(ApplyBonusCount.addUniformBonusCount(registrylookup.getOrThrow(Enchantments.FORTUNE)))
-                );
+        return LootTable.lootTable().withPool(
+                LootPool.lootPool()
+                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(berryBush)
+                                        .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(BerryBushBlock.AGE, 4))
+                        )
+                        .add(LootItem.lootTableItem(berry))
+                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
+                        .apply(ApplyBonusCount.addUniformBonusCount(registrylookup.getOrThrow(Enchantments.FORTUNE)))
+        );
     }
 
     protected LootTable.Builder createDrumSetDrops() {
         return LootTable.lootTable().withPool(this.applyExplosionCondition(ModBlocks.DRUM_SET, LootPool.lootPool()
                         .setRolls(ConstantValue.exactly(1.0F))
-                        .add(
-                                TagEntry.tagContents(ModTags.Items.DRUM_SET_PARTS)
-                                        .when(
-                                                LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.DRUM_SET.get())
-                                                        .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(ModBlockStateProperties.DRUM_SET_PART, DrumSetPart.MID_LOWER))
-                                        )
+                        .add(TagEntry.tagContents(ModTags.Items.DRUM_SET_PARTS)
+                                .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.DRUM_SET.get())
+                                        .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(ModBlockStateProperties.DRUM_SET_PART, DrumSetPart.MID_LOWER))
+                                )
                         )
                 )
         );
     }
 
     protected LootTable.Builder createReedDrops() {
-        return LootTable.lootTable().withPool(this.applyExplosionCondition(ModBlocks.REED, LootPool.lootPool()
+        return LootTable.lootTable().withPool(this.applyExplosionCondition(ModBlocks.REED,
+                LootPool.lootPool()
                         .setRolls(ConstantValue.exactly(1.0F))
-                        .add(
-                                LootItem.lootTableItem(ModItems.REED)
-                                        .when(
-                                                LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.REED.get())
-                                                        .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(ModBlockStateProperties.REED_PART, ReedPart.LOWER))
-                                        ).apply(
-                                                SetItemCountFunction.setCount(ConstantValue.exactly(2.0F))
-                                                        .when(
-                                                                LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.REED.get())
-                                                                        .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(ModBlockStateProperties.TALL_REED, true))
-                                                        )
-                                        )
+                        .add(LootItem.lootTableItem(ModItems.REED)
+                                .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.REED.get())
+                                                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(ModBlockStateProperties.REED_PART, ReedPart.LOWER))
+                                ).apply(SetItemCountFunction.setCount(ConstantValue.exactly(2.0F))
+                                                .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.REED.get())
+                                                                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(ModBlockStateProperties.TALL_REED, true))
+                                                )
+                                )
                         )
                 )
         );
     }
+
+//    protected LootTable.Builder createRibbonDrops(Block block) {
+//        return LootTable.lootTable().withPool(
+//                LootPool.lootPool()
+//                        .add(this.applyExplosionDecay(block, LootItem.lootTableItem(block)
+//                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F), true))
+//                        ))
+//        );
+//    }
 
     protected void add(Supplier<? extends Block> block, LootTable.Builder builder) {
         this.add(block.get(), builder);
@@ -228,7 +206,7 @@ public abstract class ModBlockLootTableHelper extends BlockLootSubProvider {
 
     protected void dropForHorizontalDoubleBlock(Supplier<? extends Block> block) {
         Block b = block.get();
-        this.add(b, createSinglePropConditionTable(b, ModBlockStateProperties.HORIZONTAL_HALF, HorizontalDoubleBlockHalf.RIGHT));
+        this.add(b, createSinglePropConditionTable(b, ModBlockStateProperties.HORIZONTAL_HALF, HorizontalHalf.RIGHT));
     }
 
     protected void dropForWaterGrass(Supplier<? extends Block> block) {
@@ -240,4 +218,8 @@ public abstract class ModBlockLootTableHelper extends BlockLootSubProvider {
         Block b = block.get();
         this.add(b, createShearsOnlyDrop(b));
     }
+
+//    protected void dropForRibbon(Block block) {
+//        this.add(block, createRibbonDrops(block));
+//    }
 }

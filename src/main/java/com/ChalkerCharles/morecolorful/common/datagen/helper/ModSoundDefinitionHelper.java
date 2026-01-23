@@ -48,6 +48,12 @@ public abstract class ModSoundDefinitionHelper extends SoundDefinitionsProvider 
                 .subtitle("morecolorful.subtitles." + type + "." + instrument + ".play"));
     }
 
+    protected void musicBox(Holder<SoundEvent> soundEvent, Holder<SoundEvent> source) {
+        add(soundEvent.value(), SoundDefinition.definition()
+                .with(sound(source.value().getLocation(), SoundDefinition.SoundType.EVENT))
+                .subtitle("morecolorful.subtitles.block.music_box.play"));
+    }
+
     protected void generic(Supplier<SoundEvent> soundEvent, @Nullable String subtitle, String... soundFiles) {
         SoundDefinition definition = SoundDefinition.definition();
         for (String i : soundFiles) {
@@ -56,12 +62,8 @@ public abstract class ModSoundDefinitionHelper extends SoundDefinitionsProvider 
         add(soundEvent, definition.subtitle(subtitle));
     }
 
-    protected void vanilla(Supplier<SoundEvent> soundEvent, @Nullable String subtitle, String... soundFiles) {
-        SoundDefinition definition = SoundDefinition.definition();
-        for (String i : soundFiles) {
-            definition.with(sound(i));
-        }
-        add(soundEvent, definition.subtitle(subtitle));
+    protected void vanilla(Supplier<SoundEvent> soundEvent, @Nullable String subtitle, SoundEvent source) {
+        add(soundEvent, SoundDefinition.definition().with(sound(source.getLocation(), SoundDefinition.SoundType.EVENT)).subtitle(subtitle));
     }
 
     protected void click(Supplier<SoundEvent> soundEvent, String soundFile, double pitch, double volume, String subtitle) {

@@ -2,10 +2,11 @@ package com.ChalkerCharles.morecolorful.common.item;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.common.block.ModBlocks;
-import com.ChalkerCharles.morecolorful.common.item.misc.DuckweedsItem;
-import com.ChalkerCharles.morecolorful.common.item.misc.PaperPlaneItem;
+import com.ChalkerCharles.morecolorful.common.entity.BoatTypeExtension;
+import com.ChalkerCharles.morecolorful.common.item.component.EditableMelody;
+import com.ChalkerCharles.morecolorful.common.item.component.PinwheelContext;
+import com.ChalkerCharles.morecolorful.common.item.misc.*;
 import com.ChalkerCharles.morecolorful.common.item.musical.*;
-import com.ChalkerCharles.morecolorful.util.EnumExtensions;
 import com.ChalkerCharles.morecolorful.util.InstrumentsType;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.*;
@@ -42,6 +43,7 @@ public class ModItems {
     public static final DeferredItem<BlockItem> SYNTHESIZER_KEYBOARD_PLUCK = registerSynthesizerKeyboard(ModBlocks.SYNTHESIZER_KEYBOARD_PLUCK);
     public static final DeferredItem<BlockItem> SYNTHESIZER_KEYBOARD_SYNTH_BASS = registerSynthesizerKeyboard(ModBlocks.SYNTHESIZER_KEYBOARD_SYNTH_BASS);
     public static final DeferredItem<BlockItem> GUZHENG = registerBlockItem(ModBlocks.GUZHENG);
+    public static final DeferredItem<BlockItem> MUSIC_BOX = registerBlockItem(ModBlocks.MUSIC_BOX);
 
     public static final DeferredItem<BlockItem> CRABAPPLE_LOG = registerBlockItem(ModBlocks.CRABAPPLE_LOG);
     public static final DeferredItem<BlockItem> CRABAPPLE_WOOD = registerBlockItem(ModBlocks.CRABAPPLE_WOOD);
@@ -233,49 +235,117 @@ public class ModItems {
     public static final DeferredItem<BlockItem> CLOSED_BLUE_WATER_LILY = registerPlaceOnWaterItem(ModBlocks.CLOSED_BLUE_WATER_LILY);
     public static final DeferredItem<BlockItem> DUCKWEEDS = registerBlockItem(ModBlocks.DUCKWEEDS, () -> new DuckweedsItem(ModBlocks.DUCKWEEDS.get(), properties()));
 
+    public static final DeferredItem<BlockItem> WHITE_RIBBON = registerBlockItem(ModBlocks.WHITE_RIBBON);
+    public static final DeferredItem<BlockItem> ORANGE_RIBBON = registerBlockItem(ModBlocks.ORANGE_RIBBON);
+    public static final DeferredItem<BlockItem> MAGENTA_RIBBON = registerBlockItem(ModBlocks.MAGENTA_RIBBON);
+    public static final DeferredItem<BlockItem> LIGHT_BLUE_RIBBON = registerBlockItem(ModBlocks.LIGHT_BLUE_RIBBON);
+    public static final DeferredItem<BlockItem> YELLOW_RIBBON = registerBlockItem(ModBlocks.YELLOW_RIBBON);
+    public static final DeferredItem<BlockItem> LIME_RIBBON = registerBlockItem(ModBlocks.LIME_RIBBON);
+    public static final DeferredItem<BlockItem> PINK_RIBBON = registerBlockItem(ModBlocks.PINK_RIBBON);
+    public static final DeferredItem<BlockItem> GRAY_RIBBON = registerBlockItem(ModBlocks.GRAY_RIBBON);
+    public static final DeferredItem<BlockItem> LIGHT_GRAY_RIBBON = registerBlockItem(ModBlocks.LIGHT_GRAY_RIBBON);
+    public static final DeferredItem<BlockItem> CYAN_RIBBON = registerBlockItem(ModBlocks.CYAN_RIBBON);
+    public static final DeferredItem<BlockItem> PURPLE_RIBBON = registerBlockItem(ModBlocks.PURPLE_RIBBON);
+    public static final DeferredItem<BlockItem> BLUE_RIBBON = registerBlockItem(ModBlocks.BLUE_RIBBON);
+    public static final DeferredItem<BlockItem> BROWN_RIBBON = registerBlockItem(ModBlocks.BROWN_RIBBON);
+    public static final DeferredItem<BlockItem> GREEN_RIBBON = registerBlockItem(ModBlocks.GREEN_RIBBON);
+    public static final DeferredItem<BlockItem> RED_RIBBON = registerBlockItem(ModBlocks.RED_RIBBON);
+    public static final DeferredItem<BlockItem> BLACK_RIBBON = registerBlockItem(ModBlocks.BLACK_RIBBON);
+
     public static final DeferredItem<BlockItem> FAN_BLOCK = registerBlockItem(ModBlocks.FAN_BLOCK);
     public static final DeferredItem<BlockItem> WEATHER_VANE = registerBlockItem(ModBlocks.WEATHER_VANE);
+    public static final DeferredItem<BlockItem> WHITE_PINWHEEL = registerPinwheel(ModBlocks.WHITE_PINWHEEL);
+    public static final DeferredItem<BlockItem> ORANGE_PINWHEEL = registerPinwheel(ModBlocks.ORANGE_PINWHEEL);
+    public static final DeferredItem<BlockItem> MAGENTA_PINWHEEL = registerPinwheel(ModBlocks.MAGENTA_PINWHEEL);
+    public static final DeferredItem<BlockItem> LIGHT_BLUE_PINWHEEL = registerPinwheel(ModBlocks.LIGHT_BLUE_PINWHEEL);
+    public static final DeferredItem<BlockItem> YELLOW_PINWHEEL = registerPinwheel(ModBlocks.YELLOW_PINWHEEL);
+    public static final DeferredItem<BlockItem> LIME_PINWHEEL = registerPinwheel(ModBlocks.LIME_PINWHEEL);
+    public static final DeferredItem<BlockItem> PINK_PINWHEEL = registerPinwheel(ModBlocks.PINK_PINWHEEL);
+    public static final DeferredItem<BlockItem> GRAY_PINWHEEL = registerPinwheel(ModBlocks.GRAY_PINWHEEL);
+    public static final DeferredItem<BlockItem> LIGHT_GRAY_PINWHEEL = registerPinwheel(ModBlocks.LIGHT_GRAY_PINWHEEL);
+    public static final DeferredItem<BlockItem> CYAN_PINWHEEL = registerPinwheel(ModBlocks.CYAN_PINWHEEL);
+    public static final DeferredItem<BlockItem> PURPLE_PINWHEEL = registerPinwheel(ModBlocks.PURPLE_PINWHEEL);
+    public static final DeferredItem<BlockItem> BLUE_PINWHEEL = registerPinwheel(ModBlocks.BLUE_PINWHEEL);
+    public static final DeferredItem<BlockItem> BROWN_PINWHEEL = registerPinwheel(ModBlocks.BROWN_PINWHEEL);
+    public static final DeferredItem<BlockItem> GREEN_PINWHEEL = registerPinwheel(ModBlocks.GREEN_PINWHEEL);
+    public static final DeferredItem<BlockItem> RED_PINWHEEL = registerPinwheel(ModBlocks.RED_PINWHEEL);
+    public static final DeferredItem<BlockItem> BLACK_PINWHEEL = registerPinwheel(ModBlocks.BLACK_PINWHEEL);
+    public static final DeferredItem<BlockItem> MULTICOLORED_PINWHEEL = registerPinwheel(ModBlocks.MULTICOLORED_PINWHEEL);
 
     // Items
-    public static final DeferredItem<Item> VIOLIN = register("violin", () -> new BowedStringInstrumentItem(InstrumentsType.VIOLIN, properties().stacksTo(1)));
-    public static final DeferredItem<Item> FIDDLE_BOW = register("fiddle_bow", () -> new Item(properties().stacksTo(1)));
+    public static final DeferredItem<Item> VIOLIN = register("violin", () -> new BowedStringInstrumentItem(InstrumentsType.VIOLIN, nonStackable()));
+    public static final DeferredItem<Item> FIDDLE_BOW = register("fiddle_bow", () -> new Item(nonStackable()));
     public static final DeferredItem<Item> DRUMSTICK = register("drumstick", () -> new DrumstickItem(properties()));
-    public static final DeferredItem<Item> BASS = register("bass", () -> new GuitarItem(InstrumentsType.BASS, properties().stacksTo(1)));
-    public static final DeferredItem<Item> GUITAR = register("guitar", () -> new GuitarItem(InstrumentsType.GUITAR, properties().stacksTo(1)));
-    public static final DeferredItem<Item> FLUTE = register("flute", () -> new BothHandsInstrumentItem(InstrumentsType.FLUTE, properties().stacksTo(1)));
-    public static final DeferredItem<Item> COW_BELL = register("cow_bell", () -> new CowBellItem(InstrumentsType.COW_BELL, properties().stacksTo(1)));
-    public static final DeferredItem<Item> DIDGERIDOO = register("didgeridoo", () -> new DidgeridooItem(InstrumentsType.DIDGERIDOO, properties().stacksTo(1)));
-    public static final DeferredItem<Item> BANJO = register("banjo", () -> new GuitarItem(InstrumentsType.BANJO, properties().stacksTo(1)));
-    public static final DeferredItem<Item> CELLO = register("cello", () -> new BowedStringInstrumentItem(InstrumentsType.CELLO, properties().stacksTo(1)));
-    public static final DeferredItem<Item> ELECTRIC_GUITAR = register("electric_guitar", () -> new GuitarItem(InstrumentsType.ELECTRIC_GUITAR, properties().stacksTo(1)));
-    public static final DeferredItem<Item> TRUMPET = register("trumpet", () -> new TrumpetItem(InstrumentsType.TRUMPET, properties().stacksTo(1)));
-    public static final DeferredItem<Item> SAXOPHONE = register("saxophone", () -> new DidgeridooItem(InstrumentsType.SAXOPHONE, properties().stacksTo(1)));
-    public static final DeferredItem<Item> OCARINA = register("ocarina", () -> new DidgeridooItem(InstrumentsType.OCARINA, properties().stacksTo(1)));
-    public static final DeferredItem<Item> HARMONICA = register("harmonica", () -> new DidgeridooItem(InstrumentsType.HARMONICA, properties().stacksTo(1)));
-    public static final DeferredItem<Item> PIPA = register("pipa", () -> new BothHandsInstrumentItem(InstrumentsType.PIPA, properties().stacksTo(1)));
-    public static final DeferredItem<Item> ERHU = register("erhu", () -> new BowedStringInstrumentItem(InstrumentsType.ERHU, properties().stacksTo(1)));
+    public static final DeferredItem<Item> BASS = register("bass", () -> new GuitarItem(InstrumentsType.BASS, nonStackable()));
+    public static final DeferredItem<Item> GUITAR = register("guitar", () -> new GuitarItem(InstrumentsType.GUITAR, nonStackable()));
+    public static final DeferredItem<Item> FLUTE = register("flute", () -> new BothHandsInstrumentItem(InstrumentsType.FLUTE, nonStackable()));
+    public static final DeferredItem<Item> COW_BELL = register("cow_bell", () -> new CowBellItem(InstrumentsType.COW_BELL, nonStackable()));
+    public static final DeferredItem<Item> DIDGERIDOO = register("didgeridoo", () -> new DidgeridooItem(InstrumentsType.DIDGERIDOO, nonStackable()));
+    public static final DeferredItem<Item> BANJO = register("banjo", () -> new GuitarItem(InstrumentsType.BANJO, nonStackable()));
+    public static final DeferredItem<Item> CELLO = register("cello", () -> new BowedStringInstrumentItem(InstrumentsType.CELLO, nonStackable()));
+    public static final DeferredItem<Item> ELECTRIC_GUITAR = register("electric_guitar", () -> new GuitarItem(InstrumentsType.ELECTRIC_GUITAR, nonStackable()));
+    public static final DeferredItem<Item> TRUMPET = register("trumpet", () -> new TrumpetItem(InstrumentsType.TRUMPET, nonStackable()));
+    public static final DeferredItem<Item> SAXOPHONE = register("saxophone", () -> new DidgeridooItem(InstrumentsType.SAXOPHONE, nonStackable()));
+    public static final DeferredItem<Item> OCARINA = register("ocarina", () -> new DidgeridooItem(InstrumentsType.OCARINA, nonStackable()));
+    public static final DeferredItem<Item> HARMONICA = register("harmonica", () -> new DidgeridooItem(InstrumentsType.HARMONICA, nonStackable()));
+    public static final DeferredItem<Item> PIPA = register("pipa", () -> new BothHandsInstrumentItem(InstrumentsType.PIPA, nonStackable()));
+    public static final DeferredItem<Item> ERHU = register("erhu", () -> new BowedStringInstrumentItem(InstrumentsType.ERHU, nonStackable()));
+    public static final DeferredItem<Item> WRITABLE_SHEET_MUSIC = register("writable_sheet_music", () -> new WritableSheetMusicItem(nonStackable().component(ModDataComponents.EDITABLE_MELODY.get(), EditableMelody.EMPTY)));
+    public static final DeferredItem<Item> SHEET_MUSIC = register("sheet_music", () -> new SheetMusicItem(nonStackable()));
 
-    public static final DeferredItem<Item> CRABAPPLE_BOAT = register("crabapple_boat", () -> new BoatItem(false, EnumExtensions.BoatType.CRABAPPLE.getValue(), properties().stacksTo(1)));
-    public static final DeferredItem<Item> CRABAPPLE_CHEST_BOAT = register("crabapple_chest_boat", () -> new BoatItem(true, EnumExtensions.BoatType.CRABAPPLE.getValue(), properties().stacksTo(1)));
-    public static final DeferredItem<Item> EBONY_BOAT = register("ebony_boat", () -> new BoatItem(false, EnumExtensions.BoatType.EBONY.getValue(), properties().stacksTo(1)));
-    public static final DeferredItem<Item> EBONY_CHEST_BOAT = register("ebony_chest_boat", () -> new BoatItem(true, EnumExtensions.BoatType.EBONY.getValue(), properties().stacksTo(1)));
-    public static final DeferredItem<Item> GINKGO_BOAT = register("ginkgo_boat", () -> new BoatItem(false, EnumExtensions.BoatType.GINKGO.getValue(), properties().stacksTo(1)));
-    public static final DeferredItem<Item> GINKGO_CHEST_BOAT = register("ginkgo_chest_boat", () -> new BoatItem(true, EnumExtensions.BoatType.GINKGO.getValue(), properties().stacksTo(1)));
-    public static final DeferredItem<Item> MAPLE_BOAT = register("maple_boat", () -> new BoatItem(false, EnumExtensions.BoatType.MAPLE.getValue(), properties().stacksTo(1)));
-    public static final DeferredItem<Item> MAPLE_CHEST_BOAT = register("maple_chest_boat", () -> new BoatItem(true, EnumExtensions.BoatType.MAPLE.getValue(), properties().stacksTo(1)));
-    public static final DeferredItem<Item> FROST_BOAT = register("frost_boat", () -> new BoatItem(false, EnumExtensions.BoatType.FROST.getValue(), properties().stacksTo(1)));
-    public static final DeferredItem<Item> FROST_CHEST_BOAT = register("frost_chest_boat", () -> new BoatItem(true, EnumExtensions.BoatType.FROST.getValue(), properties().stacksTo(1)));
-    public static final DeferredItem<Item> DAWN_REDWOOD_BOAT = register("dawn_redwood_boat", () -> new BoatItem(false, EnumExtensions.BoatType.DAWN_REDWOOD.getValue(), properties().stacksTo(1)));
-    public static final DeferredItem<Item> DAWN_REDWOOD_CHEST_BOAT = register("dawn_redwood_chest_boat", () -> new BoatItem(true, EnumExtensions.BoatType.DAWN_REDWOOD.getValue(), properties().stacksTo(1)));
-    public static final DeferredItem<Item> JACARANDA_BOAT = register("jacaranda_boat", () -> new BoatItem(false, EnumExtensions.BoatType.JACARANDA.getValue(), properties().stacksTo(1)));
-    public static final DeferredItem<Item> JACARANDA_CHEST_BOAT = register("jacaranda_chest_boat", () -> new BoatItem(true, EnumExtensions.BoatType.JACARANDA.getValue(), properties().stacksTo(1)));
-    public static final DeferredItem<Item> WILLOW_BOAT = register("willow_boat", () -> new BoatItem(false, EnumExtensions.BoatType.WILLOW.getValue(), properties().stacksTo(1)));
-    public static final DeferredItem<Item> WILLOW_CHEST_BOAT = register("willow_chest_boat", () -> new BoatItem(true, EnumExtensions.BoatType.WILLOW.getValue(), properties().stacksTo(1)));
+    public static final DeferredItem<Item> CRABAPPLE_BOAT = register("crabapple_boat", () -> new BoatItem(false, BoatTypeExtension.CRABAPPLE, nonStackable()));
+    public static final DeferredItem<Item> CRABAPPLE_CHEST_BOAT = register("crabapple_chest_boat", () -> new BoatItem(true, BoatTypeExtension.CRABAPPLE, nonStackable()));
+    public static final DeferredItem<Item> EBONY_BOAT = register("ebony_boat", () -> new BoatItem(false, BoatTypeExtension.EBONY, nonStackable()));
+    public static final DeferredItem<Item> EBONY_CHEST_BOAT = register("ebony_chest_boat", () -> new BoatItem(true, BoatTypeExtension.EBONY, nonStackable()));
+    public static final DeferredItem<Item> GINKGO_BOAT = register("ginkgo_boat", () -> new BoatItem(false, BoatTypeExtension.GINKGO, nonStackable()));
+    public static final DeferredItem<Item> GINKGO_CHEST_BOAT = register("ginkgo_chest_boat", () -> new BoatItem(true, BoatTypeExtension.GINKGO, nonStackable()));
+    public static final DeferredItem<Item> MAPLE_BOAT = register("maple_boat", () -> new BoatItem(false, BoatTypeExtension.MAPLE, nonStackable()));
+    public static final DeferredItem<Item> MAPLE_CHEST_BOAT = register("maple_chest_boat", () -> new BoatItem(true, BoatTypeExtension.MAPLE, nonStackable()));
+    public static final DeferredItem<Item> FROST_BOAT = register("frost_boat", () -> new BoatItem(false, BoatTypeExtension.FROST, nonStackable()));
+    public static final DeferredItem<Item> FROST_CHEST_BOAT = register("frost_chest_boat", () -> new BoatItem(true, BoatTypeExtension.FROST, nonStackable()));
+    public static final DeferredItem<Item> DAWN_REDWOOD_BOAT = register("dawn_redwood_boat", () -> new BoatItem(false, BoatTypeExtension.DAWN_REDWOOD, nonStackable()));
+    public static final DeferredItem<Item> DAWN_REDWOOD_CHEST_BOAT = register("dawn_redwood_chest_boat", () -> new BoatItem(true, BoatTypeExtension.DAWN_REDWOOD, nonStackable()));
+    public static final DeferredItem<Item> JACARANDA_BOAT = register("jacaranda_boat", () -> new BoatItem(false, BoatTypeExtension.JACARANDA, nonStackable()));
+    public static final DeferredItem<Item> JACARANDA_CHEST_BOAT = register("jacaranda_chest_boat", () -> new BoatItem(true, BoatTypeExtension.JACARANDA, nonStackable()));
+    public static final DeferredItem<Item> WILLOW_BOAT = register("willow_boat", () -> new BoatItem(false, BoatTypeExtension.WILLOW, nonStackable()));
+    public static final DeferredItem<Item> WILLOW_CHEST_BOAT = register("willow_chest_boat", () -> new BoatItem(true, BoatTypeExtension.WILLOW, nonStackable()));
 
     public static final DeferredItem<Item> STRAWBERRY = register("strawberry", () -> new ItemNameBlockItem(ModBlocks.STRAWBERRY_BUSH.get(), properties().food(ModFoods.STRAWBERRY)));
     public static final DeferredItem<Item> BLUEBERRIES = register("blueberries", () -> new ItemNameBlockItem(ModBlocks.BLUEBERRY_BUSH.get(), properties().food(ModFoods.BLUEBERRY)));
     
-    public static final DeferredItem<Item> PAPER_PLANE = register("paper_plane", () -> new PaperPlaneItem(properties().stacksTo(16)));
+    public static final DeferredItem<Item> PAPER_PLANE = register("paper_plane", () -> new PaperPlaneItem(stackTo16()));
+    public static final DeferredItem<Item> PAPER_BOAT = register("paper_boat", () -> new PaperBoatItem(stackTo16()));
+    public static final DeferredItem<Item> CONFETTI = register("confetti", () -> new Item(properties()));
+    public static final DeferredItem<Item> WHITE_PARTY_POPPER = register("white_party_popper", () -> new PartyPopperItem(stackTo16()));
+    public static final DeferredItem<Item> ORANGE_PARTY_POPPER = register("orange_party_popper", () -> new PartyPopperItem(stackTo16()));
+    public static final DeferredItem<Item> MAGENTA_PARTY_POPPER = register("magenta_party_popper", () -> new PartyPopperItem(stackTo16()));
+    public static final DeferredItem<Item> LIGHT_BLUE_PARTY_POPPER = register("light_blue_party_popper", () -> new PartyPopperItem(stackTo16()));
+    public static final DeferredItem<Item> YELLOW_PARTY_POPPER = register("yellow_party_popper", () -> new PartyPopperItem(stackTo16()));
+    public static final DeferredItem<Item> LIME_PARTY_POPPER = register("lime_party_popper", () -> new PartyPopperItem(stackTo16()));
+    public static final DeferredItem<Item> PINK_PARTY_POPPER = register("pink_party_popper", () -> new PartyPopperItem(stackTo16()));
+    public static final DeferredItem<Item> GRAY_PARTY_POPPER = register("gray_party_popper", () -> new PartyPopperItem(stackTo16()));
+    public static final DeferredItem<Item> LIGHT_GRAY_PARTY_POPPER = register("light_gray_party_popper", () -> new PartyPopperItem(stackTo16()));
+    public static final DeferredItem<Item> CYAN_PARTY_POPPER = register("cyan_party_popper", () -> new PartyPopperItem(stackTo16()));
+    public static final DeferredItem<Item> PURPLE_PARTY_POPPER = register("purple_party_popper", () -> new PartyPopperItem(stackTo16()));
+    public static final DeferredItem<Item> BLUE_PARTY_POPPER = register("blue_party_popper", () -> new PartyPopperItem(stackTo16()));
+    public static final DeferredItem<Item> BROWN_PARTY_POPPER = register("brown_party_popper", () -> new PartyPopperItem(stackTo16()));
+    public static final DeferredItem<Item> GREEN_PARTY_POPPER = register("green_party_popper", () -> new PartyPopperItem(stackTo16()));
+    public static final DeferredItem<Item> RED_PARTY_POPPER = register("red_party_popper", () -> new PartyPopperItem(stackTo16()));
+    public static final DeferredItem<Item> BLACK_PARTY_POPPER = register("black_party_popper", () -> new PartyPopperItem(stackTo16()));
+
+    public static final DeferredItem<Item> WHITE_SPARKLER = registerSparkler("white_sparkler");
+    public static final DeferredItem<Item> BROWN_SPARKLER = registerSparkler("brown_sparkler");
+    public static final DeferredItem<Item> RED_SPARKLER = registerSparkler("red_sparkler");
+    public static final DeferredItem<Item> ORANGE_SPARKLER = registerSparkler("orange_sparkler");
+    public static final DeferredItem<Item> YELLOW_SPARKLER = registerSparkler("yellow_sparkler");
+    public static final DeferredItem<Item> LIME_SPARKLER = registerSparkler("lime_sparkler");
+    public static final DeferredItem<Item> GREEN_SPARKLER = registerSparkler("green_sparkler");
+    public static final DeferredItem<Item> CYAN_SPARKLER = registerSparkler("cyan_sparkler");
+    public static final DeferredItem<Item> LIGHT_BLUE_SPARKLER = registerSparkler("light_blue_sparkler");
+    public static final DeferredItem<Item> BLUE_SPARKLER = registerSparkler("blue_sparkler");
+    public static final DeferredItem<Item> PURPLE_SPARKLER = registerSparkler("purple_sparkler");
+    public static final DeferredItem<Item> MAGENTA_SPARKLER = registerSparkler("magenta_sparkler");
+    public static final DeferredItem<Item> PINK_SPARKLER = registerSparkler("pink_sparkler");
 
     private static DeferredItem<Item> register(String name, Supplier<Item> supplier) {
         return ITEMS.register(name, supplier);
@@ -294,19 +364,35 @@ public class ModItems {
     }
     
     private static DeferredItem<BlockItem> registerSign(DeferredBlock<StandingSignBlock> sign, DeferredBlock<WallSignBlock> wallSign) {
-        return registerBlockItem(sign, () -> new SignItem(properties().stacksTo(16), sign.get(), wallSign.get()));
+        return registerBlockItem(sign, () -> new SignItem(stackTo16(), sign.get(), wallSign.get()));
     }
     
     private static DeferredItem<BlockItem> registerHangingSign(DeferredBlock<CeilingHangingSignBlock> hangingSign, DeferredBlock<WallHangingSignBlock> wallHangingSign) {
-        return registerBlockItem(hangingSign,  () -> new HangingSignItem(hangingSign.get(), wallHangingSign.get(), properties().stacksTo(16)));
+        return registerBlockItem(hangingSign,  () -> new HangingSignItem(hangingSign.get(), wallHangingSign.get(), stackTo16()));
     }
     
     private static DeferredItem<BlockItem> registerPlaceOnWaterItem(DeferredBlock<Block> block) {
         return registerBlockItem(block, () -> new PlaceOnWaterBlockItem(block.get(), properties()));
     }
+
+    private static DeferredItem<BlockItem> registerPinwheel(DeferredBlock<Block> block) {
+        return registerBlockItem(block, () -> new PinwheelItem(block.get(), properties().component(ModDataComponents.PINWHEEL_CONTEXT, PinwheelContext.DEFAULT)));
+    }
+
+    private static DeferredItem<Item> registerSparkler(String name) {
+        return register(name, () -> new SparklerItem(properties().durability(60).setNoRepair()));
+    }
     
     private static Item.Properties properties() {
         return new Item.Properties();
+    }
+
+    private static Item.Properties nonStackable() {
+        return properties().stacksTo(1);
+    }
+    
+    private static Item.Properties stackTo16() {
+        return properties().stacksTo(16);
     }
 
     public static void register(IEventBus eventBus){

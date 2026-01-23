@@ -3,8 +3,10 @@ package com.ChalkerCharles.morecolorful.common.datagen.helper;
 import com.ChalkerCharles.morecolorful.common.block.natural.BerryBushBlock;
 import com.ChalkerCharles.morecolorful.common.block.natural.WillowBranchesBlock;
 import com.ChalkerCharles.morecolorful.common.block.natural.WindFlowerBlock;
-import com.ChalkerCharles.morecolorful.common.block.properties.HorizontalDoubleBlockHalf;
+import com.ChalkerCharles.morecolorful.common.block.properties.HorizontalHalf;
 import com.ChalkerCharles.morecolorful.common.block.properties.ModBlockStateProperties;
+import com.ChalkerCharles.morecolorful.common.block.properties.RibbonState;
+import it.unimi.dsi.fastutil.Pair;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
@@ -15,6 +17,8 @@ import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.neoforged.neoforge.client.model.generators.*;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Supplier;
 
 @SuppressWarnings("SameParameterValue")
@@ -227,14 +231,57 @@ public abstract class ModBlockStateHelper extends BlockStateProvider {
         });
     }
 
+    private static final List<Pair<String, RibbonState[]>> ribbonHelper = List.of(
+            Pair.of("_bow", RibbonState.arrayOf(RibbonState::hasBow)),
+            Pair.of("_def", new RibbonState[]{RibbonState.DEFAULT, RibbonState.UP}),
+            Pair.of("_up", RibbonState.arrayOf(r -> r.connectUp && r.hasBow())),
+            Pair.of("_down", new RibbonState[]{RibbonState.DOWN, RibbonState.VERTICAL}),
+            Pair.of("_left", new RibbonState[]{RibbonState.LEFT, RibbonState.UP_LEFT}),
+            Pair.of("_right", new RibbonState[]{RibbonState.RIGHT, RibbonState.UP_RIGHT}),
+            Pair.of("_vert", new RibbonState[]{RibbonState.VERTICAL_CONNECT}),
+            Pair.of("_hor", new RibbonState[]{RibbonState.HORIZONTAL, RibbonState.UP_HORIZONTAL}),
+            Pair.of("_down_l", new RibbonState[]{RibbonState.DOWN_LEFT, RibbonState.VERTICAL_LEFT}),
+            Pair.of("_down_r", new RibbonState[]{RibbonState.DOWN_RIGHT, RibbonState.VERTICAL_RIGHT}),
+            Pair.of("_down_h", new RibbonState[]{RibbonState.DOWN_HORIZONTAL, RibbonState.CROSS}),
+            Pair.of("_tip", new RibbonState[]{RibbonState.TIP}),
+            Pair.of("_hor_c", new RibbonState[]{RibbonState.HORIZONTAL_CONNECT}),
+            Pair.of("_cross", new RibbonState[]{RibbonState.CROSS_CONNECT})
+    );
+
+    protected void ribbon(Block block) {
+        String name = name(block);
+        String key = "texture";
+        ResourceLocation template = modLoc("block/template_ribbon");
+        List<Pair<ModelFile, RibbonState[]>> list = new ArrayList<>(ribbonHelper.size());
+        for (Pair<String, RibbonState[]> pair : ribbonHelper) {
+            String s = pair.left();
+            RibbonState[] ribbonStates = pair.right();
+            ResourceLocation texture = modLoc("block/" + name + s);
+            ModelFile file = models().withExistingParent(name + s, template).texture(key, texture);
+            list.add(Pair.of(file, ribbonStates));
+        }
+        MultiPartBlockStateBuilder builder = getMultipartBuilder(block);
+        for (Direction direction : Direction.Plane.HORIZONTAL) {
+            int yRot = (int) ((direction.toYRot() + 180) % 360);
+            for (Pair<ModelFile, RibbonState[]> pair : list) {
+                ModelFile file = pair.left();
+                RibbonState[] ribbonStates = pair.right();
+                builder.part().modelFile(file).rotationY(yRot).addModel()
+                        .condition(BlockStateProperties.HORIZONTAL_FACING, direction)
+                        .condition(ModBlockStateProperties.RIBBON_STATE, ribbonStates).end();
+            }
+        }
+    }
+
+    protected void pinwheel(Block block) {
+        ModelFile model = models().sign(name(block), blockTexture(block).withSuffix("_particle"));
+        simpleBlock(block, model);
+    }
+
     // States Only (For the blocks that have custom models)
     protected void simpleStateBlock(Supplier<? extends Block> block) {
         Block b = block.get();
-        getVariantBuilder(b).partialState().setModels(
-                new ConfiguredModel(
-                        new ModelFile.UncheckedModelFile(modLoc("block/" + name(b)))
-                )
-        );
+        simpleBlock(b, new ModelFile.UncheckedModelFile(modLoc("block/" + name(b))));
     }
     protected void simpleDirectionalBlock(Supplier<? extends Block> block) {
         Block b = block.get();
@@ -279,8 +326,8 @@ public abstract class ModBlockStateHelper extends BlockStateProvider {
         Block b = block.get();
         getVariantBuilder(b).forAllStates(state -> {
             Direction direction = state.getValue(HorizontalDirectionalBlock.FACING);
-            HorizontalDoubleBlockHalf half = state.getValue(ModBlockStateProperties.HORIZONTAL_HALF);
-            boolean isLeft = half == HorizontalDoubleBlockHalf.LEFT;
+            HorizontalHalf half = state.getValue(ModBlockStateProperties.HORIZONTAL_HALF);
+            boolean isLeft = half == HorizontalHalf.LEFT;
             ModelFile left = new ModelFile.UncheckedModelFile(modLoc("block/" + name(b) + "_left"));
             ModelFile right = new ModelFile.UncheckedModelFile(modLoc("block/" + name(b) + "_right"));
             ModelFile model = isLeft ? left : right;
@@ -369,7 +416,7 @@ public abstract class ModBlockStateHelper extends BlockStateProvider {
         }
     }
 
-    private ModelBuilder<BlockModelBuilder> tintedCross(String name, ResourceLocation texture) {
+    private BlockModelBuilder tintedCross(String name, ResourceLocation texture) {
         return models().singleTexture(name, mcLoc("block/tinted_cross"), "cross", texture);
     }
 

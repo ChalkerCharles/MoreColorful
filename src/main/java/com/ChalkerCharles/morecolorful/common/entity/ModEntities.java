@@ -16,6 +16,9 @@ public class ModEntities {
     public static final Supplier<EntityType<PaperPlane>> PAPER_PLANE = register(
             "paper_plane", EntityType.Builder.<PaperPlane>of(PaperPlane::new, MobCategory.MISC).sized(0.6F, 0.2F).clientTrackingRange(4).updateInterval(20)
     );
+    public static final Supplier<EntityType<PaperBoat>> PAPER_BOAT = register(
+            "paper_boat", EntityType.Builder.<PaperBoat>of(PaperBoat::new, MobCategory.MISC).sized(0.6F, 0.4F).clientTrackingRange(4).updateInterval(20)
+    );
 
     private static <T extends Entity> Supplier<EntityType<T>> register(String name, EntityType.Builder<T> builder) {
         return ENTITY_TYPES.register(name, location -> builder.build(location.toString()));

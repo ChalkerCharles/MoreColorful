@@ -16,11 +16,11 @@ public abstract class LevelLoadingScreenMixin {
     private static Object2IntMap<ChunkStatus> COLORS;
 
     static {
-        if (Config.THERMAL_SYSTEM.isTrue()) {
+        if (Config.thermalSystem) {
             COLORS.put(ModChunkStatus.INITIALIZE_THERMAL.get(), 0xf5c469);
             COLORS.put(ModChunkStatus.THERMAL.get(), 0xff9555);
         }
-        if (Config.WIND_SYSTEM.isTrue()) {
+        if (Config.windSystem) {
             COLORS.put(ModChunkStatus.INITIALIZE_VENT.get(), 0x94dbf7);
             COLORS.put(ModChunkStatus.VENTILATION.get(), 0x7492ff);
         }

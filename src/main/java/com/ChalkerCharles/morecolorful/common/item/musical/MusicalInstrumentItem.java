@@ -29,7 +29,7 @@ public abstract class MusicalInstrumentItem extends Item implements MusicalInstr
         Level level = pContext.getLevel();
         BlockPos blockpos = pContext.getClickedPos();
         BlockState blockstate = level.getBlockState(blockpos);
-        if (player != null && !player.isCrouching() && isMusicalInstrumentBlock(blockstate)) {
+        if (player != null && !player.isSecondaryUseActive() && isMusicalInstrumentBlock(blockstate)) {
             return InteractionResult.FAIL;
         }
         return InteractionResult.PASS;

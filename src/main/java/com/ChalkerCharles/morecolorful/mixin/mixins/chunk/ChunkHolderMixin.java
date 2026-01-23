@@ -51,10 +51,10 @@ public abstract class ChunkHolderMixin extends GenerationChunkHolder implements 
 
     @ModifyExpressionValue(method = "broadcastChanges", at = @At(value = "FIELD", target = "Lnet/minecraft/server/level/ChunkHolder;hasChangedSections:Z", opcode = Opcodes.GETFIELD, ordinal = 0))
     private boolean broadcastChanges$modifyCondition(boolean original) {
-        if (Config.THERMAL_SYSTEM.isTrue()) {
+        if (Config.thermalSystem) {
             original = original || !this.moreColorful$changedThermalSectionFilter.isEmpty();
         }
-        if (Config.WIND_SYSTEM.isTrue()) {
+        if (Config.windSystem) {
             original = original || !this.moreColorful$changedVentSectionFilter.isEmpty();
         }
         return original;
@@ -62,7 +62,7 @@ public abstract class ChunkHolderMixin extends GenerationChunkHolder implements 
 
     @Inject(method = "broadcastChanges", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/chunk/LevelChunk;getLevel()Lnet/minecraft/world/level/Level;", shift = At.Shift.AFTER))
     private void broadcastChanges(LevelChunk pChunk, CallbackInfo ci) {
-        if (Config.THERMAL_SYSTEM.isTrue()) {
+        if (Config.thermalSystem) {
             if (!this.moreColorful$changedThermalSectionFilter.isEmpty()) {
                 List<ServerPlayer> list = this.playerProvider.getPlayers(this.pos, true);
                 if (!list.isEmpty()) {
@@ -75,7 +75,7 @@ public abstract class ChunkHolderMixin extends GenerationChunkHolder implements 
                 this.moreColorful$changedThermalSectionFilter.clear();
             }
         }
-        if (Config.WIND_SYSTEM.isTrue()) {
+        if (Config.windSystem) {
             if (!this.moreColorful$changedVentSectionFilter.isEmpty()) {
                 List<ServerPlayer> list = this.playerProvider.getPlayers(this.pos, true);
                 if (!list.isEmpty()) {
@@ -97,7 +97,7 @@ public abstract class ChunkHolderMixin extends GenerationChunkHolder implements 
 
     @Override
     public void moreColorful$sectionThermalChanged(int pSectionY) {
-        if (Config.THERMAL_SYSTEM.isFalse()) return;
+        if (!Config.thermalSystem) return;
         ChunkAccess chunkaccess = this.getChunkIfPresent(ModChunkStatus.INITIALIZE_THERMAL.get());
         if (chunkaccess != null) {
             chunkaccess.setUnsaved(true);
@@ -120,7 +120,7 @@ public abstract class ChunkHolderMixin extends GenerationChunkHolder implements 
 
     @Override
     public void moreColorful$sectionVentChanged(int pSectionY) {
-        if (Config.WIND_SYSTEM.isFalse()) return;
+        if (!Config.windSystem) return;
         ChunkAccess chunkaccess = this.getChunkIfPresent(ModChunkStatus.INITIALIZE_VENT.get());
         if (chunkaccess != null) {
             chunkaccess.setUnsaved(true);

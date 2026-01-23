@@ -4,6 +4,7 @@ import com.ChalkerCharles.morecolorful.Config;
 import com.ChalkerCharles.morecolorful.common.ModTags;
 import com.ChalkerCharles.morecolorful.common.block.natural.DuckweedsBlock;
 import com.ChalkerCharles.morecolorful.common.block.natural.WillowBranchesBlock;
+import com.ChalkerCharles.morecolorful.common.block.properties.InstrumentExtension;
 import com.ChalkerCharles.morecolorful.util.*;
 import com.ChalkerCharles.morecolorful.common.block.properties.HangingBlock;
 import com.ChalkerCharles.morecolorful.mixin.extensions.IBlockStateExtension;
@@ -35,7 +36,7 @@ public final class VanillaBlockPropertyModifier {
     public static void modifyDynamicProperties(TagsUpdatedEvent event) {
         BuiltInRegistries.BLOCK.forEach(block -> {
             setInstruments(block);
-            if (Config.THERMAL_SYSTEM.isTrue()) {
+            if (Config.thermalSystem) {
                 setTemperatures(block);
                 setThermalResistances(block);
             }
@@ -45,7 +46,7 @@ public final class VanillaBlockPropertyModifier {
     public static void modifyStaticProperties() {
         BuiltInRegistries.BLOCK.forEach(block -> {
             setMapColors(block);
-            if (Config.WIND_SYSTEM.isTrue()) {
+            if (Config.windSystem) {
                 setVertexTypes(block);
                 setAirBlocking(block);
                 setGroupBlock(block);
@@ -56,45 +57,45 @@ public final class VanillaBlockPropertyModifier {
     private static void setInstruments(Block block) {
         Holder.Reference<Block> holder = block.builtInRegistryHolder();
         if (holder.is(ModTags.Blocks.QUARTZ_BLOCKS)) {
-            setInstrument(block, EnumExtensions.Instrument.PIANO_LOW);
+            setInstrument(block, InstrumentExtension.PIANO_LOW);
         } else if (holder.is(ModTags.Blocks.PRISMARINES)) {
-            setInstrument(block, EnumExtensions.Instrument.PIANO_HIGH);
+            setInstrument(block, InstrumentExtension.PIANO_HIGH);
         } else if (block == Blocks.MOSS_BLOCK) {
-            setInstrument(block, EnumExtensions.Instrument.VIOLIN);
+            setInstrument(block, InstrumentExtension.VIOLIN);
         } else if (holder.is(BlockTags.WART_BLOCKS)) {
-            setInstrument(block, EnumExtensions.Instrument.CELLO);
+            setInstrument(block, InstrumentExtension.CELLO);
         } else if (holder.is(ModTags.Blocks.NETHER_FUNGUS_WOODEN_BLOCKS)) {
-            setInstrument(block, EnumExtensions.Instrument.ELECTRIC_GUITAR);
+            setInstrument(block, InstrumentExtension.ELECTRIC_GUITAR);
         } else if (holder.is(ModTags.Blocks.COPPER_BLOCKS)) {
-            setInstrument(block, EnumExtensions.Instrument.TRUMPET);
+            setInstrument(block, InstrumentExtension.TRUMPET);
         } else if (COPPER_GRATES.contains(block)) {
-            setInstrument(block, EnumExtensions.Instrument.SAXOPHONE);
+            setInstrument(block, InstrumentExtension.SAXOPHONE);
         } else if (holder.is(BlockTags.TERRACOTTA)) {
-            setInstrument(block, EnumExtensions.Instrument.OCARINA);
+            setInstrument(block, InstrumentExtension.OCARINA);
         } else if (holder.is(ModTags.Blocks.TUFF_BLOCKS)) {
-            setInstrument(block, EnumExtensions.Instrument.HARMONICA);
+            setInstrument(block, InstrumentExtension.HARMONICA);
         } else if (holder.is(ModTags.Blocks.MUSHROOM_BLOCKS)) {
-            setInstrument(block, EnumExtensions.Instrument.TOM);
+            setInstrument(block, InstrumentExtension.TOM);
         } else if (holder.is(ModTags.Blocks.BASALT_BLOCKS)) {
-            setInstrument(block, EnumExtensions.Instrument.RIDE);
+            setInstrument(block, InstrumentExtension.RIDE);
         } else if (block == Blocks.MAGMA_BLOCK) {
-            setInstrument(block, EnumExtensions.Instrument.CRASH);
+            setInstrument(block, InstrumentExtension.CRASH);
         } else if (block == Blocks.SCULK || block == Blocks.SCULK_CATALYST) {
-            setInstrument(block, EnumExtensions.Instrument.SCULK);
+            setInstrument(block, InstrumentExtension.SCULK);
         } else if (holder.is(BlockTags.CRYSTAL_SOUND_BLOCKS)) {
-            setInstrument(block, EnumExtensions.Instrument.CRYSTAL);
+            setInstrument(block, InstrumentExtension.CRYSTAL);
         } else if (holder.is(BlockTags.REDSTONE_ORES)) {
-            setInstrument(block, EnumExtensions.Instrument.SAW);
+            setInstrument(block, InstrumentExtension.SAW);
         } else if (block == Blocks.LAPIS_BLOCK) {
-            setInstrument(block, EnumExtensions.Instrument.PLUCK);
+            setInstrument(block, InstrumentExtension.PLUCK);
         } else if (holder.is(Tags.Blocks.CONCRETES)) {
-            setInstrument(block, EnumExtensions.Instrument.SYNTH_BASS);
+            setInstrument(block, InstrumentExtension.SYNTH_BASS);
         } else if (holder.is(Tags.Blocks.GLAZED_TERRACOTTAS)) {
-            setInstrument(block, EnumExtensions.Instrument.PIPA);
+            setInstrument(block, InstrumentExtension.PIPA);
         } else if (holder.is(ModTags.Blocks.PACKED_MUD_BLOCKS)) {
-            setInstrument(block, EnumExtensions.Instrument.ERHU);
+            setInstrument(block, InstrumentExtension.ERHU);
         } else if (holder.is(ModTags.Blocks.RARE_WOOD)) {
-            setInstrument(block, EnumExtensions.Instrument.GUZHENG);
+            setInstrument(block, InstrumentExtension.GUZHENG);
         }
     }
 

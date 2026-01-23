@@ -90,7 +90,7 @@ public class ChunkData implements INBTSerializable<CompoundTag> {
     }
 
     private void serializeThermal(CompoundTag nbt) {
-        if (Config.THERMAL_SYSTEM.isFalse()) return;
+        if (!Config.thermalSystem) return;
         Level level = this.getLevel();
         if (level == null) return;
         ListTag temperatures = new ListTag();
@@ -116,7 +116,7 @@ public class ChunkData implements INBTSerializable<CompoundTag> {
     }
 
     private void serializeVentilation(CompoundTag nbt) {
-        if (Config.WIND_SYSTEM.isFalse()) return;
+        if (!Config.windSystem) return;
         Level level = this.getLevel();
         if (level == null) return;
         ListTag ventilatedSections = new ListTag();
@@ -148,7 +148,7 @@ public class ChunkData implements INBTSerializable<CompoundTag> {
     }
 
     private void deserializeThermal(CompoundTag nbt) {
-        if (Config.THERMAL_SYSTEM.isFalse()) return;
+        if (!Config.thermalSystem) return;
         Level level = this.getLevel();
         if (level == null) return;
         ILevelThermalEngine thermalEngine = LevelSavedData.getThermalEngine(level);
@@ -175,7 +175,7 @@ public class ChunkData implements INBTSerializable<CompoundTag> {
     }
 
     private void deserializeVentilation(CompoundTag nbt) {
-        if (Config.WIND_SYSTEM.isFalse()) return;
+        if (!Config.windSystem) return;
         Level level = this.getLevel();
         if (level == null) return;
         ILevelVentEngine ventEngine = LevelSavedData.getVentEngine(level);

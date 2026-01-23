@@ -1,0 +1,6 @@
+{
+  "parent": "morecolorful:block/template_ribbon",
+  "textures": {
+    "texture": "morecolorful:block/magenta_ribbon_right"
+  }
+}

@@ -11,7 +11,7 @@ import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public record WindZonePacket(WindZone zone) implements CustomPacketPayload {
-    public static final CustomPacketPayload.Type<WindZonePacket> TYPE = new CustomPacketPayload.Type<>(MoreColorful.location("wind_zone"));
+    public static final Type<WindZonePacket> TYPE = new Type<>(MoreColorful.location("wind_zone"));
 
     public static final StreamCodec<FriendlyByteBuf, WindZonePacket> STREAM_CODEC = StreamCodec.composite(
             WindZone.STREAM_CODEC,

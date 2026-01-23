@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "pinwheel",
+  "ingredients": [
+    {
+      "item": "minecraft:red_dye"
+    },
+    {
+      "item": "minecraft:yellow_dye"
+    },
+    {
+      "item": "minecraft:blue_dye"
+    },
+    {
+      "tag": "morecolorful:pinwheels"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "morecolorful:multicolored_pinwheel"
+  }
+}

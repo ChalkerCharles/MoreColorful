@@ -8,6 +8,7 @@ import com.ChalkerCharles.morecolorful.common.block.properties.DrumSetPart;
 import com.ChalkerCharles.morecolorful.common.block.properties.ModBlockStateProperties;
 import com.ChalkerCharles.morecolorful.common.item.ModItems;
 import com.ChalkerCharles.morecolorful.network.packets.DrumSetPacket;
+import com.ChalkerCharles.morecolorful.util.CymbalUtils;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -296,7 +297,7 @@ public class DrumSetBlock extends BaseEntityBlock {
     public BlockState playerWillDestroy(Level pLevel, BlockPos pPos, BlockState pState, Player pPlayer) {
         ItemStack stack = pPlayer.getMainHandItem();
         MinecraftServer server = ServerLifecycleHooks.getCurrentServer();
-        BlockPos blockpos = getBassDrumPos(pPos, pState);
+        BlockPos blockpos = CymbalUtils.getBassDrumPos(pPos, pState);
         boolean hasSilkTouch = (server != null && stack.getEnchantmentLevel(server.registryAccess().registryOrThrow(Registries.ENCHANTMENT).getHolderOrThrow(Enchantments.SILK_TOUCH)) > 0);
         if (!pLevel.isClientSide && (pPlayer.isCreative() || hasSilkTouch)) {
             BlockState blockstate = pLevel.getBlockState(blockpos);
@@ -309,19 +310,6 @@ public class DrumSetBlock extends BaseEntityBlock {
             }
         }
         return super.playerWillDestroy(pLevel, pPos, pState, pPlayer);
-    }
-
-    private BlockPos getBassDrumPos(BlockPos pPos, BlockState pState) {
-        DrumSetPart part = pState.getValue(PART);
-        Direction direction = pState.getValue(FACING);
-        return switch (part) {
-            case MID_LOWER -> pPos;
-            case MID_UPPER -> pPos.below();
-            case LEFT_LOWER -> pPos.relative(direction.getCounterClockWise());
-            case LEFT_UPPER -> pPos.relative(direction.getCounterClockWise()).below();
-            case RIGHT_LOWER -> pPos.relative(direction.getClockWise());
-            case RIGHT_UPPER -> pPos.relative(direction.getClockWise()).below();
-        };
     }
 
     @Nullable

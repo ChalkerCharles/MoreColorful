@@ -26,7 +26,7 @@ public abstract class BreezeMixin extends Monster {
 
     @Inject(method = "<init>", at = @At("TAIL"))
     private void constructor(EntityType<? extends Monster> pEntityType, Level pLevel, CallbackInfo ci) {
-        if (Config.WIND_SYSTEM.isFalse()) return;
+        if (!Config.windSystem) return;
         float scale = this.getScale();
         this.moreColorful$windZone = new SwirlWindZone(this.position(), 2.5F * scale, 5 * scale, 16);
     }

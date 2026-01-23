@@ -1,11 +1,11 @@
 package com.ChalkerCharles.morecolorful.mixin.mixins.client.render;
 
+import com.ChalkerCharles.morecolorful.Config;
 import com.ChalkerCharles.morecolorful.client.renderer.wavy.WavyDataTask;
 import com.ChalkerCharles.morecolorful.mixin.extensions.ILevelChunkExtension;
 import com.ChalkerCharles.morecolorful.mixin.extensions.IRenderSectionExtension;
 import com.ChalkerCharles.morecolorful.mixin.extensions.IViewAreaExtension;
 import com.ChalkerCharles.morecolorful.util.client.MultiBlockGroup;
-import com.ChalkerCharles.morecolorful.util.client.RenderUtils;
 import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.client.renderer.ViewArea;
 import net.minecraft.client.renderer.chunk.SectionRenderDispatcher;
@@ -34,7 +34,7 @@ public abstract class ViewAreaMixin implements IViewAreaExtension {
 
     @Inject(method = "repositionCamera", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/chunk/SectionRenderDispatcher$RenderSection;setOrigin(III)V", shift = At.Shift.AFTER))
     private void repositionCamera(double pViewEntityX, double pViewEntityZ, CallbackInfo ci, @Local SectionRenderDispatcher.RenderSection section) {
-        if (RenderUtils.wavyBlocks) {
+        if (Config.wavyBlocks) {
             IRenderSectionExtension.getWavyTask(section).setWindZones(this.level);
         }
     }

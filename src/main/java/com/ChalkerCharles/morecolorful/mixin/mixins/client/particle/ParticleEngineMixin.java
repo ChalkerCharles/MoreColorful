@@ -1,7 +1,7 @@
 package com.ChalkerCharles.morecolorful.mixin.mixins.client.particle;
 
+import com.ChalkerCharles.morecolorful.Config;
 import com.ChalkerCharles.morecolorful.mixin.extensions.IParticleExtension;
-import com.ChalkerCharles.morecolorful.util.client.RenderUtils;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleEngine;
 import org.spongepowered.asm.mixin.Mixin;
@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class ParticleEngineMixin {
     @Inject(method = "tickParticle", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/particle/Particle;tick()V", shift = At.Shift.AFTER))
     private void tickParticle(Particle pParticle, CallbackInfo ci) {
-        if (RenderUtils.wavyParticles) {
+        if (Config.wavyParticles) {
             IParticleExtension.applyWind(pParticle);
         }
     }

@@ -75,6 +75,44 @@ public class ModSoundDefinitionProvider extends ModSoundDefinitionHelper {
         instrument(ModSounds.PIPA_PLAY, "pipa", "pipa", "item");
         instrument(ModSounds.ERHU_PLAY, "erhu", "erhu", "item");
 
+        // Music Boxes
+        musicBox(ModSounds.MUSIC_BOX_HARP, SoundEvents.NOTE_BLOCK_HARP);
+        musicBox(ModSounds.MUSIC_BOX_BASEDRUM, SoundEvents.NOTE_BLOCK_BASEDRUM);
+        musicBox(ModSounds.MUSIC_BOX_SNARE, SoundEvents.NOTE_BLOCK_SNARE);
+        musicBox(ModSounds.MUSIC_BOX_HAT, SoundEvents.NOTE_BLOCK_HAT);
+        musicBox(ModSounds.MUSIC_BOX_BASS, SoundEvents.NOTE_BLOCK_BASS);
+        musicBox(ModSounds.MUSIC_BOX_CHIME, SoundEvents.NOTE_BLOCK_CHIME);
+        musicBox(ModSounds.MUSIC_BOX_BELL, SoundEvents.NOTE_BLOCK_BELL);
+        musicBox(ModSounds.MUSIC_BOX_FLUTE, SoundEvents.NOTE_BLOCK_FLUTE);
+        musicBox(ModSounds.MUSIC_BOX_GUITAR, SoundEvents.NOTE_BLOCK_GUITAR);
+        musicBox(ModSounds.MUSIC_BOX_XYLOPHONE, SoundEvents.NOTE_BLOCK_XYLOPHONE);
+        musicBox(ModSounds.MUSIC_BOX_IRON_XYLOPHONE, SoundEvents.NOTE_BLOCK_IRON_XYLOPHONE);
+        musicBox(ModSounds.MUSIC_BOX_COW_BELL, SoundEvents.NOTE_BLOCK_COW_BELL);
+        musicBox(ModSounds.MUSIC_BOX_DIDGERIDOO, SoundEvents.NOTE_BLOCK_DIDGERIDOO);
+        musicBox(ModSounds.MUSIC_BOX_BIT, SoundEvents.NOTE_BLOCK_BIT);
+        musicBox(ModSounds.MUSIC_BOX_BANJO, SoundEvents.NOTE_BLOCK_BANJO);
+        musicBox(ModSounds.MUSIC_BOX_PLING, SoundEvents.NOTE_BLOCK_PLING);
+        musicBox(ModSounds.MUSIC_BOX_PIANO_LOW, ModSounds.NOTE_BLOCK_PIANO_LOW);
+        musicBox(ModSounds.MUSIC_BOX_PIANO_HIGH, ModSounds.NOTE_BLOCK_PIANO_HIGH);
+        musicBox(ModSounds.MUSIC_BOX_TOM, ModSounds.NOTE_BLOCK_TOM);
+        musicBox(ModSounds.MUSIC_BOX_RIDE, ModSounds.NOTE_BLOCK_RIDE);
+        musicBox(ModSounds.MUSIC_BOX_CRASH, ModSounds.NOTE_BLOCK_CRASH);
+        musicBox(ModSounds.MUSIC_BOX_VIOLIN, ModSounds.NOTE_BLOCK_VIOLIN);
+        musicBox(ModSounds.MUSIC_BOX_CELLO, ModSounds.NOTE_BLOCK_CELLO);
+        musicBox(ModSounds.MUSIC_BOX_ELECTRIC_GUITAR, ModSounds.NOTE_BLOCK_ELECTRIC_GUITAR);
+        musicBox(ModSounds.MUSIC_BOX_TRUMPET, ModSounds.NOTE_BLOCK_TRUMPET);
+        musicBox(ModSounds.MUSIC_BOX_SAXOPHONE, ModSounds.NOTE_BLOCK_SAXOPHONE);
+        musicBox(ModSounds.MUSIC_BOX_OCARINA, ModSounds.NOTE_BLOCK_OCARINA);
+        musicBox(ModSounds.MUSIC_BOX_HARMONICA, ModSounds.NOTE_BLOCK_HARMONICA);
+        musicBox(ModSounds.MUSIC_BOX_SCULK, ModSounds.NOTE_BLOCK_SCULK);
+        musicBox(ModSounds.MUSIC_BOX_CRYSTAL, ModSounds.NOTE_BLOCK_CRYSTAL);
+        musicBox(ModSounds.MUSIC_BOX_SAW, ModSounds.NOTE_BLOCK_SAW);
+        musicBox(ModSounds.MUSIC_BOX_PLUCK, ModSounds.NOTE_BLOCK_PLUCK);
+        musicBox(ModSounds.MUSIC_BOX_SYNTH_BASS, ModSounds.NOTE_BLOCK_SYNTH_BASS);
+        musicBox(ModSounds.MUSIC_BOX_PIPA, ModSounds.NOTE_BLOCK_PIPA);
+        musicBox(ModSounds.MUSIC_BOX_ERHU, ModSounds.NOTE_BLOCK_ERHU);
+        musicBox(ModSounds.MUSIC_BOX_GUZHENG, ModSounds.NOTE_BLOCK_GUZHENG);
+
         // Blocks
         generic(ModSounds.RARE_WOOD_BREAK, "subtitles.block.generic.break",
                 "block/rare_wood/break1",
@@ -216,13 +254,27 @@ public class ModSoundDefinitionProvider extends ModSoundDefinitionHelper {
                 "block/weather_vane/sway2",
                 "block/weather_vane/sway3",
                 "block/weather_vane/sway4");
+        vanilla(ModSounds.RIBBON_TIED, "morecolorful.subtitles.block.ribbon.tied", SoundEvents.LEASH_KNOT_PLACE);
 
         // Entities
-        vanilla(ModSounds.PAPER_PLANE_THROW, "morecolorful.subtitles.entity.paper_plane.throw", "random/bow");
+        vanilla(ModSounds.PAPER_PLANE_THROW, "morecolorful.subtitles.entity.paper_plane.throw", SoundEvents.SNOWBALL_THROW);
         generic(ModSounds.PAPER_PLANE_HIT, "morecolorful.subtitles.entity.paper_plane.hit",
                 "entity/paper_plane/hit1",
                 "entity/paper_plane/hit2",
                 "entity/paper_plane/hit3");
+
+        // Items
+        vanilla(ModSounds.PARTY_POPPER_POP, "morecolorful.subtitles.item.party_popper.pop", SoundEvents.FIREWORK_ROCKET_BLAST);
+        vanilla(ModSounds.SHEARS_SNIP, "morecolorful.subtitles.item.shears.snip", SoundEvents.SHEEP_SHEAR);
+        vanilla(ModSounds.SPARKLER_LIT, "morecolorful.subtitles.item.sparkler.lit", SoundEvents.FLINTANDSTEEL_USE);
+        generic(ModSounds.SPARKLER_FIZZ, "morecolorful.subtitles.item.sparkler.fizz",
+                "item/sparkler/fizz1",
+                "item/sparkler/fizz2",
+                "item/sparkler/fizz3",
+                "item/sparkler/fizz4",
+                "item/sparkler/fizz5",
+                "item/sparkler/fizz6");
+        vanilla(ModSounds.SPARKLER_EXTINGUISH, "morecolorful.subtitles.item.sparkler.extinguish", SoundEvents.FIRE_EXTINGUISH);
 
         // Environment & Ambient
         generic(ModSounds.WEATHER_BREEZE, "morecolorful.subtitles.weather.breeze",

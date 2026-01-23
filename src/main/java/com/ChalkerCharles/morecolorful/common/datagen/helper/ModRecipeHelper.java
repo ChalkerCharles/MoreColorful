@@ -1,13 +1,26 @@
 package com.ChalkerCharles.morecolorful.common.datagen.helper;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
+import com.ChalkerCharles.morecolorful.common.ModTags;
+import com.ChalkerCharles.morecolorful.common.block.ornamental.RibbonBlock;
+import com.ChalkerCharles.morecolorful.common.item.ModItems;
+import com.ChalkerCharles.morecolorful.common.item.misc.PartyPopperItem;
+import com.ChalkerCharles.morecolorful.common.item.misc.PinwheelItem;
+import com.ChalkerCharles.morecolorful.common.recipe.WritableSheetMusicRecipe;
+import net.minecraft.advancements.AdvancementHolder;
+import net.minecraft.advancements.AdvancementRequirements;
+import net.minecraft.advancements.AdvancementRewards;
+import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.Item;
+import net.minecraft.world.item.*;
+import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.conditions.IConditionBuilder;
 
 import java.util.concurrent.CompletableFuture;
@@ -22,95 +35,182 @@ public abstract class ModRecipeHelper extends RecipeProvider implements IConditi
         planksFromLogs(output, planks, pLogs, 4);
     }
 
-    protected static void woodenStairs(RecipeOutput output, ItemLike pStairs, ItemLike pMaterial) {
-        stairBuilder(pStairs, Ingredient.of(pMaterial))
-                .unlockedBy("has_planks", has(pMaterial))
+    protected static void woodenStairs(RecipeOutput output, ItemLike stairs, ItemLike material) {
+        stairBuilder(stairs, Ingredient.of(material))
+                .unlockedBy("has_planks", has(material))
                 .group("wooden_stairs")
                 .save(output);
     }
 
-    protected static void woodenSlab(RecipeOutput output, ItemLike pSlab, ItemLike pMaterial) {
-        slabBuilder(RecipeCategory.BUILDING_BLOCKS, pSlab, Ingredient.of(pMaterial))
-                .unlockedBy("has_item", has(pMaterial))
+    protected static void woodenSlab(RecipeOutput output, ItemLike slab, ItemLike material) {
+        slabBuilder(RecipeCategory.BUILDING_BLOCKS, slab, Ingredient.of(material))
+                .unlockedBy("has_item", has(material))
                 .group("wooden_slab")
                 .save(output);
     }
 
-    protected static void woodenFence(RecipeOutput output, ItemLike pFence, ItemLike pMaterial) {
-        fenceBuilder(pFence, Ingredient.of(pMaterial))
-                .unlockedBy("has_planks", has(pMaterial))
+    protected static void woodenFence(RecipeOutput output, ItemLike fence, ItemLike material) {
+        fenceBuilder(fence, Ingredient.of(material))
+                .unlockedBy("has_planks", has(material))
                 .group("wooden_fence")
                 .save(output);
     }
 
-    protected static void fenceGate(RecipeOutput output, ItemLike pFenceGate, ItemLike pMaterial) {
-        fenceGateBuilder(pFenceGate, Ingredient.of(pMaterial))
-                .unlockedBy("has_planks", has(pMaterial))
+    protected static void fenceGate(RecipeOutput output, ItemLike fenceGate, ItemLike material) {
+        fenceGateBuilder(fenceGate, Ingredient.of(material))
+                .unlockedBy("has_planks", has(material))
                 .group("wooden_fence_gate")
                 .save(output);
     }
 
-    protected static void woodenDoor(RecipeOutput output, ItemLike pDoor, ItemLike pMaterial) {
-        doorBuilder(pDoor, Ingredient.of(pMaterial))
-                .unlockedBy("has_planks", has(pMaterial))
+    protected static void woodenDoor(RecipeOutput output, ItemLike door, ItemLike material) {
+        doorBuilder(door, Ingredient.of(material))
+                .unlockedBy("has_planks", has(material))
                 .group("wooden_door")
                 .save(output);
     }
 
-    protected static void woodenTrapdoor(RecipeOutput output, ItemLike pTrapdoor, ItemLike pMaterial) {
-        trapdoorBuilder(pTrapdoor, Ingredient.of(pMaterial))
-                .unlockedBy("has_planks", has(pMaterial))
+    protected static void woodenTrapdoor(RecipeOutput output, ItemLike trapdoor, ItemLike material) {
+        trapdoorBuilder(trapdoor, Ingredient.of(material))
+                .unlockedBy("has_planks", has(material))
                 .group("wooden_trapdoor")
                 .save(output);
     }
 
-    protected static void woodenPressurePlate(RecipeOutput output, ItemLike pPressurePlate, ItemLike pMaterial) {
-        pressurePlateBuilder(RecipeCategory.REDSTONE, pPressurePlate, Ingredient.of(pMaterial))
-                .unlockedBy("has_planks", has(pMaterial))
+    protected static void woodenPressurePlate(RecipeOutput output, ItemLike pressurePlate, ItemLike material) {
+        pressurePlateBuilder(RecipeCategory.REDSTONE, pressurePlate, Ingredient.of(material))
+                .unlockedBy("has_planks", has(material))
                 .group("wooden_pressure_plate")
                 .save(output);
     }
 
-    protected static void woodenButton(RecipeOutput output, ItemLike pButton, ItemLike pMaterial) {
-        buttonBuilder(pButton, Ingredient.of(pMaterial))
-                .unlockedBy("has_planks", has(pMaterial))
+    protected static void woodenButton(RecipeOutput output, ItemLike button, ItemLike material) {
+        buttonBuilder(button, Ingredient.of(material))
+                .unlockedBy("has_planks", has(material))
                 .group("wooden_button")
                 .save(output);
     }
 
-    protected static void woodenSign(RecipeOutput output, ItemLike pSign, ItemLike pMaterial) {
-        signBuilder(pSign, Ingredient.of(pMaterial))
-                .unlockedBy("has_planks", has(pMaterial))
+    protected static void woodenSign(RecipeOutput output, ItemLike sign, ItemLike material) {
+        signBuilder(sign, Ingredient.of(material))
+                .unlockedBy("has_planks", has(material))
                 .group("wooden_sign")
                 .save(output);
     }
 
-    protected static void simpleRecipe(RecipeOutput output, ItemLike pResult, ItemLike pMaterial, int count, RecipeCategory category) {
-        String pKey = getItemName(pResult) + "_from_" + getItemName(pMaterial);
-        ShapelessRecipeBuilder.shapeless(category, pResult, count).requires(pMaterial)
-                .unlockedBy(getHasName(pMaterial), has(pMaterial))
-                .group(getItemName(pResult))
+    protected static void simpleRecipe(RecipeOutput output, ItemLike result, ItemLike material, int count, RecipeCategory category) {
+        String pKey = getItemName(result) + "_from_" + getItemName(material);
+        ShapelessRecipeBuilder.shapeless(category, result, count).requires(material)
+                .unlockedBy(getHasName(material), has(material))
+                .group(getItemName(result))
                 .save(output, MoreColorful.location(pKey));
     }
 
-    protected static void simpleMiscRecipe(RecipeOutput output, ItemLike pResult, ItemLike pMaterial, int count) {
-        simpleRecipe(output, pResult, pMaterial, count, RecipeCategory.MISC);
+    protected static void simpleMiscRecipe(RecipeOutput output, ItemLike result, ItemLike material, int count) {
+        simpleRecipe(output, result, material, count, RecipeCategory.MISC);
     }
 
-    protected static void simpleMiscRecipe(RecipeOutput output, ItemLike pResult, ItemLike pMaterial) {
-        simpleMiscRecipe(output, pResult, pMaterial, 1);
+    protected static void simpleMiscRecipe(RecipeOutput output, ItemLike result, ItemLike material) {
+        simpleMiscRecipe(output, result, material, 1);
     }
 
-    protected static void simpleShapedRecipe(RecipeOutput output, ItemLike pResult, ItemLike pMaterial, int count, String pattern, RecipeCategory category) {
-        String pKey = getItemName(pResult) + "_from_" + getItemName(pMaterial);
-        ShapedRecipeBuilder.shaped(category, pResult, count)
-                .define('#', pMaterial)
+    protected static void simpleShapedRecipe(RecipeOutput output, ItemLike result, ItemLike material, int count, String pattern, RecipeCategory category) {
+        String pKey = getItemName(result) + "_from_" + getItemName(material);
+        ShapedRecipeBuilder.shaped(category, result, count)
+                .define('#', material)
                 .pattern(pattern)
-                .unlockedBy(getHasName(pMaterial), has(pMaterial))
+                .unlockedBy(getHasName(material), has(material))
                 .save(output, MoreColorful.location(pKey));
     }
 
-    protected static void miscShapedRecipe(RecipeOutput output, ItemLike pResult, ItemLike pMaterial, int count, String pattern) {
-        simpleShapedRecipe(output, pResult, pMaterial, count, pattern, RecipeCategory.MISC);
+    protected static void miscShapedRecipe(RecipeOutput output, ItemLike result, ItemLike material, int count, String pattern) {
+        simpleShapedRecipe(output, result, material, count, pattern, RecipeCategory.MISC);
+    }
+
+    protected static void sheetMusicRecipe(RecipeOutput output) {
+        ResourceLocation id = RecipeBuilder.getDefaultRecipeId(ModItems.WRITABLE_SHEET_MUSIC);
+        AdvancementHolder advancement = output.advancement()
+                .addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(id))
+                .addCriterion("has_note_block", has(Items.NOTE_BLOCK))
+                .rewards(AdvancementRewards.Builder.recipe(id))
+                .requirements(AdvancementRequirements.Strategy.OR)
+                .build(id.withPrefix("recipes/misc/"));
+        output.accept(id, new WritableSheetMusicRecipe(CraftingBookCategory.MISC), advancement);
+    }
+
+    protected static void partyPopperRecipes(RecipeOutput output) {
+        for (DyeColor color : DyeColor.values()) {
+            ItemLike dye = DyeItem.byColor(color);
+            ItemLike item = PartyPopperItem.byColor(color);
+            ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, item)
+                    .requires(dye)
+                    .requires(Ingredient.of(PartyPopperItem.dyeingIngredients(item)))
+                    .group("party_popper")
+                    .unlockedBy("has_needed_dye", has(dye))
+                    .save(output, "dye_" + getItemName(item));
+        }
+    }
+    
+    protected static void ribbon(RecipeOutput output, ItemLike result, ItemLike material) {
+            ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, result, 8)
+                    .define('#', material)
+                    .pattern("# #")
+                    .pattern(" # ")
+                    .pattern("# #")
+                    .group("ribbon")
+                    .unlockedBy(getHasName(material), has(material))
+                    .save(output);
+    }
+
+    protected static void ribbonDyeRecipes(RecipeOutput output) {
+        for (DyeColor color : DyeColor.values()) {
+            ItemLike dye = DyeItem.byColor(color);
+            ItemLike item = RibbonBlock.itemByColor(color);
+            ShapelessRecipeBuilder.shapeless(RecipeCategory.DECORATIONS, item)
+                    .requires(dye)
+                    .requires(Ingredient.of(RibbonBlock.dyeingIngredients(item)))
+                    .group("ribbon")
+                    .unlockedBy("has_needed_dye", has(dye))
+                    .save(output, "dye_" + getItemName(item));
+        }
+    }
+
+    protected static void pinwheelRecipes(RecipeOutput output) {
+        for (DyeColor color : DyeColor.values()) {
+            ItemLike dye = DyeItem.byColor(color);
+            ItemLike item = PinwheelItem.itemByColor(color);
+            ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, item)
+                    .requires(dye)
+                    .requires(ModTags.Items.PINWHEELS)
+                    .group("pinwheel")
+                    .unlockedBy("has_needed_dye", has(dye))
+                    .save(output, "dye_" + getItemName(item));
+        }
+    }
+
+    protected static void sparkler(RecipeOutput output, ItemLike result, ItemLike material) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, result)
+                .define('X', material)
+                .define('#', Tags.Items.GUNPOWDERS)
+                .define('|', Tags.Items.RODS_WOODEN)
+                .pattern("X")
+                .pattern("#")
+                .pattern("|")
+                .group("sparkler")
+                .unlockedBy("has_gunpowder", has(Tags.Items.GUNPOWDERS))
+                .save(output);
+    }
+
+    protected static void sparkler(RecipeOutput output, ItemLike result, TagKey<Item> material) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, result)
+                .define('X', material)
+                .define('#', Tags.Items.GUNPOWDERS)
+                .define('|', Tags.Items.RODS_WOODEN)
+                .pattern("X")
+                .pattern("#")
+                .pattern("|")
+                .group("sparkler")
+                .unlockedBy("has_gunpowder", has(Tags.Items.GUNPOWDERS))
+                .save(output);
     }
 }

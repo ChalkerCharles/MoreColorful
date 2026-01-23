@@ -4,16 +4,18 @@ import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.client.particle.ModParticles;
 import com.ChalkerCharles.morecolorful.common.block.musical.*;
 import com.ChalkerCharles.morecolorful.common.block.natural.*;
+import com.ChalkerCharles.morecolorful.common.block.ornamental.PinwheelBlock;
 import com.ChalkerCharles.morecolorful.common.block.ornamental.PottedDaybloomBlock;
 import com.ChalkerCharles.morecolorful.common.block.ornamental.PottedWindflowerBlock;
+import com.ChalkerCharles.morecolorful.common.block.ornamental.RibbonBlock;
 import com.ChalkerCharles.morecolorful.common.block.properties.*;
 import com.ChalkerCharles.morecolorful.common.block.utility.FanBlock;
 import com.ChalkerCharles.morecolorful.common.block.utility.WeatherVaneBlock;
 import com.ChalkerCharles.morecolorful.util.InstrumentsType;
 import com.ChalkerCharles.morecolorful.common.worldgen.features.trees.ModTreeGrower;
-import com.ChalkerCharles.morecolorful.util.EnumExtensions;
 import net.minecraft.core.Direction;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
@@ -49,12 +51,13 @@ public class ModBlocks {
     public static final DeferredBlock<Block> VIBRAPHONE = register("vibraphone", () -> new VibraphoneBlock(ofFullCopy(Blocks.COPPER_BLOCK).mapColor(MapColor.METAL).instrument(NoteBlockInstrument.IRON_XYLOPHONE).pushReaction(PushReaction.DESTROY)));
     public static final DeferredBlock<Block> SYNTHESIZER_KEYBOARD_BIT = register("synthesizer_keyboard_bit", () -> new SynthesizerKeyboardBlock(InstrumentsType.BIT, ofFullCopy(Blocks.IRON_BARS).mapColor(MapColor.DEEPSLATE).instrument(NoteBlockInstrument.BIT)));
     public static final DeferredBlock<Block> SYNTHESIZER_KEYBOARD_PLING = register("synthesizer_keyboard_pling", () -> new SynthesizerKeyboardBlock(InstrumentsType.PLING, ofFullCopy(Blocks.IRON_BARS).mapColor(MapColor.COLOR_BLACK).instrument(NoteBlockInstrument.PLING)));
-    public static final DeferredBlock<Block> SYNTHESIZER_KEYBOARD_SCULK = register("synthesizer_keyboard_sculk", () -> new SynthesizerKeyboardBlock(InstrumentsType.SCULK, ofFullCopy(Blocks.SCULK_CATALYST).instrument(EnumExtensions.Instrument.SCULK).emissiveRendering(Blocks::always)));
-    public static final DeferredBlock<Block> SYNTHESIZER_KEYBOARD_AMETHYST = register("synthesizer_keyboard_amethyst", () -> new SynthesizerKeyboardBlock(InstrumentsType.CRYSTAL, ofFullCopy(Blocks.AMETHYST_CLUSTER).instrument(EnumExtensions.Instrument.CRYSTAL).emissiveRendering(Blocks::always)));
-    public static final DeferredBlock<Block> SYNTHESIZER_KEYBOARD_SAW = register("synthesizer_keyboard_saw", () -> new SynthesizerKeyboardBlock(InstrumentsType.SAW, ofFullCopy(Blocks.IRON_BARS).mapColor(MapColor.CRIMSON_NYLIUM).instrument(EnumExtensions.Instrument.SAW)));
-    public static final DeferredBlock<Block> SYNTHESIZER_KEYBOARD_PLUCK = register("synthesizer_keyboard_pluck", () -> new SynthesizerKeyboardBlock(InstrumentsType.PLUCK, ofFullCopy(Blocks.IRON_BARS).mapColor(MapColor.LAPIS).instrument(EnumExtensions.Instrument.PLUCK)));
-    public static final DeferredBlock<Block> SYNTHESIZER_KEYBOARD_SYNTH_BASS = register("synthesizer_keyboard_synth_bass", () -> new SynthesizerKeyboardBlock(InstrumentsType.SYNTH_BASS, ofFullCopy(Blocks.IRON_BARS).mapColor(MapColor.METAL).instrument(EnumExtensions.Instrument.SYNTH_BASS)));
+    public static final DeferredBlock<Block> SYNTHESIZER_KEYBOARD_SCULK = register("synthesizer_keyboard_sculk", () -> new SynthesizerKeyboardBlock(InstrumentsType.SCULK, ofFullCopy(Blocks.SCULK_CATALYST).instrument(InstrumentExtension.SCULK).emissiveRendering(Blocks::always)));
+    public static final DeferredBlock<Block> SYNTHESIZER_KEYBOARD_AMETHYST = register("synthesizer_keyboard_amethyst", () -> new SynthesizerKeyboardBlock(InstrumentsType.CRYSTAL, ofFullCopy(Blocks.AMETHYST_CLUSTER).instrument(InstrumentExtension.CRYSTAL).emissiveRendering(Blocks::always)));
+    public static final DeferredBlock<Block> SYNTHESIZER_KEYBOARD_SAW = register("synthesizer_keyboard_saw", () -> new SynthesizerKeyboardBlock(InstrumentsType.SAW, ofFullCopy(Blocks.IRON_BARS).mapColor(MapColor.CRIMSON_NYLIUM).instrument(InstrumentExtension.SAW)));
+    public static final DeferredBlock<Block> SYNTHESIZER_KEYBOARD_PLUCK = register("synthesizer_keyboard_pluck", () -> new SynthesizerKeyboardBlock(InstrumentsType.PLUCK, ofFullCopy(Blocks.IRON_BARS).mapColor(MapColor.LAPIS).instrument(InstrumentExtension.PLUCK)));
+    public static final DeferredBlock<Block> SYNTHESIZER_KEYBOARD_SYNTH_BASS = register("synthesizer_keyboard_synth_bass", () -> new SynthesizerKeyboardBlock(InstrumentsType.SYNTH_BASS, ofFullCopy(Blocks.IRON_BARS).mapColor(MapColor.METAL).instrument(InstrumentExtension.SYNTH_BASS)));
     public static final DeferredBlock<Block> GUZHENG = register("guzheng", () -> new GuzhengBlock(ofFullCopy(Blocks.CHERRY_PLANKS).mapColor(MapColor.COLOR_BROWN).pushReaction(PushReaction.DESTROY)));
+    public static final DeferredBlock<Block> MUSIC_BOX = register("music_box", () -> new MusicBoxBlock(ofFullCopy(Blocks.JUKEBOX).mapColor(MapColor.WOOD).pushReaction(PushReaction.DESTROY)));
 
     // Common Blocks
     public static final DeferredBlock<RotatedPillarBlock> CRABAPPLE_LOG = register("crabapple_log", () -> log(Blocks.CHERRY_LOG, MapColor.TERRACOTTA_PINK, MapColor.TERRACOTTA_GRAY));
@@ -80,22 +83,22 @@ public class ModBlocks {
     public static final DeferredBlock<PinkPetalsBlock> BEGONIAS = register("begonias", () -> new PinkPetalsBlock(ofFullCopy(Blocks.PINK_PETALS).mapColor(MapColorExtension.BEGONIA)));
 
     public static final DeferredBlock<RotatedPillarBlock> EBONY_LOG = register("ebony_log", () -> rareLog(MapColor.TERRACOTTA_BLACK, MapColor.TERRACOTTA_LIGHT_GRAY));
-    public static final DeferredBlock<RotatedPillarBlock> EBONY_WOOD = register("ebony_wood", () -> new RotatedPillarBlock(ofFullCopy(Blocks.OAK_WOOD).mapColor(MapColor.TERRACOTTA_LIGHT_GRAY).strength(2.5F).sound(ModSoundTypes.RARE_WOOD).instrument(EnumExtensions.Instrument.GUZHENG)));
-    public static final DeferredBlock<RotatedPillarBlock> STRIPPED_EBONY_LOG = register("stripped_ebony_log", () -> new RotatedPillarBlock(ofFullCopy(Blocks.STRIPPED_OAK_LOG).mapColor(MapColor.TERRACOTTA_BLACK).strength(2.5F).sound(ModSoundTypes.RARE_WOOD).instrument(EnumExtensions.Instrument.GUZHENG)));
-    public static final DeferredBlock<RotatedPillarBlock> STRIPPED_EBONY_WOOD = register("stripped_ebony_wood", () -> new RotatedPillarBlock(ofFullCopy(Blocks.STRIPPED_OAK_WOOD).mapColor(MapColor.TERRACOTTA_BLACK).strength(2.5F).sound(ModSoundTypes.RARE_WOOD).instrument(EnumExtensions.Instrument.GUZHENG)));
-    public static final DeferredBlock<Block> EBONY_PLANKS = register("ebony_planks", () -> new Block(ofFullCopy(Blocks.OAK_PLANKS).mapColor(MapColor.TERRACOTTA_BLACK).strength(2.5F, 3.0F).sound(ModSoundTypes.RARE_WOOD).instrument(EnumExtensions.Instrument.GUZHENG)));
+    public static final DeferredBlock<RotatedPillarBlock> EBONY_WOOD = register("ebony_wood", () -> new RotatedPillarBlock(ofFullCopy(Blocks.OAK_WOOD).mapColor(MapColor.TERRACOTTA_LIGHT_GRAY).strength(2.5F).sound(ModSoundTypes.RARE_WOOD).instrument(InstrumentExtension.GUZHENG)));
+    public static final DeferredBlock<RotatedPillarBlock> STRIPPED_EBONY_LOG = register("stripped_ebony_log", () -> new RotatedPillarBlock(ofFullCopy(Blocks.STRIPPED_OAK_LOG).mapColor(MapColor.TERRACOTTA_BLACK).strength(2.5F).sound(ModSoundTypes.RARE_WOOD).instrument(InstrumentExtension.GUZHENG)));
+    public static final DeferredBlock<RotatedPillarBlock> STRIPPED_EBONY_WOOD = register("stripped_ebony_wood", () -> new RotatedPillarBlock(ofFullCopy(Blocks.STRIPPED_OAK_WOOD).mapColor(MapColor.TERRACOTTA_BLACK).strength(2.5F).sound(ModSoundTypes.RARE_WOOD).instrument(InstrumentExtension.GUZHENG)));
+    public static final DeferredBlock<Block> EBONY_PLANKS = register("ebony_planks", () -> new Block(ofFullCopy(Blocks.OAK_PLANKS).mapColor(MapColor.TERRACOTTA_BLACK).strength(2.5F, 3.0F).sound(ModSoundTypes.RARE_WOOD).instrument(InstrumentExtension.GUZHENG)));
     public static final DeferredBlock<StairBlock> EBONY_STAIRS = register("ebony_stairs", () -> stair(EBONY_PLANKS.get()));
-    public static final DeferredBlock<SlabBlock> EBONY_SLAB = register("ebony_slab", () -> new SlabBlock(ofFullCopy(Blocks.OAK_SLAB).mapColor(MapColor.TERRACOTTA_BLACK).strength(2.5F, 3.0F).sound(ModSoundTypes.RARE_WOOD).instrument(EnumExtensions.Instrument.GUZHENG)));
-    public static final DeferredBlock<FenceBlock> EBONY_FENCE = register("ebony_fence", () -> new FenceBlock(ofFullCopy(Blocks.OAK_FENCE).mapColor(MapColor.TERRACOTTA_BLACK).strength(2.5F, 3.0F).sound(ModSoundTypes.RARE_WOOD).instrument(EnumExtensions.Instrument.GUZHENG)));
-    public static final DeferredBlock<FenceGateBlock> EBONY_FENCE_GATE = register("ebony_fence_gate", () -> new FenceGateBlock(ModWoodTypes.EBONY, ofFullCopy(Blocks.OAK_FENCE).mapColor(MapColor.TERRACOTTA_BLACK).strength(2.5F, 3.0F).instrument(EnumExtensions.Instrument.GUZHENG)));
-    public static final DeferredBlock<DoorBlock> EBONY_DOOR = register("ebony_door", () -> new DoorBlock(ModBlockSetTypes.EBONY, ofFullCopy(Blocks.OAK_DOOR).mapColor(MapColor.TERRACOTTA_BLACK).strength(3.5F).instrument(EnumExtensions.Instrument.GUZHENG)));
-    public static final DeferredBlock<TrapDoorBlock> EBONY_TRAPDOOR = register("ebony_trapdoor", () -> new TrapDoorBlock(ModBlockSetTypes.EBONY, ofFullCopy(Blocks.OAK_TRAPDOOR).mapColor(MapColor.TERRACOTTA_BLACK).strength(3.5F).instrument(EnumExtensions.Instrument.GUZHENG)));
-    public static final DeferredBlock<PressurePlateBlock> EBONY_PRESSURE_PLATE = register("ebony_pressure_plate", () -> new PressurePlateBlock(ModBlockSetTypes.EBONY, ofFullCopy(Blocks.OAK_PRESSURE_PLATE).mapColor(MapColor.TERRACOTTA_BLACK).instrument(EnumExtensions.Instrument.GUZHENG)));
+    public static final DeferredBlock<SlabBlock> EBONY_SLAB = register("ebony_slab", () -> new SlabBlock(ofFullCopy(Blocks.OAK_SLAB).mapColor(MapColor.TERRACOTTA_BLACK).strength(2.5F, 3.0F).sound(ModSoundTypes.RARE_WOOD).instrument(InstrumentExtension.GUZHENG)));
+    public static final DeferredBlock<FenceBlock> EBONY_FENCE = register("ebony_fence", () -> new FenceBlock(ofFullCopy(Blocks.OAK_FENCE).mapColor(MapColor.TERRACOTTA_BLACK).strength(2.5F, 3.0F).sound(ModSoundTypes.RARE_WOOD).instrument(InstrumentExtension.GUZHENG)));
+    public static final DeferredBlock<FenceGateBlock> EBONY_FENCE_GATE = register("ebony_fence_gate", () -> new FenceGateBlock(ModWoodTypes.EBONY, ofFullCopy(Blocks.OAK_FENCE).mapColor(MapColor.TERRACOTTA_BLACK).strength(2.5F, 3.0F).instrument(InstrumentExtension.GUZHENG)));
+    public static final DeferredBlock<DoorBlock> EBONY_DOOR = register("ebony_door", () -> new DoorBlock(ModBlockSetTypes.EBONY, ofFullCopy(Blocks.OAK_DOOR).mapColor(MapColor.TERRACOTTA_BLACK).strength(3.5F).instrument(InstrumentExtension.GUZHENG)));
+    public static final DeferredBlock<TrapDoorBlock> EBONY_TRAPDOOR = register("ebony_trapdoor", () -> new TrapDoorBlock(ModBlockSetTypes.EBONY, ofFullCopy(Blocks.OAK_TRAPDOOR).mapColor(MapColor.TERRACOTTA_BLACK).strength(3.5F).instrument(InstrumentExtension.GUZHENG)));
+    public static final DeferredBlock<PressurePlateBlock> EBONY_PRESSURE_PLATE = register("ebony_pressure_plate", () -> new PressurePlateBlock(ModBlockSetTypes.EBONY, ofFullCopy(Blocks.OAK_PRESSURE_PLATE).mapColor(MapColor.TERRACOTTA_BLACK).instrument(InstrumentExtension.GUZHENG)));
     public static final DeferredBlock<ButtonBlock> EBONY_BUTTON = register("ebony_button", () -> rareWoodButton(ModBlockSetTypes.EBONY, Blocks.OAK_BUTTON, MapColor.TERRACOTTA_BLACK));
-    public static final DeferredBlock<StandingSignBlock> EBONY_SIGN = register("ebony_sign", () -> new StandingSignBlock(ModWoodTypes.EBONY, ofFullCopy(Blocks.OAK_SIGN).mapColor(MapColor.TERRACOTTA_BLACK).strength(1.5F).instrument(EnumExtensions.Instrument.GUZHENG)));
-    public static final DeferredBlock<WallSignBlock> EBONY_WALL_SIGN = register("ebony_wall_sign", () -> new WallSignBlock(ModWoodTypes.EBONY, ofFullCopy(Blocks.OAK_WALL_SIGN).mapColor(MapColor.TERRACOTTA_BLACK).lootFrom(EBONY_SIGN).strength(1.5F).instrument(EnumExtensions.Instrument.GUZHENG)));
-    public static final DeferredBlock<CeilingHangingSignBlock> EBONY_HANGING_SIGN = register("ebony_hanging_sign", () -> new CeilingHangingSignBlock(ModWoodTypes.EBONY, ofFullCopy(Blocks.OAK_HANGING_SIGN).mapColor(MapColor.TERRACOTTA_BLACK).strength(1.5F).instrument(EnumExtensions.Instrument.GUZHENG)));
-    public static final DeferredBlock<WallHangingSignBlock> EBONY_WALL_HANGING_SIGN = register("ebony_wall_hanging_sign", () -> new WallHangingSignBlock(ModWoodTypes.EBONY, ofFullCopy(Blocks.OAK_WALL_HANGING_SIGN).mapColor(MapColor.TERRACOTTA_BLACK).lootFrom(EBONY_HANGING_SIGN).strength(1.5F).instrument(EnumExtensions.Instrument.GUZHENG)));
+    public static final DeferredBlock<StandingSignBlock> EBONY_SIGN = register("ebony_sign", () -> new StandingSignBlock(ModWoodTypes.EBONY, ofFullCopy(Blocks.OAK_SIGN).mapColor(MapColor.TERRACOTTA_BLACK).strength(1.5F).instrument(InstrumentExtension.GUZHENG)));
+    public static final DeferredBlock<WallSignBlock> EBONY_WALL_SIGN = register("ebony_wall_sign", () -> new WallSignBlock(ModWoodTypes.EBONY, ofFullCopy(Blocks.OAK_WALL_SIGN).mapColor(MapColor.TERRACOTTA_BLACK).lootFrom(EBONY_SIGN).strength(1.5F).instrument(InstrumentExtension.GUZHENG)));
+    public static final DeferredBlock<CeilingHangingSignBlock> EBONY_HANGING_SIGN = register("ebony_hanging_sign", () -> new CeilingHangingSignBlock(ModWoodTypes.EBONY, ofFullCopy(Blocks.OAK_HANGING_SIGN).mapColor(MapColor.TERRACOTTA_BLACK).strength(1.5F).instrument(InstrumentExtension.GUZHENG)));
+    public static final DeferredBlock<WallHangingSignBlock> EBONY_WALL_HANGING_SIGN = register("ebony_wall_hanging_sign", () -> new WallHangingSignBlock(ModWoodTypes.EBONY, ofFullCopy(Blocks.OAK_WALL_HANGING_SIGN).mapColor(MapColor.TERRACOTTA_BLACK).lootFrom(EBONY_HANGING_SIGN).strength(1.5F).instrument(InstrumentExtension.GUZHENG)));
 
     public static final DeferredBlock<LeavesBlock> WHITE_CHERRY_LEAVES = register("white_cherry_leaves", () -> new PetalLeavesBlock(ofFullCopy(Blocks.CHERRY_LEAVES).mapColor(MapColor.SNOW), ModParticles.WHITE_CHERRY_LEAVES));
     public static final DeferredBlock<SaplingBlock> WHITE_CHERRY_SAPLING = register("white_cherry_sapling", () -> new SaplingBlock(ModTreeGrower.WHITE_CHERRY, ofFullCopy(Blocks.CHERRY_SAPLING).mapColor(MapColor.SNOW)));
@@ -296,9 +299,43 @@ public class ModBlocks {
     public static final DeferredBlock<Block> CLOSED_WHITE_WATER_LILY = register("closed_white_water_lily", () -> new WaterLilyBlock(false, ofFullCopy(Blocks.LILY_PAD).randomTicks()));
     public static final DeferredBlock<Block> CLOSED_BLUE_WATER_LILY = register("closed_blue_water_lily", () -> new WaterLilyBlock(false, ofFullCopy(Blocks.LILY_PAD).randomTicks()));
     public static final DeferredBlock<Block> DUCKWEEDS = register("duckweeds", () -> new DuckweedsBlock(ofFullCopy(Blocks.LILY_PAD).replaceable().noCollission()));
+
+    public static final DeferredBlock<Block> WHITE_RIBBON = register("white_ribbon", () -> new RibbonBlock(ribbonProperties(DyeColor.WHITE)));
+    public static final DeferredBlock<Block> ORANGE_RIBBON = register("orange_ribbon", () -> new RibbonBlock(ribbonProperties(DyeColor.ORANGE)));
+    public static final DeferredBlock<Block> MAGENTA_RIBBON = register("magenta_ribbon", () -> new RibbonBlock(ribbonProperties(DyeColor.MAGENTA)));
+    public static final DeferredBlock<Block> LIGHT_BLUE_RIBBON = register("light_blue_ribbon", () -> new RibbonBlock(ribbonProperties(DyeColor.LIGHT_BLUE)));
+    public static final DeferredBlock<Block> YELLOW_RIBBON = register("yellow_ribbon", () -> new RibbonBlock(ribbonProperties(DyeColor.YELLOW)));
+    public static final DeferredBlock<Block> LIME_RIBBON = register("lime_ribbon", () -> new RibbonBlock(ribbonProperties(DyeColor.LIME)));
+    public static final DeferredBlock<Block> PINK_RIBBON = register("pink_ribbon", () -> new RibbonBlock(ribbonProperties(DyeColor.PINK)));
+    public static final DeferredBlock<Block> GRAY_RIBBON = register("gray_ribbon", () -> new RibbonBlock(ribbonProperties(DyeColor.GRAY)));
+    public static final DeferredBlock<Block> LIGHT_GRAY_RIBBON = register("light_gray_ribbon", () -> new RibbonBlock(ribbonProperties(DyeColor.LIGHT_GRAY)));
+    public static final DeferredBlock<Block> CYAN_RIBBON = register("cyan_ribbon", () -> new RibbonBlock(ribbonProperties(DyeColor.CYAN)));
+    public static final DeferredBlock<Block> PURPLE_RIBBON = register("purple_ribbon", () -> new RibbonBlock(ribbonProperties(DyeColor.PURPLE)));
+    public static final DeferredBlock<Block> BLUE_RIBBON = register("blue_ribbon", () -> new RibbonBlock(ribbonProperties(DyeColor.BLUE)));
+    public static final DeferredBlock<Block> BROWN_RIBBON = register("brown_ribbon", () -> new RibbonBlock(ribbonProperties(DyeColor.BROWN)));
+    public static final DeferredBlock<Block> GREEN_RIBBON = register("green_ribbon", () -> new RibbonBlock(ribbonProperties(DyeColor.GREEN)));
+    public static final DeferredBlock<Block> RED_RIBBON = register("red_ribbon", () -> new RibbonBlock(ribbonProperties(DyeColor.RED)));
+    public static final DeferredBlock<Block> BLACK_RIBBON = register("black_ribbon", () -> new RibbonBlock(ribbonProperties(DyeColor.BLACK)));
     
     public static final DeferredBlock<Block> FAN_BLOCK = register("fan_block", () -> new FanBlock(ofFullCopy(Blocks.DISPENSER)));
     public static final DeferredBlock<Block> WEATHER_VANE = register("weather_vane", () -> new WeatherVaneBlock(ofFullCopy(Blocks.IRON_BARS).noCollission()));
+    public static final DeferredBlock<Block> WHITE_PINWHEEL = register("white_pinwheel", () -> new PinwheelBlock(pinwheelProperties(DyeColor.WHITE)));
+    public static final DeferredBlock<Block> ORANGE_PINWHEEL = register("orange_pinwheel", () -> new PinwheelBlock(pinwheelProperties(DyeColor.ORANGE)));
+    public static final DeferredBlock<Block> MAGENTA_PINWHEEL = register("magenta_pinwheel", () -> new PinwheelBlock(pinwheelProperties(DyeColor.MAGENTA)));
+    public static final DeferredBlock<Block> LIGHT_BLUE_PINWHEEL = register("light_blue_pinwheel", () -> new PinwheelBlock(pinwheelProperties(DyeColor.LIGHT_BLUE)));
+    public static final DeferredBlock<Block> YELLOW_PINWHEEL = register("yellow_pinwheel", () -> new PinwheelBlock(pinwheelProperties(DyeColor.YELLOW)));
+    public static final DeferredBlock<Block> LIME_PINWHEEL = register("lime_pinwheel", () -> new PinwheelBlock(pinwheelProperties(DyeColor.LIME)));
+    public static final DeferredBlock<Block> PINK_PINWHEEL = register("pink_pinwheel", () -> new PinwheelBlock(pinwheelProperties(DyeColor.PINK)));
+    public static final DeferredBlock<Block> GRAY_PINWHEEL = register("gray_pinwheel", () -> new PinwheelBlock(pinwheelProperties(DyeColor.GRAY)));
+    public static final DeferredBlock<Block> LIGHT_GRAY_PINWHEEL = register("light_gray_pinwheel", () -> new PinwheelBlock(pinwheelProperties(DyeColor.LIGHT_GRAY)));
+    public static final DeferredBlock<Block> CYAN_PINWHEEL = register("cyan_pinwheel", () -> new PinwheelBlock(pinwheelProperties(DyeColor.CYAN)));
+    public static final DeferredBlock<Block> PURPLE_PINWHEEL = register("purple_pinwheel", () -> new PinwheelBlock(pinwheelProperties(DyeColor.PURPLE)));
+    public static final DeferredBlock<Block> BLUE_PINWHEEL = register("blue_pinwheel", () -> new PinwheelBlock(pinwheelProperties(DyeColor.BLUE)));
+    public static final DeferredBlock<Block> BROWN_PINWHEEL = register("brown_pinwheel", () -> new PinwheelBlock(pinwheelProperties(DyeColor.BROWN)));
+    public static final DeferredBlock<Block> GREEN_PINWHEEL = register("green_pinwheel", () -> new PinwheelBlock(pinwheelProperties(DyeColor.GREEN)));
+    public static final DeferredBlock<Block> RED_PINWHEEL = register("red_pinwheel", () -> new PinwheelBlock(pinwheelProperties(DyeColor.RED)));
+    public static final DeferredBlock<Block> BLACK_PINWHEEL = register("black_pinwheel", () -> new PinwheelBlock(pinwheelProperties(DyeColor.BLACK)));
+    public static final DeferredBlock<Block> MULTICOLORED_PINWHEEL = register("multicolored_pinwheel", () -> new PinwheelBlock(pinwheelProperties(DyeColor.WHITE)));
 
     private static <T extends Block> DeferredBlock<T> register(String name, Supplier<T> supplier) {
         return BLOCKS.register(name, supplier);
@@ -314,7 +351,7 @@ public class ModBlocks {
     private static RotatedPillarBlock rareLog(MapColor pTopMapColor, MapColor pSideMapColor) {
         return new RotatedPillarBlock(ofFullCopy(Blocks.OAK_LOG)
                 .mapColor(state -> state.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? pTopMapColor : pSideMapColor)
-                .sound(ModSoundTypes.RARE_WOOD).strength(2.5F).instrument(EnumExtensions.Instrument.GUZHENG)
+                .sound(ModSoundTypes.RARE_WOOD).strength(2.5F).instrument(InstrumentExtension.GUZHENG)
         );
     }
 
@@ -328,7 +365,7 @@ public class ModBlocks {
 
     @SuppressWarnings("SameParameterValue")
     private static ButtonBlock rareWoodButton(BlockSetType pType, Block pBlock, MapColor pColor) {
-        return new ButtonBlock(pType, 30, ofFullCopy(pBlock).mapColor(pColor).instrument(EnumExtensions.Instrument.GUZHENG));
+        return new ButtonBlock(pType, 30, ofFullCopy(pBlock).mapColor(pColor).instrument(InstrumentExtension.GUZHENG));
     }
 
     private static FlowerPotBlock flowerPot(Supplier<FlowerPotBlock> emptyPot, Supplier<? extends Block> potted) {
@@ -353,6 +390,14 @@ public class ModBlocks {
 
     private static BlockBehaviour.Properties flowerPotProperties() {
         return of().instabreak().noOcclusion().pushReaction(PushReaction.DESTROY);
+    }
+
+    private static BlockBehaviour.Properties ribbonProperties(DyeColor color) {
+        return of().mapColor(color).noCollission().strength(0.2F).sound(SoundType.WOOL).ignitedByLava().pushReaction(PushReaction.DESTROY);
+    }
+
+    private static BlockBehaviour.Properties pinwheelProperties(DyeColor color) {
+        return of().mapColor(color).instabreak().sound(SoundType.WOOD).noCollission().pushReaction(PushReaction.DESTROY);
     }
 
     public static void register(IEventBus eventBus){

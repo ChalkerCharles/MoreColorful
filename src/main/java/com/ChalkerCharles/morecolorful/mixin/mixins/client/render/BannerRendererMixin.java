@@ -1,5 +1,6 @@
 package com.ChalkerCharles.morecolorful.mixin.mixins.client.render;
 
+import com.ChalkerCharles.morecolorful.Config;
 import com.ChalkerCharles.morecolorful.util.Maths;
 import com.ChalkerCharles.morecolorful.util.client.RenderUtils;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -33,7 +34,7 @@ public abstract class BannerRendererMixin {
     @Inject(method = "render(Lnet/minecraft/world/level/block/entity/BannerBlockEntity;FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;II)V",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/blockentity/BannerRenderer;renderPatterns(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;IILnet/minecraft/client/model/geom/ModelPart;Lnet/minecraft/client/resources/model/Material;ZLnet/minecraft/world/item/DyeColor;Lnet/minecraft/world/level/block/entity/BannerPatternLayers;)V"))
     private void applyWind(BannerBlockEntity pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBufferSource, int pPackedLight, int pPackedOverlay, CallbackInfo ci) {
-        if (!RenderUtils.wavyBlocks) return;
+        if (!Config.wavyBlocks) return;
         Level level = pBlockEntity.getLevel();
         if (level == null) return;
         BlockPos pos = pBlockEntity.getBlockPos();

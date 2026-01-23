@@ -3,6 +3,7 @@ package com.ChalkerCharles.morecolorful.common.datagen.tag;
 import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.common.ModTags;
 import com.ChalkerCharles.morecolorful.common.block.ModBlocks;
+import com.ChalkerCharles.morecolorful.common.block.ornamental.RibbonBlock;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
@@ -99,6 +100,7 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 ModBlocks.JACARANDA_HANGING_SIGN.get(),
                 ModBlocks.WILLOW_HANGING_SIGN.get()
         );
+        tag(BlockTags.CLIMBABLE).addTag(ModTags.Blocks.RIBBONS);
         tag(BlockTags.FENCE_GATES).add(
                 ModBlocks.CRABAPPLE_FENCE_GATE.get(),
                 ModBlocks.EBONY_FENCE_GATE.get(),
@@ -640,5 +642,6 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 Blocks.SNOW,
                 ModBlocks.WILLOW_BRANCHES.get()
         );
+        tag(ModTags.Blocks.RIBBONS).add(RibbonBlock.ALL_COLORS.get());
     }
 }

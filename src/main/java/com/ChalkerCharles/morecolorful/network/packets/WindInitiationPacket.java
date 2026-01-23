@@ -14,7 +14,7 @@ import org.joml.Vector2f;
 
 public enum WindInitiationPacket implements CustomPacketPayload {
     INSTANCE;
-    public static final CustomPacketPayload.Type<WindInitiationPacket> TYPE = new CustomPacketPayload.Type<>(MoreColorful.location("wind_initiation"));
+    public static final Type<WindInitiationPacket> TYPE = new Type<>(MoreColorful.location("wind_initiation"));
     public static final StreamCodec<FriendlyByteBuf, WindInitiationPacket> STREAM_CODEC = StreamCodec.unit(INSTANCE);
 
     @Override

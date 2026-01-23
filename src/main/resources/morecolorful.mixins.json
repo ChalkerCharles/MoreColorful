@@ -65,6 +65,7 @@
     "client.compat.sodium.RenderSectionManagerMixin",
     "client.compat.sodium.RenderSectionMixin",
     "client.particle.CampfireSmokeParticleMixin",
+    "client.particle.CherryParticleMixin",
     "client.particle.ParticleEngineMixin",
     "client.particle.ParticleMixin",
     "client.particle.SparkParticleMixin",

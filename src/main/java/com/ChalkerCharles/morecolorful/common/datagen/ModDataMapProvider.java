@@ -35,7 +35,9 @@ public class ModDataMapProvider extends DataMapProvider {
                 .add(ModItems.PIPA, new FurnaceFuel(200), false)
                 .add(ModItems.ERHU, new FurnaceFuel(200), false)
                 .add(ModTags.Items.LEAF_LITTERS, new FurnaceFuel(50), false)
-                .add(ModItems.DAWN_REDWOOD_ROOTS, new FurnaceFuel(100), false);
+                .add(ModItems.DAWN_REDWOOD_ROOTS, new FurnaceFuel(100), false)
+                .add(ModTags.Items.RIBBONS, new FurnaceFuel(50), false)
+                .add(ModTags.Items.PINWHEELS, new FurnaceFuel(200), false);
 
         builder(NeoForgeDataMaps.COMPOSTABLES)
                 .add(ModItems.CRABAPPLE_LEAVES, new Compostable(0.3F), false)

@@ -5,7 +5,7 @@
       "name": "MORECOLORFUL_FLUTE",
       "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
       "parameters": {
-        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions$ArmPose",
+        "class": "com/ChalkerCharles/morecolorful/client/model/ArmPoseExtension$Proxy",
         "field": "FLUTE"
       }
     },
@@ -14,7 +14,7 @@
       "name": "MORECOLORFUL_GUITAR_HOLD",
       "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
       "parameters": {
-        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions$ArmPose",
+        "class": "com/ChalkerCharles/morecolorful/client/model/ArmPoseExtension$Proxy",
         "field": "GUITAR_HOLD"
       }
     },
@@ -23,7 +23,7 @@
       "name": "MORECOLORFUL_GUITAR_PLAYING",
       "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
       "parameters": {
-        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions$ArmPose",
+        "class": "com/ChalkerCharles/morecolorful/client/model/ArmPoseExtension$Proxy",
         "field": "GUITAR_PLAYING"
       }
     },
@@ -32,7 +32,7 @@
       "name": "MORECOLORFUL_COW_BELL",
       "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
       "parameters": {
-        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions$ArmPose",
+        "class": "com/ChalkerCharles/morecolorful/client/model/ArmPoseExtension$Proxy",
         "field": "COW_BELL"
       }
     },
@@ -41,7 +41,7 @@
       "name": "MORECOLORFUL_DIDGERIDOO",
       "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
       "parameters": {
-        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions$ArmPose",
+        "class": "com/ChalkerCharles/morecolorful/client/model/ArmPoseExtension$Proxy",
         "field": "DIDGERIDOO"
       }
     },
@@ -50,7 +50,7 @@
       "name": "MORECOLORFUL_VIOLIN_HOLD",
       "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
       "parameters": {
-        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions$ArmPose",
+        "class": "com/ChalkerCharles/morecolorful/client/model/ArmPoseExtension$Proxy",
         "field": "VIOLIN_HOLD"
       }
     },
@@ -59,7 +59,7 @@
       "name": "MORECOLORFUL_VIOLIN_PLAYING",
       "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
       "parameters": {
-        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions$ArmPose",
+        "class": "com/ChalkerCharles/morecolorful/client/model/ArmPoseExtension$Proxy",
         "field": "VIOLIN_PLAYING"
       }
     },
@@ -68,7 +68,7 @@
       "name": "MORECOLORFUL_CELLO",
       "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
       "parameters": {
-        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions$ArmPose",
+        "class": "com/ChalkerCharles/morecolorful/client/model/ArmPoseExtension$Proxy",
         "field": "CELLO"
       }
     },
@@ -77,7 +77,7 @@
       "name": "MORECOLORFUL_CELLO_HOLD",
       "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
       "parameters": {
-        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions$ArmPose",
+        "class": "com/ChalkerCharles/morecolorful/client/model/ArmPoseExtension$Proxy",
         "field": "CELLO_HOLD"
       }
     },
@@ -86,7 +86,7 @@
       "name": "MORECOLORFUL_CELLO_PLAYING",
       "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
       "parameters": {
-        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions$ArmPose",
+        "class": "com/ChalkerCharles/morecolorful/client/model/ArmPoseExtension$Proxy",
         "field": "CELLO_PLAYING"
       }
     },
@@ -95,7 +95,7 @@
       "name": "MORECOLORFUL_SAXOPHONE",
       "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
       "parameters": {
-        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions$ArmPose",
+        "class": "com/ChalkerCharles/morecolorful/client/model/ArmPoseExtension$Proxy",
         "field": "SAXOPHONE"
       }
     },
@@ -104,7 +104,7 @@
       "name": "MORECOLORFUL_PIPA_HOLD",
       "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
       "parameters": {
-        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions$ArmPose",
+        "class": "com/ChalkerCharles/morecolorful/client/model/ArmPoseExtension$Proxy",
         "field": "PIPA_HOLD"
       }
     },
@@ -113,7 +113,7 @@
       "name": "MORECOLORFUL_PIPA_PLAYING",
       "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
       "parameters": {
-        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions$ArmPose",
+        "class": "com/ChalkerCharles/morecolorful/client/model/ArmPoseExtension$Proxy",
         "field": "PIPA_PLAYING"
       }
     },
@@ -122,7 +122,7 @@
       "name": "MORECOLORFUL_ERHU_HOLD",
       "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
       "parameters": {
-        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions$ArmPose",
+        "class": "com/ChalkerCharles/morecolorful/client/model/ArmPoseExtension$Proxy",
         "field": "ERHU_HOLD"
       }
     },
@@ -131,7 +131,7 @@
       "name": "MORECOLORFUL_ERHU_PLAYING",
       "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
       "parameters": {
-        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions$ArmPose",
+        "class": "com/ChalkerCharles/morecolorful/client/model/ArmPoseExtension$Proxy",
         "field": "ERHU_PLAYING"
       }
     },
@@ -140,7 +140,7 @@
       "name": "MORECOLORFUL_CRABAPPLE",
       "constructor": "(Ljava/util/function/Supplier;Ljava/lang/String;Ljava/util/function/Supplier;Ljava/util/function/Supplier;Ljava/util/function/Supplier;Z)V",
       "parameters": {
-        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions$BoatType",
+        "class": "com/ChalkerCharles/morecolorful/common/entity/BoatTypeExtension$Proxy",
         "field": "CRABAPPLE"
       }
     },
@@ -149,7 +149,7 @@
       "name": "MORECOLORFUL_EBONY",
       "constructor": "(Ljava/util/function/Supplier;Ljava/lang/String;Ljava/util/function/Supplier;Ljava/util/function/Supplier;Ljava/util/function/Supplier;Z)V",
       "parameters": {
-        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions$BoatType",
+        "class": "com/ChalkerCharles/morecolorful/common/entity/BoatTypeExtension$Proxy",
         "field": "EBONY"
       }
     },
@@ -158,7 +158,7 @@
       "name": "MORECOLORFUL_GINKGO",
       "constructor": "(Ljava/util/function/Supplier;Ljava/lang/String;Ljava/util/function/Supplier;Ljava/util/function/Supplier;Ljava/util/function/Supplier;Z)V",
       "parameters": {
-        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions$BoatType",
+        "class": "com/ChalkerCharles/morecolorful/common/entity/BoatTypeExtension$Proxy",
         "field": "GINKGO"
       }
     },
@@ -167,7 +167,7 @@
       "name": "MORECOLORFUL_MAPLE",
       "constructor": "(Ljava/util/function/Supplier;Ljava/lang/String;Ljava/util/function/Supplier;Ljava/util/function/Supplier;Ljava/util/function/Supplier;Z)V",
       "parameters": {
-        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions$BoatType",
+        "class": "com/ChalkerCharles/morecolorful/common/entity/BoatTypeExtension$Proxy",
         "field": "MAPLE"
       }
     },
@@ -176,7 +176,7 @@
       "name": "MORECOLORFUL_FROST",
       "constructor": "(Ljava/util/function/Supplier;Ljava/lang/String;Ljava/util/function/Supplier;Ljava/util/function/Supplier;Ljava/util/function/Supplier;Z)V",
       "parameters": {
-        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions$BoatType",
+        "class": "com/ChalkerCharles/morecolorful/common/entity/BoatTypeExtension$Proxy",
         "field": "FROST"
       }
     },
@@ -185,7 +185,7 @@
       "name": "MORECOLORFUL_DAWN_REDWOOD",
       "constructor": "(Ljava/util/function/Supplier;Ljava/lang/String;Ljava/util/function/Supplier;Ljava/util/function/Supplier;Ljava/util/function/Supplier;Z)V",
       "parameters": {
-        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions$BoatType",
+        "class": "com/ChalkerCharles/morecolorful/common/entity/BoatTypeExtension$Proxy",
         "field": "DAWN_REDWOOD"
       }
     },
@@ -194,7 +194,7 @@
       "name": "MORECOLORFUL_JACARANDA",
       "constructor": "(Ljava/util/function/Supplier;Ljava/lang/String;Ljava/util/function/Supplier;Ljava/util/function/Supplier;Ljava/util/function/Supplier;Z)V",
       "parameters": {
-        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions$BoatType",
+        "class": "com/ChalkerCharles/morecolorful/common/entity/BoatTypeExtension$Proxy",
         "field": "JACARANDA"
       }
     },
@@ -203,7 +203,7 @@
       "name": "MORECOLORFUL_WILLOW",
       "constructor": "(Ljava/util/function/Supplier;Ljava/lang/String;Ljava/util/function/Supplier;Ljava/util/function/Supplier;Ljava/util/function/Supplier;Z)V",
       "parameters": {
-        "class": "com/ChalkerCharles/morecolorful/util/EnumExtensions$BoatType",
+        "class": "com/ChalkerCharles/morecolorful/common/entity/BoatTypeExtension$Proxy",
         "field": "WILLOW"
       }
     }

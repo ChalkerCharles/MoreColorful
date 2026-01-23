@@ -32,6 +32,9 @@ public class ModParticles {
     public static final Supplier<ParticleType<ColorParticleOption>> SPRUCE_LEAVES = register("spruce_leaves", false, ColorParticleOption::codec, ColorParticleOption::streamCodec);
     public static final Supplier<SimpleParticleType> WIND_GLOBAL = register("wind_global", true);
     public static final Supplier<SimpleParticleType> WIND_FAN = register("wind_fan", false);
+    public static final Supplier<SimpleParticleType> CONFETTI = register("confetti", false);
+    public static final Supplier<ParticleType<ColorParticleOption>> SPARKLER_SPARKLE = register("sparkler_sparkle", false, ColorParticleOption::codec, ColorParticleOption::streamCodec);
+    public static final Supplier<ParticleType<ColorParticleOption>> SPARKLER_GLITTER = register("sparkler_glitter", false, ColorParticleOption::codec, ColorParticleOption::streamCodec);
 
     private static Supplier<SimpleParticleType> register(String name, boolean overrideLimiter) {
         return PARTICLE_TYPES.register(name, () -> new SimpleParticleType(overrideLimiter));

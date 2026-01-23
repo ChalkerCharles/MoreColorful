@@ -70,7 +70,7 @@ public abstract class LevelRendererMixin implements ILevelRendererExtension {
 
     @WrapOperation(method = "renderSnowAndRain", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/vertex/BufferBuilder;addVertex(FFF)Lcom/mojang/blaze3d/vertex/VertexConsumer;"))
     private VertexConsumer renderSnowAndRain(BufferBuilder instance, float pX, float pY, float pZ, Operation<VertexConsumer> original) {
-        if (!RenderUtils.isCalm && RenderUtils.windAndRain) {
+        if (!RenderUtils.isCalm && Config.windAndRain) {
             float f = pY * RenderUtils.windStrength * 0.04F;
             pX -= RenderUtils.windDir.x * f;
             pZ -= RenderUtils.windDir.y * f;
@@ -81,7 +81,7 @@ public abstract class LevelRendererMixin implements ILevelRendererExtension {
     @WrapOperation(method = "renderSnowAndRain", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/vertex/VertexConsumer;setUv(FF)Lcom/mojang/blaze3d/vertex/VertexConsumer;"),
             slice = @Slice(from = @At(value = "FIELD", target = "Lnet/minecraft/client/renderer/LevelRenderer;SNOW_LOCATION:Lnet/minecraft/resources/ResourceLocation;")))
     private VertexConsumer renderSnow(VertexConsumer instance, float u, float v, Operation<VertexConsumer> original, @Local(argsOnly = true) float partialTick) {
-        if (!RenderUtils.isCalm && RenderUtils.windAndRain) {
+        if (!RenderUtils.isCalm && Config.windAndRain) {
             float f = ((this.ticks & 511) + partialTick) / 512.0F;
             v -= RenderUtils.windStrength * f;
         }
@@ -90,22 +90,21 @@ public abstract class LevelRendererMixin implements ILevelRendererExtension {
 
     @Inject(method = "prepareCullFrustum", at = @At("TAIL"))
     private void prepareCullFrustum(Vec3 pCameraPosition, Matrix4f pFrustumMatrix, Matrix4f pProjectionMatrix, CallbackInfo ci) {
-        if (RenderUtils.SODIUM_ON || !RenderUtils.wavyBlocks) return;
+        if (RenderUtils.SODIUM_ON || !Config.wavyBlocks) return;
         this.moreColorful$windFrustum = new WindFrustum(pFrustumMatrix, pProjectionMatrix);
         this.moreColorful$windFrustum.prepare(pCameraPosition.x, pCameraPosition.y, pCameraPosition.z);
     }
 
     @Inject(method = "applyFrustum", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/SectionOcclusionGraph;addSectionsInFrustum(Lnet/minecraft/client/renderer/culling/Frustum;Ljava/util/List;)V", shift = At.Shift.AFTER))
     private void applyFrustum(Frustum pFrustum, CallbackInfo ci) {
-        if (RenderUtils.SODIUM_ON || !RenderUtils.wavyBlocks) return;
+        if (RenderUtils.SODIUM_ON || !Config.wavyBlocks) return;
         this.moreColorful$windySections.clear();
         this.sectionOcclusionGraph.addSectionsInFrustum(this.moreColorful$windFrustum, this.moreColorful$windySections);
     }
 
     @Inject(method = "setLevel", at = @At(value = "INVOKE", target = "Ljava/util/Set;clear()V"))
     private void setLevel(ClientLevel pLevel, CallbackInfo ci) {
-        RenderUtils.setClientWindFlags();
-        if (!RenderUtils.wavyBlocks) return;
+        if (!Config.wavyBlocks) return;
         if (this.moreColorful$dispatcher != null) {
             this.moreColorful$dispatcher.dispose();
         }
@@ -115,8 +114,7 @@ public abstract class LevelRendererMixin implements ILevelRendererExtension {
 
     @Inject(method = "allChanged", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/chunk/SectionRenderDispatcher;blockUntilClear()V"))
     private void allChanged(CallbackInfo ci) {
-        RenderUtils.setClientWindFlags();
-        if (!RenderUtils.wavyBlocks) return;
+        if (!Config.wavyBlocks) return;
         if (this.moreColorful$dispatcher == null) {
             this.moreColorful$dispatcher = RenderUtils.SODIUM_ON
                     ? SodiumCompat.createDispatcher(Util.backgroundExecutor())
@@ -130,7 +128,7 @@ public abstract class LevelRendererMixin implements ILevelRendererExtension {
     @Inject(method = "renderLevel", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/LevelRenderer;compileSections(Lnet/minecraft/client/Camera;)V", shift = At.Shift.AFTER))
     private void updateWindData(DeltaTracker pDeltaTracker, boolean pRenderBlockOutline, Camera pCamera, GameRenderer pGameRenderer, LightTexture pLightTexture, Matrix4f pFrustumMatrix, Matrix4f pProjectionMatrix, CallbackInfo ci,
                                 @Local ProfilerFiller profilerFiller) {
-        if (this.moreColorful$dispatcher == null || !RenderUtils.wavyBlocks) return;
+        if (this.moreColorful$dispatcher == null || !Config.wavyBlocks) return;
         this.moreColorful$dispatcher.setCamera(pCamera.getPosition());
         profilerFiller.popPush("update_wind_data");
         this.moreColorful$dispatcher.uploadAllPending();
@@ -145,17 +143,17 @@ public abstract class LevelRendererMixin implements ILevelRendererExtension {
     }
 
     @ModifyVariable(method = "renderClouds", at = @At(value = "STORE", ordinal = 0), ordinal = 5)
-    private double renderClouds$x(double d2, @Local(ordinal = 4) double d1, @Local(argsOnly = true) float partialTick) {
-        if (!RenderUtils.isCalm && RenderUtils.windAndCloud) {
-            return d2 - d1 * RenderUtils.lerpWindSpeedX(partialTick) * 0.03125;
+    private double renderClouds$x(double d2, @Local(argsOnly = true) float partialTick) {
+        if (Config.windAndCloud) {
+            return d2 - RenderUtils.getCloudMovementX(partialTick);
         }
         return d2;
     }
 
     @ModifyVariable(method = "renderClouds", at = @At(value = "STORE", ordinal = 0), ordinal = 7)
-    private double renderClouds$z(double d4, @Local(ordinal = 4) double d1, @Local(argsOnly = true) float partialTick) {
-        if (!RenderUtils.isCalm && RenderUtils.windAndCloud) {
-            return d4 - d1 * RenderUtils.lerpWindSpeedZ(partialTick) * 0.03125;
+    private double renderClouds$z(double d4, @Local(argsOnly = true) float partialTick) {
+        if (Config.windAndCloud) {
+            return d4 - RenderUtils.getCloudMovementZ(partialTick);
         }
         return d4;
     }
@@ -163,9 +161,9 @@ public abstract class LevelRendererMixin implements ILevelRendererExtension {
     @Inject(method = "compileSections", at = @At("HEAD"))
     private void compileSections(Camera pCamera, CallbackInfo ci, @Share("thermal") LocalRef<ILevelThermalEngine> thermalEngine, @Share("vent") LocalRef<ILevelVentEngine> ventEngine) {
         if (this.level != null) {
-            if (Config.THERMAL_SYSTEM.isTrue())
+            if (Config.thermalSystem)
                 thermalEngine.set(LevelSavedData.getThermalEngine(this.level));
-            if (Config.WIND_SYSTEM.isTrue())
+            if (Config.windSystem)
                 ventEngine.set(LevelSavedData.getVentEngine(this.level));
         }
     }

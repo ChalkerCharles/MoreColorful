@@ -8,7 +8,7 @@ import terrablender.api.SurfaceRuleManager;
 
 public class TerraBlenderUtils {
     public static void registerRegions() {
-        Regions.register(new ModOverworldRegion(Config.OVERWORLD_REGION_WEIGHT.getAsInt()));
+        Regions.register(new ModOverworldRegion(Config.overworldRegionWeight));
     }
 
     public static void registerSurfaceRules() {

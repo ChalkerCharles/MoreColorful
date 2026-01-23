@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "ribbon",
+  "key": {
+    "#": {
+      "item": "minecraft:light_gray_wool"
+    }
+  },
+  "pattern": [
+    "# #",
+    " # ",
+    "# #"
+  ],
+  "result": {
+    "count": 8,
+    "id": "morecolorful:light_gray_ribbon"
+  }
+}

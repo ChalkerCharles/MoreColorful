@@ -1,6 +1,8 @@
 package com.ChalkerCharles.morecolorful.common.datagen.loot;
 
 import com.ChalkerCharles.morecolorful.common.block.ModBlocks;
+import com.ChalkerCharles.morecolorful.common.block.ornamental.PinwheelBlock;
+import com.ChalkerCharles.morecolorful.common.block.ornamental.RibbonBlock;
 import com.ChalkerCharles.morecolorful.common.block.properties.GrandPianoPart;
 import com.ChalkerCharles.morecolorful.common.block.properties.ModBlockStateProperties;
 import com.ChalkerCharles.morecolorful.common.block.properties.UprightPianoPart;
@@ -45,6 +47,7 @@ public class ModBlockLootTableProvider extends ModBlockLootTableHelper {
         add(ModBlocks.UPRIGHT_PIANO, createSinglePropConditionTable(ModBlocks.UPRIGHT_PIANO, ModBlockStateProperties.UPRIGHT_PIANO_PART, UprightPianoPart.RIGHT_LOWER));
         add(ModBlocks.GRAND_PIANO, createSinglePropConditionTable(ModBlocks.GRAND_PIANO, ModBlockStateProperties.GRAND_PIANO_PART, GrandPianoPart.FRONT_RIGHT_LOWER));
         add(ModBlocks.DRUM_SET, createDrumSetDrops());
+        dropSelf(ModBlocks.MUSIC_BOX);
 
         // Common Blocks
         dropSelf(ModBlocks.CRABAPPLE_LOG);
@@ -291,6 +294,12 @@ public class ModBlockLootTableProvider extends ModBlockLootTableHelper {
 
         dropSelf(ModBlocks.FAN_BLOCK);
         dropSelf(ModBlocks.WEATHER_VANE);
+        for (Block block : RibbonBlock.ALL_COLORS.get()) {
+            dropSelf(block);
+        }
+        for (Block block : PinwheelBlock.ALL_TYPES.get()) {
+            dropSelf(block);
+        }
     }
 
     @Override

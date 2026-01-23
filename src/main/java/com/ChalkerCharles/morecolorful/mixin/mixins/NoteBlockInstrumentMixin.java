@@ -1,5 +1,6 @@
 package com.ChalkerCharles.morecolorful.mixin.mixins;
 
+import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.common.ModSounds;
 import net.minecraft.core.Holder;
 import net.minecraft.sounds.SoundEvent;
@@ -10,7 +11,7 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-@Mixin(NoteBlockInstrument.class)
+@Mixin(value = NoteBlockInstrument.class, priority = 1500)
 public abstract class NoteBlockInstrumentMixin {
     @Shadow
     @Final
@@ -25,7 +26,7 @@ public abstract class NoteBlockInstrumentMixin {
 
     @Unique
     private static NoteBlockInstrument moreColorful$create(String enumName, int ordinal, String name, Holder<SoundEvent> pSoundEvent) {
-        return create(enumName, ordinal, name, pSoundEvent, NoteBlockInstrument.Type.BASE_BLOCK);
+        return create(enumName, ordinal, MoreColorful.name(name), pSoundEvent, NoteBlockInstrument.Type.BASE_BLOCK);
     }
 
     static {

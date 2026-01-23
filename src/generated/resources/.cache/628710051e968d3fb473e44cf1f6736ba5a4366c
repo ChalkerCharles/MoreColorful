@@ -1,4 +1,4 @@
-// 1.21	2025-12-15T12:50:34.9006111	Tags for minecraft:item mod id morecolorful
+// 1.21	2026-01-19T15:19:32.4492048	Tags for minecraft:item mod id morecolorful
 cec860b55aa5cfd97d01b8711b27b00516decec1 data/c/tags/item/fence_gates/wooden.json
 ddf241c26184ba2561e762d38b6fd8716d048792 data/c/tags/item/foods/berry.json
 ebe391364979d57cb13947546d19fc734d36e248 data/minecraft/tags/item/bee_food.json
@@ -31,6 +31,8 @@ d4d32edb30f872189a00a61c25229c5633721540 data/morecolorful/tags/item/frost_logs.
 141fa3065c23a6a6f23aa0736f778f8980c68c3d data/morecolorful/tags/item/jacaranda_logs.json
 008e973e7e2e2a6fd1a29e6f4d58d2fca0bda1ba data/morecolorful/tags/item/leaf_litters.json
 2c76682e998f84d222329ac6bdb0ecfdf54c46a3 data/morecolorful/tags/item/maple_logs.json
+81fe133c36308498ff87d25123223c51a7d407ce data/morecolorful/tags/item/pinwheels.json
 f331d30f70aa4372b8d04c394d4b16c3fdd76b5f data/morecolorful/tags/item/rare_planks.json
+e48415e04383cf7ee6f50384c3fa77a3b6a2d17b data/morecolorful/tags/item/ribbons.json
 ed65f2b91265f9456b95bf0b28cb969a5459a37d data/morecolorful/tags/item/stripped_rare_logs.json
 3363e9b22cd9f9ddecff6d887e50864b10a240f2 data/morecolorful/tags/item/willow_logs.json

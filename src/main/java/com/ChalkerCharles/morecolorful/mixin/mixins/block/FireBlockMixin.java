@@ -20,7 +20,7 @@ public abstract class FireBlockMixin {
     @ModifyExpressionValue(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/FireBlock;getIgniteOdds(Lnet/minecraft/world/level/LevelReader;Lnet/minecraft/core/BlockPos;)I"))
     private int tick(int original, BlockState state, ServerLevel level, BlockPos pos, @Local BlockPos.MutableBlockPos mutable) {
         if (original == 0) return 0;
-        if (Config.WIND_SYSTEM.isTrue() && Config.WIND_AIDING_FIRE_SPREAD.isTrue()) {
+        if (Config.windSystem && Config.windAidingFireSpread) {
             if (WeatherUtils.canApplyWind(level, pos)) {
                 Vector2f wind = LevelSavedData.getGlobalWindSpeed(level);
                 Vector2f dir = LevelSavedData.getWindDirection(level);

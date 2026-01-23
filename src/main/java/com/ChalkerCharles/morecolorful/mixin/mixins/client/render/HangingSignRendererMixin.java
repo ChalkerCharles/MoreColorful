@@ -1,5 +1,6 @@
 package com.ChalkerCharles.morecolorful.mixin.mixins.client.render;
 
+import com.ChalkerCharles.morecolorful.Config;
 import com.ChalkerCharles.morecolorful.util.client.RenderUtils;
 import com.ChalkerCharles.morecolorful.util.client.WavyBlockUtils;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
@@ -39,7 +40,7 @@ public abstract class HangingSignRendererMixin extends SignRenderer {
     @WrapOperation(method = "render(Lnet/minecraft/world/level/block/entity/SignBlockEntity;FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;II)V",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/blockentity/HangingSignRenderer;renderSignWithText(Lnet/minecraft/world/level/block/entity/SignBlockEntity;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;IILnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/block/SignBlock;Lnet/minecraft/world/level/block/state/properties/WoodType;Lnet/minecraft/client/model/Model;)V"))
     private void render(HangingSignRenderer instance, SignBlockEntity signBlockEntity, PoseStack poseStack, MultiBufferSource multiBufferSource, int packedLight, int packedOverlay, BlockState state, SignBlock signBlock, WoodType woodType, Model model, Operation<Void> original) {
-        if (RenderUtils.wavyBlocks) {
+        if (Config.wavyBlocks) {
             this.moreColorful$renderWavySign(signBlockEntity, poseStack, multiBufferSource, packedLight, packedOverlay, state, signBlock, woodType, model);
         } else {
             original.call(instance, signBlockEntity, poseStack, multiBufferSource, packedLight, packedOverlay, state, signBlock, woodType, model);

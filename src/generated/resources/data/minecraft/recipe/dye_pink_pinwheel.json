@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "pinwheel",
+  "ingredients": [
+    {
+      "item": "minecraft:pink_dye"
+    },
+    {
+      "tag": "morecolorful:pinwheels"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "morecolorful:pink_pinwheel"
+  }
+}

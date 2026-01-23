@@ -1,0 +1,550 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "morecolorful:block/purple_ribbon_bow"
+      },
+      "when": {
+        "facing": "north",
+        "ribbon_state": "default|up|down|left|right|vertical|horizontal|up_left|up_right|down_left|down_right|vertical_left|vertical_right|up_horizontal|down_horizontal|cross"
+      }
+    },
+    {
+      "apply": {
+        "model": "morecolorful:block/purple_ribbon_def"
+      },
+      "when": {
+        "facing": "north",
+        "ribbon_state": "default|up"
+      }
+    },
+    {
+      "apply": {
+        "model": "morecolorful:block/purple_ribbon_up"
+      },
+      "when": {
+        "facing": "north",
+        "ribbon_state": "up|vertical|up_left|up_right|vertical_left|vertical_right|up_horizontal|cross"
+      }
+    },
+    {
+      "apply": {
+        "model": "morecolorful:block/purple_ribbon_down"
+      },
+      "when": {
+        "facing": "north",
+        "ribbon_state": "down|vertical"
+      }
+    },
+    {
+      "apply": {
+        "model": "morecolorful:block/purple_ribbon_left"
+      },
+      "when": {
+        "facing": "north",
+        "ribbon_state": "left|up_left"
+      }
+    },
+    {
+      "apply": {
+        "model": "morecolorful:block/purple_ribbon_right"
+      },
+      "when": {
+        "facing": "north",
+        "ribbon_state": "right|up_right"
+      }
+    },
+    {
+      "apply": {
+        "model": "morecolorful:block/purple_ribbon_vert"
+      },
+      "when": {
+        "facing": "north",
+        "ribbon_state": "vertical_connect"
+      }
+    },
+    {
+      "apply": {
+        "model": "morecolorful:block/purple_ribbon_hor"
+      },
+      "when": {
+        "facing": "north",
+        "ribbon_state": "horizontal|up_horizontal"
+      }
+    },
+    {
+      "apply": {
+        "model": "morecolorful:block/purple_ribbon_down_l"
+      },
+      "when": {
+        "facing": "north",
+        "ribbon_state": "down_left|vertical_left"
+      }
+    },
+    {
+      "apply": {
+        "model": "morecolorful:block/purple_ribbon_down_r"
+      },
+      "when": {
+        "facing": "north",
+        "ribbon_state": "down_right|vertical_right"
+      }
+    },
+    {
+      "apply": {
+        "model": "morecolorful:block/purple_ribbon_down_h"
+      },
+      "when": {
+        "facing": "north",
+        "ribbon_state": "down_horizontal|cross"
+      }
+    },
+    {
+      "apply": {
+        "model": "morecolorful:block/purple_ribbon_tip"
+      },
+      "when": {
+        "facing": "north",
+        "ribbon_state": "tip"
+      }
+    },
+    {
+      "apply": {
+        "model": "morecolorful:block/purple_ribbon_hor_c"
+      },
+      "when": {
+        "facing": "north",
+        "ribbon_state": "horizontal_connect"
+      }
+    },
+    {
+      "apply": {
+        "model": "morecolorful:block/purple_ribbon_cross"
+      },
+      "when": {
+        "facing": "north",
+        "ribbon_state": "cross_connect"
+      }
+    },
+    {
+      "apply": {
+        "model": "morecolorful:block/purple_ribbon_bow",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "ribbon_state": "default|up|down|left|right|vertical|horizontal|up_left|up_right|down_left|down_right|vertical_left|vertical_right|up_horizontal|down_horizontal|cross"
+      }
+    },
+    {
+      "apply": {
+        "model": "morecolorful:block/purple_ribbon_def",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "ribbon_state": "default|up"
+      }
+    },
+    {
+      "apply": {
+        "model": "morecolorful:block/purple_ribbon_up",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "ribbon_state": "up|vertical|up_left|up_right|vertical_left|vertical_right|up_horizontal|cross"
+      }
+    },
+    {
+      "apply": {
+        "model": "morecolorful:block/purple_ribbon_down",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "ribbon_state": "down|vertical"
+      }
+    },
+    {
+      "apply": {
+        "model": "morecolorful:block/purple_ribbon_left",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "ribbon_state": "left|up_left"
+      }
+    },
+    {
+      "apply": {
+        "model": "morecolorful:block/purple_ribbon_right",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "ribbon_state": "right|up_right"
+      }
+    },
+    {
+      "apply": {
+        "model": "morecolorful:block/purple_ribbon_vert",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "ribbon_state": "vertical_connect"
+      }
+    },
+    {
+      "apply": {
+        "model": "morecolorful:block/purple_ribbon_hor",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "ribbon_state": "horizontal|up_horizontal"
+      }
+    },
+    {
+      "apply": {
+        "model": "morecolorful:block/purple_ribbon_down_l",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "ribbon_state": "down_left|vertical_left"
+      }
+    },
+    {
+      "apply": {
+        "model": "morecolorful:block/purple_ribbon_down_r",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "ribbon_state": "down_right|vertical_right"
+      }
+    },
+    {
+      "apply": {
+        "model": "morecolorful:block/purple_ribbon_down_h",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "ribbon_state": "down_horizontal|cross"
+      }
+    },
+    {
+      "apply": {
+        "model": "morecolorful:block/purple_ribbon_tip",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "ribbon_state": "tip"
+      }
+    },
+    {
+      "apply": {
+        "model": "morecolorful:block/purple_ribbon_hor_c",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "ribbon_state": "horizontal_connect"
+      }
+    },
+    {
+      "apply": {
+        "model": "morecolorful:block/purple_ribbon_cross",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "ribbon_state": "cross_connect"
+      }
+    },
+    {
+      "apply": {
+        "model": "morecolorful:block/purple_ribbon_bow",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "ribbon_state": "default|up|down|left|right|vertical|horizontal|up_left|up_right|down_left|down_right|vertical_left|vertical_right|up_horizontal|down_horizontal|cross"
+      }
+    },
+    {
+      "apply": {
+        "model": "morecolorful:block/purple_ribbon_def",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "ribbon_state": "default|up"
+      }
+    },
+    {
+      "apply": {
+        "model": "morecolorful:block/purple_ribbon_up",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "ribbon_state": "up|vertical|up_left|up_right|vertical_left|vertical_right|up_horizontal|cross"
+      }
+    },
+    {
+      "apply": {
+        "model": "morecolorful:block/purple_ribbon_down",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "ribbon_state": "down|vertical"
+      }
+    },
+    {
+      "apply": {
+        "model": "morecolorful:block/purple_ribbon_left",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "ribbon_state": "left|up_left"
+      }
+    },
+    {
+      "apply": {
+        "model": "morecolorful:block/purple_ribbon_right",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "ribbon_state": "right|up_right"
+      }
+    },
+    {
+      "apply": {
+        "model": "morecolorful:block/purple_ribbon_vert",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "ribbon_state": "vertical_connect"
+      }
+    },
+    {
+      "apply": {
+        "model": "morecolorful:block/purple_ribbon_hor",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "ribbon_state": "horizontal|up_horizontal"
+      }
+    },
+    {
+      "apply": {
+        "model": "morecolorful:block/purple_ribbon_down_l",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "ribbon_state": "down_left|vertical_left"
+      }
+    },
+    {
+      "apply": {
+        "model": "morecolorful:block/purple_ribbon_down_r",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "ribbon_state": "down_right|vertical_right"
+      }
+    },
+    {
+      "apply": {
+        "model": "morecolorful:block/purple_ribbon_down_h",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "ribbon_state": "down_horizontal|cross"
+      }
+    },
+    {
+      "apply": {
+        "model": "morecolorful:block/purple_ribbon_tip",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "ribbon_state": "tip"
+      }
+    },
+    {
+      "apply": {
+        "model": "morecolorful:block/purple_ribbon_hor_c",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "ribbon_state": "horizontal_connect"
+      }
+    },
+    {
+      "apply": {
+        "model": "morecolorful:block/purple_ribbon_cross",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "ribbon_state": "cross_connect"
+      }
+    },
+    {
+      "apply": {
+        "model": "morecolorful:block/purple_ribbon_bow",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "ribbon_state": "default|up|down|left|right|vertical|horizontal|up_left|up_right|down_left|down_right|vertical_left|vertical_right|up_horizontal|down_horizontal|cross"
+      }
+    },
+    {
+      "apply": {
+        "model": "morecolorful:block/purple_ribbon_def",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "ribbon_state": "default|up"
+      }
+    },
+    {
+      "apply": {
+        "model": "morecolorful:block/purple_ribbon_up",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "ribbon_state": "up|vertical|up_left|up_right|vertical_left|vertical_right|up_horizontal|cross"
+      }
+    },
+    {
+      "apply": {
+        "model": "morecolorful:block/purple_ribbon_down",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "ribbon_state": "down|vertical"
+      }
+    },
+    {
+      "apply": {
+        "model": "morecolorful:block/purple_ribbon_left",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "ribbon_state": "left|up_left"
+      }
+    },
+    {
+      "apply": {
+        "model": "morecolorful:block/purple_ribbon_right",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "ribbon_state": "right|up_right"
+      }
+    },
+    {
+      "apply": {
+        "model": "morecolorful:block/purple_ribbon_vert",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "ribbon_state": "vertical_connect"
+      }
+    },
+    {
+      "apply": {
+        "model": "morecolorful:block/purple_ribbon_hor",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "ribbon_state": "horizontal|up_horizontal"
+      }
+    },
+    {
+      "apply": {
+        "model": "morecolorful:block/purple_ribbon_down_l",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "ribbon_state": "down_left|vertical_left"
+      }
+    },
+    {
+      "apply": {
+        "model": "morecolorful:block/purple_ribbon_down_r",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "ribbon_state": "down_right|vertical_right"
+      }
+    },
+    {
+      "apply": {
+        "model": "morecolorful:block/purple_ribbon_down_h",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "ribbon_state": "down_horizontal|cross"
+      }
+    },
+    {
+      "apply": {
+        "model": "morecolorful:block/purple_ribbon_tip",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "ribbon_state": "tip"
+      }
+    },
+    {
+      "apply": {
+        "model": "morecolorful:block/purple_ribbon_hor_c",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "ribbon_state": "horizontal_connect"
+      }
+    },
+    {
+      "apply": {
+        "model": "morecolorful:block/purple_ribbon_cross",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "ribbon_state": "cross_connect"
+      }
+    }
+  ]
+}

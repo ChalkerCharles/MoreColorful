@@ -1,10 +1,16 @@
 package com.ChalkerCharles.morecolorful.client;
 
+import com.ChalkerCharles.morecolorful.Config;
 import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.client.gui.PlayingScreen;
+import com.ChalkerCharles.morecolorful.client.model.ArmPoseExtension;
 import com.ChalkerCharles.morecolorful.common.attachment.InstrumentData;
+import com.ChalkerCharles.morecolorful.common.item.ModDataComponents;
 import com.ChalkerCharles.morecolorful.common.item.ModItems;
-import com.ChalkerCharles.morecolorful.util.EnumExtensions;
+import com.ChalkerCharles.morecolorful.common.item.component.PinwheelContext;
+import com.ChalkerCharles.morecolorful.common.item.misc.PinwheelItem;
+import com.ChalkerCharles.morecolorful.common.item.misc.SparklerItem;
+import com.ChalkerCharles.morecolorful.util.client.RenderUtils;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
@@ -12,12 +18,15 @@ import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
 import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ItemLike;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -34,7 +43,7 @@ public class ModClientSetup {
             @Override
             public HumanoidModel.ArmPose getArmPose(LivingEntity livingEntity, InteractionHand hand, ItemStack itemStack) {
                 if (livingEntity.isUsingItem() && livingEntity.getUseItem() == itemStack) {
-                    return EnumExtensions.ArmPose.FLUTE.getValue();
+                    return ArmPoseExtension.FLUTE;
                 }
                 return HumanoidModel.ArmPose.ITEM;
             }
@@ -45,9 +54,9 @@ public class ModClientSetup {
             public HumanoidModel.ArmPose getArmPose(LivingEntity livingEntity, InteractionHand hand, ItemStack itemStack) {
                 InstrumentData data = InstrumentData.get((Player) livingEntity);
                 if (livingEntity.isUsingItem() && livingEntity.getUseItem() == itemStack && data.isPlaying) {
-                    return EnumExtensions.ArmPose.GUITAR_PLAYING.getValue();
+                    return ArmPoseExtension.GUITAR_PLAYING;
                 }
-                return EnumExtensions.ArmPose.GUITAR_HOLD.getValue();
+                return ArmPoseExtension.GUITAR_HOLD;
             }
         }, ModItems.GUITAR.get(), ModItems.BASS.get(), ModItems.BANJO.get(), ModItems.ELECTRIC_GUITAR.get());
         // Cow Bell
@@ -55,7 +64,7 @@ public class ModClientSetup {
             @Override
             public HumanoidModel.ArmPose getArmPose(LivingEntity livingEntity, InteractionHand hand, ItemStack itemStack) {
                 if (livingEntity.isUsingItem() && livingEntity.getUseItem() == itemStack) {
-                    return EnumExtensions.ArmPose.COW_BELL.getValue();
+                    return ArmPoseExtension.COW_BELL;
                 }
                 return HumanoidModel.ArmPose.ITEM;
             }
@@ -65,7 +74,7 @@ public class ModClientSetup {
             @Override
             public HumanoidModel.ArmPose getArmPose(LivingEntity livingEntity, InteractionHand hand, ItemStack itemStack) {
                 if (livingEntity.isUsingItem() && livingEntity.getUseItem() == itemStack) {
-                    return EnumExtensions.ArmPose.DIDGERIDOO.getValue();
+                    return ArmPoseExtension.DIDGERIDOO;
                 }
                 return HumanoidModel.ArmPose.ITEM;
             }
@@ -76,9 +85,9 @@ public class ModClientSetup {
             public HumanoidModel.ArmPose getArmPose(LivingEntity livingEntity, InteractionHand hand, ItemStack itemStack) {
                 InstrumentData data = InstrumentData.get((Player) livingEntity);
                 if (livingEntity.isUsingItem() && livingEntity.getUseItem() == itemStack && data.isPlaying) {
-                    return EnumExtensions.ArmPose.VIOLIN_PLAYING.getValue();
+                    return ArmPoseExtension.VIOLIN_PLAYING;
                 } else if (livingEntity.isUsingItem() && livingEntity.getUseItem() == itemStack) {
-                    return EnumExtensions.ArmPose.VIOLIN_HOLD.getValue();
+                    return ArmPoseExtension.VIOLIN_HOLD;
                 }
                 return HumanoidModel.ArmPose.ITEM;
             }
@@ -126,11 +135,11 @@ public class ModClientSetup {
             public HumanoidModel.ArmPose getArmPose(LivingEntity livingEntity, InteractionHand hand, ItemStack itemStack) {
                 InstrumentData data = InstrumentData.get((Player) livingEntity);
                 if (livingEntity.isUsingItem() && livingEntity.getUseItem() == itemStack && data.isPlaying) {
-                    return EnumExtensions.ArmPose.CELLO_PLAYING.getValue();
+                    return ArmPoseExtension.CELLO_PLAYING;
                 } else if (livingEntity.isUsingItem() && livingEntity.getUseItem() == itemStack) {
-                    return EnumExtensions.ArmPose.CELLO_HOLD.getValue();
+                    return ArmPoseExtension.CELLO_HOLD;
                 }
-                return EnumExtensions.ArmPose.CELLO.getValue();
+                return ArmPoseExtension.CELLO;
             }
         }, ModItems.CELLO.get());
         // Trumpet
@@ -148,7 +157,7 @@ public class ModClientSetup {
             @Override
             public HumanoidModel.ArmPose getArmPose(LivingEntity livingEntity, InteractionHand hand, ItemStack itemStack) {
                 if (livingEntity.isUsingItem() && livingEntity.getUseItem() == itemStack) {
-                    return EnumExtensions.ArmPose.SAXOPHONE.getValue();
+                    return ArmPoseExtension.SAXOPHONE;
                 }
                 return HumanoidModel.ArmPose.ITEM;
             }
@@ -159,9 +168,9 @@ public class ModClientSetup {
             public HumanoidModel.ArmPose getArmPose(LivingEntity livingEntity, InteractionHand hand, ItemStack itemStack) {
                 InstrumentData data = InstrumentData.get((Player) livingEntity);
                 if (livingEntity.isUsingItem() && livingEntity.getUseItem() == itemStack && data.isPlaying) {
-                    return EnumExtensions.ArmPose.PIPA_PLAYING.getValue();
+                    return ArmPoseExtension.PIPA_PLAYING;
                 }
-                return EnumExtensions.ArmPose.PIPA_HOLD.getValue();
+                return ArmPoseExtension.PIPA_HOLD;
             }
         }, ModItems.PIPA.get());
         // Erhu
@@ -170,9 +179,9 @@ public class ModClientSetup {
             public HumanoidModel.ArmPose getArmPose(LivingEntity livingEntity, InteractionHand hand, ItemStack itemStack) {
                 InstrumentData data = InstrumentData.get((Player) livingEntity);
                 if (livingEntity.isUsingItem() && livingEntity.getUseItem() == itemStack && data.isPlaying) {
-                    return EnumExtensions.ArmPose.ERHU_PLAYING.getValue();
+                    return ArmPoseExtension.ERHU_PLAYING;
                 } else if (livingEntity.isUsingItem() && livingEntity.getUseItem() == itemStack) {
-                    return EnumExtensions.ArmPose.ERHU_HOLD.getValue();
+                    return ArmPoseExtension.ERHU_HOLD;
                 }
                 return HumanoidModel.ArmPose.ITEM;
             }
@@ -187,21 +196,46 @@ public class ModClientSetup {
                 entity != null && entity.isUsingItem() && entity.getUseItem().getItem() == item ? 1.0F : 0.0F;
     }
 
+    private static final ClampedItemPropertyFunction PROPERTY_PINWHEEL = (stack, level, entity, seed) -> {
+        if (!Config.windSystem) return 0;
+        if (entity instanceof LivingEntity living) {
+            if (stack == living.getMainHandItem() || stack == living.getOffhandItem() || stack == living.getItemBySlot(EquipmentSlot.HEAD)) {
+                int frame = stack.getOrDefault(ModDataComponents.PINWHEEL_CONTEXT, PinwheelContext.DEFAULT).lerpFrame(RenderUtils.partialTick);
+                int frames = PinwheelItem.isMulticolor(stack) ? 16 : 4;
+                return (frame % frames) / (float) frames;
+            }
+        }
+        return 0;
+    };
+
+    private static final ClampedItemPropertyFunction PROPERTY_ACTIVATED = (stack, level, entity, seed) ->
+            stack.has(ModDataComponents.ACTIVATED) ? 1.0F : 0.0F;
+
     @SubscribeEvent
     public static void registerModelPredicate(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
-            ItemProperties.register(ModItems.FLUTE.get(), MoreColorful.location("playing"), PROPERTY_PLAYING);
-            ItemProperties.register(ModItems.COW_BELL.get(), MoreColorful.location("playing"), PROPERTY_PLAYING);
-            ItemProperties.register(ModItems.DIDGERIDOO.get(), MoreColorful.location("playing"), PROPERTY_PLAYING);
-            ItemProperties.register(ModItems.VIOLIN.get(), MoreColorful.location("playing"), PROPERTY_PLAYING);
+            ResourceLocation playing = MoreColorful.location("playing");
+            ItemProperties.register(ModItems.FLUTE.get(), playing, PROPERTY_PLAYING);
+            ItemProperties.register(ModItems.COW_BELL.get(), playing, PROPERTY_PLAYING);
+            ItemProperties.register(ModItems.DIDGERIDOO.get(), playing, PROPERTY_PLAYING);
+            ItemProperties.register(ModItems.VIOLIN.get(), playing, PROPERTY_PLAYING);
             ItemProperties.register(ModItems.FIDDLE_BOW.get(), MoreColorful.location("playing_violin"), propertyPlaying(ModItems.VIOLIN.get()));
             ItemProperties.register(ModItems.FIDDLE_BOW.get(), MoreColorful.location("playing_cello"), propertyPlaying(ModItems.CELLO.get()));
             ItemProperties.register(ModItems.FIDDLE_BOW.get(), MoreColorful.location("playing_erhu"), propertyPlaying(ModItems.ERHU.get()));
-            ItemProperties.register(ModItems.TRUMPET.get(), MoreColorful.location("playing"), PROPERTY_PLAYING);
-            ItemProperties.register(ModItems.SAXOPHONE.get(), MoreColorful.location("playing"), PROPERTY_PLAYING);
-            ItemProperties.register(ModItems.OCARINA.get(), MoreColorful.location("playing"), PROPERTY_PLAYING);
-            ItemProperties.register(ModItems.HARMONICA.get(), MoreColorful.location("playing"), PROPERTY_PLAYING);
-            ItemProperties.register(ModItems.ERHU.get(), MoreColorful.location("playing"), PROPERTY_PLAYING);
+            ItemProperties.register(ModItems.TRUMPET.get(), playing, PROPERTY_PLAYING);
+            ItemProperties.register(ModItems.SAXOPHONE.get(), playing, PROPERTY_PLAYING);
+            ItemProperties.register(ModItems.OCARINA.get(), playing, PROPERTY_PLAYING);
+            ItemProperties.register(ModItems.HARMONICA.get(), playing, PROPERTY_PLAYING);
+            ItemProperties.register(ModItems.ERHU.get(), playing, PROPERTY_PLAYING);
+            ResourceLocation spin = MoreColorful.location("spin");
+            for (ItemLike item : PinwheelItem.ALL_DYE_COLORS) {
+                ItemProperties.register(item.asItem(), spin, PROPERTY_PINWHEEL);
+            }
+            ItemProperties.register(ModItems.MULTICOLORED_PINWHEEL.get(), spin, PROPERTY_PINWHEEL);
+            ResourceLocation activated = MoreColorful.location("activated");
+            for (ItemLike item : SparklerItem.ALL_ITEMS) {
+                ItemProperties.register(item.asItem(), activated, PROPERTY_ACTIVATED);
+            }
         });
     }
 }

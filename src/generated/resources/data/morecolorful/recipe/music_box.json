@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "tag": "minecraft:planks"
+    },
+    "@": {
+      "tag": "c:ingots/iron"
+    },
+    "L": {
+      "item": "minecraft:lever"
+    },
+    "N": {
+      "item": "minecraft:note_block"
+    }
+  },
+  "pattern": [
+    "###",
+    "#@L",
+    "#N#"
+  ],
+  "result": {
+    "count": 1,
+    "id": "morecolorful:music_box"
+  }
+}

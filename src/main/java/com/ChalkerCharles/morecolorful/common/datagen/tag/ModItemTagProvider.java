@@ -3,16 +3,20 @@ package com.ChalkerCharles.morecolorful.common.datagen.tag;
 import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.common.ModTags;
 import com.ChalkerCharles.morecolorful.common.item.ModItems;
+import com.ChalkerCharles.morecolorful.common.item.misc.PinwheelItem;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Arrays;
 import java.util.concurrent.CompletableFuture;
 
 public class ModItemTagProvider extends ItemTagsProvider {
@@ -80,6 +84,7 @@ public class ModItemTagProvider extends ItemTagsProvider {
         copy(ModTags.Blocks.DAWN_REDWOOD_LOGS, ModTags.Items.DAWN_REDWOOD_LOGS);
         copy(ModTags.Blocks.JACARANDA_LOGS, ModTags.Items.JACARANDA_LOGS);
         copy(ModTags.Blocks.WILLOW_LOGS, ModTags.Items.WILLOW_LOGS);
+        copy(ModTags.Blocks.RIBBONS, ModTags.Items.RIBBONS);
 
         tag(ModTags.Items.DRUM_SET_PARTS).add(
                 ModItems.BASS_DRUM.get(),
@@ -96,6 +101,9 @@ public class ModItemTagProvider extends ItemTagsProvider {
                 ModItems.STRIPPED_EBONY_LOG.get(),
                 ModItems.STRIPPED_EBONY_WOOD.get()
         );
+        tag(ModTags.Items.PINWHEELS)
+                .add(Arrays.stream(PinwheelItem.ALL_DYE_COLORS).map(ItemLike::asItem).toArray(Item[]::new))
+                .add(ModItems.MULTICOLORED_PINWHEEL.get());
 
         // C Tags
         tag(Tags.Items.FENCE_GATES_WOODEN).add(

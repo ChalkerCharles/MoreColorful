@@ -1,5 +1,6 @@
 package com.ChalkerCharles.morecolorful.mixin.mixins.client.render;
 
+import com.ChalkerCharles.morecolorful.Config;
 import com.ChalkerCharles.morecolorful.client.renderer.wavy.WavyBufferBuilder;
 import com.ChalkerCharles.morecolorful.client.renderer.wavy.WavyVertices;
 import com.ChalkerCharles.morecolorful.mixin.mixins.client.accessor.IByteBufferBuilderResultMixin;
@@ -29,7 +30,7 @@ public abstract class SectionCompilerMixin {
     @Inject(method = "compile(Lnet/minecraft/core/SectionPos;Lnet/minecraft/client/renderer/chunk/RenderChunkRegion;Lcom/mojang/blaze3d/vertex/VertexSorting;Lnet/minecraft/client/renderer/SectionBufferBuilderPack;Ljava/util/List;)Lnet/minecraft/client/renderer/chunk/SectionCompiler$Results;",
             at = @At("HEAD"))
     private void compile$head(SectionPos pSectionPos, RenderChunkRegion pRegion, VertexSorting pVertexSorting, SectionBufferBuilderPack pSectionBufferBuilderPack, List<AddSectionGeometryEvent.AdditionalSectionRenderer> additionalRenderers, CallbackInfoReturnable<SectionCompiler.Results> cir) {
-        if (RenderUtils.wavyBlocks) {
+        if (Config.wavyBlocks) {
             RenderUtils.setCacheOrigin(pSectionPos);
         }
     }
@@ -37,7 +38,7 @@ public abstract class SectionCompilerMixin {
     @Inject(method = "compile(Lnet/minecraft/core/SectionPos;Lnet/minecraft/client/renderer/chunk/RenderChunkRegion;Lcom/mojang/blaze3d/vertex/VertexSorting;Lnet/minecraft/client/renderer/SectionBufferBuilderPack;Ljava/util/List;)Lnet/minecraft/client/renderer/chunk/SectionCompiler$Results;",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/block/BlockRenderDispatcher;renderLiquid(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/BlockAndTintGetter;Lcom/mojang/blaze3d/vertex/VertexConsumer;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/material/FluidState;)V"))
     private void compile$fluid(CallbackInfoReturnable<SectionCompiler.Results> cir, @Local(ordinal = 2) BlockPos pos) {
-        if (RenderUtils.wavyBlocks) {
+        if (Config.wavyBlocks) {
             RenderUtils.initFluidCache(pos);
         }
     }
@@ -45,7 +46,7 @@ public abstract class SectionCompilerMixin {
     @Inject(method = "compile(Lnet/minecraft/core/SectionPos;Lnet/minecraft/client/renderer/chunk/RenderChunkRegion;Lcom/mojang/blaze3d/vertex/VertexSorting;Lnet/minecraft/client/renderer/SectionBufferBuilderPack;Ljava/util/List;)Lnet/minecraft/client/renderer/chunk/SectionCompiler$Results;",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/util/RandomSource;setSeed(J)V", shift = At.Shift.AFTER))
     private void compile$cache(CallbackInfoReturnable<SectionCompiler.Results> cir, @Local(ordinal = 2) BlockPos pos, @Local BlockState state) {
-        if (RenderUtils.wavyBlocks) {
+        if (Config.wavyBlocks) {
             RenderUtils.initCache(pos, state);
         }
     }
@@ -53,7 +54,7 @@ public abstract class SectionCompilerMixin {
     @Inject(method = "compile(Lnet/minecraft/core/SectionPos;Lnet/minecraft/client/renderer/chunk/RenderChunkRegion;Lcom/mojang/blaze3d/vertex/VertexSorting;Lnet/minecraft/client/renderer/SectionBufferBuilderPack;Ljava/util/List;)Lnet/minecraft/client/renderer/chunk/SectionCompiler$Results;",
             at = @At(value = "INVOKE", target = "Ljava/util/Map;put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;"))
     private void compile$setCapacity(CallbackInfoReturnable<SectionCompiler.Results> cir, @Local RenderType renderType, @Local MeshData meshData) {
-        if (RenderUtils.wavyBlocks) {
+        if (Config.wavyBlocks) {
             WavyVertices.Default vertices = RenderUtils.getWavyVertices(renderType);
             if (vertices != null) {
                 ByteBufferBuilder.Result result = ((IMeshDataMixin) meshData).getVertexBuffer();
@@ -65,7 +66,7 @@ public abstract class SectionCompilerMixin {
     @Inject(method = "compile(Lnet/minecraft/core/SectionPos;Lnet/minecraft/client/renderer/chunk/RenderChunkRegion;Lcom/mojang/blaze3d/vertex/VertexSorting;Lnet/minecraft/client/renderer/SectionBufferBuilderPack;Ljava/util/List;)Lnet/minecraft/client/renderer/chunk/SectionCompiler$Results;",
             at = @At("TAIL"))
     private void compile$tail(CallbackInfoReturnable<SectionCompiler.Results> cir) {
-        if (RenderUtils.wavyBlocks) {
+        if (Config.wavyBlocks) {
             RenderUtils.clearCache();
             RenderUtils.clearWavyTask();
         }
@@ -73,7 +74,7 @@ public abstract class SectionCompilerMixin {
 
     @WrapOperation(method = "getOrBeginLayer", at = @At(value = "NEW", args = "class=com/mojang/blaze3d/vertex/BufferBuilder"))
     private BufferBuilder getOrBeginLayer(ByteBufferBuilder builder, VertexFormat.Mode mode, VertexFormat format, Operation<BufferBuilder> original, @Local(argsOnly = true) RenderType renderType) {
-        if (RenderUtils.wavyBlocks) {
+        if (Config.wavyBlocks) {
             WavyVertices.Default vertices = RenderUtils.getWavyVertices(renderType);
             if (vertices != null) {
                 return new WavyBufferBuilder(builder, mode, format, vertices);

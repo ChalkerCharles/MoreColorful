@@ -2,7 +2,7 @@ package com.ChalkerCharles.morecolorful.common.block.musical;
 
 import com.ChalkerCharles.morecolorful.client.gui.PlayingScreen;
 import com.ChalkerCharles.morecolorful.common.ModStats;
-import com.ChalkerCharles.morecolorful.common.block.properties.HorizontalDoubleBlockHalf;
+import com.ChalkerCharles.morecolorful.common.block.properties.HorizontalHalf;
 import com.ChalkerCharles.morecolorful.common.block.properties.ModBlockStateProperties;
 import com.ChalkerCharles.morecolorful.util.InstrumentsType;
 import com.ChalkerCharles.morecolorful.network.packets.PlayingScreenPacket;
@@ -35,7 +35,7 @@ import javax.annotation.Nullable;
 
 public class SynthesizerKeyboardBlock extends Block implements MusicalInstrument {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
-    public static final EnumProperty<HorizontalDoubleBlockHalf> HALF = ModBlockStateProperties.HORIZONTAL_HALF;
+    public static final EnumProperty<HorizontalHalf> HALF = ModBlockStateProperties.HORIZONTAL_HALF;
     private static final VoxelShape KEYBOARD_NORTH_LEFT = Block.box(0.0, 14.0, 0.0, 14.0, 15.0, 6.0);
     private static final VoxelShape KEYBOARD_NORTH_RIGHT = Block.box(2.0, 14.0, 0.0, 16.0, 15.0, 6.0);
     private static final VoxelShape KEYBOARD_EAST_LEFT = Block.box(10.0, 14.0, 0.0, 16.0, 15.0, 14.0);
@@ -114,7 +114,7 @@ public class SynthesizerKeyboardBlock extends Block implements MusicalInstrument
         super(properties.strength(3.0F, 6.0F).pushReaction(PushReaction.DESTROY));
         this.type = type;
         this.registerDefaultState(this.stateDefinition.any()
-                .setValue(HALF, HorizontalDoubleBlockHalf.LEFT)
+                .setValue(HALF, HorizontalHalf.LEFT)
         );
     }
 
@@ -136,7 +136,7 @@ public class SynthesizerKeyboardBlock extends Block implements MusicalInstrument
     @Override
     protected VoxelShape getCollisionShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
         Direction direction = pState.getValue(FACING);
-        boolean flag = pState.getValue(HALF) == HorizontalDoubleBlockHalf.LEFT;
+        boolean flag = pState.getValue(HALF) == HorizontalHalf.LEFT;
         return switch (direction){
             case WEST -> flag ? WEST_LEFT_COLLISION : WEST_RIGHT_COLLISION;
             case SOUTH -> flag ? SOUTH_LEFT_COLLISION : SOUTH_RIGHT_COLLISION;
@@ -148,7 +148,7 @@ public class SynthesizerKeyboardBlock extends Block implements MusicalInstrument
     @Override
     protected VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
         Direction direction = pState.getValue(FACING);
-        boolean flag = pState.getValue(HALF) == HorizontalDoubleBlockHalf.LEFT;
+        boolean flag = pState.getValue(HALF) == HorizontalHalf.LEFT;
         return switch (direction){
             case WEST -> flag ? WEST_LEFT : WEST_RIGHT;
             case SOUTH -> flag ? SOUTH_LEFT : SOUTH_RIGHT;
@@ -176,18 +176,18 @@ public class SynthesizerKeyboardBlock extends Block implements MusicalInstrument
         }
     }
 
-    private static Direction getNeighbourDirection(HorizontalDoubleBlockHalf pHalf, Direction pDirection) {
-        return pHalf == HorizontalDoubleBlockHalf.LEFT ? pDirection.getCounterClockWise() : pDirection.getClockWise();
+    private static Direction getNeighbourDirection(HorizontalHalf pHalf, Direction pDirection) {
+        return pHalf == HorizontalHalf.LEFT ? pDirection.getCounterClockWise() : pDirection.getClockWise();
     }
 
     @Override
     public BlockState playerWillDestroy(Level pLevel, BlockPos pPos, BlockState pState, Player pPlayer) {
         if (!pLevel.isClientSide && (pPlayer.isCreative() || !pPlayer.hasCorrectToolForDrops(pState, pLevel, pPos))) {
-            HorizontalDoubleBlockHalf half = pState.getValue(HALF);
-            if (half == HorizontalDoubleBlockHalf.LEFT) {
+            HorizontalHalf half = pState.getValue(HALF);
+            if (half == HorizontalHalf.LEFT) {
                 BlockPos blockpos = pPos.relative(getNeighbourDirection(half, pState.getValue(FACING)));
                 BlockState blockstate = pLevel.getBlockState(blockpos);
-                if (blockstate.is(this) && blockstate.getValue(HALF) == HorizontalDoubleBlockHalf.RIGHT) {
+                if (blockstate.is(this) && blockstate.getValue(HALF) == HorizontalHalf.RIGHT) {
                     pLevel.setBlock(blockpos, Blocks.AIR.defaultBlockState(), 35);
                     pLevel.levelEvent(pPlayer, 2001, blockpos, Block.getId(blockstate));
                 }
@@ -211,7 +211,7 @@ public class SynthesizerKeyboardBlock extends Block implements MusicalInstrument
 
     @Override
     public void setPlacedBy(Level pLevel, BlockPos pPos, BlockState pState, LivingEntity pPlacer, ItemStack pStack) {
-        pLevel.setBlock(pPos.relative(pState.getValue(FACING).getCounterClockWise()), pState.setValue(HALF, HorizontalDoubleBlockHalf.RIGHT), 3);
+        pLevel.setBlock(pPos.relative(pState.getValue(FACING).getCounterClockWise()), pState.setValue(HALF, HorizontalHalf.RIGHT), 3);
     }
 
     @Override

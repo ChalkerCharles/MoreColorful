@@ -1,9 +1,9 @@
 package com.ChalkerCharles.morecolorful.mixin.mixins.client.compat.sodium;
 
+import com.ChalkerCharles.morecolorful.Config;
 import com.ChalkerCharles.morecolorful.client.compat.SodiumWavyTask;
 import com.ChalkerCharles.morecolorful.mixin.extensions.compat.IRenderSectionExtension;
 import com.ChalkerCharles.morecolorful.util.Self;
-import com.ChalkerCharles.morecolorful.util.client.RenderUtils;
 import net.caffeinemc.mods.sodium.client.render.chunk.RenderSection;
 import net.caffeinemc.mods.sodium.client.render.chunk.region.RenderRegion;
 import org.spongepowered.asm.mixin.*;
@@ -19,7 +19,7 @@ public abstract class RenderSectionMixin implements IRenderSectionExtension, Sel
 
     @Inject(method = "<init>", at = @At("TAIL"))
     private void constructor(RenderRegion region, int chunkX, int chunkY, int chunkZ, CallbackInfo ci) {
-        if (!RenderUtils.wavyBlocks) return;
+        if (!Config.wavyBlocks) return;
         this.moreColorful$wavyTask = new SodiumWavyTask(moreColorful$self());
     }
 

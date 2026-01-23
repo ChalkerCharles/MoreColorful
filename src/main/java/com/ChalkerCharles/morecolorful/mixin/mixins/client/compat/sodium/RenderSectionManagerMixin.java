@@ -1,11 +1,11 @@
 package com.ChalkerCharles.morecolorful.mixin.mixins.client.compat.sodium;
 
+import com.ChalkerCharles.morecolorful.Config;
 import com.ChalkerCharles.morecolorful.client.renderer.wavy.WavyDataTask;
 import com.ChalkerCharles.morecolorful.mixin.extensions.ILevelChunkExtension;
 import com.ChalkerCharles.morecolorful.mixin.extensions.compat.IRenderSectionExtension;
 import com.ChalkerCharles.morecolorful.mixin.extensions.compat.IRenderSectionManagerExtension;
 import com.ChalkerCharles.morecolorful.util.client.MultiBlockGroup;
-import com.ChalkerCharles.morecolorful.util.client.RenderUtils;
 import it.unimi.dsi.fastutil.longs.Long2ReferenceMap;
 import net.caffeinemc.mods.sodium.client.render.chunk.ChunkUpdateType;
 import net.caffeinemc.mods.sodium.client.render.chunk.RenderSection;
@@ -31,7 +31,7 @@ public abstract class RenderSectionManagerMixin implements IRenderSectionManager
 
     @Inject(method = "scheduleRebuild", at = @At(value = "INVOKE", target = "Lnet/caffeinemc/mods/sodium/client/render/chunk/RenderSection;setPendingUpdate(Lnet/caffeinemc/mods/sodium/client/render/chunk/ChunkUpdateType;)V"))
     private void scheduleRebuild(int x, int y, int z, boolean important, CallbackInfo ci) {
-        if (RenderUtils.wavyBlocks) {
+        if (Config.wavyBlocks) {
             this.moreColorful$setGroupDirty(x, y, z);
         }
     }

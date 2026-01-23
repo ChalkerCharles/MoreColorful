@@ -3,6 +3,12 @@
     "#morecolorful:leaf_litters": {
       "burn_time": 50
     },
+    "#morecolorful:pinwheels": {
+      "burn_time": 200
+    },
+    "#morecolorful:ribbons": {
+      "burn_time": 50
+    },
     "morecolorful:banjo": {
       "burn_time": 200
     },

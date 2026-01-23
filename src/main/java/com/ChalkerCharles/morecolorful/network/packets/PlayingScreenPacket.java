@@ -21,7 +21,7 @@ public record PlayingScreenPacket(InstrumentsType pType, BlockPos pos, int id, b
         this(pType, BlockPos.ZERO, id, isOpen);
     }
 
-    public static final CustomPacketPayload.Type<PlayingScreenPacket> TYPE = new CustomPacketPayload.Type<>(MoreColorful.location("playing_screen_event"));
+    public static final Type<PlayingScreenPacket> TYPE = new Type<>(MoreColorful.location("playing_screen_event"));
 
     public static final StreamCodec<ByteBuf, PlayingScreenPacket> STREAM_CODEC = StreamCodec.composite(
             InstrumentsType.STREAM_CODEC,

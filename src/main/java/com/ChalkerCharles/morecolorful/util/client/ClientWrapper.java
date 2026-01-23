@@ -1,17 +1,21 @@
 package com.ChalkerCharles.morecolorful.util.client;
 
+import com.ChalkerCharles.morecolorful.Config;
 import com.ChalkerCharles.morecolorful.client.particle.ModParticles;
 import com.ChalkerCharles.morecolorful.common.ModSounds;
+import com.ChalkerCharles.morecolorful.util.Maths;
 import com.ChalkerCharles.morecolorful.util.WeatherUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ColorParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import org.joml.Vector3f;
 
 import java.util.Map;
 import java.util.function.BiFunction;
@@ -35,14 +39,6 @@ public class ClientWrapper {
             Blocks.FLOWERING_AZALEA_LEAVES, AZALEA_GETTER
     );
 
-    public static boolean wavyBlocks() {
-        return RenderUtils.wavyBlocks;
-    }
-
-    public static boolean windParticles() {
-        return RenderUtils.windParticles;
-    }
-
     public static void clearDataInLine(Level level, BlockPos pos) {
         RenderUtils.clearDataInLine(level, pos);
     }
@@ -53,7 +49,7 @@ public class ClientWrapper {
     }
 
     public static void playRustlingSound(Level level, BlockPos pos, RandomSource random) {
-        if (RenderUtils.windSounds && !RenderUtils.isCalm && !RenderUtils.leavesRustling && distToCameraSq(pos) < 576) {
+        if (Config.windSounds && !RenderUtils.isCalm && !RenderUtils.leavesRustling && distToCameraSq(pos) < 576) {
             int chance = WeatherUtils.chanceByWind(level, pos, 240);
             if (random.nextInt(chance) == 0) {
                 float volume = 1.0F - chance * 0.00416667F;
@@ -62,5 +58,11 @@ public class ClientWrapper {
                 RenderUtils.leavesRustling = true;
             }
         }
+    }
+
+    public static float wobble(Vector3f wind, float x, float z) {
+        float m0 = Maths.length(x - 8, z - 8) * 10F;
+        float windSpeed = Maths.length(wind.x, wind.z);
+        return Mth.cos(m0 + RenderUtils.anim * Math.round(windSpeed)) * 0.65F * Maths.INV24;
     }
 }

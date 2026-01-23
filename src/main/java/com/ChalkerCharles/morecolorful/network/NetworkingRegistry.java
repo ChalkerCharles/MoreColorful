@@ -24,6 +24,7 @@ public class NetworkingRegistry {
         // Server Bound
         registrar.playToServer(NotePlayingPacket.TYPE, NotePlayingPacket.STREAM_CODEC, NotePlayingPacket::handle);
         registrar.playToServer(WindInitiationPacket.TYPE, WindInitiationPacket.STREAM_CODEC, WindInitiationPacket::handle);
+        registrar.playToServer(EditSheetMusicPacket.TYPE, EditSheetMusicPacket.STREAM_CODEC, EditSheetMusicPacket::handle);
 
         // Both
         registrar.playBidirectional(PlayingScreenPacket.TYPE, PlayingScreenPacket.STREAM_CODEC, PlayingScreenPacket.HANDLER);

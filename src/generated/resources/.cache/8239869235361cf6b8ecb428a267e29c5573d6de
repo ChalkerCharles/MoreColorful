@@ -1,6 +1,7 @@
-// 1.21	2025-12-15T12:50:34.9098949	Tags for minecraft:block mod id morecolorful
+// 1.21	2026-01-16T13:11:08.5129093	Tags for minecraft:block mod id morecolorful
 ab471eac02ab7d31d7b320f676497455c7823bb9 data/minecraft/tags/block/bee_growables.json
 71a8c626d3e97aa27200741dd59f3eb10b71b11d data/minecraft/tags/block/ceiling_hanging_signs.json
+7e50ebcb2ab2056fc4e163dc3eea921b201e814a data/minecraft/tags/block/climbable.json
 6de5aae45cfb303b22c4ec293d4570bc2d09fc03 data/minecraft/tags/block/fence_gates.json
 1524d2f5fccfa3cb387c6e146559d54d002948ee data/minecraft/tags/block/flowers.json
 22f9ce22ed67a5bb45a3aa46a749d4df4966fcf7 data/minecraft/tags/block/flower_pots.json
@@ -47,5 +48,6 @@ fa6575672e585c976edd2211d4b373fdf6a43787 data/morecolorful/tags/block/packed_mud
 5d06f8d3f576626c34b2949d8f559e173b96921d data/morecolorful/tags/block/prismarines.json
 fb3950e4e9bdc330f6b13b3f64d81a3aa408fe26 data/morecolorful/tags/block/quartz_blocks.json
 da13fd75b11bcdca4d520f347d997910a51480da data/morecolorful/tags/block/rare_wood.json
+e48415e04383cf7ee6f50384c3fa77a3b6a2d17b data/morecolorful/tags/block/ribbons.json
 504aee8a0ab8e2d310476849eef928142fdd2bab data/morecolorful/tags/block/tuff_blocks.json
 3363e9b22cd9f9ddecff6d887e50864b10a240f2 data/morecolorful/tags/block/willow_logs.json

@@ -33,18 +33,14 @@ import java.util.Arrays;
 
 @OnlyIn(Dist.CLIENT)
 public final class RenderUtils {
+    public static float partialTick;
     public static float time, anim;
     public static final Vector2f windSpeed = new Vector2f(), windDir = new Vector2f();
-    private static final Vector2f oWindSpeed = new Vector2f();
+    public static final Vector2f cloudMovement = new Vector2f();
+    public static final Vector2f oCloudMovement = new Vector2f();
     public static float windStrength;
     public static boolean isCalm;
     public static Direction nearestWindDirection;
-    public static boolean wavyBlocks;
-    public static boolean wavyParticles;
-    public static boolean windAndRain;
-    public static boolean windAndCloud;
-    public static boolean windParticles;
-    public static boolean windSounds;
     public static boolean renderWindZones;
     public static boolean leavesRustling;
     public static final boolean SODIUM_ON = ModList.get().isLoaded("sodium");
@@ -107,18 +103,7 @@ public final class RenderUtils {
         }
     }
 
-    public static void setClientWindFlags() {
-        boolean b = Config.WIND_SYSTEM.isTrue();
-        wavyBlocks = b && Config.WAVY_BLOCKS.isTrue();
-        wavyParticles = b && Config.WAVY_PARTICLES.isTrue();
-        windAndRain = b && Config.WIND_AND_RAIN.isTrue();
-        windAndCloud = b && Config.WIND_AND_CLOUD.isTrue();
-        windParticles = b && Config.WIND_PARTICLES.isTrue();
-        windSounds = b && Config.WIND_SOUNDS.isTrue();
-    }
-
     public static void setWindContext(Level level) {
-        oWindSpeed.set(windSpeed);
         windSpeed.set(LevelSavedData.getGlobalWindSpeed(level));
         windDir.set(LevelSavedData.getWindDirection(level));
         windStrength = windSpeed.length();
@@ -131,12 +116,20 @@ public final class RenderUtils {
         anim = time * 800;
     }
 
-    public static float lerpWindSpeedX(float partialTick) {
-        return Mth.lerp(partialTick, oWindSpeed.x, windSpeed.x);
+    public static void setCloudMovement() {
+        if (Config.windAndCloud) {
+            oCloudMovement.set(cloudMovement);
+            cloudMovement.x += windSpeed.x * 0.0015625F;
+            cloudMovement.y += windSpeed.y * 0.0015625F;
+        }
     }
 
-    public static float lerpWindSpeedZ(float partialTick) {
-        return Mth.lerp(partialTick, oWindSpeed.y, windSpeed.y);
+    public static float getCloudMovementX(float partialTick) {
+        return Mth.lerp(partialTick, oCloudMovement.x, cloudMovement.x);
+    }
+
+    public static float getCloudMovementZ(float partialTick) {
+        return Mth.lerp(partialTick, oCloudMovement.y, cloudMovement.y);
     }
 
     @Nullable

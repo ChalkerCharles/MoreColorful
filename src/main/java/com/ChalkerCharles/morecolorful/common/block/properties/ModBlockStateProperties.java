@@ -6,7 +6,7 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 
 public class ModBlockStateProperties {
     public static final BooleanProperty HIT = BooleanProperty.create("hit");
-    public static final EnumProperty<HorizontalDoubleBlockHalf> HORIZONTAL_HALF = EnumProperty.create("half", HorizontalDoubleBlockHalf.class);
+    public static final EnumProperty<HorizontalHalf> HORIZONTAL_HALF = EnumProperty.create("half", HorizontalHalf.class);
     public static final EnumProperty<UprightPianoPart> UPRIGHT_PIANO_PART = EnumProperty.create("part", UprightPianoPart.class);
     public static final EnumProperty<GrandPianoPart> GRAND_PIANO_PART = EnumProperty.create("part", GrandPianoPart.class);
     public static final EnumProperty<DrumSetPart> DRUM_SET_PART = EnumProperty.create("part", DrumSetPart.class);
@@ -15,4 +15,7 @@ public class ModBlockStateProperties {
     public static final BooleanProperty TALL_REED = BooleanProperty.create("tall_reed");
     public static final BooleanProperty TIP = BooleanProperty.create("tip");
     public static final IntegerProperty WIND_LEVEL = IntegerProperty.create("wind_level", 0, 5);
+    public static final BooleanProperty SHEET = BooleanProperty.create("sheet");
+    public static final EnumProperty<RibbonState> RIBBON_STATE = EnumProperty.create("ribbon_state", RibbonState.class);
+    public static final BooleanProperty AUTO_CONNECT = BooleanProperty.create("auto_connect");
 }

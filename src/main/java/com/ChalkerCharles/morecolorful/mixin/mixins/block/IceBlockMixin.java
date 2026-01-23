@@ -21,7 +21,7 @@ public abstract class IceBlockMixin {
 
     @Inject(method = "randomTick", at = @At("HEAD"), cancellable = true)
     private void randomTick(BlockState pState, ServerLevel pLevel, BlockPos pPos, RandomSource pRandom, CallbackInfo ci) {
-        if (Config.THERMAL_SYSTEM.isTrue()) {
+        if (Config.thermalSystem) {
             if (LevelSavedData.getTemperature(pLevel, pPos) > 5) {
                 this.melt(pState, pLevel, pPos);
             }

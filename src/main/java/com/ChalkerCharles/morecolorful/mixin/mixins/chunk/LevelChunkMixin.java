@@ -48,10 +48,10 @@ public abstract class LevelChunkMixin extends ChunkAccess implements ILevelChunk
     @Inject(method = "<init>(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/level/chunk/ProtoChunk;Lnet/minecraft/world/level/chunk/LevelChunk$PostLoadProcessor;)V",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/chunk/LevelChunk;setLightCorrect(Z)V", shift = At.Shift.AFTER))
     private void constructor$server(ServerLevel pLevel, ProtoChunk pChunk, LevelChunk.PostLoadProcessor pPostLoad, CallbackInfo ci) {
-        if (Config.THERMAL_SYSTEM.isTrue()) {
+        if (Config.thermalSystem) {
             ChunkData.setThermalCorrect(this, ChunkData.isThermalCorrect(pChunk));
         }
-        if (Config.WIND_SYSTEM.isTrue()) {
+        if (Config.windSystem) {
             ChunkData.copyVentilationSources(this, pChunk);
             ChunkData.setVentilation(this, ChunkData.isVentilated(pChunk));
         }
@@ -60,10 +60,10 @@ public abstract class LevelChunkMixin extends ChunkAccess implements ILevelChunk
     @Nullable
     @Inject(method = "setBlockState", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/lighting/LevelLightEngine;updateSectionStatus(Lnet/minecraft/core/BlockPos;Z)V", shift = At.Shift.AFTER))
     private void setBlockState$1(BlockPos pPos, BlockState pState, boolean pIsMoving, CallbackInfoReturnable<BlockState> cir, @Local(ordinal = 2) boolean flag1) {
-        if (Config.THERMAL_SYSTEM.isTrue()) {
+        if (Config.thermalSystem) {
             LevelSavedData.getThermalEngine(this.level).updateSectionStatus(pPos, flag1);
         }
-        if (Config.WIND_SYSTEM.isTrue()) {
+        if (Config.windSystem) {
             LevelSavedData.getVentEngine(this.level).updateSectionStatus(pPos, flag1);
         }
     }
@@ -71,7 +71,7 @@ public abstract class LevelChunkMixin extends ChunkAccess implements ILevelChunk
     @Nullable
     @Inject(method = "setBlockState", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;hasBlockEntity()Z", ordinal = 0, shift = At.Shift.BEFORE))
     private void setBlockState$2(BlockPos pPos, BlockState pState, boolean pIsMoving, CallbackInfoReturnable<BlockState> cir, @Local(ordinal = 1) BlockState blockstate) {
-        if (Config.THERMAL_SYSTEM.isTrue()) {
+        if (Config.thermalSystem) {
             if (BlockThermalEngine.hasDifferentThermalProperties(blockstate, pState)) {
                 ProfilerFiller profilerfiller = this.level.getProfiler();
                 profilerfiller.push("queueCheckThermal");
@@ -79,7 +79,7 @@ public abstract class LevelChunkMixin extends ChunkAccess implements ILevelChunk
                 profilerfiller.pop();
             }
         }
-        if (Config.WIND_SYSTEM.isTrue()) {
+        if (Config.windSystem) {
             if (VentilationEngine.hasDifferentVentProperties(blockstate, pState)) {
                 ProfilerFiller profilerfiller = this.level.getProfiler();
                 profilerfiller.push("updateVentilationSources");
@@ -88,12 +88,12 @@ public abstract class LevelChunkMixin extends ChunkAccess implements ILevelChunk
                 profilerfiller.push("queueCheckVent");
                 LevelSavedData.getVentEngine(this.level).checkBlock(pPos);
                 profilerfiller.pop();
-                if (this.level.isClientSide && ClientWrapper.wavyBlocks()) {
+                if (this.level.isClientSide && Config.wavyBlocks) {
                     ClientWrapper.clearDataInLine(this.level, pPos);
                 }
             }
         }
-        if (this.level.isClientSide && ClientWrapper.wavyBlocks()) {
+        if (this.level.isClientSide && Config.wavyBlocks) {
             boolean isPrevGroup = IBlockStateExtension.isGroupBlock(blockstate);
             boolean isNowGroup = IBlockStateExtension.isGroupBlock(pState);
             if (isPrevGroup || isNowGroup) {
@@ -104,7 +104,7 @@ public abstract class LevelChunkMixin extends ChunkAccess implements ILevelChunk
 
     @Inject(method = "replaceWithPacketData", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/chunk/LevelChunk;initializeLightSources()V", shift = At.Shift.AFTER))
     private void replaceWithPacketData(CallbackInfo ci) {
-        if (Config.WIND_SYSTEM.isFalse()) return;
+        if (!Config.windSystem) return;
         ChunkData.initializeVentSources(this);
     }
 

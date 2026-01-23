@@ -50,10 +50,10 @@ public abstract class ServerChunkCacheMixin extends ChunkSourceMixin {
 
     @Inject(method = "<init>", at = @At(value = "TAIL", shift = At.Shift.BEFORE))
     private void constructor(CallbackInfo ci) {
-        if (Config.THERMAL_SYSTEM.isTrue()) {
+        if (Config.thermalSystem) {
             this.moreColorful$thermalEngine = IChunkMapExtension.getThermalEngine(this.chunkMap);
         }
-        if (Config.WIND_SYSTEM.isTrue()) {
+        if (Config.windSystem) {
             this.moreColorful$ventEngine = IChunkMapExtension.getVentEngine(this.chunkMap);
         }
     }
@@ -128,10 +128,10 @@ public abstract class ServerChunkCacheMixin extends ChunkSourceMixin {
 
         @Inject(method = "pollTask()Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ThreadedLevelLightEngine;tryScheduleUpdate()V", shift = At.Shift.AFTER))
         private void pollTask(CallbackInfoReturnable<Boolean> cir) {
-            if (Config.THERMAL_SYSTEM.isTrue()) {
+            if (Config.thermalSystem) {
                 IChunkSourceExtension.getThermalEngine(this$0).tryScheduleUpdate();
             }
-            if (Config.WIND_SYSTEM.isTrue()) {
+            if (Config.windSystem) {
                 IChunkSourceExtension.getVentEngine(this$0).tryScheduleUpdate();
             }
         }

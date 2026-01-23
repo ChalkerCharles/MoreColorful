@@ -11,7 +11,7 @@ import net.neoforged.neoforge.network.codec.NeoForgeStreamCodecs;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public record VentRemovalPacket(ChunkPos pos) implements CustomPacketPayload {
-    public static final CustomPacketPayload.Type<VentRemovalPacket> TYPE = new CustomPacketPayload.Type<>(MoreColorful.location("vent_removal"));
+    public static final Type<VentRemovalPacket> TYPE = new Type<>(MoreColorful.location("vent_removal"));
 
     public static final StreamCodec<FriendlyByteBuf, VentRemovalPacket> STREAM_CODEC = StreamCodec.composite(
             NeoForgeStreamCodecs.CHUNK_POS,

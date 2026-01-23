@@ -1,0 +1,61 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "party_popper",
+  "ingredients": [
+    {
+      "item": "minecraft:green_dye"
+    },
+    [
+      {
+        "item": "morecolorful:white_party_popper"
+      },
+      {
+        "item": "morecolorful:light_gray_party_popper"
+      },
+      {
+        "item": "morecolorful:gray_party_popper"
+      },
+      {
+        "item": "morecolorful:black_party_popper"
+      },
+      {
+        "item": "morecolorful:brown_party_popper"
+      },
+      {
+        "item": "morecolorful:red_party_popper"
+      },
+      {
+        "item": "morecolorful:orange_party_popper"
+      },
+      {
+        "item": "morecolorful:yellow_party_popper"
+      },
+      {
+        "item": "morecolorful:lime_party_popper"
+      },
+      {
+        "item": "morecolorful:cyan_party_popper"
+      },
+      {
+        "item": "morecolorful:light_blue_party_popper"
+      },
+      {
+        "item": "morecolorful:blue_party_popper"
+      },
+      {
+        "item": "morecolorful:purple_party_popper"
+      },
+      {
+        "item": "morecolorful:magenta_party_popper"
+      },
+      {
+        "item": "morecolorful:pink_party_popper"
+      }
+    ]
+  ],
+  "result": {
+    "count": 1,
+    "id": "morecolorful:green_party_popper"
+  }
+}

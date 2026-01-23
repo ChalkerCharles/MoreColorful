@@ -1,6 +1,7 @@
 package com.ChalkerCharles.morecolorful.util;
 
 import com.ChalkerCharles.morecolorful.common.ModSounds;
+import com.ChalkerCharles.morecolorful.common.block.properties.InstrumentExtension;
 import com.google.common.collect.ImmutableMap;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.core.Holder;
@@ -76,26 +77,26 @@ public enum InstrumentsType implements StringRepresentable {
             .put(NoteBlockInstrument.BIT, BIT)
             .put(NoteBlockInstrument.BANJO, BANJO)
             .put(NoteBlockInstrument.PLING, PLING)
-            .put(EnumExtensions.Instrument.PIANO_LOW, PIANO_LOW)
-            .put(EnumExtensions.Instrument.PIANO_HIGH, PIANO_HIGH)
-            .put(EnumExtensions.Instrument.VIOLIN, VIOLIN)
-            .put(EnumExtensions.Instrument.CELLO, CELLO)
-            .put(EnumExtensions.Instrument.ELECTRIC_GUITAR, ELECTRIC_GUITAR)
-            .put(EnumExtensions.Instrument.TRUMPET, TRUMPET)
-            .put(EnumExtensions.Instrument.SAXOPHONE, SAXOPHONE)
-            .put(EnumExtensions.Instrument.OCARINA, OCARINA)
-            .put(EnumExtensions.Instrument.HARMONICA, HARMONICA)
-            .put(EnumExtensions.Instrument.TOM, TOM)
-            .put(EnumExtensions.Instrument.RIDE, RIDE)
-            .put(EnumExtensions.Instrument.CRASH, CRASH)
-            .put(EnumExtensions.Instrument.SCULK, SCULK)
-            .put(EnumExtensions.Instrument.CRYSTAL, CRYSTAL)
-            .put(EnumExtensions.Instrument.SAW, SAW)
-            .put(EnumExtensions.Instrument.PLUCK, PLUCK)
-            .put(EnumExtensions.Instrument.SYNTH_BASS, SYNTH_BASS)
-            .put(EnumExtensions.Instrument.PIPA, PIPA)
-            .put(EnumExtensions.Instrument.ERHU, ERHU)
-            .put(EnumExtensions.Instrument.GUZHENG, GUZHENG)
+            .put(InstrumentExtension.PIANO_LOW, PIANO_LOW)
+            .put(InstrumentExtension.PIANO_HIGH, PIANO_HIGH)
+            .put(InstrumentExtension.VIOLIN, VIOLIN)
+            .put(InstrumentExtension.CELLO, CELLO)
+            .put(InstrumentExtension.ELECTRIC_GUITAR, ELECTRIC_GUITAR)
+            .put(InstrumentExtension.TRUMPET, TRUMPET)
+            .put(InstrumentExtension.SAXOPHONE, SAXOPHONE)
+            .put(InstrumentExtension.OCARINA, OCARINA)
+            .put(InstrumentExtension.HARMONICA, HARMONICA)
+            .put(InstrumentExtension.TOM, TOM)
+            .put(InstrumentExtension.RIDE, RIDE)
+            .put(InstrumentExtension.CRASH, CRASH)
+            .put(InstrumentExtension.SCULK, SCULK)
+            .put(InstrumentExtension.CRYSTAL, CRYSTAL)
+            .put(InstrumentExtension.SAW, SAW)
+            .put(InstrumentExtension.PLUCK, PLUCK)
+            .put(InstrumentExtension.SYNTH_BASS, SYNTH_BASS)
+            .put(InstrumentExtension.PIPA, PIPA)
+            .put(InstrumentExtension.ERHU, ERHU)
+            .put(InstrumentExtension.GUZHENG, GUZHENG)
             .build();
 
     InstrumentsType(Holder<SoundEvent> pSoundEvent, Type type) {

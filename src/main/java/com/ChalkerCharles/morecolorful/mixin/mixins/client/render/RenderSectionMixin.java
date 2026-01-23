@@ -1,5 +1,6 @@
 package com.ChalkerCharles.morecolorful.mixin.mixins.client.render;
 
+import com.ChalkerCharles.morecolorful.Config;
 import com.ChalkerCharles.morecolorful.client.renderer.wavy.WavyDataTask;
 import com.ChalkerCharles.morecolorful.mixin.extensions.ILevelRendererExtension;
 import com.ChalkerCharles.morecolorful.mixin.extensions.IRenderSectionExtension;
@@ -38,7 +39,7 @@ public abstract class RenderSectionMixin implements IRenderSectionExtension {
 
     @ModifyExpressionValue(method = "lambda$new$1", at = @At(value = "FIELD", target = "Lcom/mojang/blaze3d/vertex/VertexBuffer$Usage;STATIC:Lcom/mojang/blaze3d/vertex/VertexBuffer$Usage;"))
     private static VertexBuffer.Usage newVertexBuffer(VertexBuffer.Usage original, @Local(argsOnly = true)RenderType renderType) {
-        if (RenderUtils.wavyBlocks && RenderUtils.isWavyRenderType(renderType)) {
+        if (Config.wavyBlocks && RenderUtils.isWavyRenderType(renderType)) {
             return VertexBuffer.Usage.DYNAMIC;
         }
         return original;
@@ -46,7 +47,7 @@ public abstract class RenderSectionMixin implements IRenderSectionExtension {
 
     @Inject(method = "<init>", at = @At("TAIL"))
     private void constructor(CallbackInfo ci) {
-        if (!RenderUtils.wavyBlocks) return;
+        if (!Config.wavyBlocks) return;
         int id0 = ((IVertexBufferMixin) this.getBuffer(RenderType.cutoutMipped())).getVertexBufferId();
         int id1 = ((IVertexBufferMixin) this.getBuffer(RenderType.cutout())).getVertexBufferId();
         int id2 = ((IVertexBufferMixin) this.getBuffer(RenderType.translucent())).getVertexBufferId();
@@ -87,7 +88,7 @@ public abstract class RenderSectionMixin implements IRenderSectionExtension {
 
         @Inject(method = "doTask", at = @At(value = "INVOKE", target = "Lnet/minecraft/core/SectionPos;of(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/core/SectionPos;"))
         private void preCompile(CallbackInfoReturnable<CompletableFuture<?>> cir) {
-            if (RenderUtils.wavyBlocks) {
+            if (Config.wavyBlocks) {
                 RenderUtils.putWavyTask(IRenderSectionExtension.getWavyTask(this$1));
             }
         }

@@ -1,0 +1,15 @@
+{
+  "parent": "minecraft:item/generated",
+  "display": {
+    "head": {
+      "translation": [
+        0,
+        5,
+        7
+      ]
+    }
+  },
+  "textures": {
+    "layer0": "morecolorful:item/light_gray_ribbon"
+  }
+}

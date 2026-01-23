@@ -18,7 +18,7 @@ import java.util.BitSet;
 import java.util.List;
 
 public record ThermalUpdatePacket(int x, int z, ThermalUpdateData data, boolean sent) implements CustomPacketPayload {
-    public static final CustomPacketPayload.Type<ThermalUpdatePacket> TYPE = new CustomPacketPayload.Type<>(MoreColorful.location("thermal_update"));
+    public static final Type<ThermalUpdatePacket> TYPE = new Type<>(MoreColorful.location("thermal_update"));
 
     public static final StreamCodec<FriendlyByteBuf, ThermalUpdatePacket> STREAM_CODEC = StreamCodec.ofMember(
             ThermalUpdatePacket::write, ThermalUpdatePacket::new

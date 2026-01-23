@@ -30,10 +30,10 @@ public abstract class ClientChunkCacheMixin extends ChunkSourceMixin implements 
 
     @Inject(method = "<init>", at = @At("TAIL"))
     private void constructor(ClientLevel pLevel, int pViewDistance, CallbackInfo ci) {
-        if (Config.THERMAL_SYSTEM.isTrue()) {
+        if (Config.thermalSystem) {
             this.moreColorful$thermalEngine = new LevelThermalEngine(moreColorful$self());
         }
-        if (Config.WIND_SYSTEM.isTrue()) {
+        if (Config.windSystem) {
             this.moreColorful$ventEngine = new LevelVentEngine(moreColorful$self(), WeatherUtils.isWindy(pLevel));
         }
     }

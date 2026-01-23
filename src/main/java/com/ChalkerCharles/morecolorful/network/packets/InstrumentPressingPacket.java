@@ -15,7 +15,7 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.neoforged.neoforge.network.handling.IPayloadHandler;
 
 public record InstrumentPressingPacket(int id, boolean isPressing) implements CustomPacketPayload {
-    public static final CustomPacketPayload.Type<InstrumentPressingPacket> TYPE = new CustomPacketPayload.Type<>(MoreColorful.location("playing_screen_closed"));
+    public static final Type<InstrumentPressingPacket> TYPE = new Type<>(MoreColorful.location("playing_screen_closed"));
     public static final StreamCodec<ByteBuf, InstrumentPressingPacket> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.INT,
             InstrumentPressingPacket::id,

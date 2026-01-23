@@ -1,5 +1,6 @@
 package com.ChalkerCharles.morecolorful.mixin.mixins.client.compat.sodium;
 
+import com.ChalkerCharles.morecolorful.Config;
 import com.ChalkerCharles.morecolorful.mixin.extensions.compat.IRenderSectionExtension;
 import com.ChalkerCharles.morecolorful.util.client.RenderUtils;
 import com.llamalad7.mixinextras.sugar.Local;
@@ -31,7 +32,7 @@ public abstract class ChunkBuilderMeshingTaskMixin extends ChunkBuilderTask<Chun
     @Inject(method = "execute(Lnet/caffeinemc/mods/sodium/client/render/chunk/compile/ChunkBuildContext;Lnet/caffeinemc/mods/sodium/client/util/task/CancellationToken;)Lnet/caffeinemc/mods/sodium/client/render/chunk/compile/ChunkBuildOutput;",
             at = @At("HEAD"))
     private void execute$head(CallbackInfoReturnable<ChunkBuildOutput> cir) {
-        if (RenderUtils.wavyBlocks) {
+        if (Config.wavyBlocks) {
             RenderUtils.putWavyTask(IRenderSectionExtension.getWavyTask(this.render));
             RenderUtils.setCacheOrigin(this.renderContext.getOrigin());
         }
@@ -40,7 +41,7 @@ public abstract class ChunkBuilderMeshingTaskMixin extends ChunkBuilderTask<Chun
     @Inject(method = "execute(Lnet/caffeinemc/mods/sodium/client/render/chunk/compile/ChunkBuildContext;Lnet/caffeinemc/mods/sodium/client/util/task/CancellationToken;)Lnet/caffeinemc/mods/sodium/client/render/chunk/compile/ChunkBuildOutput;",
             at = @At(value = "INVOKE", target = "Lnet/caffeinemc/mods/sodium/client/render/chunk/compile/pipeline/BlockRenderer;renderModel(Lnet/minecraft/client/resources/model/BakedModel;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/BlockPos;)V"))
     private void execute$cache(CallbackInfoReturnable<ChunkBuildOutput> cir, @Local(ordinal = 0) BlockPos.MutableBlockPos pos, @Local BlockState state) {
-        if (RenderUtils.wavyBlocks) {
+        if (Config.wavyBlocks) {
             RenderUtils.initCache(pos, state);
         }
     }
@@ -48,7 +49,7 @@ public abstract class ChunkBuilderMeshingTaskMixin extends ChunkBuilderTask<Chun
     @Inject(method = "execute(Lnet/caffeinemc/mods/sodium/client/render/chunk/compile/ChunkBuildContext;Lnet/caffeinemc/mods/sodium/client/util/task/CancellationToken;)Lnet/caffeinemc/mods/sodium/client/render/chunk/compile/ChunkBuildOutput;",
             at = @At(value = "INVOKE", target = "Lnet/caffeinemc/mods/sodium/client/render/chunk/compile/pipeline/BlockRenderCache;getFluidRenderer()Lnet/caffeinemc/mods/sodium/client/render/chunk/compile/pipeline/FluidRenderer;"))
     private void execute$fluid(CallbackInfoReturnable<ChunkBuildOutput> cir, @Local(ordinal = 0) BlockPos.MutableBlockPos pos) {
-        if (RenderUtils.wavyBlocks) {
+        if (Config.wavyBlocks) {
             RenderUtils.initFluidCache(pos);
         }
     }
@@ -56,7 +57,7 @@ public abstract class ChunkBuilderMeshingTaskMixin extends ChunkBuilderTask<Chun
     @Inject(method = "execute(Lnet/caffeinemc/mods/sodium/client/render/chunk/compile/ChunkBuildContext;Lnet/caffeinemc/mods/sodium/client/util/task/CancellationToken;)Lnet/caffeinemc/mods/sodium/client/render/chunk/compile/ChunkBuildOutput;",
             at = @At(value = "FIELD", target = "Lnet/caffeinemc/mods/sodium/client/render/chunk/terrain/DefaultTerrainRenderPasses;ALL:[Lnet/caffeinemc/mods/sodium/client/render/chunk/terrain/TerrainRenderPass;", opcode = Opcodes.GETSTATIC))
     private void execute$forceUnassign(CallbackInfoReturnable<ChunkBuildOutput> cir, @Local SortType sortType) {
-        if (RenderUtils.wavyBlocks && sortType.needsDirectionMixing) {
+        if (Config.wavyBlocks && sortType.needsDirectionMixing) {
             IRenderSectionExtension.getWavyTask(this.render).vertices[1].forceUnassigned();
         }
     }
@@ -64,7 +65,7 @@ public abstract class ChunkBuilderMeshingTaskMixin extends ChunkBuilderTask<Chun
     @Inject(method = "execute(Lnet/caffeinemc/mods/sodium/client/render/chunk/compile/ChunkBuildContext;Lnet/caffeinemc/mods/sodium/client/util/task/CancellationToken;)Lnet/caffeinemc/mods/sodium/client/render/chunk/compile/ChunkBuildOutput;",
             at = @At("RETURN"))
     private void execute$return(CallbackInfoReturnable<ChunkBuildOutput> cir) {
-        if (RenderUtils.wavyBlocks) {
+        if (Config.wavyBlocks) {
             RenderUtils.clearCache();
             RenderUtils.clearWavyTask();
         }

@@ -4,7 +4,6 @@ import com.ChalkerCharles.morecolorful.Config;
 import com.ChalkerCharles.morecolorful.common.worldgen.ModBiomeModifiers;
 import com.ChalkerCharles.morecolorful.util.FileUtils;
 import net.minecraft.client.gui.screens.worldselection.CreateWorldScreen;
-import net.neoforged.neoforge.common.ModConfigSpec;
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -26,12 +25,12 @@ public abstract class CreateWorldScreenMixin {
                     target = "net.minecraft.client.gui.screens.worldselection.CreateWorldScreen.tempDataPackDir:Ljava/nio/file/Path;",
                     opcode = Opcodes.PUTFIELD, shift = At.Shift.AFTER))
     private void getTempDataPackDir(CallbackInfoReturnable<Path> cir) {
-        moreColorful$checkBiomeModifier(Config.ALLOW_ADDING_FEATURES, ModBiomeModifiers.ADD_FEATURE_MODIFIERS);
+        moreColorful$checkBiomeModifier(Config.allowAddingFeatures, ModBiomeModifiers.ADD_FEATURE_MODIFIERS);
     }
 
     @Unique
-    private void moreColorful$checkBiomeModifier(ModConfigSpec.BooleanValue config, List<String> modifiers) {
-        if (config.isFalse()) {
+    private void moreColorful$checkBiomeModifier(boolean config, List<String> modifiers) {
+        if (!config) {
             FileUtils.generateDatapack(tempDataPackDir, modifiers, FileUtils.writeFiles());
         }
     }

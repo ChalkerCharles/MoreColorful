@@ -80,9 +80,11 @@ public abstract class WavyDataTask<V extends WavyVertices> implements Comparable
     }
 
     public void encapsulate() {
-        for (WavyVertices vertices : this.vertices) {
-            vertices.encapsulate();
-        }
+        try {
+            for (WavyVertices vertices : this.vertices) {
+                vertices.encapsulate();
+            }
+        } catch (Exception ignored) {}
     }
 
     public static class Default extends WavyDataTask<WavyVertices.Default> {

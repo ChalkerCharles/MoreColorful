@@ -69,7 +69,7 @@ public class ModChunkStatus {
     }
 
     public static void modifyFullStatus() {
-        boolean thermalized = Config.THERMAL_SYSTEM.isTrue(), ventilated = Config.WIND_SYSTEM.isTrue();
+        boolean thermalized = Config.thermalSystem, ventilated = Config.windSystem;
         if (thermalized && ventilated) {
             ((IChunkStatusMixin) INITIALIZE_VENT.get()).setParent(THERMAL.get());
             addIndex(INITIALIZE_VENT.get(), 2);

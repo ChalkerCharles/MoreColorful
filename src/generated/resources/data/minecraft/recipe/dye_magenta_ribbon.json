@@ -1,0 +1,61 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "ribbon",
+  "ingredients": [
+    {
+      "item": "minecraft:magenta_dye"
+    },
+    [
+      {
+        "item": "morecolorful:white_ribbon"
+      },
+      {
+        "item": "morecolorful:light_gray_ribbon"
+      },
+      {
+        "item": "morecolorful:gray_ribbon"
+      },
+      {
+        "item": "morecolorful:black_ribbon"
+      },
+      {
+        "item": "morecolorful:brown_ribbon"
+      },
+      {
+        "item": "morecolorful:red_ribbon"
+      },
+      {
+        "item": "morecolorful:orange_ribbon"
+      },
+      {
+        "item": "morecolorful:yellow_ribbon"
+      },
+      {
+        "item": "morecolorful:lime_ribbon"
+      },
+      {
+        "item": "morecolorful:green_ribbon"
+      },
+      {
+        "item": "morecolorful:cyan_ribbon"
+      },
+      {
+        "item": "morecolorful:light_blue_ribbon"
+      },
+      {
+        "item": "morecolorful:blue_ribbon"
+      },
+      {
+        "item": "morecolorful:purple_ribbon"
+      },
+      {
+        "item": "morecolorful:pink_ribbon"
+      }
+    ]
+  ],
+  "result": {
+    "count": 1,
+    "id": "morecolorful:magenta_ribbon"
+  }
+}

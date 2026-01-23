@@ -15,7 +15,7 @@ public record WindPacket(float x, float z, boolean init) implements CustomPacket
         this(x, z, false);
     }
 
-    public static final CustomPacketPayload.Type<WindPacket> TYPE = new CustomPacketPayload.Type<>(MoreColorful.location("wind"));
+    public static final Type<WindPacket> TYPE = new Type<>(MoreColorful.location("wind"));
 
     public static final StreamCodec<FriendlyByteBuf, WindPacket> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.FLOAT,

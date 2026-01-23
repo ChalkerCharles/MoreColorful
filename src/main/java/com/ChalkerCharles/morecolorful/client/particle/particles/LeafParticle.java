@@ -1,5 +1,7 @@
 package com.ChalkerCharles.morecolorful.client.particle.particles;
 
+import com.ChalkerCharles.morecolorful.Config;
+import com.ChalkerCharles.morecolorful.mixin.extensions.IParticleExtension;
 import com.ChalkerCharles.morecolorful.util.WindSensitive;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
@@ -7,10 +9,9 @@ import net.minecraft.core.particles.ColorParticleOption;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import org.jetbrains.annotations.Nullable;
 
 @OnlyIn(Dist.CLIENT)
-public class LeafParticle extends TextureSheetParticle implements WindSensitive {
+public class LeafParticle extends TextureSheetParticle implements WindSensitive, IParticleExtension {
     private float rotSpeed;
     private final float particleRandom;
     private final float spinAcceleration;
@@ -52,11 +53,16 @@ public class LeafParticle extends TextureSheetParticle implements WindSensitive 
             this.xd += d0 * 0.0025F;
             this.zd += d1 * 0.0025F;
             this.yd = this.yd - (double) this.gravity;
-            this.rotSpeed = this.rotSpeed + this.spinAcceleration / 20.0F;
             this.oRoll = this.roll;
-            this.roll = this.roll + this.rotSpeed / 20.0F;
+            if (!this.onGround && !this.stoppedByCollision) {
+                this.rotSpeed = this.rotSpeed + this.spinAcceleration / 20.0F;
+                this.roll = this.roll + this.rotSpeed / 20.0F;
+            }
             this.move(this.xd, this.yd, this.zd);
-            if (this.onGround || this.lifetime < 299 && (this.xd == 0.0 || this.zd == 0.0)) {
+            if (Config.leavesOnGround) {
+                this.moreColorful$floatOnFluid();
+            }
+            if (!Config.leavesOnGround && (this.onGround || this.lifetime < 299 && (this.xd == 0.0 || this.zd == 0.0))) {
                 this.remove();
             }
 
@@ -68,15 +74,21 @@ public class LeafParticle extends TextureSheetParticle implements WindSensitive 
         }
     }
 
-    @OnlyIn(Dist.CLIENT)
-    public static class Provider implements ParticleProvider<SimpleParticleType> {
-        private final SpriteSet sprites;
+    @Override
+    public void moreColorful$whenStoppedByCollision() {
+        this.y += 0.0001 + this.particleRandom * 0.01;
+    }
 
-        public Provider(SpriteSet sprites) {
-            this.sprites = sprites;
+    @Override
+    public FacingCameraMode getFacingCameraMode() {
+        if (Config.leavesOnGround && (this.onGround || this.stoppedByCollision)) {
+            return this::moreColorful$groundFacingCameraMode;
         }
+        return super.getFacingCameraMode();
+    }
 
-        @Nullable
+    @OnlyIn(Dist.CLIENT)
+    public record Provider(SpriteSet sprites) implements ParticleProvider<SimpleParticleType> {
         @Override
         public Particle createParticle(SimpleParticleType pType, ClientLevel pLevel, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed) {
             return new LeafParticle(pLevel, pX, pY, pZ, sprites);
@@ -84,14 +96,7 @@ public class LeafParticle extends TextureSheetParticle implements WindSensitive 
     }
 
     @OnlyIn(Dist.CLIENT)
-    public static class TintedProvider implements ParticleProvider<ColorParticleOption> {
-        private final SpriteSet sprites;
-
-        public TintedProvider(SpriteSet sprites) {
-            this.sprites = sprites;
-        }
-
-        @Nullable
+    public record TintedProvider(SpriteSet sprites) implements ParticleProvider<ColorParticleOption> {
         @Override
         public Particle createParticle(ColorParticleOption pType, ClientLevel pLevel, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed) {
             LeafParticle particle = new LeafParticle(pLevel, pX, pY, pZ, sprites);

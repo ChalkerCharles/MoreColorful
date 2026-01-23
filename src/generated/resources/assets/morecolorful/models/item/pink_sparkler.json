@@ -1,0 +1,14 @@
+{
+  "parent": "minecraft:item/handheld",
+  "overrides": [
+    {
+      "model": "morecolorful:item/pink_sparkler_lit",
+      "predicate": {
+        "morecolorful:activated": 1.0
+      }
+    }
+  ],
+  "textures": {
+    "layer0": "morecolorful:item/pink_sparkler"
+  }
+}

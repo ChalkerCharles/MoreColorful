@@ -69,11 +69,11 @@ public abstract class ChunkMapMixin implements IChunkMapExtension, Self<ChunkMap
                                                                 @Share("vent") LocalRef<ProcessorMailbox<Runnable>> ventMailbox,
                                                                 @Local(argsOnly = true) Executor pDispatcher) {
         ImmutableList.Builder<ProcessorHandle<?>> builder = ImmutableList.<ProcessorHandle<?>>builder().addAll(original);
-        if (Config.THERMAL_SYSTEM.isTrue()) {
+        if (Config.thermalSystem) {
             temperatureMailbox.set(ProcessorMailbox.create(pDispatcher, "temperature"));
             builder.add(temperatureMailbox.get());
         }
-        if (Config.WIND_SYSTEM.isTrue()) {
+        if (Config.windSystem) {
             ventMailbox.set(ProcessorMailbox.create(pDispatcher, "ventilation"));
             builder.add(ventMailbox.get());
         }

@@ -16,7 +16,7 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public record NotePlayingPacket(InstrumentsType pType, BlockPos pos, int keyId) implements CustomPacketPayload {
-    public static final CustomPacketPayload.Type<NotePlayingPacket> TYPE = new CustomPacketPayload.Type<>(MoreColorful.location("note_playing"));
+    public static final Type<NotePlayingPacket> TYPE = new Type<>(MoreColorful.location("note_playing"));
 
     public static final StreamCodec<ByteBuf, NotePlayingPacket> STREAM_CODEC = StreamCodec.composite(
             InstrumentsType.STREAM_CODEC,

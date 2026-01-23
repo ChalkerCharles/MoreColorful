@@ -1,0 +1,6 @@
+{
+  "parent": "morecolorful:item/handheld_pinwheel",
+  "textures": {
+    "layer0": "morecolorful:item/magenta_pinwheel_1"
+  }
+}

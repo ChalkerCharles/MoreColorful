@@ -1,0 +1,6 @@
+{
+  "parent": "morecolorful:block/template_ribbon",
+  "textures": {
+    "texture": "morecolorful:block/purple_ribbon_down_l"
+  }
+}

@@ -53,7 +53,7 @@ public class WindFlowerBlock extends FlowerBlock {
     }
 
     public static BlockState setWindLevel(BlockState state, Level level, BlockPos pos) {
-        if (Config.WIND_SYSTEM.isTrue()) {
+        if (Config.windSystem) {
             int windLevel = 0;
             Vector3f wind = WeatherUtils.getEffectiveWindSpeedAt(level, pos);
             if (wind != null) {
@@ -65,7 +65,7 @@ public class WindFlowerBlock extends FlowerBlock {
     }
 
     public static void tryChangingState(BlockState state, ServerLevel level, BlockPos pos) {
-        if (Config.WIND_SYSTEM.isTrue()) {
+        if (Config.windSystem) {
             int currentLevel = state.getValue(WIND_LEVEL);
             int windLevel = 0;
             Vector3f wind = WeatherUtils.getEffectiveWindSpeedAt(level, pos);
@@ -78,7 +78,7 @@ public class WindFlowerBlock extends FlowerBlock {
         }
     }
 
-    private static int getWindLevel(float windSpeed) {
+    public static int getWindLevel(float windSpeed) {
         if (windSpeed < 1.5) return 0;
         else if (windSpeed < 4) return 1;
         else if (windSpeed < 7.5) return 2;

@@ -18,7 +18,7 @@ import java.util.BitSet;
 import java.util.List;
 
 public record VentUpdatePacket(int x, int z, VentUpdateData data, boolean sent) implements CustomPacketPayload {
-    public static final CustomPacketPayload.Type<VentUpdatePacket> TYPE = new CustomPacketPayload.Type<>(MoreColorful.location("vent_update"));
+    public static final Type<VentUpdatePacket> TYPE = new Type<>(MoreColorful.location("vent_update"));
 
     public static final StreamCodec<FriendlyByteBuf, VentUpdatePacket> STREAM_CODEC = StreamCodec.ofMember(
             VentUpdatePacket::write, VentUpdatePacket::new

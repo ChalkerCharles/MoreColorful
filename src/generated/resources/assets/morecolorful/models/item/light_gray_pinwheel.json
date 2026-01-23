@@ -1,0 +1,26 @@
+{
+  "parent": "morecolorful:item/handheld_pinwheel",
+  "overrides": [
+    {
+      "model": "morecolorful:item/light_gray_pinwheel_1",
+      "predicate": {
+        "morecolorful:spin": 0.25
+      }
+    },
+    {
+      "model": "morecolorful:item/light_gray_pinwheel_2",
+      "predicate": {
+        "morecolorful:spin": 0.5
+      }
+    },
+    {
+      "model": "morecolorful:item/light_gray_pinwheel_3",
+      "predicate": {
+        "morecolorful:spin": 0.75
+      }
+    }
+  ],
+  "textures": {
+    "layer0": "morecolorful:item/light_gray_pinwheel"
+  }
+}

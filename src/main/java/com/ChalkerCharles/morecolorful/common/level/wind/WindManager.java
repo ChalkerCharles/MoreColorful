@@ -1,12 +1,12 @@
 package com.ChalkerCharles.morecolorful.common.level.wind;
 
+import com.ChalkerCharles.morecolorful.Config;
 import com.ChalkerCharles.morecolorful.client.particle.ModParticles;
 import com.ChalkerCharles.morecolorful.common.ModSounds;
 import com.ChalkerCharles.morecolorful.mixin.extensions.ILevelRendererExtension;
 import com.ChalkerCharles.morecolorful.network.packets.WindPacket;
 import com.ChalkerCharles.morecolorful.util.Maths;
 import com.ChalkerCharles.morecolorful.util.WeatherUtils;
-import com.ChalkerCharles.morecolorful.util.client.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.Direction;
@@ -109,7 +109,7 @@ public abstract class WindManager {
         @Override
         public void tick() {
             if (this.isCalm) return;
-            if (RenderUtils.windParticles) {
+            if (Config.windParticles) {
                 if (this.shouldSpawnParticle()) {
                     Vec3 pos = Minecraft.getInstance().gameRenderer.getMainCamera().getPosition();
                     double dx = globalWindSpeed.x, dz = globalWindSpeed.y;
@@ -123,7 +123,7 @@ public abstract class WindManager {
                     }
                 }
             }
-            if (RenderUtils.windSounds) {
+            if (Config.windSounds) {
                 float windSpeed = this.globalWindSpeed.length();
                 if (this.shouldPlayWindSound(windSpeed)) {
                     Vec3 pos = Minecraft.getInstance().gameRenderer.getMainCamera().getPosition();

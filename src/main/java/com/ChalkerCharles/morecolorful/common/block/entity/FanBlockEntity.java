@@ -1,11 +1,11 @@
 package com.ChalkerCharles.morecolorful.common.block.entity;
 
+import com.ChalkerCharles.morecolorful.Config;
 import com.ChalkerCharles.morecolorful.common.ModSounds;
 import com.ChalkerCharles.morecolorful.common.attachment.LevelSavedData;
 import com.ChalkerCharles.morecolorful.common.block.ModBlockEntities;
 import com.ChalkerCharles.morecolorful.common.block.utility.FanBlock;
 import com.ChalkerCharles.morecolorful.common.level.wind.LineWindZone;
-import com.ChalkerCharles.morecolorful.util.client.ClientWrapper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundSource;
@@ -46,7 +46,7 @@ public class FanBlockEntity extends BlockEntity {
             LevelSavedData.updateWindZoneSections(level, zone, oldSections, newSections);
         }
         if (level.isClientSide) {
-            if (ClientWrapper.windParticles() && level.random.nextBoolean()) {
+            if (Config.windParticles && level.random.nextBoolean()) {
                 zone.spawnWindParticle(level, pos);
             }
             if (level.random.nextInt(blockEntity.soundTime) == 0) {

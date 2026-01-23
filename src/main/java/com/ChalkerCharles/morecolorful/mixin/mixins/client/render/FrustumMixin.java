@@ -1,15 +1,11 @@
 package com.ChalkerCharles.morecolorful.mixin.mixins.client.render;
 
 import com.ChalkerCharles.morecolorful.mixin.extensions.IFrustumExtension;
-import com.ChalkerCharles.morecolorful.util.client.RenderUtils;
-import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.culling.Frustum;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
-import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(Frustum.class)
 public abstract class FrustumMixin implements IFrustumExtension {
@@ -21,14 +17,6 @@ public abstract class FrustumMixin implements IFrustumExtension {
     private double camZ;
     @Unique
     private final int moreColorful$distance = Minecraft.getInstance().options.getEffectiveRenderDistance() << 4;
-
-    @WrapOperation(method = "isVisible", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/culling/Frustum;cubeInFrustum(DDDDDD)Z"))
-    private boolean isVisible(Frustum instance, double pMinX, double pMinY, double pMinZ, double pMaxX, double pMaxY, double pMaxZ, Operation<Boolean> original) {
-        if (RenderUtils.SODIUM_ON) {
-            return original.call(instance, pMinX, pMinY, pMinZ, pMaxX, pMaxY, pMaxZ);
-        }
-        return moreColorful$isInRange(pMinX, pMinY, pMinZ) && original.call(instance, pMinX, pMinY, pMinZ, pMaxX, pMaxY, pMaxZ);
-    }
 
     @Override
     public boolean moreColorful$isInRange(double pMinX, double pMinY, double pMinZ) {

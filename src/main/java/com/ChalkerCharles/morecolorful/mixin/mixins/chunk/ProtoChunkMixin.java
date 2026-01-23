@@ -47,7 +47,7 @@ public abstract class ProtoChunkMixin extends ChunkAccess implements IProtoChunk
     @Inject(method = "setBlockState", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/chunk/ProtoChunk;getPersistedStatus()Lnet/minecraft/world/level/chunk/status/ChunkStatus;", shift = At.Shift.BEFORE))
     public void setBlockState(BlockPos pPos, BlockState pState, boolean pIsMoving, CallbackInfoReturnable<BlockState> cir,
                               @Local LevelChunkSection levelchunksection, @Local(ordinal = 1) boolean flag, @Local(ordinal = 1) BlockState blockstate) {
-        if (Config.THERMAL_SYSTEM.isTrue() && this.status.isOrAfter(ModChunkStatus.INITIALIZE_THERMAL.get()) && this.moreColorful$thermalEngine != null) {
+        if (Config.thermalSystem && this.status.isOrAfter(ModChunkStatus.INITIALIZE_THERMAL.get()) && this.moreColorful$thermalEngine != null) {
             boolean flag1 = levelchunksection.hasOnlyAir();
             if (flag1 != flag) {
                 this.moreColorful$thermalEngine.updateSectionStatus(pPos, flag1);
@@ -58,7 +58,7 @@ public abstract class ProtoChunkMixin extends ChunkAccess implements IProtoChunk
             }
         }
 
-        if (Config.WIND_SYSTEM.isTrue() && this.status.isOrAfter(ModChunkStatus.INITIALIZE_VENT.get()) && this.moreColorful$ventEngine != null) {
+        if (Config.windSystem && this.status.isOrAfter(ModChunkStatus.INITIALIZE_VENT.get()) && this.moreColorful$ventEngine != null) {
             boolean flag1 = levelchunksection.hasOnlyAir();
             if (flag1 != flag) {
                 this.moreColorful$ventEngine.updateSectionStatus(pPos, flag1);
