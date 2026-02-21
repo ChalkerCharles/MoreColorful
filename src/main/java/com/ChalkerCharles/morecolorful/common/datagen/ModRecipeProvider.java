@@ -4,7 +4,9 @@ import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.common.ModTags;
 import com.ChalkerCharles.morecolorful.common.datagen.helper.ModRecipeHelper;
 import com.ChalkerCharles.morecolorful.common.item.ModItems;
+import com.ChalkerCharles.morecolorful.common.recipe.PinwheelDyeRecipe;
 import com.ChalkerCharles.morecolorful.common.recipe.SheetMusicCloningRecipe;
+import com.ChalkerCharles.morecolorful.common.recipe.UmbrellaDyeRecipe;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
@@ -249,24 +251,15 @@ public class ModRecipeProvider extends ModRecipeHelper {
         ribbon(recipeOutput, ModItems.RED_RIBBON, Items.RED_WOOL);
         ribbon(recipeOutput, ModItems.BLACK_RIBBON, Items.BLACK_WOOL);
         ribbonDyeRecipes(recipeOutput);
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.WHITE_PINWHEEL)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.PINWHEEL)
                 .define('#', Items.PAPER)
                 .define('|', Tags.Items.RODS_WOODEN)
                 .pattern(" # ")
                 .pattern("#|#")
                 .pattern("|# ")
-                .group("pinwheel")
                 .unlockedBy("has_paper", has(Items.PAPER))
                 .save(recipeOutput);
-        pinwheelRecipes(recipeOutput);
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.MULTICOLORED_PINWHEEL)
-                .requires(Items.RED_DYE)
-                .requires(Items.YELLOW_DYE)
-                .requires(Items.BLUE_DYE)
-                .requires(ModTags.Items.PINWHEELS)
-                .group("pinwheel")
-                .unlockedBy("has_pinwheel", has(ModTags.Items.PINWHEELS))
-                .save(recipeOutput);
+        SpecialRecipeBuilder.special(PinwheelDyeRecipe::new).save(recipeOutput, MoreColorful.location("pinwheel_dye"));
         sparkler(recipeOutput, ModItems.WHITE_SPARKLER, Tags.Items.GEMS_PRISMARINE);
         sparkler(recipeOutput, ModItems.BROWN_SPARKLER, Tags.Items.DUSTS_GLOWSTONE);
         sparkler(recipeOutput, ModItems.RED_SPARKLER, Tags.Items.DUSTS_REDSTONE);
@@ -277,5 +270,57 @@ public class ModRecipeProvider extends ModRecipeHelper {
         sparkler(recipeOutput, ModItems.BLUE_SPARKLER, Tags.Items.GEMS_LAPIS);
         sparkler(recipeOutput, ModItems.PURPLE_SPARKLER, Tags.Items.GEMS_AMETHYST);
         sparkler(recipeOutput, ModItems.MAGENTA_SPARKLER, Items.DRAGON_BREATH);
+        pennant(recipeOutput, ModItems.WHITE_PENNANT, Items.WHITE_WOOL);
+        pennant(recipeOutput, ModItems.ORANGE_PENNANT, Items.ORANGE_WOOL);
+        pennant(recipeOutput, ModItems.MAGENTA_PENNANT, Items.MAGENTA_WOOL);
+        pennant(recipeOutput, ModItems.LIGHT_BLUE_PENNANT, Items.LIGHT_BLUE_WOOL);
+        pennant(recipeOutput, ModItems.YELLOW_PENNANT, Items.YELLOW_WOOL);
+        pennant(recipeOutput, ModItems.LIME_PENNANT, Items.LIME_WOOL);
+        pennant(recipeOutput, ModItems.PINK_PENNANT, Items.PINK_WOOL);
+        pennant(recipeOutput, ModItems.GRAY_PENNANT, Items.GRAY_WOOL);
+        pennant(recipeOutput, ModItems.LIGHT_GRAY_PENNANT, Items.LIGHT_GRAY_WOOL);
+        pennant(recipeOutput, ModItems.CYAN_PENNANT, Items.CYAN_WOOL);
+        pennant(recipeOutput, ModItems.PURPLE_PENNANT, Items.PURPLE_WOOL);
+        pennant(recipeOutput, ModItems.BLUE_PENNANT, Items.BLUE_WOOL);
+        pennant(recipeOutput, ModItems.BROWN_PENNANT, Items.BROWN_WOOL);
+        pennant(recipeOutput, ModItems.GREEN_PENNANT, Items.GREEN_WOOL);
+        pennant(recipeOutput, ModItems.RED_PENNANT, Items.RED_WOOL);
+        pennant(recipeOutput, ModItems.BLACK_PENNANT, Items.BLACK_WOOL);
+        pennantDyeRecipes(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, Items.BUNDLE)
+                .define('#', Tags.Items.LEATHERS)
+                .define('-', Tags.Items.STRINGS)
+                .pattern("-")
+                .pattern("#")
+                .group("bundle")
+                .unlockedBy("has_string", has(Tags.Items.STRINGS))
+                .save(recipeOutput);
+        bundleDyeRecipes(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.BALLOON)
+                .define('#', Items.PHANTOM_MEMBRANE)
+                .define('@', Items.WIND_CHARGE)
+                .define('S', Items.LEAD)
+                .pattern(" # ")
+                .pattern("#@#")
+                .pattern("S# ")
+                .group("balloon")
+                .unlockedBy("has_membrane", has(Items.PHANTOM_MEMBRANE))
+                .unlockedBy("has_wind_charge", has(Items.WIND_CHARGE))
+                .save(recipeOutput);
+        balloonDyeRecipes(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.UMBRELLA)
+                .define('#', Tags.Items.LEATHERS)
+                .define('|', Tags.Items.RODS_WOODEN)
+                .pattern("###")
+                .pattern(" | ")
+                .pattern(" | ")
+                .unlockedBy("has_leather", has(Tags.Items.LEATHERS))
+                .save(recipeOutput);
+        SpecialRecipeBuilder.special(UmbrellaDyeRecipe::new).save(recipeOutput, MoreColorful.location("umbrella_dye"));
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.DECORATIONS, ModItems.SANDBAG)
+                .requires(ModTags.Items.BUNDLES)
+                .requires(Tags.Items.SANDS)
+                .unlockedBy("has_bundle", has(ModTags.Items.BUNDLES))
+                .save(recipeOutput);
     }
 }

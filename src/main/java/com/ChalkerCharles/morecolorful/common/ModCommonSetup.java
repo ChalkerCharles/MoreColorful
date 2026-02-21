@@ -1,21 +1,34 @@
 package com.ChalkerCharles.morecolorful.common;
 
 import com.ChalkerCharles.morecolorful.common.block.ModBlocks;
-import com.ChalkerCharles.morecolorful.common.block.ornamental.PinwheelBlock;
+import com.ChalkerCharles.morecolorful.common.block.ornamental.PennantBlock;
 import com.ChalkerCharles.morecolorful.common.block.ornamental.RibbonBlock;
 import com.ChalkerCharles.morecolorful.common.entity.BoatTypeExtension;
+import com.ChalkerCharles.morecolorful.common.entity.EntityUtils;
+import com.ChalkerCharles.morecolorful.common.entity.ModAttributes;
 import com.ChalkerCharles.morecolorful.common.item.ModItems;
 import com.ChalkerCharles.morecolorful.common.item.misc.PaperBoatItem;
 import com.ChalkerCharles.morecolorful.common.item.misc.PartyPopperItem;
+import com.ChalkerCharles.morecolorful.common.item.utility.UmbrellaItem;
 import com.google.common.collect.ImmutableMap;
+import net.minecraft.core.cauldron.CauldronInteraction;
 import net.minecraft.core.dispenser.BoatDispenseItemBehavior;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.attributes.DefaultAttributes;
 import net.minecraft.world.item.AxeItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.event.BlockEntityTypeAddBlocksEvent;
+import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
+
+import java.util.Map;
 
 public final class ModCommonSetup {
     @SubscribeEvent
@@ -24,6 +37,7 @@ public final class ModCommonSetup {
         event.enqueueWork(ModCommonSetup::addFlowerPotBlocks);
         event.enqueueWork(ModCommonSetup::setFlammableBlocks);
         event.enqueueWork(ModCommonSetup::registerDispenserBehaviors);
+        event.enqueueWork(ModCommonSetup::registerCauldronInteractions);
     }
 
     public static void setStrippedWoodBlocks() {
@@ -218,7 +232,8 @@ public final class ModCommonSetup {
         for (Block block : RibbonBlock.ALL_COLORS.get()) {
             fireblock.setFlammable(block, 60, 100);
         }
-        for (Block block : PinwheelBlock.ALL_TYPES.get()) {
+        fireblock.setFlammable(ModBlocks.PINWHEEL.get(), 30, 60);
+        for (Block block : PennantBlock.ALL_BLOCKS.get()) {
             fireblock.setFlammable(block, 30, 60);
         }
     }
@@ -245,6 +260,11 @@ public final class ModCommonSetup {
         for (ItemLike item : PartyPopperItem.ALL_COLORS) {
             DispenserBlock.registerBehavior(item, PartyPopperItem.DISPENSE_ITEM_BEHAVIOR);
         }
+    }
+
+    public static void registerCauldronInteractions() {
+        Map<Item, CauldronInteraction> water = CauldronInteraction.WATER.map();
+        water.put(ModItems.UMBRELLA.get(), UmbrellaItem.CAULDRON_INTERACTION);
     }
 
     @SubscribeEvent
@@ -283,5 +303,17 @@ public final class ModCommonSetup {
                 ModBlocks.JACARANDA_WALL_HANGING_SIGN.get(),
                 ModBlocks.WILLOW_HANGING_SIGN.get(),
                 ModBlocks.WILLOW_WALL_HANGING_SIGN.get());
+    }
+
+    @SubscribeEvent
+    public static void modifyEntityAttributes(EntityAttributeModificationEvent event) {
+        for (EntityType<? extends LivingEntity> type : event.getTypes()) {
+            AttributeSupplier globalMap = DefaultAttributes.getSupplier(type);
+            double d = globalMap.getBaseValue(Attributes.KNOCKBACK_RESISTANCE);
+            event.add(type, ModAttributes.HORIZONTAL_WINDAGE, 1.0 - d);
+            event.add(type, ModAttributes.VERTICAL_WINDAGE, 1.0 - d);
+            event.add(type, ModAttributes.WEIGHT);
+        }
+        EntityUtils.addVanillaWeightAttribute((type, value) -> event.add(type, ModAttributes.WEIGHT, value));
     }
 }

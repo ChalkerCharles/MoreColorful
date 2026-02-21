@@ -2,14 +2,16 @@ package com.ChalkerCharles.morecolorful.common.datagen.tag;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.common.ModTags;
+import com.ChalkerCharles.morecolorful.common.block.ornamental.PennantBlock;
+import com.ChalkerCharles.morecolorful.common.item.ItemUtils;
 import com.ChalkerCharles.morecolorful.common.item.ModItems;
-import com.ChalkerCharles.morecolorful.common.item.misc.PinwheelItem;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
@@ -25,6 +27,7 @@ public class ModItemTagProvider extends ItemTagsProvider {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     protected void addTags(HolderLookup.Provider pProvider) {
         // Vanilla Tags
         copy(BlockTags.FENCE_GATES, ItemTags.FENCE_GATES);
@@ -101,9 +104,17 @@ public class ModItemTagProvider extends ItemTagsProvider {
                 ModItems.STRIPPED_EBONY_LOG.get(),
                 ModItems.STRIPPED_EBONY_WOOD.get()
         );
-        tag(ModTags.Items.PINWHEELS)
-                .add(Arrays.stream(PinwheelItem.ALL_DYE_COLORS).map(ItemLike::asItem).toArray(Item[]::new))
-                .add(ModItems.MULTICOLORED_PINWHEEL.get());
+        tag(ModTags.Items.PENNANTS).add(Arrays.stream(PennantBlock.ALL_ITEMS).map(ItemLike::asItem).toArray(Item[]::new));
+        tag(ModTags.Items.BUNDLES)
+                .add(Items.BUNDLE)
+                .add(Arrays.stream(ItemUtils.COLORED_BUNDLES).map(ItemLike::asItem).toArray(Item[]::new));
+        tag(ModTags.Items.CAN_POKE_BALLOON).addTags(
+                ItemTags.SWORDS,
+                ItemTags.PICKAXES,
+                ItemTags.AXES,
+                ItemTags.ARROWS,
+                Tags.Items.TOOLS_SHEAR
+        ).add(Items.TRIDENT);
 
         // C Tags
         tag(Tags.Items.FENCE_GATES_WOODEN).add(

@@ -5,6 +5,7 @@ import com.ChalkerCharles.morecolorful.client.particle.ModParticles;
 import com.ChalkerCharles.morecolorful.common.ModSounds;
 import com.ChalkerCharles.morecolorful.util.Maths;
 import com.ChalkerCharles.morecolorful.util.WeatherUtils;
+import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ColorParticleOption;
@@ -43,9 +44,17 @@ public class ClientWrapper {
         RenderUtils.clearDataInLine(level, pos);
     }
 
+    public static Camera getCamera() {
+        return Minecraft.getInstance().gameRenderer.getMainCamera();
+    }
+
+    public static double distToCameraSq(int px, int py, int pz) {
+        double x = px + 0.5, y = py + 0.5, z = pz + 0.5;
+        return getCamera().getPosition().distanceToSqr(x, y, z);
+    }
+
     public static double distToCameraSq(BlockPos pos) {
-        double x = pos.getX() + 0.5, y = pos.getY() + 0.5, z = pos.getZ() + 0.5;
-        return Minecraft.getInstance().gameRenderer.getMainCamera().getPosition().distanceToSqr(x, y, z);
+        return distToCameraSq(pos.getX(), pos.getY(), pos.getZ());
     }
 
     public static void playRustlingSound(Level level, BlockPos pos, RandomSource random) {

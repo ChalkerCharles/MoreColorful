@@ -4,6 +4,7 @@ import com.ChalkerCharles.morecolorful.common.ModSounds;
 import com.ChalkerCharles.morecolorful.common.block.ModBlocks;
 import com.ChalkerCharles.morecolorful.common.block.properties.ModBlockStateProperties;
 import com.ChalkerCharles.morecolorful.common.block.properties.RibbonState;
+import com.ChalkerCharles.morecolorful.common.item.ItemUtils;
 import com.ChalkerCharles.morecolorful.common.item.ModItems;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
@@ -33,12 +34,9 @@ import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.util.Lazy;
 
 import javax.annotation.Nullable;
-import java.util.Arrays;
-import java.util.stream.Stream;
 
 public class RibbonBlock extends Block implements SimpleWaterloggedBlock {
     public static final MapCodec<RibbonBlock> CODEC = simpleCodec(RibbonBlock::new);
@@ -128,10 +126,6 @@ public class RibbonBlock extends Block implements SimpleWaterloggedBlock {
             case RED -> ModItems.RED_RIBBON;
             case BLACK -> ModItems.BLACK_RIBBON;
         };
-    }
-
-    public static Stream<ItemStack> dyeingIngredients(ItemLike except) {
-        return Arrays.stream(ALL_ITEMS).filter(i -> i != except).map(ItemStack::new);
     }
 
     private static boolean sameFace(BlockState neighborState, Direction direction) {
@@ -281,8 +275,7 @@ public class RibbonBlock extends Block implements SimpleWaterloggedBlock {
 
     @Override
     protected ItemInteractionResult useItemOn(ItemStack pStack, BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHitResult) {
-        Item item = pStack.getItem();
-        if (item instanceof ShearsItem || pStack.is(Tags.Items.TOOLS_SHEAR)) {
+        if (ItemUtils.isShears(pStack)) {
             RibbonState ribbonState = pState.getValue(RIBBON_STATE);
             Section section = getHitSection(pHitResult, pState);
             RibbonState ribbonState1 = switch (section) {
@@ -298,7 +291,7 @@ public class RibbonBlock extends Block implements SimpleWaterloggedBlock {
                 pLevel.setBlock(pPos, state, 3);
                 pLevel.playSound(null, pPos, ModSounds.SHEARS_SNIP.get(), SoundSource.BLOCKS);
                 pLevel.gameEvent(pPlayer, GameEvent.SHEAR, pPos);
-                pPlayer.awardStat(Stats.ITEM_USED.get(item));
+                pPlayer.awardStat(Stats.ITEM_USED.get(pStack.getItem()));
                 pStack.hurtAndBreak(1, pPlayer, LivingEntity.getSlotForHand(pHand));
                 return ItemInteractionResult.sidedSuccess(pLevel.isClientSide);
             }

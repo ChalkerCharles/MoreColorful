@@ -5,23 +5,31 @@ import com.ChalkerCharles.morecolorful.common.level.wind.WindZoneManager;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.culling.Frustum;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
 
 public class ClientLevelData extends LevelSavedData {
+    private final ClientLevel level;
     private final WindManager.Client windManager;
     private final WindZoneManager.Client windZoneManager = new WindZoneManager.Client();
     private final Deque<Runnable> thermalUpdateQueue = new ArrayDeque<>();
     private final Deque<Runnable> ventUpdateQueue = new ArrayDeque<>();
 
     public ClientLevelData(ClientLevel level) {
+        this.level = level;
         this.windManager = new WindManager.Client(level);
     }
 
     private static ClientLevelData get(ClientLevel level) {
         return (ClientLevelData) LevelSavedData.get(level);
+    }
+
+    @Override
+    protected Level level() {
+        return this.level;
     }
 
     @Override

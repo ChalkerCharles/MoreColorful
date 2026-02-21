@@ -1,0 +1,101 @@
+{
+  "sources": [
+    {
+      "type": "minecraft:paletted_permutations",
+      "palette_key": "morecolorful:colored/palettes/cloth_block/palette",
+      "permutations": {
+        "black": "morecolorful:colored/palettes/cloth_block/black",
+        "blue": "morecolorful:colored/palettes/cloth_block/blue",
+        "brown": "morecolorful:colored/palettes/cloth_block/brown",
+        "cyan": "morecolorful:colored/palettes/cloth_block/cyan",
+        "default": "morecolorful:colored/palettes/cloth_block/default",
+        "gray": "morecolorful:colored/palettes/cloth_block/gray",
+        "green": "morecolorful:colored/palettes/cloth_block/green",
+        "light_blue": "morecolorful:colored/palettes/cloth_block/light_blue",
+        "light_gray": "morecolorful:colored/palettes/cloth_block/light_gray",
+        "lime": "morecolorful:colored/palettes/cloth_block/lime",
+        "magenta": "morecolorful:colored/palettes/cloth_block/magenta",
+        "orange": "morecolorful:colored/palettes/cloth_block/orange",
+        "pink": "morecolorful:colored/palettes/cloth_block/pink",
+        "purple": "morecolorful:colored/palettes/cloth_block/purple",
+        "red": "morecolorful:colored/palettes/cloth_block/red",
+        "white": "morecolorful:colored/palettes/cloth_block/white",
+        "yellow": "morecolorful:colored/palettes/cloth_block/yellow"
+      },
+      "textures": [
+        "morecolorful:colored/umbrella_block/canopy"
+      ]
+    },
+    {
+      "type": "minecraft:paletted_permutations",
+      "palette_key": "morecolorful:colored/palettes/cloth_item/palette",
+      "permutations": {
+        "black": "morecolorful:colored/palettes/cloth_item/black",
+        "blue": "morecolorful:colored/palettes/cloth_item/blue",
+        "brown": "morecolorful:colored/palettes/cloth_item/brown",
+        "cyan": "morecolorful:colored/palettes/cloth_item/cyan",
+        "default": "morecolorful:colored/palettes/cloth_item/default",
+        "gray": "morecolorful:colored/palettes/cloth_item/gray",
+        "green": "morecolorful:colored/palettes/cloth_item/green",
+        "light_blue": "morecolorful:colored/palettes/cloth_item/light_blue",
+        "light_gray": "morecolorful:colored/palettes/cloth_item/light_gray",
+        "lime": "morecolorful:colored/palettes/cloth_item/lime",
+        "magenta": "morecolorful:colored/palettes/cloth_item/magenta",
+        "orange": "morecolorful:colored/palettes/cloth_item/orange",
+        "pink": "morecolorful:colored/palettes/cloth_item/pink",
+        "purple": "morecolorful:colored/palettes/cloth_item/purple",
+        "red": "morecolorful:colored/palettes/cloth_item/red",
+        "white": "morecolorful:colored/palettes/cloth_item/white",
+        "yellow": "morecolorful:colored/palettes/cloth_item/yellow"
+      },
+      "textures": [
+        "morecolorful:colored/umbrella_item/open_0",
+        "morecolorful:colored/umbrella_item/open_1",
+        "morecolorful:colored/umbrella_item/open_2",
+        "morecolorful:colored/umbrella_item/closed_0",
+        "morecolorful:colored/umbrella_item/closed_1",
+        "morecolorful:colored/umbrella_item/closed_2"
+      ]
+    },
+    {
+      "type": "minecraft:paletted_permutations",
+      "palette_key": "morecolorful:colored/palettes/paper/palette",
+      "permutations": {
+        "black": "morecolorful:colored/palettes/paper/black",
+        "blue": "morecolorful:colored/palettes/paper/blue",
+        "brown": "morecolorful:colored/palettes/paper/brown",
+        "cyan": "morecolorful:colored/palettes/paper/cyan",
+        "gray": "morecolorful:colored/palettes/paper/gray",
+        "green": "morecolorful:colored/palettes/paper/green",
+        "light_blue": "morecolorful:colored/palettes/paper/light_blue",
+        "light_gray": "morecolorful:colored/palettes/paper/light_gray",
+        "lime": "morecolorful:colored/palettes/paper/lime",
+        "magenta": "morecolorful:colored/palettes/paper/magenta",
+        "orange": "morecolorful:colored/palettes/paper/orange",
+        "pink": "morecolorful:colored/palettes/paper/pink",
+        "purple": "morecolorful:colored/palettes/paper/purple",
+        "red": "morecolorful:colored/palettes/paper/red",
+        "white": "morecolorful:colored/palettes/paper/white",
+        "yellow": "morecolorful:colored/palettes/paper/yellow"
+      },
+      "textures": [
+        "morecolorful:colored/pinwheel/0",
+        "morecolorful:colored/pinwheel/1",
+        "morecolorful:colored/pinwheel/2",
+        "morecolorful:colored/pinwheel/3",
+        "morecolorful:colored/pinwheel/4",
+        "morecolorful:colored/pinwheel/5",
+        "morecolorful:colored/pinwheel/6",
+        "morecolorful:colored/pinwheel/7",
+        "morecolorful:colored/pinwheel/8",
+        "morecolorful:colored/pinwheel/9",
+        "morecolorful:colored/pinwheel/10",
+        "morecolorful:colored/pinwheel/11",
+        "morecolorful:colored/pinwheel/12",
+        "morecolorful:colored/pinwheel/13",
+        "morecolorful:colored/pinwheel/14",
+        "morecolorful:colored/pinwheel/15"
+      ]
+    }
+  ]
+}

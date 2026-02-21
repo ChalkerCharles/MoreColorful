@@ -7,6 +7,7 @@ import com.ChalkerCharles.morecolorful.common.attachment.ModDataAttachments;
 import com.ChalkerCharles.morecolorful.common.block.ModBlockEntities;
 import com.ChalkerCharles.morecolorful.common.block.ModBlocks;
 import com.ChalkerCharles.morecolorful.common.block.VanillaBlockPropertyModifier;
+import com.ChalkerCharles.morecolorful.common.entity.ModAttributes;
 import com.ChalkerCharles.morecolorful.common.entity.ModEntities;
 import com.ChalkerCharles.morecolorful.common.item.ModCreativeTabs;
 import com.ChalkerCharles.morecolorful.common.item.ModDataComponents;
@@ -51,6 +52,7 @@ public class MoreColorful {
         ModBlocks.register(modEventBus);
         ModBlockEntities.register(modEventBus);
         ModEntities.register(modEventBus);
+        ModAttributes.register(modEventBus);
         ModSounds.register(modEventBus);
         ModStats.register(modEventBus);
         ModDataComponents.register(modEventBus);

@@ -3,6 +3,7 @@ package com.ChalkerCharles.morecolorful.client.gui;
 import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.client.MidiHandler;
 import com.ChalkerCharles.morecolorful.client.ModKeyMapping;
+import com.ChalkerCharles.morecolorful.common.item.ItemUtils;
 import com.ChalkerCharles.morecolorful.common.item.ModItems;
 import com.ChalkerCharles.morecolorful.util.InstrumentsType;
 import com.ChalkerCharles.morecolorful.network.packets.InstrumentPressingPacket;
@@ -24,7 +25,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
@@ -341,10 +341,10 @@ public class PlayingScreen extends Screen {
                 player.swing(this.getDrumstickHand());
             } else if (type == InstrumentsType.GLOCKENSPIEL || type == InstrumentsType.XYLOPHONE || type == InstrumentsType.VIBRAPHONE) {
                 if (isAnyLeftKeysPressed()) {
-                    player.swing(this.getLeftHand());
+                    player.swing(ItemUtils.getLeftHand(player));
                 }
                 if (isAnyRightKeysPressed()) {
-                    player.swing(this.getRightHand());
+                    player.swing(ItemUtils.getRightHand(player));
                 }
             } else if (type.isPercussion()) {
                 player.swing(this.getDrumstickHand());
@@ -355,14 +355,6 @@ public class PlayingScreen extends Screen {
             this.onClose();
         }
         PacketDistributor.sendToServer(new InstrumentTickingPacket(tick, player.getId()));
-    }
-
-    private InteractionHand getLeftHand() {
-        return player.getMainArm() == HumanoidArm.RIGHT ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND;
-    }
-
-    private InteractionHand getRightHand() {
-        return player.getMainArm() == HumanoidArm.RIGHT ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND;
     }
 
     private InteractionHand getDrumstickHand() {

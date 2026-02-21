@@ -27,5 +27,6 @@ public class ParticleProvidersRegistry {
         event.registerSpriteSet(ModParticles.CONFETTI.get(), ConfettiParticle.Provider::new);
         event.registerSpriteSet(ModParticles.SPARKLER_SPARKLE.get(), SparklerParticles.SparkleProvider::new);
         event.registerSprite(ModParticles.SPARKLER_GLITTER.get(), SparklerParticles::createGlitter);
+        event.registerSpecial(ModParticles.BALLOON.get(), BalloonScrapParticle::create);
     }
 }

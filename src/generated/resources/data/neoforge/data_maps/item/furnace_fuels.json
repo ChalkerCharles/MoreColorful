@@ -3,7 +3,7 @@
     "#morecolorful:leaf_litters": {
       "burn_time": 50
     },
-    "#morecolorful:pinwheels": {
+    "#morecolorful:pennants": {
       "burn_time": 200
     },
     "#morecolorful:ribbons": {
@@ -44,6 +44,9 @@
     },
     "morecolorful:guzheng": {
       "burn_time": 300
+    },
+    "morecolorful:pinwheel": {
+      "burn_time": 200
     },
     "morecolorful:pipa": {
       "burn_time": 200

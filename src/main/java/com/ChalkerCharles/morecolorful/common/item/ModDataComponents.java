@@ -1,9 +1,7 @@
 package com.ChalkerCharles.morecolorful.common.item;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
-import com.ChalkerCharles.morecolorful.common.item.component.EditableMelody;
-import com.ChalkerCharles.morecolorful.common.item.component.Melody;
-import com.ChalkerCharles.morecolorful.common.item.component.PinwheelContext;
+import com.ChalkerCharles.morecolorful.common.item.component.*;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.Unit;
@@ -20,6 +18,9 @@ public class ModDataComponents {
     public static final Supplier<DataComponentType<EditableMelody>> EDITABLE_MELODY = register("editable_melody", builder -> builder.persistent(EditableMelody.CODEC).networkSynchronized(EditableMelody.STREAM_CODEC).cacheEncoding());
     public static final Supplier<DataComponentType<PinwheelContext>> PINWHEEL_CONTEXT = register("pinwheel_context", builder -> builder.networkSynchronized(PinwheelContext.STREAM_CODEC));
     public static final Supplier<DataComponentType<Unit>> ACTIVATED = register("activated", builder -> builder.persistent(Unit.CODEC).networkSynchronized(StreamCodec.unit(Unit.INSTANCE)));
+    public static final Supplier<DataComponentType<UmbrellaColor>> UMBRELLA_COLOR = register("umbrella_color", builder -> builder.persistent(UmbrellaColor.CODEC).networkSynchronized(UmbrellaColor.STREAM_CODEC).cacheEncoding());
+    public static final Supplier<DataComponentType<Unit>> OPEN = register("open", builder -> builder.persistent(Unit.CODEC).networkSynchronized(StreamCodec.unit(Unit.INSTANCE)));
+    public static final Supplier<DataComponentType<PinwheelColor>> PINWHEEL_COLOR = register("pinwheel_color", builder -> builder.persistent(PinwheelColor.CODEC).networkSynchronized(PinwheelColor.STREAM_CODEC).cacheEncoding());
 
     private static <T> Supplier<DataComponentType<T>> register(String name, UnaryOperator<DataComponentType.Builder<T>> builder) {
         return DATA_COMPONENTS.registerComponentType(name, builder);

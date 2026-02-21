@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "balloon",
+  "key": {
+    "#": {
+      "item": "minecraft:phantom_membrane"
+    },
+    "@": {
+      "item": "minecraft:wind_charge"
+    },
+    "S": {
+      "item": "minecraft:lead"
+    }
+  },
+  "pattern": [
+    " # ",
+    "#@#",
+    "S# "
+  ],
+  "result": {
+    "count": 1,
+    "id": "morecolorful:balloon"
+  }
+}

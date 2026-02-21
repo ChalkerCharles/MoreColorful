@@ -7,12 +7,17 @@ import com.ChalkerCharles.morecolorful.common.block.properties.ModBlockStateProp
 import com.ChalkerCharles.morecolorful.util.InstrumentsType;
 import com.ChalkerCharles.morecolorful.network.packets.PlayingScreenPacket;
 import com.ChalkerCharles.morecolorful.util.MusicalInstrument;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -32,6 +37,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 public class SynthesizerKeyboardBlock extends Block implements MusicalInstrument {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
@@ -228,6 +234,16 @@ public class SynthesizerKeyboardBlock extends Block implements MusicalInstrument
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
         pBuilder.add(FACING, HALF);
+    }
+
+    @Override
+    public void appendHoverText(ItemStack pStack, Item.TooltipContext pContext, List<Component> pTooltipComponents, TooltipFlag pTooltipFlag) {
+        super.appendHoverText(pStack, pContext, pTooltipComponents, pTooltipFlag);
+        pTooltipComponents.add(this.getDisplayName().withStyle(ChatFormatting.GRAY));
+    }
+
+    private MutableComponent getDisplayName() {
+        return Component.translatable(this.getDescriptionId() + ".desc");
     }
 
     @Override

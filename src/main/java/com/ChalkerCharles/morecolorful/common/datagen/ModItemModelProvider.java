@@ -2,11 +2,13 @@ package com.ChalkerCharles.morecolorful.common.datagen;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.common.block.ModBlocks;
+import com.ChalkerCharles.morecolorful.common.block.ornamental.PennantBlock;
 import com.ChalkerCharles.morecolorful.common.block.ornamental.RibbonBlock;
 import com.ChalkerCharles.morecolorful.common.datagen.helper.ModItemModelHelper;
+import com.ChalkerCharles.morecolorful.common.item.ItemUtils;
 import com.ChalkerCharles.morecolorful.common.item.ModItems;
+import com.ChalkerCharles.morecolorful.common.item.misc.BalloonItem;
 import com.ChalkerCharles.morecolorful.common.item.misc.PartyPopperItem;
-import com.ChalkerCharles.morecolorful.common.item.misc.PinwheelItem;
 import com.ChalkerCharles.morecolorful.common.item.misc.SparklerItem;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.ItemLike;
@@ -183,12 +185,18 @@ public class ModItemModelProvider extends ModItemModelHelper {
         for (ItemLike item : RibbonBlock.ALL_ITEMS) {
             ribbon(item);
         }
-        for (ItemLike item : PinwheelItem.ALL_DYE_COLORS) {
-            pinwheel(item);
-        }
-        pinwheel(ModItems.MULTICOLORED_PINWHEEL);
         for (ItemLike item : SparklerItem.ALL_ITEMS) {
             sparkler(item);
         }
+        for (ItemLike item : PennantBlock.ALL_ITEMS) {
+            handheld(item);
+        }
+        for (ItemLike item : ItemUtils.COLORED_BUNDLES) {
+            bundle(item);
+        }
+        for (ItemLike item : BalloonItem.ALL_TYPES) {
+            basicItem(item);
+        }
+        basicItem(ModItems.SANDBAG);
     }
 }

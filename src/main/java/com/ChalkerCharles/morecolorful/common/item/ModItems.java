@@ -3,12 +3,19 @@ package com.ChalkerCharles.morecolorful.common.item;
 import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.common.block.ModBlocks;
 import com.ChalkerCharles.morecolorful.common.entity.BoatTypeExtension;
+import com.ChalkerCharles.morecolorful.common.entity.misc.Balloon;
 import com.ChalkerCharles.morecolorful.common.item.component.EditableMelody;
+import com.ChalkerCharles.morecolorful.common.item.component.PinwheelColor;
 import com.ChalkerCharles.morecolorful.common.item.component.PinwheelContext;
+import com.ChalkerCharles.morecolorful.common.item.component.UmbrellaColor;
 import com.ChalkerCharles.morecolorful.common.item.misc.*;
 import com.ChalkerCharles.morecolorful.common.item.musical.*;
+import com.ChalkerCharles.morecolorful.common.item.utility.UmbrellaItem;
+import com.ChalkerCharles.morecolorful.util.Colour;
 import com.ChalkerCharles.morecolorful.util.InstrumentsType;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.component.BundleContents;
 import net.minecraft.world.level.block.*;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
@@ -35,13 +42,13 @@ public class ModItems {
     public static final DeferredItem<BlockItem> GLOCKENSPIEL = registerBlockItem(ModBlocks.GLOCKENSPIEL);
     public static final DeferredItem<BlockItem> XYLOPHONE = registerBlockItem(ModBlocks.XYLOPHONE);
     public static final DeferredItem<BlockItem> VIBRAPHONE = registerBlockItem(ModBlocks.VIBRAPHONE);
-    public static final DeferredItem<BlockItem> SYNTHESIZER_KEYBOARD_BIT = registerSynthesizerKeyboard(ModBlocks.SYNTHESIZER_KEYBOARD_BIT);
-    public static final DeferredItem<BlockItem> SYNTHESIZER_KEYBOARD_PLING = registerSynthesizerKeyboard(ModBlocks.SYNTHESIZER_KEYBOARD_PLING);
-    public static final DeferredItem<BlockItem> SYNTHESIZER_KEYBOARD_SCULK = registerSynthesizerKeyboard(ModBlocks.SYNTHESIZER_KEYBOARD_SCULK);
-    public static final DeferredItem<BlockItem> SYNTHESIZER_KEYBOARD_AMETHYST = registerSynthesizerKeyboard(ModBlocks.SYNTHESIZER_KEYBOARD_AMETHYST);
-    public static final DeferredItem<BlockItem> SYNTHESIZER_KEYBOARD_SAW = registerSynthesizerKeyboard(ModBlocks.SYNTHESIZER_KEYBOARD_SAW);
-    public static final DeferredItem<BlockItem> SYNTHESIZER_KEYBOARD_PLUCK = registerSynthesizerKeyboard(ModBlocks.SYNTHESIZER_KEYBOARD_PLUCK);
-    public static final DeferredItem<BlockItem> SYNTHESIZER_KEYBOARD_SYNTH_BASS = registerSynthesizerKeyboard(ModBlocks.SYNTHESIZER_KEYBOARD_SYNTH_BASS);
+    public static final DeferredItem<BlockItem> SYNTHESIZER_KEYBOARD_BIT = registerBlockItem(ModBlocks.SYNTHESIZER_KEYBOARD_BIT);
+    public static final DeferredItem<BlockItem> SYNTHESIZER_KEYBOARD_PLING = registerBlockItem(ModBlocks.SYNTHESIZER_KEYBOARD_PLING);
+    public static final DeferredItem<BlockItem> SYNTHESIZER_KEYBOARD_SCULK = registerBlockItem(ModBlocks.SYNTHESIZER_KEYBOARD_SCULK);
+    public static final DeferredItem<BlockItem> SYNTHESIZER_KEYBOARD_AMETHYST = registerBlockItem(ModBlocks.SYNTHESIZER_KEYBOARD_AMETHYST);
+    public static final DeferredItem<BlockItem> SYNTHESIZER_KEYBOARD_SAW = registerBlockItem(ModBlocks.SYNTHESIZER_KEYBOARD_SAW);
+    public static final DeferredItem<BlockItem> SYNTHESIZER_KEYBOARD_PLUCK = registerBlockItem(ModBlocks.SYNTHESIZER_KEYBOARD_PLUCK);
+    public static final DeferredItem<BlockItem> SYNTHESIZER_KEYBOARD_SYNTH_BASS = registerBlockItem(ModBlocks.SYNTHESIZER_KEYBOARD_SYNTH_BASS);
     public static final DeferredItem<BlockItem> GUZHENG = registerBlockItem(ModBlocks.GUZHENG);
     public static final DeferredItem<BlockItem> MUSIC_BOX = registerBlockItem(ModBlocks.MUSIC_BOX);
 
@@ -254,23 +261,25 @@ public class ModItems {
 
     public static final DeferredItem<BlockItem> FAN_BLOCK = registerBlockItem(ModBlocks.FAN_BLOCK);
     public static final DeferredItem<BlockItem> WEATHER_VANE = registerBlockItem(ModBlocks.WEATHER_VANE);
-    public static final DeferredItem<BlockItem> WHITE_PINWHEEL = registerPinwheel(ModBlocks.WHITE_PINWHEEL);
-    public static final DeferredItem<BlockItem> ORANGE_PINWHEEL = registerPinwheel(ModBlocks.ORANGE_PINWHEEL);
-    public static final DeferredItem<BlockItem> MAGENTA_PINWHEEL = registerPinwheel(ModBlocks.MAGENTA_PINWHEEL);
-    public static final DeferredItem<BlockItem> LIGHT_BLUE_PINWHEEL = registerPinwheel(ModBlocks.LIGHT_BLUE_PINWHEEL);
-    public static final DeferredItem<BlockItem> YELLOW_PINWHEEL = registerPinwheel(ModBlocks.YELLOW_PINWHEEL);
-    public static final DeferredItem<BlockItem> LIME_PINWHEEL = registerPinwheel(ModBlocks.LIME_PINWHEEL);
-    public static final DeferredItem<BlockItem> PINK_PINWHEEL = registerPinwheel(ModBlocks.PINK_PINWHEEL);
-    public static final DeferredItem<BlockItem> GRAY_PINWHEEL = registerPinwheel(ModBlocks.GRAY_PINWHEEL);
-    public static final DeferredItem<BlockItem> LIGHT_GRAY_PINWHEEL = registerPinwheel(ModBlocks.LIGHT_GRAY_PINWHEEL);
-    public static final DeferredItem<BlockItem> CYAN_PINWHEEL = registerPinwheel(ModBlocks.CYAN_PINWHEEL);
-    public static final DeferredItem<BlockItem> PURPLE_PINWHEEL = registerPinwheel(ModBlocks.PURPLE_PINWHEEL);
-    public static final DeferredItem<BlockItem> BLUE_PINWHEEL = registerPinwheel(ModBlocks.BLUE_PINWHEEL);
-    public static final DeferredItem<BlockItem> BROWN_PINWHEEL = registerPinwheel(ModBlocks.BROWN_PINWHEEL);
-    public static final DeferredItem<BlockItem> GREEN_PINWHEEL = registerPinwheel(ModBlocks.GREEN_PINWHEEL);
-    public static final DeferredItem<BlockItem> RED_PINWHEEL = registerPinwheel(ModBlocks.RED_PINWHEEL);
-    public static final DeferredItem<BlockItem> BLACK_PINWHEEL = registerPinwheel(ModBlocks.BLACK_PINWHEEL);
-    public static final DeferredItem<BlockItem> MULTICOLORED_PINWHEEL = registerPinwheel(ModBlocks.MULTICOLORED_PINWHEEL);
+    public static final DeferredItem<BlockItem> PINWHEEL = registerBlockItem(ModBlocks.PINWHEEL, () -> new BlockItem(ModBlocks.PINWHEEL.get(), pinwheelProperties()));
+    public static final DeferredItem<BlockItem> WHITE_PENNANT = registerBlockItem(ModBlocks.WHITE_PENNANT);
+    public static final DeferredItem<BlockItem> ORANGE_PENNANT = registerBlockItem(ModBlocks.ORANGE_PENNANT);
+    public static final DeferredItem<BlockItem> MAGENTA_PENNANT = registerBlockItem(ModBlocks.MAGENTA_PENNANT);
+    public static final DeferredItem<BlockItem> LIGHT_BLUE_PENNANT = registerBlockItem(ModBlocks.LIGHT_BLUE_PENNANT);
+    public static final DeferredItem<BlockItem> YELLOW_PENNANT = registerBlockItem(ModBlocks.YELLOW_PENNANT);
+    public static final DeferredItem<BlockItem> LIME_PENNANT = registerBlockItem(ModBlocks.LIME_PENNANT);
+    public static final DeferredItem<BlockItem> PINK_PENNANT = registerBlockItem(ModBlocks.PINK_PENNANT);
+    public static final DeferredItem<BlockItem> GRAY_PENNANT = registerBlockItem(ModBlocks.GRAY_PENNANT);
+    public static final DeferredItem<BlockItem> LIGHT_GRAY_PENNANT = registerBlockItem(ModBlocks.LIGHT_GRAY_PENNANT);
+    public static final DeferredItem<BlockItem> CYAN_PENNANT = registerBlockItem(ModBlocks.CYAN_PENNANT);
+    public static final DeferredItem<BlockItem> PURPLE_PENNANT = registerBlockItem(ModBlocks.PURPLE_PENNANT);
+    public static final DeferredItem<BlockItem> BLUE_PENNANT = registerBlockItem(ModBlocks.BLUE_PENNANT);
+    public static final DeferredItem<BlockItem> BROWN_PENNANT = registerBlockItem(ModBlocks.BROWN_PENNANT);
+    public static final DeferredItem<BlockItem> GREEN_PENNANT = registerBlockItem(ModBlocks.GREEN_PENNANT);
+    public static final DeferredItem<BlockItem> RED_PENNANT = registerBlockItem(ModBlocks.RED_PENNANT);
+    public static final DeferredItem<BlockItem> BLACK_PENNANT = registerBlockItem(ModBlocks.BLACK_PENNANT);
+
+    public static final DeferredItem<BlockItem> SANDBAG = registerBlockItem(ModBlocks.SANDBAG);
 
     // Items
     public static final DeferredItem<Item> VIOLIN = register("violin", () -> new BowedStringInstrumentItem(InstrumentsType.VIOLIN, nonStackable()));
@@ -347,6 +356,43 @@ public class ModItems {
     public static final DeferredItem<Item> MAGENTA_SPARKLER = registerSparkler("magenta_sparkler");
     public static final DeferredItem<Item> PINK_SPARKLER = registerSparkler("pink_sparkler");
 
+    public static final DeferredItem<Item> BALLOON = registerBalloon("balloon", Colour.DEFAULT);
+    public static final DeferredItem<Item> WHITE_BALLOON = registerBalloon("white_balloon", DyeColor.WHITE);
+    public static final DeferredItem<Item> LIGHT_GRAY_BALLOON = registerBalloon("light_gray_balloon", DyeColor.LIGHT_GRAY);
+    public static final DeferredItem<Item> GRAY_BALLOON = registerBalloon("gray_balloon", DyeColor.GRAY);
+    public static final DeferredItem<Item> BLACK_BALLOON = registerBalloon("black_balloon", DyeColor.BLACK);
+    public static final DeferredItem<Item> BROWN_BALLOON = registerBalloon("brown_balloon", DyeColor.BROWN);
+    public static final DeferredItem<Item> RED_BALLOON = registerBalloon("red_balloon", DyeColor.RED);
+    public static final DeferredItem<Item> ORANGE_BALLOON = registerBalloon("orange_balloon", DyeColor.ORANGE);
+    public static final DeferredItem<Item> YELLOW_BALLOON = registerBalloon("yellow_balloon", DyeColor.YELLOW);
+    public static final DeferredItem<Item> LIME_BALLOON = registerBalloon("lime_balloon", DyeColor.LIME);
+    public static final DeferredItem<Item> GREEN_BALLOON = registerBalloon("green_balloon", DyeColor.GREEN);
+    public static final DeferredItem<Item> CYAN_BALLOON = registerBalloon("cyan_balloon", DyeColor.CYAN);
+    public static final DeferredItem<Item> LIGHT_BLUE_BALLOON = registerBalloon("light_blue_balloon", DyeColor.LIGHT_BLUE);
+    public static final DeferredItem<Item> BLUE_BALLOON = registerBalloon("blue_balloon", DyeColor.BLUE);
+    public static final DeferredItem<Item> PURPLE_BALLOON = registerBalloon("purple_balloon", DyeColor.PURPLE);
+    public static final DeferredItem<Item> MAGENTA_BALLOON = registerBalloon("magenta_balloon", DyeColor.MAGENTA);
+    public static final DeferredItem<Item> PINK_BALLOON = registerBalloon("pink_balloon", DyeColor.PINK);
+
+    public static final DeferredItem<Item> WHITE_BUNDLE = registerBundle("white_bundle");
+    public static final DeferredItem<Item> LIGHT_GRAY_BUNDLE = registerBundle("light_gray_bundle");
+    public static final DeferredItem<Item> GRAY_BUNDLE = registerBundle("gray_bundle");
+    public static final DeferredItem<Item> BLACK_BUNDLE = registerBundle("black_bundle");
+    public static final DeferredItem<Item> BROWN_BUNDLE = registerBundle("brown_bundle");
+    public static final DeferredItem<Item> RED_BUNDLE = registerBundle("red_bundle");
+    public static final DeferredItem<Item> ORANGE_BUNDLE = registerBundle("orange_bundle");
+    public static final DeferredItem<Item> YELLOW_BUNDLE = registerBundle("yellow_bundle");
+    public static final DeferredItem<Item> LIME_BUNDLE = registerBundle("lime_bundle");
+    public static final DeferredItem<Item> GREEN_BUNDLE = registerBundle("green_bundle");
+    public static final DeferredItem<Item> CYAN_BUNDLE = registerBundle("cyan_bundle");
+    public static final DeferredItem<Item> LIGHT_BLUE_BUNDLE = registerBundle("light_blue_bundle");
+    public static final DeferredItem<Item> BLUE_BUNDLE = registerBundle("blue_bundle");
+    public static final DeferredItem<Item> PURPLE_BUNDLE = registerBundle("purple_bundle");
+    public static final DeferredItem<Item> MAGENTA_BUNDLE = registerBundle("magenta_bundle");
+    public static final DeferredItem<Item> PINK_BUNDLE = registerBundle("pink_bundle");
+
+    public static final DeferredItem<Item> UMBRELLA = register("umbrella", () -> new UmbrellaItem(properties().durability(128).component(ModDataComponents.UMBRELLA_COLOR, UmbrellaColor.DEFAULT)));
+
     private static DeferredItem<Item> register(String name, Supplier<Item> supplier) {
         return ITEMS.register(name, supplier);
     }
@@ -357,10 +403,6 @@ public class ModItems {
     
     private static DeferredItem<BlockItem> registerBlockItem(DeferredBlock<? extends Block> block, Supplier<BlockItem> blockItem) {
         return ITEMS.register(block.getId().getPath(), blockItem);
-    }
-    
-    private static DeferredItem<BlockItem> registerSynthesizerKeyboard(DeferredBlock<Block> block) {
-        return registerBlockItem(block, () -> new SynthesizerKeyboardItem(block.get(), properties()));
     }
     
     private static DeferredItem<BlockItem> registerSign(DeferredBlock<StandingSignBlock> sign, DeferredBlock<WallSignBlock> wallSign) {
@@ -375,12 +417,20 @@ public class ModItems {
         return registerBlockItem(block, () -> new PlaceOnWaterBlockItem(block.get(), properties()));
     }
 
-    private static DeferredItem<BlockItem> registerPinwheel(DeferredBlock<Block> block) {
-        return registerBlockItem(block, () -> new PinwheelItem(block.get(), properties().component(ModDataComponents.PINWHEEL_CONTEXT, PinwheelContext.DEFAULT)));
-    }
-
     private static DeferredItem<Item> registerSparkler(String name) {
         return register(name, () -> new SparklerItem(properties().durability(60).setNoRepair()));
+    }
+
+    private static DeferredItem<Item> registerBundle(String name) {
+        return register(name, () -> new BundleItem(nonStackable().component(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY)));
+    }
+
+    private static DeferredItem<Item> registerBalloon(String name, Balloon.Variant variant) {
+        return register(name, () -> new BalloonItem(properties(), variant));
+    }
+
+    private static DeferredItem<Item> registerBalloon(String name, DyeColor color) {
+        return registerBalloon(name, Colour.cast(color));
     }
     
     private static Item.Properties properties() {
@@ -393,6 +443,10 @@ public class ModItems {
     
     private static Item.Properties stackTo16() {
         return properties().stacksTo(16);
+    }
+
+    private static Item.Properties pinwheelProperties() {
+        return properties().component(ModDataComponents.PINWHEEL_CONTEXT, PinwheelContext.DEFAULT).component(ModDataComponents.PINWHEEL_COLOR, PinwheelColor.DEFAULT);
     }
 
     public static void register(IEventBus eventBus){

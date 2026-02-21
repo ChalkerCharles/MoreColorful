@@ -35,6 +35,7 @@ public class ModParticles {
     public static final Supplier<SimpleParticleType> CONFETTI = register("confetti", false);
     public static final Supplier<ParticleType<ColorParticleOption>> SPARKLER_SPARKLE = register("sparkler_sparkle", false, ColorParticleOption::codec, ColorParticleOption::streamCodec);
     public static final Supplier<ParticleType<ColorParticleOption>> SPARKLER_GLITTER = register("sparkler_glitter", false, ColorParticleOption::codec, ColorParticleOption::streamCodec);
+    public static final Supplier<ParticleType<BalloonParticleOption>> BALLOON = register("balloon", false, t -> BalloonParticleOption.CODEC, t -> BalloonParticleOption.STREAM_CODEC);
 
     private static Supplier<SimpleParticleType> register(String name, boolean overrideLimiter) {
         return PARTICLE_TYPES.register(name, () -> new SimpleParticleType(overrideLimiter));

@@ -1,29 +1,30 @@
 package com.ChalkerCharles.morecolorful.client;
 
-import com.ChalkerCharles.morecolorful.Config;
 import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.client.gui.PlayingScreen;
 import com.ChalkerCharles.morecolorful.client.model.ArmPoseExtension;
+import com.ChalkerCharles.morecolorful.client.renderer.item.PinwheelRenderer;
+import com.ChalkerCharles.morecolorful.client.renderer.item.UmbrellaRenderer;
 import com.ChalkerCharles.morecolorful.common.attachment.InstrumentData;
+import com.ChalkerCharles.morecolorful.common.item.ItemUtils;
 import com.ChalkerCharles.morecolorful.common.item.ModDataComponents;
 import com.ChalkerCharles.morecolorful.common.item.ModItems;
-import com.ChalkerCharles.morecolorful.common.item.component.PinwheelContext;
-import com.ChalkerCharles.morecolorful.common.item.misc.PinwheelItem;
 import com.ChalkerCharles.morecolorful.common.item.misc.SparklerItem;
-import com.ChalkerCharles.morecolorful.util.client.RenderUtils;
+import com.ChalkerCharles.morecolorful.common.item.utility.UmbrellaItem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
+import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import net.minecraft.client.renderer.item.ItemPropertyFunction;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BundleItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
@@ -31,9 +32,12 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.ModelEvent;
+import net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 
+@SuppressWarnings("deprecation")
 @EventBusSubscriber(modid = MoreColorful.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ModClientSetup {
     @SubscribeEvent
@@ -186,30 +190,39 @@ public class ModClientSetup {
                 return HumanoidModel.ArmPose.ITEM;
             }
         }, ModItems.ERHU.get());
+        // Pinwheel
+        event.registerItem(new IClientItemExtensions() {
+            @Override
+            public BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                return PinwheelRenderer.INSTANCE;
+            }
+        }, ModItems.PINWHEEL.get());
+        // Umbrella
+        event.registerItem(new IClientItemExtensions() {
+            @Override
+            public HumanoidModel.ArmPose getArmPose(LivingEntity entityLiving, InteractionHand hand, ItemStack itemStack) {
+                return UmbrellaItem.isOpen(itemStack) ? ArmPoseExtension.UMBRELLA : HumanoidModel.ArmPose.ITEM;
+            }
+
+            @Override
+            public BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                return UmbrellaRenderer.INSTANCE;
+            }
+        }, ModItems.UMBRELLA.get());
     }
 
-    private static final ClampedItemPropertyFunction PROPERTY_PLAYING = (stack, level, entity, seed) ->
+    private static final ItemPropertyFunction PROPERTY_PLAYING = (stack, level, entity, seed) ->
             entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1.0F : 0.0F;
-
-    private static ClampedItemPropertyFunction propertyPlaying(Item item) {
+    private static ItemPropertyFunction propertyPlaying(Item item) {
         return (stack, level, entity, seed) ->
                 entity != null && entity.isUsingItem() && entity.getUseItem().getItem() == item ? 1.0F : 0.0F;
     }
-
-    private static final ClampedItemPropertyFunction PROPERTY_PINWHEEL = (stack, level, entity, seed) -> {
-        if (!Config.windSystem) return 0;
-        if (entity instanceof LivingEntity living) {
-            if (stack == living.getMainHandItem() || stack == living.getOffhandItem() || stack == living.getItemBySlot(EquipmentSlot.HEAD)) {
-                int frame = stack.getOrDefault(ModDataComponents.PINWHEEL_CONTEXT, PinwheelContext.DEFAULT).lerpFrame(RenderUtils.partialTick);
-                int frames = PinwheelItem.isMulticolor(stack) ? 16 : 4;
-                return (frame % frames) / (float) frames;
-            }
-        }
-        return 0;
-    };
-
-    private static final ClampedItemPropertyFunction PROPERTY_ACTIVATED = (stack, level, entity, seed) ->
+    private static final ItemPropertyFunction PROPERTY_ACTIVATED = (stack, level, entity, seed) ->
             stack.has(ModDataComponents.ACTIVATED) ? 1.0F : 0.0F;
+    private static final ItemPropertyFunction PROPERTY_OPEN = (stack, level, entity, seed) ->
+            stack.has(ModDataComponents.OPEN) ? 1.0F : 0.0F;
+    private static final ItemPropertyFunction PROPERTY_FILLED = (stack, level, entity, seed) ->
+            BundleItem.getFullnessDisplay(stack);
 
     @SubscribeEvent
     public static void registerModelPredicate(FMLClientSetupEvent event) {
@@ -227,15 +240,29 @@ public class ModClientSetup {
             ItemProperties.register(ModItems.OCARINA.get(), playing, PROPERTY_PLAYING);
             ItemProperties.register(ModItems.HARMONICA.get(), playing, PROPERTY_PLAYING);
             ItemProperties.register(ModItems.ERHU.get(), playing, PROPERTY_PLAYING);
-            ResourceLocation spin = MoreColorful.location("spin");
-            for (ItemLike item : PinwheelItem.ALL_DYE_COLORS) {
-                ItemProperties.register(item.asItem(), spin, PROPERTY_PINWHEEL);
-            }
-            ItemProperties.register(ModItems.MULTICOLORED_PINWHEEL.get(), spin, PROPERTY_PINWHEEL);
             ResourceLocation activated = MoreColorful.location("activated");
             for (ItemLike item : SparklerItem.ALL_ITEMS) {
                 ItemProperties.register(item.asItem(), activated, PROPERTY_ACTIVATED);
             }
+            ResourceLocation open = MoreColorful.location("open");
+            ItemProperties.register(ModItems.UMBRELLA.get(), open, PROPERTY_OPEN);
+            ResourceLocation filled = ResourceLocation.withDefaultNamespace("filled");
+            for (ItemLike item : ItemUtils.COLORED_BUNDLES) {
+                ItemProperties.register(item.asItem(), filled, PROPERTY_FILLED);
+            }
         });
+    }
+
+    @SubscribeEvent
+    public static void registerAdditionalModels(ModelEvent.RegisterAdditional event) {
+        event.register(UmbrellaRenderer.UMBRELLA_FRAME_MODEL);
+        event.register(UmbrellaRenderer.UMBRELLA_FRAME_MIRRORED_MODEL);
+        event.register(UmbrellaRenderer.UMBRELLA_OVERLAY_MODEL);
+    }
+
+    @SubscribeEvent
+    public static void registerClientReloadListeners(RegisterClientReloadListenersEvent event) {
+        event.registerReloadListener(UmbrellaRenderer.INSTANCE);
+        event.registerReloadListener(PinwheelRenderer.INSTANCE);
     }
 }

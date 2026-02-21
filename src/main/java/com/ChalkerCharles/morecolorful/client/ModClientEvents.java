@@ -30,7 +30,7 @@ public final class ModClientEvents {
     private static int removedLines = 0;
 
     @SubscribeEvent
-    public static void onClientTickPre(ClientTickEvent.Pre event) {
+    public static void preClientTick(ClientTickEvent.Pre event) {
         Minecraft minecraft = Minecraft.getInstance();
         if (minecraft.isPaused()) return;
         RenderUtils.leavesRustling = false;
@@ -42,7 +42,7 @@ public final class ModClientEvents {
     }
 
     @SubscribeEvent
-    public static void onClientTickPost(ClientTickEvent.Post event) {
+    public static void postClientTick(ClientTickEvent.Post event) {
         DebugScreenOverlay debugScreenOverlay = Minecraft.getInstance().getDebugOverlay();
         boolean isDebugScreenOn = debugScreenOverlay.showDebugScreen();
         while (isDebugScreenOn && ModKeyMapping.DEBUG_TEXT_SCROLL_DOWN.get().consumeClick()) {
@@ -54,7 +54,7 @@ public final class ModClientEvents {
     }
 
     @SubscribeEvent
-    public static void onRenderFramePre(RenderFrameEvent.Pre event) {
+    public static void preRenderFrame(RenderFrameEvent.Pre event) {
         RenderUtils.setRenderTime();
         RenderUtils.partialTick = event.getPartialTick().getGameTimeDeltaPartialTick(false);
     }

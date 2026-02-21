@@ -22,6 +22,7 @@ public class CommonConfig {
     public final ModConfigSpec.IntValue overworldRegionWeight;
     public final ModConfigSpec.ConfigValue<List<? extends String>> disabledBiomes;
     public final ModConfigSpec.BooleanValue allowAddingFeatures;
+    public final ModConfigSpec.BooleanValue enhancedLeash;
 
     public CommonConfig(ModConfigSpec.Builder builder) {
         builder.comment("Block").translation(prefix + "block").push("block");
@@ -86,6 +87,11 @@ public class CommonConfig {
         builder.pop();
 
         builder.pop();
+
+        enhancedLeash = builder
+                .translation(prefix + "enhanced_leash")
+                .comment("Make leads act like in vanilla 1.21.6+.")
+                .define("enhancedLeash", true);
     }
 
     private static boolean validLocation(Object o) {

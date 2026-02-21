@@ -11,12 +11,13 @@ public class ModModelLayers {
     public static final ModelLayerLocation CRASH_CYMBAL = register("crash_cymbal");
     public static final ModelLayerLocation DRUM_SET_RIDE = register("drum_set_ride");
     public static final ModelLayerLocation DRUM_SET_CRASH = register("drum_set_crash");
+    public static final ModelLayerLocation BALLOON = register("balloon");
 
-    private static ModelLayerLocation register(String pPath) {
-        return register(pPath, "main");
+    private static ModelLayerLocation register(String path) {
+        return register(path, "main");
     }
     @SuppressWarnings("SameParameterValue")
-    private static ModelLayerLocation register(String pPath, String pModel) {
-        return new ModelLayerLocation(MoreColorful.location(pPath), pModel);
+    private static ModelLayerLocation register(String path, String model) {
+        return new ModelLayerLocation(MoreColorful.location(path), model);
     }
 }

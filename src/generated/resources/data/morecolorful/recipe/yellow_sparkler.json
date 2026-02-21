@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "sparkler",
+  "key": {
+    "#": {
+      "tag": "c:gunpowders"
+    },
+    "X": {
+      "item": "minecraft:blaze_powder"
+    },
+    "|": {
+      "tag": "c:rods/wooden"
+    }
+  },
+  "pattern": [
+    "X",
+    "#",
+    "|"
+  ],
+  "result": {
+    "count": 1,
+    "id": "morecolorful:yellow_sparkler"
+  }
+}

@@ -4,19 +4,26 @@ import com.ChalkerCharles.morecolorful.client.gui.PlayingScreen;
 import com.ChalkerCharles.morecolorful.common.item.ModItems;
 import com.ChalkerCharles.morecolorful.common.item.musical.DidgeridooItem;
 import com.ChalkerCharles.morecolorful.common.item.musical.GuitarItem;
+import com.ChalkerCharles.morecolorful.common.item.utility.UmbrellaItem;
 import com.ChalkerCharles.morecolorful.util.InstrumentsType;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.AbstractClientPlayer;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.ItemInHandRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.MapItem;
+import net.neoforged.neoforge.client.ClientHooks;
+import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -30,6 +37,14 @@ public abstract class ItemInHandRendererMixin {
     @Shadow
     @Final
     private Minecraft minecraft;
+    @Shadow
+    private ItemStack mainHandItem;
+    @Shadow
+    private float mainHandHeight;
+    @Shadow
+    private ItemStack offHandItem;
+    @Shadow
+    private float offHandHeight;
     @Shadow
     protected abstract void renderPlayerArm(PoseStack pPoseStack, MultiBufferSource pBuffer, int pCombinedLight, float pEquippedProgress, float pSwingProgress, HumanoidArm pSide);
 
@@ -101,6 +116,45 @@ public abstract class ItemInHandRendererMixin {
         if (pPlayer.getOffhandItem().getItem() instanceof DidgeridooItem item && minecraft.screen instanceof PlayingScreen screen && screen.type == item.getType()) {
             pPoseStack.popPose();
             ci.cancel();
+        }
+    }
+
+    @Unique
+    private void moreColorful$raiseMainHand() {
+        LocalPlayer player = this.minecraft.player;
+        if (player == null) return;
+        float f = player.getAttackStrengthScale(1.0F);
+        ItemStack itemstack = player.getMainHandItem();
+        boolean reequip = ClientHooks.shouldCauseReequipAnimation(this.mainHandItem, itemstack, player.getInventory().selected);
+        if (!reequip && this.mainHandItem != itemstack) this.mainHandItem = itemstack;
+        this.mainHandHeight += Mth.clamp((!reequip ? f * f * f : 0.0F) - this.mainHandHeight, -0.4F, 0.4F);
+    }
+
+    @Unique
+    private void moreColorful$raiseOffHand() {
+        LocalPlayer player = this.minecraft.player;
+        if (player == null) return;
+        ItemStack itemstack = player.getOffhandItem();
+        boolean reequip = ClientHooks.shouldCauseReequipAnimation(this.offHandItem, itemstack, -1);
+        if (!reequip && this.offHandItem != itemstack) this.offHandItem = itemstack;
+        this.offHandHeight += Mth.clamp((!reequip ? 1 : 0) - this.offHandHeight, -0.4F, 0.4F);
+    }
+
+    @WrapOperation(method = "tick", at = @At(value = "FIELD", target = "Lnet/minecraft/client/renderer/ItemInHandRenderer;mainHandHeight:F", opcode = Opcodes.PUTFIELD, ordinal = 0))
+    private void tick$mainHand(ItemInHandRenderer instance, float value, Operation<Void> original) {
+        if (UmbrellaItem.isOpen(this.mainHandItem)) {
+            this.moreColorful$raiseMainHand();
+        } else {
+            original.call(instance, value);
+        }
+    }
+
+    @WrapOperation(method = "tick", at = @At(value = "FIELD", target = "Lnet/minecraft/client/renderer/ItemInHandRenderer;offHandHeight:F", opcode = Opcodes.PUTFIELD, ordinal = 0))
+    private void tick$offHand(ItemInHandRenderer instance, float value, Operation<Void> original) {
+        if (UmbrellaItem.isOpen(this.offHandItem)) {
+            this.moreColorful$raiseOffHand();
+        } else {
+            original.call(instance, value);
         }
     }
 }

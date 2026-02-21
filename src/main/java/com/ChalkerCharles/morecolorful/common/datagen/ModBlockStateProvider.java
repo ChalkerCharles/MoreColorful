@@ -2,14 +2,14 @@ package com.ChalkerCharles.morecolorful.common.datagen;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.common.block.ModBlocks;
-import com.ChalkerCharles.morecolorful.common.block.ornamental.PinwheelBlock;
+import com.ChalkerCharles.morecolorful.common.block.ornamental.PennantBlock;
 import com.ChalkerCharles.morecolorful.common.block.ornamental.RibbonBlock;
 import com.ChalkerCharles.morecolorful.common.datagen.helper.ModBlockStateHelper;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
-public class  ModBlockStateProvider extends ModBlockStateHelper {
+public class ModBlockStateProvider extends ModBlockStateHelper {
     public ModBlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
         super(output, MoreColorful.MODID, exFileHelper);
     }
@@ -209,8 +209,8 @@ public class  ModBlockStateProvider extends ModBlockStateHelper {
         for (Block block : RibbonBlock.ALL_COLORS.get()) {
             ribbon(block);
         }
-        for (Block block : PinwheelBlock.ALL_TYPES.get()) {
-            pinwheel(block);
+        for (Block block : PennantBlock.ALL_BLOCKS.get()) {
+            emptyModelWithParticle(block);
         }
     }
 
@@ -258,5 +258,7 @@ public class  ModBlockStateProvider extends ModBlockStateHelper {
         leafLitterBlock(ModBlocks.DUCKWEEDS);
 
         simpleStateBlock(ModBlocks.WEATHER_VANE);
+        simpleStateBlock(ModBlocks.SANDBAG);
+        simpleStateBlock(ModBlocks.PINWHEEL);
     }
 }

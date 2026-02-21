@@ -1,0 +1,64 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "balloon",
+  "ingredients": [
+    {
+      "item": "minecraft:orange_dye"
+    },
+    [
+      {
+        "item": "morecolorful:balloon"
+      },
+      {
+        "item": "morecolorful:white_balloon"
+      },
+      {
+        "item": "morecolorful:light_gray_balloon"
+      },
+      {
+        "item": "morecolorful:gray_balloon"
+      },
+      {
+        "item": "morecolorful:black_balloon"
+      },
+      {
+        "item": "morecolorful:brown_balloon"
+      },
+      {
+        "item": "morecolorful:red_balloon"
+      },
+      {
+        "item": "morecolorful:yellow_balloon"
+      },
+      {
+        "item": "morecolorful:lime_balloon"
+      },
+      {
+        "item": "morecolorful:green_balloon"
+      },
+      {
+        "item": "morecolorful:cyan_balloon"
+      },
+      {
+        "item": "morecolorful:light_blue_balloon"
+      },
+      {
+        "item": "morecolorful:blue_balloon"
+      },
+      {
+        "item": "morecolorful:purple_balloon"
+      },
+      {
+        "item": "morecolorful:magenta_balloon"
+      },
+      {
+        "item": "morecolorful:pink_balloon"
+      }
+    ]
+  ],
+  "result": {
+    "count": 1,
+    "id": "morecolorful:orange_balloon"
+  }
+}

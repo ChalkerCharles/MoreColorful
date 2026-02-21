@@ -1,7 +1,7 @@
 package com.ChalkerCharles.morecolorful.common.datagen.loot;
 
 import com.ChalkerCharles.morecolorful.common.block.ModBlocks;
-import com.ChalkerCharles.morecolorful.common.block.ornamental.PinwheelBlock;
+import com.ChalkerCharles.morecolorful.common.block.ornamental.PennantBlock;
 import com.ChalkerCharles.morecolorful.common.block.ornamental.RibbonBlock;
 import com.ChalkerCharles.morecolorful.common.block.properties.GrandPianoPart;
 import com.ChalkerCharles.morecolorful.common.block.properties.ModBlockStateProperties;
@@ -297,9 +297,11 @@ public class ModBlockLootTableProvider extends ModBlockLootTableHelper {
         for (Block block : RibbonBlock.ALL_COLORS.get()) {
             dropSelf(block);
         }
-        for (Block block : PinwheelBlock.ALL_TYPES.get()) {
+        add(ModBlocks.PINWHEEL, createPinwheelDrop());
+        for (Block block : PennantBlock.ALL_BLOCKS.get()) {
             dropSelf(block);
         }
+        dropSelf(ModBlocks.SANDBAG);
     }
 
     @Override

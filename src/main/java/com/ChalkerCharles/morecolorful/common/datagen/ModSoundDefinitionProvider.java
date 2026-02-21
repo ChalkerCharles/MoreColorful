@@ -255,6 +255,11 @@ public class ModSoundDefinitionProvider extends ModSoundDefinitionHelper {
                 "block/weather_vane/sway3",
                 "block/weather_vane/sway4");
         vanilla(ModSounds.RIBBON_TIED, "morecolorful.subtitles.block.ribbon.tied", SoundEvents.LEASH_KNOT_PLACE);
+        generic(ModSounds.SANDBAG_LAND, "morecolorful.subtitles.block.sandbag.land",
+                "block/sandbag/land1",
+                "block/sandbag/land2",
+                "block/sandbag/land3",
+                "block/sandbag/land4");
 
         // Entities
         vanilla(ModSounds.PAPER_PLANE_THROW, "morecolorful.subtitles.entity.paper_plane.throw", SoundEvents.SNOWBALL_THROW);
@@ -262,10 +267,25 @@ public class ModSoundDefinitionProvider extends ModSoundDefinitionHelper {
                 "entity/paper_plane/hit1",
                 "entity/paper_plane/hit2",
                 "entity/paper_plane/hit3");
+        generic(ModSounds.BALLOON_POP, "morecolorful.subtitles.entity.balloon.pop",
+                "entity/balloon/pop1",
+                "entity/balloon/pop2",
+                "entity/balloon/pop3");
+        generic(ModSounds.BALLOON_HIT, "morecolorful.subtitles.entity.balloon.hit",
+                "entity/balloon/hit1",
+                "entity/balloon/hit2",
+                "entity/balloon/hit3");
+        generic(ModSounds.BALLOON_INFLATE, "morecolorful.subtitles.entity.balloon.inflate",
+                "entity/balloon/inflate1",
+                "entity/balloon/inflate2",
+                "entity/balloon/inflate3");
 
         // Items
         vanilla(ModSounds.PARTY_POPPER_POP, "morecolorful.subtitles.item.party_popper.pop", SoundEvents.FIREWORK_ROCKET_BLAST);
         vanilla(ModSounds.SHEARS_SNIP, "morecolorful.subtitles.item.shears.snip", SoundEvents.SHEEP_SHEAR);
+        vanilla(ModSounds.LEAD_UNTIED, "morecolorful.subtitles.item.lead.untied", SoundEvents.LEASH_KNOT_BREAK);
+        vanilla(ModSounds.LEAD_TIED, "morecolorful.subtitles.item.lead.tied", SoundEvents.LEASH_KNOT_PLACE);
+        generic(ModSounds.LEAD_BREAK, "morecolorful.subtitles.item.lead.break", "item/lead_break");
         vanilla(ModSounds.SPARKLER_LIT, "morecolorful.subtitles.item.sparkler.lit", SoundEvents.FLINTANDSTEEL_USE);
         generic(ModSounds.SPARKLER_FIZZ, "morecolorful.subtitles.item.sparkler.fizz",
                 "item/sparkler/fizz1",
@@ -275,6 +295,20 @@ public class ModSoundDefinitionProvider extends ModSoundDefinitionHelper {
                 "item/sparkler/fizz5",
                 "item/sparkler/fizz6");
         vanilla(ModSounds.SPARKLER_EXTINGUISH, "morecolorful.subtitles.item.sparkler.extinguish", SoundEvents.FIRE_EXTINGUISH);
+        generic(ModSounds.UMBRELLA_OPEN, "morecolorful.subtitles.item.umbrella.open",
+                "item/umbrella/open1",
+                "item/umbrella/open2",
+                "item/umbrella/open3");
+        generic(ModSounds.UMBRELLA_CLOSE, "morecolorful.subtitles.item.umbrella.close",
+                "item/umbrella/close1",
+                "item/umbrella/close2",
+                "item/umbrella/close3");
+        generic(ModSounds.UMBRELLA_BLOCK, "morecolorful.subtitles.item.umbrella.block",
+                "item/umbrella/block1",
+                "item/umbrella/block2",
+                "item/umbrella/block3",
+                "item/umbrella/block4",
+                "item/umbrella/block5");
 
         // Environment & Ambient
         generic(ModSounds.WEATHER_BREEZE, "morecolorful.subtitles.weather.breeze",
@@ -298,6 +332,13 @@ public class ModSoundDefinitionProvider extends ModSoundDefinitionHelper {
                 "ambient/weather/wind4",
                 "ambient/weather/wind5",
                 "ambient/weather/wind6");
+        generic(ModSounds.WEATHER_RAIN_UMBRELLA, "morecolorful.subtitles.weather.rain_umbrella",
+                "ambient/weather/rain_umbrella1",
+                "ambient/weather/rain_umbrella2",
+                "ambient/weather/rain_umbrella3",
+                "ambient/weather/rain_umbrella4",
+                "ambient/weather/rain_umbrella5",
+                "ambient/weather/rain_umbrella6");
 
         // Music
 //        add(ModSounds.MUSIC_BIOME_AUTUMN.value(), SoundDefinition.definition().with(

@@ -5,6 +5,7 @@ import com.ChalkerCharles.morecolorful.common.block.ModBlocks;
 import com.ChalkerCharles.morecolorful.common.block.natural.BerryBushBlock;
 import com.ChalkerCharles.morecolorful.common.block.natural.LeafLitterBlock;
 import com.ChalkerCharles.morecolorful.common.block.properties.*;
+import com.ChalkerCharles.morecolorful.common.item.ModDataComponents;
 import com.ChalkerCharles.morecolorful.common.item.ModItems;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.core.HolderLookup;
@@ -25,6 +26,7 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.entries.TagEntry;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
+import net.minecraft.world.level.storage.loot.functions.CopyComponentsFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.BonusLevelTableCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
@@ -139,14 +141,18 @@ public abstract class ModBlockLootTableHelper extends BlockLootSubProvider {
         );
     }
 
-//    protected LootTable.Builder createRibbonDrops(Block block) {
-//        return LootTable.lootTable().withPool(
-//                LootPool.lootPool()
-//                        .add(this.applyExplosionDecay(block, LootItem.lootTableItem(block)
-//                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F), true))
-//                        ))
-//        );
-//    }
+    protected LootTable.Builder createPinwheelDrop() {
+        return LootTable.lootTable().withPool(this.applyExplosionCondition(ModBlocks.PINWHEEL,
+                LootPool.lootPool()
+                        .setRolls(ConstantValue.exactly(1.0F))
+                        .add(LootItem.lootTableItem(ModItems.PINWHEEL)
+                                .apply(CopyComponentsFunction.copyComponents(CopyComponentsFunction.Source.BLOCK_ENTITY)
+                                        .include(ModDataComponents.PINWHEEL_COLOR.get())
+                                )
+                        )
+                )
+        );
+    }
 
     protected void add(Supplier<? extends Block> block, LootTable.Builder builder) {
         this.add(block.get(), builder);
@@ -218,8 +224,4 @@ public abstract class ModBlockLootTableHelper extends BlockLootSubProvider {
         Block b = block.get();
         this.add(b, createShearsOnlyDrop(b));
     }
-
-//    protected void dropForRibbon(Block block) {
-//        this.add(block, createRibbonDrops(block));
-//    }
 }

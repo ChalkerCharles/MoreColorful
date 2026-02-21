@@ -4,10 +4,7 @@ import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.client.particle.ModParticles;
 import com.ChalkerCharles.morecolorful.common.block.musical.*;
 import com.ChalkerCharles.morecolorful.common.block.natural.*;
-import com.ChalkerCharles.morecolorful.common.block.ornamental.PinwheelBlock;
-import com.ChalkerCharles.morecolorful.common.block.ornamental.PottedDaybloomBlock;
-import com.ChalkerCharles.morecolorful.common.block.ornamental.PottedWindflowerBlock;
-import com.ChalkerCharles.morecolorful.common.block.ornamental.RibbonBlock;
+import com.ChalkerCharles.morecolorful.common.block.ornamental.*;
 import com.ChalkerCharles.morecolorful.common.block.properties.*;
 import com.ChalkerCharles.morecolorful.common.block.utility.FanBlock;
 import com.ChalkerCharles.morecolorful.common.block.utility.WeatherVaneBlock;
@@ -319,23 +316,25 @@ public class ModBlocks {
     
     public static final DeferredBlock<Block> FAN_BLOCK = register("fan_block", () -> new FanBlock(ofFullCopy(Blocks.DISPENSER)));
     public static final DeferredBlock<Block> WEATHER_VANE = register("weather_vane", () -> new WeatherVaneBlock(ofFullCopy(Blocks.IRON_BARS).noCollission()));
-    public static final DeferredBlock<Block> WHITE_PINWHEEL = register("white_pinwheel", () -> new PinwheelBlock(pinwheelProperties(DyeColor.WHITE)));
-    public static final DeferredBlock<Block> ORANGE_PINWHEEL = register("orange_pinwheel", () -> new PinwheelBlock(pinwheelProperties(DyeColor.ORANGE)));
-    public static final DeferredBlock<Block> MAGENTA_PINWHEEL = register("magenta_pinwheel", () -> new PinwheelBlock(pinwheelProperties(DyeColor.MAGENTA)));
-    public static final DeferredBlock<Block> LIGHT_BLUE_PINWHEEL = register("light_blue_pinwheel", () -> new PinwheelBlock(pinwheelProperties(DyeColor.LIGHT_BLUE)));
-    public static final DeferredBlock<Block> YELLOW_PINWHEEL = register("yellow_pinwheel", () -> new PinwheelBlock(pinwheelProperties(DyeColor.YELLOW)));
-    public static final DeferredBlock<Block> LIME_PINWHEEL = register("lime_pinwheel", () -> new PinwheelBlock(pinwheelProperties(DyeColor.LIME)));
-    public static final DeferredBlock<Block> PINK_PINWHEEL = register("pink_pinwheel", () -> new PinwheelBlock(pinwheelProperties(DyeColor.PINK)));
-    public static final DeferredBlock<Block> GRAY_PINWHEEL = register("gray_pinwheel", () -> new PinwheelBlock(pinwheelProperties(DyeColor.GRAY)));
-    public static final DeferredBlock<Block> LIGHT_GRAY_PINWHEEL = register("light_gray_pinwheel", () -> new PinwheelBlock(pinwheelProperties(DyeColor.LIGHT_GRAY)));
-    public static final DeferredBlock<Block> CYAN_PINWHEEL = register("cyan_pinwheel", () -> new PinwheelBlock(pinwheelProperties(DyeColor.CYAN)));
-    public static final DeferredBlock<Block> PURPLE_PINWHEEL = register("purple_pinwheel", () -> new PinwheelBlock(pinwheelProperties(DyeColor.PURPLE)));
-    public static final DeferredBlock<Block> BLUE_PINWHEEL = register("blue_pinwheel", () -> new PinwheelBlock(pinwheelProperties(DyeColor.BLUE)));
-    public static final DeferredBlock<Block> BROWN_PINWHEEL = register("brown_pinwheel", () -> new PinwheelBlock(pinwheelProperties(DyeColor.BROWN)));
-    public static final DeferredBlock<Block> GREEN_PINWHEEL = register("green_pinwheel", () -> new PinwheelBlock(pinwheelProperties(DyeColor.GREEN)));
-    public static final DeferredBlock<Block> RED_PINWHEEL = register("red_pinwheel", () -> new PinwheelBlock(pinwheelProperties(DyeColor.RED)));
-    public static final DeferredBlock<Block> BLACK_PINWHEEL = register("black_pinwheel", () -> new PinwheelBlock(pinwheelProperties(DyeColor.BLACK)));
-    public static final DeferredBlock<Block> MULTICOLORED_PINWHEEL = register("multicolored_pinwheel", () -> new PinwheelBlock(pinwheelProperties(DyeColor.WHITE)));
+    public static final DeferredBlock<Block> PINWHEEL = register("pinwheel", () -> new PinwheelBlock(of().mapColor(DyeColor.WHITE).instabreak().sound(SoundType.WOOD).noCollission().pushReaction(PushReaction.DESTROY)));
+    public static final DeferredBlock<Block> WHITE_PENNANT = register("white_pennant", () -> new PennantBlock(pinwheelProperties(DyeColor.WHITE)));
+    public static final DeferredBlock<Block> ORANGE_PENNANT = register("orange_pennant", () -> new PennantBlock(pinwheelProperties(DyeColor.ORANGE)));
+    public static final DeferredBlock<Block> MAGENTA_PENNANT = register("magenta_pennant", () -> new PennantBlock(pinwheelProperties(DyeColor.MAGENTA)));
+    public static final DeferredBlock<Block> LIGHT_BLUE_PENNANT = register("light_blue_pennant", () -> new PennantBlock(pinwheelProperties(DyeColor.LIGHT_BLUE)));
+    public static final DeferredBlock<Block> YELLOW_PENNANT = register("yellow_pennant", () -> new PennantBlock(pinwheelProperties(DyeColor.YELLOW)));
+    public static final DeferredBlock<Block> LIME_PENNANT = register("lime_pennant", () -> new PennantBlock(pinwheelProperties(DyeColor.LIME)));
+    public static final DeferredBlock<Block> PINK_PENNANT = register("pink_pennant", () -> new PennantBlock(pinwheelProperties(DyeColor.PINK)));
+    public static final DeferredBlock<Block> GRAY_PENNANT = register("gray_pennant", () -> new PennantBlock(pinwheelProperties(DyeColor.GRAY)));
+    public static final DeferredBlock<Block> LIGHT_GRAY_PENNANT = register("light_gray_pennant", () -> new PennantBlock(pinwheelProperties(DyeColor.LIGHT_GRAY)));
+    public static final DeferredBlock<Block> CYAN_PENNANT = register("cyan_pennant", () -> new PennantBlock(pinwheelProperties(DyeColor.CYAN)));
+    public static final DeferredBlock<Block> PURPLE_PENNANT = register("purple_pennant", () -> new PennantBlock(pinwheelProperties(DyeColor.PURPLE)));
+    public static final DeferredBlock<Block> BLUE_PENNANT = register("blue_pennant", () -> new PennantBlock(pinwheelProperties(DyeColor.BLUE)));
+    public static final DeferredBlock<Block> BROWN_PENNANT = register("brown_pennant", () -> new PennantBlock(pinwheelProperties(DyeColor.BROWN)));
+    public static final DeferredBlock<Block> GREEN_PENNANT = register("green_pennant", () -> new PennantBlock(pinwheelProperties(DyeColor.GREEN)));
+    public static final DeferredBlock<Block> RED_PENNANT = register("red_pennant", () -> new PennantBlock(pinwheelProperties(DyeColor.RED)));
+    public static final DeferredBlock<Block> BLACK_PENNANT = register("black_pennant", () -> new PennantBlock(pinwheelProperties(DyeColor.BLACK)));
+
+    public static final DeferredBlock<Block> SANDBAG = register("sandbag", () -> new SandbagBlock(of().mapColor(MapColor.DIRT).instrument(NoteBlockInstrument.GUITAR).strength(0.8F).sound(SoundType.WOOL).pushReaction(PushReaction.DESTROY)));
 
     private static <T extends Block> DeferredBlock<T> register(String name, Supplier<T> supplier) {
         return BLOCKS.register(name, supplier);

@@ -1,10 +1,8 @@
 package com.ChalkerCharles.morecolorful.client.renderer.block;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
-import com.ChalkerCharles.morecolorful.common.block.ModBlocks;
 import com.ChalkerCharles.morecolorful.common.block.entity.PinwheelBlockEntity;
 import com.ChalkerCharles.morecolorful.common.block.ornamental.PinwheelBlock;
-import com.google.common.collect.ImmutableMap;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
@@ -14,33 +12,16 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.RotationSegment;
 
-import java.util.Map;
+import java.util.List;
+
+import static com.ChalkerCharles.morecolorful.client.renderer.item.PinwheelRenderer.TEXTURES;
 
 public class PinwheelRenderer implements BlockEntityRenderer<PinwheelBlockEntity> {
     public static final ResourceLocation STICK_TEXTURE = MoreColorful.location("textures/block/pinwheel_stick.png");
-    public static final Map<Block, ResourceLocation> TEXTURES = ImmutableMap.<Block, ResourceLocation>builder()
-            .put(ModBlocks.WHITE_PINWHEEL.get(), MoreColorful.location("textures/block/white_pinwheel.png"))
-            .put(ModBlocks.ORANGE_PINWHEEL.get(), MoreColorful.location("textures/block/orange_pinwheel.png"))
-            .put(ModBlocks.MAGENTA_PINWHEEL.get(), MoreColorful.location("textures/block/magenta_pinwheel.png"))
-            .put(ModBlocks.LIGHT_BLUE_PINWHEEL.get(), MoreColorful.location("textures/block/light_blue_pinwheel.png"))
-            .put(ModBlocks.YELLOW_PINWHEEL.get(), MoreColorful.location("textures/block/yellow_pinwheel.png"))
-            .put(ModBlocks.LIME_PINWHEEL.get(), MoreColorful.location("textures/block/lime_pinwheel.png"))
-            .put(ModBlocks.PINK_PINWHEEL.get(), MoreColorful.location("textures/block/pink_pinwheel.png"))
-            .put(ModBlocks.GRAY_PINWHEEL.get(), MoreColorful.location("textures/block/gray_pinwheel.png"))
-            .put(ModBlocks.LIGHT_GRAY_PINWHEEL.get(), MoreColorful.location("textures/block/light_gray_pinwheel.png"))
-            .put(ModBlocks.CYAN_PINWHEEL.get(), MoreColorful.location("textures/block/cyan_pinwheel.png"))
-            .put(ModBlocks.PURPLE_PINWHEEL.get(), MoreColorful.location("textures/block/purple_pinwheel.png"))
-            .put(ModBlocks.BLUE_PINWHEEL.get(), MoreColorful.location("textures/block/blue_pinwheel.png"))
-            .put(ModBlocks.BROWN_PINWHEEL.get(), MoreColorful.location("textures/block/brown_pinwheel.png"))
-            .put(ModBlocks.GREEN_PINWHEEL.get(), MoreColorful.location("textures/block/green_pinwheel.png"))
-            .put(ModBlocks.RED_PINWHEEL.get(), MoreColorful.location("textures/block/red_pinwheel.png"))
-            .put(ModBlocks.BLACK_PINWHEEL.get(), MoreColorful.location("textures/block/black_pinwheel.png"))
-            .put(ModBlocks.MULTICOLORED_PINWHEEL.get(), MoreColorful.location("textures/block/multicolored_pinwheel.png"))
-            .build();
 
     public PinwheelRenderer(BlockEntityRendererProvider.Context ignore) {}
 
@@ -55,8 +36,16 @@ public class PinwheelRenderer implements BlockEntityRenderer<PinwheelBlockEntity
         pPoseStack.scale(0.0625F, 0.0625F, 0.0625F);
         PoseStack.Pose pose = pPoseStack.last();
         buildStickModel(pose, stickConsumer, pPackedLight);
-        VertexConsumer wheelConsumer = pBufferSource.getBuffer(RenderType.entityCutout(TEXTURES.get(blockstate.getBlock())));
-        buildWheelModel(pose, wheelConsumer, pPackedLight, blockEntity.frames, blockEntity.lerpFrame(pPartialTick));
+        List<DyeColor> colors = blockEntity.getColors();
+        int frame = blockEntity.lerpFrame(pPartialTick) - 2;
+        for (int i = 0; i < 4; i++) {
+            DyeColor color = colors.get(i);
+            int j = color.getId();
+            if (j > 15) j = 0;
+            int k = (frame + (i << 2)) & 15;
+            VertexConsumer wheelConsumer = TEXTURES[k][j].buffer(pBufferSource, RenderType::entityCutout);
+            buildWheelModel(pose, wheelConsumer, pPackedLight);
+        }
         pPoseStack.popPose();
     }
 
@@ -78,20 +67,26 @@ public class PinwheelRenderer implements BlockEntityRenderer<PinwheelBlockEntity
         vertex(pose, consumer, 1, 10, -1, 0.125F, 0.0F, -1, 0, packedLight);
         vertex(pose, consumer, 1, 10, 0, 0.125F, 0.0625F, -1, 0, packedLight);
         vertex(pose, consumer, -1, 10, 0, 0.25F, 0.0625F, -1, 0, packedLight);
+
+        vertex(pose, consumer, 1, 11, -1, 0.25F, 0.0F, 0, -1, packedLight);
+        vertex(pose, consumer, 1, 9, -1, 0.25F, 0.125F, 0, -1, packedLight);
+        vertex(pose, consumer, -1, 9, -1, 0.375F, 0.125F, 0, -1, packedLight);
+        vertex(pose, consumer, -1, 11, -1, 0.375F, 0.0F, 0, -1, packedLight);
+        vertex(pose, consumer, 1, 11, -1, 0.25F, 0.0F, 0, 1, packedLight);
+        vertex(pose, consumer, -1, 11, -1, 0.375F, 0.0F, 0, 1, packedLight);
+        vertex(pose, consumer, -1, 9, -1, 0.375F, 0.125F, 0, 1, packedLight);
+        vertex(pose, consumer, 1, 9, -1, 0.25F, 0.125F, 0, 1, packedLight);
     }
 
-    private static void buildWheelModel(PoseStack.Pose pose, VertexConsumer consumer, int packedLight, int frames, int currentFrame) {
-        int i = currentFrame % frames;
-        float v0 = (float) i / frames;
-        float v1 = (float) (i + 1) / frames;
-        vertex(pose, consumer, 8, 18, -1, 0.0F, v0, 0, -1, packedLight);
-        vertex(pose, consumer, -8, 18, -1, 1.0F, v0, 0, -1, packedLight);
-        vertex(pose, consumer, -8, 2, -1, 1.0F, v1, 0, -1, packedLight);
-        vertex(pose, consumer, 8, 2, -1, 0.0F, v1, 0, -1, packedLight);
-        vertex(pose, consumer, 8, 18, -1, 0.0F, v0, 0, 1, packedLight);
-        vertex(pose, consumer, 8, 2, -1, 0.0F, v1, 0, 1, packedLight);
-        vertex(pose, consumer, -8, 2, -1, 1.0F, v1, 0, 1, packedLight);
-        vertex(pose, consumer, -8, 18, -1, 1.0F, v0, 0, 1, packedLight);
+    private static void buildWheelModel(PoseStack.Pose pose, VertexConsumer consumer, int packedLight) {
+        vertex(pose, consumer, 9, 17, -1, 0.0F, 0.0F, 0, -1, packedLight);
+        vertex(pose, consumer, -7, 17, -1, 1.0F, 0.0F, 0, -1, packedLight);
+        vertex(pose, consumer, -7, 1, -1, 1.0F, 1.0F, 0, -1, packedLight);
+        vertex(pose, consumer, 9, 1, -1, 0.0F, 1.0F, 0, -1, packedLight);
+        vertex(pose, consumer, 9, 17, -1, 0.0F, 0.0F, 0, 1, packedLight);
+        vertex(pose, consumer, 9, 1, -1, 0.0F, 1.0F, 0, 1, packedLight);
+        vertex(pose, consumer, -7, 1, -1, 1.0F, 1.0F, 0, 1, packedLight);
+        vertex(pose, consumer, -7, 17, -1, 1.0F, 0.0F, 0, 1, packedLight);
     }
 
     private static void vertex(PoseStack.Pose pose, VertexConsumer consumer, int x, int y, int z, float u, float v, int normalY, int normalZ, int packedLight) {

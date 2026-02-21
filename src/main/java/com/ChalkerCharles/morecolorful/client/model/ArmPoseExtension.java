@@ -25,12 +25,13 @@ public final class ArmPoseExtension {
     public static final HumanoidModel.ArmPose PIPA_PLAYING = Proxy.PIPA_PLAYING.getValue();
     public static final HumanoidModel.ArmPose ERHU_HOLD = Proxy.ERHU_HOLD.getValue();
     public static final HumanoidModel.ArmPose ERHU_PLAYING = Proxy.ERHU_PLAYING.getValue();
+    public static final HumanoidModel.ArmPose UMBRELLA = Proxy.UMBRELLA.getValue();
 
     public static class Proxy {
         public static final EnumProxy<HumanoidModel.ArmPose> FLUTE = new EnumProxy<>(
                 HumanoidModel.ArmPose.class,
                 true,
-                (IArmPoseTransformer) ((model, entity, arm) -> {
+                (IArmPoseTransformer) (model, entity, arm) -> {
                     if (arm == HumanoidArm.RIGHT) {
                         model.rightArm.xRot = -0.364023F - model.head.xRot / 2 + model.head.yRot / 2;
                         model.rightArm.yRot = 0.36029F - Math.abs(model.head.yRot / 2) - model.head.xRot / 2;
@@ -54,12 +55,12 @@ public final class ArmPoseExtension {
                         model.rightArm.y -= 1;
                         model.rightArm.z -= 1;
                     }
-                })
+                }
         );
         public static final EnumProxy<HumanoidModel.ArmPose> GUITAR_HOLD = new EnumProxy<>(
                 HumanoidModel.ArmPose.class,
                 true,
-                (IArmPoseTransformer) ((model, entity, arm) -> {
+                (IArmPoseTransformer) (model, entity, arm) -> {
                     if (arm == HumanoidArm.RIGHT) {
                         model.rightArm.xRot = -0.26179938F; // (-pi/12)
                         model.leftArm.xRot = -0.62831852F; // (-pi/5)
@@ -67,12 +68,12 @@ public final class ArmPoseExtension {
                         model.rightArm.xRot = -0.62831852F;
                         model.leftArm.xRot = -0.26179938F;
                     }
-                })
+                }
         );
         public static final EnumProxy<HumanoidModel.ArmPose> GUITAR_PLAYING = new EnumProxy<>(
                 HumanoidModel.ArmPose.class,
                 true,
-                (IArmPoseTransformer) ((model, entity, arm) -> {
+                (IArmPoseTransformer) (model, entity, arm) -> {
                     if (arm == HumanoidArm.RIGHT) {
                         model.rightArm.xRot = -0.26179938F;
                         model.leftArm.xRot = -0.62831852F;
@@ -82,12 +83,12 @@ public final class ArmPoseExtension {
                         model.leftArm.xRot = -0.26179938F;
                         AnimationUtils.animateGuitarPlaying(model.rightArm, model.leftArm, entity, false);
                     }
-                })
+                }
         );
         public static final EnumProxy<HumanoidModel.ArmPose> COW_BELL = new EnumProxy<>(
                 HumanoidModel.ArmPose.class,
                 false,
-                (IArmPoseTransformer) ((model, entity, arm) -> {
+                (IArmPoseTransformer) (model, entity, arm) -> {
                     if (arm == HumanoidArm.RIGHT) {
                         model.rightArm.xRot = -1.308998F;
                         model.rightArm.yRot = -0.174533F;
@@ -97,12 +98,12 @@ public final class ArmPoseExtension {
                         model.leftArm.yRot = 0.174533F;
                         model.rightArm.xRot = model.rightArm.xRot * 0.5F - (float) (Math.PI / 10);
                     }
-                })
+                }
         );
         public static final EnumProxy<HumanoidModel.ArmPose> DIDGERIDOO = new EnumProxy<>(
                 HumanoidModel.ArmPose.class,
                 true,
-                (IArmPoseTransformer) ((model, entity, arm) -> {
+                (IArmPoseTransformer) (model, entity, arm) -> {
                     model.rightArm.xRot = -1.221731F;
                     model.leftArm.xRot = -1.221731F;
                     model.rightArm.yRot = -0.218166F;
@@ -111,12 +112,12 @@ public final class ArmPoseExtension {
                     model.leftArm.zRot = 0.174533F;
                     model.rightArm.x += 0.5F;
                     model.leftArm.x -= 0.5F;
-                })
+                }
         );
         public static final EnumProxy<HumanoidModel.ArmPose> VIOLIN_HOLD = new EnumProxy<>(
                 HumanoidModel.ArmPose.class,
                 true,
-                (IArmPoseTransformer) ((model, entity, arm) -> {
+                (IArmPoseTransformer) (model, entity, arm) -> {
                     if (arm == HumanoidArm.RIGHT) {
                         model.rightArm.xRot = -1.178098F;
                         model.rightArm.yRot = 0.087267F;
@@ -128,12 +129,12 @@ public final class ArmPoseExtension {
                         model.leftArm.zRot = -0.392699F;
                         model.rightArm.xRot = -1.570797F;
                     }
-                })
+                }
         );
         public static final EnumProxy<HumanoidModel.ArmPose> VIOLIN_PLAYING = new EnumProxy<>(
                 HumanoidModel.ArmPose.class,
                 true,
-                (IArmPoseTransformer) ((model, entity, arm) -> {
+                (IArmPoseTransformer) (model, entity, arm) -> {
                     if (arm == HumanoidArm.RIGHT) {
                         model.rightArm.xRot = -1.178098F;
                         model.rightArm.yRot = 0.087267F;
@@ -147,12 +148,12 @@ public final class ArmPoseExtension {
                         model.rightArm.xRot = -1.570797F;
                         AnimationUtils.animateViolinPlaying(model.rightArm, model.leftArm, entity, false);
                     }
-                })
+                }
         );
         public static final EnumProxy<HumanoidModel.ArmPose> CELLO = new EnumProxy<>(
                 HumanoidModel.ArmPose.class,
                 false,
-                (IArmPoseTransformer) ((model, entity, arm) -> {
+                (IArmPoseTransformer) (model, entity, arm) -> {
                     if (arm == HumanoidArm.RIGHT) {
                         model.rightArm.xRot = -1.483531F;
                         model.rightArm.yRot = -0.043633F;
@@ -164,12 +165,12 @@ public final class ArmPoseExtension {
                         model.leftArm.zRot = 0.087267F;
                         model.leftArm.y += 1;
                     }
-                })
+                }
         );
         public static final EnumProxy<HumanoidModel.ArmPose> CELLO_HOLD = new EnumProxy<>(
                 HumanoidModel.ArmPose.class,
                 true,
-                (IArmPoseTransformer) ((model, entity, arm) -> {
+                (IArmPoseTransformer) (model, entity, arm) -> {
                     if (arm == HumanoidArm.RIGHT) {
                         model.rightArm.xRot = -1.483531F;
                         model.rightArm.yRot = -0.043633F;
@@ -185,12 +186,12 @@ public final class ArmPoseExtension {
                         model.rightArm.xRot = -0.872665F;
                         model.rightArm.y -= 1;
                     }
-                })
+                }
         );
         public static final EnumProxy<HumanoidModel.ArmPose> CELLO_PLAYING = new EnumProxy<>(
                 HumanoidModel.ArmPose.class,
                 true,
-                (IArmPoseTransformer) ((model, entity, arm) -> {
+                (IArmPoseTransformer) (model, entity, arm) -> {
                     if (arm == HumanoidArm.RIGHT) {
                         model.rightArm.xRot = -1.483531F;
                         model.rightArm.yRot = -0.043633F;
@@ -208,12 +209,12 @@ public final class ArmPoseExtension {
                         model.rightArm.y -= 1;
                         AnimationUtils.animateCelloPlaying(model.rightArm, model.leftArm, entity, false);
                     }
-                })
+                }
         );
         public static final EnumProxy<HumanoidModel.ArmPose> SAXOPHONE = new EnumProxy<>(
                 HumanoidModel.ArmPose.class,
                 true,
-                (IArmPoseTransformer) ((model, entity, arm) -> {
+                (IArmPoseTransformer) (model, entity, arm) -> {
                     model.rightArm.xRot = -1.047198F;
                     model.leftArm.xRot = -1.047198F;
                     model.rightArm.yRot = -0.218166F;
@@ -222,12 +223,12 @@ public final class ArmPoseExtension {
                     model.leftArm.zRot = 0.174533F;
                     model.rightArm.x += 0.5F;
                     model.leftArm.x -= 0.5F;
-                })
+                }
         );
         public static final EnumProxy<HumanoidModel.ArmPose> PIPA_HOLD = new EnumProxy<>(
                 HumanoidModel.ArmPose.class,
                 true,
-                (IArmPoseTransformer) ((model, entity, arm) -> {
+                (IArmPoseTransformer) (model, entity, arm) -> {
                     if (arm == HumanoidArm.RIGHT) {
                         model.rightArm.xRot = -2.094396F;
                         model.rightArm.yRot = -0.349066F;
@@ -245,12 +246,12 @@ public final class ArmPoseExtension {
                         model.leftArm.zRot = 0.2618F;
                         model.leftArm.z += 0.5F;
                     }
-                })
+                }
         );
         public static final EnumProxy<HumanoidModel.ArmPose> PIPA_PLAYING = new EnumProxy<>(
                 HumanoidModel.ArmPose.class,
                 true,
-                (IArmPoseTransformer) ((model, entity, arm) -> {
+                (IArmPoseTransformer) (model, entity, arm) -> {
                     if (arm == HumanoidArm.RIGHT) {
                         model.rightArm.xRot = -2.094396F;
                         model.rightArm.yRot = -0.349066F;
@@ -270,12 +271,12 @@ public final class ArmPoseExtension {
                         model.leftArm.z += 0.5F;
                         AnimationUtils.animatePipaPlaying(model.rightArm, model.leftArm, entity, false);
                     }
-                })
+                }
         );
         public static final EnumProxy<HumanoidModel.ArmPose> ERHU_HOLD = new EnumProxy<>(
                 HumanoidModel.ArmPose.class,
                 true,
-                (IArmPoseTransformer) ((model, entity, arm) -> {
+                (IArmPoseTransformer) (model, entity, arm) -> {
                     if (arm == HumanoidArm.RIGHT) {
                         model.rightArm.xRot = -1.047198F;
                         model.rightArm.yRot = -0.087267F;
@@ -285,12 +286,12 @@ public final class ArmPoseExtension {
                         model.leftArm.yRot = 0.087267F;
                         model.rightArm.xRot = -0.523599F;
                     }
-                })
+                }
         );
         public static final EnumProxy<HumanoidModel.ArmPose> ERHU_PLAYING = new EnumProxy<>(
                 HumanoidModel.ArmPose.class,
                 true,
-                (IArmPoseTransformer) ((model, entity, arm) -> {
+                (IArmPoseTransformer) (model, entity, arm) -> {
                     if (arm == HumanoidArm.RIGHT) {
                         model.rightArm.xRot = -1.047198F;
                         model.rightArm.yRot = -0.087267F;
@@ -302,7 +303,21 @@ public final class ArmPoseExtension {
                         model.rightArm.xRot = -0.523599F;
                         AnimationUtils.animateErhuPlaying(model.rightArm, model.leftArm, entity, false);
                     }
-                })
+                }
+        );
+        public static final EnumProxy<HumanoidModel.ArmPose> UMBRELLA = new EnumProxy<>(
+                HumanoidModel.ArmPose.class,
+                false,
+                (IArmPoseTransformer) (model, entity, arm) -> {
+                    float rot = model.head.xRot / 3;
+                    if (arm == HumanoidArm.RIGHT) {
+                        model.rightArm.yRot = -0.10471976F;
+                        model.rightArm.xRot = -1.3089969F + rot;
+                    } else {
+                        model.leftArm.yRot = 0.10471976F;
+                        model.leftArm.xRot = -1.3089969F + rot;
+                    }
+                }
         );
     }
 }

@@ -26,9 +26,6 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Vector3d;
 
-import java.util.Arrays;
-import java.util.stream.Stream;
-
 public class PartyPopperItem extends Item {
     public static final ItemLike[] ALL_COLORS = new ItemLike[] {
             ModItems.WHITE_PARTY_POPPER,
@@ -119,10 +116,6 @@ public class PartyPopperItem extends Item {
             case RED -> ModItems.RED_PARTY_POPPER;
             case BLACK -> ModItems.BLACK_PARTY_POPPER;
         };
-    }
-
-    public static Stream<ItemStack> dyeingIngredients(ItemLike except) {
-        return Arrays.stream(ALL_COLORS).filter(i -> i != except).map(ItemStack::new);
     }
 
     private static void createConfettiParticles(ServerLevel level, double x, double y, double z, float xRot, float yRot) {

@@ -41,6 +41,7 @@ public class Config {
     public static int overworldRegionWeight = 10;
     public static Set<ResourceKey<Biome>> disabledBiomes = Set.of();
     public static boolean allowAddingFeatures = true;
+    public static boolean enhancedLeash = true;
 
     public static boolean wavyBlocks = true;
     public static boolean wavyParticles = true;
@@ -84,6 +85,7 @@ public class Config {
                 .collect(Collectors.toSet());
         allowAddingFeatures = config.allowAddingFeatures.get();
         checkBiomeModifier(allowAddingFeatures, ModBiomeModifiers.ADD_FEATURE_MODIFIERS, "Add Feature");
+        enhancedLeash = config.enhancedLeash.get();
     }
 
     public static void setClientConfigs(ClientConfig config) {

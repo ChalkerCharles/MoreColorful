@@ -2,9 +2,7 @@ package com.ChalkerCharles.morecolorful.common.datagen;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.common.datagen.loot.ModLootTableProvider;
-import com.ChalkerCharles.morecolorful.common.datagen.tag.ModBiomeTagProvider;
-import com.ChalkerCharles.morecolorful.common.datagen.tag.ModBlockTagProvider;
-import com.ChalkerCharles.morecolorful.common.datagen.tag.ModItemTagProvider;
+import com.ChalkerCharles.morecolorful.common.datagen.tag.*;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -33,12 +31,15 @@ public class DataGenerators {
         generator.addProvider(server, blockTagProvider);
         generator.addProvider(server, new ModItemTagProvider(output, provider, blockTagProvider.contentsGetter(), helper));
         generator.addProvider(server, new ModBiomeTagProvider(output, provider, helper));
+        generator.addProvider(server, new ModEntityTypeTagProvider(output, provider, helper));
+        generator.addProvider(server, new ModDamageTypeTagProvider(output, provider, helper));
         generator.addProvider(server, new ModLootTableProvider(output, provider));
         generator.addProvider(server, new ModRecipeProvider(output, provider));
         generator.addProvider(server, new ModDataMapProvider(output, provider));
         generator.addProvider(server, new ModGlobalLootModifierProvider(output, provider));
 
         boolean client = event.includeClient();
+        generator.addProvider(client, new ModAtlasProvider(output, provider, helper));
         generator.addProvider(client, new ModBlockStateProvider(output, helper));
         generator.addProvider(client, new ModItemModelProvider(output, helper));
         generator.addProvider(client, new ModSoundDefinitionProvider(output, helper));

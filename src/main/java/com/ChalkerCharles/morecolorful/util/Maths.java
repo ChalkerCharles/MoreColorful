@@ -6,6 +6,7 @@ import net.minecraft.util.Mth;
 import org.joml.Vector4f;
 
 import java.util.function.BinaryOperator;
+import java.util.function.IntFunction;
 import java.util.function.IntSupplier;
 
 public final class Maths {
@@ -42,5 +43,35 @@ public final class Maths {
 
     public static float vectorToAngle(float x, float z) {
         return (90 - (float) Mth.atan2(-z, x) * Mth.RAD_TO_DEG) % 360;
+    }
+
+    @SuppressWarnings({"unchecked","SuspiciousSystemArraycopy"})
+    public static <T> T[] concatArray(IntFunction<T[]> builder, Object object, Object[] array) {
+        int size = array.length + 1;
+        T[] arr = builder.apply(size);
+        arr[0] = (T) object;
+        System.arraycopy(array, 0, arr, 1, array.length);
+        return arr;
+    }
+
+    @SuppressWarnings("SuspiciousSystemArraycopy")
+    public static <T> T[] concatArray(IntFunction<T[]> builder, Object[] arr1, Object[] arr2) {
+        int totalSize = arr1.length + arr2.length;
+        T[] arr = builder.apply(totalSize);
+        System.arraycopy(arr1, 0, arr, 0, arr1.length);
+        System.arraycopy(arr2, 0, arr, arr1.length, arr2.length);
+        return arr;
+    }
+
+    public static int getRelativePosIn3By3Grid(int index, int width, int startCol, int startRow) {
+        int col = index % width, row = index / width;
+        int originCol = col + startCol, originRow = row + startRow;
+        return originCol + originRow * 3;
+    }
+
+    public static boolean inCenter(int col, int row, int width, int height) {
+        boolean colValid = col == width >> 1 || col == (width - 1) >> 1;
+        boolean rowValid = row == height >> 1 || row == (height - 1) >> 1;
+        return colValid && rowValid;
     }
 }

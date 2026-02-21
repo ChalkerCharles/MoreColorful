@@ -1,11 +1,12 @@
 package com.ChalkerCharles.morecolorful.common.datagen.helper;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
-import com.ChalkerCharles.morecolorful.common.ModTags;
+import com.ChalkerCharles.morecolorful.common.block.ornamental.PennantBlock;
 import com.ChalkerCharles.morecolorful.common.block.ornamental.RibbonBlock;
+import com.ChalkerCharles.morecolorful.common.item.ItemUtils;
 import com.ChalkerCharles.morecolorful.common.item.ModItems;
+import com.ChalkerCharles.morecolorful.common.item.misc.BalloonItem;
 import com.ChalkerCharles.morecolorful.common.item.misc.PartyPopperItem;
-import com.ChalkerCharles.morecolorful.common.item.misc.PinwheelItem;
 import com.ChalkerCharles.morecolorful.common.recipe.WritableSheetMusicRecipe;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementRequirements;
@@ -144,7 +145,7 @@ public abstract class ModRecipeHelper extends RecipeProvider implements IConditi
             ItemLike item = PartyPopperItem.byColor(color);
             ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, item)
                     .requires(dye)
-                    .requires(Ingredient.of(PartyPopperItem.dyeingIngredients(item)))
+                    .requires(Ingredient.of(ItemUtils.dyeingIngredients(PartyPopperItem.ALL_COLORS, item)))
                     .group("party_popper")
                     .unlockedBy("has_needed_dye", has(dye))
                     .save(output, "dye_" + getItemName(item));
@@ -168,21 +169,8 @@ public abstract class ModRecipeHelper extends RecipeProvider implements IConditi
             ItemLike item = RibbonBlock.itemByColor(color);
             ShapelessRecipeBuilder.shapeless(RecipeCategory.DECORATIONS, item)
                     .requires(dye)
-                    .requires(Ingredient.of(RibbonBlock.dyeingIngredients(item)))
+                    .requires(Ingredient.of(ItemUtils.dyeingIngredients(RibbonBlock.ALL_ITEMS, item)))
                     .group("ribbon")
-                    .unlockedBy("has_needed_dye", has(dye))
-                    .save(output, "dye_" + getItemName(item));
-        }
-    }
-
-    protected static void pinwheelRecipes(RecipeOutput output) {
-        for (DyeColor color : DyeColor.values()) {
-            ItemLike dye = DyeItem.byColor(color);
-            ItemLike item = PinwheelItem.itemByColor(color);
-            ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, item)
-                    .requires(dye)
-                    .requires(ModTags.Items.PINWHEELS)
-                    .group("pinwheel")
                     .unlockedBy("has_needed_dye", has(dye))
                     .save(output, "dye_" + getItemName(item));
         }
@@ -212,5 +200,56 @@ public abstract class ModRecipeHelper extends RecipeProvider implements IConditi
                 .group("sparkler")
                 .unlockedBy("has_gunpowder", has(Tags.Items.GUNPOWDERS))
                 .save(output);
+    }
+
+    protected static void pennant(RecipeOutput output, ItemLike result, ItemLike material) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, result, 3)
+                .define('|', Tags.Items.RODS_WOODEN)
+                .define('#', material)
+                .pattern("|# ")
+                .pattern("|##")
+                .pattern("|  ")
+                .group("pennant")
+                .unlockedBy(getHasName(material), has(material))
+                .save(output);
+    }
+
+    protected static void pennantDyeRecipes(RecipeOutput output) {
+        for (DyeColor color : DyeColor.values()) {
+            ItemLike dye = DyeItem.byColor(color);
+            ItemLike item = PennantBlock.itemByColor(color);
+            ShapelessRecipeBuilder.shapeless(RecipeCategory.DECORATIONS, item)
+                    .requires(dye)
+                    .requires(Ingredient.of(ItemUtils.dyeingIngredients(PennantBlock.ALL_ITEMS, item)))
+                    .group("pennant")
+                    .unlockedBy("has_needed_dye", has(dye))
+                    .save(output, "dye_" + getItemName(item));
+        }
+    }
+
+    protected static void bundleDyeRecipes(RecipeOutput output) {
+        for (DyeColor color : DyeColor.values()) {
+            ItemLike dye = DyeItem.byColor(color);
+            ItemLike item = ItemUtils.bundleByColor(color);
+            ShapelessRecipeBuilder.shapeless(RecipeCategory.TOOLS, item)
+                    .requires(dye)
+                    .requires(Ingredient.of(ItemUtils.dyeingIngredients(ItemUtils.ALL_BUNDLES, item)))
+                    .group("bundle")
+                    .unlockedBy("has_needed_dye", has(dye))
+                    .save(output, "dye_" + getItemName(item));
+        }
+    }
+
+    protected static void balloonDyeRecipes(RecipeOutput output) {
+        for (DyeColor color : DyeColor.values()) {
+            ItemLike dye = DyeItem.byColor(color);
+            ItemLike item = BalloonItem.byColor(color);
+            ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, item)
+                    .requires(dye)
+                    .requires(Ingredient.of(ItemUtils.dyeingIngredients(BalloonItem.ALL_TYPES, item)))
+                    .group("balloon")
+                    .unlockedBy("has_needed_dye", has(dye))
+                    .save(output, "dye_" + getItemName(item));
+        }
     }
 }

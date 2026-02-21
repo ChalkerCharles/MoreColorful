@@ -1,7 +1,7 @@
 package com.ChalkerCharles.morecolorful.client.renderer.entity;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
-import com.ChalkerCharles.morecolorful.common.entity.PaperPlane;
+import com.ChalkerCharles.morecolorful.common.entity.misc.PaperPlane;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;

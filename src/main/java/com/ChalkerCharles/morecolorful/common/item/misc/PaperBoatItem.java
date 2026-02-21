@@ -1,7 +1,7 @@
 package com.ChalkerCharles.morecolorful.common.item.misc;
 
 import com.ChalkerCharles.morecolorful.common.entity.ModEntities;
-import com.ChalkerCharles.morecolorful.common.entity.PaperBoat;
+import com.ChalkerCharles.morecolorful.common.entity.misc.PaperBoat;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.dispenser.BlockSource;

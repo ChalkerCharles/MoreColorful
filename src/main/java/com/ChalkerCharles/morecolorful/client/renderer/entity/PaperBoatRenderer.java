@@ -1,7 +1,7 @@
 package com.ChalkerCharles.morecolorful.client.renderer.entity;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
-import com.ChalkerCharles.morecolorful.common.entity.PaperBoat;
+import com.ChalkerCharles.morecolorful.common.entity.misc.PaperBoat;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
@@ -65,58 +65,58 @@ public class PaperBoatRenderer extends EntityRenderer<PaperBoat> {
         poseStack.translate(0, 0, 2.5F);
         poseStack.mulPose(Axis.XP.rotationDegrees(22.5F));
         PoseStack.Pose pose1 = poseStack.last();
-        vertex(pose1, consumer, 4.5F, 3, 0, 0.5625F, 0.3125F, 0, -0.0156231F, 0.9998778F, packedLight);
-        vertex(pose1, consumer, -4.5F, 3, 0, 0.0F, 0.3125F, 0, -0.0156231F, 0.9998778F, packedLight);
-        vertex(pose1, consumer, -4.5F, 0, 0, 0.0F, 0.5F, 0, -0.0156231F, 0.9998778F, packedLight);
-        vertex(pose1, consumer, 4.5F, 0, 0, 0.5625F, 0.5F, 0, -0.0156231F, 0.9998778F, packedLight);
-        vertex(pose1, consumer, 4.5F, 3, 0, 0.0F, 0.3125F, 0, 0.0156231F, -0.9998778F, packedLight);
-        vertex(pose1, consumer, 4.5F, 0, 0, 0.0F, 0.5F, 0, 0.0156231F, -0.9998778F, packedLight);
-        vertex(pose1, consumer, -4.5F, 0, 0, 0.5625F, 0.5F, 0, 0.0156231F, -0.9998778F, packedLight);
-        vertex(pose1, consumer, -4.5F, 3, 0, 0.5625F, 0.3125F, 0, 0.0156231F, -0.9998778F, packedLight);
+        vertex(pose1, consumer, 4.5F, 3, 0, 0.5625F, 0.3125F, 0, 0, 1, packedLight);
+        vertex(pose1, consumer, -4.5F, 3, 0, 0.0F, 0.3125F, 0, 0, 1, packedLight);
+        vertex(pose1, consumer, -4.5F, 0, 0, 0.0F, 0.5F, 0, 0, 1, packedLight);
+        vertex(pose1, consumer, 4.5F, 0, 0, 0.5625F, 0.5F, 0, 0, 1, packedLight);
+        vertex(pose1, consumer, 4.5F, 3, 0, 0.0F, 0.3125F, 0, 0, -1, packedLight);
+        vertex(pose1, consumer, 4.5F, 0, 0, 0.0F, 0.5F, 0, 0, -1, packedLight);
+        vertex(pose1, consumer, -4.5F, 0, 0, 0.5625F, 0.5F, 0, 0, -1, packedLight);
+        vertex(pose1, consumer, -4.5F, 3, 0, 0.5625F, 0.3125F, 0, 0, -1, packedLight);
         poseStack.popPose();
 
         poseStack.pushPose();
         poseStack.translate(0, 0, -2.5F);
         poseStack.mulPose(Axis.XP.rotationDegrees(-22.5F));
         PoseStack.Pose pose2 = poseStack.last();
-        vertex(pose2, consumer, 4.5F, 3, 0, 0.5625F, 0.3125F, 0, 0.0156231F, 0.9998778F, packedLight);
-        vertex(pose2, consumer, -4.5F, 3, 0, 0.0F, 0.3125F, 0, 0.0156231F, 0.9998778F, packedLight);
-        vertex(pose2, consumer, -4.5F, 0, 0, 0.0F, 0.5F, 0, 0.0156231F, 0.9998778F, packedLight);
-        vertex(pose2, consumer, 4.5F, 0, 0, 0.5625F, 0.5F, 0, 0.0156231F, 0.9998778F, packedLight);
-        vertex(pose2, consumer, 4.5F, 3, 0, 0.0F, 0.3125F, 0, -0.0156231F, -0.9998778F, packedLight);
-        vertex(pose2, consumer, 4.5F, 0, 0, 0.0F, 0.5F, 0, -0.0156231F, -0.9998778F, packedLight);
-        vertex(pose2, consumer, -4.5F, 0, 0, 0.5625F, 0.5F, 0, -0.0156231F, -0.9998778F, packedLight);
-        vertex(pose2, consumer, -4.5F, 3, 0, 0.5625F, 0.3125F, 0, -0.0156231F, -0.9998778F, packedLight);
+        vertex(pose2, consumer, 4.5F, 3, 0, 0.5625F, 0.3125F, 0, 0, 1, packedLight);
+        vertex(pose2, consumer, -4.5F, 3, 0, 0.0F, 0.3125F, 0, 0, 1, packedLight);
+        vertex(pose2, consumer, -4.5F, 0, 0, 0.0F, 0.5F, 0, 0, 1, packedLight);
+        vertex(pose2, consumer, 4.5F, 0, 0, 0.5625F, 0.5F, 0, 0, 1, packedLight);
+        vertex(pose2, consumer, 4.5F, 3, 0, 0.0F, 0.3125F, 0, 0, -1, packedLight);
+        vertex(pose2, consumer, 4.5F, 0, 0, 0.0F, 0.5F, 0, 0, -1, packedLight);
+        vertex(pose2, consumer, -4.5F, 0, 0, 0.5625F, 0.5F, 0, 0, -1, packedLight);
+        vertex(pose2, consumer, -4.5F, 3, 0, 0.5625F, 0.3125F, 0, 0, -1, packedLight);
         poseStack.popPose();
 
         poseStack.pushPose();
         poseStack.translate(4.5F, 0, 0);
         poseStack.mulPose(Axis.ZP.rotationDegrees(-22.5F));
         PoseStack.Pose pose3 = poseStack.last();
-        vertex(pose3, consumer, 0, 3, -2.5F, 0.875F, 0.0F, 0.9998778F, -0.0156231F, 0, packedLight);
-        vertex(pose3, consumer, 0, 3, 2.5F, 0.5625F, 0.0F, 0.9998778F, -0.0156231F, 0, packedLight);
-        vertex(pose3, consumer, 0, 0, 2.5F, 0.5625F, 0.1875F, 0.9998778F, -0.0156231F, 0, packedLight);
-        vertex(pose3, consumer, 0, 0, -2.5F, 0.875F, 0.1875F, 0.9998778F, -0.0156231F, 0, packedLight);
-        vertex(pose3, consumer, 0, 3, -2.5F, 0.5625F, 0.0F, -0.9998778F, 0.0156231F, 0, packedLight);
-        vertex(pose3, consumer, 0, 0, -2.5F, 0.5625F, 0.1875F, -0.9998778F, 0.0156231F, 0, packedLight);
-        vertex(pose3, consumer, 0, 0, 2.5F, 0.875F, 0.1875F, -0.9998778F, 0.0156231F, 0, packedLight);
-        vertex(pose3, consumer, 0, 3, 2.5F, 0.875F, 0.0F, -0.9998778F, 0.0156231F, 0, packedLight);
+        vertex(pose3, consumer, 0, 3, -2.5F, 0.875F, 0.0F, 1, 0, 0, packedLight);
+        vertex(pose3, consumer, 0, 3, 2.5F, 0.5625F, 0.0F, 1, 0, 0, packedLight);
+        vertex(pose3, consumer, 0, 0, 2.5F, 0.5625F, 0.1875F, 1, 0, 0, packedLight);
+        vertex(pose3, consumer, 0, 0, -2.5F, 0.875F, 0.1875F, 1, 0, 0, packedLight);
+        vertex(pose3, consumer, 0, 3, -2.5F, 0.5625F, 0.0F, -1, 0, 0, packedLight);
+        vertex(pose3, consumer, 0, 0, -2.5F, 0.5625F, 0.1875F, -1, 0, 0, packedLight);
+        vertex(pose3, consumer, 0, 0, 2.5F, 0.875F, 0.1875F, -1, 0, 0, packedLight);
+        vertex(pose3, consumer, 0, 3, 2.5F, 0.875F, 0.0F, -1, 0, 0, packedLight);
         poseStack.popPose();
 
         poseStack.translate(-4.5F, 0, 0);
         poseStack.mulPose(Axis.ZP.rotationDegrees(22.5F));
-        vertex(pose, consumer, 0, 3, -2.5F, 0.875F, 0.0F, 0.9998778F, 0.0156231F, 0, packedLight);
-        vertex(pose, consumer, 0, 3, 2.5F, 0.5625F, 0.0F, 0.9998778F, 0.0156231F, 0, packedLight);
-        vertex(pose, consumer, 0, 0, 2.5F, 0.5625F, 0.1875F, 0.9998778F, 0.0156231F, 0, packedLight);
-        vertex(pose, consumer, 0, 0, -2.5F, 0.875F, 0.1875F, 0.9998778F, 0.0156231F, 0, packedLight);
-        vertex(pose, consumer, 0, 3, -2.5F, 0.5625F, 0.0F, -0.9998778F, -0.0156231F, 0, packedLight);
-        vertex(pose, consumer, 0, 0, -2.5F, 0.5625F, 0.1875F, -0.9998778F, -0.0156231F, 0, packedLight);
-        vertex(pose, consumer, 0, 0, 2.5F, 0.875F, 0.1875F, -0.9998778F, -0.0156231F, 0, packedLight);
-        vertex(pose, consumer, 0, 3, 2.5F, 0.875F, 0.0F, -0.9998778F, -0.0156231F, 0, packedLight);
+        vertex(pose, consumer, 0, 3, -2.5F, 0.875F, 0.0F, 1, 0, 0, packedLight);
+        vertex(pose, consumer, 0, 3, 2.5F, 0.5625F, 0.0F, 1, 0, 0, packedLight);
+        vertex(pose, consumer, 0, 0, 2.5F, 0.5625F, 0.1875F, 1, 0, 0, packedLight);
+        vertex(pose, consumer, 0, 0, -2.5F, 0.875F, 0.1875F, 1, 0, 0, packedLight);
+        vertex(pose, consumer, 0, 3, -2.5F, 0.5625F, 0.0F, -1, 0, 0, packedLight);
+        vertex(pose, consumer, 0, 0, -2.5F, 0.5625F, 0.1875F, -1, 0, 0, packedLight);
+        vertex(pose, consumer, 0, 0, 2.5F, 0.875F, 0.1875F, -1, 0, 0, packedLight);
+        vertex(pose, consumer, 0, 3, 2.5F, 0.875F, 0.0F, -1, 0, 0, packedLight);
     }
 
     private static void vertex(PoseStack.Pose pose, VertexConsumer consumer, float x, float y, float z, float u, float v,
-                               float normalX, float normalY, float normalZ, int packedLight) {
+                               int normalX, int normalY, int normalZ, int packedLight) {
         consumer.addVertex(pose, x, y, z)
                 .setColor(-1)
                 .setUv(u, v)

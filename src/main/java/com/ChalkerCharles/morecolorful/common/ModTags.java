@@ -5,10 +5,13 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.damagesource.DamageType;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 
+@SuppressWarnings("SameParameterValue")
 public abstract class ModTags {
     public static class Blocks {
         public static final TagKey<Block> QUARTZ_BLOCKS = create("quartz_blocks");
@@ -52,7 +55,9 @@ public abstract class ModTags {
         public static final TagKey<Item> JACARANDA_LOGS = create("jacaranda_logs");
         public static final TagKey<Item> WILLOW_LOGS = create("willow_logs");
         public static final TagKey<Item> RIBBONS = create("ribbons");
-        public static final TagKey<Item> PINWHEELS = create("pinwheels");
+        public static final TagKey<Item> PENNANTS = create("pennants");
+        public static final TagKey<Item> BUNDLES = create("bundles");
+        public static final TagKey<Item> CAN_POKE_BALLOON = create("can_poke_balloon");
 
         private static TagKey<Item> create(String path) {
             return ItemTags.create(MoreColorful.location(path));
@@ -64,6 +69,22 @@ public abstract class ModTags {
 
         private static TagKey<Biome> create(String path) {
             return TagKey.create(Registries.BIOME, MoreColorful.location(path));
+        }
+    }
+
+    public static class EntityTypes {
+        public static TagKey<EntityType<?>> CAN_SPAWN_WITH_UMBRELLA = create("can_spawn_with_umbrella");
+
+        private static TagKey<EntityType<?>> create(String path) {
+            return TagKey.create(Registries.ENTITY_TYPE, MoreColorful.location(path));
+        }
+    }
+
+    public static class DamageTypes {
+        public static TagKey<DamageType> CAN_POKE_BALLOON = create("can_poke_balloon");
+
+        private static TagKey<DamageType> create(String path) {
+            return TagKey.create(Registries.DAMAGE_TYPE, MoreColorful.location(path));
         }
     }
 }

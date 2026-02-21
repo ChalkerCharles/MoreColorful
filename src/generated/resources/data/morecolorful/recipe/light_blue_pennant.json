@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "pennant",
+  "key": {
+    "#": {
+      "item": "minecraft:light_blue_wool"
+    },
+    "|": {
+      "tag": "c:rods/wooden"
+    }
+  },
+  "pattern": [
+    "|# ",
+    "|##",
+    "|  "
+  ],
+  "result": {
+    "count": 3,
+    "id": "morecolorful:light_blue_pennant"
+  }
+}

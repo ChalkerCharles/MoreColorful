@@ -16,6 +16,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.neoforged.neoforge.client.model.generators.*;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import org.apache.commons.lang3.ArrayUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -233,19 +234,19 @@ public abstract class ModBlockStateHelper extends BlockStateProvider {
 
     private static final List<Pair<String, RibbonState[]>> ribbonHelper = List.of(
             Pair.of("_bow", RibbonState.arrayOf(RibbonState::hasBow)),
-            Pair.of("_def", new RibbonState[]{RibbonState.DEFAULT, RibbonState.UP}),
+            Pair.of("_def", ArrayUtils.toArray(RibbonState.DEFAULT, RibbonState.UP)),
             Pair.of("_up", RibbonState.arrayOf(r -> r.connectUp && r.hasBow())),
-            Pair.of("_down", new RibbonState[]{RibbonState.DOWN, RibbonState.VERTICAL}),
-            Pair.of("_left", new RibbonState[]{RibbonState.LEFT, RibbonState.UP_LEFT}),
-            Pair.of("_right", new RibbonState[]{RibbonState.RIGHT, RibbonState.UP_RIGHT}),
-            Pair.of("_vert", new RibbonState[]{RibbonState.VERTICAL_CONNECT}),
-            Pair.of("_hor", new RibbonState[]{RibbonState.HORIZONTAL, RibbonState.UP_HORIZONTAL}),
-            Pair.of("_down_l", new RibbonState[]{RibbonState.DOWN_LEFT, RibbonState.VERTICAL_LEFT}),
-            Pair.of("_down_r", new RibbonState[]{RibbonState.DOWN_RIGHT, RibbonState.VERTICAL_RIGHT}),
-            Pair.of("_down_h", new RibbonState[]{RibbonState.DOWN_HORIZONTAL, RibbonState.CROSS}),
-            Pair.of("_tip", new RibbonState[]{RibbonState.TIP}),
-            Pair.of("_hor_c", new RibbonState[]{RibbonState.HORIZONTAL_CONNECT}),
-            Pair.of("_cross", new RibbonState[]{RibbonState.CROSS_CONNECT})
+            Pair.of("_down", ArrayUtils.toArray(RibbonState.DOWN, RibbonState.VERTICAL)),
+            Pair.of("_left", ArrayUtils.toArray(RibbonState.LEFT, RibbonState.UP_LEFT)),
+            Pair.of("_right", ArrayUtils.toArray(RibbonState.RIGHT, RibbonState.UP_RIGHT)),
+            Pair.of("_vert", ArrayUtils.toArray(RibbonState.VERTICAL_CONNECT)),
+            Pair.of("_hor", ArrayUtils.toArray(RibbonState.HORIZONTAL, RibbonState.UP_HORIZONTAL)),
+            Pair.of("_down_l", ArrayUtils.toArray(RibbonState.DOWN_LEFT, RibbonState.VERTICAL_LEFT)),
+            Pair.of("_down_r", ArrayUtils.toArray(RibbonState.DOWN_RIGHT, RibbonState.VERTICAL_RIGHT)),
+            Pair.of("_down_h", ArrayUtils.toArray(RibbonState.DOWN_HORIZONTAL, RibbonState.CROSS)),
+            Pair.of("_tip", ArrayUtils.toArray(RibbonState.TIP)),
+            Pair.of("_hor_c", ArrayUtils.toArray(RibbonState.HORIZONTAL_CONNECT)),
+            Pair.of("_cross", ArrayUtils.toArray(RibbonState.CROSS_CONNECT))
     );
 
     protected void ribbon(Block block) {
@@ -273,7 +274,7 @@ public abstract class ModBlockStateHelper extends BlockStateProvider {
         }
     }
 
-    protected void pinwheel(Block block) {
+    protected void emptyModelWithParticle(Block block) {
         ModelFile model = models().sign(name(block), blockTexture(block).withSuffix("_particle"));
         simpleBlock(block, model);
     }

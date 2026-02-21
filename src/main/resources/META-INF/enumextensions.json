@@ -136,6 +136,15 @@
       }
     },
     {
+      "enum": "net/minecraft/client/model/HumanoidModel$ArmPose",
+      "name": "MORECOLORFUL_UMBRELLA",
+      "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
+      "parameters": {
+        "class": "com/ChalkerCharles/morecolorful/client/model/ArmPoseExtension$Proxy",
+        "field": "UMBRELLA"
+      }
+    },
+    {
       "enum": "net/minecraft/world/entity/vehicle/Boat$Type",
       "name": "MORECOLORFUL_CRABAPPLE",
       "constructor": "(Ljava/util/function/Supplier;Ljava/lang/String;Ljava/util/function/Supplier;Ljava/util/function/Supplier;Ljava/util/function/Supplier;Z)V",

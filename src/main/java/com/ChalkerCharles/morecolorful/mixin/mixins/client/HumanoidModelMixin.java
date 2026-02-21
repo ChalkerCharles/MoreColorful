@@ -1,8 +1,11 @@
 package com.ChalkerCharles.morecolorful.mixin.mixins.client;
 
+import com.ChalkerCharles.morecolorful.client.model.ArmPoseExtension;
 import com.ChalkerCharles.morecolorful.common.attachment.InstrumentData;
 import com.ChalkerCharles.morecolorful.common.block.ModBlocks;
 import com.ChalkerCharles.morecolorful.common.block.properties.ModBlockStateProperties;
+import com.ChalkerCharles.morecolorful.common.item.ItemUtils;
+import com.ChalkerCharles.morecolorful.common.item.utility.UmbrellaItem;
 import com.ChalkerCharles.morecolorful.util.InstrumentsType;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
@@ -27,6 +30,15 @@ public abstract class HumanoidModelMixin<T extends LivingEntity> {
     @Shadow
     @Final
     public ModelPart leftArm;
+    @Shadow
+    public HumanoidModel.ArmPose rightArmPose;
+    @Shadow
+    public HumanoidModel.ArmPose leftArmPose;
+
+    @Shadow
+    protected abstract void poseLeftArm(T pLivingEntity);
+    @Shadow
+    protected abstract void poseRightArm(T pLivingEntity);
 
     @Unique
     private void moreColorful$setupKeyboardAnimation(T pLivingEntity) {
@@ -85,6 +97,31 @@ public abstract class HumanoidModelMixin<T extends LivingEntity> {
                     this.leftArm.zRot = Mth.rotLerp(f2 / 8, 0.0F, -angle);
                 }
             }
+        }
+    }
+
+    @Inject(method = "prepareMobModel(Lnet/minecraft/world/entity/LivingEntity;FFF)V", at = @At("TAIL"))
+    private void prepareMobModel(T entity, float pLimbSwing, float pLimbSwingAmount, float pPartialTick, CallbackInfo ci) {
+        if (entity instanceof Player) return;
+        if (UmbrellaItem.isOpen(ItemUtils.getRightHandItem(entity))) {
+            this.rightArmPose = ArmPoseExtension.UMBRELLA;
+        }
+        if (UmbrellaItem.isOpen(ItemUtils.getLeftHandItem(entity))) {
+            this.leftArmPose = ArmPoseExtension.UMBRELLA;
+        }
+    }
+
+    @Inject(method = "setupAnim(Lnet/minecraft/world/entity/LivingEntity;FFFFF)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/model/HumanoidModel;poseRightArm(Lnet/minecraft/world/entity/LivingEntity;)V", ordinal = 0))
+    private void setUpAnim$poseLeftArm(T pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch, CallbackInfo ci) {
+        if (UmbrellaItem.isHolding(pEntity)) {
+            this.poseLeftArm(pEntity);
+        }
+    }
+
+    @Inject(method = "setupAnim(Lnet/minecraft/world/entity/LivingEntity;FFFFF)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/model/HumanoidModel;poseLeftArm(Lnet/minecraft/world/entity/LivingEntity;)V", ordinal = 0))
+    private void setUpAnim$poseRightArm(T pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch, CallbackInfo ci) {
+        if (UmbrellaItem.isHolding(pEntity)) {
+            this.poseRightArm(pEntity);
         }
     }
 

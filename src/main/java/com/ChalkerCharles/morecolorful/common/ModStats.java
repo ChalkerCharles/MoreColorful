@@ -31,12 +31,18 @@ public class ModStats {
     public static final Supplier<ResourceLocation> INTERACT_WITH_VIBRAPHONE = makeCustomStat("interact_with_vibraphone");
     public static final Supplier<ResourceLocation> INTERACT_WITH_SYNTHESIZER_KEYBOARD = makeCustomStat("interact_with_synthesizer_keyboard");
     public static final Supplier<ResourceLocation> INTERACT_WITH_GUZHENG = makeCustomStat("interact_with_guzheng");
+    public static final Supplier<ResourceLocation> CLEAN_UMBRELLA = makeCustomStat("clean_umbrella");
+    public static final Supplier<ResourceLocation> DAMAGE_BLOCKED_BY_UMBRELLA = makeCustomStat("damage_blocked_by_umbrella", StatFormatter.DIVIDE_BY_TEN);
 
-    private static Supplier<ResourceLocation> makeCustomStat(String key) {
+    private static Supplier<ResourceLocation> makeCustomStat(String key, StatFormatter formatter) {
         return STATS.register(key, location -> {
-            STAT_SETUP.put(location, StatFormatter.DEFAULT);
+            STAT_SETUP.put(location, formatter);
             return location;
         });
+    }
+
+    private static Supplier<ResourceLocation> makeCustomStat(String key) {
+        return makeCustomStat(key, StatFormatter.DEFAULT);
     }
 
     public static void init() {

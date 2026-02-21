@@ -1,5 +1,7 @@
 package com.ChalkerCharles.morecolorful.common.attachment;
 
+import com.ChalkerCharles.morecolorful.Config;
+import com.ChalkerCharles.morecolorful.common.level.UmbrellaHeightMap;
 import com.ChalkerCharles.morecolorful.common.level.thermal.ILevelThermalEngine;
 import com.ChalkerCharles.morecolorful.common.level.wind.ILevelVentEngine;
 import com.ChalkerCharles.morecolorful.common.level.wind.WindManager;
@@ -32,6 +34,8 @@ import org.joml.Vector3f;
 import java.util.List;
 
 public abstract class LevelSavedData implements INBTSerializable<CompoundTag> {
+    private final UmbrellaHeightMap umbrellaHeightMap = new UmbrellaHeightMap();
+
     public static LevelSavedData create(IAttachmentHolder holder) {
         Level level = (Level) holder;
         if (level.isClientSide) {
@@ -44,6 +48,8 @@ public abstract class LevelSavedData implements INBTSerializable<CompoundTag> {
     protected static LevelSavedData get(Level level) {
         return level.getData(ModDataAttachments.LEVEL_DATA);
     }
+
+    protected abstract Level level();
 
     protected abstract WindManager windManager();
 
@@ -91,6 +97,20 @@ public abstract class LevelSavedData implements INBTSerializable<CompoundTag> {
         return getVentilation(level, BlockPos.asLong(x, y, z));
     }
 
+    private void tick() {
+        if (Config.windSystem) {
+            this.windZoneManager().tick();
+            if (WeatherUtils.isWindy(this.level())) {
+                this.windManager().tick();
+            }
+        }
+        this.umbrellaHeightMap.tick();
+    }
+
+    public static void tick(Level level) {
+        get(level).tick();
+    }
+
     public static Vector2f getGlobalWindSpeed(Level level) {
         return get(level).windManager().globalWindSpeed;
     }
@@ -113,14 +133,6 @@ public abstract class LevelSavedData implements INBTSerializable<CompoundTag> {
 
     public static void initGlobalWindSpeed(Level level, float x, float z) {
         get(level).windManager().initWindSpeed(x, z);
-    }
-
-    public static void tickWind(Level level) {
-        LevelSavedData data = get(level);
-        data.windZoneManager().tick();
-        if (WeatherUtils.isWindy(level)) {
-            data.windManager().tick();
-        }
     }
 
     public static void addWindZone(Level level, WindZone windZone) {
@@ -173,6 +185,14 @@ public abstract class LevelSavedData implements INBTSerializable<CompoundTag> {
 
     public static void onChunkUnload(Level level, ChunkPos pos) {
         get(level).windZoneManager().onChunkUnload(level, pos);
+    }
+
+    public static void setCanopy(Level level, int x, double y, int z) {
+        get(level).umbrellaHeightMap.setCanopy(x, y, z);
+    }
+
+    public static double getCanopy(Level level, int x, int z) {
+        return get(level).umbrellaHeightMap.getCanopy(x, z);
     }
 
     @Override

@@ -1,7 +1,7 @@
 package com.ChalkerCharles.morecolorful.common.item.misc;
 
 import com.ChalkerCharles.morecolorful.common.ModSounds;
-import com.ChalkerCharles.morecolorful.common.entity.PaperPlane;
+import com.ChalkerCharles.morecolorful.common.entity.misc.PaperPlane;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Position;
 import net.minecraft.sounds.SoundSource;

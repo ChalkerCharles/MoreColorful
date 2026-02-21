@@ -141,22 +141,33 @@ public class ModSounds {
     public static final Supplier<SoundEvent> LEAVES_RUSTLE = register("block.leaves.rustle");
     public static final Supplier<SoundEvent> WEATHER_VANE_SWAY = register("block.weather_vane.sway");
     public static final Supplier<SoundEvent> RIBBON_TIED = register("block.ribbon.tied");
+    public static final Supplier<SoundEvent> SANDBAG_LAND = register("block.sandbag.land");
 
     // Entities
     public static final Supplier<SoundEvent> PAPER_PLANE_THROW = register("entity.paper_plane.throw");
     public static final Supplier<SoundEvent> PAPER_PLANE_HIT = register("entity.paper_plane.hit");
+    public static final Supplier<SoundEvent> BALLOON_POP = register("entity.balloon.pop");
+    public static final Supplier<SoundEvent> BALLOON_HIT = register("entity.balloon.hit");
+    public static final Supplier<SoundEvent> BALLOON_INFLATE = register("entity.balloon.inflate");
 
     // Items
     public static final Supplier<SoundEvent> PARTY_POPPER_POP = register("item.party_popper.pop");
     public static final Supplier<SoundEvent> SHEARS_SNIP = register("item.shears.snip");
+    public static final Supplier<SoundEvent> LEAD_UNTIED = register("item.lead.untied");
+    public static final Supplier<SoundEvent> LEAD_TIED = register("item.lead.tied");
+    public static final Supplier<SoundEvent> LEAD_BREAK = register("item.lead.break");
     public static final Supplier<SoundEvent> SPARKLER_LIT = register("item.sparkler.lit");
     public static final Supplier<SoundEvent> SPARKLER_FIZZ = register("item.sparkler.fizz");
     public static final Supplier<SoundEvent> SPARKLER_EXTINGUISH = register("item.sparkler.extinguish");
+    public static final Supplier<SoundEvent> UMBRELLA_OPEN = register("item.umbrella.open");
+    public static final Supplier<SoundEvent> UMBRELLA_CLOSE = register("item.umbrella.close");
+    public static final Supplier<SoundEvent> UMBRELLA_BLOCK = register("item.umbrella.block");
 
     // Environment & Ambient
     public static final Supplier<SoundEvent> WEATHER_BREEZE = register("weather.breeze");
     public static final Supplier<SoundEvent> WEATHER_WIND = register("weather.wind");
     public static final Supplier<SoundEvent> WEATHER_GALE = register("weather.gale");
+    public static final Supplier<SoundEvent> WEATHER_RAIN_UMBRELLA = register("weather.rain_umbrella");
 
     // Music
     //public static final Holder<SoundEvent> MUSIC_BIOME_AUTUMN = registerForHolder("music.overworld.autumn");

@@ -1,9 +1,10 @@
 package com.ChalkerCharles.morecolorful.common.item;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
+import com.ChalkerCharles.morecolorful.common.block.ornamental.PennantBlock;
 import com.ChalkerCharles.morecolorful.common.block.ornamental.RibbonBlock;
+import com.ChalkerCharles.morecolorful.common.item.misc.BalloonItem;
 import com.ChalkerCharles.morecolorful.common.item.misc.PartyPopperItem;
-import com.ChalkerCharles.morecolorful.common.item.misc.PinwheelItem;
 import com.ChalkerCharles.morecolorful.common.item.misc.SparklerItem;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -70,8 +71,8 @@ public class ModCreativeTabs {
                 );
                 appendBySequence(output, PartyPopperItem.ALL_COLORS);
                 appendBySequence(output, SparklerItem.ALL_ITEMS);
-                appendBySequence(output, PinwheelItem.ALL_DYE_COLORS);
-                output.accept(ModItems.MULTICOLORED_PINWHEEL);
+                output.accept(ModItems.PINWHEEL);
+                appendBySequence(output, BalloonItem.ALL_TYPES);
             })
             .build()
     ).getKey();
@@ -187,8 +188,7 @@ public class ModCreativeTabs {
             );
         } else if (tab == CreativeModeTabs.COLORED_BLOCKS) {
             appendBySequence(event, RibbonBlock.ALL_ITEMS);
-            appendBySequence(event, PinwheelItem.ALL_DYE_COLORS);
-            event.accept(ModItems.MULTICOLORED_PINWHEEL);
+            appendBySequence(event, PennantBlock.ALL_ITEMS);
         } else if (tab == CreativeModeTabs.NATURAL_BLOCKS) {
             insertAfterBySequence(event, Items.CHERRY_LOG,
                     ModItems.CRABAPPLE_LOG,
@@ -311,6 +311,8 @@ public class ModCreativeTabs {
                     ModItems.WILLOW_SIGN,
                     ModItems.WILLOW_HANGING_SIGN
             );
+            insertBeforeBySequence(event, Items.SKELETON_SKULL, RibbonBlock.ALL_ITEMS);
+            insertBeforeBySequence(event, Items.SKELETON_SKULL, PennantBlock.ALL_ITEMS);
         } else if (tab == CreativeModeTabs.REDSTONE_BLOCKS) {
             insertAfterBySequence(event, Items.LIGHTNING_ROD,
                     ModItems.WEATHER_VANE
@@ -319,6 +321,10 @@ public class ModCreativeTabs {
                     ModItems.FAN_BLOCK
             );
         } else if (tab == CreativeModeTabs.TOOLS_AND_UTILITIES) {
+            insertAfterBySequence(event, Items.BRUSH,
+                    ModItems.UMBRELLA
+            );
+            insertAfterBySequence(event, Items.BUNDLE, ItemUtils.COLORED_BUNDLES);
             insertAfterBySequence(event, Items.CHERRY_CHEST_BOAT,
                     ModItems.CRABAPPLE_BOAT,
                     ModItems.CRABAPPLE_CHEST_BOAT,
@@ -362,12 +368,12 @@ public class ModCreativeTabs {
         }
     }
 
-//    private static void insertBeforeBySequence(BuildCreativeModeTabContentsEvent event, Item existing, ItemLike... entries) {
-//        event.insertBefore(existing.getDefaultInstance(), new ItemStack(entries[0]), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-//        for (int i = 1, l = entries.length; i < l; i++) {
-//            event.insertAfter(new ItemStack(entries[i - 1]), new ItemStack(entries[i]), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-//        }
-//    }
+    private static void insertBeforeBySequence(BuildCreativeModeTabContentsEvent event, Item existing, ItemLike... entries) {
+        event.insertBefore(existing.getDefaultInstance(), new ItemStack(entries[0]), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+        for (int i = 1, l = entries.length; i < l; i++) {
+            event.insertAfter(new ItemStack(entries[i - 1]), new ItemStack(entries[i]), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+        }
+    }
 
     public static void register(IEventBus eventBus){
         CREATIVE_MODE_TABS.register(eventBus);

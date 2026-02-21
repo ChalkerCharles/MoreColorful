@@ -1,0 +1,61 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "pennant",
+  "ingredients": [
+    {
+      "item": "minecraft:red_dye"
+    },
+    [
+      {
+        "item": "morecolorful:white_pennant"
+      },
+      {
+        "item": "morecolorful:light_gray_pennant"
+      },
+      {
+        "item": "morecolorful:gray_pennant"
+      },
+      {
+        "item": "morecolorful:black_pennant"
+      },
+      {
+        "item": "morecolorful:brown_pennant"
+      },
+      {
+        "item": "morecolorful:orange_pennant"
+      },
+      {
+        "item": "morecolorful:yellow_pennant"
+      },
+      {
+        "item": "morecolorful:lime_pennant"
+      },
+      {
+        "item": "morecolorful:green_pennant"
+      },
+      {
+        "item": "morecolorful:cyan_pennant"
+      },
+      {
+        "item": "morecolorful:light_blue_pennant"
+      },
+      {
+        "item": "morecolorful:blue_pennant"
+      },
+      {
+        "item": "morecolorful:purple_pennant"
+      },
+      {
+        "item": "morecolorful:magenta_pennant"
+      },
+      {
+        "item": "morecolorful:pink_pennant"
+      }
+    ]
+  ],
+  "result": {
+    "count": 1,
+    "id": "morecolorful:red_pennant"
+  }
+}

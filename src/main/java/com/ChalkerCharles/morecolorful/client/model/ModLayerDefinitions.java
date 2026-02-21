@@ -17,5 +17,6 @@ public class ModLayerDefinitions {
         event.registerLayerDefinition(ModModelLayers.CRASH_CYMBAL, CrashCymbalRenderer::create);
         event.registerLayerDefinition(ModModelLayers.DRUM_SET_RIDE, DrumSetRenderer::createRide);
         event.registerLayerDefinition(ModModelLayers.DRUM_SET_CRASH, DrumSetRenderer::createCrash);
+        event.registerLayerDefinition(ModModelLayers.BALLOON, BalloonModel::create);
     }
 }

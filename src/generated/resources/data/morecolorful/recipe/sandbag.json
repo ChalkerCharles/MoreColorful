@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "morecolorful:bundles"
+    },
+    {
+      "tag": "c:sands"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "morecolorful:sandbag"
+  }
+}

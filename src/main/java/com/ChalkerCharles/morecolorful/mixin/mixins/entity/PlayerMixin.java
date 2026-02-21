@@ -1,7 +1,12 @@
 package com.ChalkerCharles.morecolorful.mixin.mixins.entity;
 
+import com.ChalkerCharles.morecolorful.common.item.ModItems;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Abilities;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemCooldowns;
+import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -12,10 +17,26 @@ public abstract class PlayerMixin extends LivingEntityMixin {
     @Final
     private Abilities abilities;
 
+    protected PlayerMixin(EntityType<?> pEntityType, Level pLevel) {
+        super(pEntityType, pLevel);
+    }
+
+    @Shadow
+    public abstract ItemCooldowns getCooldowns();
+
     @Override
     public void moreColorful$applyWind() {
         if (!this.abilities.flying) {
             super.moreColorful$applyWind();
+        }
+    }
+
+    @Override
+    public void moreColorful$blockUsingUmbrella(LivingEntity attacker) {
+        super.moreColorful$blockUsingUmbrella(attacker);
+        if (attacker.canDisableShield()) {
+            this.getCooldowns().addCooldown(ModItems.UMBRELLA.get(), 100);
+            this.level().broadcastEntityEvent(this, (byte) 30);
         }
     }
 }

@@ -1,0 +1,33 @@
+{
+  "sources": [
+    {
+      "type": "minecraft:paletted_permutations",
+      "palette_key": "morecolorful:colored/palettes/balloon/palette",
+      "permutations": {
+        "black": "morecolorful:colored/palettes/balloon/black",
+        "blue": "morecolorful:colored/palettes/balloon/blue",
+        "brown": "morecolorful:colored/palettes/balloon/brown",
+        "cyan": "morecolorful:colored/palettes/balloon/cyan",
+        "default": "morecolorful:colored/palettes/balloon/default",
+        "gray": "morecolorful:colored/palettes/balloon/gray",
+        "green": "morecolorful:colored/palettes/balloon/green",
+        "light_blue": "morecolorful:colored/palettes/balloon/light_blue",
+        "light_gray": "morecolorful:colored/palettes/balloon/light_gray",
+        "lime": "morecolorful:colored/palettes/balloon/lime",
+        "magenta": "morecolorful:colored/palettes/balloon/magenta",
+        "orange": "morecolorful:colored/palettes/balloon/orange",
+        "pink": "morecolorful:colored/palettes/balloon/pink",
+        "purple": "morecolorful:colored/palettes/balloon/purple",
+        "red": "morecolorful:colored/palettes/balloon/red",
+        "white": "morecolorful:colored/palettes/balloon/white",
+        "yellow": "morecolorful:colored/palettes/balloon/yellow"
+      },
+      "textures": [
+        "morecolorful:colored/balloon/balloon_0",
+        "morecolorful:colored/balloon/balloon_1",
+        "morecolorful:colored/balloon/balloon_2",
+        "morecolorful:colored/balloon/balloon_3"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "group": "bundle",
+  "ingredients": [
+    {
+      "item": "minecraft:brown_dye"
+    },
+    [
+      {
+        "item": "minecraft:bundle"
+      },
+      {
+        "item": "morecolorful:white_bundle"
+      },
+      {
+        "item": "morecolorful:light_gray_bundle"
+      },
+      {
+        "item": "morecolorful:gray_bundle"
+      },
+      {
+        "item": "morecolorful:black_bundle"
+      },
+      {
+        "item": "morecolorful:red_bundle"
+      },
+      {
+        "item": "morecolorful:orange_bundle"
+      },
+      {
+        "item": "morecolorful:yellow_bundle"
+      },
+      {
+        "item": "morecolorful:lime_bundle"
+      },
+      {
+        "item": "morecolorful:green_bundle"
+      },
+      {
+        "item": "morecolorful:cyan_bundle"
+      },
+      {
+        "item": "morecolorful:light_blue_bundle"
+      },
+      {
+        "item": "morecolorful:blue_bundle"
+      },
+      {
+        "item": "morecolorful:purple_bundle"
+      },
+      {
+        "item": "morecolorful:magenta_bundle"
+      },
+      {
+        "item": "morecolorful:pink_bundle"
+      }
+    ]
+  ],
+  "result": {
+    "count": 1,
+    "id": "morecolorful:brown_bundle"
+  }
+}
