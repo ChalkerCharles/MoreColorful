@@ -36,6 +36,7 @@ public abstract class PlayerMixin extends LivingEntityMixin {
         super.moreColorful$blockUsingUmbrella(attacker);
         if (attacker.canDisableShield()) {
             this.getCooldowns().addCooldown(ModItems.UMBRELLA.get(), 100);
+            this.getCooldowns().addCooldown(ModItems.DRIPLEAF_UMBRELLA.get(), 100);
             this.level().broadcastEntityEvent(this, (byte) 30);
         }
     }

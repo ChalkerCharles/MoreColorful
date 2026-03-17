@@ -260,6 +260,83 @@ public class ModSoundDefinitionProvider extends ModSoundDefinitionHelper {
                 "block/sandbag/land2",
                 "block/sandbag/land3",
                 "block/sandbag/land4");
+        generic(ModSounds.PYROTECHNICS_TABLE_USE, "morecolorful.subtitles.block.pyrotechnics_table.use",
+                "block/pyrotechnics_table/use1",
+                "block/pyrotechnics_table/use2",
+                "block/pyrotechnics_table/use3",
+                "block/pyrotechnics_table/use4");
+        generic(ModSounds.PAPER_BREAK, "subtitles.block.generic.break",
+                "block/paper/break1",
+                "block/paper/break2",
+                "block/paper/break3",
+                "block/paper/break4",
+                "block/paper/break5");
+        generic(ModSounds.PAPER_STEP, "subtitles.block.generic.footsteps",
+                "block/paper/step1",
+                "block/paper/step2",
+                "block/paper/step3",
+                "block/paper/step4",
+                "block/paper/step5",
+                "block/paper/step6");
+        generic(ModSounds.PAPER_PLACE, "subtitles.block.generic.place",
+                "block/paper/place1",
+                "block/paper/place2",
+                "block/paper/place3",
+                "block/paper/place4",
+                "block/paper/place5");
+        generic(ModSounds.PAPER_HIT, "subtitles.block.generic.hit",
+                "block/paper/step1",
+                "block/paper/step2",
+                "block/paper/step3",
+                "block/paper/step4",
+                "block/paper/step5",
+                "block/paper/step6");
+        generic(ModSounds.PAPER_FALL, null,
+                "block/paper/step1",
+                "block/paper/step2",
+                "block/paper/step3",
+                "block/paper/step4",
+                "block/paper/step5",
+                "block/paper/step6");
+        generic(ModSounds.PAPER_CUT, "morecolorful.subtitles.block.paper.cut",
+                "block/paper/cut1",
+                "block/paper/cut2",
+                "block/paper/cut3",
+                "block/paper/cut4",
+                "block/paper/cut5");
+        generic(ModSounds.CARDBOARD_BREAK, "subtitles.block.generic.break",
+                "block/cardboard/break1",
+                "block/cardboard/break2",
+                "block/cardboard/break3",
+                "block/cardboard/break4",
+                "block/cardboard/break5");
+        generic(ModSounds.CARDBOARD_STEP, "subtitles.block.generic.footsteps",
+                "block/cardboard/step1",
+                "block/cardboard/step2",
+                "block/cardboard/step3",
+                "block/cardboard/step4",
+                "block/cardboard/step5",
+                "block/cardboard/step6");
+        generic(ModSounds.CARDBOARD_PLACE, "subtitles.block.generic.place",
+                "block/cardboard/break1",
+                "block/cardboard/break2",
+                "block/cardboard/break3",
+                "block/cardboard/break4",
+                "block/cardboard/break5");
+        generic(ModSounds.CARDBOARD_HIT, "subtitles.block.generic.hit",
+                "block/cardboard/step1",
+                "block/cardboard/step2",
+                "block/cardboard/step3",
+                "block/cardboard/step4",
+                "block/cardboard/step5",
+                "block/cardboard/step6");
+        generic(ModSounds.CARDBOARD_FALL, null,
+                "block/cardboard/step1",
+                "block/cardboard/step2",
+                "block/cardboard/step3",
+                "block/cardboard/step4",
+                "block/cardboard/step5",
+                "block/cardboard/step6");
 
         // Entities
         vanilla(ModSounds.PAPER_PLANE_THROW, "morecolorful.subtitles.entity.paper_plane.throw", SoundEvents.SNOWBALL_THROW);
@@ -279,6 +356,17 @@ public class ModSoundDefinitionProvider extends ModSoundDefinitionHelper {
                 "entity/balloon/inflate1",
                 "entity/balloon/inflate2",
                 "entity/balloon/inflate3");
+        generic(ModSounds.KITE_REEL, "morecolorful.subtitles.entity.kite.reel",
+                "entity/kite/reel1",
+                "entity/kite/reel2",
+                "entity/kite/reel3",
+                "entity/kite/reel4");
+        generic(ModSounds.KITE_UNREEL, "morecolorful.subtitles.entity.kite.unreel",
+                "entity/kite/reel1",
+                "entity/kite/reel2",
+                "entity/kite/reel3",
+                "entity/kite/reel4");
+        vanilla(ModSounds.BOMB_THROW, "morecolorful.subtitles.entity.bomb.throw", SoundEvents.SNOWBALL_THROW);
 
         // Items
         vanilla(ModSounds.PARTY_POPPER_POP, "morecolorful.subtitles.item.party_popper.pop", SoundEvents.FIREWORK_ROCKET_BLAST);

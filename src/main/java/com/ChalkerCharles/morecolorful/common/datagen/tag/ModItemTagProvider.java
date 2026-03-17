@@ -10,15 +10,12 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
 import java.util.concurrent.CompletableFuture;
 
 public class ModItemTagProvider extends ItemTagsProvider {
@@ -104,10 +101,10 @@ public class ModItemTagProvider extends ItemTagsProvider {
                 ModItems.STRIPPED_EBONY_LOG.get(),
                 ModItems.STRIPPED_EBONY_WOOD.get()
         );
-        tag(ModTags.Items.PENNANTS).add(Arrays.stream(PennantBlock.ALL_ITEMS).map(ItemLike::asItem).toArray(Item[]::new));
+        tag(ModTags.Items.PENNANTS).add(ItemUtils.itemArray(PennantBlock.ALL_ITEMS));
         tag(ModTags.Items.BUNDLES)
                 .add(Items.BUNDLE)
-                .add(Arrays.stream(ItemUtils.COLORED_BUNDLES).map(ItemLike::asItem).toArray(Item[]::new));
+                .add(ItemUtils.itemArray(ItemUtils.COLORED_BUNDLES));
         tag(ModTags.Items.CAN_POKE_BALLOON).addTags(
                 ItemTags.SWORDS,
                 ItemTags.PICKAXES,

@@ -154,6 +154,19 @@ public abstract class ModBlockLootTableHelper extends BlockLootSubProvider {
         );
     }
 
+    protected LootTable.Builder createPapercuttingDrop(Block block) {
+        return LootTable.lootTable().withPool(this.applyExplosionCondition(block,
+                        LootPool.lootPool()
+                                .setRolls(ConstantValue.exactly(1.0F))
+                                .add(LootItem.lootTableItem(block)
+                                        .apply(CopyComponentsFunction.copyComponents(CopyComponentsFunction.Source.BLOCK_ENTITY)
+                                                .include(ModDataComponents.PAPERCUTTING_STENCIL.get())
+                                        )
+                                )
+                )
+        );
+    }
+
     protected void add(Supplier<? extends Block> block, LootTable.Builder builder) {
         this.add(block.get(), builder);
     }

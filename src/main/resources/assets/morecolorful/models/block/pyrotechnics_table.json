@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "morecolorful:block/pyrotechnics_table_bottom",
+    "east": "morecolorful:block/pyrotechnics_table_side",
+    "north": "morecolorful:block/pyrotechnics_table_front",
+    "particle": "morecolorful:block/pyrotechnics_table_front",
+    "south": "morecolorful:block/pyrotechnics_table_front",
+    "up": "morecolorful:block/pyrotechnics_table_top",
+    "west": "morecolorful:block/pyrotechnics_table_side"
+  }
+}

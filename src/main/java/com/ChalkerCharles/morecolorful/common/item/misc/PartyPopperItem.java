@@ -118,7 +118,7 @@ public class PartyPopperItem extends Item {
         };
     }
 
-    private static void createConfettiParticles(ServerLevel level, double x, double y, double z, float xRot, float yRot) {
+    public static void createConfettiParticles(ServerLevel level, double x, double y, double z, float xRot, float yRot) {
         float xd = -Mth.sin(yRot * Mth.DEG_TO_RAD) * Mth.cos(xRot * Mth.DEG_TO_RAD);
         float yd = -Mth.sin(xRot * Mth.DEG_TO_RAD);
         float zd = Mth.cos(yRot * Mth.DEG_TO_RAD) * Mth.cos(xRot * Mth.DEG_TO_RAD);

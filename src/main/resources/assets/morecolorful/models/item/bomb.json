@@ -1,0 +1,14 @@
+{
+ "parent": "minecraft:item/generated",
+ "textures": {
+   "layer0": "morecolorful:item/bomb"
+ },
+  "overrides": [
+    {
+      "predicate": {
+        "morecolorful:activated": 1
+      },
+      "model": "morecolorful:item/bomb_lit"
+    }
+  ]
+}

@@ -42,7 +42,6 @@ public abstract class ModItemModelHelper extends ItemModelProvider {
         blockItem2d(item, location.getPath());
     }
 
-    @SuppressWarnings("SameParameterValue")
     protected void fromBlock(ItemLike item, Supplier<Block> block) {
         getBuilder(item.asItem().toString()).parent(new ModelFile.UncheckedModelFile(modLoc("block/" + name(block.get()))));
     }
@@ -61,6 +60,11 @@ public abstract class ModItemModelHelper extends ItemModelProvider {
         getBuilder(i.toString())
                 .parent(new ModelFile.UncheckedModelFile("item/handheld"))
                 .texture("layer0", location.withPrefix("item/"));
+    }
+
+    protected void dynamicFlat(ItemLike item) {
+        Item i = item.asItem();
+        getBuilder(i.toString()).parent(new ModelFile.UncheckedModelFile("morecolorful:item/dynamic_flat"));
     }
 
     protected void ribbon(ItemLike item) {

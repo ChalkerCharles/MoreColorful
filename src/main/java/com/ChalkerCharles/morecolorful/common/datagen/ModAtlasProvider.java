@@ -1,15 +1,21 @@
 package com.ChalkerCharles.morecolorful.common.datagen;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
+import com.ChalkerCharles.morecolorful.client.texture.Atlases;
 import net.minecraft.Util;
+import net.minecraft.client.renderer.texture.atlas.sources.DirectoryLister;
 import net.minecraft.client.renderer.texture.atlas.sources.PalettedPermutations;
+import net.minecraft.client.renderer.texture.atlas.sources.SingleFile;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.common.data.SpriteSourceProvider;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class ModAtlasProvider extends SpriteSourceProvider {
@@ -17,6 +23,11 @@ public class ModAtlasProvider extends SpriteSourceProvider {
             "white", "orange", "magenta", "light_blue", "yellow", "lime", "pink", "gray",
             "light_gray", "cyan", "purple", "blue", "brown", "green", "red", "black"
     };
+    private static final Map<String, ResourceLocation> PAPER_PALETTE_MAP = Util.make(new HashMap<>(), map -> {
+        for (String color : COLORS) {
+            map.put(color, MoreColorful.location("colored/palettes/paper/" + color));
+        }
+    });
 
     public ModAtlasProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, ExistingFileHelper existingFileHelper) {
         super(output, lookupProvider, MoreColorful.MODID, existingFileHelper);
@@ -69,11 +80,18 @@ public class ModAtlasProvider extends SpriteSourceProvider {
                         MoreColorful.location("colored/pinwheel/15")
                 ),
                 MoreColorful.location("colored/palettes/paper/palette"),
-                Util.make(new HashMap<>(), map -> {
-                    for (String color : COLORS) {
-                        map.put(color, MoreColorful.location("colored/palettes/paper/" + color));
-                    }
-                })
+                PAPER_PALETTE_MAP
+        )).addSource(new PalettedPermutations(
+                List.of(
+                        MoreColorful.location("colored/kite_item/0"),
+                        MoreColorful.location("colored/kite_item/1"),
+                        MoreColorful.location("colored/kite_item/2"),
+                        MoreColorful.location("colored/kite_item/3"),
+                        MoreColorful.location("colored/kite_item/tail"),
+                        MoreColorful.location("colored/kite_item/bow")
+                ),
+                MoreColorful.location("colored/palettes/paper/palette"),
+                PAPER_PALETTE_MAP
         ));
         atlas(PARTICLES_ATLAS).addSource(new PalettedPermutations(
                 List.of(
@@ -90,5 +108,15 @@ public class ModAtlasProvider extends SpriteSourceProvider {
                     }
                 })
         ));
+        atlas(Atlases.KITES_ATLAS).addSource(new SingleFile(
+                MoreColorful.location("colored/kite_entity/frame"), Optional.empty()
+        )).addSource(new SingleFile(
+                MoreColorful.location("colored/kite_entity/rope"), Optional.empty()
+        )).addSource(new PalettedPermutations(
+                List.of(MoreColorful.location("colored/kite_entity/kite")),
+                MoreColorful.location("colored/palettes/paper/palette"),
+                PAPER_PALETTE_MAP
+        ));
+        atlas(Atlases.BALLOONS_ATLAS).addSource(new DirectoryLister("entity/balloons", "entity/balloons/"));
     }
 }

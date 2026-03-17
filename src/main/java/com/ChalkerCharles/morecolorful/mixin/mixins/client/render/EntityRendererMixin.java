@@ -35,7 +35,6 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,15 +46,6 @@ public abstract class EntityRendererMixin<T extends Entity> {
     @Shadow
     @Final
     protected EntityRenderDispatcher entityRenderDispatcher;
-
-    @Inject(method = "shouldRender", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/world/entity/Leashable;getLeashHolder()Lnet/minecraft/world/entity/Entity;", shift = At.Shift.AFTER), cancellable = true)
-    private void shouldRender(T entity, Frustum frustum, double camX, double camY, double camZ, CallbackInfoReturnable<Boolean> cir,
-                              @Local AABB aabb, @Local(ordinal = 1) Entity leashHolder) {
-        if (entity instanceof Balloon && leashHolder == null) {
-            AABB aabb1 = aabb.setMinY(aabb.minY - 4);
-            cir.setReturnValue(frustum.isVisible(aabb1));
-        }
-    }
 
     @WrapOperation(method = "shouldRender", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/culling/Frustum;isVisible(Lnet/minecraft/world/phys/AABB;)Z", ordinal = 1))
     private boolean shouldRender(Frustum instance, AABB aabb, Operation<Boolean> original, @Local AABB aabb1) {

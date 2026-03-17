@@ -141,7 +141,7 @@ public abstract class ModRecipeHelper extends RecipeProvider implements IConditi
 
     protected static void partyPopperRecipes(RecipeOutput output) {
         for (DyeColor color : DyeColor.values()) {
-            ItemLike dye = DyeItem.byColor(color);
+            TagKey<Item> dye = color.getTag();
             ItemLike item = PartyPopperItem.byColor(color);
             ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, item)
                     .requires(dye)
@@ -165,7 +165,7 @@ public abstract class ModRecipeHelper extends RecipeProvider implements IConditi
 
     protected static void ribbonDyeRecipes(RecipeOutput output) {
         for (DyeColor color : DyeColor.values()) {
-            ItemLike dye = DyeItem.byColor(color);
+            TagKey<Item> dye = color.getTag();
             ItemLike item = RibbonBlock.itemByColor(color);
             ShapelessRecipeBuilder.shapeless(RecipeCategory.DECORATIONS, item)
                     .requires(dye)
@@ -216,7 +216,7 @@ public abstract class ModRecipeHelper extends RecipeProvider implements IConditi
 
     protected static void pennantDyeRecipes(RecipeOutput output) {
         for (DyeColor color : DyeColor.values()) {
-            ItemLike dye = DyeItem.byColor(color);
+            TagKey<Item> dye = color.getTag();
             ItemLike item = PennantBlock.itemByColor(color);
             ShapelessRecipeBuilder.shapeless(RecipeCategory.DECORATIONS, item)
                     .requires(dye)
@@ -229,7 +229,7 @@ public abstract class ModRecipeHelper extends RecipeProvider implements IConditi
 
     protected static void bundleDyeRecipes(RecipeOutput output) {
         for (DyeColor color : DyeColor.values()) {
-            ItemLike dye = DyeItem.byColor(color);
+            TagKey<Item> dye = color.getTag();
             ItemLike item = ItemUtils.bundleByColor(color);
             ShapelessRecipeBuilder.shapeless(RecipeCategory.TOOLS, item)
                     .requires(dye)
@@ -242,14 +242,42 @@ public abstract class ModRecipeHelper extends RecipeProvider implements IConditi
 
     protected static void balloonDyeRecipes(RecipeOutput output) {
         for (DyeColor color : DyeColor.values()) {
-            ItemLike dye = DyeItem.byColor(color);
+            TagKey<Item> dye = color.getTag();
             ItemLike item = BalloonItem.byColor(color);
             ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, item)
                     .requires(dye)
-                    .requires(Ingredient.of(ItemUtils.dyeingIngredients(BalloonItem.ALL_TYPES, item)))
+                    .requires(Ingredient.of(ItemUtils.dyeingIngredients(BalloonItem.COMMON, item)))
                     .group("balloon")
                     .unlockedBy("has_needed_dye", has(dye))
                     .save(output, "dye_" + getItemName(item));
         }
+    }
+
+    protected static void fireworkShapeTemplate(RecipeOutput output, ItemLike result, ItemLike material) {
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, result)
+                .requires(Items.PAPER)
+                .requires(Tags.Items.GUNPOWDERS)
+                .requires(material)
+                .group("firework_shape_template")
+                .unlockedBy("has_material", has(material))
+                .save(output);
+    }
+
+    protected static void fireworkShapeTemplate(RecipeOutput output, ItemLike result, TagKey<Item> material) {
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, result)
+                .requires(Items.PAPER)
+                .requires(Tags.Items.GUNPOWDERS)
+                .requires(material)
+                .group("firework_shape_template")
+                .unlockedBy("has_material", has(material))
+                .save(output);
+    }
+
+    protected static void specialBalloon(RecipeOutput output, ItemLike result, ItemLike material) {
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, result)
+                .requires(material)
+                .group("balloon")
+                .unlockedBy(getHasName(material), has(material))
+                .save(output);
     }
 }

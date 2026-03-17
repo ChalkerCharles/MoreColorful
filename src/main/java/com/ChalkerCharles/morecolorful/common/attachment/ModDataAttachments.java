@@ -11,9 +11,13 @@ import java.util.function.Supplier;
 public class ModDataAttachments {
     private static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(NeoForgeRegistries.Keys.ATTACHMENT_TYPES, MoreColorful.MODID);
 
-    public static final Supplier<AttachmentType<InstrumentData>> INSTRUMENT_DATA = ATTACHMENT_TYPES.register("instrument_data", () -> AttachmentType.builder(InstrumentData::new).build());
-    public static final Supplier<AttachmentType<ChunkData>> CHUNK_DATA = ATTACHMENT_TYPES.register("chunk_data", () -> AttachmentType.serializable(ChunkData::new).build());
-    public static final Supplier<AttachmentType<LevelSavedData>> LEVEL_DATA = ATTACHMENT_TYPES.register("level_data", () -> AttachmentType.serializable(LevelSavedData::create).build());
+    public static final Supplier<AttachmentType<InstrumentData>> INSTRUMENT_DATA = register("instrument_data", () -> AttachmentType.builder(InstrumentData::new).build());
+    public static final Supplier<AttachmentType<ChunkData>> CHUNK_DATA = register("chunk_data", () -> AttachmentType.serializable(ChunkData::new).build());
+    public static final Supplier<AttachmentType<LevelSavedData>> LEVEL_DATA = register("level_data", () -> AttachmentType.serializable(LevelSavedData::create).build());
+
+    private static <T> Supplier<AttachmentType<T>> register(String name, Supplier<AttachmentType<T>> supplier) {
+        return ATTACHMENT_TYPES.register(name, supplier);
+    }
 
     public static void register(IEventBus eventBus){
         ATTACHMENT_TYPES.register(eventBus);

@@ -2,6 +2,7 @@ package com.ChalkerCharles.morecolorful.common.block;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.common.block.entity.*;
+import com.ChalkerCharles.morecolorful.common.block.ornamental.PapercuttingBlock;
 import com.ChalkerCharles.morecolorful.common.block.ornamental.PennantBlock;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.Block;
@@ -24,6 +25,7 @@ public class ModBlockEntities {
     public static final Supplier<BlockEntityType<MusicBoxBlockEntity>> MUSIC_BOX = register("music_box", () -> create(MusicBoxBlockEntity::new, ModBlocks.MUSIC_BOX.get()));
     public static final Supplier<BlockEntityType<PinwheelBlockEntity>> PINWHEEL = register("pinwheel", () -> create(PinwheelBlockEntity::new, ModBlocks.PINWHEEL.get()));
     public static final Supplier<BlockEntityType<PennantBlockEntity>> PENNANT = register("pennant", () -> create(PennantBlockEntity::new, PennantBlock.ALL_BLOCKS.get()));
+    public static final Supplier<BlockEntityType<PapercuttingBlockEntity>> PAPERCUTTING = register("papercutting", () -> create(PapercuttingBlockEntity::new, PapercuttingBlock.ALL_BLOCKS.get()));
 
     private static <T extends BlockEntity> Supplier<BlockEntityType<T>> register(String name, Supplier<BlockEntityType<T>> supplier) {
         return BLOCK_ENTITY_TYPES.register(name, supplier);

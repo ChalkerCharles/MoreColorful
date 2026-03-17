@@ -182,7 +182,8 @@ public final class VanillaBlockPropertyModifier {
                 || Predicates.tagMatches(holder, THERMAL_RESISTANCE_3_TAGS)) {
             setThermalResistance(block, 3);
         } else if (THERMAL_RESISTANCE_4.contains(block)
-                || Predicates.tagMatches(holder, THERMAL_RESISTANCE_4_TAGS)) {
+                || Predicates.tagMatches(holder, THERMAL_RESISTANCE_4_TAGS)
+                || THERMAL_RESISTANCE_4_HOLDERS.contains(holder)) {
             setThermalResistance(block, 4);
         }
 
@@ -572,6 +573,9 @@ public final class VanillaBlockPropertyModifier {
             BlockTags.WOOL,
             Tags.Blocks.BARRELS_WOODEN,
             Tags.Blocks.BOOKSHELVES
+    );
+    private static final List<Holder<Block>> THERMAL_RESISTANCE_4_HOLDERS = List.of(
+            ModBlocks.PYROTECHNICS_TABLE
     );
     private static final Set<Block> COPPER_GRATES = Set.of(
             Blocks.COPPER_GRATE,

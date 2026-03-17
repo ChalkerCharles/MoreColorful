@@ -4,6 +4,7 @@ import com.ChalkerCharles.morecolorful.Config;
 import com.ChalkerCharles.morecolorful.common.attachment.ClientLevelData;
 import com.ChalkerCharles.morecolorful.common.attachment.LevelSavedData;
 import com.ChalkerCharles.morecolorful.mixin.extensions.ILevelRendererExtension;
+import com.ChalkerCharles.morecolorful.network.packets.KiteReelPacket;
 import com.ChalkerCharles.morecolorful.network.packets.WindInitiationPacket;
 import com.ChalkerCharles.morecolorful.util.WeatherUtils;
 import com.ChalkerCharles.morecolorful.util.client.RenderUtils;
@@ -14,11 +15,13 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.client.event.*;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.ArrayList;
@@ -131,5 +134,11 @@ public final class ModClientEvents {
         if (WeatherUtils.isWindy(event.getPlayer().clientLevel)) {
             PacketDistributor.sendToServer(WindInitiationPacket.INSTANCE);
         }
+    }
+
+    @SubscribeEvent
+    public static void onEmptyRightClick(PlayerInteractEvent.RightClickEmpty event) {
+        Player player = event.getEntity();
+        PacketDistributor.sendToServer(new KiteReelPacket(player.isSecondaryUseActive()));
     }
 }

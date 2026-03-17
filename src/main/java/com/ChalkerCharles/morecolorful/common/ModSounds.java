@@ -142,6 +142,18 @@ public class ModSounds {
     public static final Supplier<SoundEvent> WEATHER_VANE_SWAY = register("block.weather_vane.sway");
     public static final Supplier<SoundEvent> RIBBON_TIED = register("block.ribbon.tied");
     public static final Supplier<SoundEvent> SANDBAG_LAND = register("block.sandbag.land");
+    public static final Supplier<SoundEvent> PYROTECHNICS_TABLE_USE = register("block.pyrotechnics_table.use");
+    public static final Supplier<SoundEvent> PAPER_BREAK = register("block.paper.break");
+    public static final Supplier<SoundEvent> PAPER_STEP = register("block.paper.step");
+    public static final Supplier<SoundEvent> PAPER_PLACE = register("block.paper.place");
+    public static final Supplier<SoundEvent> PAPER_HIT = register("block.paper.hit");
+    public static final Supplier<SoundEvent> PAPER_FALL = register("block.paper.fall");
+    public static final Supplier<SoundEvent> PAPER_CUT = register("block.paper.cut");
+    public static final Supplier<SoundEvent> CARDBOARD_BREAK = register("block.cardboard.break");
+    public static final Supplier<SoundEvent> CARDBOARD_STEP = register("block.cardboard.step");
+    public static final Supplier<SoundEvent> CARDBOARD_PLACE = register("block.cardboard.place");
+    public static final Supplier<SoundEvent> CARDBOARD_HIT = register("block.cardboard.hit");
+    public static final Supplier<SoundEvent> CARDBOARD_FALL = register("block.cardboard.fall");
 
     // Entities
     public static final Supplier<SoundEvent> PAPER_PLANE_THROW = register("entity.paper_plane.throw");
@@ -149,6 +161,9 @@ public class ModSounds {
     public static final Supplier<SoundEvent> BALLOON_POP = register("entity.balloon.pop");
     public static final Supplier<SoundEvent> BALLOON_HIT = register("entity.balloon.hit");
     public static final Supplier<SoundEvent> BALLOON_INFLATE = register("entity.balloon.inflate");
+    public static final Supplier<SoundEvent> KITE_REEL = register("entity.kite.reel");
+    public static final Supplier<SoundEvent> KITE_UNREEL = register("entity.kite.unreel");
+    public static final Supplier<SoundEvent> BOMB_THROW = register("entity.bomb.throw");
 
     // Items
     public static final Supplier<SoundEvent> PARTY_POPPER_POP = register("item.party_popper.pop");

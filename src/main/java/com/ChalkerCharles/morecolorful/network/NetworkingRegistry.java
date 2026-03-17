@@ -25,6 +25,9 @@ public class NetworkingRegistry {
         registrar.playToServer(NotePlayingPacket.TYPE, NotePlayingPacket.STREAM_CODEC, NotePlayingPacket::handle);
         registrar.playToServer(WindInitiationPacket.TYPE, WindInitiationPacket.STREAM_CODEC, WindInitiationPacket::handle);
         registrar.playToServer(EditSheetMusicPacket.TYPE, EditSheetMusicPacket.STREAM_CODEC, EditSheetMusicPacket::handle);
+        registrar.playToServer(KiteReelPacket.TYPE, KiteReelPacket.STREAM_CODEC, KiteReelPacket::handle);
+        registrar.playToServer(PaperCarvingPacket.TYPE, PaperCarvingPacket.STREAM_CODEC, PaperCarvingPacket::handle);
+        registrar.playToServer(SoundPacket.TYPE, SoundPacket.STREAM_CODEC, SoundPacket::handle);
 
         // Both
         registrar.playBidirectional(PlayingScreenPacket.TYPE, PlayingScreenPacket.STREAM_CODEC, PlayingScreenPacket.HANDLER);

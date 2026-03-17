@@ -2,12 +2,14 @@ package com.ChalkerCharles.morecolorful.common.datagen;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.common.block.ModBlocks;
+import com.ChalkerCharles.morecolorful.common.block.ornamental.PapercuttingBlock;
 import com.ChalkerCharles.morecolorful.common.block.ornamental.PennantBlock;
 import com.ChalkerCharles.morecolorful.common.block.ornamental.RibbonBlock;
 import com.ChalkerCharles.morecolorful.common.datagen.helper.ModItemModelHelper;
 import com.ChalkerCharles.morecolorful.common.item.ItemUtils;
 import com.ChalkerCharles.morecolorful.common.item.ModItems;
 import com.ChalkerCharles.morecolorful.common.item.misc.BalloonItem;
+import com.ChalkerCharles.morecolorful.common.item.misc.FireworkShapeTemplateItem;
 import com.ChalkerCharles.morecolorful.common.item.misc.PartyPopperItem;
 import com.ChalkerCharles.morecolorful.common.item.misc.SparklerItem;
 import net.minecraft.data.PackOutput;
@@ -198,5 +200,14 @@ public class ModItemModelProvider extends ModItemModelHelper {
             basicItem(item);
         }
         basicItem(ModItems.SANDBAG);
+        fromBlock(ModItems.PYROTECHNICS_TABLE, ModBlocks.PYROTECHNICS_TABLE);
+        for (ItemLike item : FireworkShapeTemplateItem.ALL_TYPES) {
+            basicItem(item);
+        }
+        for (ItemLike item : PapercuttingBlock.ALL_ITEMS) {
+            dynamicFlat(item);
+        }
+        fromBlock(ModItems.PAPERCRAFT_TABLE, ModBlocks.PAPERCRAFT_TABLE);
+        basicItem(ModItems.CARDBOARD);
     }
 }

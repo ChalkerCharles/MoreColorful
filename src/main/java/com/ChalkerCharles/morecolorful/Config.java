@@ -51,6 +51,7 @@ public class Config {
     public static boolean windSounds = true;
     public static boolean leavesOnGround = true;
     public static boolean confettiOnGround = true;
+    public static boolean babyVillagerWithBigHead = true;
 
     static {
         Pair<CommonConfig, ModConfigSpec> common = new ModConfigSpec.Builder().configure(CommonConfig::new);
@@ -97,6 +98,7 @@ public class Config {
         windSounds = windSystem && config.windSounds.get();
         leavesOnGround = config.leavesOnGround.get();
         confettiOnGround = config.confettiOnGround.get();
+        babyVillagerWithBigHead = config.babyVillagerWithBigHead.get();
     }
 
     public static void setConfigs(ModConfigEvent event) {

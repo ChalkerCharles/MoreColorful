@@ -12,7 +12,6 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
@@ -138,7 +137,7 @@ public class PaperPlane extends Projectile implements IEntityExtension {
     private void drop() {
         this.discard();
         if (this.shouldNotDropItem()) return;
-        this.level().addFreshEntity(new ItemEntity(this.level(), this.getX(), this.getY(), this.getZ(), this.getItem()));
+        this.spawnAtLocation(this.getItem());
     }
 
     private boolean shouldNotDropItem() {

@@ -2,6 +2,7 @@ package com.ChalkerCharles.morecolorful.common.entity;
 
 import com.ChalkerCharles.morecolorful.common.ModSounds;
 import com.ChalkerCharles.morecolorful.common.entity.misc.Balloon;
+import com.ChalkerCharles.morecolorful.common.entity.misc.Kite;
 import com.ChalkerCharles.morecolorful.mixin.extensions.ILeashableExtension;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
@@ -52,6 +53,11 @@ public final class EntityUtils {
 
     public static double getBalloonGravityFactor(Entity entity) {
         return getTiedBalloons(entity).stream().mapToDouble(b -> Math.max(0, b.getY() - entity.getY()) * 0.25).sum();
+    }
+
+    public static List<Kite> getHoldingKites(Entity entity) {
+        AABB scanArea = AABB.ofSize(entity.getBoundingBox().getCenter(), 128.0, 128.0, 128.0);
+        return entity.level().getEntitiesOfClass(Kite.class, scanArea, b -> b.getLeashHolder() == entity);
     }
 
     public static void addVanillaWeightAttribute(ObjDoubleConsumer<EntityType<? extends LivingEntity>> consumer) {

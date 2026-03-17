@@ -4,7 +4,7 @@
   "group": "party_popper",
   "ingredients": [
     {
-      "item": "minecraft:white_dye"
+      "tag": "c:dyes/white"
     },
     [
       {

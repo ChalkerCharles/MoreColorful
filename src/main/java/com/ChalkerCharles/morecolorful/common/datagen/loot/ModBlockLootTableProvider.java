@@ -1,6 +1,7 @@
 package com.ChalkerCharles.morecolorful.common.datagen.loot;
 
 import com.ChalkerCharles.morecolorful.common.block.ModBlocks;
+import com.ChalkerCharles.morecolorful.common.block.ornamental.PapercuttingBlock;
 import com.ChalkerCharles.morecolorful.common.block.ornamental.PennantBlock;
 import com.ChalkerCharles.morecolorful.common.block.ornamental.RibbonBlock;
 import com.ChalkerCharles.morecolorful.common.block.properties.GrandPianoPart;
@@ -302,6 +303,13 @@ public class ModBlockLootTableProvider extends ModBlockLootTableHelper {
             dropSelf(block);
         }
         dropSelf(ModBlocks.SANDBAG);
+        dropSelf(ModBlocks.PYROTECHNICS_TABLE);
+        dropSelf(ModBlocks.UNDERWATER_TNT);
+        for (Block block : PapercuttingBlock.ALL_BLOCKS.get()) {
+            add(block, createPapercuttingDrop(block));
+        }
+        dropSelf(ModBlocks.PAPERCRAFT_TABLE);
+        dropSelf(ModBlocks.CARDBOARD_BLOCK);
     }
 
     @Override

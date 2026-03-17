@@ -4,7 +4,7 @@
   "group": "pennant",
   "ingredients": [
     {
-      "item": "minecraft:black_dye"
+      "tag": "c:dyes/black"
     },
     [
       {

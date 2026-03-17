@@ -32,6 +32,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.util.Lazy;
 import org.jetbrains.annotations.Nullable;
@@ -40,7 +41,12 @@ import java.util.List;
 
 public class Balloon extends Entity implements WindSensitive, IEntityExtension, Leashable, ILeashableExtension, VariantHolder<Balloon.Variant> {
     private static final EntityDataAccessor<Integer> DATA_TYPE_ID = SynchedEntityData.defineId(Balloon.class, EntityDataSerializers.INT);
-    protected static final EntityDataAccessor<Float> DATA_ID_DAMAGE = SynchedEntityData.defineId(Balloon.class, EntityDataSerializers.FLOAT);
+    private static final EntityDataAccessor<Float> DATA_ID_DAMAGE = SynchedEntityData.defineId(Balloon.class, EntityDataSerializers.FLOAT);
+    private int lerpSteps;
+    private double lerpX;
+    private double lerpY;
+    private double lerpZ;
+    private double lerpYRot;
     @Nullable
     private Leashable.LeashData leashData;
 
@@ -48,13 +54,33 @@ public class Balloon extends Entity implements WindSensitive, IEntityExtension, 
         super(pEntityType, pLevel);
     }
 
-    public Balloon(Level level, Player player, Entity attachedTo, Variant variant) {
-        super(ModEntities.BALLOON.get(), level);
-        Vec3 vec = player == attachedTo ? player.getLookAngle() : player.getLookAngle().reverse();
+    public Balloon(Level level, Vec3 vec, Entity attachedTo, Variant variant) {
+        this(ModEntities.BALLOON.get(), level);
         this.setPos(attachedTo.getX() + vec.x, attachedTo.getEyeY() + vec.y, attachedTo.getZ() + vec.z);
         this.setVariant(variant);
         this.setLeashedTo(attachedTo, true);
         this.playSound(ModSounds.BALLOON_INFLATE.get());
+    }
+
+    public Balloon(Level level, Player player, Entity attachedTo, Variant variant) {
+        this(level, player == attachedTo ? player.getLookAngle() : player.getLookAngle().reverse(), attachedTo, variant);
+    }
+
+    @Override
+    public boolean shouldRenderAtSqrDistance(double pDistance) {
+        double d0 = this.getBoundingBox().getSize() * 4.0;
+        if (Double.isNaN(d0)) {
+            d0 = 4.0;
+        }
+
+        d0 *= 64.0;
+        return pDistance < d0 * d0;
+    }
+
+    @Override
+    public AABB getBoundingBoxForCulling() {
+        AABB aabb = super.getBoundingBoxForCulling();
+        return this.isLeashed() ? aabb : aabb.setMinY(aabb.minY - 4);
     }
 
     @Override
@@ -117,9 +143,19 @@ public class Balloon extends Entity implements WindSensitive, IEntityExtension, 
     }
 
     @Override
+    public boolean moreColorful$canDropLeash() {
+        return false;
+    }
+
+    @Override
+    public boolean moreColorful$balloonAttachable() {
+        return false;
+    }
+
+    @Override
     public boolean moreColorful$canHaveALeashAttachedTo(Entity entity) {
-        if (entity instanceof Balloon) return false;
-        return ILeashableExtension.super.moreColorful$canHaveALeashAttachedTo(entity);
+        return IEntityExtension.balloonAttachable(entity)
+                && ILeashableExtension.super.moreColorful$canHaveALeashAttachedTo(entity);
     }
 
     @Override
@@ -176,6 +212,7 @@ public class Balloon extends Entity implements WindSensitive, IEntityExtension, 
                     count, 0.2, 0.2, 0.2, 1
             );
             this.playSound(ModSounds.BALLOON_POP.get());
+            this.gameEvent(GameEvent.EXPLODE);
         }
         if (!source.isCreativePlayer() && this.level().getGameRules().getBoolean(GameRules.RULE_DOENTITYDROPS)) {
             this.spawnAtLocation(Items.LEAD);
@@ -251,14 +288,55 @@ public class Balloon extends Entity implements WindSensitive, IEntityExtension, 
     }
 
     @Override
+    public void lerpTo(double pX, double pY, double pZ, float pYRot, float pXRot, int pSteps) {
+        this.lerpX = pX;
+        this.lerpY = pY;
+        this.lerpZ = pZ;
+        this.lerpYRot = pYRot;
+        this.lerpSteps = 8;
+    }
+
+    @Override
+    public double lerpTargetX() {
+        return this.lerpSteps > 0 ? this.lerpX : this.getX();
+    }
+
+    @Override
+    public double lerpTargetY() {
+        return this.lerpSteps > 0 ? this.lerpY : this.getY();
+    }
+
+    @Override
+    public double lerpTargetZ() {
+        return this.lerpSteps > 0 ? this.lerpZ : this.getZ();
+    }
+
+    @Override
+    public float lerpTargetYRot() {
+        return this.lerpSteps > 0 ? (float)this.lerpYRot : this.getYRot();
+    }
+
+    private void tickLerp() {
+        if (this.isControlledByLocalInstance()) {
+            this.lerpSteps = 0;
+            this.syncPacketPositionCodec(this.getX(), this.getY(), this.getZ());
+        }
+        if (this.lerpSteps > 0) {
+            this.lerpPositionAndRotationStep(this.lerpSteps, this.lerpX, this.lerpY, this.lerpZ, this.lerpYRot, this.getXRot());
+            this.lerpSteps--;
+        }
+    }
+
+    @Override
     public void tick() {
         if (this.getDamage() > 0.0F) {
             this.setDamage(this.getDamage() - 1.0F);
         }
         super.tick();
+        this.tickLerp();
+        this.moreColorful$stopSlightMovement();
         this.move(MoverType.SELF, this.getDeltaMovement());
-        this.setDeltaMovement(this.getDeltaMovement().multiply(0.98, 0.92, 0.98));
-        this.applyGravity();
+        this.applyGravityAndDrag();
         this.checkInsideBlocks();
         List<Entity> list = this.level().getEntities(this, this.getBoundingBox(), EntitySelector.pushableBy(this));
         if (!list.isEmpty()) {
@@ -269,20 +347,14 @@ public class Balloon extends Entity implements WindSensitive, IEntityExtension, 
         }
     }
 
-    @Override
-    protected void applyGravity() {
+    private void applyGravityAndDrag() {
         double d0 = this.getGravity();
-        if (d0 == 0.0) return;
-        double d = 1;
-        if (this.leashData != null) {
-            Entity leashHolder = this.leashData.leashHolder;
-            double d1;
-            if (leashHolder != null && (d1 = this.getY() - leashHolder.getY()) > 0) {
-                d = 1 - Math.max(0, d1 - 3.0);
-            }
+        Vec3 vec = this.getDeltaMovement();
+        double y = vec.y;
+        if (!this.level().isClientSide) {
+            y -= d0;
         }
-        if (d == 0.0) return;
-        this.setDeltaMovement(this.getDeltaMovement().add(0.0, -d0 * d, 0.0));
+        this.setDeltaMovement(vec.x * 0.98, y * 0.92, vec.z * 0.98);
     }
 
     @Override
@@ -293,6 +365,11 @@ public class Balloon extends Entity implements WindSensitive, IEntityExtension, 
     @Override
     public double moreColorful$horizontalWindage() {
         return 3.0;
+    }
+
+    @Override
+    protected MovementEmission getMovementEmission() {
+        return MovementEmission.NONE;
     }
 
     public static Vec3 getUntiedRopeBlockPos(Entity entity, float partialTick) {
@@ -355,7 +432,11 @@ public class Balloon extends Entity implements WindSensitive, IEntityExtension, 
     }
 
     public enum SpecialVariant implements Variant {
-        ;
+        CREEPER("creeper"),
+        HEART("heart"),
+        STAR("star"),
+        RABBIT("rabbit");
+
         public static final SpecialVariant[] VALUES = values();
 
         private final String name;
@@ -371,7 +452,7 @@ public class Balloon extends Entity implements WindSensitive, IEntityExtension, 
 
         @Override
         public int getIndex() {
-            return Colour.size();
+            return Colour.size() + this.ordinal();
         }
 
         public static SpecialVariant byName(String name) {

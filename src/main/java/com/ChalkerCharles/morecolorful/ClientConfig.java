@@ -12,6 +12,7 @@ public class ClientConfig {
     public final ModConfigSpec.BooleanValue windSounds;
     public final ModConfigSpec.BooleanValue leavesOnGround;
     public final ModConfigSpec.BooleanValue confettiOnGround;
+    public final ModConfigSpec.BooleanValue babyVillagerWithBigHead;
 
     public ClientConfig(ModConfigSpec.Builder builder) {
         wavyBlocks = builder
@@ -52,5 +53,9 @@ public class ClientConfig {
                 .translation(prefix + "confetti_on_ground")
                 .comment("Allow confetti particles to stay on the ground for a while, instead of disappearing immediately.")
                 .define("confettiOnGround", true);
+        babyVillagerWithBigHead = builder
+                .translation(prefix + "baby_villager_with_big_head")
+                .comment("Baby Villagers have bigger heads. This doesn't affect their hitboxes.")
+                .define("babyVillagerWithBigHead", true);
     }
 }

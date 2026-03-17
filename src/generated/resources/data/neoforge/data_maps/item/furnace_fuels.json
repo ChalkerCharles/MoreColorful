@@ -18,6 +18,9 @@
     "morecolorful:bass_drum": {
       "burn_time": 300
     },
+    "morecolorful:cardboard_block": {
+      "burn_time": 300
+    },
     "morecolorful:cello": {
       "burn_time": 200
     },
@@ -45,11 +48,17 @@
     "morecolorful:guzheng": {
       "burn_time": 300
     },
+    "morecolorful:papercraft_table": {
+      "burn_time": 300
+    },
     "morecolorful:pinwheel": {
       "burn_time": 200
     },
     "morecolorful:pipa": {
       "burn_time": 200
+    },
+    "morecolorful:pyrotechnics_table": {
+      "burn_time": 300
     },
     "morecolorful:tom-tom_drum": {
       "burn_time": 300

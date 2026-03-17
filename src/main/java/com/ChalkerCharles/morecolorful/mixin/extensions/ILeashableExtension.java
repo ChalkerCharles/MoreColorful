@@ -38,8 +38,12 @@ public interface ILeashableExtension {
         return (Entity) this;
     }
 
+    default boolean moreColorful$canDropLeash() {
+        return true;
+    }
+
     default boolean moreColorful$canHaveALeashAttachedTo(Entity entity) {
-        if (self() == entity) {
+        if (this == entity) {
             return false;
         } else if (this.moreColorful$leashDistanceTo(entity) > this.moreColorful$leashSnapDistance()) {
             return false;
@@ -53,7 +57,7 @@ public interface ILeashableExtension {
     }
 
     default void moreColorful$onElasticLeashPull() {
-        IEntityExtension.checkFallDistanceAccumulation(entity());
+        entity().checkSlowFallDistance();
         if (this instanceof AbstractHorse horse) {
             if (horse.isEating()) {
                 horse.setEating(false);
@@ -100,7 +104,7 @@ public interface ILeashableExtension {
         if (wrenches.isEmpty()) {
             return false;
         } else {
-            Wrench result = Wrench.accumulate(wrenches);
+            Wrench result = Wrench.accumulate(wrenches).scale(quadConnection ? 0.25 : 1.0);
             LeashData.setAngularMomentum(leashData, LeashData.angularMomentum(leashData) + 10.0 * result.torque());
             Vec3 vec3 = getHolderMovement(leashHolder).subtract(entity().getKnownMovement());
             entity().addDeltaMovement(result.force().multiply(AXIS_SPECIFIC_ELASTICITY).add(vec3.scale(0.11)));
@@ -212,6 +216,10 @@ public interface ILeashableExtension {
         return (ILeashableExtension) leashable;
     }
 
+    static boolean canDropLeash(Leashable leashable) {
+        return self(leashable).moreColorful$canDropLeash();
+    }
+
     static boolean canHaveALeashAttachedTo(Leashable leashable, Entity entity) {
         return self(leashable).moreColorful$canHaveALeashAttachedTo(entity);
     }
@@ -284,7 +292,7 @@ public interface ILeashableExtension {
                 double z = 0.0;
                 double t = 0.0;
 
-                for(Wrench wrench : wrenches) {
+                for (Wrench wrench : wrenches) {
                     Vec3 force = wrench.force;
                     x += force.x;
                     y += force.y;

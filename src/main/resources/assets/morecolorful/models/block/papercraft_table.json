@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "morecolorful:block/willow_planks",
+    "east": "morecolorful:block/papercraft_table_side",
+    "north": "morecolorful:block/papercraft_table_front",
+    "particle": "morecolorful:block/papercraft_table_front",
+    "south": "morecolorful:block/papercraft_table_front",
+    "up": "morecolorful:block/papercraft_table_top",
+    "west": "morecolorful:block/papercraft_table_side"
+  }
+}

@@ -4,7 +4,7 @@
   "group": "pennant",
   "ingredients": [
     {
-      "item": "minecraft:green_dye"
+      "tag": "c:dyes/green"
     },
     [
       {

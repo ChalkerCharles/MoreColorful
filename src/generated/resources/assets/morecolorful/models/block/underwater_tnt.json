@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "morecolorful:block/underwater_tnt_bottom",
+    "side": "morecolorful:block/underwater_tnt_side",
+    "top": "morecolorful:block/underwater_tnt_top"
+  }
+}

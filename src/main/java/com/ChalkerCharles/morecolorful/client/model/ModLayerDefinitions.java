@@ -18,5 +18,8 @@ public class ModLayerDefinitions {
         event.registerLayerDefinition(ModModelLayers.DRUM_SET_RIDE, DrumSetRenderer::createRide);
         event.registerLayerDefinition(ModModelLayers.DRUM_SET_CRASH, DrumSetRenderer::createCrash);
         event.registerLayerDefinition(ModModelLayers.BALLOON, BalloonModel::create);
+        event.registerLayerDefinition(ModModelLayers.BALLOON_HEART, BalloonModel::createHeart);
+        event.registerLayerDefinition(ModModelLayers.BALLOON_STAR, BalloonModel::createStar);
+        event.registerLayerDefinition(ModModelLayers.BALLOON_RABBIT, BalloonModel::createRabbit);
     }
 }

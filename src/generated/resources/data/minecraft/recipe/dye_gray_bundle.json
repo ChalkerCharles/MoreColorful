@@ -4,7 +4,7 @@
   "group": "bundle",
   "ingredients": [
     {
-      "item": "minecraft:gray_dye"
+      "tag": "c:dyes/gray"
     },
     [
       {

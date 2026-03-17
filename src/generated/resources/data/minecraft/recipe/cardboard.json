@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "morecolorful:cardboard_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "morecolorful:cardboard"
+  }
+}

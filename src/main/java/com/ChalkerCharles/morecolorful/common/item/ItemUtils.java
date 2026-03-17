@@ -8,10 +8,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.ShearsItem;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.common.Tags;
@@ -63,6 +60,10 @@ public final class ItemUtils extends net.minecraft.world.item.ItemUtils {
             case RED -> ModItems.RED_BUNDLE;
             case BLACK -> ModItems.BLACK_BUNDLE;
         };
+    }
+
+    public static Item[] itemArray(ItemLike[] array) {
+        return Arrays.stream(array).map(ItemLike::asItem).toArray(Item[]::new);
     }
     
     public static boolean isShears(ItemStack stack) {

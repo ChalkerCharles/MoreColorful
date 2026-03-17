@@ -158,7 +158,7 @@ public abstract class LivingEntityMixin extends Entity implements IEntityExtensi
 
     @Inject(method = "updateFallFlying", at = @At("HEAD"))
     private void updateFallFlying(CallbackInfo ci) {
-        this.moreColorful$checkFallDistanceAccumulation();
+        this.checkSlowFallDistance();
     }
 
     @Override

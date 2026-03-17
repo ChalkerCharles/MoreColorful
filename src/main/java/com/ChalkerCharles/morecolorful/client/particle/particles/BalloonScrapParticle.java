@@ -59,7 +59,7 @@ public class BalloonScrapParticle extends TextureSheetParticle implements WindSe
             TextureAtlasSprite[] sprites = new TextureAtlasSprite[4];
             for (int i = 0; i < 4; i++) {
                 String path = variant.isSpecial()
-                        ? "particle/balloon_" + variant.getName() + '_' + i
+                        ? "balloon_" + variant.getName() + '_' + i
                         : "colored/balloon/balloon_" + i + '_' + variant.getName();
                 sprites[i] = atlas.getSprite(MoreColorful.location(path));
             }

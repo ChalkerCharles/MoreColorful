@@ -5,13 +5,22 @@ import com.ChalkerCharles.morecolorful.common.block.ModBlocks;
 import com.ChalkerCharles.morecolorful.common.entity.misc.Balloon;
 import com.ChalkerCharles.morecolorful.common.entity.misc.SandbagEntity;
 import com.ChalkerCharles.morecolorful.common.item.ModItems;
+import com.ChalkerCharles.morecolorful.mixin.extensions.IEntityExtension;
 import com.ChalkerCharles.morecolorful.util.Maths;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.dispenser.BlockSource;
+import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
+import net.minecraft.core.dispenser.DispenseItemBehavior;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.EntitySelector;
+import net.minecraft.world.entity.Leashable;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.decoration.LeashFenceKnotEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeColor;
@@ -20,8 +29,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -47,8 +59,36 @@ public class BalloonItem extends Item {
             ModItems.MAGENTA_BALLOON,
             ModItems.PINK_BALLOON
     };
-    public static final ItemLike[] SPECIAL = new ItemLike[] {};
+    public static final ItemLike[] SPECIAL = new ItemLike[] {
+            ModItems.CREEPER_BALLOON,
+            ModItems.HEART_BALLOON,
+            ModItems.STAR_BALLOON,
+            ModItems.RABBIT_BALLOON
+    };
     public static final ItemLike[] ALL_TYPES = Maths.concatArray(ItemLike[]::new, COMMON, SPECIAL);
+    public static final DispenseItemBehavior DISPENSE_ITEM_BEHAVIOR = new DefaultDispenseItemBehavior() {
+        @Override
+        protected ItemStack execute(BlockSource blockSource, ItemStack item) {
+            if (!(item.getItem() instanceof BalloonItem balloon)) return item;
+            ServerLevel level = blockSource.level();
+            Direction facing = blockSource.state().getValue(DispenserBlock.FACING);
+            BlockPos blockpos = blockSource.pos().relative(facing);
+            for (LivingEntity living : level.getEntitiesOfClass(LivingEntity.class, new AABB(blockpos), EntitySelector.NO_SPECTATORS)) {
+                if (living.isAlive()
+                        && living instanceof Leashable leashable
+                        && leashable.canBeLeashed()
+                        && IEntityExtension.balloonAttachable(living)) {
+                    Vec3 vec = Vec3.atLowerCornerOf(facing.getNormal()).reverse();
+                    level.addFreshEntity(new Balloon(level, vec, living, balloon.variant));
+                    level.gameEvent(GameEvent.ENTITY_PLACE, living.position(), GameEvent.Context.of(living));
+                    living.playSound(ModSounds.LEAD_TIED.get());
+                    item.shrink(1);
+                    break;
+                }
+            }
+            return item;
+        }
+    };
     public final Balloon.Variant variant;
 
     public BalloonItem(Properties pProperties, Balloon.Variant variant) {

@@ -6,8 +6,7 @@ import com.ChalkerCharles.morecolorful.common.block.musical.*;
 import com.ChalkerCharles.morecolorful.common.block.natural.*;
 import com.ChalkerCharles.morecolorful.common.block.ornamental.*;
 import com.ChalkerCharles.morecolorful.common.block.properties.*;
-import com.ChalkerCharles.morecolorful.common.block.utility.FanBlock;
-import com.ChalkerCharles.morecolorful.common.block.utility.WeatherVaneBlock;
+import com.ChalkerCharles.morecolorful.common.block.utility.*;
 import com.ChalkerCharles.morecolorful.util.InstrumentsType;
 import com.ChalkerCharles.morecolorful.common.worldgen.features.trees.ModTreeGrower;
 import net.minecraft.core.Direction;
@@ -297,22 +296,22 @@ public class ModBlocks {
     public static final DeferredBlock<Block> CLOSED_BLUE_WATER_LILY = register("closed_blue_water_lily", () -> new WaterLilyBlock(false, ofFullCopy(Blocks.LILY_PAD).randomTicks()));
     public static final DeferredBlock<Block> DUCKWEEDS = register("duckweeds", () -> new DuckweedsBlock(ofFullCopy(Blocks.LILY_PAD).replaceable().noCollission()));
 
-    public static final DeferredBlock<Block> WHITE_RIBBON = register("white_ribbon", () -> new RibbonBlock(ribbonProperties(DyeColor.WHITE)));
-    public static final DeferredBlock<Block> ORANGE_RIBBON = register("orange_ribbon", () -> new RibbonBlock(ribbonProperties(DyeColor.ORANGE)));
-    public static final DeferredBlock<Block> MAGENTA_RIBBON = register("magenta_ribbon", () -> new RibbonBlock(ribbonProperties(DyeColor.MAGENTA)));
-    public static final DeferredBlock<Block> LIGHT_BLUE_RIBBON = register("light_blue_ribbon", () -> new RibbonBlock(ribbonProperties(DyeColor.LIGHT_BLUE)));
-    public static final DeferredBlock<Block> YELLOW_RIBBON = register("yellow_ribbon", () -> new RibbonBlock(ribbonProperties(DyeColor.YELLOW)));
-    public static final DeferredBlock<Block> LIME_RIBBON = register("lime_ribbon", () -> new RibbonBlock(ribbonProperties(DyeColor.LIME)));
-    public static final DeferredBlock<Block> PINK_RIBBON = register("pink_ribbon", () -> new RibbonBlock(ribbonProperties(DyeColor.PINK)));
-    public static final DeferredBlock<Block> GRAY_RIBBON = register("gray_ribbon", () -> new RibbonBlock(ribbonProperties(DyeColor.GRAY)));
-    public static final DeferredBlock<Block> LIGHT_GRAY_RIBBON = register("light_gray_ribbon", () -> new RibbonBlock(ribbonProperties(DyeColor.LIGHT_GRAY)));
-    public static final DeferredBlock<Block> CYAN_RIBBON = register("cyan_ribbon", () -> new RibbonBlock(ribbonProperties(DyeColor.CYAN)));
-    public static final DeferredBlock<Block> PURPLE_RIBBON = register("purple_ribbon", () -> new RibbonBlock(ribbonProperties(DyeColor.PURPLE)));
-    public static final DeferredBlock<Block> BLUE_RIBBON = register("blue_ribbon", () -> new RibbonBlock(ribbonProperties(DyeColor.BLUE)));
-    public static final DeferredBlock<Block> BROWN_RIBBON = register("brown_ribbon", () -> new RibbonBlock(ribbonProperties(DyeColor.BROWN)));
-    public static final DeferredBlock<Block> GREEN_RIBBON = register("green_ribbon", () -> new RibbonBlock(ribbonProperties(DyeColor.GREEN)));
-    public static final DeferredBlock<Block> RED_RIBBON = register("red_ribbon", () -> new RibbonBlock(ribbonProperties(DyeColor.RED)));
-    public static final DeferredBlock<Block> BLACK_RIBBON = register("black_ribbon", () -> new RibbonBlock(ribbonProperties(DyeColor.BLACK)));
+    public static final DeferredBlock<Block> WHITE_RIBBON = register("white_ribbon", () -> ribbon(DyeColor.WHITE));
+    public static final DeferredBlock<Block> ORANGE_RIBBON = register("orange_ribbon", () -> ribbon(DyeColor.ORANGE));
+    public static final DeferredBlock<Block> MAGENTA_RIBBON = register("magenta_ribbon", () -> ribbon(DyeColor.MAGENTA));
+    public static final DeferredBlock<Block> LIGHT_BLUE_RIBBON = register("light_blue_ribbon", () -> ribbon(DyeColor.LIGHT_BLUE));
+    public static final DeferredBlock<Block> YELLOW_RIBBON = register("yellow_ribbon", () -> ribbon(DyeColor.YELLOW));
+    public static final DeferredBlock<Block> LIME_RIBBON = register("lime_ribbon", () -> ribbon(DyeColor.LIME));
+    public static final DeferredBlock<Block> PINK_RIBBON = register("pink_ribbon", () -> ribbon(DyeColor.PINK));
+    public static final DeferredBlock<Block> GRAY_RIBBON = register("gray_ribbon", () -> ribbon(DyeColor.GRAY));
+    public static final DeferredBlock<Block> LIGHT_GRAY_RIBBON = register("light_gray_ribbon", () -> ribbon(DyeColor.LIGHT_GRAY));
+    public static final DeferredBlock<Block> CYAN_RIBBON = register("cyan_ribbon", () -> ribbon(DyeColor.CYAN));
+    public static final DeferredBlock<Block> PURPLE_RIBBON = register("purple_ribbon", () -> ribbon(DyeColor.PURPLE));
+    public static final DeferredBlock<Block> BLUE_RIBBON = register("blue_ribbon", () -> ribbon(DyeColor.BLUE));
+    public static final DeferredBlock<Block> BROWN_RIBBON = register("brown_ribbon", () -> ribbon(DyeColor.BROWN));
+    public static final DeferredBlock<Block> GREEN_RIBBON = register("green_ribbon", () -> ribbon(DyeColor.GREEN));
+    public static final DeferredBlock<Block> RED_RIBBON = register("red_ribbon", () -> ribbon(DyeColor.RED));
+    public static final DeferredBlock<Block> BLACK_RIBBON = register("black_ribbon", () -> ribbon(DyeColor.BLACK));
     
     public static final DeferredBlock<Block> FAN_BLOCK = register("fan_block", () -> new FanBlock(ofFullCopy(Blocks.DISPENSER)));
     public static final DeferredBlock<Block> WEATHER_VANE = register("weather_vane", () -> new WeatherVaneBlock(ofFullCopy(Blocks.IRON_BARS).noCollission()));
@@ -334,7 +333,29 @@ public class ModBlocks {
     public static final DeferredBlock<Block> RED_PENNANT = register("red_pennant", () -> new PennantBlock(pinwheelProperties(DyeColor.RED)));
     public static final DeferredBlock<Block> BLACK_PENNANT = register("black_pennant", () -> new PennantBlock(pinwheelProperties(DyeColor.BLACK)));
 
+    public static final DeferredBlock<Block> WHITE_PAPERCUTTING = register("white_papercutting", () -> papercutting(DyeColor.WHITE));
+    public static final DeferredBlock<Block> ORANGE_PAPERCUTTING = register("orange_papercutting", () -> papercutting(DyeColor.ORANGE));
+    public static final DeferredBlock<Block> MAGENTA_PAPERCUTTING = register("magenta_papercutting", () -> papercutting(DyeColor.MAGENTA));
+    public static final DeferredBlock<Block> LIGHT_BLUE_PAPERCUTTING = register("light_blue_papercutting", () -> papercutting(DyeColor.LIGHT_BLUE));
+    public static final DeferredBlock<Block> YELLOW_PAPERCUTTING = register("yellow_papercutting", () -> papercutting(DyeColor.YELLOW));
+    public static final DeferredBlock<Block> LIME_PAPERCUTTING = register("lime_papercutting", () -> papercutting(DyeColor.LIME));
+    public static final DeferredBlock<Block> PINK_PAPERCUTTING = register("pink_papercutting", () -> papercutting(DyeColor.PINK));
+    public static final DeferredBlock<Block> GRAY_PAPERCUTTING = register("gray_papercutting", () -> papercutting(DyeColor.GRAY));
+    public static final DeferredBlock<Block> LIGHT_GRAY_PAPERCUTTING = register("light_gray_papercutting", () -> papercutting(DyeColor.LIGHT_GRAY));
+    public static final DeferredBlock<Block> CYAN_PAPERCUTTING = register("cyan_papercutting", () -> papercutting(DyeColor.CYAN));
+    public static final DeferredBlock<Block> PURPLE_PAPERCUTTING = register("purple_papercutting", () -> papercutting(DyeColor.PURPLE));
+    public static final DeferredBlock<Block> BLUE_PAPERCUTTING = register("blue_papercutting", () -> papercutting(DyeColor.BLUE));
+    public static final DeferredBlock<Block> BROWN_PAPERCUTTING = register("brown_papercutting", () -> papercutting(DyeColor.BROWN));
+    public static final DeferredBlock<Block> GREEN_PAPERCUTTING = register("green_papercutting", () -> papercutting(DyeColor.GREEN));
+    public static final DeferredBlock<Block> RED_PAPERCUTTING = register("red_papercutting", () -> papercutting(DyeColor.RED));
+    public static final DeferredBlock<Block> BLACK_PAPERCUTTING = register("black_papercutting", () -> papercutting(DyeColor.BLACK));
+
     public static final DeferredBlock<Block> SANDBAG = register("sandbag", () -> new SandbagBlock(of().mapColor(MapColor.DIRT).instrument(NoteBlockInstrument.GUITAR).strength(0.8F).sound(SoundType.WOOL).pushReaction(PushReaction.DESTROY)));
+    public static final DeferredBlock<Block> PYROTECHNICS_TABLE = register("pyrotechnics_table", () -> new PyrotechnicsTableBlock(ofFullCopy(Blocks.SMITHING_TABLE)));
+    public static final DeferredBlock<Block> PAPERCRAFT_TABLE = register("papercraft_table", () -> new PapercraftTableBlock(ofFullCopy(Blocks.FLETCHING_TABLE)));
+    public static final DeferredBlock<RotatedPillarBlock> CARDBOARD_BLOCK = register("cardboard_block", () -> new RotatedPillarBlock(of().mapColor(MapColor.WOOD).strength(0.5F).sound(ModSoundTypes.CARDBOARD)));
+
+    public static final DeferredBlock<Block> UNDERWATER_TNT = register("underwater_tnt", () -> new UnderwaterTntBlock(ofFullCopy(Blocks.TNT).mapColor(MapColor.DIAMOND)));
 
     private static <T extends Block> DeferredBlock<T> register(String name, Supplier<T> supplier) {
         return BLOCKS.register(name, supplier);
@@ -365,6 +386,14 @@ public class ModBlocks {
     @SuppressWarnings("SameParameterValue")
     private static ButtonBlock rareWoodButton(BlockSetType pType, Block pBlock, MapColor pColor) {
         return new ButtonBlock(pType, 30, ofFullCopy(pBlock).mapColor(pColor).instrument(InstrumentExtension.GUZHENG));
+    }
+
+    private static Block ribbon(DyeColor color) {
+        return new RibbonBlock(ribbonProperties(color), color);
+    }
+
+    private static Block papercutting(DyeColor color) {
+        return new PapercuttingBlock(of().noCollission().instabreak().sound(ModSoundTypes.PAPER).pushReaction(PushReaction.DESTROY).mapColor(color).ignitedByLava());
     }
 
     private static FlowerPotBlock flowerPot(Supplier<FlowerPotBlock> emptyPot, Supplier<? extends Block> potted) {

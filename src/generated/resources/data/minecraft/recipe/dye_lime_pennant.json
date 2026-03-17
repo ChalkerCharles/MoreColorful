@@ -4,7 +4,7 @@
   "group": "pennant",
   "ingredients": [
     {
-      "item": "minecraft:lime_dye"
+      "tag": "c:dyes/lime"
     },
     [
       {

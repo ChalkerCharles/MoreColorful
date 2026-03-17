@@ -4,7 +4,7 @@
   "group": "balloon",
   "ingredients": [
     {
-      "item": "minecraft:red_dye"
+      "tag": "c:dyes/red"
     },
     [
       {

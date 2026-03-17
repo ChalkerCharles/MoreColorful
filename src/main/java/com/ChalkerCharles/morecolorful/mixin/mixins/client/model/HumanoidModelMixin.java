@@ -1,4 +1,4 @@
-package com.ChalkerCharles.morecolorful.mixin.mixins.client;
+package com.ChalkerCharles.morecolorful.mixin.mixins.client.model;
 
 import com.ChalkerCharles.morecolorful.client.model.ArmPoseExtension;
 import com.ChalkerCharles.morecolorful.common.attachment.InstrumentData;

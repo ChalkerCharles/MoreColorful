@@ -215,6 +215,78 @@
         "class": "com/ChalkerCharles/morecolorful/common/entity/BoatTypeExtension$Proxy",
         "field": "WILLOW"
       }
+    },
+    {
+      "enum": "net/minecraft/world/item/component/FireworkExplosion$Shape",
+      "name": "MORECOLORFUL_CUBE",
+      "constructor": "(ILjava/lang/String;)V",
+      "parameters": {
+        "class": "com/ChalkerCharles/morecolorful/common/item/FireworkShapeExtension$Proxy",
+        "field": "CUBE"
+      }
+    },
+    {
+      "enum": "net/minecraft/world/item/component/FireworkExplosion$Shape",
+      "name": "MORECOLORFUL_HEART",
+      "constructor": "(ILjava/lang/String;)V",
+      "parameters": {
+        "class": "com/ChalkerCharles/morecolorful/common/item/FireworkShapeExtension$Proxy",
+        "field": "HEART"
+      }
+    },
+    {
+      "enum": "net/minecraft/world/item/component/FireworkExplosion$Shape",
+      "name": "MORECOLORFUL_PLANET",
+      "constructor": "(ILjava/lang/String;)V",
+      "parameters": {
+        "class": "com/ChalkerCharles/morecolorful/common/item/FireworkShapeExtension$Proxy",
+        "field": "PLANET"
+      }
+    },
+    {
+      "enum": "net/minecraft/world/item/component/FireworkExplosion$Shape",
+      "name": "MORECOLORFUL_JELLYFISH",
+      "constructor": "(ILjava/lang/String;)V",
+      "parameters": {
+        "class": "com/ChalkerCharles/morecolorful/common/item/FireworkShapeExtension$Proxy",
+        "field": "JELLYFISH"
+      }
+    },
+    {
+      "enum": "net/minecraft/world/item/component/FireworkExplosion$Shape",
+      "name": "MORECOLORFUL_CLOCK",
+      "constructor": "(ILjava/lang/String;)V",
+      "parameters": {
+        "class": "com/ChalkerCharles/morecolorful/common/item/FireworkShapeExtension$Proxy",
+        "field": "CLOCK"
+      }
+    },
+    {
+      "enum": "net/minecraft/world/item/component/FireworkExplosion$Shape",
+      "name": "MORECOLORFUL_AXIS",
+      "constructor": "(ILjava/lang/String;)V",
+      "parameters": {
+        "class": "com/ChalkerCharles/morecolorful/common/item/FireworkShapeExtension$Proxy",
+        "field": "AXIS"
+      }
+    },
+    {
+      "enum": "net/minecraft/world/item/component/FireworkExplosion$Shape",
+      "name": "MORECOLORFUL_TETRAHEDRON",
+      "constructor": "(ILjava/lang/String;)V",
+      "parameters": {
+        "class": "com/ChalkerCharles/morecolorful/common/item/FireworkShapeExtension$Proxy",
+        "field": "TETRAHEDRON"
+      }
+    },
+    {
+      "enum": "net/minecraft/world/item/component/FireworkExplosion$Shape",
+      "name": "MORECOLORFUL_HYPERBOLOID",
+      "constructor": "(ILjava/lang/String;)V",
+      "parameters": {
+        "class": "com/ChalkerCharles/morecolorful/common/item/FireworkShapeExtension$Proxy",
+        "field": "HYPERBOLOID"
+      }
     }
   ]
 }

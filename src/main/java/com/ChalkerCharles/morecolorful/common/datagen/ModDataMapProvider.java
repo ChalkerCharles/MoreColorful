@@ -38,7 +38,10 @@ public class ModDataMapProvider extends DataMapProvider {
                 .add(ModItems.DAWN_REDWOOD_ROOTS, new FurnaceFuel(100), false)
                 .add(ModTags.Items.RIBBONS, new FurnaceFuel(50), false)
                 .add(ModItems.PINWHEEL, new FurnaceFuel(200), false)
-                .add(ModTags.Items.PENNANTS, new FurnaceFuel(200), false);
+                .add(ModTags.Items.PENNANTS, new FurnaceFuel(200), false)
+                .add(ModItems.PYROTECHNICS_TABLE, new FurnaceFuel(300), false)
+                .add(ModItems.PAPERCRAFT_TABLE, new FurnaceFuel(300), false)
+                .add(ModItems.CARDBOARD_BLOCK, new FurnaceFuel(300), false);
 
         builder(NeoForgeDataMaps.COMPOSTABLES)
                 .add(ModItems.CRABAPPLE_LEAVES, new Compostable(0.3F), false)

@@ -1,12 +1,15 @@
 package com.ChalkerCharles.morecolorful.common;
 
 import com.ChalkerCharles.morecolorful.common.block.ModBlocks;
+import com.ChalkerCharles.morecolorful.common.block.ornamental.PapercuttingBlock;
 import com.ChalkerCharles.morecolorful.common.block.ornamental.PennantBlock;
 import com.ChalkerCharles.morecolorful.common.block.ornamental.RibbonBlock;
+import com.ChalkerCharles.morecolorful.common.block.utility.UnderwaterTntBlock;
 import com.ChalkerCharles.morecolorful.common.entity.BoatTypeExtension;
 import com.ChalkerCharles.morecolorful.common.entity.EntityUtils;
 import com.ChalkerCharles.morecolorful.common.entity.ModAttributes;
 import com.ChalkerCharles.morecolorful.common.item.ModItems;
+import com.ChalkerCharles.morecolorful.common.item.misc.BalloonItem;
 import com.ChalkerCharles.morecolorful.common.item.misc.PaperBoatItem;
 import com.ChalkerCharles.morecolorful.common.item.misc.PartyPopperItem;
 import com.ChalkerCharles.morecolorful.common.item.utility.UmbrellaItem;
@@ -236,6 +239,11 @@ public final class ModCommonSetup {
         for (Block block : PennantBlock.ALL_BLOCKS.get()) {
             fireblock.setFlammable(block, 30, 60);
         }
+        fireblock.setFlammable(ModBlocks.UNDERWATER_TNT.get(), 15, 100);
+        for (Block block : PapercuttingBlock.ALL_BLOCKS.get()) {
+            fireblock.setFlammable(block, 60, 100);
+        }
+        fireblock.setFlammable(ModBlocks.CARDBOARD_BLOCK.get(), 5, 20);
     }
 
     public static void registerDispenserBehaviors() {
@@ -260,6 +268,11 @@ public final class ModCommonSetup {
         for (ItemLike item : PartyPopperItem.ALL_COLORS) {
             DispenserBlock.registerBehavior(item, PartyPopperItem.DISPENSE_ITEM_BEHAVIOR);
         }
+        for (ItemLike item : BalloonItem.ALL_TYPES) {
+            DispenserBlock.registerBehavior(item, BalloonItem.DISPENSE_ITEM_BEHAVIOR);
+        }
+        DispenserBlock.registerBehavior(ModItems.UNDERWATER_TNT, UnderwaterTntBlock.DISPENSE_ITEM_BEHAVIOR);
+        DispenserBlock.registerProjectileBehavior(ModItems.BOMB);
     }
 
     public static void registerCauldronInteractions() {

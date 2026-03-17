@@ -213,6 +213,11 @@ public abstract class LevelRendererMixin implements ILevelRendererExtension {
         }
     }
 
+    @WrapOperation(method = "renderEntity", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/Mth;lerp(FFF)F"))
+    private float renderEntity$fixRot(float delta, float start, float end, Operation<Float> original) {
+        return Mth.rotLerp(delta, start, end);
+    }
+
     @ModifyVariable(method = "renderClouds", at = @At(value = "STORE", ordinal = 0), ordinal = 5)
     private double renderClouds$x(double d2, @Local(argsOnly = true) float partialTick) {
         if (Config.windAndCloud) {

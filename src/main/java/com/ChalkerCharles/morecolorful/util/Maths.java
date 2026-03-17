@@ -3,6 +3,9 @@ package com.ChalkerCharles.morecolorful.util;
 import net.minecraft.core.Direction;
 import net.minecraft.core.SectionPos;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
+import org.joml.Quaternionf;
+import org.joml.Vector3f;
 import org.joml.Vector4f;
 
 import java.util.function.BinaryOperator;
@@ -73,5 +76,27 @@ public final class Maths {
         boolean colValid = col == width >> 1 || col == (width - 1) >> 1;
         boolean rowValid = row == height >> 1 || row == (height - 1) >> 1;
         return colValid && rowValid;
+    }
+
+    public static Quaternionf randomQuaternion(RandomSource random) {
+        float u1 = random.nextFloat(), u2 = random.nextFloat(), u3 = random.nextFloat();
+        float f0 = Mth.sqrt(1 - u1);
+        float f1 = Mth.sqrt(u1);
+        float f2 = Mth.TWO_PI * u2;
+        float f3 = Mth.TWO_PI * u3;
+        float x = f0 * Mth.sin(f2);
+        float y = f0 * Mth.cos(f2);
+        float z = f1 * Mth.sin(f3);
+        float w = f1 * Mth.cos(f3);
+        return new Quaternionf(x, y, z, w);
+    }
+
+    public static Vector3f[] transform(Vector3f[] vectors, Quaternionf quaternion) {
+        int size = vectors.length;
+        Vector3f[] transformed = new Vector3f[size];
+        for (int i = 0; i < size; i++) {
+            transformed[i] = quaternion.transform(vectors[i], new Vector3f());
+        }
+        return transformed;
     }
 }

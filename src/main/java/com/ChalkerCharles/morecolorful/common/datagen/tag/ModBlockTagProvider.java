@@ -39,7 +39,9 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 ModBlocks.CLOSED_WATER_LILY.get(),
                 ModBlocks.CLOSED_WHITE_WATER_LILY.get(),
                 ModBlocks.CLOSED_BLUE_WATER_LILY.get(),
-                ModBlocks.WILLOW_BRANCHES.get()
+                ModBlocks.WILLOW_BRANCHES.get(),
+                ModBlocks.PYROTECHNICS_TABLE.get(),
+                ModBlocks.PAPERCRAFT_TABLE.get()
         );
         tag(BlockTags.MINEABLE_WITH_HOE).addTag(
                 ModTags.Blocks.LEAF_LITTERS
@@ -63,7 +65,8 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 ModBlocks.SPEEDWELLS.get(),
                 ModBlocks.WOOD_SORRELS.get(),
                 ModBlocks.DUCKWEEDS.get(),
-                ModBlocks.WILLOW_LEAVES.get()
+                ModBlocks.WILLOW_LEAVES.get(),
+                ModBlocks.CARDBOARD_BLOCK.get()
         );
         tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
                 ModBlocks.HARP.get(),

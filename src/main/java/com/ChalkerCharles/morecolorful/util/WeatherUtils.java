@@ -24,6 +24,14 @@ public final class WeatherUtils {
         return Config.windlessDimensions.contains(level.dimension());
     }
 
+    public static boolean isWindyNow(Level level) {
+        return getGlobalWindSpeed(level).length() > 8;
+    }
+
+    public static boolean suitableForKiteFly(Level level) {
+        return getGlobalWindSpeed(level).length() > 9;
+    }
+
     private static Vector2f getGlobalWindSpeed(Level level) {
         return level.isClientSide ? RenderUtils.windSpeed : LevelSavedData.getGlobalWindSpeed(level);
     }

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "morecolorful:star_balloon"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_yellow_balloon": {
+      "conditions": {
+        "items": [
+          {
+            "items": "morecolorful:yellow_balloon"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_yellow_balloon"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "morecolorful:star_balloon"
+    ]
+  }
+}

@@ -40,7 +40,6 @@ public abstract class EntityMixin implements IEntityExtension, Self<Entity> {
     private Level level;
     @Shadow
     private BlockPos blockPosition;
-
     @Shadow
     public abstract boolean isAlive();
     @Shadow
@@ -72,7 +71,7 @@ public abstract class EntityMixin implements IEntityExtension, Self<Entity> {
         Entity self = this.moreColorful$self();
         if (this.isAlive() && this instanceof Leashable leashable && leashable.canBeLeashed() && player.isSecondaryUseActive()) {
             ItemStack itemstack = player.getItemInHand(hand);
-            if (itemstack.getItem() instanceof BalloonItem item && !(self instanceof Balloon)) {
+            if (itemstack.getItem() instanceof BalloonItem item && this.moreColorful$balloonAttachable()) {
                 if (!this.level.isClientSide()) {
                     this.level.addFreshEntity(new Balloon(this.level, player, self, item.variant));
                     level.gameEvent(GameEvent.ENTITY_PLACE, self.position(), GameEvent.Context.of(player));

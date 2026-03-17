@@ -4,7 +4,7 @@
   "group": "party_popper",
   "ingredients": [
     {
-      "item": "minecraft:gray_dye"
+      "tag": "c:dyes/gray"
     },
     [
       {

@@ -7,6 +7,7 @@ import com.ChalkerCharles.morecolorful.common.block.properties.RibbonState;
 import com.ChalkerCharles.morecolorful.common.item.ItemUtils;
 import com.ChalkerCharles.morecolorful.common.item.ModItems;
 import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundSource;
@@ -39,7 +40,12 @@ import net.neoforged.neoforge.common.util.Lazy;
 import javax.annotation.Nullable;
 
 public class RibbonBlock extends Block implements SimpleWaterloggedBlock {
-    public static final MapCodec<RibbonBlock> CODEC = simpleCodec(RibbonBlock::new);
+    public static final MapCodec<RibbonBlock> CODEC =  RecordCodecBuilder.mapCodec(
+            instance -> instance.group(
+                    propertiesCodec(),
+                    DyeColor.CODEC.fieldOf("color").forGetter(RibbonBlock::color)
+            ).apply(instance, RibbonBlock::new)
+    );
     public static final EnumProperty<RibbonState> RIBBON_STATE = ModBlockStateProperties.RIBBON_STATE;
     public static final BooleanProperty AUTO_CONNECT = ModBlockStateProperties.AUTO_CONNECT;
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
@@ -92,19 +98,25 @@ public class RibbonBlock extends Block implements SimpleWaterloggedBlock {
             ModItems.MAGENTA_RIBBON,
             ModItems.PINK_RIBBON
     };
+    private final DyeColor color;
 
-    public RibbonBlock(Properties properties) {
+    public RibbonBlock(Properties properties, DyeColor color) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(RIBBON_STATE, RibbonState.DEFAULT)
                 .setValue(FACING, Direction.NORTH)
                 .setValue(WATERLOGGED, false)
         );
+        this.color = color;
     }
 
     @Override
     protected MapCodec<RibbonBlock> codec() {
         return CODEC;
+    }
+
+    public DyeColor color() {
+        return this.color;
     }
 
     public static ItemLike itemByColor(DyeColor color) {

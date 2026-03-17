@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_lime_balloon": {
+      "conditions": {
+        "items": [
+          {
+            "items": "morecolorful:lime_balloon"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "morecolorful:creeper_balloon"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_lime_balloon"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "morecolorful:creeper_balloon"
+    ]
+  }
+}

@@ -2,6 +2,7 @@ package com.ChalkerCharles.morecolorful.common.datagen;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.common.block.ModBlocks;
+import com.ChalkerCharles.morecolorful.common.block.ornamental.PapercuttingBlock;
 import com.ChalkerCharles.morecolorful.common.block.ornamental.PennantBlock;
 import com.ChalkerCharles.morecolorful.common.block.ornamental.RibbonBlock;
 import com.ChalkerCharles.morecolorful.common.datagen.helper.ModBlockStateHelper;
@@ -212,6 +213,11 @@ public class ModBlockStateProvider extends ModBlockStateHelper {
         for (Block block : PennantBlock.ALL_BLOCKS.get()) {
             emptyModelWithParticle(block);
         }
+        cubeBottomTop(ModBlocks.UNDERWATER_TNT);
+        for (Block block : PapercuttingBlock.ALL_BLOCKS.get()) {
+            emptyModel(block);
+        }
+        logBlock(ModBlocks.CARDBOARD_BLOCK);
     }
 
     private void registerStatesOnly() {
@@ -260,5 +266,7 @@ public class ModBlockStateProvider extends ModBlockStateHelper {
         simpleStateBlock(ModBlocks.WEATHER_VANE);
         simpleStateBlock(ModBlocks.SANDBAG);
         simpleStateBlock(ModBlocks.PINWHEEL);
+        simpleStateBlock(ModBlocks.PYROTECHNICS_TABLE);
+        simpleStateBlock(ModBlocks.PAPERCRAFT_TABLE);
     }
 }

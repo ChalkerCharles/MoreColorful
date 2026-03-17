@@ -4,6 +4,8 @@ import com.ChalkerCharles.morecolorful.Config;
 import com.ChalkerCharles.morecolorful.common.attachment.LevelSavedData;
 import com.ChalkerCharles.morecolorful.common.block.ornamental.PinwheelBlock;
 import com.ChalkerCharles.morecolorful.common.command.ModWeatherCommand;
+import com.ChalkerCharles.morecolorful.common.entity.ai.memory.KiteMemory;
+import com.ChalkerCharles.morecolorful.common.entity.misc.PrimedUnderwaterTnt;
 import com.ChalkerCharles.morecolorful.common.item.ModDataComponents;
 import com.ChalkerCharles.morecolorful.common.item.ModItems;
 import com.ChalkerCharles.morecolorful.common.item.utility.UmbrellaItem;
@@ -11,12 +13,14 @@ import com.ChalkerCharles.morecolorful.common.level.thermal.ILevelThermalEngine;
 import com.ChalkerCharles.morecolorful.common.level.wind.BurstWindZone;
 import com.ChalkerCharles.morecolorful.common.level.wind.ILevelVentEngine;
 import com.ChalkerCharles.morecolorful.mixin.extensions.IEntityExtension;
+import com.ChalkerCharles.morecolorful.mixin.extensions.IExplosionExtension;
 import com.ChalkerCharles.morecolorful.network.packets.*;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.monster.Bogged;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
@@ -83,7 +87,7 @@ public final class ModCommonEvents {
         Entity entity = event.getEntity();
         if (Config.windSystem) {
             PinwheelBlock.applyWind(entity);
-            if (Config.windPhysics) {
+            if (Config.windPhysics && entity.isControlledByLocalInstance()) {
                 IEntityExtension.applyWind(entity);
             }
         }
@@ -96,6 +100,9 @@ public final class ModCommonEvents {
         if (!entity.isPassenger() && !entity.isInFluidType()) {
             UmbrellaItem.applyAirResistance(entity);
         }
+        if (entity instanceof Mob mob) {
+            KiteMemory.check(mob);
+        }
     }
 
     @SubscribeEvent
@@ -107,12 +114,17 @@ public final class ModCommonEvents {
                 && mob.getType().is(ModTags.EntityTypes.CAN_SPAWN_WITH_UMBRELLA)
                 && random.nextFloat() < 0.1F
                 && mob.getOffhandItem().isEmpty()) {
-            ItemStack item = ModItems.UMBRELLA.toStack();
-            UmbrellaItem.open(item);
+            ItemStack item;
             float chance = random.nextFloat();
-            if (chance < 0.75F) {
-                item.set(ModDataComponents.UMBRELLA_COLOR, UmbrellaItem.chooseColor(chance, random));
+            if (mob instanceof Bogged && chance < 0.5F) {
+                item = ModItems.DRIPLEAF_UMBRELLA.toStack();
+            } else {
+                item = ModItems.UMBRELLA.toStack();
+                if (chance < 0.75F) {
+                    item.set(ModDataComponents.UMBRELLA_COLOR, UmbrellaItem.chooseColor(chance, random));
+                }
             }
+            UmbrellaItem.open(item);
             mob.setItemSlot(EquipmentSlot.OFFHAND, item);
         }
     }
@@ -124,15 +136,20 @@ public final class ModCommonEvents {
 
     @SubscribeEvent
     public static void onExplosionStart(ExplosionEvent.Start event) {
-        if (!Config.windSystem) return;
         Level level = event.getLevel();
         if (level.isClientSide) return;
         Explosion explosion = event.getExplosion();
-        Vec3 origin = explosion.center();
-        float radius = explosion.radius() * 1.5F;
-        BurstWindZone windZone = new BurstWindZone(origin, radius, 16, 20);
-        LevelSavedData.addWindZone(level, windZone);
-        PacketDistributor.sendToPlayersInDimension((ServerLevel) level, new WindZonePacket(windZone));
+        if (Config.windSystem) {
+            Vec3 origin = explosion.center();
+            float radius = explosion.radius() * 1.5F;
+            BurstWindZone windZone = new BurstWindZone(origin, radius, 16, 20);
+            LevelSavedData.addWindZone(level, windZone);
+            PacketDistributor.sendToPlayersInDimension((ServerLevel) level, new WindZonePacket(windZone));
+        }
+        Entity entity = explosion.getDirectSourceEntity();
+        if (entity instanceof PrimedUnderwaterTnt) {
+            IExplosionExtension.setIgnoreFluid(explosion);
+        }
     }
 
     @SubscribeEvent

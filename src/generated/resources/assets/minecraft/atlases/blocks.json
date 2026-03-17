@@ -96,6 +96,36 @@
         "morecolorful:colored/pinwheel/14",
         "morecolorful:colored/pinwheel/15"
       ]
+    },
+    {
+      "type": "minecraft:paletted_permutations",
+      "palette_key": "morecolorful:colored/palettes/paper/palette",
+      "permutations": {
+        "black": "morecolorful:colored/palettes/paper/black",
+        "blue": "morecolorful:colored/palettes/paper/blue",
+        "brown": "morecolorful:colored/palettes/paper/brown",
+        "cyan": "morecolorful:colored/palettes/paper/cyan",
+        "gray": "morecolorful:colored/palettes/paper/gray",
+        "green": "morecolorful:colored/palettes/paper/green",
+        "light_blue": "morecolorful:colored/palettes/paper/light_blue",
+        "light_gray": "morecolorful:colored/palettes/paper/light_gray",
+        "lime": "morecolorful:colored/palettes/paper/lime",
+        "magenta": "morecolorful:colored/palettes/paper/magenta",
+        "orange": "morecolorful:colored/palettes/paper/orange",
+        "pink": "morecolorful:colored/palettes/paper/pink",
+        "purple": "morecolorful:colored/palettes/paper/purple",
+        "red": "morecolorful:colored/palettes/paper/red",
+        "white": "morecolorful:colored/palettes/paper/white",
+        "yellow": "morecolorful:colored/palettes/paper/yellow"
+      },
+      "textures": [
+        "morecolorful:colored/kite_item/0",
+        "morecolorful:colored/kite_item/1",
+        "morecolorful:colored/kite_item/2",
+        "morecolorful:colored/kite_item/3",
+        "morecolorful:colored/kite_item/tail",
+        "morecolorful:colored/kite_item/bow"
+      ]
     }
   ]
 }

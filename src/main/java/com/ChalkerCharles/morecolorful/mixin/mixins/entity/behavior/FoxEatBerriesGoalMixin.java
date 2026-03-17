@@ -1,4 +1,4 @@
-package com.ChalkerCharles.morecolorful.mixin.mixins.entity;
+package com.ChalkerCharles.morecolorful.mixin.mixins.entity.behavior;
 
 import com.ChalkerCharles.morecolorful.common.block.natural.BerryBushBlock;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;

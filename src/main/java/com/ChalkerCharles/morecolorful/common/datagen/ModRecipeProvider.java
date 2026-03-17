@@ -4,9 +4,7 @@ import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.common.ModTags;
 import com.ChalkerCharles.morecolorful.common.datagen.helper.ModRecipeHelper;
 import com.ChalkerCharles.morecolorful.common.item.ModItems;
-import com.ChalkerCharles.morecolorful.common.recipe.PinwheelDyeRecipe;
-import com.ChalkerCharles.morecolorful.common.recipe.SheetMusicCloningRecipe;
-import com.ChalkerCharles.morecolorful.common.recipe.UmbrellaDyeRecipe;
+import com.ChalkerCharles.morecolorful.common.recipe.*;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
@@ -308,6 +306,21 @@ public class ModRecipeProvider extends ModRecipeHelper {
                 .unlockedBy("has_wind_charge", has(Items.WIND_CHARGE))
                 .save(recipeOutput);
         balloonDyeRecipes(recipeOutput);
+        specialBalloon(recipeOutput, ModItems.CREEPER_BALLOON, ModItems.LIME_BALLOON);
+        specialBalloon(recipeOutput, ModItems.HEART_BALLOON, ModItems.RED_BALLOON);
+        specialBalloon(recipeOutput, ModItems.STAR_BALLOON, ModItems.YELLOW_BALLOON);
+        specialBalloon(recipeOutput, ModItems.RABBIT_BALLOON, ModItems.PINK_BALLOON);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.KITE)
+                .define('#', Items.PAPER)
+                .define('|', Tags.Items.RODS_WOODEN)
+                .define('S', Items.LEAD)
+                .pattern(" ##")
+                .pattern("|##")
+                .pattern("S| ")
+                .unlockedBy("has_paper", has(Items.PAPER))
+                .save(recipeOutput);
+        SpecialRecipeBuilder.special(KiteDyeRecipe::new).save(recipeOutput, MoreColorful.location("kite_dye"));
+        SpecialRecipeBuilder.special(AttachRibbonRecipe::new).save(recipeOutput, MoreColorful.location("attach_ribbon"));
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.UMBRELLA)
                 .define('#', Tags.Items.LEATHERS)
                 .define('|', Tags.Items.RODS_WOODEN)
@@ -317,10 +330,64 @@ public class ModRecipeProvider extends ModRecipeHelper {
                 .unlockedBy("has_leather", has(Tags.Items.LEATHERS))
                 .save(recipeOutput);
         SpecialRecipeBuilder.special(UmbrellaDyeRecipe::new).save(recipeOutput, MoreColorful.location("umbrella_dye"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.DRIPLEAF_UMBRELLA)
+                .define('#', Items.BIG_DRIPLEAF)
+                .define('|', Tags.Items.RODS_WOODEN)
+                .pattern("###")
+                .pattern(" | ")
+                .pattern(" | ")
+                .unlockedBy("has_drip_leaf", has(Items.BIG_DRIPLEAF))
+                .save(recipeOutput);
         ShapelessRecipeBuilder.shapeless(RecipeCategory.DECORATIONS, ModItems.SANDBAG)
                 .requires(ModTags.Items.BUNDLES)
                 .requires(Tags.Items.SANDS)
                 .unlockedBy("has_bundle", has(ModTags.Items.BUNDLES))
                 .save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModItems.PYROTECHNICS_TABLE)
+                .define('#', ItemTags.PLANKS)
+                .define('@', Tags.Items.GUNPOWDERS)
+                .pattern("@@")
+                .pattern("##")
+                .pattern("##")
+                .unlockedBy("has_gunpowder", has(Tags.Items.GUNPOWDERS))
+                .save(recipeOutput);
+        fireworkShapeTemplate(recipeOutput, ModItems.FIREWORK_SHAPE_TEMPLATE_LARGE_BALL, Items.FIRE_CHARGE);
+        fireworkShapeTemplate(recipeOutput, ModItems.FIREWORK_SHAPE_TEMPLATE_STAR, Tags.Items.NUGGETS_GOLD);
+        fireworkShapeTemplate(recipeOutput, ModItems.FIREWORK_SHAPE_TEMPLATE_CREEPER, ItemTags.SKULLS);
+        fireworkShapeTemplate(recipeOutput, ModItems.FIREWORK_SHAPE_TEMPLATE_BURST, Tags.Items.FEATHERS);
+        fireworkShapeTemplate(recipeOutput, ModItems.FIREWORK_SHAPE_TEMPLATE_CUBE, Items.GRASS_BLOCK);
+        ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, ModItems.UNDERWATER_TNT)
+                .define('#', Items.TNT)
+                .define('@', Items.PRISMARINE_SHARD)
+                .pattern(" @ ")
+                .pattern("@#@")
+                .pattern(" @ ")
+                .unlockedBy("has_prismarine_shard", has(Items.PRISMARINE_SHARD))
+                .save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.BOMB, 4)
+                .define('T', Items.TNT)
+                .define('#', Tags.Items.INGOTS_IRON)
+                .define('~', Tags.Items.STRINGS)
+                .pattern(" #~")
+                .pattern("#T#")
+                .pattern(" # ")
+                .unlockedBy("has_tnt", has(Items.TNT))
+                .save(recipeOutput);
+        SpecialRecipeBuilder.special(PapercuttingDyeRecipe::new).save(recipeOutput, MoreColorful.location("papercutting_dye"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModItems.PAPERCRAFT_TABLE)
+                .define('#', ItemTags.PLANKS)
+                .define('@', ModItems.CARDBOARD)
+                .pattern("@@")
+                .pattern("##")
+                .pattern("##")
+                .unlockedBy("has_cardboard", has(ModItems.CARDBOARD))
+                .save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.CARDBOARD, 3)
+                .define('#', Items.PAPER)
+                .pattern("###")
+                .pattern("###")
+                .unlockedBy("has_paper", has(Items.PAPER))
+                .save(recipeOutput);
+        nineBlockStorageRecipes(recipeOutput, RecipeCategory.MISC, ModItems.CARDBOARD, RecipeCategory.BUILDING_BLOCKS, ModItems.CARDBOARD_BLOCK);
     }
 }

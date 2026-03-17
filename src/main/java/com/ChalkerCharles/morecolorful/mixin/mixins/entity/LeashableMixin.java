@@ -2,7 +2,6 @@ package com.ChalkerCharles.morecolorful.mixin.mixins.entity;
 
 import com.ChalkerCharles.morecolorful.Config;
 import com.ChalkerCharles.morecolorful.common.ModSounds;
-import com.ChalkerCharles.morecolorful.common.entity.misc.Balloon;
 import com.ChalkerCharles.morecolorful.mixin.extensions.IEntityExtension;
 import com.ChalkerCharles.morecolorful.mixin.extensions.ILeashableExtension;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
@@ -24,8 +23,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(Leashable.class)
 public interface LeashableMixin extends ILeashableExtension {
     @WrapWithCondition(method = "restoreLeashFromSave", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;spawnAtLocation(Lnet/minecraft/world/level/ItemLike;)Lnet/minecraft/world/entity/item/ItemEntity;"))
-    private static boolean restoreLeashFromSave(Entity instance, ItemLike item) {
-        return !(instance instanceof Balloon);
+    private static <E extends Entity & Leashable> boolean restoreLeashFromSave(E entity, ItemLike item) {
+        return ILeashableExtension.canDropLeash(entity);
     }
 
     @Inject(method = "dropLeash(Lnet/minecraft/world/entity/Entity;ZZ)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Leashable;setLeashData(Lnet/minecraft/world/entity/Leashable$LeashData;)V", shift = At.Shift.AFTER))
@@ -36,8 +35,8 @@ public interface LeashableMixin extends ILeashableExtension {
     }
 
     @WrapWithCondition(method = "dropLeash(Lnet/minecraft/world/entity/Entity;ZZ)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;spawnAtLocation(Lnet/minecraft/world/level/ItemLike;)Lnet/minecraft/world/entity/item/ItemEntity;"))
-    private static boolean dropLeash(Entity instance, ItemLike item) {
-        return !(instance instanceof Balloon);
+    private static <E extends Entity & Leashable> boolean dropLeash(E entity, ItemLike item) {
+        return ILeashableExtension.canDropLeash(entity);
     }
 
     @Inject(method = "tickLeash", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;distanceTo(Lnet/minecraft/world/entity/Entity;)F"), cancellable = true)
@@ -56,9 +55,9 @@ public interface LeashableMixin extends ILeashableExtension {
         } else {
             entity.closeRangeLeashBehaviour(leashHolder);
         }
-        double angularMomentum = ILeashableExtension.LeashData.angularMomentum(leashData);
+        double angularMomentum = LeashData.angularMomentum(leashData);
         entity.setYRot((float) (entity.getYRot() - angularMomentum));
-        ILeashableExtension.LeashData.setAngularMomentum(leashData, angularMomentum * ILeashableExtension.angularFriction(entity));
+        LeashData.setAngularMomentum(leashData, angularMomentum * ILeashableExtension.angularFriction(entity));
     }
 
     @ModifyExpressionValue(method = "tickLeash", at = @At(value = "CONSTANT", args = "doubleValue=10.0"))
@@ -92,7 +91,7 @@ public interface LeashableMixin extends ILeashableExtension {
     }
 
     @Mixin(Leashable.LeashData.class)
-    abstract class LeashDataMixin implements ILeashableExtension.LeashData {
+    abstract class LeashDataMixin implements LeashData {
         @Unique
         private double moreColorful$angularMomentum;
 

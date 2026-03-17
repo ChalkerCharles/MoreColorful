@@ -1,9 +1,11 @@
 package com.ChalkerCharles.morecolorful.common.item;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
+import com.ChalkerCharles.morecolorful.common.block.ornamental.PapercuttingBlock;
 import com.ChalkerCharles.morecolorful.common.block.ornamental.PennantBlock;
 import com.ChalkerCharles.morecolorful.common.block.ornamental.RibbonBlock;
 import com.ChalkerCharles.morecolorful.common.item.misc.BalloonItem;
+import com.ChalkerCharles.morecolorful.common.item.misc.FireworkShapeTemplateItem;
 import com.ChalkerCharles.morecolorful.common.item.misc.PartyPopperItem;
 import com.ChalkerCharles.morecolorful.common.item.misc.SparklerItem;
 import net.minecraft.core.registries.Registries;
@@ -71,8 +73,8 @@ public class ModCreativeTabs {
                 );
                 appendBySequence(output, PartyPopperItem.ALL_COLORS);
                 appendBySequence(output, SparklerItem.ALL_ITEMS);
-                output.accept(ModItems.PINWHEEL);
                 appendBySequence(output, BalloonItem.ALL_TYPES);
+                appendBySequence(output, ModItems.PINWHEEL, ModItems.KITE);
             })
             .build()
     ).getKey();
@@ -186,9 +188,11 @@ public class ModCreativeTabs {
                     ModItems.WILLOW_PRESSURE_PLATE,
                     ModItems.WILLOW_BUTTON
             );
+            appendBySequence(event, ModItems.CARDBOARD_BLOCK);
         } else if (tab == CreativeModeTabs.COLORED_BLOCKS) {
             appendBySequence(event, RibbonBlock.ALL_ITEMS);
             appendBySequence(event, PennantBlock.ALL_ITEMS);
+            appendBySequence(event, PapercuttingBlock.ALL_ITEMS);
         } else if (tab == CreativeModeTabs.NATURAL_BLOCKS) {
             insertAfterBySequence(event, Items.CHERRY_LOG,
                     ModItems.CRABAPPLE_LOG,
@@ -287,12 +291,17 @@ public class ModCreativeTabs {
                     ModItems.DUCKWEEDS
             );
         } else if (tab == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
+            insertAfterBySequence(event, Items.LOOM,
+                    ModItems.PYROTECHNICS_TABLE,
+                    ModItems.PAPERCRAFT_TABLE
+            );
             insertAfterBySequence(event, Items.CAULDRON,
                     ModItems.FAN_BLOCK
             );
             insertAfterBySequence(event, Items.LIGHTNING_ROD,
                     ModItems.WEATHER_VANE
             );
+            insertAfterBySequence(event, Items.DECORATED_POT, ModItems.SANDBAG);
             insertAfterBySequence(event, Items.CHERRY_HANGING_SIGN,
                     ModItems.CRABAPPLE_SIGN,
                     ModItems.CRABAPPLE_HANGING_SIGN,
@@ -320,9 +329,11 @@ public class ModCreativeTabs {
             insertAfterBySequence(event, Items.CAULDRON,
                     ModItems.FAN_BLOCK
             );
+            insertAfterBySequence(event, Items.TNT, ModItems.UNDERWATER_TNT);
         } else if (tab == CreativeModeTabs.TOOLS_AND_UTILITIES) {
             insertAfterBySequence(event, Items.BRUSH,
-                    ModItems.UMBRELLA
+                    ModItems.UMBRELLA,
+                    ModItems.DRIPLEAF_UMBRELLA
             );
             insertAfterBySequence(event, Items.BUNDLE, ItemUtils.COLORED_BUNDLES);
             insertAfterBySequence(event, Items.CHERRY_CHEST_BOAT,
@@ -343,15 +354,22 @@ public class ModCreativeTabs {
                     ModItems.WILLOW_BOAT,
                     ModItems.WILLOW_CHEST_BOAT
             );
+            insertAfterBySequence(event, Items.WIND_CHARGE, ModItems.BOMB);
+        } else if (tab == CreativeModeTabs.COMBAT) {
+            insertAfterBySequence(event, Items.WIND_CHARGE, ModItems.BOMB);
         } else if (tab == CreativeModeTabs.FOOD_AND_DRINKS) {
             insertAfterBySequence(event, Items.SWEET_BERRIES,
                     ModItems.STRAWBERRY,
                     ModItems.BLUEBERRIES
             );
         } else if (tab == CreativeModeTabs.INGREDIENTS) {
+            insertAfterBySequence(event, Items.PAPER,
+                    ModItems.CARDBOARD
+            );
             insertAfterBySequence(event, Items.PINK_DYE,
                     ModItems.CONFETTI
             );
+            insertBeforeBySequence(event, Items.ANGLER_POTTERY_SHERD, FireworkShapeTemplateItem.ALL_TYPES);
         }
     }
 

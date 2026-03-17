@@ -12,6 +12,9 @@ public class ModModelLayers {
     public static final ModelLayerLocation DRUM_SET_RIDE = register("drum_set_ride");
     public static final ModelLayerLocation DRUM_SET_CRASH = register("drum_set_crash");
     public static final ModelLayerLocation BALLOON = register("balloon");
+    public static final ModelLayerLocation BALLOON_HEART = register("balloon_heart");
+    public static final ModelLayerLocation BALLOON_STAR = register("balloon_star");
+    public static final ModelLayerLocation BALLOON_RABBIT = register("balloon_rabbit");
 
     private static ModelLayerLocation register(String path) {
         return register(path, "main");

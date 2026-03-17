@@ -15,7 +15,6 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MoverType;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GameRules;
@@ -35,10 +34,15 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public class PaperBoat extends Entity implements WindSensitive {
-    private static final Predicate<Entity> IS_PAPER_BOAT = entity -> entity instanceof PaperBoat;
+    private static final Predicate<Entity> IS_PAPER_BOAT = PaperBoat.class::isInstance;
     private static final EntityDataAccessor<ItemStack> DATA_ITEM_STACK = SynchedEntityData.defineId(
             PaperBoat.class, EntityDataSerializers.ITEM_STACK
     );
+    private int lerpSteps;
+    private double lerpX;
+    private double lerpY;
+    private double lerpZ;
+    private double lerpYRot;
     private double waterLevel;
     private float landFriction;
     private Boat.Status status;
@@ -127,7 +131,7 @@ public class PaperBoat extends Entity implements WindSensitive {
     }
 
     private void dropItem() {
-        this.level().addFreshEntity(new ItemEntity(this.level(), this.getX(), this.getY(), this.getZ(), this.getItem()));
+        this.spawnAtLocation(this.getItem());
     }
 
     @Override
@@ -147,8 +151,49 @@ public class PaperBoat extends Entity implements WindSensitive {
     }
 
     @Override
+    public void lerpTo(double pX, double pY, double pZ, float pYRot, float pXRot, int pSteps) {
+        this.lerpX = pX;
+        this.lerpY = pY;
+        this.lerpZ = pZ;
+        this.lerpYRot = pYRot;
+        this.lerpSteps = 10;
+    }
+
+    @Override
+    public double lerpTargetX() {
+        return this.lerpSteps > 0 ? this.lerpX : this.getX();
+    }
+
+    @Override
+    public double lerpTargetY() {
+        return this.lerpSteps > 0 ? this.lerpY : this.getY();
+    }
+
+    @Override
+    public double lerpTargetZ() {
+        return this.lerpSteps > 0 ? this.lerpZ : this.getZ();
+    }
+
+    @Override
+    public float lerpTargetYRot() {
+        return this.lerpSteps > 0 ? (float)this.lerpYRot : this.getYRot();
+    }
+
+    private void tickLerp() {
+        if (this.isControlledByLocalInstance()) {
+            this.lerpSteps = 0;
+            this.syncPacketPositionCodec(this.getX(), this.getY(), this.getZ());
+        }
+        if (this.lerpSteps > 0) {
+            this.lerpPositionAndRotationStep(this.lerpSteps, this.lerpX, this.lerpY, this.lerpZ, this.lerpYRot, this.getXRot());
+            this.lerpSteps--;
+        }
+    }
+
+    @Override
     public void tick() {
         super.tick();
+        this.tickLerp();
         this.oldStatus = this.status;
         this.status = this.getStatus();
         this.checkInsideBlocks();
@@ -390,5 +435,10 @@ public class PaperBoat extends Entity implements WindSensitive {
     @Override
     protected double getDefaultGravity() {
         return 0.04;
+    }
+
+    @Override
+    protected MovementEmission getMovementEmission() {
+        return MovementEmission.NONE;
     }
 }

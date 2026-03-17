@@ -31,4 +31,22 @@ public class ModSoundTypes {
             ModSounds.LEAF_LITTER_HIT,
             ModSounds.LEAF_LITTER_FALL
     );
+    public static final DeferredSoundType PAPER = new DeferredSoundType(
+            0.8F,
+            1.0F,
+            ModSounds.PAPER_BREAK,
+            ModSounds.PAPER_STEP,
+            ModSounds.PAPER_PLACE,
+            ModSounds.PAPER_HIT,
+            ModSounds.PAPER_FALL
+    );
+    public static final DeferredSoundType CARDBOARD = new DeferredSoundType(
+            1.0F,
+            1.0F,
+            ModSounds.CARDBOARD_BREAK,
+            ModSounds.CARDBOARD_STEP,
+            ModSounds.CARDBOARD_PLACE,
+            ModSounds.CARDBOARD_HIT,
+            ModSounds.CARDBOARD_FALL
+    );
 }

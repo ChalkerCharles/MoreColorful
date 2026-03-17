@@ -4,7 +4,7 @@
   "group": "ribbon",
   "ingredients": [
     {
-      "item": "minecraft:white_dye"
+      "tag": "c:dyes/white"
     },
     [
       {

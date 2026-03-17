@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "balloon",
+  "ingredients": [
+    {
+      "item": "morecolorful:yellow_balloon"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "morecolorful:star_balloon"
+  }
+}

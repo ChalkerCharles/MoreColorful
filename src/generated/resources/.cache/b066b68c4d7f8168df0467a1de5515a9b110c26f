@@ -1,3 +1,5 @@
-// 1.21	2026-02-20T22:10:26.1024429	atlases generator for morecolorful
-268b7e1cd2ce67bdc7df449141d9858b1a6b7ca8 assets/minecraft/atlases/blocks.json
+// 1.21	2026-03-06T21:16:15.2078827	atlases generator for morecolorful
+c6d1d6d81d230ff8c3fb04fdf88f2f8d31281bfc assets/minecraft/atlases/blocks.json
 d9110964032fd1ec99cab476ea4ec28f96b4a99b assets/minecraft/atlases/particles.json
+6c271a1ed52d71d53df7d903f9d7beaf39e87b00 assets/morecolorful/atlases/balloons.json
+49e857cf6f6dcab672bc76cedac1d3ada6e2b973 assets/morecolorful/atlases/kites.json

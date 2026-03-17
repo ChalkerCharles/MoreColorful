@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_drip_leaf": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:big_dripleaf"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "morecolorful:dripleaf_umbrella"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_drip_leaf"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "morecolorful:dripleaf_umbrella"
+    ]
+  }
+}

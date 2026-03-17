@@ -8,6 +8,58 @@
     ],
     "subtitle": "morecolorful.subtitles.block.bass_drum.play"
   },
+  "block.cardboard.break": {
+    "sounds": [
+      "morecolorful:block/cardboard/break1",
+      "morecolorful:block/cardboard/break2",
+      "morecolorful:block/cardboard/break3",
+      "morecolorful:block/cardboard/break4",
+      "morecolorful:block/cardboard/break5"
+    ],
+    "subtitle": "subtitles.block.generic.break"
+  },
+  "block.cardboard.fall": {
+    "sounds": [
+      "morecolorful:block/cardboard/step1",
+      "morecolorful:block/cardboard/step2",
+      "morecolorful:block/cardboard/step3",
+      "morecolorful:block/cardboard/step4",
+      "morecolorful:block/cardboard/step5",
+      "morecolorful:block/cardboard/step6"
+    ]
+  },
+  "block.cardboard.hit": {
+    "sounds": [
+      "morecolorful:block/cardboard/step1",
+      "morecolorful:block/cardboard/step2",
+      "morecolorful:block/cardboard/step3",
+      "morecolorful:block/cardboard/step4",
+      "morecolorful:block/cardboard/step5",
+      "morecolorful:block/cardboard/step6"
+    ],
+    "subtitle": "subtitles.block.generic.hit"
+  },
+  "block.cardboard.place": {
+    "sounds": [
+      "morecolorful:block/cardboard/break1",
+      "morecolorful:block/cardboard/break2",
+      "morecolorful:block/cardboard/break3",
+      "morecolorful:block/cardboard/break4",
+      "morecolorful:block/cardboard/break5"
+    ],
+    "subtitle": "subtitles.block.generic.place"
+  },
+  "block.cardboard.step": {
+    "sounds": [
+      "morecolorful:block/cardboard/step1",
+      "morecolorful:block/cardboard/step2",
+      "morecolorful:block/cardboard/step3",
+      "morecolorful:block/cardboard/step4",
+      "morecolorful:block/cardboard/step5",
+      "morecolorful:block/cardboard/step6"
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
+  },
   "block.chimes.play": {
     "sounds": [
       {
@@ -574,6 +626,68 @@
     ],
     "subtitle": "subtitles.block.note_block.note"
   },
+  "block.paper.break": {
+    "sounds": [
+      "morecolorful:block/paper/break1",
+      "morecolorful:block/paper/break2",
+      "morecolorful:block/paper/break3",
+      "morecolorful:block/paper/break4",
+      "morecolorful:block/paper/break5"
+    ],
+    "subtitle": "subtitles.block.generic.break"
+  },
+  "block.paper.cut": {
+    "sounds": [
+      "morecolorful:block/paper/cut1",
+      "morecolorful:block/paper/cut2",
+      "morecolorful:block/paper/cut3",
+      "morecolorful:block/paper/cut4",
+      "morecolorful:block/paper/cut5"
+    ],
+    "subtitle": "morecolorful.subtitles.block.paper.cut"
+  },
+  "block.paper.fall": {
+    "sounds": [
+      "morecolorful:block/paper/step1",
+      "morecolorful:block/paper/step2",
+      "morecolorful:block/paper/step3",
+      "morecolorful:block/paper/step4",
+      "morecolorful:block/paper/step5",
+      "morecolorful:block/paper/step6"
+    ]
+  },
+  "block.paper.hit": {
+    "sounds": [
+      "morecolorful:block/paper/step1",
+      "morecolorful:block/paper/step2",
+      "morecolorful:block/paper/step3",
+      "morecolorful:block/paper/step4",
+      "morecolorful:block/paper/step5",
+      "morecolorful:block/paper/step6"
+    ],
+    "subtitle": "subtitles.block.generic.hit"
+  },
+  "block.paper.place": {
+    "sounds": [
+      "morecolorful:block/paper/place1",
+      "morecolorful:block/paper/place2",
+      "morecolorful:block/paper/place3",
+      "morecolorful:block/paper/place4",
+      "morecolorful:block/paper/place5"
+    ],
+    "subtitle": "subtitles.block.generic.place"
+  },
+  "block.paper.step": {
+    "sounds": [
+      "morecolorful:block/paper/step1",
+      "morecolorful:block/paper/step2",
+      "morecolorful:block/paper/step3",
+      "morecolorful:block/paper/step4",
+      "morecolorful:block/paper/step5",
+      "morecolorful:block/paper/step6"
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
+  },
   "block.piano_high.play": {
     "sounds": [
       "morecolorful:note/piano_high"
@@ -585,6 +699,15 @@
       "morecolorful:note/piano_low"
     ],
     "subtitle": "morecolorful.subtitles.block.piano.play"
+  },
+  "block.pyrotechnics_table.use": {
+    "sounds": [
+      "morecolorful:block/pyrotechnics_table/use1",
+      "morecolorful:block/pyrotechnics_table/use2",
+      "morecolorful:block/pyrotechnics_table/use3",
+      "morecolorful:block/pyrotechnics_table/use4"
+    ],
+    "subtitle": "morecolorful.subtitles.block.pyrotechnics_table.use"
   },
   "block.rare_wood.break": {
     "sounds": [
@@ -909,6 +1032,33 @@
       "morecolorful:entity/balloon/pop3"
     ],
     "subtitle": "morecolorful.subtitles.entity.balloon.pop"
+  },
+  "entity.bomb.throw": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "entity.snowball.throw"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.entity.bomb.throw"
+  },
+  "entity.kite.reel": {
+    "sounds": [
+      "morecolorful:entity/kite/reel1",
+      "morecolorful:entity/kite/reel2",
+      "morecolorful:entity/kite/reel3",
+      "morecolorful:entity/kite/reel4"
+    ],
+    "subtitle": "morecolorful.subtitles.entity.kite.reel"
+  },
+  "entity.kite.unreel": {
+    "sounds": [
+      "morecolorful:entity/kite/reel1",
+      "morecolorful:entity/kite/reel2",
+      "morecolorful:entity/kite/reel3",
+      "morecolorful:entity/kite/reel4"
+    ],
+    "subtitle": "morecolorful.subtitles.entity.kite.unreel"
   },
   "entity.paper_plane.hit": {
     "sounds": [

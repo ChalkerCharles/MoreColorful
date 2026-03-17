@@ -1,0 +1,27 @@
+{
+  "parent": "minecraft:item/generated",
+  "loader": "neoforge:separate_transforms",
+  "base": {
+    "parent": "minecraft:item/generated",
+    "textures": {
+      "layer0": "morecolorful:item/dripleaf_umbrella_open"
+    }
+  },
+  "perspectives": {
+    "thirdperson_righthand": {
+      "parent": "morecolorful:item/dripleaf_umbrella_in_hand"
+    },
+    "thirdperson_lefthand": {
+      "parent": "morecolorful:item/dripleaf_umbrella_in_hand_mirrored"
+    },
+    "firstperson_righthand": {
+      "parent": "morecolorful:item/dripleaf_umbrella_in_hand_mirrored"
+    },
+    "firstperson_lefthand": {
+      "parent": "morecolorful:item/dripleaf_umbrella_in_hand"
+    },
+    "head": {
+      "parent": "morecolorful:item/dripleaf_umbrella_in_hand"
+    }
+  }
+}

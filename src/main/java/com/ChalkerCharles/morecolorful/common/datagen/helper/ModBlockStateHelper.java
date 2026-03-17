@@ -59,6 +59,20 @@ public abstract class ModBlockStateHelper extends BlockStateProvider {
         simpleBlockItem(w, models().cubeColumn(name(w), sideTex, sideTex));
     }
 
+    protected void logBlock(Supplier<? extends RotatedPillarBlock> block) {
+        RotatedPillarBlock l = block.get();
+        logBlock(l);
+        ResourceLocation sideTex = blockTexture(l);
+        simpleBlockItem(l, models().cubeColumn(name(l), sideTex, modLoc("block/" + name(l) + "_top")));
+    }
+
+    protected void cubeBottomTop(Supplier<? extends Block> block) {
+        Block b = block.get();
+        ResourceLocation tex = blockTexture(b);
+        ModelFile model = models().cubeBottomTop(name(b), tex.withSuffix("_side"), tex.withSuffix("_bottom"), tex.withSuffix("_top"));
+        simpleBlockWithItem(b, model);
+    }
+
     protected void fenceBlock(Supplier<? extends FenceBlock> block, Supplier<? extends Block> baseBlock) {
         this.fenceBlock(block.get(), blockTexture(baseBlock.get()));
     }
@@ -272,6 +286,10 @@ public abstract class ModBlockStateHelper extends BlockStateProvider {
                         .condition(ModBlockStateProperties.RIBBON_STATE, ribbonStates).end();
             }
         }
+    }
+
+    protected void emptyModel(Block block) {
+        simpleBlock(block, models().sign(name(block), blockTexture(block)));
     }
 
     protected void emptyModelWithParticle(Block block) {

@@ -28,7 +28,7 @@ public class PaperPlaneRenderer extends EntityRenderer<PaperPlane> {
     @Override
     public void render(PaperPlane pEntity, float pEntityYaw, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBufferSource, int pPackedLight) {
         pPoseStack.pushPose();
-        pPoseStack.mulPose(Axis.YP.rotationDegrees(Mth.lerp(pPartialTick, pEntity.yRotO, pEntity.getYRot()) - 90.0F));
+        pPoseStack.mulPose(Axis.YP.rotationDegrees(pEntityYaw - 90.0F));
         pPoseStack.mulPose(Axis.ZP.rotationDegrees(Mth.lerp(pPartialTick, pEntity.xRotO, pEntity.getXRot())));
         pPoseStack.scale(0.05625F, 0.05625F, 0.05625F);
         VertexConsumer consumer = pBufferSource.getBuffer(RenderType.entityCutout(PAPER_PLANE_TEXTURE));

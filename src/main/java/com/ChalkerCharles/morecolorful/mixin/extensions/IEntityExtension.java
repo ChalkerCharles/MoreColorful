@@ -1,6 +1,7 @@
 package com.ChalkerCharles.morecolorful.mixin.extensions;
 
 import com.ChalkerCharles.morecolorful.util.WeatherUtils;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Leashable;
@@ -26,6 +27,13 @@ public interface IEntityExtension {
             double x = windX * 0.02 * h;
             double y = windY * 0.02 * v;
             double z = windZ * 0.02 * h;
+            if (this.moreColorful$hasLift()) {
+                double d = Mth.length(windX, windZ) * 0.1 * v;
+                y += Math.min(d, 0.03125);
+                if (d > self().getGravity()) {
+                    this.moreColorful$onLift();
+                }
+            }
             self().push(x, y, z);
         }
     }
@@ -46,6 +54,36 @@ public interface IEntityExtension {
         return 1.0;
     }
 
+    default void moreColorful$stopSlightMovement() {
+        Vec3 vec3 = self().getDeltaMovement();
+        if (vec3.equals(Vec3.ZERO)) return;
+        double d0 = vec3.x;
+        double d1 = vec3.y;
+        double d2 = vec3.z;
+        boolean changed = false;
+        if (Math.abs(vec3.x) < 0.003) {
+            d0 = 0.0;
+            changed = true;
+        }
+        if (Math.abs(vec3.y) < 0.003) {
+            d1 = 0.0;
+            changed = true;
+        }
+        if (Math.abs(vec3.z) < 0.003) {
+            d2 = 0.0;
+            changed = true;
+        }
+        if (changed) {
+            self().setDeltaMovement(d0, d1, d2);
+        }
+    }
+
+    default boolean moreColorful$hasLift() {
+        return false;
+    }
+
+    default void moreColorful$onLift() {}
+
     default boolean moreColorful$supportQuadLeashAsHolder() {
         return this instanceof Ghast;
     }
@@ -54,13 +92,11 @@ public interface IEntityExtension {
         return ILeashableExtension.createQuadLeashOffsets(self(), 0.0, 0.5, 0.5, 0.0);
     }
 
-    default void moreColorful$notifyLeashRemoved(Leashable leashable) {}
-
-    default void moreColorful$checkFallDistanceAccumulation() {
-        if (self().getDeltaMovement().y() > -0.5 && self().fallDistance > 1.0F) {
-            self().fallDistance = 1.0F;
-        }
+    default boolean moreColorful$balloonAttachable() {
+        return true;
     }
+
+    default void moreColorful$notifyLeashRemoved(Leashable leashable) {}
 
     private static IEntityExtension self(Entity entity) {
         return (IEntityExtension) entity;
@@ -82,11 +118,11 @@ public interface IEntityExtension {
         return self(entity).moreColorful$getQuadLeashHolderOffsets();
     }
 
-    static void notifyLeashRemoved(Entity entity, Leashable leashable) {
-        self(entity).moreColorful$notifyLeashRemoved(leashable);
+    static boolean balloonAttachable(Entity entity) {
+        return self(entity).moreColorful$balloonAttachable();
     }
 
-    static void checkFallDistanceAccumulation(Entity entity) {
-        self(entity).moreColorful$checkFallDistanceAccumulation();
+    static void notifyLeashRemoved(Entity entity, Leashable leashable) {
+        self(entity).moreColorful$notifyLeashRemoved(leashable);
     }
 }

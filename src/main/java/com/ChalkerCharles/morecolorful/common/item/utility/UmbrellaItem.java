@@ -38,6 +38,7 @@ import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileDeflection;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.level.Level;
@@ -225,7 +226,11 @@ public class UmbrellaItem extends Item {
 
     @Override
     public boolean isValidRepairItem(ItemStack pStack, ItemStack pRepairCandidate) {
-        return super.isValidRepairItem(pStack, pRepairCandidate) || pRepairCandidate.is(Tags.Items.LEATHERS);
+        if (super.isValidRepairItem(pStack, pRepairCandidate)) return true;
+        if (pStack.is(ModItems.DRIPLEAF_UMBRELLA)) {
+            return pRepairCandidate.is(Items.BIG_DRIPLEAF);
+        }
+        return pRepairCandidate.is(Tags.Items.LEATHERS);
     }
 
     @Override

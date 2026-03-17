@@ -1,16 +1,27 @@
 package com.ChalkerCharles.morecolorful.client;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
+import com.ChalkerCharles.morecolorful.client.gui.PapercraftScreen;
 import com.ChalkerCharles.morecolorful.client.gui.PlayingScreen;
+import com.ChalkerCharles.morecolorful.client.gui.PyrotechnicsScreen;
 import com.ChalkerCharles.morecolorful.client.model.ArmPoseExtension;
+import com.ChalkerCharles.morecolorful.client.particle.FireworkShapeFactories;
+import com.ChalkerCharles.morecolorful.client.renderer.item.KiteRenderer;
+import com.ChalkerCharles.morecolorful.client.renderer.item.PapercuttingRenderer;
 import com.ChalkerCharles.morecolorful.client.renderer.item.PinwheelRenderer;
 import com.ChalkerCharles.morecolorful.client.renderer.item.UmbrellaRenderer;
+import com.ChalkerCharles.morecolorful.client.texture.BalloonTextureManager;
+import com.ChalkerCharles.morecolorful.client.texture.KiteTextureManager;
+import com.ChalkerCharles.morecolorful.client.texture.PapercuttingTextureManager;
 import com.ChalkerCharles.morecolorful.common.attachment.InstrumentData;
+import com.ChalkerCharles.morecolorful.common.block.ornamental.PapercuttingBlock;
+import com.ChalkerCharles.morecolorful.common.item.FireworkShapeExtension;
 import com.ChalkerCharles.morecolorful.common.item.ItemUtils;
 import com.ChalkerCharles.morecolorful.common.item.ModDataComponents;
 import com.ChalkerCharles.morecolorful.common.item.ModItems;
 import com.ChalkerCharles.morecolorful.common.item.misc.SparklerItem;
 import com.ChalkerCharles.morecolorful.common.item.utility.UmbrellaItem;
+import com.ChalkerCharles.morecolorful.common.menu.ModMenuTypes;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
@@ -32,14 +43,74 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.FireworkShapeFactoryRegistry;
 import net.neoforged.neoforge.client.event.ModelEvent;
 import net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 
 @SuppressWarnings("deprecation")
 @EventBusSubscriber(modid = MoreColorful.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ModClientSetup {
+    private static final ItemPropertyFunction PROPERTY_PLAYING = (stack, level, entity, seed) ->
+            entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1.0F : 0.0F;
+    private static ItemPropertyFunction propertyPlaying(Item item) {
+        return (stack, level, entity, seed) ->
+                entity != null && entity.isUsingItem() && entity.getUseItem().getItem() == item ? 1.0F : 0.0F;
+    }
+    private static final ItemPropertyFunction PROPERTY_ACTIVATED = (stack, level, entity, seed) ->
+            stack.has(ModDataComponents.ACTIVATED) ? 1.0F : 0.0F;
+    private static final ItemPropertyFunction PROPERTY_OPEN = (stack, level, entity, seed) ->
+            stack.has(ModDataComponents.OPEN) ? 1.0F : 0.0F;
+    private static final ItemPropertyFunction PROPERTY_FILLED = (stack, level, entity, seed) ->
+            BundleItem.getFullnessDisplay(stack);
+
+    @SubscribeEvent
+    public static void onClientSetup(FMLClientSetupEvent event) {
+        event.enqueueWork(ModClientSetup::registerModelPredicate);
+        event.enqueueWork(ModClientSetup::registerFireworkShapes);
+    }
+
+    private static void registerModelPredicate() {
+        ResourceLocation playing = MoreColorful.location("playing");
+        ItemProperties.register(ModItems.FLUTE.get(), playing, PROPERTY_PLAYING);
+        ItemProperties.register(ModItems.COW_BELL.get(), playing, PROPERTY_PLAYING);
+        ItemProperties.register(ModItems.DIDGERIDOO.get(), playing, PROPERTY_PLAYING);
+        ItemProperties.register(ModItems.VIOLIN.get(), playing, PROPERTY_PLAYING);
+        ItemProperties.register(ModItems.FIDDLE_BOW.get(), MoreColorful.location("playing_violin"), propertyPlaying(ModItems.VIOLIN.get()));
+        ItemProperties.register(ModItems.FIDDLE_BOW.get(), MoreColorful.location("playing_cello"), propertyPlaying(ModItems.CELLO.get()));
+        ItemProperties.register(ModItems.FIDDLE_BOW.get(), MoreColorful.location("playing_erhu"), propertyPlaying(ModItems.ERHU.get()));
+        ItemProperties.register(ModItems.TRUMPET.get(), playing, PROPERTY_PLAYING);
+        ItemProperties.register(ModItems.SAXOPHONE.get(), playing, PROPERTY_PLAYING);
+        ItemProperties.register(ModItems.OCARINA.get(), playing, PROPERTY_PLAYING);
+        ItemProperties.register(ModItems.HARMONICA.get(), playing, PROPERTY_PLAYING);
+        ItemProperties.register(ModItems.ERHU.get(), playing, PROPERTY_PLAYING);
+        ResourceLocation activated = MoreColorful.location("activated");
+        for (ItemLike item : SparklerItem.ALL_ITEMS) {
+            ItemProperties.register(item.asItem(), activated, PROPERTY_ACTIVATED);
+        }
+        ItemProperties.register(ModItems.BOMB.get(), activated, PROPERTY_ACTIVATED);
+        ResourceLocation open = MoreColorful.location("open");
+        ItemProperties.register(ModItems.UMBRELLA.get(), open, PROPERTY_OPEN);
+        ItemProperties.register(ModItems.DRIPLEAF_UMBRELLA.get(), open, PROPERTY_OPEN);
+        ResourceLocation filled = ResourceLocation.withDefaultNamespace("filled");
+        for (ItemLike item : ItemUtils.COLORED_BUNDLES) {
+            ItemProperties.register(item.asItem(), filled, PROPERTY_FILLED);
+        }
+    }
+
+    private static void registerFireworkShapes() {
+        FireworkShapeFactoryRegistry.register(FireworkShapeExtension.CUBE, FireworkShapeFactories::cube);
+        FireworkShapeFactoryRegistry.register(FireworkShapeExtension.HEART, FireworkShapeFactories::heart);
+        FireworkShapeFactoryRegistry.register(FireworkShapeExtension.PLANET, FireworkShapeFactories::planet);
+        FireworkShapeFactoryRegistry.register(FireworkShapeExtension.JELLYFISH, FireworkShapeFactories::jellyfish);
+        FireworkShapeFactoryRegistry.register(FireworkShapeExtension.CLOCK, FireworkShapeFactories::clock);
+        FireworkShapeFactoryRegistry.register(FireworkShapeExtension.AXIS, FireworkShapeFactories::axis);
+        FireworkShapeFactoryRegistry.register(FireworkShapeExtension.TETRAHEDRON, FireworkShapeFactories::tetrahedron);
+        FireworkShapeFactoryRegistry.register(FireworkShapeExtension.HYPERBOLOID, FireworkShapeFactories::hyperboloid);
+    }
+
     @SubscribeEvent
     public static void setupUseAnim(RegisterClientExtensionsEvent event) {
         // Flute
@@ -209,48 +280,25 @@ public class ModClientSetup {
                 return UmbrellaRenderer.INSTANCE;
             }
         }, ModItems.UMBRELLA.get());
-    }
-
-    private static final ItemPropertyFunction PROPERTY_PLAYING = (stack, level, entity, seed) ->
-            entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1.0F : 0.0F;
-    private static ItemPropertyFunction propertyPlaying(Item item) {
-        return (stack, level, entity, seed) ->
-                entity != null && entity.isUsingItem() && entity.getUseItem().getItem() == item ? 1.0F : 0.0F;
-    }
-    private static final ItemPropertyFunction PROPERTY_ACTIVATED = (stack, level, entity, seed) ->
-            stack.has(ModDataComponents.ACTIVATED) ? 1.0F : 0.0F;
-    private static final ItemPropertyFunction PROPERTY_OPEN = (stack, level, entity, seed) ->
-            stack.has(ModDataComponents.OPEN) ? 1.0F : 0.0F;
-    private static final ItemPropertyFunction PROPERTY_FILLED = (stack, level, entity, seed) ->
-            BundleItem.getFullnessDisplay(stack);
-
-    @SubscribeEvent
-    public static void registerModelPredicate(FMLClientSetupEvent event) {
-        event.enqueueWork(() -> {
-            ResourceLocation playing = MoreColorful.location("playing");
-            ItemProperties.register(ModItems.FLUTE.get(), playing, PROPERTY_PLAYING);
-            ItemProperties.register(ModItems.COW_BELL.get(), playing, PROPERTY_PLAYING);
-            ItemProperties.register(ModItems.DIDGERIDOO.get(), playing, PROPERTY_PLAYING);
-            ItemProperties.register(ModItems.VIOLIN.get(), playing, PROPERTY_PLAYING);
-            ItemProperties.register(ModItems.FIDDLE_BOW.get(), MoreColorful.location("playing_violin"), propertyPlaying(ModItems.VIOLIN.get()));
-            ItemProperties.register(ModItems.FIDDLE_BOW.get(), MoreColorful.location("playing_cello"), propertyPlaying(ModItems.CELLO.get()));
-            ItemProperties.register(ModItems.FIDDLE_BOW.get(), MoreColorful.location("playing_erhu"), propertyPlaying(ModItems.ERHU.get()));
-            ItemProperties.register(ModItems.TRUMPET.get(), playing, PROPERTY_PLAYING);
-            ItemProperties.register(ModItems.SAXOPHONE.get(), playing, PROPERTY_PLAYING);
-            ItemProperties.register(ModItems.OCARINA.get(), playing, PROPERTY_PLAYING);
-            ItemProperties.register(ModItems.HARMONICA.get(), playing, PROPERTY_PLAYING);
-            ItemProperties.register(ModItems.ERHU.get(), playing, PROPERTY_PLAYING);
-            ResourceLocation activated = MoreColorful.location("activated");
-            for (ItemLike item : SparklerItem.ALL_ITEMS) {
-                ItemProperties.register(item.asItem(), activated, PROPERTY_ACTIVATED);
+        event.registerItem(new IClientItemExtensions() {
+            @Override
+            public HumanoidModel.ArmPose getArmPose(LivingEntity entityLiving, InteractionHand hand, ItemStack itemStack) {
+                return UmbrellaItem.isOpen(itemStack) ? ArmPoseExtension.UMBRELLA : HumanoidModel.ArmPose.ITEM;
             }
-            ResourceLocation open = MoreColorful.location("open");
-            ItemProperties.register(ModItems.UMBRELLA.get(), open, PROPERTY_OPEN);
-            ResourceLocation filled = ResourceLocation.withDefaultNamespace("filled");
-            for (ItemLike item : ItemUtils.COLORED_BUNDLES) {
-                ItemProperties.register(item.asItem(), filled, PROPERTY_FILLED);
+        }, ModItems.DRIPLEAF_UMBRELLA.get());
+        // Kite
+        event.registerItem(new IClientItemExtensions() {
+            @Override
+            public BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                return KiteRenderer.INSTANCE;
             }
-        });
+        }, ModItems.KITE.get());
+        event.registerItem(new IClientItemExtensions() {
+            @Override
+            public BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                return PapercuttingRenderer.INSTANCE;
+            }
+        }, ItemUtils.itemArray(PapercuttingBlock.ALL_ITEMS));
     }
 
     @SubscribeEvent
@@ -264,5 +312,16 @@ public class ModClientSetup {
     public static void registerClientReloadListeners(RegisterClientReloadListenersEvent event) {
         event.registerReloadListener(UmbrellaRenderer.INSTANCE);
         event.registerReloadListener(PinwheelRenderer.INSTANCE);
+        event.registerReloadListener(KiteRenderer.INSTANCE);
+        event.registerReloadListener(KiteTextureManager.INSTANCE);
+        event.registerReloadListener(BalloonTextureManager.INSTANCE);
+        event.registerReloadListener(PapercuttingRenderer.INSTANCE);
+        event.registerReloadListener(PapercuttingTextureManager.INSTANCE);
+    }
+
+    @SubscribeEvent
+    public static void registerMenuScreens(RegisterMenuScreensEvent event) {
+        event.register(ModMenuTypes.PYROTECHNICS.get(), PyrotechnicsScreen::new);
+        event.register(ModMenuTypes.PAPERCRAFT.get(), PapercraftScreen::new);
     }
 }
