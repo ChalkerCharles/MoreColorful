@@ -74,6 +74,7 @@ public class PartyPopperItem extends Item {
 
     public PartyPopperItem(Properties pProperties) {
         super(pProperties);
+        DispenserBlock.registerBehavior(this, DISPENSE_ITEM_BEHAVIOR);
     }
 
     @Override

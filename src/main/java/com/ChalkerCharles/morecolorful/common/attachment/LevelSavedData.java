@@ -1,6 +1,7 @@
 package com.ChalkerCharles.morecolorful.common.attachment;
 
 import com.ChalkerCharles.morecolorful.Config;
+import com.ChalkerCharles.morecolorful.common.level.EntitiesInSmoke;
 import com.ChalkerCharles.morecolorful.common.level.UmbrellaHeightMap;
 import com.ChalkerCharles.morecolorful.common.level.thermal.ILevelThermalEngine;
 import com.ChalkerCharles.morecolorful.common.level.wind.ILevelVentEngine;
@@ -18,6 +19,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.SectionPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
@@ -35,6 +37,7 @@ import java.util.List;
 
 public abstract class LevelSavedData implements INBTSerializable<CompoundTag> {
     private final UmbrellaHeightMap umbrellaHeightMap = new UmbrellaHeightMap();
+    private final EntitiesInSmoke entitiesInSmoke = new EntitiesInSmoke();
 
     public static LevelSavedData create(IAttachmentHolder holder) {
         Level level = (Level) holder;
@@ -105,6 +108,7 @@ public abstract class LevelSavedData implements INBTSerializable<CompoundTag> {
             }
         }
         this.umbrellaHeightMap.tick();
+        this.entitiesInSmoke.tick();
     }
 
     public static void tick(Level level) {
@@ -193,6 +197,14 @@ public abstract class LevelSavedData implements INBTSerializable<CompoundTag> {
 
     public static double getCanopy(Level level, int x, int z) {
         return get(level).umbrellaHeightMap.getCanopy(x, z);
+    }
+
+    public static void addEntityInSmoke(Level level, Entity entity) {
+        get(level).entitiesInSmoke.addEntity(entity);
+    }
+
+    public static boolean isEntityInSmoke(Level level, Entity entity) {
+        return get(level).entitiesInSmoke.isInSmoke(entity);
     }
 
     @Override

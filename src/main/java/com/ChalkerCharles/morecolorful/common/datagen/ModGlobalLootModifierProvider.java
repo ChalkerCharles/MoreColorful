@@ -9,6 +9,7 @@ import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
 import net.neoforged.neoforge.common.data.GlobalLootModifierProvider;
+import net.neoforged.neoforge.common.loot.AddTableLootModifier;
 import net.neoforged.neoforge.common.loot.LootTableIdCondition;
 
 import java.util.concurrent.CompletableFuture;
@@ -24,5 +25,9 @@ public class ModGlobalLootModifierProvider extends GlobalLootModifierProvider {
                 LootTableIdCondition.builder(BuiltInLootTables.TRAIL_RUINS_ARCHAEOLOGY_COMMON.location()).build(),
                 LootItemRandomChanceCondition.randomChance(0.04255319F).build() // 0.04255319F = 2/47
         }, ModLootTables.TRAIL_RUINS_ARCHAEOLOGY_COMMON_ADD));
+        add("village_plains_house", new AddTableLootModifier(new LootItemCondition[] {
+                LootTableIdCondition.builder(BuiltInLootTables.VILLAGE_PLAINS_HOUSE.location()).build(),
+                LootItemRandomChanceCondition.randomChance(0.05F).build()
+        }, ModLootTables.VILLAGE_PLAINS_HOUSE_ADD));
     }
 }

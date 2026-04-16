@@ -154,6 +154,8 @@ public class ModSounds {
     public static final Supplier<SoundEvent> CARDBOARD_PLACE = register("block.cardboard.place");
     public static final Supplier<SoundEvent> CARDBOARD_HIT = register("block.cardboard.hit");
     public static final Supplier<SoundEvent> CARDBOARD_FALL = register("block.cardboard.fall");
+    public static final Supplier<SoundEvent> COCOON_CRACK = register("block.cocoon.crack");
+    public static final Supplier<SoundEvent> COCOON_HATCH = register("block.cocoon.hatch");
 
     // Entities
     public static final Supplier<SoundEvent> PAPER_PLANE_THROW = register("entity.paper_plane.throw");
@@ -164,6 +166,20 @@ public class ModSounds {
     public static final Supplier<SoundEvent> KITE_REEL = register("entity.kite.reel");
     public static final Supplier<SoundEvent> KITE_UNREEL = register("entity.kite.unreel");
     public static final Supplier<SoundEvent> BOMB_THROW = register("entity.bomb.throw");
+    public static final Supplier<SoundEvent> BUTTERFLY_HURT = register("entity.butterfly.hurt");
+    public static final Supplier<SoundEvent> BUTTERFLY_DEATH = register("entity.butterfly.death");
+    public static final Supplier<SoundEvent> BUTTERFLY_FLUTTER = register("entity.butterfly.flutter");
+    public static final Supplier<SoundEvent> MOTH_HURT = register("entity.moth.hurt");
+    public static final Supplier<SoundEvent> MOTH_DEATH = register("entity.moth.death");
+    public static final Supplier<SoundEvent> MOTH_FLUTTER = register("entity.moth.flutter");
+    public static final Supplier<SoundEvent> CATERPILLAR_HURT = register("entity.caterpillar.hurt");
+    public static final Supplier<SoundEvent> CATERPILLAR_DEATH = register("entity.caterpillar.death");
+    public static final Supplier<SoundEvent> CATERPILLAR_PUPATE = register("entity.caterpillar.pupate");
+    public static final Supplier<SoundEvent> SMOKE_BOMB_THROW = register("entity.smoke_bomb.throw");
+    public static final Supplier<SoundEvent> SMOKE_BOMB_EXPLODE = register("entity.smoke_bomb.explode");
+    public static final Supplier<SoundEvent> VILLAGER_WORK_BEEKEEPER = register("entity.villager.work_beekeeper");
+    public static final Supplier<SoundEvent> VILLAGER_WORK_PYROTECHNICIAN = register("entity.villager.work_pyrotechnician");
+    public static final Supplier<SoundEvent> VILLAGER_WORK_PAPER_ARTISAN = register("entity.villager.work_paper_artisan");
 
     // Items
     public static final Supplier<SoundEvent> PARTY_POPPER_POP = register("item.party_popper.pop");
@@ -177,6 +193,7 @@ public class ModSounds {
     public static final Supplier<SoundEvent> UMBRELLA_OPEN = register("item.umbrella.open");
     public static final Supplier<SoundEvent> UMBRELLA_CLOSE = register("item.umbrella.close");
     public static final Supplier<SoundEvent> UMBRELLA_BLOCK = register("item.umbrella.block");
+    public static final Supplier<SoundEvent> BUG_NET_CATCH = register("item.bug_net.catch");
 
     // Environment & Ambient
     public static final Supplier<SoundEvent> WEATHER_BREEZE = register("weather.breeze");

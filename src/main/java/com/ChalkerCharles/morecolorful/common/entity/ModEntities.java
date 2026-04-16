@@ -1,6 +1,9 @@
 package com.ChalkerCharles.morecolorful.common.entity;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
+import com.ChalkerCharles.morecolorful.common.entity.animal.Butterfly;
+import com.ChalkerCharles.morecolorful.common.entity.animal.Caterpillar;
+import com.ChalkerCharles.morecolorful.common.entity.animal.Moth;
 import com.ChalkerCharles.morecolorful.common.entity.misc.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.Entity;
@@ -40,6 +43,18 @@ public class ModEntities {
     );
     public static final Supplier<EntityType<Bomb>> BOMB = register(
             "bomb", EntityType.Builder.<Bomb>of(Bomb::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10)
+    );
+    public static final Supplier<EntityType<Butterfly>> BUTTERFLY = register(
+            "butterfly", EntityType.Builder.of(Butterfly::new, MobCategory.AMBIENT).sized(0.75F, 0.25F).eyeHeight(0.15F).clientTrackingRange(8)
+    );
+    public static final Supplier<EntityType<Moth>> MOTH = register(
+            "moth", EntityType.Builder.of(Moth::new, MobCategory.AMBIENT).sized(0.75F, 0.25F).eyeHeight(0.15F).clientTrackingRange(8)
+    );
+    public static final Supplier<EntityType<Caterpillar>> CATERPILLAR = register(
+            "caterpillar", EntityType.Builder.of(Caterpillar::new, MobCategory.AMBIENT).sized(0.625F, 0.125F).eyeHeight(0.0625F).clientTrackingRange(8)
+    );
+    public static final Supplier<EntityType<SmokeBomb>> SMOKE_BOMB = register(
+            "smoke_bomb", EntityType.Builder.<SmokeBomb>of(SmokeBomb::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10)
     );
 
     private static <T extends Entity> Supplier<EntityType<T>> register(String name, EntityType.Builder<T> builder) {

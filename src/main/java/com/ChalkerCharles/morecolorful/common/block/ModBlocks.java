@@ -357,6 +357,8 @@ public class ModBlocks {
 
     public static final DeferredBlock<Block> UNDERWATER_TNT = register("underwater_tnt", () -> new UnderwaterTntBlock(ofFullCopy(Blocks.TNT).mapColor(MapColor.DIAMOND)));
 
+    public static final DeferredBlock<Block> COCOON = register("cocoon", () -> new CocoonBlock(of().forceSolidOn().strength(0.5F).sound(SoundType.METAL).noOcclusion().pushReaction(PushReaction.DESTROY).mapColor(MapColor.WOOL)));
+
     private static <T extends Block> DeferredBlock<T> register(String name, Supplier<T> supplier) {
         return BLOCKS.register(name, supplier);
     }

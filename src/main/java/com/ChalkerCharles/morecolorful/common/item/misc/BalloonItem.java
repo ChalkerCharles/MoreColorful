@@ -95,6 +95,7 @@ public class BalloonItem extends Item {
         super(pProperties);
         this.variant = variant;
         BY_VARIANT.put(variant, this);
+        DispenserBlock.registerBehavior(this, DISPENSE_ITEM_BEHAVIOR);
     }
 
     public static ItemLike byColor(DyeColor color) {
@@ -159,8 +160,7 @@ public class BalloonItem extends Item {
                     level.gameEvent(GameEvent.BLOCK_ATTACH, pos, GameEvent.Context.of(player));
                 }
                 ItemStack itemStack = pContext.getItemInHand();
-                player.awardStat(Stats.ITEM_USED.get(this));
-                itemStack.consume(1, player);
+                itemStack.shrink(1);
                 return InteractionResult.sidedSuccess(level.isClientSide);
             }
         }

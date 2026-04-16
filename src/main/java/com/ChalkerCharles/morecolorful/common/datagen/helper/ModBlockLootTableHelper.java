@@ -167,6 +167,20 @@ public abstract class ModBlockLootTableHelper extends BlockLootSubProvider {
         );
     }
 
+    protected LootTable.Builder createCocoonDrop() {
+        return LootTable.lootTable().withPool(this.applyExplosionCondition(ModBlocks.COCOON,
+                        LootPool.lootPool()
+                                .when(this.hasSilkTouch())
+                                .setRolls(ConstantValue.exactly(1.0F))
+                                .add(LootItem.lootTableItem(ModItems.COCOON)
+                                        .apply(CopyComponentsFunction.copyComponents(CopyComponentsFunction.Source.BLOCK_ENTITY)
+                                                .include(ModDataComponents.COCOON_DATA.get())
+                                        )
+                                )
+                )
+        );
+    }
+
     protected void add(Supplier<? extends Block> block, LootTable.Builder builder) {
         this.add(block.get(), builder);
     }

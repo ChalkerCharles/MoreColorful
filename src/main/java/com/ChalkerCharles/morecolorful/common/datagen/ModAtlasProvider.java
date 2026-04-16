@@ -118,5 +118,8 @@ public class ModAtlasProvider extends SpriteSourceProvider {
                 PAPER_PALETTE_MAP
         ));
         atlas(Atlases.BALLOONS_ATLAS).addSource(new DirectoryLister("entity/balloons", "entity/balloons/"));
+        atlas(Atlases.MOTHS_ATLAS).addSource(new DirectoryLister("entity/butterfly", "entity/butterfly/"))
+                .addSource(new DirectoryLister("entity/moth", "entity/moth/"))
+                .addSource(new DirectoryLister("entity/caterpillar", "entity/caterpillar/"));
     }
 }

@@ -1,0 +1,35 @@
+{
+	"textures": {
+		"0": "morecolorful:item/straw_hat_model"
+	},
+	"elements": [
+		{
+			"name": "helmet",
+			"from": [3.5, 8, 3.5],
+			"to": [12.5, 12.4, 12.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, -20, 8]},
+			"faces": {
+				"north": {"uv": [4, 4, 8, 6], "texture": "#0"},
+				"east": {"uv": [0, 4, 4, 6], "texture": "#0"},
+				"south": {"uv": [12, 4, 16, 6], "texture": "#0"},
+				"west": {"uv": [8, 4, 12, 6], "texture": "#0"},
+				"up": {"uv": [8, 4, 4, 0], "texture": "#0"}
+			}
+		},
+		{
+			"name": "brim",
+			"from": [-0.1, 7.99, -0.1],
+			"to": [16.1, 8, 16.1],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, -9, 6]},
+			"faces": {
+				"up": {"uv": [0, 8, 8, 16], "rotation": 180, "texture": "#0"},
+				"down": {"uv": [0, 8, 8, 16], "texture": "#0"}
+			}
+		}
+	],
+	"display": {
+		"head": {
+			"scale": [1.7, 1.7, 1.7]
+		}
+	}
+}

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "hatch=0": {
+      "model": "morecolorful:block/cocoon"
+    },
+    "hatch=1": {
+      "model": "morecolorful:block/cocoon_slightly_cracked"
+    },
+    "hatch=2": {
+      "model": "morecolorful:block/cocoon_very_cracked"
+    }
+  }
+}

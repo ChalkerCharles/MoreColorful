@@ -6,12 +6,14 @@ import net.minecraft.core.component.DataComponentType;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.Unit;
 import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.component.CustomData;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 
+@SuppressWarnings("deprecation")
 public class ModDataComponents {
     private static final DeferredRegister.DataComponents DATA_COMPONENTS = DeferredRegister.createDataComponents(MoreColorful.MODID);
 
@@ -25,6 +27,7 @@ public class ModDataComponents {
     public static final Supplier<DataComponentType<KiteColor>> KITE_COLOR = register("kite_color", builder -> builder.persistent(KiteColor.CODEC).networkSynchronized(KiteColor.STREAM_CODEC).cacheEncoding());
     public static final Supplier<DataComponentType<DyeColor>> RIBBON = register("ribbon", builder -> builder.persistent(DyeColor.CODEC).networkSynchronized(DyeColor.STREAM_CODEC));
     public static final Supplier<DataComponentType<PapercuttingStencil>> PAPERCUTTING_STENCIL = register("papercutting_stencil", builder -> builder.persistent(PapercuttingStencil.CODEC).networkSynchronized(PapercuttingStencil.STREAM_CODEC));
+    public static final Supplier<DataComponentType<CustomData>> COCOON_DATA = register("cocoon_data", builder -> builder.persistent(CustomData.CODEC).networkSynchronized(CustomData.STREAM_CODEC));
 
     private static <T> Supplier<DataComponentType<T>> register(String name, UnaryOperator<DataComponentType.Builder<T>> builder) {
         return DATA_COMPONENTS.registerComponentType(name, builder);

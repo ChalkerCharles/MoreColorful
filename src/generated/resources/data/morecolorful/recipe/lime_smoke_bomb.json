@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "group": "smoke_bomb",
+  "ingredients": [
+    {
+      "tag": "c:gunpowders"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "tag": "minecraft:coals"
+    },
+    {
+      "tag": "c:dyes/lime"
+    }
+  ],
+  "result": {
+    "count": 2,
+    "id": "morecolorful:lime_smoke_bomb"
+  }
+}

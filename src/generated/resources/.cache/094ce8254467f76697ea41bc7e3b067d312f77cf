@@ -1,3 +1,4 @@
-// 1.21	2025-03-16T21:54:42.9000328	Global Loot Modifiers : morecolorful
+// 1.21	2026-04-15T23:35:48.4953871	Global Loot Modifiers : morecolorful
 36348192dda70a767e49f2abcf2e69d0da18597f data/morecolorful/loot_modifiers/archaeology_trail_ruins_common.json
-63b09fd2d891d29a43540d0fc96e10bcbac5a056 data/neoforge/loot_modifiers/global_loot_modifiers.json
+29704898037db66fd79f90345a36e5e24490e965 data/morecolorful/loot_modifiers/village_plains_house.json
+52dd488aaf83c9e6a6a48c13bb862d979248ab12 data/neoforge/loot_modifiers/global_loot_modifiers.json

@@ -26,6 +26,7 @@ public class ModBlockEntities {
     public static final Supplier<BlockEntityType<PinwheelBlockEntity>> PINWHEEL = register("pinwheel", () -> create(PinwheelBlockEntity::new, ModBlocks.PINWHEEL.get()));
     public static final Supplier<BlockEntityType<PennantBlockEntity>> PENNANT = register("pennant", () -> create(PennantBlockEntity::new, PennantBlock.ALL_BLOCKS.get()));
     public static final Supplier<BlockEntityType<PapercuttingBlockEntity>> PAPERCUTTING = register("papercutting", () -> create(PapercuttingBlockEntity::new, PapercuttingBlock.ALL_BLOCKS.get()));
+    public static final Supplier<BlockEntityType<CocoonBlockEntity>> COCOON = register("cocoon", () -> create(CocoonBlockEntity::new, ModBlocks.COCOON.get()));
 
     private static <T extends BlockEntity> Supplier<BlockEntityType<T>> register(String name, Supplier<BlockEntityType<T>> supplier) {
         return BLOCK_ENTITY_TYPES.register(name, supplier);

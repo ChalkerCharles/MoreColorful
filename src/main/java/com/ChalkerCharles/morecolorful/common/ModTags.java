@@ -66,6 +66,7 @@ public abstract class ModTags {
 
     public static class Biomes {
         public static final TagKey<Biome> IS_WINDY = create("is_windy");
+        public static final TagKey<Biome> IS_AUTUMN = create("is_autumn");
 
         private static TagKey<Biome> create(String path) {
             return TagKey.create(Registries.BIOME, MoreColorful.location(path));
@@ -74,6 +75,7 @@ public abstract class ModTags {
 
     public static class EntityTypes {
         public static TagKey<EntityType<?>> CAN_SPAWN_WITH_UMBRELLA = create("can_spawn_with_umbrella");
+        public static TagKey<EntityType<?>> CAN_SPAWN_WITH_BALLOON = create("can_spawn_with_balloon");
 
         private static TagKey<EntityType<?>> create(String path) {
             return TagKey.create(Registries.ENTITY_TYPE, MoreColorful.location(path));

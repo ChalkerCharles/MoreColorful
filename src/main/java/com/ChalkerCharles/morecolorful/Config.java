@@ -1,7 +1,5 @@
 package com.ChalkerCharles.morecolorful;
 
-import com.ChalkerCharles.morecolorful.common.worldgen.ModBiomeModifiers;
-import com.ChalkerCharles.morecolorful.util.FileUtils;
 import com.ChalkerCharles.morecolorful.util.Maths;
 import com.ChalkerCharles.morecolorful.util.StringParser;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
@@ -41,6 +39,7 @@ public class Config {
     public static int overworldRegionWeight = 10;
     public static Set<ResourceKey<Biome>> disabledBiomes = Set.of();
     public static boolean allowAddingFeatures = true;
+    public static boolean allowAddingSpawns = true;
     public static boolean enhancedLeash = true;
 
     public static boolean wavyBlocks = true;
@@ -85,7 +84,7 @@ public class Config {
                 .map(biome -> ResourceKey.create(Registries.BIOME, ResourceLocation.parse(biome)))
                 .collect(Collectors.toSet());
         allowAddingFeatures = config.allowAddingFeatures.get();
-        checkBiomeModifier(allowAddingFeatures, ModBiomeModifiers.ADD_FEATURE_MODIFIERS, "Add Feature");
+        allowAddingSpawns = config.allowAddingSpawns.get();
         enhancedLeash = config.enhancedLeash.get();
     }
 
@@ -116,16 +115,5 @@ public class Config {
     @SubscribeEvent
     public static void onReload(ModConfigEvent.Reloading event) {
         setConfigs(event);
-    }
-
-    @SuppressWarnings("SameParameterValue")
-    private static void checkBiomeModifier(boolean config, List<String> modifiers, String name) {
-        if (config) {
-            FileUtils.enableBiomeModifiers(modifiers);
-            MoreColorful.LOGGER.info("Enabled Biome Modifiers: {}", name);
-        } else {
-            FileUtils.disableBiomeModifiers(modifiers);
-            MoreColorful.LOGGER.info("Disabled Biome Modifiers: {}", name);
-        }
     }
 }

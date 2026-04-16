@@ -40,8 +40,8 @@ public final class BlockThermalEngine implements LayerThermalEventListener {
     public static boolean hasDifferentThermalProperties(BlockState state1, BlockState state2) {
         if (state2 == state1) {
             return false;
-        } else if (IBlockStateExtension.getThermalResistance(state2) == IBlockStateExtension.getThermalResistance(state1)) {
-            return false;
+        } else if (IBlockStateExtension.getThermalResistance(state2) != IBlockStateExtension.getThermalResistance(state1)) {
+            return true;
         } else {
             return IBlockStateExtension.getTemperature(state2) != IBlockStateExtension.getTemperature(state1);
         }

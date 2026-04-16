@@ -8,28 +8,34 @@ import com.ChalkerCharles.morecolorful.common.block.utility.UnderwaterTntBlock;
 import com.ChalkerCharles.morecolorful.common.entity.BoatTypeExtension;
 import com.ChalkerCharles.morecolorful.common.entity.EntityUtils;
 import com.ChalkerCharles.morecolorful.common.entity.ModAttributes;
+import com.ChalkerCharles.morecolorful.common.entity.ModEntities;
+import com.ChalkerCharles.morecolorful.common.entity.animal.AbstractMoth;
+import com.ChalkerCharles.morecolorful.common.entity.animal.Butterfly;
+import com.ChalkerCharles.morecolorful.common.entity.animal.Caterpillar;
+import com.ChalkerCharles.morecolorful.common.entity.animal.Moth;
 import com.ChalkerCharles.morecolorful.common.item.ModItems;
-import com.ChalkerCharles.morecolorful.common.item.misc.BalloonItem;
 import com.ChalkerCharles.morecolorful.common.item.misc.PaperBoatItem;
-import com.ChalkerCharles.morecolorful.common.item.misc.PartyPopperItem;
 import com.ChalkerCharles.morecolorful.common.item.utility.UmbrellaItem;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.core.cauldron.CauldronInteraction;
 import net.minecraft.core.dispenser.BoatDispenseItemBehavior;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.SpawnPlacementTypes;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.attributes.DefaultAttributes;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.event.BlockEntityTypeAddBlocksEvent;
+import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
+import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 
 import java.util.Map;
 
@@ -265,12 +271,6 @@ public final class ModCommonSetup {
         DispenserBlock.registerBehavior(ModItems.WILLOW_CHEST_BOAT, new BoatDispenseItemBehavior(BoatTypeExtension.WILLOW, true));
         DispenserBlock.registerProjectileBehavior(ModItems.PAPER_PLANE);
         DispenserBlock.registerBehavior(ModItems.PAPER_BOAT, PaperBoatItem.DISPENSE_ITEM_BEHAVIOR);
-        for (ItemLike item : PartyPopperItem.ALL_COLORS) {
-            DispenserBlock.registerBehavior(item, PartyPopperItem.DISPENSE_ITEM_BEHAVIOR);
-        }
-        for (ItemLike item : BalloonItem.ALL_TYPES) {
-            DispenserBlock.registerBehavior(item, BalloonItem.DISPENSE_ITEM_BEHAVIOR);
-        }
         DispenserBlock.registerBehavior(ModItems.UNDERWATER_TNT, UnderwaterTntBlock.DISPENSE_ITEM_BEHAVIOR);
         DispenserBlock.registerProjectileBehavior(ModItems.BOMB);
     }
@@ -319,6 +319,13 @@ public final class ModCommonSetup {
     }
 
     @SubscribeEvent
+    public static void createEntityAttributes(EntityAttributeCreationEvent event) {
+        event.put(ModEntities.BUTTERFLY.get(), AbstractMoth.createAttributes().build());
+        event.put(ModEntities.MOTH.get(), AbstractMoth.createAttributes().build());
+        event.put(ModEntities.CATERPILLAR.get(), Caterpillar.createAttributes().build());
+    }
+
+    @SubscribeEvent
     public static void modifyEntityAttributes(EntityAttributeModificationEvent event) {
         for (EntityType<? extends LivingEntity> type : event.getTypes()) {
             AttributeSupplier globalMap = DefaultAttributes.getSupplier(type);
@@ -328,5 +335,12 @@ public final class ModCommonSetup {
             event.add(type, ModAttributes.WEIGHT);
         }
         EntityUtils.addVanillaWeightAttribute((type, value) -> event.add(type, ModAttributes.WEIGHT, value));
+    }
+
+    @SubscribeEvent
+    public static void registerSpawnPlacements(RegisterSpawnPlacementsEvent event) {
+        RegisterSpawnPlacementsEvent.Operation replace = RegisterSpawnPlacementsEvent.Operation.REPLACE;
+        event.register(ModEntities.BUTTERFLY.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Butterfly::checkSpawnRules, replace);
+        event.register(ModEntities.MOTH.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Moth::checkSpawnRules, replace);
     }
 }

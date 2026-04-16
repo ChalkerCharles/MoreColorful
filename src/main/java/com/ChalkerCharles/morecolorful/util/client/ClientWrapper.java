@@ -2,17 +2,22 @@ package com.ChalkerCharles.morecolorful.util.client;
 
 import com.ChalkerCharles.morecolorful.Config;
 import com.ChalkerCharles.morecolorful.client.particle.ModParticles;
+import com.ChalkerCharles.morecolorful.client.particle.particles.SmokeBombParticles;
 import com.ChalkerCharles.morecolorful.common.ModSounds;
+import com.ChalkerCharles.morecolorful.common.entity.misc.SmokeBomb;
+import com.ChalkerCharles.morecolorful.common.item.utility.SmokeBombItem;
 import com.ChalkerCharles.morecolorful.util.Maths;
 import com.ChalkerCharles.morecolorful.util.WeatherUtils;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ColorParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -73,5 +78,14 @@ public class ClientWrapper {
         float m0 = Maths.length(x - 8, z - 8) * 10F;
         float windSpeed = Maths.length(wind.x, wind.z);
         return Mth.cos(m0 + RenderUtils.anim * Math.round(windSpeed)) * 0.65F * Maths.INV24;
+    }
+
+    public static void createSmokeBomb(Level level, SmokeBomb bomb) {
+        DyeColor color = SmokeBombItem.getColor(bomb.getItem().getItem());
+        int life = Math.max(bomb.getLifetime(), 0);
+        SmokeBombParticles.Starter starter = new SmokeBombParticles.Starter(
+                (ClientLevel) level, bomb.getX(), bomb.getY(), bomb.getZ(), Minecraft.getInstance().particleEngine, life, color.getTextureDiffuseColor());
+        bomb.setParticlePosSetter(() -> starter.setPos(bomb.getX(), bomb.getY(), bomb.getZ()));
+        Minecraft.getInstance().particleEngine.add(starter);
     }
 }

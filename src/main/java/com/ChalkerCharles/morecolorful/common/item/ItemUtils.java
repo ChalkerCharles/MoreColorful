@@ -2,13 +2,17 @@ package com.ChalkerCharles.morecolorful.common.item;
 
 import com.ChalkerCharles.morecolorful.util.Maths;
 import com.google.common.collect.ImmutableList;
+import it.unimi.dsi.fastutil.ints.IntList;
+import net.minecraft.Util;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.component.FireworkExplosion;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.common.Tags;
@@ -36,6 +40,11 @@ public final class ItemUtils extends net.minecraft.world.item.ItemUtils {
             ModItems.PINK_BUNDLE
     };
     public static final ItemLike[] ALL_BUNDLES = Maths.concatArray(ItemLike[]::new, Items.BUNDLE, COLORED_BUNDLES);
+    public static final ItemLike[] MOD_SPAWN_EGGS = new ItemLike[] {
+            ModItems.BUTTERFLY_SPAWN_EGG,
+            ModItems.MOTH_SPAWN_EGG,
+            ModItems.CATERPILLAR_SPAWN_EGG
+    };
 
     public static Stream<ItemStack> dyeingIngredients(ItemLike[] items, ItemLike except) {
         return Arrays.stream(items).filter(i -> i != except).map(ItemStack::new);
@@ -65,9 +74,32 @@ public final class ItemUtils extends net.minecraft.world.item.ItemUtils {
     public static Item[] itemArray(ItemLike[] array) {
         return Arrays.stream(array).map(ItemLike::asItem).toArray(Item[]::new);
     }
+
+    public static boolean isCustomHat(Item item) {
+        return item == ModItems.BEEKEEPING_HAT.get() || item == ModItems.STRAW_HAT.get();
+    }
     
     public static boolean isShears(ItemStack stack) {
         return stack.getItem() instanceof ShearsItem || stack.is(Tags.Items.TOOLS_SHEAR);
+    }
+    
+    public static FireworkExplosion getRandomFireworkExplosion(RandomSource random) {
+        FireworkExplosion.Shape shape = Util.getRandom(FireworkExplosion.Shape.values(), random);
+        DyeColor[] dyeColors = DyeColor.values();
+        DyeColor color0 = Util.getRandom(dyeColors, random);
+        IntList colors = random.nextBoolean()
+                ? IntList.of(color0.getFireworkColor())
+                : IntList.of(color0.getFireworkColor(), Util.getRandom(dyeColors, random).getFireworkColor());
+        IntList fadeColors;
+        if (random.nextBoolean()) {
+            DyeColor color1 = Util.getRandom(dyeColors, random);
+            fadeColors = random.nextBoolean()
+                    ? IntList.of(color1.getFireworkColor())
+                    : IntList.of(color1.getFireworkColor(), Util.getRandom(dyeColors, random).getFireworkColor());
+        } else {
+            fadeColors = IntList.of();
+        }
+        return new FireworkExplosion(shape, colors, fadeColors, random.nextBoolean(), random.nextBoolean());
     }
 
     public static boolean isSameItemSameComponentsExcept(ItemStack stack, ItemStack other, DataComponentType<?> except) {

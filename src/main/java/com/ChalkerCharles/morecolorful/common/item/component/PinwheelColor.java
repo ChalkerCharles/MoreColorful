@@ -21,6 +21,15 @@ public record PinwheelColor(List<DyeColor> colors) {
             .apply(ByteBufCodecs.list(4))
             .map(PinwheelColor::new, PinwheelColor::colors);
 
+    public static PinwheelColor pure(DyeColor color) {
+        if (color == DyeColor.WHITE) return DEFAULT;
+        return new PinwheelColor(List.of(color, color, color, color));
+    }
+
+    public static PinwheelColor biColor(DyeColor first, DyeColor second) {
+        return new PinwheelColor(List.of(first, second, first, second));
+    }
+
     public void save(CompoundTag tag) {
         if (!this.equals(DEFAULT)) {
             tag.put("colors", CODEC.encodeStart(NbtOps.INSTANCE, this).getOrThrow());

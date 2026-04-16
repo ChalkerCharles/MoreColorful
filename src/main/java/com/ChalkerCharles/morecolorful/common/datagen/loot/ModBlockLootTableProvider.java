@@ -310,6 +310,7 @@ public class ModBlockLootTableProvider extends ModBlockLootTableHelper {
         }
         dropSelf(ModBlocks.PAPERCRAFT_TABLE);
         dropSelf(ModBlocks.CARDBOARD_BLOCK);
+        add(ModBlocks.COCOON, createCocoonDrop());
     }
 
     @Override

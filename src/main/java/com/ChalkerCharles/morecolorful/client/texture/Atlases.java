@@ -14,4 +14,6 @@ public class Atlases {
     public static final ResourceLocation BALLOONS_ATLAS = MoreColorful.location("balloons");
     public static final ResourceLocation BALLOON_SHEET = MoreColorful.location("textures/atlas/balloons.png");
     public static final ResourceLocation PAPERCUTTING_SHEET = MoreColorful.location("textures/atlas/papercutting.png");
+    public static final ResourceLocation MOTHS_ATLAS = MoreColorful.location("moths");
+    public static final ResourceLocation MOTH_SHEET = MoreColorful.location("textures/atlas/moths.png");
 }

@@ -3,20 +3,26 @@ package com.ChalkerCharles.morecolorful.common.item;
 import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.common.block.ModBlocks;
 import com.ChalkerCharles.morecolorful.common.entity.BoatTypeExtension;
+import com.ChalkerCharles.morecolorful.common.entity.ModEntities;
 import com.ChalkerCharles.morecolorful.common.entity.misc.Balloon;
 import com.ChalkerCharles.morecolorful.common.item.component.*;
 import com.ChalkerCharles.morecolorful.common.item.misc.*;
 import com.ChalkerCharles.morecolorful.common.item.musical.*;
 import com.ChalkerCharles.morecolorful.common.item.utility.BombItem;
+import com.ChalkerCharles.morecolorful.common.item.utility.BugNetItem;
+import com.ChalkerCharles.morecolorful.common.item.utility.SmokeBombItem;
 import com.ChalkerCharles.morecolorful.common.item.utility.UmbrellaItem;
 import com.ChalkerCharles.morecolorful.util.Colour;
 import com.ChalkerCharles.morecolorful.util.InstrumentsType;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.BundleContents;
 import net.minecraft.world.item.component.FireworkExplosion;
 import net.minecraft.world.level.block.*;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.common.DeferredSpawnEggItem;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -301,6 +307,8 @@ public class ModItems {
 
     public static final DeferredItem<BlockItem> UNDERWATER_TNT = registerBlockItem(ModBlocks.UNDERWATER_TNT);
 
+    public static final DeferredItem<BlockItem> COCOON = registerBlockItem(ModBlocks.COCOON);
+
     // Items
     public static final DeferredItem<Item> VIOLIN = register("violin", () -> new BowedStringInstrumentItem(InstrumentsType.VIOLIN, nonStackable()));
     public static final DeferredItem<Item> FIDDLE_BOW = register("fiddle_bow", () -> new Item(nonStackable()));
@@ -419,6 +427,25 @@ public class ModItems {
     public static final DeferredItem<Item> UMBRELLA = register("umbrella", () -> new UmbrellaItem(properties().durability(128).component(ModDataComponents.UMBRELLA_COLOR, UmbrellaColor.DEFAULT)));
     public static final DeferredItem<Item> DRIPLEAF_UMBRELLA = register("dripleaf_umbrella", () -> new UmbrellaItem(properties().durability(96)));
     public static final DeferredItem<Item> BOMB = register("bomb", () -> new BombItem(stackTo16()));
+    public static final DeferredItem<Item> BUG_NET = register("bug_net", () -> new BugNetItem(properties().durability(64)));
+    public static final DeferredItem<Item> WHITE_SMOKE_BOMB = register("white_smoke_bomb", () -> new SmokeBombItem(DyeColor.WHITE, stackTo16()));
+    public static final DeferredItem<Item> LIGHT_GRAY_SMOKE_BOMB = register("light_gray_smoke_bomb", () -> new SmokeBombItem(DyeColor.LIGHT_GRAY, stackTo16()));
+    public static final DeferredItem<Item> GRAY_SMOKE_BOMB = register("gray_smoke_bomb", () -> new SmokeBombItem(DyeColor.GRAY, stackTo16()));
+    public static final DeferredItem<Item> BLACK_SMOKE_BOMB = register("black_smoke_bomb", () -> new SmokeBombItem(DyeColor.BLACK, stackTo16()));
+    public static final DeferredItem<Item> BROWN_SMOKE_BOMB = register("brown_smoke_bomb", () -> new SmokeBombItem(DyeColor.BROWN, stackTo16()));
+    public static final DeferredItem<Item> RED_SMOKE_BOMB = register("red_smoke_bomb", () -> new SmokeBombItem(DyeColor.RED, stackTo16()));
+    public static final DeferredItem<Item> ORANGE_SMOKE_BOMB = register("orange_smoke_bomb", () -> new SmokeBombItem(DyeColor.ORANGE, stackTo16()));
+    public static final DeferredItem<Item> YELLOW_SMOKE_BOMB = register("yellow_smoke_bomb", () -> new SmokeBombItem(DyeColor.YELLOW, stackTo16()));
+    public static final DeferredItem<Item> LIME_SMOKE_BOMB = register("lime_smoke_bomb", () -> new SmokeBombItem(DyeColor.LIME, stackTo16()));
+    public static final DeferredItem<Item> GREEN_SMOKE_BOMB = register("green_smoke_bomb", () -> new SmokeBombItem(DyeColor.GREEN, stackTo16()));
+    public static final DeferredItem<Item> CYAN_SMOKE_BOMB = register("cyan_smoke_bomb", () -> new SmokeBombItem(DyeColor.CYAN, stackTo16()));
+    public static final DeferredItem<Item> LIGHT_BLUE_SMOKE_BOMB = register("light_blue_smoke_bomb", () -> new SmokeBombItem(DyeColor.LIGHT_BLUE, stackTo16()));
+    public static final DeferredItem<Item> BLUE_SMOKE_BOMB = register("blue_smoke_bomb", () -> new SmokeBombItem(DyeColor.BLUE, stackTo16()));
+    public static final DeferredItem<Item> PURPLE_SMOKE_BOMB = register("purple_smoke_bomb", () -> new SmokeBombItem(DyeColor.PURPLE, stackTo16()));
+    public static final DeferredItem<Item> MAGENTA_SMOKE_BOMB = register("magenta_smoke_bomb", () -> new SmokeBombItem(DyeColor.MAGENTA, stackTo16()));
+    public static final DeferredItem<Item> PINK_SMOKE_BOMB = register("pink_smoke_bomb", () -> new SmokeBombItem(DyeColor.PINK, stackTo16()));
+    public static final DeferredItem<Item> BEEKEEPING_HAT = register("beekeeping_hat", () -> new ArmorItem(ModArmorMaterials.CLOTH, ArmorItem.Type.HELMET, properties().durability(64)));
+    public static final DeferredItem<Item> STRAW_HAT = register("straw_hat", () -> new ArmorItem(ModArmorMaterials.CLOTH, ArmorItem.Type.HELMET, properties().durability(64)));
 
     public static final DeferredItem<Item> FIREWORK_SHAPE_TEMPLATE_LARGE_BALL = registerFireworkShapeTemplate("firework_shape_template_large_ball", FireworkExplosion.Shape.LARGE_BALL);
     public static final DeferredItem<Item> FIREWORK_SHAPE_TEMPLATE_STAR = registerFireworkShapeTemplate("firework_shape_template_star", FireworkExplosion.Shape.STAR);
@@ -434,6 +461,14 @@ public class ModItems {
     public static final DeferredItem<Item> FIREWORK_SHAPE_TEMPLATE_HYPERBOLOID = registerFireworkShapeTemplate("firework_shape_template_hyperboloid", FireworkShapeExtension.HYPERBOLOID);
 
     public static final DeferredItem<Item> CARDBOARD = registerSimple("cardboard");
+
+    public static final DeferredItem<Item> BEE = register("bee", () -> new CritterItem(EntityType.BEE, properties()));
+    public static final DeferredItem<Item> BUTTERFLY = register("butterfly", () -> new CritterItem(ModEntities.BUTTERFLY.get(), properties()));
+    public static final DeferredItem<Item> MOTH = register("moth", () -> new CritterItem(ModEntities.MOTH.get(), properties()));
+    public static final DeferredItem<Item> CATERPILLAR = register("caterpillar", () -> new CritterItem(ModEntities.CATERPILLAR.get(), properties()));
+    public static final DeferredItem<Item> BUTTERFLY_SPAWN_EGG = registerSpawnEgg("butterfly_spawn_egg", ModEntities.BUTTERFLY, 0xfc8113, 0x341911);
+    public static final DeferredItem<Item> MOTH_SPAWN_EGG = registerSpawnEgg("moth_spawn_egg", ModEntities.MOTH, 0x735450, 0xc5b9a7);
+    public static final DeferredItem<Item> CATERPILLAR_SPAWN_EGG = registerSpawnEgg("caterpillar_spawn_egg", ModEntities.CATERPILLAR, 0x6c8031, 0x1e2d0e);
 
     private static DeferredItem<Item> register(String name, Supplier<Item> supplier) {
         return ITEMS.register(name, supplier);
@@ -485,6 +520,10 @@ public class ModItems {
 
     private static DeferredItem<BlockItem> registerPapercutting(DeferredBlock<? extends Block> block) {
         return registerBlockItem(block, () -> new BlockItem(block.get(), properties().component(ModDataComponents.PAPERCUTTING_STENCIL, PapercuttingStencil.DEFAULT)));
+    }
+
+    private static DeferredItem<Item> registerSpawnEgg(String name, Supplier<? extends EntityType<? extends Mob>> type, int backgroundColor, int highlightColor) {
+        return register(name, () -> new DeferredSpawnEggItem(type, backgroundColor, highlightColor, properties()));
     }
     
     private static Item.Properties properties() {

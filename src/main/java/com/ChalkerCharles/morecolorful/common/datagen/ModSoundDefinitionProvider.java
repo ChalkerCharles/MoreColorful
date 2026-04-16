@@ -337,6 +337,8 @@ public class ModSoundDefinitionProvider extends ModSoundDefinitionHelper {
                 "block/cardboard/step4",
                 "block/cardboard/step5",
                 "block/cardboard/step6");
+        vanilla(ModSounds.COCOON_CRACK, "morecolorful.subtitles.block.cocoon.crack", SoundEvents.SNIFFER_EGG_CRACK);
+        vanilla(ModSounds.COCOON_HATCH, "morecolorful.subtitles.block.cocoon.hatch", SoundEvents.SNIFFER_EGG_HATCH);
 
         // Entities
         vanilla(ModSounds.PAPER_PLANE_THROW, "morecolorful.subtitles.entity.paper_plane.throw", SoundEvents.SNOWBALL_THROW);
@@ -367,6 +369,48 @@ public class ModSoundDefinitionProvider extends ModSoundDefinitionHelper {
                 "entity/kite/reel3",
                 "entity/kite/reel4");
         vanilla(ModSounds.BOMB_THROW, "morecolorful.subtitles.entity.bomb.throw", SoundEvents.SNOWBALL_THROW);
+        generic(ModSounds.BUTTERFLY_HURT, "morecolorful.subtitles.entity.butterfly.hurt",
+                "entity/moth/hurt1",
+                "entity/moth/hurt2",
+                "entity/moth/hurt3",
+                "entity/moth/hurt4");
+        generic(ModSounds.BUTTERFLY_DEATH, "morecolorful.subtitles.entity.butterfly.death",
+                "entity/moth/hurt1",
+                "entity/moth/hurt2",
+                "entity/moth/hurt3",
+                "entity/moth/hurt4");
+        generic(ModSounds.BUTTERFLY_FLUTTER, "morecolorful.subtitles.entity.butterfly.flutter", "entity/moth/flutter");
+        generic(ModSounds.MOTH_HURT, "morecolorful.subtitles.entity.moth.hurt",
+                "entity/moth/hurt1",
+                "entity/moth/hurt2",
+                "entity/moth/hurt3",
+                "entity/moth/hurt4");
+        generic(ModSounds.MOTH_DEATH, "morecolorful.subtitles.entity.moth.death",
+                "entity/moth/hurt1",
+                "entity/moth/hurt2",
+                "entity/moth/hurt3",
+                "entity/moth/hurt4");
+        generic(ModSounds.MOTH_FLUTTER, "morecolorful.subtitles.entity.moth.flutter", "entity/moth/flutter");
+        generic(ModSounds.CATERPILLAR_HURT, "morecolorful.subtitles.entity.caterpillar.hurt",
+                "entity/worm/hurt1",
+                "entity/worm/hurt2",
+                "entity/worm/hurt3",
+                "entity/worm/hurt4");
+        generic(ModSounds.CATERPILLAR_DEATH, "morecolorful.subtitles.entity.caterpillar.death",
+                "entity/worm/hurt1",
+                "entity/worm/hurt2",
+                "entity/worm/hurt3",
+                "entity/worm/hurt4");
+        generic(ModSounds.CATERPILLAR_PUPATE, "morecolorful.subtitles.entity.caterpillar.pupate",
+                "entity/worm/pupate1",
+                "entity/worm/pupate2",
+                "entity/worm/pupate3",
+                "entity/worm/pupate4");
+        vanilla(ModSounds.SMOKE_BOMB_THROW, "morecolorful.subtitles.entity.smoke_bomb.throw", SoundEvents.SNOWBALL_THROW);
+        vanilla(ModSounds.SMOKE_BOMB_EXPLODE, "morecolorful.subtitles.entity.smoke_bomb.explode", SoundEvents.FIREWORK_ROCKET_BLAST);
+        vanilla(ModSounds.VILLAGER_WORK_BEEKEEPER, "morecolorful.subtitles.entity.villager.work_beekeeper", SoundEvents.BEEHIVE_SHEAR);
+        vanilla(ModSounds.VILLAGER_WORK_PYROTECHNICIAN, "morecolorful.subtitles.entity.villager.work_pyrotechnician", ModSounds.PYROTECHNICS_TABLE_USE.get());
+        vanilla(ModSounds.VILLAGER_WORK_PAPER_ARTISAN, "morecolorful.subtitles.entity.villager.work_paper_artisan", ModSounds.PAPER_CUT.get());
 
         // Items
         vanilla(ModSounds.PARTY_POPPER_POP, "morecolorful.subtitles.item.party_popper.pop", SoundEvents.FIREWORK_ROCKET_BLAST);
@@ -397,6 +441,7 @@ public class ModSoundDefinitionProvider extends ModSoundDefinitionHelper {
                 "item/umbrella/block3",
                 "item/umbrella/block4",
                 "item/umbrella/block5");
+        vanilla(ModSounds.BUG_NET_CATCH, "morecolorful.subtitles.item.bug_net.catch", SoundEvents.SNOWBALL_THROW);
 
         // Environment & Ambient
         generic(ModSounds.WEATHER_BREEZE, "morecolorful.subtitles.weather.breeze",

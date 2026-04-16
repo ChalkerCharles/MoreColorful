@@ -1,0 +1,13 @@
+{
+  "values": {
+    "morecolorful:beekeeper": {
+      "loot_table": "morecolorful:gameplay/hero_of_the_village/beekeeper_gift"
+    },
+    "morecolorful:paper_artisan": {
+      "loot_table": "morecolorful:gameplay/hero_of_the_village/paper_artisan_gift"
+    },
+    "morecolorful:pyrotechnician": {
+      "loot_table": "morecolorful:gameplay/hero_of_the_village/pyrotechnician_gift"
+    }
+  }
+}

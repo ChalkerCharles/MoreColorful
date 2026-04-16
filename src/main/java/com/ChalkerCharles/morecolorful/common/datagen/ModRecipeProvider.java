@@ -356,6 +356,7 @@ public class ModRecipeProvider extends ModRecipeHelper {
         fireworkShapeTemplate(recipeOutput, ModItems.FIREWORK_SHAPE_TEMPLATE_CREEPER, ItemTags.SKULLS);
         fireworkShapeTemplate(recipeOutput, ModItems.FIREWORK_SHAPE_TEMPLATE_BURST, Tags.Items.FEATHERS);
         fireworkShapeTemplate(recipeOutput, ModItems.FIREWORK_SHAPE_TEMPLATE_CUBE, Items.GRASS_BLOCK);
+        fireworkShapeTemplate(recipeOutput, ModItems.FIREWORK_SHAPE_TEMPLATE_CLOCK, Items.CLOCK);
         ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, ModItems.UNDERWATER_TNT)
                 .define('#', Items.TNT)
                 .define('@', Items.PRISMARINE_SHARD)
@@ -389,5 +390,20 @@ public class ModRecipeProvider extends ModRecipeHelper {
                 .unlockedBy("has_paper", has(Items.PAPER))
                 .save(recipeOutput);
         nineBlockStorageRecipes(recipeOutput, RecipeCategory.MISC, ModItems.CARDBOARD, RecipeCategory.BUILDING_BLOCKS, ModItems.CARDBOARD_BLOCK);
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.BUG_NET)
+                .define('/', Tags.Items.RODS_WOODEN)
+                .define('#', Items.COBWEB)
+                .pattern("  #")
+                .pattern(" /#")
+                .pattern("/  ")
+                .unlockedBy("has_cobweb", has(Items.COBWEB))
+                .save(recipeOutput);
+        smokeBombs(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.STRAW_HAT)
+                .define('#', Tags.Items.CROPS_WHEAT)
+                .pattern("###")
+                .pattern("# #")
+                .unlockedBy("has_wheat", has(Tags.Items.CROPS_WHEAT))
+                .save(recipeOutput);
     }
 }

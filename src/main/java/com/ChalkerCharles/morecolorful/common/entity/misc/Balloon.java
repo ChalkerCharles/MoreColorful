@@ -49,6 +49,7 @@ public class Balloon extends Entity implements WindSensitive, IEntityExtension, 
     private double lerpYRot;
     @Nullable
     private Leashable.LeashData leashData;
+    private boolean fragile;
 
     public Balloon(EntityType<? extends Balloon> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -64,6 +65,11 @@ public class Balloon extends Entity implements WindSensitive, IEntityExtension, 
 
     public Balloon(Level level, Player player, Entity attachedTo, Variant variant) {
         this(level, player == attachedTo ? player.getLookAngle() : player.getLookAngle().reverse(), attachedTo, variant);
+    }
+
+    public Balloon(Level level, Entity attachedTo, Variant variant) {
+        this(level, Vec3.ZERO, attachedTo, variant);
+        this.fragile = true;
     }
 
     @Override
@@ -93,12 +99,14 @@ public class Balloon extends Entity implements WindSensitive, IEntityExtension, 
     protected void readAdditionalSaveData(CompoundTag pCompound) {
         this.leashData = this.readLeashData(pCompound);
         this.setVariant(Variant.byIndex(pCompound.getInt("Type")));
+        this.fragile = pCompound.getBoolean("Fragile");
     }
 
     @Override
     protected void addAdditionalSaveData(CompoundTag pCompound) {
         this.writeLeashData(pCompound, this.leashData);
         pCompound.putInt("Type", this.getVariant().getIndex());
+        pCompound.putBoolean("Fragile", this.fragile);
     }
 
     public void setDamage(float pDamage) {
@@ -214,7 +222,7 @@ public class Balloon extends Entity implements WindSensitive, IEntityExtension, 
             this.playSound(ModSounds.BALLOON_POP.get());
             this.gameEvent(GameEvent.EXPLODE);
         }
-        if (!source.isCreativePlayer() && this.level().getGameRules().getBoolean(GameRules.RULE_DOENTITYDROPS)) {
+        if (!this.fragile && !source.isCreativePlayer() && this.level().getGameRules().getBoolean(GameRules.RULE_DOENTITYDROPS)) {
             this.spawnAtLocation(Items.LEAD);
             int count = this.random.nextInt(3);
             if (count > 0) {

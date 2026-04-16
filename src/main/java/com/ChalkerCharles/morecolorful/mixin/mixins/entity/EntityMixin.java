@@ -2,6 +2,7 @@ package com.ChalkerCharles.morecolorful.mixin.mixins.entity;
 
 import com.ChalkerCharles.morecolorful.Config;
 import com.ChalkerCharles.morecolorful.common.ModSounds;
+import com.ChalkerCharles.morecolorful.common.ModTags;
 import com.ChalkerCharles.morecolorful.common.entity.EntityUtils;
 import com.ChalkerCharles.morecolorful.common.entity.misc.Balloon;
 import com.ChalkerCharles.morecolorful.common.entity.misc.SandbagEntity;
@@ -30,6 +31,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
@@ -137,6 +139,14 @@ public abstract class EntityMixin implements IEntityExtension, Self<Entity> {
                 leashable.dropLeash(true, true);
             }
             this.playSound(ModSounds.LEAD_TIED.get());
+        }
+    }
+
+    @Inject(method = "discard", at = @At("TAIL"))
+    private void discard(CallbackInfo ci) {
+        Entity self = this.moreColorful$self();
+        if (self.getType().is(ModTags.EntityTypes.CAN_SPAWN_WITH_BALLOON)) {
+            EntityUtils.getTiedBalloons(self).forEach(Entity::discard);
         }
     }
 }

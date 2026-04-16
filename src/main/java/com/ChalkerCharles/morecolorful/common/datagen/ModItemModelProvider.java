@@ -12,6 +12,7 @@ import com.ChalkerCharles.morecolorful.common.item.misc.BalloonItem;
 import com.ChalkerCharles.morecolorful.common.item.misc.FireworkShapeTemplateItem;
 import com.ChalkerCharles.morecolorful.common.item.misc.PartyPopperItem;
 import com.ChalkerCharles.morecolorful.common.item.misc.SparklerItem;
+import com.ChalkerCharles.morecolorful.common.item.utility.SmokeBombItem;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
@@ -209,5 +210,17 @@ public class ModItemModelProvider extends ModItemModelHelper {
         }
         fromBlock(ModItems.PAPERCRAFT_TABLE, ModBlocks.PAPERCRAFT_TABLE);
         basicItem(ModItems.CARDBOARD);
+        for (ItemLike item : SmokeBombItem.ALL_ITEMS) {
+            basicItem(item);
+        }
+
+        basicItem(ModItems.COCOON);
+        basicItem(ModItems.BEE);
+        butterflies();
+        moths();
+        caterpillars();
+        for (ItemLike item : ItemUtils.MOD_SPAWN_EGGS) {
+            spawnEgg(item);
+        }
     }
 }

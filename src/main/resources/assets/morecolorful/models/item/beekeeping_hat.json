@@ -1,0 +1,15 @@
+{
+  "parent": "minecraft:item/generated",
+  "loader": "neoforge:separate_transforms",
+  "base": {
+    "parent": "minecraft:item/generated",
+    "textures": {
+      "layer0": "morecolorful:item/beekeeping_hat"
+    }
+  },
+  "perspectives": {
+    "head": {
+      "parent": "morecolorful:item/beekeeping_hat_on_head"
+    }
+  }
+}

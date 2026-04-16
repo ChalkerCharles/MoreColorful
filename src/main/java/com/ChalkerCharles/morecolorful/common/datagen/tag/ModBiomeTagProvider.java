@@ -128,6 +128,13 @@ public class ModBiomeTagProvider extends BiomeTagsProvider {
                 Biomes.JAGGED_PEAKS,
                 Biomes.STONY_PEAKS
         );
+        tag(ModTags.Biomes.IS_AUTUMN).add(
+                ModBiomes.AUTUMN_BIRCH_FOREST,
+                ModBiomes.GOLDEN_GROVE,
+                ModBiomes.MAPLE_FOREST,
+                ModBiomes.SUNSET_VALLEY,
+                ModBiomes.DAWN_REDWOOD_SWAMP
+        );
 
         // C Tags
         tag(Tags.Biomes.IS_COLD_OVERWORLD).add(

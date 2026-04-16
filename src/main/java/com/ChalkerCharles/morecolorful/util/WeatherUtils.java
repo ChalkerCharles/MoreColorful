@@ -32,7 +32,7 @@ public final class WeatherUtils {
         return getGlobalWindSpeed(level).length() > 9;
     }
 
-    private static Vector2f getGlobalWindSpeed(Level level) {
+    public static Vector2f getGlobalWindSpeed(Level level) {
         return level.isClientSide ? RenderUtils.windSpeed : LevelSavedData.getGlobalWindSpeed(level);
     }
 

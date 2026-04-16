@@ -1,4 +1,4 @@
-// 1.21	2026-03-16T16:43:54.0521763	Loot Tables
+// 1.21	2026-04-15T23:35:48.4849091	Loot Tables
 f4a289ffbac099d2c4b9b5d100073692eef09ea1 data/morecolorful/loot_table/archaeology/trail_ruins_common_add.json
 e054af3624d12ff4e2914684513873472bea0ce3 data/morecolorful/loot_table/blocks/baby-blue-eyes.json
 901491be093e8563cc1694d8924813b00f115542 data/morecolorful/loot_table/blocks/bass_drum.json
@@ -21,6 +21,7 @@ a1eb97bdce1bc635192d8ff0793b545f22b12cfa data/morecolorful/loot_table/blocks/clo
 7cf0d4883602bc1dd438c4e451e979db86c21b4e data/morecolorful/loot_table/blocks/closed_daybloom.json
 bc68088681afebf3e9f59d24bc6820b71012b90a data/morecolorful/loot_table/blocks/closed_water_lily.json
 f9745ee469b45a7219f82040c8cfd8a39612bcb6 data/morecolorful/loot_table/blocks/closed_white_water_lily.json
+5068e9224836c9ad62e02410bc403117ad555d05 data/morecolorful/loot_table/blocks/cocoon.json
 86d6ec8dadb3786e8bc6d0e57d19fe35188af215 data/morecolorful/loot_table/blocks/crabapple_button.json
 3cd2242874e9d87434c1f05392e95810d8849022 data/morecolorful/loot_table/blocks/crabapple_door.json
 5378d04bc538683c7d6eabe7652e9380afcf2e41 data/morecolorful/loot_table/blocks/crabapple_fence.json
@@ -293,3 +294,10 @@ cbd9e8be9d748a2eb76a5d7e4d460cc0c8ed6c31 data/morecolorful/loot_table/blocks/yel
 e554f5475b85bd874bb8275ec56234697644fbf2 data/morecolorful/loot_table/blocks/yellow_papercutting.json
 c8bb0919dc0d6f44a89d4a0702653c36a5f65438 data/morecolorful/loot_table/blocks/yellow_pennant.json
 77bf23acd223c020a7725a1394b08699d6d16f65 data/morecolorful/loot_table/blocks/yellow_ribbon.json
+fb80889a729a65afa5ffabe2ef384a2c4edd2e65 data/morecolorful/loot_table/chests/village/village_apiary.json
+5f9b4f24786f4a90d93534f961b510b8b24e3039 data/morecolorful/loot_table/chests/village/village_paper_mill.json
+2ea802d6dda4a83d17f6b07dee7509a8b551703f data/morecolorful/loot_table/chests/village/village_plains_house_add.json
+0642a58a4ddc43e3496da177223a8103a17bcda2 data/morecolorful/loot_table/chests/village/village_pyrotechnician_house.json
+b6d65ff5fce2a33b540c5ade76b1ed2deb164f1e data/morecolorful/loot_table/gameplay/hero_of_the_village/beekeeper_gift.json
+ef9ebf0e5f480a79467249268d1fdff51ff0df89 data/morecolorful/loot_table/gameplay/hero_of_the_village/paper_artisan_gift.json
+c9f1a7d3ea50b140bcb44930416b2815c9adad29 data/morecolorful/loot_table/gameplay/hero_of_the_village/pyrotechnician_gift.json

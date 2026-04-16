@@ -15,6 +15,10 @@ public class ModModelLayers {
     public static final ModelLayerLocation BALLOON_HEART = register("balloon_heart");
     public static final ModelLayerLocation BALLOON_STAR = register("balloon_star");
     public static final ModelLayerLocation BALLOON_RABBIT = register("balloon_rabbit");
+    public static final ModelLayerLocation BUTTERFLY = register("butterfly");
+    public static final ModelLayerLocation MOTH = register("moth");
+    public static final ModelLayerLocation CATERPILLAR = register("caterpillar");
+    public static final ModelLayerLocation VEIL = register("veil");
 
     private static ModelLayerLocation register(String path) {
         return register(path, "main");

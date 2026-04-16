@@ -11,10 +11,14 @@ import com.ChalkerCharles.morecolorful.common.entity.ModAttributes;
 import com.ChalkerCharles.morecolorful.common.entity.ModEntities;
 import com.ChalkerCharles.morecolorful.common.entity.ai.memory.ModMemoryModuleTypes;
 import com.ChalkerCharles.morecolorful.common.entity.ai.sensor.ModSensorTypes;
+import com.ChalkerCharles.morecolorful.common.entity.villager.ModPoiTypes;
+import com.ChalkerCharles.morecolorful.common.entity.villager.ModVillagerProfessions;
+import com.ChalkerCharles.morecolorful.common.item.ModArmorMaterials;
 import com.ChalkerCharles.morecolorful.common.item.ModCreativeTabs;
 import com.ChalkerCharles.morecolorful.common.item.ModDataComponents;
 import com.ChalkerCharles.morecolorful.common.item.ModItems;
 import com.ChalkerCharles.morecolorful.common.level.ModChunkStatus;
+import com.ChalkerCharles.morecolorful.common.loot.functions.ModLootFunctions;
 import com.ChalkerCharles.morecolorful.common.loot.modifiers.ModLootModifiers;
 import com.ChalkerCharles.morecolorful.common.menu.ModMenuTypes;
 import com.ChalkerCharles.morecolorful.common.recipe.ModRecipeSerializers;
@@ -51,6 +55,7 @@ public class MoreColorful {
         modEventBus.register(ModCommonSetup.class);
 
         ModItems.register(modEventBus);
+        ModArmorMaterials.register(modEventBus);
         ModCreativeTabs.register(modEventBus);
         ModBlocks.register(modEventBus);
         ModBlockEntities.register(modEventBus);
@@ -64,6 +69,7 @@ public class MoreColorful {
         ModRecipeSerializers.register(modEventBus);
         ModMenuTypes.register(modEventBus);
         ModLootModifiers.register(modEventBus);
+        ModLootFunctions.register(modEventBus);
         ModFoliagePlacers.register(modEventBus);
         ModTrunkPlacers.register(modEventBus);
         ModRootPlacers.register(modEventBus);
@@ -72,6 +78,8 @@ public class MoreColorful {
         ModChunkStatus.register(modEventBus);
         ModSensorTypes.register(modEventBus);
         ModMemoryModuleTypes.register(modEventBus);
+        ModPoiTypes.register(modEventBus);
+        ModVillagerProfessions.register(modEventBus);
 
         NeoForge.EVENT_BUS.register(ModCommonEvents.class);
         NeoForge.EVENT_BUS.addListener(VanillaBlockPropertyModifier::modifyDynamicProperties);
@@ -92,6 +100,7 @@ public class MoreColorful {
 
         ModStats.init();
         ModChunkStatus.modifyFullStatus();
+        ModPoiTypes.modifyVanilla();
         VanillaBlockPropertyModifier.modifyStaticProperties();
 
         ModList modList = ModList.get();

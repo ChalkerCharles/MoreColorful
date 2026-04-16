@@ -7,6 +7,7 @@ import com.ChalkerCharles.morecolorful.common.item.ItemUtils;
 import com.ChalkerCharles.morecolorful.common.item.ModItems;
 import com.ChalkerCharles.morecolorful.common.item.misc.BalloonItem;
 import com.ChalkerCharles.morecolorful.common.item.misc.PartyPopperItem;
+import com.ChalkerCharles.morecolorful.common.item.utility.SmokeBombItem;
 import com.ChalkerCharles.morecolorful.common.recipe.WritableSheetMusicRecipe;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementRequirements;
@@ -16,6 +17,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.CraftingBookCategory;
@@ -279,5 +281,20 @@ public abstract class ModRecipeHelper extends RecipeProvider implements IConditi
                 .group("balloon")
                 .unlockedBy(getHasName(material), has(material))
                 .save(output);
+    }
+
+    protected static void smokeBombs(RecipeOutput output) {
+        for (DyeColor color : DyeColor.values()) {
+            TagKey<Item> dye = color.getTag();
+            ItemLike item = SmokeBombItem.itemByColor(color);
+            ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, item, 2)
+                    .requires(Tags.Items.GUNPOWDERS)
+                    .requires(Items.SUGAR)
+                    .requires(ItemTags.COALS)
+                    .requires(dye)
+                    .group("smoke_bomb")
+                    .unlockedBy("has_gunpowder", has(Tags.Items.GUNPOWDERS))
+                    .save(output);
+        }
     }
 }

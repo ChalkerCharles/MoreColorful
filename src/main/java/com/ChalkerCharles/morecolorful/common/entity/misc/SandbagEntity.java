@@ -152,7 +152,8 @@ public class SandbagEntity extends FallingBlockEntity implements IEntityExtensio
         if (this.isFalling()) {
             super.tick();
         } else {
-            if (!this.level().getBlockState(this.blockPosition()).is(ModBlocks.SANDBAG)) {
+            if (!this.level().getBlockState(this.blockPosition()).is(ModBlocks.SANDBAG)
+                    || !this.hasTiedBalloon()) {
                 this.discard();
             }
             this.time = 0;

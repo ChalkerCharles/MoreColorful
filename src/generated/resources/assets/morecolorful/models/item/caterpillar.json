@@ -1,0 +1,296 @@
+{
+  "parent": "minecraft:item/generated",
+  "overrides": [
+    {
+      "model": "morecolorful:item/caterpillar_monarch",
+      "predicate": {
+        "morecolorful:type": 0.0
+      }
+    },
+    {
+      "model": "morecolorful:item/caterpillar_bluebottle",
+      "predicate": {
+        "morecolorful:type": 0.015625
+      }
+    },
+    {
+      "model": "morecolorful:item/caterpillar_white",
+      "predicate": {
+        "morecolorful:type": 0.03125
+      }
+    },
+    {
+      "model": "morecolorful:item/caterpillar_yellow",
+      "predicate": {
+        "morecolorful:type": 0.046875
+      }
+    },
+    {
+      "model": "morecolorful:item/caterpillar_brimstone",
+      "predicate": {
+        "morecolorful:type": 0.0625
+      }
+    },
+    {
+      "model": "morecolorful:item/caterpillar_red_admiral",
+      "predicate": {
+        "morecolorful:type": 0.078125
+      }
+    },
+    {
+      "model": "morecolorful:item/caterpillar_blue_admiral",
+      "predicate": {
+        "morecolorful:type": 0.09375
+      }
+    },
+    {
+      "model": "morecolorful:item/caterpillar_purple_emperor",
+      "predicate": {
+        "morecolorful:type": 0.109375
+      }
+    },
+    {
+      "model": "morecolorful:item/caterpillar_morpho",
+      "predicate": {
+        "morecolorful:type": 0.125
+      }
+    },
+    {
+      "model": "morecolorful:item/caterpillar_oakblue",
+      "predicate": {
+        "morecolorful:type": 0.140625
+      }
+    },
+    {
+      "model": "morecolorful:item/caterpillar_mourning_cloak",
+      "predicate": {
+        "morecolorful:type": 0.15625
+      }
+    },
+    {
+      "model": "morecolorful:item/caterpillar_constable",
+      "predicate": {
+        "morecolorful:type": 0.171875
+      }
+    },
+    {
+      "model": "morecolorful:item/caterpillar_glasswing",
+      "predicate": {
+        "morecolorful:type": 0.1875
+      }
+    },
+    {
+      "model": "morecolorful:item/caterpillar_dead_leaf",
+      "predicate": {
+        "morecolorful:type": 0.203125
+      }
+    },
+    {
+      "model": "morecolorful:item/caterpillar_julia",
+      "predicate": {
+        "morecolorful:type": 0.21875
+      }
+    },
+    {
+      "model": "morecolorful:item/caterpillar_swallowtail",
+      "predicate": {
+        "morecolorful:type": 0.234375
+      }
+    },
+    {
+      "model": "morecolorful:item/caterpillar_emerald",
+      "predicate": {
+        "morecolorful:type": 0.25
+      }
+    },
+    {
+      "model": "morecolorful:item/caterpillar_tailed_jay",
+      "predicate": {
+        "morecolorful:type": 0.265625
+      }
+    },
+    {
+      "model": "morecolorful:item/caterpillar_mormon",
+      "predicate": {
+        "morecolorful:type": 0.28125
+      }
+    },
+    {
+      "model": "morecolorful:item/caterpillar_tree_nymph",
+      "predicate": {
+        "morecolorful:type": 0.296875
+      }
+    },
+    {
+      "model": "morecolorful:item/caterpillar_birdwing",
+      "predicate": {
+        "morecolorful:type": 0.3125
+      }
+    },
+    {
+      "model": "morecolorful:item/caterpillar_alexandra",
+      "predicate": {
+        "morecolorful:type": 0.328125
+      }
+    },
+    {
+      "model": "morecolorful:item/caterpillar_agrias",
+      "predicate": {
+        "morecolorful:type": 0.34375
+      }
+    },
+    {
+      "model": "morecolorful:item/caterpillar_blaze",
+      "predicate": {
+        "morecolorful:type": 0.359375
+      }
+    },
+    {
+      "model": "morecolorful:item/caterpillar_skeleton",
+      "predicate": {
+        "morecolorful:type": 0.375
+      }
+    },
+    {
+      "model": "morecolorful:item/caterpillar_specter",
+      "predicate": {
+        "morecolorful:type": 0.390625
+      }
+    },
+    {
+      "model": "morecolorful:item/caterpillar_ender",
+      "predicate": {
+        "morecolorful:type": 0.40625
+      }
+    },
+    {
+      "model": "morecolorful:item/caterpillar_void",
+      "predicate": {
+        "morecolorful:type": 0.421875
+      }
+    },
+    {
+      "model": "morecolorful:item/caterpillar_wild_silk",
+      "predicate": {
+        "morecolorful:type": 0.5
+      }
+    },
+    {
+      "model": "morecolorful:item/caterpillar_luna",
+      "predicate": {
+        "morecolorful:type": 0.515625
+      }
+    },
+    {
+      "model": "morecolorful:item/caterpillar_rosy",
+      "predicate": {
+        "morecolorful:type": 0.53125
+      }
+    },
+    {
+      "model": "morecolorful:item/caterpillar_atlas",
+      "predicate": {
+        "morecolorful:type": 0.546875
+      }
+    },
+    {
+      "model": "morecolorful:item/caterpillar_white_peppered",
+      "predicate": {
+        "morecolorful:type": 0.5625
+      }
+    },
+    {
+      "model": "morecolorful:item/caterpillar_black_peppered",
+      "predicate": {
+        "morecolorful:type": 0.578125
+      }
+    },
+    {
+      "model": "morecolorful:item/caterpillar_white_witch",
+      "predicate": {
+        "morecolorful:type": 0.59375
+      }
+    },
+    {
+      "model": "morecolorful:item/caterpillar_black_witch",
+      "predicate": {
+        "morecolorful:type": 0.609375
+      }
+    },
+    {
+      "model": "morecolorful:item/caterpillar_deaths_head",
+      "predicate": {
+        "morecolorful:type": 0.625
+      }
+    },
+    {
+      "model": "morecolorful:item/caterpillar_fall_webworm",
+      "predicate": {
+        "morecolorful:type": 0.640625
+      }
+    },
+    {
+      "model": "morecolorful:item/caterpillar_comet",
+      "predicate": {
+        "morecolorful:type": 0.65625
+      }
+    },
+    {
+      "model": "morecolorful:item/caterpillar_garden_tiger",
+      "predicate": {
+        "morecolorful:type": 0.671875
+      }
+    },
+    {
+      "model": "morecolorful:item/caterpillar_scarlet_tiger",
+      "predicate": {
+        "morecolorful:type": 0.6875
+      }
+    },
+    {
+      "model": "morecolorful:item/caterpillar_oleander",
+      "predicate": {
+        "morecolorful:type": 0.703125
+      }
+    },
+    {
+      "model": "morecolorful:item/caterpillar_crimson",
+      "predicate": {
+        "morecolorful:type": 0.71875
+      }
+    },
+    {
+      "model": "morecolorful:item/caterpillar_warped",
+      "predicate": {
+        "morecolorful:type": 0.734375
+      }
+    },
+    {
+      "model": "morecolorful:item/caterpillar_virid",
+      "predicate": {
+        "morecolorful:type": 0.75
+      }
+    },
+    {
+      "model": "morecolorful:item/caterpillar_end_yellow",
+      "predicate": {
+        "morecolorful:type": 0.765625
+      }
+    },
+    {
+      "model": "morecolorful:item/caterpillar_chorus",
+      "predicate": {
+        "morecolorful:type": 0.78125
+      }
+    },
+    {
+      "model": "morecolorful:item/caterpillar_nameless",
+      "predicate": {
+        "morecolorful:type": 0.796875
+      }
+    }
+  ],
+  "textures": {
+    "layer0": "morecolorful:item/monarch_butterfly_caterpillar"
+  }
+}

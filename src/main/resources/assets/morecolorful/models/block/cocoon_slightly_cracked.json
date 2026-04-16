@@ -1,0 +1,6 @@
+{
+  "parent": "morecolorful:block/template_cocoon",
+  "textures": {
+    "cocoon": "morecolorful:block/cocoon_slightly_cracked"
+  }
+}

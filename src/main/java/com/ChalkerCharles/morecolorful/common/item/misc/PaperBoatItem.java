@@ -53,29 +53,25 @@ public class PaperBoatItem extends Item {
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
         ItemStack itemstack = pPlayer.getItemInHand(pUsedHand);
         HitResult hitresult = getPlayerPOVHitResult(pLevel, pPlayer, ClipContext.Fluid.ANY);
-        if (hitresult.getType() == HitResult.Type.MISS) {
-            return InteractionResultHolder.pass(itemstack);
-        } else {
-            if (hitresult.getType() == HitResult.Type.BLOCK) {
-                Vec3 location = hitresult.getLocation();
-                PaperBoat paperBoat = new PaperBoat(pLevel, location.x, location.y, location.z);
-                paperBoat.setItem(itemstack);
-                paperBoat.setYRot(-pPlayer.getYRot());
-                if (!pLevel.noCollision(paperBoat, paperBoat.getBoundingBox())) {
-                    return InteractionResultHolder.fail(itemstack);
-                } else {
-                    if (!pLevel.isClientSide) {
-                        pLevel.addFreshEntity(paperBoat);
-                        pLevel.gameEvent(pPlayer, GameEvent.ENTITY_PLACE, location);
-                        itemstack.consume(1, pPlayer);
-                    }
-
-                    pPlayer.awardStat(Stats.ITEM_USED.get(this));
-                    return InteractionResultHolder.sidedSuccess(itemstack, pLevel.isClientSide);
-                }
+        if (hitresult.getType() == HitResult.Type.BLOCK) {
+            Vec3 location = hitresult.getLocation();
+            PaperBoat paperBoat = new PaperBoat(pLevel, location.x, location.y, location.z);
+            paperBoat.setItem(itemstack);
+            paperBoat.setYRot(-pPlayer.getYRot());
+            if (!pLevel.noCollision(paperBoat, paperBoat.getBoundingBox())) {
+                return InteractionResultHolder.fail(itemstack);
             } else {
-                return InteractionResultHolder.pass(itemstack);
+                if (!pLevel.isClientSide) {
+                    pLevel.addFreshEntity(paperBoat);
+                    pLevel.gameEvent(pPlayer, GameEvent.ENTITY_PLACE, location);
+                    itemstack.consume(1, pPlayer);
+                }
+
+                pPlayer.awardStat(Stats.ITEM_USED.get(this));
+                return InteractionResultHolder.sidedSuccess(itemstack, pLevel.isClientSide);
             }
+        } else {
+            return InteractionResultHolder.pass(itemstack);
         }
     }
 }

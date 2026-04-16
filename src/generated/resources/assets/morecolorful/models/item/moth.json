@@ -1,0 +1,128 @@
+{
+  "parent": "minecraft:item/generated",
+  "overrides": [
+    {
+      "model": "morecolorful:item/moth_wild_silk",
+      "predicate": {
+        "morecolorful:type": 0.0
+      }
+    },
+    {
+      "model": "morecolorful:item/moth_luna",
+      "predicate": {
+        "morecolorful:type": 0.03125
+      }
+    },
+    {
+      "model": "morecolorful:item/moth_rosy",
+      "predicate": {
+        "morecolorful:type": 0.0625
+      }
+    },
+    {
+      "model": "morecolorful:item/moth_atlas",
+      "predicate": {
+        "morecolorful:type": 0.09375
+      }
+    },
+    {
+      "model": "morecolorful:item/moth_white_peppered",
+      "predicate": {
+        "morecolorful:type": 0.125
+      }
+    },
+    {
+      "model": "morecolorful:item/moth_black_peppered",
+      "predicate": {
+        "morecolorful:type": 0.15625
+      }
+    },
+    {
+      "model": "morecolorful:item/moth_white_witch",
+      "predicate": {
+        "morecolorful:type": 0.1875
+      }
+    },
+    {
+      "model": "morecolorful:item/moth_black_witch",
+      "predicate": {
+        "morecolorful:type": 0.21875
+      }
+    },
+    {
+      "model": "morecolorful:item/moth_deaths_head",
+      "predicate": {
+        "morecolorful:type": 0.25
+      }
+    },
+    {
+      "model": "morecolorful:item/moth_fall_webworm",
+      "predicate": {
+        "morecolorful:type": 0.28125
+      }
+    },
+    {
+      "model": "morecolorful:item/moth_comet",
+      "predicate": {
+        "morecolorful:type": 0.3125
+      }
+    },
+    {
+      "model": "morecolorful:item/moth_garden_tiger",
+      "predicate": {
+        "morecolorful:type": 0.34375
+      }
+    },
+    {
+      "model": "morecolorful:item/moth_scarlet_tiger",
+      "predicate": {
+        "morecolorful:type": 0.375
+      }
+    },
+    {
+      "model": "morecolorful:item/moth_oleander",
+      "predicate": {
+        "morecolorful:type": 0.40625
+      }
+    },
+    {
+      "model": "morecolorful:item/moth_crimson",
+      "predicate": {
+        "morecolorful:type": 0.4375
+      }
+    },
+    {
+      "model": "morecolorful:item/moth_warped",
+      "predicate": {
+        "morecolorful:type": 0.46875
+      }
+    },
+    {
+      "model": "morecolorful:item/moth_virid",
+      "predicate": {
+        "morecolorful:type": 0.5
+      }
+    },
+    {
+      "model": "morecolorful:item/moth_end_yellow",
+      "predicate": {
+        "morecolorful:type": 0.53125
+      }
+    },
+    {
+      "model": "morecolorful:item/moth_chorus",
+      "predicate": {
+        "morecolorful:type": 0.5625
+      }
+    },
+    {
+      "model": "morecolorful:item/moth_nameless",
+      "predicate": {
+        "morecolorful:type": 0.59375
+      }
+    }
+  ],
+  "textures": {
+    "layer0": "morecolorful:item/wild_silk_moth"
+  }
+}

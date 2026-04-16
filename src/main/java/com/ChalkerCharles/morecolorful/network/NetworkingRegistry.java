@@ -20,10 +20,10 @@ public class NetworkingRegistry {
         registrar.playToClient(VentRemovalPacket.TYPE, VentRemovalPacket.STREAM_CODEC, VentRemovalPacket::handle);
         registrar.playToClient(WindPacket.TYPE, WindPacket.STREAM_CODEC, WindPacket::handle);
         registrar.playToClient(WindZonePacket.TYPE, WindZonePacket.STREAM_CODEC, WindZonePacket::handle);
+        registrar.playToClient(SmokeBombPacket.TYPE, SmokeBombPacket.STREAM_CODEC, SmokeBombPacket::handle);
 
         // Server Bound
         registrar.playToServer(NotePlayingPacket.TYPE, NotePlayingPacket.STREAM_CODEC, NotePlayingPacket::handle);
-        registrar.playToServer(WindInitiationPacket.TYPE, WindInitiationPacket.STREAM_CODEC, WindInitiationPacket::handle);
         registrar.playToServer(EditSheetMusicPacket.TYPE, EditSheetMusicPacket.STREAM_CODEC, EditSheetMusicPacket::handle);
         registrar.playToServer(KiteReelPacket.TYPE, KiteReelPacket.STREAM_CODEC, KiteReelPacket::handle);
         registrar.playToServer(PaperCarvingPacket.TYPE, PaperCarvingPacket.STREAM_CODEC, PaperCarvingPacket::handle);

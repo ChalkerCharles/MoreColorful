@@ -5,7 +5,6 @@ import com.ChalkerCharles.morecolorful.common.attachment.ClientLevelData;
 import com.ChalkerCharles.morecolorful.common.attachment.LevelSavedData;
 import com.ChalkerCharles.morecolorful.mixin.extensions.ILevelRendererExtension;
 import com.ChalkerCharles.morecolorful.network.packets.KiteReelPacket;
-import com.ChalkerCharles.morecolorful.network.packets.WindInitiationPacket;
 import com.ChalkerCharles.morecolorful.util.WeatherUtils;
 import com.ChalkerCharles.morecolorful.util.client.RenderUtils;
 import net.minecraft.ChatFormatting;
@@ -126,13 +125,6 @@ public final class ModClientEvents {
                     ClientLevelData.renderWindZonesInView(level, event.getPoseStack(), event.getCamera().getPosition());
                 }
             }
-        }
-    }
-
-    @SubscribeEvent
-    public static void onPlayerLoggingIn(ClientPlayerNetworkEvent.LoggingIn event) {
-        if (WeatherUtils.isWindy(event.getPlayer().clientLevel)) {
-            PacketDistributor.sendToServer(WindInitiationPacket.INSTANCE);
         }
     }
 

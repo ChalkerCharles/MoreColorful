@@ -1,7 +1,9 @@
 package com.ChalkerCharles.morecolorful.common.worldgen;
 
+import com.ChalkerCharles.morecolorful.Config;
 import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.common.ModTags;
+import com.ChalkerCharles.morecolorful.common.entity.ModEntities;
 import com.ChalkerCharles.morecolorful.common.worldgen.biomes.ModBiomes;
 import com.ChalkerCharles.morecolorful.common.worldgen.placements.ModVegetationPlacements;
 import net.minecraft.core.Holder;
@@ -10,10 +12,13 @@ import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
+import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.world.BiomeModifier;
 import net.neoforged.neoforge.common.world.BiomeModifiers;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
@@ -38,6 +43,14 @@ public class ModBiomeModifiers {
     public static final ResourceKey<BiomeModifier> TREES_WILLOW = registerKey("trees_willow");
     public static final ResourceKey<BiomeModifier> PATCH_WOOD_SORRELS = registerKey("patch_wood_sorrels");
     public static final ResourceKey<BiomeModifier> PATCH_WINDFLOWER = registerKey("patch_windflower");
+
+    public static final ResourceKey<BiomeModifier> COMMON_PLAIN_SPAWN = registerKey("common_plain_spawn");
+    public static final ResourceKey<BiomeModifier> COMMON_FOREST_SPAWN = registerKey("common_forest_spawn");
+    public static final ResourceKey<BiomeModifier> COMMON_TAIGA_SPAWN = registerKey("common_taiga_spawn");
+    public static final ResourceKey<BiomeModifier> COMMON_JUNGLE_SPAWN = registerKey("common_jungle_spawn");
+    public static final ResourceKey<BiomeModifier> COMMON_SAVANNA_SPAWN = registerKey("common_savanna_spawn");
+    public static final ResourceKey<BiomeModifier> COMMON_MOUNTAIN_SPAWN = registerKey("common_mountain_spawn");
+    public static final ResourceKey<BiomeModifier> COMMON_SWAMP_SPAWN = registerKey("common_swamp_spawn");
     
     public static void bootstrap(BootstrapContext<BiomeModifier> context) {
         HolderGetter<PlacedFeature> placedFeatures = context.lookup(Registries.PLACED_FEATURE);
@@ -165,35 +178,42 @@ public class ModBiomeModifiers {
                 HolderSet.direct(placedFeatures.getOrThrow(ModVegetationPlacements.PATCH_WINDFLOWER)),
                 GenerationStep.Decoration.VEGETAL_DECORATION
         );
-    }
 
-    public static final List<String> ADD_FEATURE_MODIFIERS = getBiomeModifiers(
-            ADD_FLOWER_CHERRY,
-            PATCH_STRAWBERRY_BUSH,
-            PATCH_BLUEBERRY_BUSH,
-            PATCH_CROCUS,
-            PATCH_WATER_GRASS,
-            PATCH_GERBERA_DAISY,
-            PATCH_CATTAIL,
-            PATCH_REED,
-            PATCH_WATER_LILY,
-            PATCH_DUCKWEEDS,
-            PATCH_BUTTERCUPS,
-            PATCH_FORGET_ME_NOTS,
-            PATCH_SPEEDWELLS,
-            TREES_WILLOW,
-            PATCH_WOOD_SORRELS,
-            PATCH_WINDFLOWER
-    );
-
-    @SafeVarargs
-    private static List<String> getBiomeModifiers(ResourceKey<BiomeModifier>... keys) {
-        List<String> list = new ArrayList<>();
-        for (ResourceKey<BiomeModifier> k : keys) {
-            String path = k.location().getPath();
-            list.add(path);
-        }
-        return list;
+        addSpawn(context, COMMON_PLAIN_SPAWN,
+                biomes.getOrThrow(Tags.Biomes.IS_PLAINS),
+                List.of(new MobSpawnSettings.SpawnerData(ModEntities.BUTTERFLY.get(), 10, 1, 3),
+                        new MobSpawnSettings.SpawnerData(ModEntities.MOTH.get(), 10, 1, 3))
+        );
+        addSpawn(context, COMMON_FOREST_SPAWN,
+                biomes.getOrThrow(BiomeTags.IS_FOREST),
+                List.of(new MobSpawnSettings.SpawnerData(ModEntities.BUTTERFLY.get(), 10, 1, 3),
+                        new MobSpawnSettings.SpawnerData(ModEntities.MOTH.get(), 10, 1, 3))
+        );
+        addSpawn(context, COMMON_TAIGA_SPAWN,
+                biomes.getOrThrow(BiomeTags.IS_TAIGA),
+                List.of(new MobSpawnSettings.SpawnerData(ModEntities.BUTTERFLY.get(), 8, 1, 3),
+                        new MobSpawnSettings.SpawnerData(ModEntities.MOTH.get(), 8, 1, 3))
+        );
+        addSpawn(context, COMMON_JUNGLE_SPAWN,
+                biomes.getOrThrow(BiomeTags.IS_JUNGLE),
+                List.of(new MobSpawnSettings.SpawnerData(ModEntities.BUTTERFLY.get(), 12, 1, 3),
+                        new MobSpawnSettings.SpawnerData(ModEntities.MOTH.get(), 12, 1, 3))
+        );
+        addSpawn(context, COMMON_SAVANNA_SPAWN,
+                biomes.getOrThrow(BiomeTags.IS_SAVANNA),
+                List.of(new MobSpawnSettings.SpawnerData(ModEntities.BUTTERFLY.get(), 8, 1, 3),
+                        new MobSpawnSettings.SpawnerData(ModEntities.MOTH.get(), 8, 1, 3))
+        );
+        addSpawn(context, COMMON_MOUNTAIN_SPAWN,
+                biomes.getOrThrow(BiomeTags.IS_MOUNTAIN),
+                List.of(new MobSpawnSettings.SpawnerData(ModEntities.BUTTERFLY.get(), 8, 1, 3),
+                        new MobSpawnSettings.SpawnerData(ModEntities.MOTH.get(), 8, 1, 3))
+        );
+        addSpawn(context, COMMON_SWAMP_SPAWN,
+                biomes.getOrThrow(Tags.Biomes.IS_SWAMP),
+                List.of(new MobSpawnSettings.SpawnerData(ModEntities.BUTTERFLY.get(), 8, 1, 3),
+                        new MobSpawnSettings.SpawnerData(ModEntities.MOTH.get(), 8, 1, 3))
+        );
     }
 
     private static ResourceKey<BiomeModifier> registerKey(String name) {
@@ -217,5 +237,24 @@ public class ModBiomeModifiers {
             HolderSet<PlacedFeature> features,
             GenerationStep.Decoration step) {
         context.register(biomeModifier, new BiomeModifiers.AddFeaturesBiomeModifier(biomes, features, step));
+    }
+
+    private static void addSpawn(
+            BootstrapContext<BiomeModifier> context,
+            ResourceKey<BiomeModifier> biomeModifier,
+            HolderSet<Biome> biomes,
+            List<MobSpawnSettings.SpawnerData> spawners) {
+        context.register(biomeModifier, new BiomeModifiers.AddSpawnsBiomeModifier(biomes, spawners));
+    }
+
+    public static boolean disableBiomeModifiers(Holder.Reference<BiomeModifier> holder) {
+        ResourceKey<BiomeModifier> key = holder.getKey();
+        if (key != null && MoreColorful.MODID.equals(key.location().getNamespace())) {
+            BiomeModifier modifier = holder.value();
+            if (!Config.allowAddingFeatures && modifier instanceof BiomeModifiers.AddFeaturesBiomeModifier) {
+                return false;
+            } else return Config.allowAddingSpawns || !(modifier instanceof BiomeModifiers.AddSpawnsBiomeModifier);
+        }
+        return true;
     }
 }

@@ -22,6 +22,7 @@ public class CommonConfig {
     public final ModConfigSpec.IntValue overworldRegionWeight;
     public final ModConfigSpec.ConfigValue<List<? extends String>> disabledBiomes;
     public final ModConfigSpec.BooleanValue allowAddingFeatures;
+    public final ModConfigSpec.BooleanValue allowAddingSpawns;
     public final ModConfigSpec.BooleanValue enhancedLeash;
 
     public CommonConfig(ModConfigSpec.Builder builder) {
@@ -84,6 +85,10 @@ public class CommonConfig {
                 .translation(prefix + "allow_adding_features")
                 .comment("Allow More Colorful to add new features to vanilla biomes.")
                 .define("allowAddingFeatures", true);
+        allowAddingSpawns = builder
+                .translation(prefix + "allow_adding_spawns")
+                .comment("Allow More Colorful to add new mob spawns to vanilla biomes.")
+                .define("allowAddingSpawns", true);
         builder.pop();
 
         builder.pop();

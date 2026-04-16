@@ -33,6 +33,7 @@ public class DataGenerators {
         generator.addProvider(server, new ModBiomeTagProvider(output, provider, helper));
         generator.addProvider(server, new ModEntityTypeTagProvider(output, provider, helper));
         generator.addProvider(server, new ModDamageTypeTagProvider(output, provider, helper));
+        generator.addProvider(server, new ModPoiTypeTagProvider(output, provider, helper));
         generator.addProvider(server, new ModLootTableProvider(output, provider));
         generator.addProvider(server, new ModRecipeProvider(output, provider));
         generator.addProvider(server, new ModDataMapProvider(output, provider));

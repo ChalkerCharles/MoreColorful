@@ -1,0 +1,19 @@
+{
+  "sources": [
+    {
+      "type": "minecraft:directory",
+      "prefix": "entity/butterfly/",
+      "source": "entity/butterfly"
+    },
+    {
+      "type": "minecraft:directory",
+      "prefix": "entity/moth/",
+      "source": "entity/moth"
+    },
+    {
+      "type": "minecraft:directory",
+      "prefix": "entity/caterpillar/",
+      "source": "entity/caterpillar"
+    }
+  ]
+}

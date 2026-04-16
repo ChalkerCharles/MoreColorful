@@ -12,6 +12,7 @@ import com.ChalkerCharles.morecolorful.client.renderer.item.PinwheelRenderer;
 import com.ChalkerCharles.morecolorful.client.renderer.item.UmbrellaRenderer;
 import com.ChalkerCharles.morecolorful.client.texture.BalloonTextureManager;
 import com.ChalkerCharles.morecolorful.client.texture.KiteTextureManager;
+import com.ChalkerCharles.morecolorful.client.texture.MothTextureManager;
 import com.ChalkerCharles.morecolorful.client.texture.PapercuttingTextureManager;
 import com.ChalkerCharles.morecolorful.common.attachment.InstrumentData;
 import com.ChalkerCharles.morecolorful.common.block.ornamental.PapercuttingBlock;
@@ -30,6 +31,7 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.item.ItemPropertyFunction;
 import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.HumanoidArm;
@@ -38,6 +40,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BundleItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -65,6 +68,13 @@ public class ModClientSetup {
             stack.has(ModDataComponents.OPEN) ? 1.0F : 0.0F;
     private static final ItemPropertyFunction PROPERTY_FILLED = (stack, level, entity, seed) ->
             BundleItem.getFullnessDisplay(stack);
+    private static ItemPropertyFunction propertyMothType(float f) {
+        return (stack, level, entity, seed) -> {
+            CustomData data = stack.getOrDefault(DataComponents.ENTITY_DATA, CustomData.EMPTY);
+            int i = data.copyTag().getInt("Type");
+            return i / f;
+        };
+    }
 
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event) {
@@ -98,6 +108,10 @@ public class ModClientSetup {
         for (ItemLike item : ItemUtils.COLORED_BUNDLES) {
             ItemProperties.register(item.asItem(), filled, PROPERTY_FILLED);
         }
+        ResourceLocation type = MoreColorful.location("type");
+        ItemProperties.register(ModItems.BUTTERFLY.get(), type, propertyMothType(32));
+        ItemProperties.register(ModItems.MOTH.get(), type, propertyMothType(32));
+        ItemProperties.register(ModItems.CATERPILLAR.get(), type, propertyMothType(64));
     }
 
     private static void registerFireworkShapes() {
@@ -317,6 +331,7 @@ public class ModClientSetup {
         event.registerReloadListener(BalloonTextureManager.INSTANCE);
         event.registerReloadListener(PapercuttingRenderer.INSTANCE);
         event.registerReloadListener(PapercuttingTextureManager.INSTANCE);
+        event.registerReloadListener(MothTextureManager.INSTANCE);
     }
 
     @SubscribeEvent

@@ -1,13 +1,16 @@
 package com.ChalkerCharles.morecolorful.common.datagen;
 
 import com.ChalkerCharles.morecolorful.common.ModTags;
+import com.ChalkerCharles.morecolorful.common.entity.villager.ModVillagerProfessions;
 import com.ChalkerCharles.morecolorful.common.item.ModItems;
+import com.ChalkerCharles.morecolorful.common.loot.ModLootTables;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.common.data.DataMapProvider;
 import net.neoforged.neoforge.registries.datamaps.builtin.Compostable;
 import net.neoforged.neoforge.registries.datamaps.builtin.FurnaceFuel;
 import net.neoforged.neoforge.registries.datamaps.builtin.NeoForgeDataMaps;
+import net.neoforged.neoforge.registries.datamaps.builtin.RaidHeroGift;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -107,5 +110,10 @@ public class ModDataMapProvider extends DataMapProvider {
                 .add(ModItems.DUCKWEEDS, new Compostable(0.3F), false)
                 .add(ModItems.STRAWBERRY, new Compostable(0.3F), false)
                 .add(ModItems.BLUEBERRIES, new Compostable(0.3F), false);
+
+        builder(NeoForgeDataMaps.RAID_HERO_GIFTS)
+                .add(ModVillagerProfessions.BEEKEEPER, new RaidHeroGift(ModLootTables.BEEKEEPER_GIFT), false)
+                .add(ModVillagerProfessions.PYROTECHNICIAN, new RaidHeroGift(ModLootTables.PYROTECHNICIAN_GIFT), false)
+                .add(ModVillagerProfessions.PAPER_ARTISAN, new RaidHeroGift(ModLootTables.PAPER_ARTISAN_GIFT), false);
     }
 }

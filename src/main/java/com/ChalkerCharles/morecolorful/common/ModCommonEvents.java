@@ -4,23 +4,34 @@ import com.ChalkerCharles.morecolorful.Config;
 import com.ChalkerCharles.morecolorful.common.attachment.LevelSavedData;
 import com.ChalkerCharles.morecolorful.common.block.ornamental.PinwheelBlock;
 import com.ChalkerCharles.morecolorful.common.command.ModWeatherCommand;
+import com.ChalkerCharles.morecolorful.common.entity.EntityUtils;
 import com.ChalkerCharles.morecolorful.common.entity.ai.memory.KiteMemory;
+import com.ChalkerCharles.morecolorful.common.entity.misc.Balloon;
 import com.ChalkerCharles.morecolorful.common.entity.misc.PrimedUnderwaterTnt;
+import com.ChalkerCharles.morecolorful.common.entity.misc.SmokeBomb;
 import com.ChalkerCharles.morecolorful.common.item.ModDataComponents;
 import com.ChalkerCharles.morecolorful.common.item.ModItems;
 import com.ChalkerCharles.morecolorful.common.item.utility.UmbrellaItem;
 import com.ChalkerCharles.morecolorful.common.level.thermal.ILevelThermalEngine;
 import com.ChalkerCharles.morecolorful.common.level.wind.BurstWindZone;
 import com.ChalkerCharles.morecolorful.common.level.wind.ILevelVentEngine;
+import com.ChalkerCharles.morecolorful.common.worldgen.ModTemplatePools;
 import com.ChalkerCharles.morecolorful.mixin.extensions.IEntityExtension;
 import com.ChalkerCharles.morecolorful.mixin.extensions.IExplosionExtension;
 import com.ChalkerCharles.morecolorful.network.packets.*;
+import com.ChalkerCharles.morecolorful.util.Colour;
+import com.ChalkerCharles.morecolorful.util.WeatherUtils;
+import net.minecraft.Util;
+import net.minecraft.core.RegistryAccess;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.monster.Bogged;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
@@ -29,13 +40,20 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.ItemStackedOnOtherEvent;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
+import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.living.FinalizeSpawnEvent;
+import net.neoforged.neoforge.event.entity.living.LivingConversionEvent;
+import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
+import net.neoforged.neoforge.event.entity.living.LivingEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.level.ChunkEvent;
 import net.neoforged.neoforge.event.level.ChunkWatchEvent;
 import net.neoforged.neoforge.event.level.ExplosionEvent;
+import net.neoforged.neoforge.event.server.ServerAboutToStartEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.event.tick.LevelTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
+import org.joml.Vector2f;
 
 public final class ModCommonEvents {
     @SubscribeEvent
@@ -106,8 +124,30 @@ public final class ModCommonEvents {
     }
 
     @SubscribeEvent
+    public static void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
+        Player player = event.getEntity();
+        Level level = player.level();
+        if (player instanceof ServerPlayer serverPlayer) {
+            Vector2f wind = LevelSavedData.getGlobalWindSpeed(level);
+            PacketDistributor.sendToPlayer(serverPlayer, new WindPacket(wind.x, wind.y, true));
+        }
+    }
+
+    @SubscribeEvent
+    public static void onEntityJoinLevel(EntityJoinLevelEvent event) {
+        Entity entity = event.getEntity();
+        Level level = event.getLevel();
+        if (level.isClientSide) {
+            if (entity instanceof SmokeBomb bomb) {
+                bomb.markExplodeClient();
+            }
+        }
+    }
+
+    @SubscribeEvent
     public static void onFinalizeSpawn(FinalizeSpawnEvent event) {
         Mob mob = event.getEntity();
+        MobSpawnType spawnType = event.getSpawnType();
         Level level = event.getLevel().getLevel();
         RandomSource random = level.random;
         if (level.isRaining()
@@ -126,6 +166,44 @@ public final class ModCommonEvents {
             }
             UmbrellaItem.open(item);
             mob.setItemSlot(EquipmentSlot.OFFHAND, item);
+        }
+        if (spawnType == MobSpawnType.NATURAL
+                && WeatherUtils.isWindyNow(level)
+                && mob.getType().is(ModTags.EntityTypes.CAN_SPAWN_WITH_BALLOON)
+                && random.nextFloat() < 0.1F
+                && level.canSeeSky(mob.blockPosition())) {
+            Vec3 pos = mob.position();
+            mob.moveTo(pos.x, pos.y + random.nextInt(20, 80), pos.z);
+            for (int i = 0; i < 3; i++) {
+                level.addFreshEntity(new Balloon(level, mob, Util.getRandom(Colour.values(), random)));
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void postLivingConversion(LivingConversionEvent.Post event) {
+        LivingEntity living = event.getEntity();
+        LivingEntity outcome = event.getOutcome();
+        for (Balloon balloon : EntityUtils.getTiedBalloons(living)) {
+            balloon.setLeashedTo(outcome, true);
+        }
+    }
+
+    @SubscribeEvent
+    public static void preLivingDamage(LivingDamageEvent.Pre event) {
+        LivingEntity entity = event.getEntity();
+        DamageSource source = event.getSource();
+        if (entity.getItemBySlot(EquipmentSlot.HEAD).is(ModItems.BEEKEEPING_HAT) && source.is(DamageTypes.STING)) {
+            event.setNewDamage(0);
+        }
+    }
+
+    @SubscribeEvent
+    public static void onLivingVisibility(LivingEvent.LivingVisibilityEvent event) {
+        Entity entity = event.getEntity();
+        Level level = entity.level();
+        if (LevelSavedData.isEntityInSmoke(level, entity) || LevelSavedData.isEntityInSmoke(level, event.getLookingEntity())) {
+            event.modifyVisibility(0.5);
         }
     }
 
@@ -159,5 +237,12 @@ public final class ModCommonEvents {
         if (carried.is(ModItems.PINWHEEL) && stackedOn.is(ModItems.PINWHEEL)) {
            PinwheelBlock.merge(carried, stackedOn);
         }
+    }
+
+    @SubscribeEvent
+    public static void onServerAboutToStart(ServerAboutToStartEvent event) {
+        MinecraftServer server = event.getServer();
+        RegistryAccess access = server.registryAccess();
+        ModTemplatePools.addPools(access);
     }
 }

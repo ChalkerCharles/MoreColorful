@@ -69,6 +69,24 @@
     ],
     "subtitle": "morecolorful.subtitles.block.chimes.play"
   },
+  "block.cocoon.crack": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.sniffer_egg.crack"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.block.cocoon.crack"
+  },
+  "block.cocoon.hatch": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.sniffer_egg.hatch"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.block.cocoon.hatch"
+  },
   "block.crash.play": {
     "sounds": [
       "morecolorful:note/crash"
@@ -1042,6 +1060,57 @@
     ],
     "subtitle": "morecolorful.subtitles.entity.bomb.throw"
   },
+  "entity.butterfly.death": {
+    "sounds": [
+      "morecolorful:entity/moth/hurt1",
+      "morecolorful:entity/moth/hurt2",
+      "morecolorful:entity/moth/hurt3",
+      "morecolorful:entity/moth/hurt4"
+    ],
+    "subtitle": "morecolorful.subtitles.entity.butterfly.death"
+  },
+  "entity.butterfly.flutter": {
+    "sounds": [
+      "morecolorful:entity/moth/flutter"
+    ],
+    "subtitle": "morecolorful.subtitles.entity.butterfly.flutter"
+  },
+  "entity.butterfly.hurt": {
+    "sounds": [
+      "morecolorful:entity/moth/hurt1",
+      "morecolorful:entity/moth/hurt2",
+      "morecolorful:entity/moth/hurt3",
+      "morecolorful:entity/moth/hurt4"
+    ],
+    "subtitle": "morecolorful.subtitles.entity.butterfly.hurt"
+  },
+  "entity.caterpillar.death": {
+    "sounds": [
+      "morecolorful:entity/worm/hurt1",
+      "morecolorful:entity/worm/hurt2",
+      "morecolorful:entity/worm/hurt3",
+      "morecolorful:entity/worm/hurt4"
+    ],
+    "subtitle": "morecolorful.subtitles.entity.caterpillar.death"
+  },
+  "entity.caterpillar.hurt": {
+    "sounds": [
+      "morecolorful:entity/worm/hurt1",
+      "morecolorful:entity/worm/hurt2",
+      "morecolorful:entity/worm/hurt3",
+      "morecolorful:entity/worm/hurt4"
+    ],
+    "subtitle": "morecolorful.subtitles.entity.caterpillar.hurt"
+  },
+  "entity.caterpillar.pupate": {
+    "sounds": [
+      "morecolorful:entity/worm/pupate1",
+      "morecolorful:entity/worm/pupate2",
+      "morecolorful:entity/worm/pupate3",
+      "morecolorful:entity/worm/pupate4"
+    ],
+    "subtitle": "morecolorful.subtitles.entity.caterpillar.pupate"
+  },
   "entity.kite.reel": {
     "sounds": [
       "morecolorful:entity/kite/reel1",
@@ -1060,6 +1129,30 @@
     ],
     "subtitle": "morecolorful.subtitles.entity.kite.unreel"
   },
+  "entity.moth.death": {
+    "sounds": [
+      "morecolorful:entity/moth/hurt1",
+      "morecolorful:entity/moth/hurt2",
+      "morecolorful:entity/moth/hurt3",
+      "morecolorful:entity/moth/hurt4"
+    ],
+    "subtitle": "morecolorful.subtitles.entity.moth.death"
+  },
+  "entity.moth.flutter": {
+    "sounds": [
+      "morecolorful:entity/moth/flutter"
+    ],
+    "subtitle": "morecolorful.subtitles.entity.moth.flutter"
+  },
+  "entity.moth.hurt": {
+    "sounds": [
+      "morecolorful:entity/moth/hurt1",
+      "morecolorful:entity/moth/hurt2",
+      "morecolorful:entity/moth/hurt3",
+      "morecolorful:entity/moth/hurt4"
+    ],
+    "subtitle": "morecolorful.subtitles.entity.moth.hurt"
+  },
   "entity.paper_plane.hit": {
     "sounds": [
       "morecolorful:entity/paper_plane/hit1",
@@ -1076,6 +1169,51 @@
       }
     ],
     "subtitle": "morecolorful.subtitles.entity.paper_plane.throw"
+  },
+  "entity.smoke_bomb.explode": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "entity.firework_rocket.blast"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.entity.smoke_bomb.explode"
+  },
+  "entity.smoke_bomb.throw": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "entity.snowball.throw"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.entity.smoke_bomb.throw"
+  },
+  "entity.villager.work_beekeeper": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.beehive.shear"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.entity.villager.work_beekeeper"
+  },
+  "entity.villager.work_paper_artisan": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "morecolorful:block.paper.cut"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.entity.villager.work_paper_artisan"
+  },
+  "entity.villager.work_pyrotechnician": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "morecolorful:block.pyrotechnics_table.use"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.entity.villager.work_pyrotechnician"
   },
   "item.banjo.play": {
     "sounds": [
@@ -1094,6 +1232,15 @@
       }
     ],
     "subtitle": "morecolorful.subtitles.item.bass.play"
+  },
+  "item.bug_net.catch": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "entity.snowball.throw"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.item.bug_net.catch"
   },
   "item.cello.play": {
     "sounds": [

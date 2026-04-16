@@ -2,15 +2,15 @@ package com.ChalkerCharles.morecolorful.network;
 
 import com.ChalkerCharles.morecolorful.common.attachment.ClientLevelData;
 import com.ChalkerCharles.morecolorful.common.attachment.LevelSavedData;
+import com.ChalkerCharles.morecolorful.common.entity.misc.SmokeBomb;
 import com.ChalkerCharles.morecolorful.common.level.thermal.ILevelThermalEngine;
 import com.ChalkerCharles.morecolorful.common.level.wind.ILevelVentEngine;
-import com.ChalkerCharles.morecolorful.network.packets.ThermalRemovalPacket;
-import com.ChalkerCharles.morecolorful.network.packets.ThermalUpdatePacket;
-import com.ChalkerCharles.morecolorful.network.packets.VentRemovalPacket;
-import com.ChalkerCharles.morecolorful.network.packets.VentUpdatePacket;
+import com.ChalkerCharles.morecolorful.network.packets.*;
+import com.ChalkerCharles.morecolorful.util.client.ClientWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.SectionPos;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.chunk.DataLayer;
 import net.minecraft.world.level.chunk.LevelChunk;
@@ -154,5 +154,14 @@ public class ClientPacketHandler {
                 ventEngine.updateSectionStatus(SectionPos.of(pos, j), true);
             }
         });
+    }
+
+    public static void handleSmokeBomb(SmokeBombPacket packet) {
+        ClientLevel level = Minecraft.getInstance().level;
+        if (level == null) return;
+        Entity entity = level.getEntity(packet.id());
+        if (entity instanceof SmokeBomb bomb) {
+            ClientWrapper.createSmokeBomb(level, bomb);
+        }
     }
 }

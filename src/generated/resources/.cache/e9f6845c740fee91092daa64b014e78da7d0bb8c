@@ -1,4 +1,4 @@
-// 1.21	2025-12-10T19:58:36.1958111	Tags for minecraft:worldgen/biome mod id morecolorful
+// 1.21	2026-04-04T20:27:41.3723167	Tags for minecraft:worldgen/biome mod id morecolorful
 11aaeb6fb3d82a2b7e318ff8c8ddfc405bd5e336 data/c/tags/worldgen/biome/is_birch_forest.json
 d6f27c35120f002f0f2a85230aac17ad2cf2ae2a data/c/tags/worldgen/biome/is_cold/overworld.json
 5aad44ae71a0e0e69d0bc986830c20c0016728b9 data/c/tags/worldgen/biome/is_floral.json
@@ -23,4 +23,5 @@ d6f27c35120f002f0f2a85230aac17ad2cf2ae2a data/minecraft/tags/worldgen/biome/spaw
 d6f27c35120f002f0f2a85230aac17ad2cf2ae2a data/minecraft/tags/worldgen/biome/spawns_white_rabbits.json
 957be5ed82dd1e175991f9f7dbdf2f9f69e1ba58 data/minecraft/tags/worldgen/biome/stronghold_biased_to.json
 c0cd2f40f53a821acc8c99494ab5296ff657e11d data/minecraft/tags/worldgen/biome/water_on_map_outlines.json
+f9078c9d4dec0775f90f3b9db5f648797e5eb557 data/morecolorful/tags/worldgen/biome/is_autumn.json
 315f1f31bac97c674a4fa260d9339ef65b1a38d7 data/morecolorful/tags/worldgen/biome/is_windy.json

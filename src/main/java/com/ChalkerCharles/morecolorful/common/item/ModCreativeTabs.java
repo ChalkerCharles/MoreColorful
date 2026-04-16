@@ -4,10 +4,8 @@ import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.common.block.ornamental.PapercuttingBlock;
 import com.ChalkerCharles.morecolorful.common.block.ornamental.PennantBlock;
 import com.ChalkerCharles.morecolorful.common.block.ornamental.RibbonBlock;
-import com.ChalkerCharles.morecolorful.common.item.misc.BalloonItem;
-import com.ChalkerCharles.morecolorful.common.item.misc.FireworkShapeTemplateItem;
-import com.ChalkerCharles.morecolorful.common.item.misc.PartyPopperItem;
-import com.ChalkerCharles.morecolorful.common.item.misc.SparklerItem;
+import com.ChalkerCharles.morecolorful.common.item.misc.*;
+import com.ChalkerCharles.morecolorful.common.item.utility.SmokeBombItem;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
@@ -277,6 +275,7 @@ public class ModCreativeTabs {
                     ModItems.CATTAIL,
                     ModItems.TALL_RAPESEED_FLOWER
             );
+            insertAfterBySequence(event, Items.SNIFFER_EGG, ModItems.COCOON);
             insertAfterBySequence(event, Items.SWEET_BERRIES,
                     ModItems.STRAWBERRY,
                     ModItems.BLUEBERRIES
@@ -333,7 +332,8 @@ public class ModCreativeTabs {
         } else if (tab == CreativeModeTabs.TOOLS_AND_UTILITIES) {
             insertAfterBySequence(event, Items.BRUSH,
                     ModItems.UMBRELLA,
-                    ModItems.DRIPLEAF_UMBRELLA
+                    ModItems.DRIPLEAF_UMBRELLA,
+                    ModItems.BUG_NET
             );
             insertAfterBySequence(event, Items.BUNDLE, ItemUtils.COLORED_BUNDLES);
             insertAfterBySequence(event, Items.CHERRY_CHEST_BOAT,
@@ -356,6 +356,11 @@ public class ModCreativeTabs {
             );
             insertAfterBySequence(event, Items.WIND_CHARGE, ModItems.BOMB);
         } else if (tab == CreativeModeTabs.COMBAT) {
+            insertAfterBySequence(event, Items.TURTLE_HELMET,
+                    ModItems.STRAW_HAT,
+                    ModItems.BEEKEEPING_HAT
+            );
+            insertAfterBySequence(event, Items.WIND_CHARGE, SmokeBombItem.ALL_ITEMS);
             insertAfterBySequence(event, Items.WIND_CHARGE, ModItems.BOMB);
         } else if (tab == CreativeModeTabs.FOOD_AND_DRINKS) {
             insertAfterBySequence(event, Items.SWEET_BERRIES,
@@ -370,6 +375,12 @@ public class ModCreativeTabs {
                     ModItems.CONFETTI
             );
             insertBeforeBySequence(event, Items.ANGLER_POTTERY_SHERD, FireworkShapeTemplateItem.ALL_TYPES);
+        } else if (tab == CreativeModeTabs.SPAWN_EGGS) {
+            appendBySequence(event, ItemUtils.MOD_SPAWN_EGGS);
+            event.accept(ModItems.BEE);
+            event.acceptAll(CritterItem.getAllButterflies());
+            event.acceptAll(CritterItem.getAllMoths());
+            event.acceptAll(CritterItem.getAllCaterpillars());
         }
     }
 

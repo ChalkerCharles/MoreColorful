@@ -3,9 +3,7 @@ package com.ChalkerCharles.morecolorful.common.item.musical;
 import com.ChalkerCharles.morecolorful.common.block.musical.DrumSetBlock;
 import com.ChalkerCharles.morecolorful.util.MusicalInstrument;
 import net.minecraft.core.BlockPos;
-import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
@@ -22,11 +20,7 @@ public class DrumstickItem extends Item {
         Level level = pContext.getLevel();
         BlockPos blockpos = pContext.getClickedPos();
         BlockState blockstate = level.getBlockState(blockpos);
-        Player player = pContext.getPlayer();
         if (isPercussionInstrument(blockstate.getBlock())) {
-            if (player != null) {
-                player.awardStat(Stats.ITEM_USED.get(this));
-            }
             return InteractionResult.SUCCESS;
         }
         return InteractionResult.PASS;

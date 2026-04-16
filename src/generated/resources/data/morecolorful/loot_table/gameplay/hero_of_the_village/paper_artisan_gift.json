@@ -1,0 +1,76 @@
+{
+  "type": "minecraft:gift",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "morecolorful:white_party_popper"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "morecolorful:light_gray_party_popper"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "morecolorful:gray_party_popper"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "morecolorful:black_party_popper"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "morecolorful:brown_party_popper"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "morecolorful:red_party_popper"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "morecolorful:orange_party_popper"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "morecolorful:yellow_party_popper"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "morecolorful:lime_party_popper"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "morecolorful:green_party_popper"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "morecolorful:cyan_party_popper"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "morecolorful:light_blue_party_popper"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "morecolorful:blue_party_popper"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "morecolorful:purple_party_popper"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "morecolorful:magenta_party_popper"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "morecolorful:pink_party_popper"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "morecolorful:gameplay/hero_of_the_village/paper_artisan_gift"
+}

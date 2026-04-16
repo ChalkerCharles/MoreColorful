@@ -1,0 +1,18 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#c:is_plains",
+  "spawners": [
+    {
+      "type": "morecolorful:butterfly",
+      "maxCount": 3,
+      "minCount": 1,
+      "weight": 10
+    },
+    {
+      "type": "morecolorful:moth",
+      "maxCount": 3,
+      "minCount": 1,
+      "weight": 10
+    }
+  ]
+}
