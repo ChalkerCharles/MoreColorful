@@ -5,6 +5,7 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
+import net.neoforged.neoforge.common.Tags;
 
 public class WritableSheetMusicRecipe extends ShapelessRecipe {
     private static final NonNullList<Ingredient> INGREDIENTS = NonNullList.create();
@@ -40,7 +41,7 @@ public class WritableSheetMusicRecipe extends ShapelessRecipe {
 
     static {
         INGREDIENTS.add(Ingredient.of(Items.PAPER));
-        INGREDIENTS.add(Ingredient.of(Items.FEATHER));
+        INGREDIENTS.add(Ingredient.of(Tags.Items.FEATHERS));
         INGREDIENTS.add(Ingredient.of(Items.INK_SAC));
         INGREDIENTS.add(Ingredient.of(Items.NOTE_BLOCK));
     }

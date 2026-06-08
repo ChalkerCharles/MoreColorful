@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "mailbox",
+  "key": {
+    "#": {
+      "item": "morecolorful:ebony_planks"
+    },
+    "@": {
+      "item": "morecolorful:envelope"
+    }
+  },
+  "pattern": [
+    "###",
+    "#@#",
+    "###"
+  ],
+  "result": {
+    "count": 1,
+    "id": "morecolorful:ebony_mailbox"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "mailbox",
+  "key": {
+    "#": {
+      "item": "minecraft:dark_oak_planks"
+    },
+    "@": {
+      "item": "morecolorful:envelope"
+    }
+  },
+  "pattern": [
+    "###",
+    "#@#",
+    "###"
+  ],
+  "result": {
+    "count": 1,
+    "id": "morecolorful:dark_oak_mailbox"
+  }
+}

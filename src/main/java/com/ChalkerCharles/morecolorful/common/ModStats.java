@@ -35,6 +35,7 @@ public class ModStats {
     public static final Supplier<ResourceLocation> DAMAGE_BLOCKED_BY_UMBRELLA = makeCustomStat("damage_blocked_by_umbrella", StatFormatter.DIVIDE_BY_TEN);
     public static final Supplier<ResourceLocation> INTERACT_WITH_PYROTECHNICS_TABLE = makeCustomStat("interact_with_pyrotechnics_table");
     public static final Supplier<ResourceLocation> INTERACT_WITH_PAPERCRAFT_TABLE = makeCustomStat("interact_with_papercraft_table");
+    public static final Supplier<ResourceLocation> OPEN_MAILBOX = makeCustomStat("open_mailbox");
 
     private static Supplier<ResourceLocation> makeCustomStat(String key, StatFormatter formatter) {
         return STATS.register(key, location -> {

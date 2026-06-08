@@ -1,0 +1,68 @@
+{
+  "parent": "minecraft:item/generated",
+  "overrides": [
+    {
+      "model": "morecolorful:item/dragonfly_red",
+      "predicate": {
+        "morecolorful:type": 0.0
+      }
+    },
+    {
+      "model": "morecolorful:item/dragonfly_orange",
+      "predicate": {
+        "morecolorful:type": 0.1
+      }
+    },
+    {
+      "model": "morecolorful:item/dragonfly_yellow",
+      "predicate": {
+        "morecolorful:type": 0.2
+      }
+    },
+    {
+      "model": "morecolorful:item/dragonfly_lime",
+      "predicate": {
+        "morecolorful:type": 0.3
+      }
+    },
+    {
+      "model": "morecolorful:item/dragonfly_green",
+      "predicate": {
+        "morecolorful:type": 0.4
+      }
+    },
+    {
+      "model": "morecolorful:item/dragonfly_cyan",
+      "predicate": {
+        "morecolorful:type": 0.5
+      }
+    },
+    {
+      "model": "morecolorful:item/dragonfly_blue",
+      "predicate": {
+        "morecolorful:type": 0.6
+      }
+    },
+    {
+      "model": "morecolorful:item/dragonfly_purple",
+      "predicate": {
+        "morecolorful:type": 0.7
+      }
+    },
+    {
+      "model": "morecolorful:item/dragonfly_brown",
+      "predicate": {
+        "morecolorful:type": 0.8
+      }
+    },
+    {
+      "model": "morecolorful:item/dragonfly_black",
+      "predicate": {
+        "morecolorful:type": 0.9
+      }
+    }
+  ],
+  "textures": {
+    "layer0": "morecolorful:item/red_dragonfly"
+  }
+}

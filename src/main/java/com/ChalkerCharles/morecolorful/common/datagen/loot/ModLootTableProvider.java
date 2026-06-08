@@ -16,8 +16,8 @@ public class ModLootTableProvider extends LootTableProvider {
 
     public static final List<SubProviderEntry> PROVIDERS = List.of(
             new SubProviderEntry(ModBlockLootTableProvider::new, LootContextParamSets.BLOCK),
-            new SubProviderEntry(ModArchaeologyLootProvider::new, LootContextParamSets.ARCHAEOLOGY),
             new SubProviderEntry(ModChestLootProvider::new, LootContextParamSets.CHEST),
+            new SubProviderEntry(ModEntityLootProvider::new, LootContextParamSets.ENTITY),
             new SubProviderEntry(ModGiftLootProvider::new, LootContextParamSets.GIFT)
     );
 }

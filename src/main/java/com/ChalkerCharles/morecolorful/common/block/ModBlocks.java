@@ -354,6 +354,28 @@ public class ModBlocks {
     public static final DeferredBlock<Block> PYROTECHNICS_TABLE = register("pyrotechnics_table", () -> new PyrotechnicsTableBlock(ofFullCopy(Blocks.SMITHING_TABLE)));
     public static final DeferredBlock<Block> PAPERCRAFT_TABLE = register("papercraft_table", () -> new PapercraftTableBlock(ofFullCopy(Blocks.FLETCHING_TABLE)));
     public static final DeferredBlock<RotatedPillarBlock> CARDBOARD_BLOCK = register("cardboard_block", () -> new RotatedPillarBlock(of().mapColor(MapColor.WOOD).strength(0.5F).sound(ModSoundTypes.CARDBOARD)));
+    public static final DeferredBlock<RotatedPillarBlock> VERMILION_FROGLIGHT = register("vermilion_froglight", () -> new RotatedPillarBlock(ofFullCopy(Blocks.OCHRE_FROGLIGHT).mapColor(MapColorExtension.CRABAPPLE)));
+    public static final DeferredBlock<RotatedPillarBlock> CYANINE_FROGLIGHT = register("cyanine_froglight", () -> new RotatedPillarBlock(ofFullCopy(Blocks.OCHRE_FROGLIGHT).mapColor(MapColor.COLOR_CYAN)));
+    public static final DeferredBlock<RotatedPillarBlock> UMBER_FROGLIGHT = register("umber_froglight", () -> new RotatedPillarBlock(ofFullCopy(Blocks.OCHRE_FROGLIGHT).mapColor(MapColor.WOOD)));
+    public static final DeferredBlock<Block> OAK_MAILBOX = register("oak_mailbox", () -> new MailboxBlock(ofFullCopy(Blocks.OAK_PLANKS)));
+    public static final DeferredBlock<Block> SPRUCE_MAILBOX = register("spruce_mailbox", () -> new MailboxBlock(ofFullCopy(Blocks.SPRUCE_PLANKS)));
+    public static final DeferredBlock<Block> BIRCH_MAILBOX = register("birch_mailbox", () -> new MailboxBlock(ofFullCopy(Blocks.BIRCH_PLANKS)));
+    public static final DeferredBlock<Block> JUNGLE_MAILBOX = register("jungle_mailbox", () -> new MailboxBlock(ofFullCopy(Blocks.JUNGLE_PLANKS)));
+    public static final DeferredBlock<Block> ACACIA_MAILBOX = register("acacia_mailbox", () -> new MailboxBlock(ofFullCopy(Blocks.ACACIA_PLANKS)));
+    public static final DeferredBlock<Block> DARK_OAK_MAILBOX = register("dark_oak_mailbox", () -> new MailboxBlock(ofFullCopy(Blocks.DARK_OAK_PLANKS)));
+    public static final DeferredBlock<Block> CRIMSON_MAILBOX = register("crimson_mailbox", () -> new MailboxBlock(ofFullCopy(Blocks.CRIMSON_PLANKS)));
+    public static final DeferredBlock<Block> WARPED_MAILBOX = register("warped_mailbox", () -> new MailboxBlock(ofFullCopy(Blocks.WARPED_PLANKS)));
+    public static final DeferredBlock<Block> MANGROVE_MAILBOX = register("mangrove_mailbox", () -> new MailboxBlock(ofFullCopy(Blocks.MANGROVE_PLANKS)));
+    public static final DeferredBlock<Block> CHERRY_MAILBOX = register("cherry_mailbox", () -> new MailboxBlock(ofFullCopy(Blocks.CHERRY_PLANKS)));
+    public static final DeferredBlock<Block> BAMBOO_MAILBOX = register("bamboo_mailbox", () -> new MailboxBlock(ofFullCopy(Blocks.BAMBOO_PLANKS)));
+    public static final DeferredBlock<Block> CRABAPPLE_MAILBOX = register("crabapple_mailbox", () -> new MailboxBlock(ofFullCopy(CRABAPPLE_PLANKS.get())));
+    public static final DeferredBlock<Block> EBONY_MAILBOX = register("ebony_mailbox", () -> new MailboxBlock(ofFullCopy(EBONY_PLANKS.get())));
+    public static final DeferredBlock<Block> GINKGO_MAILBOX = register("ginkgo_mailbox", () -> new MailboxBlock(ofFullCopy(GINKGO_PLANKS.get())));
+    public static final DeferredBlock<Block> MAPLE_MAILBOX = register("maple_mailbox", () -> new MailboxBlock(ofFullCopy(MAPLE_PLANKS.get())));
+    public static final DeferredBlock<Block> FROST_MAILBOX = register("frost_mailbox", () -> new MailboxBlock(ofFullCopy(FROST_PLANKS.get())));
+    public static final DeferredBlock<Block> DAWN_REDWOOD_MAILBOX = register("dawn_redwood_mailbox", () -> new MailboxBlock(ofFullCopy(DAWN_REDWOOD_PLANKS.get())));
+    public static final DeferredBlock<Block> JACARANDA_MAILBOX = register("jacaranda_mailbox", () -> new MailboxBlock(ofFullCopy(JACARANDA_PLANKS.get())));
+    public static final DeferredBlock<Block> WILLOW_MAILBOX = register("willow_mailbox", () -> new MailboxBlock(ofFullCopy(WILLOW_PLANKS.get())));
 
     public static final DeferredBlock<Block> UNDERWATER_TNT = register("underwater_tnt", () -> new UnderwaterTntBlock(ofFullCopy(Blocks.TNT).mapColor(MapColor.DIAMOND)));
 

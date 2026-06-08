@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "mailbox",
+  "key": {
+    "#": {
+      "item": "morecolorful:jacaranda_planks"
+    },
+    "@": {
+      "item": "morecolorful:envelope"
+    }
+  },
+  "pattern": [
+    "###",
+    "#@#",
+    "###"
+  ],
+  "result": {
+    "count": 1,
+    "id": "morecolorful:jacaranda_mailbox"
+  }
+}

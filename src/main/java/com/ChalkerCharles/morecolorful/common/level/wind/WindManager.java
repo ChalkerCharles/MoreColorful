@@ -23,6 +23,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import org.joml.Vector2f;
 
 public abstract class WindManager {
+    public static final WindManager DUMMY = new WindManager() {};
     private static final float INV_MAX_WIND_SPEED_SQ = 0.0016326531F;
     public final Vector2f globalWindSpeed = new Vector2f();
     public final Vector2f windDirection = new Vector2f(1, 0);

@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WindZoneManager {
+    public static final WindZoneManager DUMMY = new WindZoneManager();
     protected final List<WindZone> windZones = new ArrayList<>();
     private final List<WindZone> windZonesToAdd = new ArrayList<>();
     private final Long2ReferenceMap<List<WindZone>> windZoneMap = new Long2ReferenceOpenHashMap<>();

@@ -1,0 +1,11 @@
+{
+  "values": [
+    "minecraft:grass_block",
+    "minecraft:dirt",
+    "minecraft:coarse_dirt",
+    "minecraft:mud",
+    "minecraft:muddy_mangrove_roots",
+    "minecraft:lily_pad",
+    "morecolorful:cattail"
+  ]
+}

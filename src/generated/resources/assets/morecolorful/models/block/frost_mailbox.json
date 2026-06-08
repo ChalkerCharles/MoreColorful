@@ -1,0 +1,6 @@
+{
+  "parent": "morecolorful:block/template_mailbox",
+  "textures": {
+    "texture": "morecolorful:block/frost_mailbox"
+  }
+}

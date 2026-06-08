@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:paper"
+    },
+    {
+      "item": "minecraft:ink_sac"
+    },
+    {
+      "tag": "c:feathers"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "morecolorful:writable_letter"
+  }
+}

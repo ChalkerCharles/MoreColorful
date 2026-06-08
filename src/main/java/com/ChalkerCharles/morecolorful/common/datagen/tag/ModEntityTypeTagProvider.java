@@ -24,6 +24,14 @@ public class ModEntityTypeTagProvider extends EntityTypeTagsProvider {
                 ModEntities.BUTTERFLY.get(),
                 ModEntities.MOTH.get()
         );
+        tag(EntityTypeTags.FALL_DAMAGE_IMMUNE).add(
+                ModEntities.BUTTERFLY.get(),
+                ModEntities.MOTH.get(),
+                ModEntities.CATERPILLAR.get(),
+                ModEntities.DRAGONFLY.get(),
+                ModEntities.BIRD.get(),
+                ModEntities.PIGEON.get()
+        );
 
         tag(ModTags.EntityTypes.CAN_SPAWN_WITH_UMBRELLA).add(
                 EntityType.ZOMBIE,

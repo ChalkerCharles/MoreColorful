@@ -2,6 +2,7 @@ package com.ChalkerCharles.morecolorful.common.item.misc;
 
 import com.ChalkerCharles.morecolorful.common.entity.animal.AbstractMoth;
 import com.ChalkerCharles.morecolorful.common.entity.animal.Butterfly;
+import com.ChalkerCharles.morecolorful.common.entity.animal.Dragonfly;
 import com.ChalkerCharles.morecolorful.common.entity.animal.Moth;
 import com.ChalkerCharles.morecolorful.common.item.ModItems;
 import net.minecraft.ChatFormatting;
@@ -97,6 +98,19 @@ public class CritterItem extends Item {
             CompoundTag tag = new CompoundTag();
             tag.putString("id", "morecolorful:caterpillar");
             tag.putInt("Type", variant.getIndex());
+            stack.set(DataComponents.ENTITY_DATA, CustomData.of(tag));
+            set.add(stack);
+        }
+        return set;
+    }
+
+    public static Set<ItemStack> getAllDragonflies() {
+        Set<ItemStack> set = ItemStackLinkedSet.createTypeAndComponentsSet();
+        for (Dragonfly.Variant variant : Dragonfly.Variant.values()) {
+            ItemStack stack = ModItems.DRAGONFLY.toStack();
+            CompoundTag tag = new CompoundTag();
+            tag.putString("id", "morecolorful:dragonfly");
+            tag.putInt("Type", variant.ordinal());
             stack.set(DataComponents.ENTITY_DATA, CustomData.of(tag));
             set.add(stack);
         }

@@ -9,6 +9,12 @@
     "#morecolorful:ribbons": {
       "burn_time": 50
     },
+    "morecolorful:acacia_mailbox": {
+      "burn_time": 300
+    },
+    "morecolorful:bamboo_mailbox": {
+      "burn_time": 300
+    },
     "morecolorful:banjo": {
       "burn_time": 200
     },
@@ -18,11 +24,26 @@
     "morecolorful:bass_drum": {
       "burn_time": 300
     },
+    "morecolorful:birch_mailbox": {
+      "burn_time": 300
+    },
     "morecolorful:cardboard_block": {
       "burn_time": 300
     },
     "morecolorful:cello": {
       "burn_time": 200
+    },
+    "morecolorful:cherry_mailbox": {
+      "burn_time": 300
+    },
+    "morecolorful:crabapple_mailbox": {
+      "burn_time": 300
+    },
+    "morecolorful:dark_oak_mailbox": {
+      "burn_time": 300
+    },
+    "morecolorful:dawn_redwood_mailbox": {
+      "burn_time": 300
     },
     "morecolorful:dawn_redwood_roots": {
       "burn_time": 100
@@ -33,6 +54,9 @@
     "morecolorful:drumstick": {
       "burn_time": 200
     },
+    "morecolorful:ebony_mailbox": {
+      "burn_time": 300
+    },
     "morecolorful:erhu": {
       "burn_time": 200
     },
@@ -42,10 +66,31 @@
     "morecolorful:flute": {
       "burn_time": 200
     },
+    "morecolorful:frost_mailbox": {
+      "burn_time": 300
+    },
+    "morecolorful:ginkgo_mailbox": {
+      "burn_time": 300
+    },
     "morecolorful:guitar": {
       "burn_time": 200
     },
     "morecolorful:guzheng": {
+      "burn_time": 300
+    },
+    "morecolorful:jacaranda_mailbox": {
+      "burn_time": 300
+    },
+    "morecolorful:jungle_mailbox": {
+      "burn_time": 300
+    },
+    "morecolorful:mangrove_mailbox": {
+      "burn_time": 300
+    },
+    "morecolorful:maple_mailbox": {
+      "burn_time": 300
+    },
+    "morecolorful:oak_mailbox": {
       "burn_time": 300
     },
     "morecolorful:papercraft_table": {
@@ -60,11 +105,17 @@
     "morecolorful:pyrotechnics_table": {
       "burn_time": 300
     },
+    "morecolorful:spruce_mailbox": {
+      "burn_time": 300
+    },
     "morecolorful:tom-tom_drum": {
       "burn_time": 300
     },
     "morecolorful:violin": {
       "burn_time": 200
+    },
+    "morecolorful:willow_mailbox": {
+      "burn_time": 300
     },
     "morecolorful:xylophone": {
       "burn_time": 300

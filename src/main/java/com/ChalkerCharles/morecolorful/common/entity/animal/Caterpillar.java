@@ -3,6 +3,7 @@ package com.ChalkerCharles.morecolorful.common.entity.animal;
 import com.ChalkerCharles.morecolorful.common.ModSounds;
 import com.ChalkerCharles.morecolorful.common.block.ModBlocks;
 import com.ChalkerCharles.morecolorful.common.block.entity.CocoonBlockEntity;
+import com.ChalkerCharles.morecolorful.common.entity.ModAttributes;
 import com.ChalkerCharles.morecolorful.common.item.ModItems;
 import com.ChalkerCharles.morecolorful.util.Maths;
 import net.minecraft.core.BlockPos;
@@ -50,7 +51,8 @@ public class Caterpillar extends Animal implements VariantHolder<AbstractMoth.Va
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 3.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.1F);
+                .add(Attributes.MOVEMENT_SPEED, 0.1F)
+                .add(ModAttributes.WEIGHT, 0.2);
     }
 
     @Override

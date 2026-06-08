@@ -4,6 +4,7 @@ import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.common.block.ornamental.PapercuttingBlock;
 import com.ChalkerCharles.morecolorful.common.block.ornamental.PennantBlock;
 import com.ChalkerCharles.morecolorful.common.block.ornamental.RibbonBlock;
+import com.ChalkerCharles.morecolorful.common.block.utility.MailboxBlock;
 import com.ChalkerCharles.morecolorful.common.item.misc.*;
 import com.ChalkerCharles.morecolorful.common.item.utility.SmokeBombItem;
 import net.minecraft.core.registries.Registries;
@@ -289,7 +290,17 @@ public class ModCreativeTabs {
                     ModItems.CLOSED_BLUE_WATER_LILY,
                     ModItems.DUCKWEEDS
             );
+            insertAfterBySequence(event, Items.PEARLESCENT_FROGLIGHT,
+                    ModItems.VERMILION_FROGLIGHT,
+                    ModItems.CYANINE_FROGLIGHT,
+                    ModItems.UMBER_FROGLIGHT
+            );
         } else if (tab == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
+            insertAfterBySequence(event, Items.PEARLESCENT_FROGLIGHT,
+                    ModItems.VERMILION_FROGLIGHT,
+                    ModItems.CYANINE_FROGLIGHT,
+                    ModItems.UMBER_FROGLIGHT
+            );
             insertAfterBySequence(event, Items.LOOM,
                     ModItems.PYROTECHNICS_TABLE,
                     ModItems.PAPERCRAFT_TABLE
@@ -319,6 +330,7 @@ public class ModCreativeTabs {
                     ModItems.WILLOW_SIGN,
                     ModItems.WILLOW_HANGING_SIGN
             );
+            insertAfterBySequence(event, Items.PINK_SHULKER_BOX, MailboxBlock.ALL_ITEMS);
             insertBeforeBySequence(event, Items.SKELETON_SKULL, RibbonBlock.ALL_ITEMS);
             insertBeforeBySequence(event, Items.SKELETON_SKULL, PennantBlock.ALL_ITEMS);
         } else if (tab == CreativeModeTabs.REDSTONE_BLOCKS) {
@@ -335,7 +347,14 @@ public class ModCreativeTabs {
                     ModItems.DRIPLEAF_UMBRELLA,
                     ModItems.BUG_NET
             );
+            try {
+                insertAfterBySequence(event, Items.LEAD, Items.BUNDLE);
+            } catch (Exception ignored) {}
             insertAfterBySequence(event, Items.BUNDLE, ItemUtils.COLORED_BUNDLES);
+            insertAfterBySequence(event, Items.WRITABLE_BOOK,
+                    ModItems.WRITABLE_LETTER,
+                    ModItems.ENVELOPE
+            );
             insertAfterBySequence(event, Items.CHERRY_CHEST_BOAT,
                     ModItems.CRABAPPLE_BOAT,
                     ModItems.CRABAPPLE_CHEST_BOAT,
@@ -381,6 +400,7 @@ public class ModCreativeTabs {
             event.acceptAll(CritterItem.getAllButterflies());
             event.acceptAll(CritterItem.getAllMoths());
             event.acceptAll(CritterItem.getAllCaterpillars());
+            event.acceptAll(CritterItem.getAllDragonflies());
         }
     }
 

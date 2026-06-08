@@ -21,6 +21,7 @@ public class NetworkingRegistry {
         registrar.playToClient(WindPacket.TYPE, WindPacket.STREAM_CODEC, WindPacket::handle);
         registrar.playToClient(WindZonePacket.TYPE, WindZonePacket.STREAM_CODEC, WindZonePacket::handle);
         registrar.playToClient(SmokeBombPacket.TYPE, SmokeBombPacket.STREAM_CODEC, SmokeBombPacket::handle);
+        registrar.playToClient(OpenLetterPacket.TYPE, OpenLetterPacket.STREAM_CODEC, OpenLetterPacket::handle);
 
         // Server Bound
         registrar.playToServer(NotePlayingPacket.TYPE, NotePlayingPacket.STREAM_CODEC, NotePlayingPacket::handle);
@@ -28,6 +29,8 @@ public class NetworkingRegistry {
         registrar.playToServer(KiteReelPacket.TYPE, KiteReelPacket.STREAM_CODEC, KiteReelPacket::handle);
         registrar.playToServer(PaperCarvingPacket.TYPE, PaperCarvingPacket.STREAM_CODEC, PaperCarvingPacket::handle);
         registrar.playToServer(SoundPacket.TYPE, SoundPacket.STREAM_CODEC, SoundPacket::handle);
+        registrar.playToServer(EditLetterPacket.TYPE, EditLetterPacket.STREAM_CODEC, EditLetterPacket::handle);
+        registrar.playToServer(SealMailPacket.TYPE, SealMailPacket.STREAM_CODEC, SealMailPacket::handle);
 
         // Both
         registrar.playBidirectional(PlayingScreenPacket.TYPE, PlayingScreenPacket.STREAM_CODEC, PlayingScreenPacket.HANDLER);

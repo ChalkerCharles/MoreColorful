@@ -17,6 +17,7 @@ public class ModMenuTypes {
 
     public static final Supplier<MenuType<PyrotechnicsMenu>> PYROTECHNICS = register("pyrotechnics", PyrotechnicsMenu::new);
     public static final Supplier<MenuType<PapercraftMenu>> PAPERCRAFT = register_("papercraft", PapercraftMenu::new);
+    public static final Supplier<MenuType<EnvelopeMenu>> ENVELOPE = register("envelope", EnvelopeMenu::new);
 
     private static <T extends AbstractContainerMenu> Supplier<MenuType<T>> register(String name, MenuType.MenuSupplier<T> factory) {
         return MENU_TYPES.register(name, () -> new MenuType<>(factory, FeatureFlags.DEFAULT_FLAGS));

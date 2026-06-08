@@ -1,6 +1,7 @@
 package com.ChalkerCharles.morecolorful.common;
 
 import com.ChalkerCharles.morecolorful.Config;
+import com.ChalkerCharles.morecolorful.common.attachment.ChunkData;
 import com.ChalkerCharles.morecolorful.common.attachment.LevelSavedData;
 import com.ChalkerCharles.morecolorful.common.block.ornamental.PinwheelBlock;
 import com.ChalkerCharles.morecolorful.common.command.ModWeatherCommand;
@@ -9,12 +10,14 @@ import com.ChalkerCharles.morecolorful.common.entity.ai.memory.KiteMemory;
 import com.ChalkerCharles.morecolorful.common.entity.misc.Balloon;
 import com.ChalkerCharles.morecolorful.common.entity.misc.PrimedUnderwaterTnt;
 import com.ChalkerCharles.morecolorful.common.entity.misc.SmokeBomb;
+import com.ChalkerCharles.morecolorful.common.entity.spawn.DragonflySpawner;
 import com.ChalkerCharles.morecolorful.common.item.ModDataComponents;
 import com.ChalkerCharles.morecolorful.common.item.ModItems;
 import com.ChalkerCharles.morecolorful.common.item.utility.UmbrellaItem;
 import com.ChalkerCharles.morecolorful.common.level.thermal.ILevelThermalEngine;
 import com.ChalkerCharles.morecolorful.common.level.wind.BurstWindZone;
 import com.ChalkerCharles.morecolorful.common.level.wind.ILevelVentEngine;
+import com.ChalkerCharles.morecolorful.common.loot.VanillaLootTableModifier;
 import com.ChalkerCharles.morecolorful.common.worldgen.ModTemplatePools;
 import com.ChalkerCharles.morecolorful.mixin.extensions.IEntityExtension;
 import com.ChalkerCharles.morecolorful.mixin.extensions.IExplosionExtension;
@@ -39,6 +42,7 @@ import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.ItemStackedOnOtherEvent;
+import net.neoforged.neoforge.event.LootTableLoadEvent;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.living.FinalizeSpawnEvent;
@@ -49,6 +53,7 @@ import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.level.ChunkEvent;
 import net.neoforged.neoforge.event.level.ChunkWatchEvent;
 import net.neoforged.neoforge.event.level.ExplosionEvent;
+import net.neoforged.neoforge.event.level.ModifyCustomSpawnersEvent;
 import net.neoforged.neoforge.event.server.ServerAboutToStartEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.event.tick.LevelTickEvent;
@@ -89,6 +94,12 @@ public final class ModCommonEvents {
         if (Config.windSystem) {
             PacketDistributor.sendToPlayer(event.getPlayer(), new VentRemovalPacket(event.getPos()));
         }
+    }
+
+    @SubscribeEvent
+    public static void onChunkLoad(ChunkEvent.Load event) {
+        ChunkAccess chunk = event.getChunk();
+        ChunkData.onChunkLoad(chunk);
     }
 
     @SubscribeEvent
@@ -244,5 +255,15 @@ public final class ModCommonEvents {
         MinecraftServer server = event.getServer();
         RegistryAccess access = server.registryAccess();
         ModTemplatePools.addPools(access);
+    }
+
+    @SubscribeEvent
+    public static void onLootTableLoad(LootTableLoadEvent event) {
+        VanillaLootTableModifier.modify(event.getTable(), event.getName());
+    }
+
+    @SubscribeEvent
+    public static void modifyCustomSpawners(ModifyCustomSpawnersEvent event) {
+        event.addCustomSpawner(new DragonflySpawner());
     }
 }

@@ -8,10 +8,7 @@ import com.ChalkerCharles.morecolorful.common.entity.misc.Balloon;
 import com.ChalkerCharles.morecolorful.common.item.component.*;
 import com.ChalkerCharles.morecolorful.common.item.misc.*;
 import com.ChalkerCharles.morecolorful.common.item.musical.*;
-import com.ChalkerCharles.morecolorful.common.item.utility.BombItem;
-import com.ChalkerCharles.morecolorful.common.item.utility.BugNetItem;
-import com.ChalkerCharles.morecolorful.common.item.utility.SmokeBombItem;
-import com.ChalkerCharles.morecolorful.common.item.utility.UmbrellaItem;
+import com.ChalkerCharles.morecolorful.common.item.utility.*;
 import com.ChalkerCharles.morecolorful.util.Colour;
 import com.ChalkerCharles.morecolorful.util.InstrumentsType;
 import net.minecraft.core.component.DataComponents;
@@ -20,6 +17,7 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.BundleContents;
 import net.minecraft.world.item.component.FireworkExplosion;
+import net.minecraft.world.item.component.WritableBookContent;
 import net.minecraft.world.level.block.*;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.DeferredSpawnEggItem;
@@ -304,6 +302,28 @@ public class ModItems {
     public static final DeferredItem<BlockItem> PYROTECHNICS_TABLE = registerBlockItem(ModBlocks.PYROTECHNICS_TABLE);
     public static final DeferredItem<BlockItem> PAPERCRAFT_TABLE = registerBlockItem(ModBlocks.PAPERCRAFT_TABLE);
     public static final DeferredItem<BlockItem> CARDBOARD_BLOCK = registerBlockItem(ModBlocks.CARDBOARD_BLOCK);
+    public static final DeferredItem<BlockItem> VERMILION_FROGLIGHT = registerBlockItem(ModBlocks.VERMILION_FROGLIGHT);
+    public static final DeferredItem<BlockItem> CYANINE_FROGLIGHT = registerBlockItem(ModBlocks.CYANINE_FROGLIGHT);
+    public static final DeferredItem<BlockItem> UMBER_FROGLIGHT = registerBlockItem(ModBlocks.UMBER_FROGLIGHT);
+    public static final DeferredItem<BlockItem> OAK_MAILBOX = registerBlockItem(ModBlocks.OAK_MAILBOX);
+    public static final DeferredItem<BlockItem> SPRUCE_MAILBOX = registerBlockItem(ModBlocks.SPRUCE_MAILBOX);
+    public static final DeferredItem<BlockItem> BIRCH_MAILBOX = registerBlockItem(ModBlocks.BIRCH_MAILBOX);
+    public static final DeferredItem<BlockItem> JUNGLE_MAILBOX = registerBlockItem(ModBlocks.JUNGLE_MAILBOX);
+    public static final DeferredItem<BlockItem> ACACIA_MAILBOX = registerBlockItem(ModBlocks.ACACIA_MAILBOX);
+    public static final DeferredItem<BlockItem> DARK_OAK_MAILBOX = registerBlockItem(ModBlocks.DARK_OAK_MAILBOX);
+    public static final DeferredItem<BlockItem> CRIMSON_MAILBOX = registerBlockItem(ModBlocks.CRIMSON_MAILBOX);
+    public static final DeferredItem<BlockItem> WARPED_MAILBOX = registerBlockItem(ModBlocks.WARPED_MAILBOX);
+    public static final DeferredItem<BlockItem> MANGROVE_MAILBOX = registerBlockItem(ModBlocks.MANGROVE_MAILBOX);
+    public static final DeferredItem<BlockItem> CHERRY_MAILBOX = registerBlockItem(ModBlocks.CHERRY_MAILBOX);
+    public static final DeferredItem<BlockItem> BAMBOO_MAILBOX = registerBlockItem(ModBlocks.BAMBOO_MAILBOX);
+    public static final DeferredItem<BlockItem> CRABAPPLE_MAILBOX = registerBlockItem(ModBlocks.CRABAPPLE_MAILBOX);
+    public static final DeferredItem<BlockItem> EBONY_MAILBOX = registerBlockItem(ModBlocks.EBONY_MAILBOX);
+    public static final DeferredItem<BlockItem> GINKGO_MAILBOX = registerBlockItem(ModBlocks.GINKGO_MAILBOX);
+    public static final DeferredItem<BlockItem> MAPLE_MAILBOX = registerBlockItem(ModBlocks.MAPLE_MAILBOX);
+    public static final DeferredItem<BlockItem> FROST_MAILBOX = registerBlockItem(ModBlocks.FROST_MAILBOX);
+    public static final DeferredItem<BlockItem> DAWN_REDWOOD_MAILBOX = registerBlockItem(ModBlocks.DAWN_REDWOOD_MAILBOX);
+    public static final DeferredItem<BlockItem> JACARANDA_MAILBOX = registerBlockItem(ModBlocks.JACARANDA_MAILBOX);
+    public static final DeferredItem<BlockItem> WILLOW_MAILBOX = registerBlockItem(ModBlocks.WILLOW_MAILBOX);
 
     public static final DeferredItem<BlockItem> UNDERWATER_TNT = registerBlockItem(ModBlocks.UNDERWATER_TNT);
 
@@ -328,7 +348,7 @@ public class ModItems {
     public static final DeferredItem<Item> PIPA = register("pipa", () -> new BothHandsInstrumentItem(InstrumentsType.PIPA, nonStackable()));
     public static final DeferredItem<Item> ERHU = register("erhu", () -> new BowedStringInstrumentItem(InstrumentsType.ERHU, nonStackable()));
     public static final DeferredItem<Item> WRITABLE_SHEET_MUSIC = register("writable_sheet_music", () -> new WritableSheetMusicItem(nonStackable().component(ModDataComponents.EDITABLE_MELODY.get(), EditableMelody.EMPTY)));
-    public static final DeferredItem<Item> SHEET_MUSIC = register("sheet_music", () -> new SheetMusicItem(nonStackable()));
+    public static final DeferredItem<Item> SHEET_MUSIC = register("sheet_music", () -> new SheetMusicItem(stackTo16()));
 
     public static final DeferredItem<Item> CRABAPPLE_BOAT = register("crabapple_boat", () -> new BoatItem(false, BoatTypeExtension.CRABAPPLE, nonStackable()));
     public static final DeferredItem<Item> CRABAPPLE_CHEST_BOAT = register("crabapple_chest_boat", () -> new BoatItem(true, BoatTypeExtension.CRABAPPLE, nonStackable()));
@@ -461,14 +481,22 @@ public class ModItems {
     public static final DeferredItem<Item> FIREWORK_SHAPE_TEMPLATE_HYPERBOLOID = registerFireworkShapeTemplate("firework_shape_template_hyperboloid", FireworkShapeExtension.HYPERBOLOID);
 
     public static final DeferredItem<Item> CARDBOARD = registerSimple("cardboard");
+    public static final DeferredItem<Item> WRITABLE_LETTER = register("writable_letter", () -> new WritableLetterItem(nonStackable().component(DataComponents.WRITABLE_BOOK_CONTENT, WritableBookContent.EMPTY)));
+    public static final DeferredItem<Item> LETTER = register("letter", () -> new LetterItem(stackTo16()));
+    public static final DeferredItem<Item> ENVELOPE = register("envelope", () -> new EnvelopeItem(properties()));
+    public static final DeferredItem<Item> MAIL = register("mail", () -> new MailItem(properties().component(ModDataComponents.MAIL_CONTENT, MailContent.DEFAULT)));
 
     public static final DeferredItem<Item> BEE = register("bee", () -> new CritterItem(EntityType.BEE, properties()));
     public static final DeferredItem<Item> BUTTERFLY = register("butterfly", () -> new CritterItem(ModEntities.BUTTERFLY.get(), properties()));
     public static final DeferredItem<Item> MOTH = register("moth", () -> new CritterItem(ModEntities.MOTH.get(), properties()));
     public static final DeferredItem<Item> CATERPILLAR = register("caterpillar", () -> new CritterItem(ModEntities.CATERPILLAR.get(), properties()));
+    public static final DeferredItem<Item> DRAGONFLY = register("dragonfly", () -> new CritterItem(ModEntities.DRAGONFLY.get(), properties()));
     public static final DeferredItem<Item> BUTTERFLY_SPAWN_EGG = registerSpawnEgg("butterfly_spawn_egg", ModEntities.BUTTERFLY, 0xfc8113, 0x341911);
     public static final DeferredItem<Item> MOTH_SPAWN_EGG = registerSpawnEgg("moth_spawn_egg", ModEntities.MOTH, 0x735450, 0xc5b9a7);
     public static final DeferredItem<Item> CATERPILLAR_SPAWN_EGG = registerSpawnEgg("caterpillar_spawn_egg", ModEntities.CATERPILLAR, 0x6c8031, 0x1e2d0e);
+    public static final DeferredItem<Item> DRAGONFLY_SPAWN_EGG = registerSpawnEgg("dragonfly_spawn_egg", ModEntities.DRAGONFLY, 0x7a2026, 0xc7cec6);
+    public static final DeferredItem<Item> BIRD_SPAWN_EGG = registerSpawnEgg("bird_spawn_egg", ModEntities.BIRD, 0xa68259, 0x684d42);
+    public static final DeferredItem<Item> PIGEON_SPAWN_EGG = registerSpawnEgg("pigeon_spawn_egg", ModEntities.PIGEON, 0xabb4bc, 0x3d4753);
 
     private static DeferredItem<Item> register(String name, Supplier<Item> supplier) {
         return ITEMS.register(name, supplier);

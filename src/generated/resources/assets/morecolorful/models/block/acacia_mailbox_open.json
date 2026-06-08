@@ -1,0 +1,6 @@
+{
+  "parent": "morecolorful:block/template_mailbox_open",
+  "textures": {
+    "texture": "morecolorful:block/acacia_mailbox"
+  }
+}

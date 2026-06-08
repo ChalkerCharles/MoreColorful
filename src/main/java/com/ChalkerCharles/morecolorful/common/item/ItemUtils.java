@@ -43,7 +43,10 @@ public final class ItemUtils extends net.minecraft.world.item.ItemUtils {
     public static final ItemLike[] MOD_SPAWN_EGGS = new ItemLike[] {
             ModItems.BUTTERFLY_SPAWN_EGG,
             ModItems.MOTH_SPAWN_EGG,
-            ModItems.CATERPILLAR_SPAWN_EGG
+            ModItems.CATERPILLAR_SPAWN_EGG,
+            ModItems.DRAGONFLY_SPAWN_EGG,
+            ModItems.BIRD_SPAWN_EGG,
+            ModItems.PIGEON_SPAWN_EGG
     };
 
     public static Stream<ItemStack> dyeingIngredients(ItemLike[] items, ItemLike except) {

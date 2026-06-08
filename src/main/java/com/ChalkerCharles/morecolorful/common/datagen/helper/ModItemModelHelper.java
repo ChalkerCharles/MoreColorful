@@ -2,6 +2,7 @@ package com.ChalkerCharles.morecolorful.common.datagen.helper;
 
 import com.ChalkerCharles.morecolorful.common.entity.animal.AbstractMoth;
 import com.ChalkerCharles.morecolorful.common.entity.animal.Butterfly;
+import com.ChalkerCharles.morecolorful.common.entity.animal.Dragonfly;
 import com.ChalkerCharles.morecolorful.common.entity.animal.Moth;
 import com.ChalkerCharles.morecolorful.common.item.ModItems;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -47,8 +48,13 @@ public abstract class ModItemModelHelper extends ItemModelProvider {
         blockItem2d(item, location.getPath());
     }
 
-    protected void fromBlock(ItemLike item, Supplier<Block> block) {
-        getBuilder(item.asItem().toString()).parent(new ModelFile.UncheckedModelFile(modLoc("block/" + name(block.get()))));
+    protected void fromBlock(ItemLike item, Block block) {
+        getBuilder(item.asItem().toString()).parent(new ModelFile.UncheckedModelFile(modLoc("block/" + name(block))));
+    }
+
+    protected void fromBlock(ItemLike item) {
+        Block block = Block.byItem(item.asItem());
+        fromBlock(item, block);
     }
 
     protected void itemWithCustomName(ItemLike item, String name) {
@@ -127,6 +133,17 @@ public abstract class ModItemModelHelper extends ItemModelProvider {
         for (AbstractMoth.Variant variant : AbstractMoth.Variant.values()) {
             ModelFile file = getBuilder(name + '_' + variant.getName()).parent(parent).texture("layer0", texture.withSuffix(variant.getTextureName() + "_caterpillar"));
             builder.override().predicate(modLoc("type"), variant.getIndex() / 64.0F).model(file);
+        }
+    }
+
+    protected void dragonflies() {
+        String name = ModItems.DRAGONFLY.get().toString();
+        ModelFile parent = new ModelFile.UncheckedModelFile("item/generated");
+        ResourceLocation texture = modLoc("item/");
+        ItemModelBuilder builder = getBuilder(name).parent(parent).texture("layer0", texture.withSuffix(Dragonfly.Variant.RED.name + "_dragonfly"));
+        for (Dragonfly.Variant variant : Dragonfly.Variant.values()) {
+            ModelFile file = getBuilder(name + '_' + variant.name).parent(parent).texture("layer0", texture.withSuffix(variant.name + "_dragonfly"));
+            builder.override().predicate(modLoc("type"), variant.ordinal() / 10.0F).model(file);
         }
     }
 

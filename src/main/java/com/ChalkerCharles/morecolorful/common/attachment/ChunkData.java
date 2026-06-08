@@ -13,6 +13,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.chunk.*;
@@ -79,20 +80,32 @@ public class ChunkData implements INBTSerializable<CompoundTag> {
         get(chunk).ventilationSources = getVentilationSources(other);
     }
 
+    private void onChunkLoad() {
+        Level level = this.getLevel();
+        if (level instanceof ServerLevel serverLevel) {
+            ServerLevelData.runMailCallbacks(serverLevel, this.chunk.getPos().toLong());
+        }
+    }
+
+    public static void onChunkLoad(ChunkAccess chunk) {
+        get(chunk).onChunkLoad();
+    }
+
     @Override
     @UnknownNullability
     public CompoundTag serializeNBT(HolderLookup.Provider provider) {
         CompoundTag nbt = new CompoundTag();
         nbt.putString("status", BuiltInRegistries.CHUNK_STATUS.getKey(this.chunk.getPersistedStatus()).toString());
-        serializeThermal(nbt);
-        serializeVentilation(nbt);
+        Level level = this.getLevel();
+        if (level != null) {
+            serializeThermal(nbt, level);
+            serializeVentilation(nbt, level);
+        }
         return nbt;
     }
 
-    private void serializeThermal(CompoundTag nbt) {
+    private void serializeThermal(CompoundTag nbt, Level level) {
         if (!Config.thermalSystem) return;
-        Level level = this.getLevel();
-        if (level == null) return;
         ListTag temperatures = new ListTag();
         ILevelThermalEngine thermalEngine = LevelSavedData.getThermalEngine(level);
         ChunkPos pos = this.chunk.getPos();
@@ -115,10 +128,8 @@ public class ChunkData implements INBTSerializable<CompoundTag> {
         }
     }
 
-    private void serializeVentilation(CompoundTag nbt) {
+    private void serializeVentilation(CompoundTag nbt, Level level) {
         if (!Config.windSystem) return;
-        Level level = this.getLevel();
-        if (level == null) return;
         ListTag ventilatedSections = new ListTag();
         ILevelVentEngine ventEngine = LevelSavedData.getVentEngine(level);
         ChunkPos pos = this.chunk.getPos();
@@ -143,14 +154,15 @@ public class ChunkData implements INBTSerializable<CompoundTag> {
 
     @Override
     public void deserializeNBT(HolderLookup.Provider provider, CompoundTag nbt) {
-        deserializeThermal(nbt);
-        deserializeVentilation(nbt);
+        Level level = this.getLevel();
+        if (level != null) {
+            deserializeThermal(nbt, level);
+            deserializeVentilation(nbt, level);
+        }
     }
 
-    private void deserializeThermal(CompoundTag nbt) {
+    private void deserializeThermal(CompoundTag nbt, Level level) {
         if (!Config.thermalSystem) return;
-        Level level = this.getLevel();
-        if (level == null) return;
         ILevelThermalEngine thermalEngine = LevelSavedData.getThermalEngine(level);
         ChunkPos pos = this.chunk.getPos();
         ListTag temperatures = nbt.getList("blockTemperatures", Tag.TAG_COMPOUND);
@@ -174,10 +186,8 @@ public class ChunkData implements INBTSerializable<CompoundTag> {
         this.setThermalCorrect(nbt.getBoolean("isThermalOn"));
     }
 
-    private void deserializeVentilation(CompoundTag nbt) {
+    private void deserializeVentilation(CompoundTag nbt, Level level) {
         if (!Config.windSystem) return;
-        Level level = this.getLevel();
-        if (level == null) return;
         ILevelVentEngine ventEngine = LevelSavedData.getVentEngine(level);
         ChunkPos pos = this.chunk.getPos();
         ListTag ventilatedSections = nbt.getList("ventilatedSections", Tag.TAG_COMPOUND);

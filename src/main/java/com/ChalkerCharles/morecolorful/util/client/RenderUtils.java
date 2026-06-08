@@ -303,6 +303,7 @@ public final class RenderUtils {
         }
 
         private long getData(float x, float y, float z) {
+            if (this.pos == null) return 0L;
             int x1 = Math.round(x), y0 = Mth.floor(y), y1 = Math.round(y), z1 = Math.round(z);
             int key = 272 * x1 + (z1 << 4) + y0;
             long l = this.cache[key];

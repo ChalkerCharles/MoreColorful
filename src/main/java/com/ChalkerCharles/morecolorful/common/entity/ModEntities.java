@@ -1,9 +1,7 @@
 package com.ChalkerCharles.morecolorful.common.entity;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
-import com.ChalkerCharles.morecolorful.common.entity.animal.Butterfly;
-import com.ChalkerCharles.morecolorful.common.entity.animal.Caterpillar;
-import com.ChalkerCharles.morecolorful.common.entity.animal.Moth;
+import com.ChalkerCharles.morecolorful.common.entity.animal.*;
 import com.ChalkerCharles.morecolorful.common.entity.misc.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.Entity;
@@ -15,7 +13,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import java.util.function.Supplier;
 
 public class ModEntities {
-    private static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(Registries.ENTITY_TYPE, MoreColorful.MODID);
+    public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(Registries.ENTITY_TYPE, MoreColorful.MODID);
 
     public static final Supplier<EntityType<PaperPlane>> PAPER_PLANE = register(
             "paper_plane", EntityType.Builder.<PaperPlane>of(PaperPlane::new, MobCategory.MISC).sized(0.6F, 0.2F).clientTrackingRange(4).updateInterval(10)
@@ -55,6 +53,15 @@ public class ModEntities {
     );
     public static final Supplier<EntityType<SmokeBomb>> SMOKE_BOMB = register(
             "smoke_bomb", EntityType.Builder.<SmokeBomb>of(SmokeBomb::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10)
+    );
+    public static final Supplier<EntityType<Dragonfly>> DRAGONFLY = register(
+            "dragonfly", EntityType.Builder.of(Dragonfly::new, MobCategory.AMBIENT).sized(0.95F, 0.25F).eyeHeight(0.2F).clientTrackingRange(8)
+    );
+    public static final Supplier<EntityType<Bird>> BIRD = register(
+            "bird", EntityType.Builder.of(Bird::new, MobCategory.CREATURE).sized(0.5F, 0.8F).eyeHeight(0.54F).passengerAttachments(0.4625F).clientTrackingRange(8)
+    );
+    public static final Supplier<EntityType<Pigeon>> PIGEON = register(
+            "pigeon", EntityType.Builder.of(Pigeon::new, MobCategory.CREATURE).sized(0.5F, 0.8F).eyeHeight(0.54F).passengerAttachments(0.4625F).clientTrackingRange(8)
     );
 
     private static <T extends Entity> Supplier<EntityType<T>> register(String name, EntityType.Builder<T> builder) {

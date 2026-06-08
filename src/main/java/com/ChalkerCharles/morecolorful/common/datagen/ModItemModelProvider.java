@@ -5,6 +5,7 @@ import com.ChalkerCharles.morecolorful.common.block.ModBlocks;
 import com.ChalkerCharles.morecolorful.common.block.ornamental.PapercuttingBlock;
 import com.ChalkerCharles.morecolorful.common.block.ornamental.PennantBlock;
 import com.ChalkerCharles.morecolorful.common.block.ornamental.RibbonBlock;
+import com.ChalkerCharles.morecolorful.common.block.utility.MailboxBlock;
 import com.ChalkerCharles.morecolorful.common.datagen.helper.ModItemModelHelper;
 import com.ChalkerCharles.morecolorful.common.item.ItemUtils;
 import com.ChalkerCharles.morecolorful.common.item.ModItems;
@@ -176,7 +177,7 @@ public class ModItemModelProvider extends ModItemModelHelper {
         basicItem(ModItems.STRAWBERRY);
         basicItem(ModItems.BLUEBERRIES);
 
-        fromBlock(ModItems.FAN_BLOCK, ModBlocks.FAN_BLOCK);
+        fromBlock(ModItems.FAN_BLOCK);
         blockItem2d(ModItems.WEATHER_VANE);
 
         basicItem(ModItems.PAPER_PLANE);
@@ -201,17 +202,24 @@ public class ModItemModelProvider extends ModItemModelHelper {
             basicItem(item);
         }
         basicItem(ModItems.SANDBAG);
-        fromBlock(ModItems.PYROTECHNICS_TABLE, ModBlocks.PYROTECHNICS_TABLE);
+        fromBlock(ModItems.PYROTECHNICS_TABLE);
         for (ItemLike item : FireworkShapeTemplateItem.ALL_TYPES) {
             basicItem(item);
         }
         for (ItemLike item : PapercuttingBlock.ALL_ITEMS) {
             dynamicFlat(item);
         }
-        fromBlock(ModItems.PAPERCRAFT_TABLE, ModBlocks.PAPERCRAFT_TABLE);
+        fromBlock(ModItems.PAPERCRAFT_TABLE);
         basicItem(ModItems.CARDBOARD);
         for (ItemLike item : SmokeBombItem.ALL_ITEMS) {
             basicItem(item);
+        }
+        basicItem(ModItems.WRITABLE_LETTER);
+        basicItem(ModItems.LETTER);
+        basicItem(ModItems.ENVELOPE);
+        basicItem(ModItems.MAIL);
+        for (ItemLike item : MailboxBlock.ALL_ITEMS) {
+            fromBlock(item);
         }
 
         basicItem(ModItems.COCOON);
@@ -219,6 +227,7 @@ public class ModItemModelProvider extends ModItemModelHelper {
         butterflies();
         moths();
         caterpillars();
+        dragonflies();
         for (ItemLike item : ItemUtils.MOD_SPAWN_EGGS) {
             spawnEgg(item);
         }

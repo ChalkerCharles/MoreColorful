@@ -135,14 +135,6 @@ public abstract class LivingEntityMixin extends Entity implements IEntityExtensi
         original.call(instance, player, entity, source, amountDealt, amountTaken, blocked);
     }
 
-//    @ModifyExpressionValue(method = "travel", at = @At(value = "CONSTANT", args = "doubleValue=0.9800000190734863"))
-//    private double travel$modifyAirResistance(double original, @Local boolean flag) {
-//        if (flag && UmbrellaItem.isHolding(moreColorful$self())) {
-//            return original - 0.1;
-//        }
-//        return original;
-//    }
-
     @Inject(method = "collectEquipmentChanges", at = @At("TAIL"))
     private void collectEquipmentChanges(CallbackInfoReturnable<Map<EquipmentSlot, ItemStack>> cir) {
         if (cir.getReturnValue() != null && UmbrellaItem.isHolding(moreColorful$self())) {

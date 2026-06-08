@@ -646,5 +646,18 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 ModBlocks.WILLOW_BRANCHES.get()
         );
         tag(ModTags.Blocks.RIBBONS).add(RibbonBlock.ALL_COLORS.get());
+        tag(ModTags.Blocks.DRAGONFLY_SPAWNABLE_ON).add(
+                Blocks.GRASS_BLOCK,
+                Blocks.DIRT,
+                Blocks.COARSE_DIRT,
+                Blocks.MUD,
+                Blocks.MUDDY_MANGROVE_ROOTS,
+                Blocks.LILY_PAD,
+                ModBlocks.CATTAIL.get()
+        );
+        tag(ModTags.Blocks.BIRD_SPAWNABLE_ON).addTags(
+                BlockTags.PARROTS_SPAWNABLE_ON,
+                BlockTags.SAND
+        );
     }
 }

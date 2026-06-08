@@ -28,6 +28,7 @@ public class ModDataComponents {
     public static final Supplier<DataComponentType<DyeColor>> RIBBON = register("ribbon", builder -> builder.persistent(DyeColor.CODEC).networkSynchronized(DyeColor.STREAM_CODEC));
     public static final Supplier<DataComponentType<PapercuttingStencil>> PAPERCUTTING_STENCIL = register("papercutting_stencil", builder -> builder.persistent(PapercuttingStencil.CODEC).networkSynchronized(PapercuttingStencil.STREAM_CODEC));
     public static final Supplier<DataComponentType<CustomData>> COCOON_DATA = register("cocoon_data", builder -> builder.persistent(CustomData.CODEC).networkSynchronized(CustomData.STREAM_CODEC));
+    public static final Supplier<DataComponentType<MailContent>> MAIL_CONTENT = register("mail_content", builder -> builder.persistent(MailContent.CODEC).networkSynchronized(MailContent.STREAM_CODEC).cacheEncoding());
 
     private static <T> Supplier<DataComponentType<T>> register(String name, UnaryOperator<DataComponentType.Builder<T>> builder) {
         return DATA_COMPONENTS.registerComponentType(name, builder);

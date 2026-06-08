@@ -19,6 +19,9 @@ public class ModModelLayers {
     public static final ModelLayerLocation MOTH = register("moth");
     public static final ModelLayerLocation CATERPILLAR = register("caterpillar");
     public static final ModelLayerLocation VEIL = register("veil");
+    public static final ModelLayerLocation DRAGONFLY = register("dragonfly");
+    public static final ModelLayerLocation SMALL_BIRD = register("small_bird");
+    public static final ModelLayerLocation BIG_BIRD = register("big_bird");
 
     private static ModelLayerLocation register(String path) {
         return register(path, "main");

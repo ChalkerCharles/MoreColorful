@@ -6,6 +6,7 @@ import com.ChalkerCharles.morecolorful.common.block.natural.WindFlowerBlock;
 import com.ChalkerCharles.morecolorful.common.block.properties.HorizontalHalf;
 import com.ChalkerCharles.morecolorful.common.block.properties.ModBlockStateProperties;
 import com.ChalkerCharles.morecolorful.common.block.properties.RibbonState;
+import com.ChalkerCharles.morecolorful.common.block.utility.MailboxBlock;
 import it.unimi.dsi.fastutil.Pair;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -64,6 +65,14 @@ public abstract class ModBlockStateHelper extends BlockStateProvider {
         logBlock(l);
         ResourceLocation sideTex = blockTexture(l);
         simpleBlockItem(l, models().cubeColumn(name(l), sideTex, modLoc("block/" + name(l) + "_top")));
+    }
+
+    protected void logSideBlock(Supplier<? extends RotatedPillarBlock> block) {
+        RotatedPillarBlock l = block.get();
+        ResourceLocation sideTex = blockTexture(l).withSuffix("_side");
+        ResourceLocation topTex = blockTexture(l).withSuffix("_top");
+        axisBlock(l, sideTex, topTex);
+        simpleBlockItem(l, models().cubeColumn(name(l), sideTex, topTex));
     }
 
     protected void cubeBottomTop(Supplier<? extends Block> block) {
@@ -295,6 +304,29 @@ public abstract class ModBlockStateHelper extends BlockStateProvider {
     protected void emptyModelWithParticle(Block block) {
         ModelFile model = models().sign(name(block), blockTexture(block).withSuffix("_particle"));
         simpleBlock(block, model);
+    }
+
+    protected void mailbox(Block block) {
+        String name = name(block);
+        ResourceLocation texture = blockTexture(block);
+        ModelFile template = models()
+                .withExistingParent(name, modLoc("block/template_mailbox"))
+                .texture("texture", texture);
+        ModelFile templateOpen = models()
+                .withExistingParent(name + "_open", modLoc("block/template_mailbox_open"))
+                .texture("texture", texture);
+        VariantBlockStateBuilder builder = getVariantBuilder(block);
+        for (Direction direction : Direction.Plane.HORIZONTAL) {
+            int yRot = (int) ((direction.toYRot() + 180) % 360);
+            builder.partialState()
+                    .with(MailboxBlock.FACING, direction)
+                    .with(MailboxBlock.OPEN, true)
+                    .setModels(ConfiguredModel.builder().modelFile(templateOpen).rotationY(yRot).build());
+            builder.partialState()
+                    .with(MailboxBlock.FACING, direction)
+                    .with(MailboxBlock.OPEN, false)
+                    .setModels(ConfiguredModel.builder().modelFile(template).rotationY(yRot).build());
+        }
     }
 
     // States Only (For the blocks that have custom models)

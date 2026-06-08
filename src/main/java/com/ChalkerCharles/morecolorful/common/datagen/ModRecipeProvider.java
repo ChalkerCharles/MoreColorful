@@ -405,5 +405,37 @@ public class ModRecipeProvider extends ModRecipeHelper {
                 .pattern("# #")
                 .unlockedBy("has_wheat", has(Tags.Items.CROPS_WHEAT))
                 .save(recipeOutput);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.WRITABLE_LETTER)
+                .requires(Items.PAPER)
+                .requires(Items.INK_SAC)
+                .requires(Tags.Items.FEATHERS)
+                .unlockedBy("has_paper", has(Items.PAPER))
+                .save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.ENVELOPE, 3)
+                .define('#', Items.PAPER)
+                .pattern(" # ")
+                .pattern("# #")
+                .pattern("###")
+                .unlockedBy("has_paper", has(Items.PAPER))
+                .save(recipeOutput);
+        mailbox(recipeOutput, ModItems.OAK_MAILBOX, Items.OAK_PLANKS);
+        mailbox(recipeOutput, ModItems.SPRUCE_MAILBOX, Items.SPRUCE_PLANKS);
+        mailbox(recipeOutput, ModItems.BIRCH_MAILBOX, Items.BIRCH_PLANKS);
+        mailbox(recipeOutput, ModItems.JUNGLE_MAILBOX, Items.JUNGLE_PLANKS);
+        mailbox(recipeOutput, ModItems.ACACIA_MAILBOX, Items.ACACIA_PLANKS);
+        mailbox(recipeOutput, ModItems.DARK_OAK_MAILBOX, Items.DARK_OAK_PLANKS);
+        mailbox(recipeOutput, ModItems.CRIMSON_MAILBOX, Items.CRIMSON_PLANKS);
+        mailbox(recipeOutput, ModItems.WARPED_MAILBOX, Items.WARPED_PLANKS);
+        mailbox(recipeOutput, ModItems.MANGROVE_MAILBOX, Items.MANGROVE_PLANKS);
+        mailbox(recipeOutput, ModItems.CHERRY_MAILBOX, Items.CHERRY_PLANKS);
+        mailbox(recipeOutput, ModItems.BAMBOO_MAILBOX, Items.BAMBOO_PLANKS);
+        mailbox(recipeOutput, ModItems.CRABAPPLE_MAILBOX, ModItems.CRABAPPLE_PLANKS);
+        mailbox(recipeOutput, ModItems.EBONY_MAILBOX, ModItems.EBONY_PLANKS);
+        mailbox(recipeOutput, ModItems.GINKGO_MAILBOX, ModItems.GINKGO_PLANKS);
+        mailbox(recipeOutput, ModItems.MAPLE_MAILBOX, ModItems.MAPLE_PLANKS);
+        mailbox(recipeOutput, ModItems.FROST_MAILBOX, ModItems.FROST_PLANKS);
+        mailbox(recipeOutput, ModItems.DAWN_REDWOOD_MAILBOX, ModItems.DAWN_REDWOOD_PLANKS);
+        mailbox(recipeOutput, ModItems.JACARANDA_MAILBOX, ModItems.JACARANDA_PLANKS);
+        mailbox(recipeOutput, ModItems.WILLOW_MAILBOX, ModItems.WILLOW_PLANKS);
     }
 }

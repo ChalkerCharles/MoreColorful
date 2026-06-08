@@ -1,6 +1,7 @@
 package com.ChalkerCharles.morecolorful.client;
 
 import com.ChalkerCharles.morecolorful.MoreColorful;
+import com.ChalkerCharles.morecolorful.client.gui.EnvelopeScreen;
 import com.ChalkerCharles.morecolorful.client.gui.PapercraftScreen;
 import com.ChalkerCharles.morecolorful.client.gui.PlayingScreen;
 import com.ChalkerCharles.morecolorful.client.gui.PyrotechnicsScreen;
@@ -68,7 +69,7 @@ public class ModClientSetup {
             stack.has(ModDataComponents.OPEN) ? 1.0F : 0.0F;
     private static final ItemPropertyFunction PROPERTY_FILLED = (stack, level, entity, seed) ->
             BundleItem.getFullnessDisplay(stack);
-    private static ItemPropertyFunction propertyMothType(float f) {
+    private static ItemPropertyFunction propertyEntityVariantType(float f) {
         return (stack, level, entity, seed) -> {
             CustomData data = stack.getOrDefault(DataComponents.ENTITY_DATA, CustomData.EMPTY);
             int i = data.copyTag().getInt("Type");
@@ -109,9 +110,10 @@ public class ModClientSetup {
             ItemProperties.register(item.asItem(), filled, PROPERTY_FILLED);
         }
         ResourceLocation type = MoreColorful.location("type");
-        ItemProperties.register(ModItems.BUTTERFLY.get(), type, propertyMothType(32));
-        ItemProperties.register(ModItems.MOTH.get(), type, propertyMothType(32));
-        ItemProperties.register(ModItems.CATERPILLAR.get(), type, propertyMothType(64));
+        ItemProperties.register(ModItems.BUTTERFLY.get(), type, propertyEntityVariantType(32));
+        ItemProperties.register(ModItems.MOTH.get(), type, propertyEntityVariantType(32));
+        ItemProperties.register(ModItems.CATERPILLAR.get(), type, propertyEntityVariantType(64));
+        ItemProperties.register(ModItems.DRAGONFLY.get(), type, propertyEntityVariantType(10));
     }
 
     private static void registerFireworkShapes() {
@@ -338,5 +340,6 @@ public class ModClientSetup {
     public static void registerMenuScreens(RegisterMenuScreensEvent event) {
         event.register(ModMenuTypes.PYROTECHNICS.get(), PyrotechnicsScreen::new);
         event.register(ModMenuTypes.PAPERCRAFT.get(), PapercraftScreen::new);
+        event.register(ModMenuTypes.ENVELOPE.get(), EnvelopeScreen::new);
     }
 }

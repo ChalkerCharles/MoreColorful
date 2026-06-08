@@ -51,6 +51,7 @@ public class ModBiomeModifiers {
     public static final ResourceKey<BiomeModifier> COMMON_SAVANNA_SPAWN = registerKey("common_savanna_spawn");
     public static final ResourceKey<BiomeModifier> COMMON_MOUNTAIN_SPAWN = registerKey("common_mountain_spawn");
     public static final ResourceKey<BiomeModifier> COMMON_SWAMP_SPAWN = registerKey("common_swamp_spawn");
+    public static final ResourceKey<BiomeModifier> DRAGONFLY_SPAWN = registerKey("dragonfly_spawn");
     
     public static void bootstrap(BootstrapContext<BiomeModifier> context) {
         HolderGetter<PlacedFeature> placedFeatures = context.lookup(Registries.PLACED_FEATURE);
@@ -182,37 +183,55 @@ public class ModBiomeModifiers {
         addSpawn(context, COMMON_PLAIN_SPAWN,
                 biomes.getOrThrow(Tags.Biomes.IS_PLAINS),
                 List.of(new MobSpawnSettings.SpawnerData(ModEntities.BUTTERFLY.get(), 10, 1, 3),
-                        new MobSpawnSettings.SpawnerData(ModEntities.MOTH.get(), 10, 1, 3))
+                        new MobSpawnSettings.SpawnerData(ModEntities.MOTH.get(), 10, 1, 3),
+                        new MobSpawnSettings.SpawnerData(ModEntities.BIRD.get(), 12, 1, 2),
+                        new MobSpawnSettings.SpawnerData(ModEntities.PIGEON.get(), 6, 1, 2))
         );
         addSpawn(context, COMMON_FOREST_SPAWN,
                 biomes.getOrThrow(BiomeTags.IS_FOREST),
                 List.of(new MobSpawnSettings.SpawnerData(ModEntities.BUTTERFLY.get(), 10, 1, 3),
-                        new MobSpawnSettings.SpawnerData(ModEntities.MOTH.get(), 10, 1, 3))
+                        new MobSpawnSettings.SpawnerData(ModEntities.MOTH.get(), 10, 1, 3),
+                        new MobSpawnSettings.SpawnerData(ModEntities.BIRD.get(), 12, 1, 2),
+                        new MobSpawnSettings.SpawnerData(ModEntities.PIGEON.get(), 6, 1, 2))
         );
         addSpawn(context, COMMON_TAIGA_SPAWN,
                 biomes.getOrThrow(BiomeTags.IS_TAIGA),
                 List.of(new MobSpawnSettings.SpawnerData(ModEntities.BUTTERFLY.get(), 8, 1, 3),
-                        new MobSpawnSettings.SpawnerData(ModEntities.MOTH.get(), 8, 1, 3))
+                        new MobSpawnSettings.SpawnerData(ModEntities.MOTH.get(), 8, 1, 3),
+                        new MobSpawnSettings.SpawnerData(ModEntities.BIRD.get(), 10, 1, 2),
+                        new MobSpawnSettings.SpawnerData(ModEntities.PIGEON.get(), 6, 1, 2))
         );
         addSpawn(context, COMMON_JUNGLE_SPAWN,
                 biomes.getOrThrow(BiomeTags.IS_JUNGLE),
                 List.of(new MobSpawnSettings.SpawnerData(ModEntities.BUTTERFLY.get(), 12, 1, 3),
-                        new MobSpawnSettings.SpawnerData(ModEntities.MOTH.get(), 12, 1, 3))
+                        new MobSpawnSettings.SpawnerData(ModEntities.MOTH.get(), 12, 1, 3),
+                        new MobSpawnSettings.SpawnerData(ModEntities.BIRD.get(), 20, 1, 2))
         );
         addSpawn(context, COMMON_SAVANNA_SPAWN,
                 biomes.getOrThrow(BiomeTags.IS_SAVANNA),
                 List.of(new MobSpawnSettings.SpawnerData(ModEntities.BUTTERFLY.get(), 8, 1, 3),
-                        new MobSpawnSettings.SpawnerData(ModEntities.MOTH.get(), 8, 1, 3))
+                        new MobSpawnSettings.SpawnerData(ModEntities.MOTH.get(), 8, 1, 3),
+                        new MobSpawnSettings.SpawnerData(ModEntities.BIRD.get(), 10, 1, 2))
         );
         addSpawn(context, COMMON_MOUNTAIN_SPAWN,
                 biomes.getOrThrow(BiomeTags.IS_MOUNTAIN),
                 List.of(new MobSpawnSettings.SpawnerData(ModEntities.BUTTERFLY.get(), 8, 1, 3),
-                        new MobSpawnSettings.SpawnerData(ModEntities.MOTH.get(), 8, 1, 3))
+                        new MobSpawnSettings.SpawnerData(ModEntities.MOTH.get(), 8, 1, 3),
+                        new MobSpawnSettings.SpawnerData(ModEntities.BIRD.get(), 10, 1, 2))
         );
         addSpawn(context, COMMON_SWAMP_SPAWN,
                 biomes.getOrThrow(Tags.Biomes.IS_SWAMP),
                 List.of(new MobSpawnSettings.SpawnerData(ModEntities.BUTTERFLY.get(), 8, 1, 3),
-                        new MobSpawnSettings.SpawnerData(ModEntities.MOTH.get(), 8, 1, 3))
+                        new MobSpawnSettings.SpawnerData(ModEntities.MOTH.get(), 8, 1, 3),
+                        new MobSpawnSettings.SpawnerData(ModEntities.BIRD.get(), 10, 1, 2))
+        );
+        addSpawn(context, DRAGONFLY_SPAWN,
+                biomes(biomes, Biomes.SWAMP,
+                        Biomes.MANGROVE_SWAMP,
+                        Biomes.RIVER,
+                        ModBiomes.MARSH,
+                        ModBiomes.WILLOW_BAYOU),
+                List.of(new MobSpawnSettings.SpawnerData(ModEntities.DRAGONFLY.get(), 8, 1, 3))
         );
     }
 

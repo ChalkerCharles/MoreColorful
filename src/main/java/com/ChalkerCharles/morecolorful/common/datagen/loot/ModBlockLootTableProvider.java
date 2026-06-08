@@ -7,6 +7,7 @@ import com.ChalkerCharles.morecolorful.common.block.ornamental.RibbonBlock;
 import com.ChalkerCharles.morecolorful.common.block.properties.GrandPianoPart;
 import com.ChalkerCharles.morecolorful.common.block.properties.ModBlockStateProperties;
 import com.ChalkerCharles.morecolorful.common.block.properties.UprightPianoPart;
+import com.ChalkerCharles.morecolorful.common.block.utility.MailboxBlock;
 import com.ChalkerCharles.morecolorful.common.datagen.helper.ModBlockLootTableHelper;
 import com.ChalkerCharles.morecolorful.common.item.ModItems;
 import net.minecraft.core.HolderLookup;
@@ -306,11 +307,17 @@ public class ModBlockLootTableProvider extends ModBlockLootTableHelper {
         dropSelf(ModBlocks.PYROTECHNICS_TABLE);
         dropSelf(ModBlocks.UNDERWATER_TNT);
         for (Block block : PapercuttingBlock.ALL_BLOCKS.get()) {
-            add(block, createPapercuttingDrop(block));
+            add(block, this::createPapercuttingDrop);
         }
         dropSelf(ModBlocks.PAPERCRAFT_TABLE);
         dropSelf(ModBlocks.CARDBOARD_BLOCK);
         add(ModBlocks.COCOON, createCocoonDrop());
+        dropSelf(ModBlocks.VERMILION_FROGLIGHT);
+        dropSelf(ModBlocks.CYANINE_FROGLIGHT);
+        dropSelf(ModBlocks.UMBER_FROGLIGHT);
+        for (Block block : MailboxBlock.ALL_BLOCKS.get()) {
+            add(block, this::createNameableBlockEntityTable);
+        }
     }
 
     @Override

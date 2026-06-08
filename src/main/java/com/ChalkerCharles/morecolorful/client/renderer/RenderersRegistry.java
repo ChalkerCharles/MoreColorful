@@ -7,6 +7,8 @@ import com.ChalkerCharles.morecolorful.client.renderer.entity.*;
 import com.ChalkerCharles.morecolorful.common.block.ModBlockEntities;
 import com.ChalkerCharles.morecolorful.common.entity.ModEntities;
 import net.minecraft.client.renderer.entity.*;
+import net.minecraft.client.renderer.entity.player.PlayerRenderer;
+import net.minecraft.client.resources.PlayerSkin;
 import net.minecraft.world.entity.EntityType;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -37,6 +39,9 @@ public class RenderersRegistry {
         event.registerEntityRenderer(ModEntities.MOTH.get(), MothRenderer::createMoth);
         event.registerEntityRenderer(ModEntities.CATERPILLAR.get(), CaterpillarRenderer::new);
         event.registerEntityRenderer(ModEntities.SMOKE_BOMB.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer(ModEntities.DRAGONFLY.get(), DragonflyRenderer::new);
+        event.registerEntityRenderer(ModEntities.BIRD.get(), BirdRenderer::create);
+        event.registerEntityRenderer(ModEntities.PIGEON.get(), BirdRenderer::createPigeon);
     }
 
     @SubscribeEvent
@@ -53,6 +58,9 @@ public class RenderersRegistry {
         event.registerLayerDefinition(ModModelLayers.MOTH, MothModel::createMoth);
         event.registerLayerDefinition(ModModelLayers.CATERPILLAR, CaterpillarModel::create);
         event.registerLayerDefinition(ModModelLayers.VEIL, VillagerVeilLayer::createVeil);
+        event.registerLayerDefinition(ModModelLayers.DRAGONFLY, DragonflyModel::create);
+        event.registerLayerDefinition(ModModelLayers.SMALL_BIRD, BirdModel::createSmall);
+        event.registerLayerDefinition(ModModelLayers.BIG_BIRD, BirdModel::createBig);
     }
 
     @SubscribeEvent
@@ -65,6 +73,12 @@ public class RenderersRegistry {
         ZombieVillagerRenderer zombieVillagerRenderer = event.getRenderer(EntityType.ZOMBIE_VILLAGER);
         if (zombieVillagerRenderer != null) {
             zombieVillagerRenderer.addLayer(new VillagerVeilLayer<>(zombieVillagerRenderer, context));
+        }
+        for (PlayerSkin.Model model : PlayerSkin.Model.values()) {
+            PlayerRenderer playerRenderer = event.getSkin(model);
+            if (playerRenderer != null) {
+                playerRenderer.addLayer(new BirdOnShoulderLayer<>(playerRenderer, event.getEntityModels()));
+            }
         }
     }
 }

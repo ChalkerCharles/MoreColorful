@@ -12,6 +12,7 @@ import com.ChalkerCharles.morecolorful.mixin.extensions.IChunkSourceExtension;
 import com.ChalkerCharles.morecolorful.mixin.extensions.ILevelChunkExtension;
 import com.ChalkerCharles.morecolorful.util.Maths;
 import com.ChalkerCharles.morecolorful.util.WeatherUtils;
+import it.unimi.dsi.fastutil.longs.LongSet;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -34,6 +35,7 @@ import org.joml.Vector2f;
 import org.joml.Vector3f;
 
 import java.util.List;
+import java.util.Map;
 
 public abstract class LevelSavedData implements INBTSerializable<CompoundTag> {
     private final UmbrellaHeightMap umbrellaHeightMap = new UmbrellaHeightMap();
@@ -41,10 +43,12 @@ public abstract class LevelSavedData implements INBTSerializable<CompoundTag> {
 
     public static LevelSavedData create(IAttachmentHolder holder) {
         Level level = (Level) holder;
-        if (level.isClientSide) {
-            return new ClientLevelData((ClientLevel) level);
+        if (level instanceof ClientLevel clientLevel) {
+            return new ClientLevelData(clientLevel);
+        } else if (level instanceof ServerLevel serverLevel) {
+            return new ServerLevelData(serverLevel);
         } else {
-            return new ServerLevelData((ServerLevel) level);
+            return new Dummy(level);
         }
     }
 
@@ -207,6 +211,14 @@ public abstract class LevelSavedData implements INBTSerializable<CompoundTag> {
         return get(level).entitiesInSmoke.isInSmoke(entity);
     }
 
+    public Map<String, LongSet> getMailboxes() {
+        return Map.of();
+    }
+
+    public static Map<String, LongSet> getMailboxes(Level level) {
+        return get(level).getMailboxes();
+    }
+
     @Override
     @UnknownNullability
     public CompoundTag serializeNBT(HolderLookup.Provider provider) {
@@ -218,5 +230,28 @@ public abstract class LevelSavedData implements INBTSerializable<CompoundTag> {
     @Override
     public void deserializeNBT(HolderLookup.Provider provider, CompoundTag nbt) {
         this.windManager().deserialize(nbt);
+    }
+
+    public static class Dummy extends LevelSavedData {
+        private final Level level;
+
+        public Dummy(Level level) {
+            this.level = level;
+        }
+
+        @Override
+        protected Level level() {
+            return this.level;
+        }
+
+        @Override
+        protected WindManager windManager() {
+            return WindManager.DUMMY;
+        }
+
+        @Override
+        protected WindZoneManager windZoneManager() {
+            return WindZoneManager.DUMMY;
+        }
     }
 }

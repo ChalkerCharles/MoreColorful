@@ -297,4 +297,16 @@ public abstract class ModRecipeHelper extends RecipeProvider implements IConditi
                     .save(output);
         }
     }
+
+    protected static void mailbox(RecipeOutput output, ItemLike result, ItemLike plank) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, result)
+                .define('#', plank)
+                .define('@', ModItems.ENVELOPE)
+                .pattern("###")
+                .pattern("#@#")
+                .pattern("###")
+                .group("mailbox")
+                .unlockedBy("has_planks", has(plank))
+                .save(output);
+    }
 }

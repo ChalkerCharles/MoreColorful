@@ -1,0 +1,16 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": [
+    "minecraft:swamp",
+    "minecraft:mangrove_swamp",
+    "minecraft:river",
+    "morecolorful:marsh",
+    "morecolorful:willow_bayou"
+  ],
+  "spawners": {
+    "type": "morecolorful:dragonfly",
+    "maxCount": 3,
+    "minCount": 1,
+    "weight": 8
+  }
+}

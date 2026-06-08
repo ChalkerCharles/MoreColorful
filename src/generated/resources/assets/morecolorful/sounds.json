@@ -200,6 +200,22 @@
     ],
     "subtitle": "morecolorful.subtitles.block.leaves.rustle"
   },
+  "block.mailbox.close": {
+    "sounds": [
+      "morecolorful:block/cabinet/close1",
+      "morecolorful:block/cabinet/close2",
+      "morecolorful:block/cabinet/close3"
+    ],
+    "subtitle": "morecolorful.subtitles.block.mailbox.close"
+  },
+  "block.mailbox.open": {
+    "sounds": [
+      "morecolorful:block/cabinet/open1",
+      "morecolorful:block/cabinet/open2",
+      "morecolorful:block/cabinet/open3"
+    ],
+    "subtitle": "morecolorful.subtitles.block.mailbox.open"
+  },
   "block.music_box.banjo": {
     "sounds": [
       {
@@ -1051,6 +1067,71 @@
     ],
     "subtitle": "morecolorful.subtitles.entity.balloon.pop"
   },
+  "entity.bird.chirp": {
+    "sounds": [
+      "morecolorful:entity/bird/bird_chirp1",
+      "morecolorful:entity/bird/bird_chirp2",
+      "morecolorful:entity/bird/bird_chirp3",
+      "morecolorful:entity/bird/bird_chirp4",
+      "morecolorful:entity/bird/bird_chirp5",
+      "morecolorful:entity/bird/bird_chirp6"
+    ],
+    "subtitle": "morecolorful.subtitles.entity.bird.chirp"
+  },
+  "entity.bird.death": {
+    "sounds": [
+      "morecolorful:entity/bird/bird_death1",
+      "morecolorful:entity/bird/bird_death2"
+    ],
+    "subtitle": "morecolorful.subtitles.entity.bird.death"
+  },
+  "entity.bird.eat": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "entity.parrot.eat"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.entity.bird.eat"
+  },
+  "entity.bird.fly": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "entity.parrot.fly"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.entity.bird.fly"
+  },
+  "entity.bird.hurt": {
+    "sounds": [
+      "morecolorful:entity/bird/bird_hurt1",
+      "morecolorful:entity/bird/bird_hurt2"
+    ],
+    "subtitle": "morecolorful.subtitles.entity.bird.hurt"
+  },
+  "entity.blue_jay.death": {
+    "sounds": [
+      "morecolorful:entity/bird/blue_jay_death1",
+      "morecolorful:entity/bird/blue_jay_death2"
+    ],
+    "subtitle": "morecolorful.subtitles.entity.blue_jay.death"
+  },
+  "entity.blue_jay.hurt": {
+    "sounds": [
+      "morecolorful:entity/bird/blue_jay_hurt1",
+      "morecolorful:entity/bird/blue_jay_hurt2"
+    ],
+    "subtitle": "morecolorful.subtitles.entity.blue_jay.hurt"
+  },
+  "entity.blue_jay.twitter": {
+    "sounds": [
+      "morecolorful:entity/bird/blue_jay_twitter1",
+      "morecolorful:entity/bird/blue_jay_twitter2",
+      "morecolorful:entity/bird/blue_jay_twitter3"
+    ],
+    "subtitle": "morecolorful.subtitles.entity.blue_jay.twitter"
+  },
   "entity.bomb.throw": {
     "sounds": [
       {
@@ -1111,6 +1192,76 @@
     ],
     "subtitle": "morecolorful.subtitles.entity.caterpillar.pupate"
   },
+  "entity.crow.caw": {
+    "sounds": [
+      "morecolorful:entity/bird/crow_caw1",
+      "morecolorful:entity/bird/crow_caw2",
+      "morecolorful:entity/bird/crow_caw3",
+      "morecolorful:entity/bird/crow_caw4"
+    ],
+    "subtitle": "morecolorful.subtitles.entity.crow.caw"
+  },
+  "entity.crow.death": {
+    "sounds": [
+      "morecolorful:entity/bird/crow_death1",
+      "morecolorful:entity/bird/crow_death2"
+    ],
+    "subtitle": "morecolorful.subtitles.entity.crow.death"
+  },
+  "entity.crow.hurt": {
+    "sounds": [
+      "morecolorful:entity/bird/crow_hurt1",
+      "morecolorful:entity/bird/crow_hurt2"
+    ],
+    "subtitle": "morecolorful.subtitles.entity.crow.hurt"
+  },
+  "entity.cuckoo.call": {
+    "sounds": [
+      "morecolorful:entity/bird/cuckoo_call1",
+      "morecolorful:entity/bird/cuckoo_call2",
+      "morecolorful:entity/bird/cuckoo_call3"
+    ],
+    "subtitle": "morecolorful.subtitles.entity.cuckoo.call"
+  },
+  "entity.cuckoo.death": {
+    "sounds": [
+      "morecolorful:entity/bird/cuckoo_death1",
+      "morecolorful:entity/bird/cuckoo_death2"
+    ],
+    "subtitle": "morecolorful.subtitles.entity.cuckoo.death"
+  },
+  "entity.cuckoo.hurt": {
+    "sounds": [
+      "morecolorful:entity/bird/cuckoo_hurt1",
+      "morecolorful:entity/bird/cuckoo_hurt2"
+    ],
+    "subtitle": "morecolorful.subtitles.entity.cuckoo.hurt"
+  },
+  "entity.dragonfly.death": {
+    "sounds": [
+      "morecolorful:entity/moth/hurt1",
+      "morecolorful:entity/moth/hurt2",
+      "morecolorful:entity/moth/hurt3",
+      "morecolorful:entity/moth/hurt4"
+    ],
+    "subtitle": "morecolorful.subtitles.entity.dragonfly.death"
+  },
+  "entity.dragonfly.flutter": {
+    "sounds": [
+      "morecolorful:entity/dragonfly/flutter1",
+      "morecolorful:entity/dragonfly/flutter2"
+    ],
+    "subtitle": "morecolorful.subtitles.entity.dragonfly.flutter"
+  },
+  "entity.dragonfly.hurt": {
+    "sounds": [
+      "morecolorful:entity/moth/hurt1",
+      "morecolorful:entity/moth/hurt2",
+      "morecolorful:entity/moth/hurt3",
+      "morecolorful:entity/moth/hurt4"
+    ],
+    "subtitle": "morecolorful.subtitles.entity.dragonfly.hurt"
+  },
   "entity.kite.reel": {
     "sounds": [
       "morecolorful:entity/kite/reel1",
@@ -1128,6 +1279,29 @@
       "morecolorful:entity/kite/reel4"
     ],
     "subtitle": "morecolorful.subtitles.entity.kite.unreel"
+  },
+  "entity.magpie.chatter": {
+    "sounds": [
+      "morecolorful:entity/bird/magpie_chatter1",
+      "morecolorful:entity/bird/magpie_chatter2",
+      "morecolorful:entity/bird/magpie_chatter3",
+      "morecolorful:entity/bird/magpie_chatter4"
+    ],
+    "subtitle": "morecolorful.subtitles.entity.magpie.chatter"
+  },
+  "entity.magpie.death": {
+    "sounds": [
+      "morecolorful:entity/bird/magpie_death1",
+      "morecolorful:entity/bird/magpie_death2"
+    ],
+    "subtitle": "morecolorful.subtitles.entity.magpie.death"
+  },
+  "entity.magpie.hurt": {
+    "sounds": [
+      "morecolorful:entity/bird/magpie_hurt1",
+      "morecolorful:entity/bird/magpie_hurt2"
+    ],
+    "subtitle": "morecolorful.subtitles.entity.magpie.hurt"
   },
   "entity.moth.death": {
     "sounds": [
@@ -1169,6 +1343,72 @@
       }
     ],
     "subtitle": "morecolorful.subtitles.entity.paper_plane.throw"
+  },
+  "entity.pigeon.coo": {
+    "sounds": [
+      "morecolorful:entity/bird/pigeon_coo1",
+      "morecolorful:entity/bird/pigeon_coo2",
+      "morecolorful:entity/bird/pigeon_coo3",
+      "morecolorful:entity/bird/pigeon_coo4",
+      "morecolorful:entity/bird/pigeon_coo5",
+      "morecolorful:entity/bird/pigeon_coo6"
+    ],
+    "subtitle": "morecolorful.subtitles.entity.pigeon.coo"
+  },
+  "entity.pigeon.death": {
+    "sounds": [
+      "morecolorful:entity/bird/pigeon_death1",
+      "morecolorful:entity/bird/pigeon_death2"
+    ],
+    "subtitle": "morecolorful.subtitles.entity.pigeon.death"
+  },
+  "entity.pigeon.eat": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "entity.parrot.eat"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.entity.pigeon.eat"
+  },
+  "entity.pigeon.fly": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "entity.parrot.fly"
+      }
+    ],
+    "subtitle": "morecolorful.subtitles.entity.pigeon.fly"
+  },
+  "entity.pigeon.hurt": {
+    "sounds": [
+      "morecolorful:entity/bird/pigeon_hurt1",
+      "morecolorful:entity/bird/pigeon_hurt2"
+    ],
+    "subtitle": "morecolorful.subtitles.entity.pigeon.hurt"
+  },
+  "entity.seagull.death": {
+    "sounds": [
+      "morecolorful:entity/bird/seagull_death1",
+      "morecolorful:entity/bird/seagull_death2"
+    ],
+    "subtitle": "morecolorful.subtitles.entity.seagull.death"
+  },
+  "entity.seagull.hurt": {
+    "sounds": [
+      "morecolorful:entity/bird/seagull_hurt1",
+      "morecolorful:entity/bird/seagull_hurt2"
+    ],
+    "subtitle": "morecolorful.subtitles.entity.seagull.hurt"
+  },
+  "entity.seagull.squawk": {
+    "sounds": [
+      "morecolorful:entity/bird/seagull_squawk1",
+      "morecolorful:entity/bird/seagull_squawk2",
+      "morecolorful:entity/bird/seagull_squawk3",
+      "morecolorful:entity/bird/seagull_squawk4"
+    ],
+    "subtitle": "morecolorful.subtitles.entity.seagull.squawk"
   },
   "entity.smoke_bomb.explode": {
     "sounds": [
@@ -1325,6 +1565,15 @@
       }
     ],
     "subtitle": "morecolorful.subtitles.item.lead.untied"
+  },
+  "item.mail.unseal": {
+    "sounds": [
+      "morecolorful:item/mail/unseal1",
+      "morecolorful:item/mail/unseal2",
+      "morecolorful:item/mail/unseal3",
+      "morecolorful:item/mail/unseal4"
+    ],
+    "subtitle": "morecolorful.subtitles.item.mail.unseal"
   },
   "item.ocarina.play": {
     "sounds": [

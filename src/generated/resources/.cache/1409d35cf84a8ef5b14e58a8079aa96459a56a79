@@ -1,4 +1,5 @@
-// 1.21	2026-04-16T13:05:08.6197188	Tags for minecraft:entity_type mod id morecolorful
+// 1.21	2026-05-29T12:55:39.1286579	Tags for minecraft:entity_type mod id morecolorful
 b06e8757c9b01ce9026bb8f5ef35ec917270b34d data/minecraft/tags/entity_type/arthropod.json
+226e09f94dc9faa83ec3f17fa92af7e7aafdc1d4 data/minecraft/tags/entity_type/fall_damage_immune.json
 bcb83c7d12e0cc7a80b5f5495b8d809e150bd564 data/morecolorful/tags/entity_type/can_spawn_with_balloon.json
 09871cfb5197f0f5bcd5bd4b11de3ca6e9f27805 data/morecolorful/tags/entity_type/can_spawn_with_umbrella.json

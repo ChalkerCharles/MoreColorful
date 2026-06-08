@@ -5,6 +5,7 @@ import com.ChalkerCharles.morecolorful.common.block.ModBlocks;
 import com.ChalkerCharles.morecolorful.common.block.ornamental.PapercuttingBlock;
 import com.ChalkerCharles.morecolorful.common.block.ornamental.PennantBlock;
 import com.ChalkerCharles.morecolorful.common.block.ornamental.RibbonBlock;
+import com.ChalkerCharles.morecolorful.common.block.utility.MailboxBlock;
 import com.ChalkerCharles.morecolorful.common.datagen.helper.ModBlockStateHelper;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;
@@ -218,6 +219,12 @@ public class ModBlockStateProvider extends ModBlockStateHelper {
             emptyModel(block);
         }
         logBlock(ModBlocks.CARDBOARD_BLOCK);
+        logSideBlock(ModBlocks.VERMILION_FROGLIGHT);
+        logSideBlock(ModBlocks.CYANINE_FROGLIGHT);
+        logSideBlock(ModBlocks.UMBER_FROGLIGHT);
+        for (Block block : MailboxBlock.ALL_BLOCKS.get()) {
+            mailbox(block);
+        }
     }
 
     private void registerStatesOnly() {

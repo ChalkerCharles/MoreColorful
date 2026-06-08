@@ -37,7 +37,6 @@ public class DataGenerators {
         generator.addProvider(server, new ModLootTableProvider(output, provider));
         generator.addProvider(server, new ModRecipeProvider(output, provider));
         generator.addProvider(server, new ModDataMapProvider(output, provider));
-        generator.addProvider(server, new ModGlobalLootModifierProvider(output, provider));
 
         boolean client = event.includeClient();
         generator.addProvider(client, new ModAtlasProvider(output, provider, helper));

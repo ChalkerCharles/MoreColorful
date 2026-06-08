@@ -4,6 +4,7 @@ import com.ChalkerCharles.morecolorful.MoreColorful;
 import com.ChalkerCharles.morecolorful.common.block.entity.*;
 import com.ChalkerCharles.morecolorful.common.block.ornamental.PapercuttingBlock;
 import com.ChalkerCharles.morecolorful.common.block.ornamental.PennantBlock;
+import com.ChalkerCharles.morecolorful.common.block.utility.MailboxBlock;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -27,6 +28,7 @@ public class ModBlockEntities {
     public static final Supplier<BlockEntityType<PennantBlockEntity>> PENNANT = register("pennant", () -> create(PennantBlockEntity::new, PennantBlock.ALL_BLOCKS.get()));
     public static final Supplier<BlockEntityType<PapercuttingBlockEntity>> PAPERCUTTING = register("papercutting", () -> create(PapercuttingBlockEntity::new, PapercuttingBlock.ALL_BLOCKS.get()));
     public static final Supplier<BlockEntityType<CocoonBlockEntity>> COCOON = register("cocoon", () -> create(CocoonBlockEntity::new, ModBlocks.COCOON.get()));
+    public static final Supplier<BlockEntityType<MailboxBlockEntity>> MAILBOX = register("mailbox", () -> create(MailboxBlockEntity::new, MailboxBlock.ALL_BLOCKS.get()));
 
     private static <T extends BlockEntity> Supplier<BlockEntityType<T>> register(String name, Supplier<BlockEntityType<T>> supplier) {
         return BLOCK_ENTITY_TYPES.register(name, supplier);

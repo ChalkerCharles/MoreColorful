@@ -35,6 +35,8 @@ public abstract class ModTags {
         public static final TagKey<Block> WILLOW_LOGS = create("willow_logs");
         public static final TagKey<Block> LAKES_CANNOT_REPLACE = create("lakes_cannot_replace");
         public static final TagKey<Block> RIBBONS = create("ribbons");
+        public static final TagKey<Block> DRAGONFLY_SPAWNABLE_ON = create("dragonfly_spawnable_on");
+        public static final TagKey<Block> BIRD_SPAWNABLE_ON = create("bird_spawnable_on");
 
         private static TagKey<Block> create(String path) {
             return BlockTags.create(MoreColorful.location(path));

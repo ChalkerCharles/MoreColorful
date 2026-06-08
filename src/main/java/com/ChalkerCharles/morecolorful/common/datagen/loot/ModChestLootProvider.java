@@ -56,12 +56,5 @@ public record ModChestLootProvider(HolderLookup.Provider registries) implements 
                         .add(LootItem.lootTableItem(ModItems.CARDBOARD).setWeight(5).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))))
                 )
         );
-        pOutput.accept(
-                ModLootTables.VILLAGE_PLAINS_HOUSE_ADD,
-                LootTable.lootTable().withPool(LootPool.lootPool()
-                        .setRolls(UniformGenerator.between(1.0F, 5.0F))
-                        .add(LootItem.lootTableItem(ModItems.STRAW_HAT))
-                )
-        );
     }
 }

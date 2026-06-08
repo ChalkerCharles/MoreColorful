@@ -9,13 +9,14 @@ import com.ChalkerCharles.morecolorful.common.entity.BoatTypeExtension;
 import com.ChalkerCharles.morecolorful.common.entity.EntityUtils;
 import com.ChalkerCharles.morecolorful.common.entity.ModAttributes;
 import com.ChalkerCharles.morecolorful.common.entity.ModEntities;
-import com.ChalkerCharles.morecolorful.common.entity.animal.AbstractMoth;
-import com.ChalkerCharles.morecolorful.common.entity.animal.Butterfly;
-import com.ChalkerCharles.morecolorful.common.entity.animal.Caterpillar;
-import com.ChalkerCharles.morecolorful.common.entity.animal.Moth;
+import com.ChalkerCharles.morecolorful.common.entity.ai.memory.ModMemoryModuleTypes;
+import com.ChalkerCharles.morecolorful.common.entity.ai.sensor.ModSensorTypes;
+import com.ChalkerCharles.morecolorful.common.entity.animal.*;
 import com.ChalkerCharles.morecolorful.common.item.ModItems;
 import com.ChalkerCharles.morecolorful.common.item.misc.PaperBoatItem;
+import com.ChalkerCharles.morecolorful.common.item.utility.MailItem;
 import com.ChalkerCharles.morecolorful.common.item.utility.UmbrellaItem;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.core.cauldron.CauldronInteraction;
 import net.minecraft.core.dispenser.BoatDispenseItemBehavior;
@@ -25,6 +26,10 @@ import net.minecraft.world.entity.SpawnPlacementTypes;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.attributes.DefaultAttributes;
+import net.minecraft.world.entity.ai.memory.MemoryModuleType;
+import net.minecraft.world.entity.ai.sensing.Sensor;
+import net.minecraft.world.entity.ai.sensing.SensorType;
+import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
@@ -47,6 +52,7 @@ public final class ModCommonSetup {
         event.enqueueWork(ModCommonSetup::setFlammableBlocks);
         event.enqueueWork(ModCommonSetup::registerDispenserBehaviors);
         event.enqueueWork(ModCommonSetup::registerCauldronInteractions);
+        event.enqueueWork(ModCommonSetup::modifyVillager);
     }
 
     public static void setStrippedWoodBlocks() {
@@ -273,11 +279,24 @@ public final class ModCommonSetup {
         DispenserBlock.registerBehavior(ModItems.PAPER_BOAT, PaperBoatItem.DISPENSE_ITEM_BEHAVIOR);
         DispenserBlock.registerBehavior(ModItems.UNDERWATER_TNT, UnderwaterTntBlock.DISPENSE_ITEM_BEHAVIOR);
         DispenserBlock.registerProjectileBehavior(ModItems.BOMB);
+        DispenserBlock.registerBehavior(ModItems.MAIL, MailItem.DISPENSE_ITEM_BEHAVIOR);
     }
 
     public static void registerCauldronInteractions() {
         Map<Item, CauldronInteraction> water = CauldronInteraction.WATER.map();
         water.put(ModItems.UMBRELLA.get(), UmbrellaItem.CAULDRON_INTERACTION);
+    }
+
+    public static void modifyVillager() {
+        Villager.MEMORY_TYPES = ImmutableList.<MemoryModuleType<?>>builder()
+                .addAll(Villager.MEMORY_TYPES)
+                .add(ModMemoryModuleTypes.NEAREST_OPEN_SPACE.get())
+                .add(ModMemoryModuleTypes.KITE_MEMORY.get())
+                .build();
+        Villager.SENSOR_TYPES = ImmutableList.<SensorType<? extends Sensor<? super Villager>>>builder()
+                .addAll(Villager.SENSOR_TYPES)
+                .add(ModSensorTypes.NEAREST_OPEN_SPACE.get())
+                .build();
     }
 
     @SubscribeEvent
@@ -323,6 +342,9 @@ public final class ModCommonSetup {
         event.put(ModEntities.BUTTERFLY.get(), AbstractMoth.createAttributes().build());
         event.put(ModEntities.MOTH.get(), AbstractMoth.createAttributes().build());
         event.put(ModEntities.CATERPILLAR.get(), Caterpillar.createAttributes().build());
+        event.put(ModEntities.DRAGONFLY.get(), Dragonfly.createAttributes().build());
+        event.put(ModEntities.BIRD.get(), AbstractBird.createAttributes().build());
+        event.put(ModEntities.PIGEON.get(), AbstractBird.createAttributes().build());
     }
 
     @SubscribeEvent
@@ -342,5 +364,8 @@ public final class ModCommonSetup {
         RegisterSpawnPlacementsEvent.Operation replace = RegisterSpawnPlacementsEvent.Operation.REPLACE;
         event.register(ModEntities.BUTTERFLY.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Butterfly::checkSpawnRules, replace);
         event.register(ModEntities.MOTH.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Moth::checkSpawnRules, replace);
+        event.register(ModEntities.DRAGONFLY.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Dragonfly::checkSpawnRules, replace);
+        event.register(ModEntities.BIRD.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING, AbstractBird::checkSpawnRules, replace);
+        event.register(ModEntities.PIGEON.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING, AbstractBird::checkSpawnRules, replace);
     }
 }

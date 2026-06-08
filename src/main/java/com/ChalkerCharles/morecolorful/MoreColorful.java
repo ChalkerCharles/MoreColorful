@@ -11,6 +11,7 @@ import com.ChalkerCharles.morecolorful.common.entity.ModAttributes;
 import com.ChalkerCharles.morecolorful.common.entity.ModEntities;
 import com.ChalkerCharles.morecolorful.common.entity.ai.memory.ModMemoryModuleTypes;
 import com.ChalkerCharles.morecolorful.common.entity.ai.sensor.ModSensorTypes;
+import com.ChalkerCharles.morecolorful.common.entity.animal.ModFrogVariants;
 import com.ChalkerCharles.morecolorful.common.entity.villager.ModPoiTypes;
 import com.ChalkerCharles.morecolorful.common.entity.villager.ModVillagerProfessions;
 import com.ChalkerCharles.morecolorful.common.item.ModArmorMaterials;
@@ -19,7 +20,6 @@ import com.ChalkerCharles.morecolorful.common.item.ModDataComponents;
 import com.ChalkerCharles.morecolorful.common.item.ModItems;
 import com.ChalkerCharles.morecolorful.common.level.ModChunkStatus;
 import com.ChalkerCharles.morecolorful.common.loot.functions.ModLootFunctions;
-import com.ChalkerCharles.morecolorful.common.loot.modifiers.ModLootModifiers;
 import com.ChalkerCharles.morecolorful.common.menu.ModMenuTypes;
 import com.ChalkerCharles.morecolorful.common.recipe.ModRecipeSerializers;
 import com.ChalkerCharles.morecolorful.common.worldgen.biomes.TerraBlenderUtils;
@@ -68,7 +68,6 @@ public class MoreColorful {
         ModParticles.register(modEventBus);
         ModRecipeSerializers.register(modEventBus);
         ModMenuTypes.register(modEventBus);
-        ModLootModifiers.register(modEventBus);
         ModLootFunctions.register(modEventBus);
         ModFoliagePlacers.register(modEventBus);
         ModTrunkPlacers.register(modEventBus);
@@ -80,6 +79,7 @@ public class MoreColorful {
         ModMemoryModuleTypes.register(modEventBus);
         ModPoiTypes.register(modEventBus);
         ModVillagerProfessions.register(modEventBus);
+        ModFrogVariants.register(modEventBus);
 
         NeoForge.EVENT_BUS.register(ModCommonEvents.class);
         NeoForge.EVENT_BUS.addListener(VanillaBlockPropertyModifier::modifyDynamicProperties);

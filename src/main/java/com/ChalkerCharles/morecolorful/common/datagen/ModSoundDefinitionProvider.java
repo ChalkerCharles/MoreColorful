@@ -339,6 +339,14 @@ public class ModSoundDefinitionProvider extends ModSoundDefinitionHelper {
                 "block/cardboard/step6");
         vanilla(ModSounds.COCOON_CRACK, "morecolorful.subtitles.block.cocoon.crack", SoundEvents.SNIFFER_EGG_CRACK);
         vanilla(ModSounds.COCOON_HATCH, "morecolorful.subtitles.block.cocoon.hatch", SoundEvents.SNIFFER_EGG_HATCH);
+        generic(ModSounds.MAILBOX_OPEN, "morecolorful.subtitles.block.mailbox.open",
+                "block/cabinet/open1",
+                "block/cabinet/open2",
+                "block/cabinet/open3");
+        generic(ModSounds.MAILBOX_CLOSE, "morecolorful.subtitles.block.mailbox.close",
+                "block/cabinet/close1",
+                "block/cabinet/close2",
+                "block/cabinet/close3");
 
         // Entities
         vanilla(ModSounds.PAPER_PLANE_THROW, "morecolorful.subtitles.entity.paper_plane.throw", SoundEvents.SNOWBALL_THROW);
@@ -408,6 +416,102 @@ public class ModSoundDefinitionProvider extends ModSoundDefinitionHelper {
                 "entity/worm/pupate4");
         vanilla(ModSounds.SMOKE_BOMB_THROW, "morecolorful.subtitles.entity.smoke_bomb.throw", SoundEvents.SNOWBALL_THROW);
         vanilla(ModSounds.SMOKE_BOMB_EXPLODE, "morecolorful.subtitles.entity.smoke_bomb.explode", SoundEvents.FIREWORK_ROCKET_BLAST);
+        generic(ModSounds.DRAGONFLY_HURT, "morecolorful.subtitles.entity.dragonfly.hurt",
+                "entity/moth/hurt1",
+                "entity/moth/hurt2",
+                "entity/moth/hurt3",
+                "entity/moth/hurt4");
+        generic(ModSounds.DRAGONFLY_DEATH, "morecolorful.subtitles.entity.dragonfly.death",
+                "entity/moth/hurt1",
+                "entity/moth/hurt2",
+                "entity/moth/hurt3",
+                "entity/moth/hurt4");
+        generic(ModSounds.DRAGONFLY_FLUTTER, "morecolorful.subtitles.entity.dragonfly.flutter",
+                "entity/dragonfly/flutter1",
+                "entity/dragonfly/flutter2");
+        vanilla(ModSounds.BIRD_EAT, "morecolorful.subtitles.entity.bird.eat", SoundEvents.PARROT_EAT);
+        vanilla(ModSounds.BIRD_FLY, "morecolorful.subtitles.entity.bird.fly", SoundEvents.PARROT_FLY);
+        vanilla(ModSounds.PIGEON_EAT, "morecolorful.subtitles.entity.pigeon.eat", SoundEvents.PARROT_EAT);
+        vanilla(ModSounds.PIGEON_FLY, "morecolorful.subtitles.entity.pigeon.fly", SoundEvents.PARROT_FLY);
+        generic(ModSounds.BIRD_CHIRP, "morecolorful.subtitles.entity.bird.chirp",
+                "entity/bird/bird_chirp1",
+                "entity/bird/bird_chirp2",
+                "entity/bird/bird_chirp3",
+                "entity/bird/bird_chirp4",
+                "entity/bird/bird_chirp5",
+                "entity/bird/bird_chirp6");
+        generic(ModSounds.BIRD_HURT, "morecolorful.subtitles.entity.bird.hurt",
+                "entity/bird/bird_hurt1",
+                "entity/bird/bird_hurt2");
+        generic(ModSounds.BIRD_DEATH, "morecolorful.subtitles.entity.bird.death",
+                "entity/bird/bird_death1",
+                "entity/bird/bird_death2");
+        generic(ModSounds.BLUE_JAY_TWITTER, "morecolorful.subtitles.entity.blue_jay.twitter",
+                "entity/bird/blue_jay_twitter1",
+                "entity/bird/blue_jay_twitter2",
+                "entity/bird/blue_jay_twitter3");
+        generic(ModSounds.BLUE_JAY_HURT, "morecolorful.subtitles.entity.blue_jay.hurt",
+                "entity/bird/blue_jay_hurt1",
+                "entity/bird/blue_jay_hurt2");
+        generic(ModSounds.BLUE_JAY_DEATH, "morecolorful.subtitles.entity.blue_jay.death",
+                "entity/bird/blue_jay_death1",
+                "entity/bird/blue_jay_death2");
+        generic(ModSounds.MAGPIE_CHATTER, "morecolorful.subtitles.entity.magpie.chatter",
+                "entity/bird/magpie_chatter1",
+                "entity/bird/magpie_chatter2",
+                "entity/bird/magpie_chatter3",
+                "entity/bird/magpie_chatter4");
+        generic(ModSounds.MAGPIE_HURT, "morecolorful.subtitles.entity.magpie.hurt",
+                "entity/bird/magpie_hurt1",
+                "entity/bird/magpie_hurt2");
+        generic(ModSounds.MAGPIE_DEATH, "morecolorful.subtitles.entity.magpie.death",
+                "entity/bird/magpie_death1",
+                "entity/bird/magpie_death2");
+        generic(ModSounds.CUCKOO_CALL, "morecolorful.subtitles.entity.cuckoo.call",
+                "entity/bird/cuckoo_call1",
+                "entity/bird/cuckoo_call2",
+                "entity/bird/cuckoo_call3");
+        generic(ModSounds.CUCKOO_HURT, "morecolorful.subtitles.entity.cuckoo.hurt",
+                "entity/bird/cuckoo_hurt1",
+                "entity/bird/cuckoo_hurt2");
+        generic(ModSounds.CUCKOO_DEATH, "morecolorful.subtitles.entity.cuckoo.death",
+                "entity/bird/cuckoo_death1",
+                "entity/bird/cuckoo_death2");
+        generic(ModSounds.SEAGULL_SQUAWK, "morecolorful.subtitles.entity.seagull.squawk",
+                "entity/bird/seagull_squawk1",
+                "entity/bird/seagull_squawk2",
+                "entity/bird/seagull_squawk3",
+                "entity/bird/seagull_squawk4");
+        generic(ModSounds.SEAGULL_HURT, "morecolorful.subtitles.entity.seagull.hurt",
+                "entity/bird/seagull_hurt1",
+                "entity/bird/seagull_hurt2");
+        generic(ModSounds.SEAGULL_DEATH, "morecolorful.subtitles.entity.seagull.death",
+                "entity/bird/seagull_death1",
+                "entity/bird/seagull_death2");
+        generic(ModSounds.CROW_CAW, "morecolorful.subtitles.entity.crow.caw",
+                "entity/bird/crow_caw1",
+                "entity/bird/crow_caw2",
+                "entity/bird/crow_caw3",
+                "entity/bird/crow_caw4");
+        generic(ModSounds.CROW_HURT, "morecolorful.subtitles.entity.crow.hurt",
+                "entity/bird/crow_hurt1",
+                "entity/bird/crow_hurt2");
+        generic(ModSounds.CROW_DEATH, "morecolorful.subtitles.entity.crow.death",
+                "entity/bird/crow_death1",
+                "entity/bird/crow_death2");
+        generic(ModSounds.PIGEON_COO, "morecolorful.subtitles.entity.pigeon.coo",
+                "entity/bird/pigeon_coo1",
+                "entity/bird/pigeon_coo2",
+                "entity/bird/pigeon_coo3",
+                "entity/bird/pigeon_coo4",
+                "entity/bird/pigeon_coo5",
+                "entity/bird/pigeon_coo6");
+        generic(ModSounds.PIGEON_HURT, "morecolorful.subtitles.entity.pigeon.hurt",
+                "entity/bird/pigeon_hurt1",
+                "entity/bird/pigeon_hurt2");
+        generic(ModSounds.PIGEON_DEATH, "morecolorful.subtitles.entity.pigeon.death",
+                "entity/bird/pigeon_death1",
+                "entity/bird/pigeon_death2");
         vanilla(ModSounds.VILLAGER_WORK_BEEKEEPER, "morecolorful.subtitles.entity.villager.work_beekeeper", SoundEvents.BEEHIVE_SHEAR);
         vanilla(ModSounds.VILLAGER_WORK_PYROTECHNICIAN, "morecolorful.subtitles.entity.villager.work_pyrotechnician", ModSounds.PYROTECHNICS_TABLE_USE.get());
         vanilla(ModSounds.VILLAGER_WORK_PAPER_ARTISAN, "morecolorful.subtitles.entity.villager.work_paper_artisan", ModSounds.PAPER_CUT.get());
@@ -442,6 +546,11 @@ public class ModSoundDefinitionProvider extends ModSoundDefinitionHelper {
                 "item/umbrella/block4",
                 "item/umbrella/block5");
         vanilla(ModSounds.BUG_NET_CATCH, "morecolorful.subtitles.item.bug_net.catch", SoundEvents.SNOWBALL_THROW);
+        generic(ModSounds.MAIL_UNSEAL, "morecolorful.subtitles.item.mail.unseal",
+                "item/mail/unseal1",
+                "item/mail/unseal2",
+                "item/mail/unseal3",
+                "item/mail/unseal4");
 
         // Environment & Ambient
         generic(ModSounds.WEATHER_BREEZE, "morecolorful.subtitles.weather.breeze",

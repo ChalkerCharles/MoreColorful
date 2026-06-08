@@ -1,5 +1,6 @@
 package com.ChalkerCharles.morecolorful.network;
 
+import com.ChalkerCharles.morecolorful.client.gui.LetterViewScreen;
 import com.ChalkerCharles.morecolorful.common.attachment.ClientLevelData;
 import com.ChalkerCharles.morecolorful.common.attachment.LevelSavedData;
 import com.ChalkerCharles.morecolorful.common.entity.misc.SmokeBomb;
@@ -10,7 +11,12 @@ import com.ChalkerCharles.morecolorful.util.client.ClientWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.SectionPos;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.WritableBookContent;
+import net.minecraft.world.item.component.WrittenBookContent;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.chunk.DataLayer;
 import net.minecraft.world.level.chunk.LevelChunk;
@@ -18,6 +24,7 @@ import net.minecraft.world.level.chunk.LevelChunkSection;
 
 import java.util.BitSet;
 import java.util.Iterator;
+import java.util.List;
 
 public class ClientPacketHandler {
     public static void handleThermalUpdate(ThermalUpdatePacket packet) {
@@ -162,6 +169,24 @@ public class ClientPacketHandler {
         Entity entity = level.getEntity(packet.id());
         if (entity instanceof SmokeBomb bomb) {
             ClientWrapper.createSmokeBomb(level, bomb);
+        }
+    }
+
+    public static void handleOpenLetter(OpenLetterPacket packet) {
+        Minecraft minecraft = Minecraft.getInstance();
+        if (minecraft.player == null) return;
+        ItemStack itemstack = minecraft.player.getItemInHand(packet.hand());
+        boolean flag = minecraft.isTextFilteringEnabled();
+        WrittenBookContent writtenBookContent = itemstack.get(DataComponents.WRITTEN_BOOK_CONTENT);
+        List<Component> pages;
+        if (writtenBookContent != null) {
+            pages = writtenBookContent.getPages(flag);
+        } else {
+            WritableBookContent writableBookContent = itemstack.get(DataComponents.WRITABLE_BOOK_CONTENT);
+            pages = writableBookContent != null ? writableBookContent.getPages(flag).<Component>map(Component::literal).toList() : null;
+        }
+        if (pages != null) {
+            minecraft.setScreen(new LetterViewScreen(pages));
         }
     }
 }
